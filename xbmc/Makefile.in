@@ -21,7 +21,6 @@ INCLUDES+=-Ilib/cpluff/libcpluff
 SRCS=Application.cpp \
      CueDocument.cpp \
      GUISettings.cpp \
-     GUIWindowAddonBrowser.cpp \
      GUIWindowSettings.cpp \
      GUIWindowSettingsCategory.cpp \
      GUIWindowSettingsProfile.cpp \
@@ -31,7 +30,6 @@ SRCS=Application.cpp \
      GUIDialogMusicScan.cpp \
      GUIViewControl.cpp \
      GUIViewState.cpp \
-     GUIViewStateAddonBrowser.cpp \
      GUIViewStateMusic.cpp \
      GUIWindowMusicBase.cpp \
      GUIWindowMusicInfo.cpp \
@@ -83,8 +81,6 @@ SRCS=Application.cpp \
      Song.cpp \
      VideoDatabase.cpp \
      ViewDatabase.cpp \
-     GUIDialogAddonInfo.cpp \
-     GUIDialogAddonSettings.cpp \
      GUIDialogAudioSubtitleSettings.cpp \
      GUIDialogBoxBase.cpp \
      GUIDialogButtonMenu.cpp \
@@ -182,7 +178,6 @@ SRCS=Application.cpp \
      Bookmark.cpp \
      TextureCache.cpp \
      TextureDatabase.cpp \
-     AddonDatabase.cpp \
      URIUtils.cpp \
      SystemGlobals.cpp \
 

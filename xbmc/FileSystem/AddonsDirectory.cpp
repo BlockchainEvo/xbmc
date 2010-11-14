@@ -21,7 +21,7 @@
 
 
 #include "AddonsDirectory.h"
-#include "AddonDatabase.h"
+#include "addons/AddonDatabase.h"
 #include "FactoryDirectory.h"
 #include "Directory.h"
 #include "DirectoryCache.h"

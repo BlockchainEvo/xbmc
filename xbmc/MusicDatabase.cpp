@@ -57,9 +57,9 @@
 #include "utils/log.h"
 #include "utils/TimeUtils.h"
 #include "TextureCache.h"
-#include "GUIWindowAddonBrowser.h"
-#include "AutoPtrHandle.h"
-#include "AnnouncementManager.h"
+#include "addons/GUIWindowAddonBrowser.h"
+#include "utils/AutoPtrHandle.h"
+#include "utils/AnnouncementManager.h"
 
 using namespace std;
 using namespace AUTOPTR;

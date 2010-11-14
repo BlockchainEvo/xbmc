@@ -168,7 +168,7 @@
 #include "GUIWindowPictures.h"
 #include "GUIWindowWeather.h"
 #include "GUIWindowLoginScreen.h"
-#include "GUIWindowAddonBrowser.h"
+#include "addons/GUIWindowAddonBrowser.h"
 #include "GUIWindowVisualisation.h"
 #include "GUIWindowSystemInfo.h"
 #include "GUIWindowScreensaver.h"
@@ -211,8 +211,8 @@
 #include "GUIDialogSmartPlaylistEditor.h"
 #include "GUIDialogSmartPlaylistRule.h"
 #include "GUIDialogPictureInfo.h"
-#include "GUIDialogAddonSettings.h"
-#include "GUIDialogAddonInfo.h"
+#include "addons/GUIDialogAddonSettings.h"
+#include "addons/GUIDialogAddonInfo.h"
 #ifdef HAS_LINUX_NETWORK
 #include "GUIDialogAccessPoints.h"
 #endif

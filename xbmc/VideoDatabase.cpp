@@ -46,7 +46,7 @@
 #include "utils/TimeUtils.h"
 #include "utils/log.h"
 #include "TextureCache.h"
-#include "GUIWindowAddonBrowser.h"
+#include "addons/GUIWindowAddonBrowser.h"
 #include "utils/AnnouncementManager.h"
 
 using namespace std;

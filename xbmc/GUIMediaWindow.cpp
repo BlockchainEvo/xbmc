@@ -42,7 +42,7 @@
 #include "GUISettings.h"
 
 #include "GUIDialogSmartPlaylistEditor.h"
-#include "GUIDialogAddonSettings.h"
+#include "addons/GUIDialogAddonSettings.h"
 #include "GUIDialogYesNo.h"
 #include "GUIWindowManager.h"
 #include "GUIDialogOK.h"

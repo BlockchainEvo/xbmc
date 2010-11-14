@@ -26,7 +26,7 @@
 #include "GUIUserMessages.h"
 #include "Settings.h"
 #include "GUISettings.h"
-#include "GUIWindowAddonBrowser.h"
+#include "addons/GUIWindowAddonBrowser.h"
 
 #define CONTROL_VIS_BUTTON       500
 #define CONTROL_LOCK_BUTTON      501

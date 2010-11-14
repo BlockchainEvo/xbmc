@@ -20,7 +20,7 @@
  */
 
 #include "GUIDialogContentSettings.h"
-#include "GUIDialogAddonSettings.h"
+#include "addons/GUIDialogAddonSettings.h"
 #include "GUIDialogOK.h"
 #include "GUISettings.h"
 #include "GUIWindowManager.h"

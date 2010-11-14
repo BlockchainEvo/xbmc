@@ -28,7 +28,7 @@
 #include "Builtins.h"
 #include "ButtonTranslator.h"
 #include "FileItem.h"
-#include "GUIDialogAddonSettings.h"
+#include "addons/GUIDialogAddonSettings.h"
 #include "GUIDialogFileBrowser.h"
 #include "GUIDialogKeyboard.h"
 #include "GUIDialogMusicScan.h"
@@ -39,7 +39,7 @@
 #include "GUIUserMessages.h"
 #include "GUIWindowLoginScreen.h"
 #include "GUIWindowVideoBase.h"
-#include "GUIWindowAddonBrowser.h"
+#include "addons/GUIWindowAddonBrowser.h"
 #include "addons/Addon.h" // for TranslateType, TranslateContent
 #include "addons/AddonManager.h"
 #include "addons/PluginSource.h"

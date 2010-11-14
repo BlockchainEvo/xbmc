@@ -20,7 +20,7 @@
  */
 
 #include "GUIViewState.h"
-#include "GUIViewStateAddonBrowser.h"
+#include "addons/GUIViewStateAddonBrowser.h"
 #include "GUIViewStateMusic.h"
 #include "GUIViewStateVideo.h"
 #include "GUIViewStatePictures.h"

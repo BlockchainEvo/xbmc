@@ -22,7 +22,7 @@
 #include "PythonAddon.h"
 #include "pyutil.h"
 #include "addons/AddonManager.h"
-#include "GUIDialogAddonSettings.h"
+#include "addons/GUIDialogAddonSettings.h"
 
 #ifndef __GNUC__
 #pragma code_seg("PY_TEXT")
