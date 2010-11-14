@@ -30,7 +30,7 @@
 #include "GUIDialogTextViewer.h"
 #include "GUIUserMessages.h"
 #include "GUIWindowAddonBrowser.h"
-#include "guilib/GUIWindowManager.h"
+#include "GUIWindowManager.h"
 #include "URL.h"
 #include "utils/JobManager.h"
 #include "utils/FileOperationJob.h"
@@ -199,13 +199,7 @@ void CGUIDialogAddonInfo::OnChangeLog()
   {
     pDlgInfo->SetText(g_localizeStrings.Get(13413));
     CFileItemList items;
-    if (m_localAddon && 
-        !m_item->GetProperty("Addon.UpdateAvail").Equals("true"))
-    {
-      items.Add(CFileItemPtr(new CFileItem(m_localAddon->ChangeLog(),false)));
-    }
-    else
-      items.Add(CFileItemPtr(new CFileItem(m_addon->ChangeLog(),false)));
+    items.Add(CFileItemPtr(new CFileItem(m_addon->ChangeLog(),false)));
     items[0]->Select(true);
     m_jobid = CJobManager::GetInstance().AddJob(
       new CFileOperationJob(CFileOperationJob::ActionCopy,items,

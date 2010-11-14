@@ -9785,6 +9785,21 @@
     <ClInclude Include="..\..\xbmc\music\tags\VorbisTag.h">
       <Filter>Source Files\infoTagReaders</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\xbmc\addons\GUIDialogAddonInfo.h">
+      <Filter>Source Files\Addons</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\addons\GUIDialogAddonSettings.h">
+      <Filter>Source Files\Addons</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\addons\GUIViewStateAddonBrowser.h">
+      <Filter>Source Files\Addons</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\addons\GUIWindowAddonBrowser.h">
+      <Filter>Source Files\Addons</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\addons\AddonDatabase.h">
+      <Filter>Source Files\Addons</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\xbmc\win32\XBMC.ico">

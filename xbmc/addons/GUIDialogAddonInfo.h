@@ -21,7 +21,7 @@
  *
  */
 
-#include "guilib/GUIDialog.h"
+#include "GUIDialog.h"
 #include "addons/IAddon.h"
 #include "utils/Job.h"
 

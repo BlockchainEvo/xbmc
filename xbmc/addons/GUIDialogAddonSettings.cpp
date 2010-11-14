@@ -26,26 +26,25 @@
 #include "GUIDialogNumeric.h"
 #include "GUIDialogFileBrowser.h"
 #include "GUIDialogOK.h"
-#include "guilib/GUIControlGroupList.h"
-#include "guilib/GUISettingsSliderControl.h"
+#include "GUIControlGroupList.h"
+#include "GUISettingsSliderControl.h"
 #include "Util.h"
-#include "utils/StringUtils.h"
-#include "storage/MediaManager.h"
-#include "guilib/GUILabelControl.h"
-#include "guilib/GUIRadioButtonControl.h"
-#include "guilib/GUISpinControlEx.h"
-#include "guilib/GUIImage.h"
+#include "StringUtils.h"
+#include "MediaManager.h"
+#include "GUILabelControl.h"
+#include "GUIRadioButtonControl.h"
+#include "GUISpinControlEx.h"
+#include "GUIImage.h"
 #include "FileSystem/Directory.h"
 #include "VideoInfoScanner.h"
 #include "addons/Scraper.h"
-#include "guilib/GUIWindowManager.h"
+#include "GUIWindowManager.h"
 #include "Application.h"
 #include "GUIDialogKeyboard.h"
 #include "FileItem.h"
-#include "settings/Settings.h"
-#include "utils/GUIInfoManager.h"
+#include "Settings.h"
+#include "GUIInfoManager.h"
 #include "GUIDialogSelect.h"
-#include "utils/log.h"
 
 using namespace std;
 using namespace ADDON;
@@ -793,11 +792,6 @@ void CGUIDialogAddonSettings::CreateControls()
 
     setting = setting->NextSiblingElement("setting");
     controlId++;
-    if (controlId >= CONTROL_START_SECTION)
-    {
-      CLog::Log(LOGERROR, "%s - cannot have more than %d controls per category - simplify your addon!", __FUNCTION__, CONTROL_START_SECTION - CONTROL_START_SETTING);
-      break;
-    }
   }
   EnableControls();
 }
