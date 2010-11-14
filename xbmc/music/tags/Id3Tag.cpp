@@ -21,10 +21,10 @@
 
 #include "Id3Tag.h"
 #include "Util.h"
-#include "utils/StringUtils.h"
+#include "StringUtils.h"
 #include "Picture.h"
-#include "settings/AdvancedSettings.h"
-#include "guilib/LocalizeStrings.h"
+#include "AdvancedSettings.h"
+#include "LocalizeStrings.h"
 #include "utils/CharsetConverter.h"
 #include "utils/log.h"
 

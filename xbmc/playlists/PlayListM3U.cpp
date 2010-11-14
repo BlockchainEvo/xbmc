@@ -31,8 +31,7 @@
 #endif
 
 #include "AdvancedSettings.h"
-#include "MusicInfoTag.h"
-#include "AdvancedSettings.h"
+#include "music/tags/MusicInfoTag.h"
 
 using namespace PLAYLIST;
 using namespace XFILE;

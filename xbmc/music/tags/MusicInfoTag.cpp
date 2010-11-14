@@ -21,8 +21,8 @@
 
 #include "MusicInfoTag.h"
 #include "Album.h"
-#include "utils/StringUtils.h"
-#include "settings/AdvancedSettings.h"
+#include "StringUtils.h"
+#include "AdvancedSettings.h"
 #include "utils/Variant.h"
 
 using namespace MUSIC_INFO;

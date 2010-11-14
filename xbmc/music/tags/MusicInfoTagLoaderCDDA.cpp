@@ -21,17 +21,15 @@
 
 #include "system.h" // for HAS_DVD_DRIVE
 #include "MusicInfoTagLoaderCDDA.h"
-#include "network/cddb.h"
+#include "FileSystem/cddb.h"
 #include "MusicInfoTag.h"
-#include "settings/Settings.h"
-#include "storage/MediaManager.h"
+#include "Settings.h"
+#include "MediaManager.h"
 #include "utils/log.h"
 
-using namespace MUSIC_INFO;
-#ifdef HAS_DVD_DRIVE
 using namespace MEDIA_DETECT;
+using namespace MUSIC_INFO;
 using namespace CDDB;
-#endif
 
 CMusicInfoTagLoaderCDDA::CMusicInfoTagLoaderCDDA(void)
 {
