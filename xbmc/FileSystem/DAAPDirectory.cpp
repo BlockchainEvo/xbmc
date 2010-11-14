@@ -21,7 +21,7 @@
 #include "FileDAAP.h"
 #include "DAAPDirectory.h"
 #include "Util.h"
-#include "MusicInfoTag.h"
+#include "music/tags/MusicInfoTag.h"
 #include "FileItem.h"
 #include "SectionLoader.h"
 #include "utils/log.h"

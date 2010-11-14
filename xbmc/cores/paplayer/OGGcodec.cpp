@@ -20,7 +20,7 @@
  */
 
 #include "OGGcodec.h"
-#include "OggTag.h"
+#include "music/tags/OggTag.h"
 #include "FileItem.h"
 #include "Util.h"
 #include "utils/log.h"

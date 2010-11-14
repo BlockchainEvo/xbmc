@@ -29,7 +29,7 @@
 #include "FileSystem/SpecialProtocol.h"
 #include "GUIDialogMusicScan.h"
 #include "utils/GUIInfoManager.h"
-#include "MusicInfoTag.h"
+#include "music/tags/MusicInfoTag.h"
 #include "addons/AddonManager.h"
 #include "addons/Scraper.h"
 #include "addons/Addon.h"

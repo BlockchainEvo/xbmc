@@ -28,7 +28,7 @@
 #include "HTMLUtil.h"
 #include "StringUtils.h"
 #include "VideoInfoTag.h"
-#include "MusicInfoTag.h"
+#include "music/tags/MusicInfoTag.h"
 #include "utils/log.h"
 #include "URL.h"
 #include "GUISettings.h"

@@ -22,7 +22,6 @@
 #include "PlaylistFileDirectory.h"
 #include "utils/log.h"
 #include "playlists/PlayListFactory.h"
-#include "MusicInfoTag.h"
 #include "FileSystem/File.h"
 #include "playlists/PlayList.h"
 

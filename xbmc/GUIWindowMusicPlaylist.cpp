@@ -28,7 +28,7 @@
 #include "PartyModeManager.h"
 #include "LastFmManager.h"
 #include "utils/LabelFormatter.h"
-#include "MusicInfoTag.h"
+#include "music/tags/MusicInfoTag.h"
 #include "GUIWindowManager.h"
 #include "GUIDialogKeyboard.h"
 #include "GUIUserMessages.h"

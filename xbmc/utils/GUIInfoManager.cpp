@@ -45,7 +45,7 @@
 #include "GUIWindowSlideShow.h"
 #include "LastFmManager.h"
 #include "PictureInfoTag.h"
-#include "MusicInfoTag.h"
+#include "music/tags/MusicInfoTag.h"
 #include "GUIDialogMusicScan.h"
 #include "GUIDialogVideoScan.h"
 #include "GUIWindowManager.h"
@@ -62,7 +62,7 @@
 #include "MathUtils.h"
 
 // stuff for current song
-#include "MusicInfoTagLoaderFactory.h"
+#include "music/tags/MusicInfoTagLoaderFactory.h"
 #include "MusicInfoLoader.h"
 #include "LabelFormatter.h"
 

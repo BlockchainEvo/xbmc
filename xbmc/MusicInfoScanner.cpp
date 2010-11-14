@@ -21,7 +21,7 @@
 
 #include "MusicInfoScanner.h"
 #include "MusicDatabase.h"
-#include "MusicInfoTagLoaderFactory.h"
+#include "music/tags/MusicInfoTagLoaderFactory.h"
 #include "utils/MusicAlbumInfo.h"
 #include "utils/MusicInfoScraper.h"
 #include "FileSystem/DirectoryCache.h"
@@ -32,7 +32,7 @@
 #include "utils/GUIInfoManager.h"
 #include "utils/Variant.h"
 #include "NfoFile.h"
-#include "MusicInfoTag.h"
+#include "music/tags/MusicInfoTag.h"
 #include "GUIWindowManager.h"
 #include "GUIDialogProgress.h"
 #include "GUIDialogSelect.h"

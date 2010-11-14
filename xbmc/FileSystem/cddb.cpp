@@ -33,7 +33,7 @@
 
 #include "cddb.h"
 #include "DNSNameCache.h"
-#include "Id3Tag.h"
+#include "music/tags/Id3Tag.h"
 #include "AdvancedSettings.h"
 #include "StringUtils.h"
 #include "Util.h"

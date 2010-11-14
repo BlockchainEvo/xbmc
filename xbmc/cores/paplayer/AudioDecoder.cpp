@@ -23,7 +23,7 @@
 #include "CodecFactory.h"
 #include "GUISettings.h"
 #include "FileItem.h"
-#include "MusicInfoTag.h"
+#include "music/tags/MusicInfoTag.h"
 #include "utils/SingleLock.h"
 #include "utils/log.h"
 #include <math.h>

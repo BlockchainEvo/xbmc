@@ -36,7 +36,7 @@
 #include "GUIDialogMusicScan.h"
 #include "VideoDatabase.h"
 #include "GUIWindowVideoNav.h"
-#include "MusicInfoTag.h"
+#include "music/tags/MusicInfoTag.h"
 #include "GUIWindowManager.h"
 #include "GUIDialogOK.h"
 #include "GUIDialogKeyboard.h"

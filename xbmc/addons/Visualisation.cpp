@@ -23,7 +23,7 @@
 #include "fft.h"
 #include "utils/GUIInfoManager.h"
 #include "Application.h"
-#include "MusicInfoTag.h"
+#include "music/tags/MusicInfoTag.h"
 #include "Settings.h"
 #include "WindowingFactory.h"
 #include "Util.h"

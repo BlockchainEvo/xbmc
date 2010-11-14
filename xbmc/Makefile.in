@@ -50,33 +50,8 @@ SRCS=Application.cpp \
      GUIWindowVideoPlaylist.cpp \
      VideoInfoScanner.cpp \
      PlayListPlayer.cpp \
-     APEv2Tag.cpp \
-     FlacTag.cpp \
-     Id3Tag.cpp \
      MusicInfoLoader.cpp \
      MusicInfoScanner.cpp \
-     MusicInfoTag.cpp \
-     MusicInfoTagLoaderAAC.cpp \
-     MusicInfoTagLoaderApe.cpp \
-     MusicInfoTagLoaderCDDA.cpp \
-     MusicInfoTagLoaderDatabase.cpp \
-     MusicInfoTagLoaderFactory.cpp \
-     MusicInfoTagLoaderFlac.cpp \
-     MusicInfoTagLoaderMidi.cpp \
-     MusicInfoTagLoaderMod.cpp \
-     MusicInfoTagLoaderMP3.cpp \
-     MusicInfoTagLoaderMP4.cpp \
-     MusicInfoTagLoaderMPC.cpp \
-     MusicInfoTagLoaderNSF.cpp \
-     MusicInfoTagLoaderOgg.cpp \
-     MusicInfoTagLoaderShn.cpp \
-     MusicInfoTagLoaderSPC.cpp \
-     MusicInfoTagLoaderWav.cpp \
-     MusicInfoTagLoaderWavPack.cpp \
-     MusicInfoTagLoaderWMA.cpp \
-     MusicInfoTagLoaderYM.cpp \
-     OggTag.cpp \
-     VorbisTag.cpp \
      AutoSwitch.cpp \
      ButtonTranslator.cpp \
      Crc32.cpp \
@@ -183,7 +158,6 @@ SRCS=Application.cpp \
      Artist.cpp \
      Album.cpp \
      MediaSource.cpp \
-     MusicInfoTagLoaderASAP.cpp \
      GUIWindowTestPattern.cpp \
      GUIViewStatePrograms.cpp \
      GUIViewStatePictures.cpp \

@@ -22,7 +22,7 @@
 
 
 #include "IFileDirectory.h"
-#include "MusicInfoTag.h"
+#include "music/tags/MusicInfoTag.h"
 
 namespace XFILE
 {

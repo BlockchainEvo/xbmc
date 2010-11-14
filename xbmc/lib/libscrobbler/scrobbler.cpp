@@ -24,7 +24,7 @@
 #include "utils/md5.h"
 #include "utils/log.h"
 #include "Util.h"
-#include "MusicInfoTag.h"
+#include "music/tags/MusicInfoTag.h"
 #include "errors.h"
 #include "utils/Atomics.h"
 #include "GUISettings.h"

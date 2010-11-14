@@ -30,7 +30,7 @@
 #include "playlists/PlayList.h"
 #include "utils/log.h"
 #include "utils/TimeUtils.h"
-#include "MusicInfoTag.h"
+#include "music/tags/MusicInfoTag.h"
 
 using namespace PLAYLIST;
 

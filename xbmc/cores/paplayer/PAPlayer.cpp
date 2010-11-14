@@ -29,7 +29,7 @@
 #include "AdvancedSettings.h"
 #include "GUISettings.h"
 #include "Settings.h"
-#include "MusicInfoTag.h"
+#include "music/tags/MusicInfoTag.h"
 #include "../AudioRenderers/AudioRendererFactory.h"
 #include "../../utils/TimeUtils.h"
 #include "utils/log.h"

@@ -22,7 +22,7 @@
  */
 
 #include "GUIWindow.h"
-#include "MusicInfoTag.h"
+#include "music/tags/MusicInfoTag.h"
 #include "Stopwatch.h"
 
 class CGUIWindowVisualisation :

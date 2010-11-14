@@ -20,7 +20,7 @@
  */
 
 #include "EncoderLame.h"
-#include "Id3Tag.h"
+#include "music/tags/Id3Tag.h"
 #include "GUISettings.h"
 #include "utils/log.h"
 

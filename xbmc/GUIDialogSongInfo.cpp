@@ -27,7 +27,7 @@
 #include "GUIUserMessages.h"
 #include "MusicDatabase.h"
 #include "GUIWindowMusicBase.h"
-#include "MusicInfoTag.h"
+#include "music/tags/MusicInfoTag.h"
 #include "GUIWindowManager.h"
 #include "FileSystem/File.h"
 #include "FileSystem/FileCurl.h"

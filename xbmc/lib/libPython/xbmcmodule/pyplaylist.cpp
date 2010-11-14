@@ -44,7 +44,7 @@
 #include "listitem.h"
 #include "playlists/PlayList.h"
 #include "VideoInfoTag.h"
-#include "MusicInfoTag.h"
+#include "music/tags/MusicInfoTag.h"
 
 using namespace std;
 using namespace PLAYLIST;

@@ -36,7 +36,7 @@
   #include "lib/libPython/Python/Include/Python.h"
 #endif
 
-#include "MusicInfoTag.h"
+#include "music/tags/MusicInfoTag.h"
 
 #pragma once
 

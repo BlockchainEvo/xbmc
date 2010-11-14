@@ -23,7 +23,7 @@
 #include "../MusicDatabase.h"
 #include "../FileItem.h"
 #include "../Util.h"
-#include "../MusicInfoTag.h"
+#include "music/tags/MusicInfoTag.h"
 #include "../Song.h"
 #include "Application.h"
 

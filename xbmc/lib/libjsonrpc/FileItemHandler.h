@@ -25,7 +25,7 @@
 #include "JSONUtils.h"
 #include "../FileItem.h"
 #include "../VideoInfoTag.h"
-#include "../MusicInfoTag.h"
+#include "music/tags/MusicInfoTag.h"
 
 namespace JSONRPC
 {

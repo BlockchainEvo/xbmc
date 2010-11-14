@@ -32,7 +32,7 @@
 #include "FileSystem/FileCurl.h"
 #include "utils/GUIInfoManager.h"
 #include "MusicDatabase.h"
-#include "MusicInfoTag.h"
+#include "music/tags/MusicInfoTag.h"
 #include "URL.h"
 #include "GUIWindowManager.h"
 #include "GUIDialogProgress.h"
