@@ -22,9 +22,10 @@
 #include "PlayListB4S.h"
 #include "Util.h"
 #include "tinyXML/tinyxml.h"
-#include "settings/AdvancedSettings.h"
-#include "music/tags/MusicInfoTag.h"
+#include "AdvancedSettings.h"
+#include "MusicInfoTag.h"
 #include "FileSystem/File.h"
+#include "AdvancedSettings.h"
 #include "utils/log.h"
 
 using namespace XFILE;

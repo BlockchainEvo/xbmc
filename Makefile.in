@@ -35,7 +35,6 @@ BIN_DIRS=	\
 	xbmc/playlists \
 	xbmc/powermanagement \
         xbmc/powermanagement/linux \
-        xbmc/powermanagement/linux \
 	xbmc/storage \
 	xbmc/storage/linux \
 	xbmc/storage/osx \

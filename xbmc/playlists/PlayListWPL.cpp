@@ -22,7 +22,7 @@
 #include "PlayListWPL.h"
 #include "Util.h"
 #include "tinyXML/tinyxml.h"
-#include "settings/AdvancedSettings.h"
+#include "AdvancedSettings.h"
 #include "FileSystem/File.h"
 #include "utils/log.h"
 

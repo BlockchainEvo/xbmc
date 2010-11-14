@@ -22,7 +22,7 @@
 #include "PlayListM3U.h"
 #include "FileSystem/File.h"
 #include "Util.h"
-#include "utils/StringUtils.h"
+#include "StringUtils.h"
 #include "utils/CharsetConverter.h"
 #include "utils/RegExp.h"
 #include "utils/log.h"
@@ -30,8 +30,9 @@
 #include "cores/dllloader/exports/emu_msvcrt.h"
 #endif
 
-#include "settings/AdvancedSettings.h"
-#include "music/tags/MusicInfoTag.h"
+#include "AdvancedSettings.h"
+#include "MusicInfoTag.h"
+#include "AdvancedSettings.h"
 
 using namespace PLAYLIST;
 using namespace XFILE;

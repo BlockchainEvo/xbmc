@@ -9665,6 +9665,33 @@
     <ClInclude Include="..\..\xbmc\storage\windows\Win32StorageProvider.h">
       <Filter>Source Files\Storage</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\xbmc\playlists\PlayList.h">
+      <Filter>Source Files\Playlist</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\playlists\PlayListB4S.h">
+      <Filter>Source Files\Playlist</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\playlists\PlayListFactory.h">
+      <Filter>Source Files\Playlist</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\playlists\PlayListM3U.h">
+      <Filter>Source Files\Playlist</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\playlists\PlayListPLS.h">
+      <Filter>Source Files\Playlist</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\playlists\PlayListURL.h">
+      <Filter>Source Files\Playlist</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\playlists\PlayListWPL.h">
+      <Filter>Source Files\Playlist</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\playlists\PlayListXML.h">
+      <Filter>Source Files\Playlist</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\playlists\SmartPlayList.h">
+      <Filter>Source Files\Playlist</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\xbmc\win32\XBMC.ico">
