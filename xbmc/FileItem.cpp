@@ -24,7 +24,7 @@
 #include "StringUtils.h"
 #include "Util.h"
 #include "Picture.h"
-#include "PlayListFactory.h"
+#include "playlists/PlayListFactory.h"
 #include "Shortcut.h"
 #include "Crc32.h"
 #include "FileSystem/DirectoryCache.h"

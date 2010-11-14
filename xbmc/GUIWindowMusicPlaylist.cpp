@@ -22,7 +22,7 @@
 #include "GUIWindowMusicPlaylist.h"
 #include "GUIDialogSmartPlaylistEditor.h"
 #include "Util.h"
-#include "PlayListM3U.h"
+#include "playlists/PlayListM3U.h"
 #include "Application.h"
 #include "PlayListPlayer.h"
 #include "PartyModeManager.h"

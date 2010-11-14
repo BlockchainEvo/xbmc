@@ -15,10 +15,10 @@
 //#include "includes.h"
 #include "GUIWindowManager.h"
 
-#include "PlayListFactory.h"
+#include "playlists/PlayListFactory.h"
 #include "Util.h"
 #include "PlayListPlayer.h"
-#include "PlayList.h"
+#include "playlists/PlayList.h"
 #include "FileSystem/HDDirectory.h" 
 #include "FileSystem/CDDADirectory.h"
 #include "FileSystem/SpecialProtocol.h"

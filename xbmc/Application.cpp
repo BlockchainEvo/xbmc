@@ -40,7 +40,7 @@
 #include "GUIControlProfiler.h"
 #include "LangCodeExpander.h"
 #include "utils/GUIInfoManager.h"
-#include "PlayListFactory.h"
+#include "playlists/PlayListFactory.h"
 #include "GUIFontManager.h"
 #include "GUIColorManager.h"
 #include "GUITextLayout.h"
@@ -75,11 +75,11 @@
 #include "GUILargeTextureManager.h"
 #include "TextureCache.h"
 #include "LastFmManager.h"
-#include "SmartPlaylist.h"
+#include "playlists/SmartPlaylist.h"
 #ifdef HAS_FILESYSTEM_RAR
 #include "FileSystem/RarManager.h"
 #endif
-#include "PlayList.h"
+#include "playlists/PlayList.h"
 #include "WindowingFactory.h"
 #include "PowerManager.h"
 #include "DPMSSupport.h"

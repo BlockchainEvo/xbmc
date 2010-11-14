@@ -29,7 +29,7 @@
 #include "FileSystem/File.h"
 #include "FileSystem/SpecialProtocol.h"
 #include "FileSystem/Directory.h"
-#include "PlayListM3U.h"
+#include "playlists/PlayListM3U.h"
 #include "GUIWindowManager.h"
 #include "GUIDialogKeyboard.h"
 #include "FileItem.h"

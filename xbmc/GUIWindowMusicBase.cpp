@@ -27,9 +27,9 @@
 #ifdef HAS_FILESYSTEM_DAAP
 #include "FileSystem/DAAPDirectory.h"
 #endif
-#include "PlayListFactory.h"
+#include "playlists/PlayListFactory.h"
 #include "Util.h"
-#include "PlayListM3U.h"
+#include "playlists/PlayListM3U.h"
 #include "Application.h"
 #include "PlayListPlayer.h"
 #include "FileSystem/DirectoryCache.h"

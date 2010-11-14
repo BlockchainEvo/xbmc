@@ -23,7 +23,7 @@
 #include "StdString.h"
 #include "JSONRPC.h"
 #include "FileItemHandler.h"
-#include "PlayList.h"
+#include "playlists/PlayList.h"
 #include "SingleLock.h"
 
 namespace JSONRPC

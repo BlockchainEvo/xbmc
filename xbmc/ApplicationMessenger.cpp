@@ -60,7 +60,7 @@
 #include "lib/libhttpapi/XBMChttp.h"
 #endif
 
-#include "PlayList.h"
+#include "playlists/PlayList.h"
 #include "FileItem.h"
 
 using namespace std;

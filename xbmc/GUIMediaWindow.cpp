@@ -46,7 +46,7 @@
 #include "GUIDialogYesNo.h"
 #include "GUIWindowManager.h"
 #include "GUIDialogOK.h"
-#include "PlayList.h"
+#include "playlists/PlayList.h"
 #include "MediaManager.h"
 #include "Settings.h"
 #include "StringUtils.h"

@@ -28,6 +28,7 @@ BIN_DIRS=	\
 	xbmc/FileSystem/MusicDatabaseDirectory \
 	xbmc/FileSystem/VideoDatabaseDirectory \
 	xbmc/karaoke \
+	xbmc/playlists \
 	xbmc/lib/cmyth/libcmyth \
 	xbmc/lib/cmyth/librefmem \
 	xbmc/lib/libhts \
@@ -226,6 +227,8 @@ xbmc/FileSystem/VideoDatabaseDirectory/videodatabasedirectory.a: force
 	$(MAKE) -C xbmc/FileSystem/VideoDatabaseDirectory
 xbmc/karaoke/karaoke.a: force
 	$(MAKE) -C xbmc/karaoke
+xbmc/playlists/playlists.a: force
+	$(MAKE) -C xbmc/playlists
 xbmc/lib/cmyth/libcmyth/libcmyth.a: force
 	$(MAKE) -C xbmc/lib/cmyth/libcmyth
 xbmc/lib/cmyth/librefmem/librefmem.a: force
@@ -419,6 +422,7 @@ OBJSXBMC=	\
 	xbmc/FileSystem/MusicDatabaseDirectory/musicdatabasedirectory.a \
 	xbmc/FileSystem/VideoDatabaseDirectory/videodatabasedirectory.a \
 	xbmc/karaoke/karaoke.a \
+	xbmc/playlists/playlists.a \
 	xbmc/lib/libPython/xbmcmodule/xbmcmodule.a \
 	xbmc/lib/libscrobbler/scrobbler.a \
 	xbmc/lib/libRTV/librtv-@ARCH@.a \

@@ -39,10 +39,10 @@
   #include "lib/libPython/Python/Include/structmember.h"
 #endif
 #include "../XBPythonDll.h"
-#include "../../../PlayListFactory.h"
+#include "playlists/PlayListFactory.h"
 #include "pyutil.h"
 #include "listitem.h"
-#include "PlayList.h"
+#include "playlists/PlayList.h"
 #include "VideoInfoTag.h"
 #include "MusicInfoTag.h"
 

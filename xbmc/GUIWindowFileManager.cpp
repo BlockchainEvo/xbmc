@@ -41,7 +41,7 @@
 #include "lib/libPython/XBPython.h"
 #endif
 #include "GUIWindowSlideShow.h"
-#include "PlayListFactory.h"
+#include "playlists/PlayListFactory.h"
 #include "utils/Network.h"
 #include "GUIWindowManager.h"
 #include "GUIDialogOK.h"
@@ -52,7 +52,7 @@
 #include "FileSystem/RarManager.h"
 #endif
 #include "Favourites.h"
-#include "PlayList.h"
+#include "playlists/PlayList.h"
 #include "utils/AsyncFileCopy.h"
 #include "MediaManager.h"
 #include "Settings.h"

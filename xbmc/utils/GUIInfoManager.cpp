@@ -50,7 +50,7 @@
 #include "GUIDialogVideoScan.h"
 #include "GUIWindowManager.h"
 #include "FileSystem/File.h"
-#include "PlayList.h"
+#include "playlists/PlayList.h"
 #include "TuxBoxUtil.h"
 #include "WindowingFactory.h"
 #include "PowerManager.h"

@@ -21,7 +21,7 @@
 
 #include "PlaylistOperations.h"
 #include "PlayListPlayer.h"
-#include "PlayListFactory.h"
+#include "playlists/PlayListFactory.h"
 #include "Util.h"
 #include "GUIWindowManager.h"
 #include "GUIUserMessages.h"

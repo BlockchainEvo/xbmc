@@ -40,7 +40,6 @@ SRCS=Application.cpp \
      GUIWindowMusicPlaylist.cpp \
      GUIWindowMusicPlaylistEditor.cpp \
      GUIWindowMusicSongs.cpp \
-     SmartPlaylist.cpp \
      GUIDialogVideoScan.cpp \
      GUIViewStateVideo.cpp \
      GUIWindowVideoBase.cpp \
@@ -50,15 +49,7 @@ SRCS=Application.cpp \
      GUIWindowVideoOverlay.cpp \
      GUIWindowVideoPlaylist.cpp \
      VideoInfoScanner.cpp \
-     PlayList.cpp \
-     PlayListB4S.cpp \
-     PlayListFactory.cpp \
-     PlayListM3U.cpp \
      PlayListPlayer.cpp \
-     PlayListPLS.cpp \
-     PlayListWPL.cpp \
-     PlayListURL.cpp \
-     PlayListXML.cpp \
      APEv2Tag.cpp \
      FlacTag.cpp \
      Id3Tag.cpp \
