@@ -19,7 +19,7 @@
  *
  */
 
-#include "SmartPlaylist.h"
+#include "SmartPlayList.h"
 #include "utils/log.h"
 #include "StringUtils.h"
 #include "FileSystem/SmartPlaylistDirectory.h"

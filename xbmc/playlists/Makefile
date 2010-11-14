@@ -8,7 +8,7 @@ SRCS=PlayListB4S.cpp \
      PlayListURL.cpp \
      PlayListWPL.cpp \
      PlayListXML.cpp \
-     SmartPlaylist.cpp
+     SmartPlayList.cpp
 
 LIB=playlists.a
 

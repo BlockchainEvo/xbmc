@@ -39,7 +39,7 @@
 #endif
 #include "ZipDirectory.h"
 #include "SmartPlaylistDirectory.h"
-#include "playlists/SmartPlaylist.h"
+#include "playlists/SmartPlayList.h"
 #include "PlaylistFileDirectory.h"
 #include "playlists/PlayListFactory.h"
 #include "FileSystem/Directory.h"

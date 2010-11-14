@@ -75,7 +75,7 @@
 #include "GUILargeTextureManager.h"
 #include "TextureCache.h"
 #include "LastFmManager.h"
-#include "playlists/SmartPlaylist.h"
+#include "playlists/SmartPlayList.h"
 #ifdef HAS_FILESYSTEM_RAR
 #include "FileSystem/RarManager.h"
 #endif
