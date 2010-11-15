@@ -22,8 +22,8 @@
 #include "DirectoryNodeSeasons.h"
 #include "QueryParams.h"
 #include "VideoDatabase.h"
-#include "GUISettings.h"
-#include "Settings.h"
+#include "settings/GUISettings.h"
+#include "settings/Settings.h"
 #include "FileItem.h"
 
 using namespace XFILE::VIDEODATABASEDIRECTORY;

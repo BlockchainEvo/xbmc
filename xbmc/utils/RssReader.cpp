@@ -30,7 +30,7 @@
 #ifdef __APPLE__
 #include "CocoaInterface.h"
 #endif
-#include "Settings.h"
+#include "settings/Settings.h"
 #include "LocalizeStrings.h"
 #include "GUIRSSControl.h"
 #include "utils/TimeUtils.h"

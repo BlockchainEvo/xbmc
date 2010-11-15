@@ -23,7 +23,7 @@
 #include "../Key.h"
 #include "SDLJoystick.h"
 #include "ButtonTranslator.h"
-#include "AdvancedSettings.h"
+#include "settings/AdvancedSettings.h"
 #include "utils/log.h"
 
 #include <math.h>

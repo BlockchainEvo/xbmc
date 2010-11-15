@@ -26,7 +26,7 @@
 #include "DVDCodecs/DVDCodecs.h"
 #include "DVDCodecs/DVDFactoryCodec.h"
 #include "DVDPerformanceCounter.h"
-#include "GUISettings.h"
+#include "settings/GUISettings.h"
 #include "VideoReferenceClock.h"
 #include "utils/log.h"
 #include "utils/TimeUtils.h"

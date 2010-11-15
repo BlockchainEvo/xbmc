@@ -22,7 +22,6 @@
 #include "FileHD.h"
 #include "Util.h"
 #include "URL.h"
-#include "GUISettings.h"
 #include "utils/AliasShortcutUtils.h"
 #ifdef _LINUX
 #include "XHandle.h"

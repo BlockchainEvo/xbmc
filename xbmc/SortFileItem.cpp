@@ -19,8 +19,8 @@
  *
  */
 
-#include "AdvancedSettings.h"
 #include "SortFileItem.h"
+#include "settings/AdvancedSettings.h"
 #include "StringUtils.h"
 #include "VideoInfoTag.h"
 #include "music/tags/MusicInfoTag.h"

@@ -19,15 +19,14 @@
  *
  */
 
-#include "system.h"
 #include "SlideShowPicture.h"
+#include "system.h"
 #include "Texture.h"
 #include "cores/ssrc.h"         // for M_PI
 #include "utils/GUIInfoManager.h"
-#include "AdvancedSettings.h"
-#include "Settings.h"
-#include "GUISettings.h"
-#include "system.h"
+#include "settings/AdvancedSettings.h"
+#include "settings/Settings.h"
+#include "settings/GUISettings.h"
 #include "WindowingFactory.h"
 #include "utils/log.h"
 #include "utils/SingleLock.h"

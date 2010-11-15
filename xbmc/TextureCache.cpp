@@ -24,8 +24,8 @@
 #include "utils/SingleLock.h"
 #include "Crc32.h"
 #include "Util.h"
-#include "Settings.h"
-#include "AdvancedSettings.h"
+#include "settings/Settings.h"
+#include "settings/AdvancedSettings.h"
 #include "utils/log.h"
 
 #include "Texture.h"

@@ -36,7 +36,7 @@
 #include "FileSystem/Directory.h"
 #include "FileSystem/File.h"
 #include "FileItem.h"
-#include "Settings.h"
+#include "settings/Settings.h"
 #include "LocalizeStrings.h"
 #include "utils/TimeUtils.h"
 #include "utils/log.h"

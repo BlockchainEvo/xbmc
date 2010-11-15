@@ -22,8 +22,8 @@
 #include "lastfmscrobbler.h"
 #include "Application.h"
 #include "Atomics.h"
-#include "GUISettings.h"
-#include "Settings.h"
+#include "settings/GUISettings.h"
+#include "settings/Settings.h"
 #include "Util.h"
 #include "LocalizeStrings.h"
 

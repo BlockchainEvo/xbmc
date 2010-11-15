@@ -24,7 +24,7 @@
 #include "GUIWindowManager.h"
 #include "Key.h"
 #include "LocalizeStrings.h"
-#include "Settings.h"
+#include "settings/Settings.h"
 #include "GUIControlFactory.h"
 #include "GUIControlGroup.h"
 #include "GUIControlProfiler.h"

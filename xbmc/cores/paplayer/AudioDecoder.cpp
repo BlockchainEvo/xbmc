@@ -21,7 +21,7 @@
 
 #include "AudioDecoder.h"
 #include "CodecFactory.h"
-#include "GUISettings.h"
+#include "settings/GUISettings.h"
 #include "FileItem.h"
 #include "music/tags/MusicInfoTag.h"
 #include "utils/SingleLock.h"

@@ -24,7 +24,6 @@
 #include "utils/IoSupport.h"
 #include "iso9660.h"
 #include "URL.h"
-#include "GUISettings.h"
 #include "FileItem.h"
 #include "AutoPtrHandle.h"
 #include "utils/AliasShortcutUtils.h"

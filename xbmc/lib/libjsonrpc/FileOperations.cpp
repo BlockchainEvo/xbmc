@@ -20,11 +20,11 @@
  */
 
 #include "FileOperations.h"
-#include "Settings.h"
+#include "settings/Settings.h"
 #include "MediaSource.h"
 #include "../FileSystem/Directory.h"
 #include "FileItem.h"
-#include "AdvancedSettings.h"
+#include "settings/AdvancedSettings.h"
 #include "../Util.h"
 #include "URL.h"
 

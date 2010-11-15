@@ -26,7 +26,7 @@
 #include "FileSystem/DirectoryHistory.h"
 #include "utils/CriticalSection.h"
 #include "FileSystem/File.h"
-#include "Job.h"
+#include "utils/Job.h"
 
 class CFileItem;
 class CFileItemList;

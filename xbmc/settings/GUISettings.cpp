@@ -34,7 +34,7 @@
 #include "AdvancedSettings.h"
 #include "LocalizeStrings.h"
 #include "StringUtils.h"
-#include "SystemInfo.h"
+#include "utils/SystemInfo.h"
 #include "utils/log.h"
 #include "tinyXML/tinyxml.h"
 #include "WindowingFactory.h"

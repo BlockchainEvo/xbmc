@@ -35,7 +35,7 @@
 #include "../utils/CriticalSection.h"
 #include "../Util.h"
 #include "../MediaSource.h"
-#include "GUISettings.h"
+#include "settings/GUISettings.h"
 
 class CHALDevice
 {

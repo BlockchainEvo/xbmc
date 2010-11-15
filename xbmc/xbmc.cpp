@@ -28,7 +28,7 @@
 //
 
 #include "system.h"
-#include "AdvancedSettings.h"
+#include "settings/AdvancedSettings.h"
 #include "FileItem.h"
 #include "Application.h"
 #include "PlayListPlayer.h"

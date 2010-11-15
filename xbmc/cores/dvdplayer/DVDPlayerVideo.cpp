@@ -20,9 +20,9 @@
  */
 
 #include "system.h"
-#include "AdvancedSettings.h"
-#include "GUISettings.h"
-#include "Settings.h"
+#include "settings/AdvancedSettings.h"
+#include "settings/GUISettings.h"
+#include "settings/Settings.h"
 #include "VideoReferenceClock.h"
 #include "MathUtils.h"
 #include "DVDPlayer.h"

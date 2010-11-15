@@ -35,7 +35,7 @@
 #include "cores/dvdplayer/DVDCodecs/Overlay/DVDOverlaySpu.h"
 #include "cores/dvdplayer/DVDCodecs/Overlay/DVDOverlaySSA.h"
 #include "WindowingFactory.h"
-#include "Settings.h"
+#include "settings/Settings.h"
 #include "MathUtils.h"
 
 #if defined(HAS_GL) || HAS_GLES == 2

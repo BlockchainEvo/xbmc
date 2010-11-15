@@ -28,7 +28,6 @@
 #include "FileSystem/SpecialProtocol.h"
 #include "log.h"
 #include "Util.h"
-#include "AdvancedSettings.h"
 #include "LocalizeStrings.h"
 #ifdef HAS_FILESYSTEM_RAR
 #include "FileSystem/RarManager.h"

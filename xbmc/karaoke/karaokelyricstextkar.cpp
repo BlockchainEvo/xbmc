@@ -23,7 +23,7 @@
 
 #include "utils/CharsetConverter.h"
 #include "FileSystem/File.h"
-#include "GUISettings.h"
+#include "settings/GUISettings.h"
 #include "utils/log.h"
 #include <math.h>
 

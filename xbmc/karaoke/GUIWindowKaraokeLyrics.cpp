@@ -21,7 +21,7 @@
 
 #include "Application.h"
 #include "GUIWindowManager.h"
-#include "AdvancedSettings.h"
+#include "settings/AdvancedSettings.h"
 
 #include "GUIDialogKaraokeSongSelector.h"
 #include "GUIWindowKaraokeLyrics.h"

@@ -30,7 +30,7 @@
 #include "GUIWindowManager.h"
 #include "GUIDialogOK.h"
 #include "playlists/PlayList.h"
-#include "Settings.h"
+#include "settings/Settings.h"
 #include "utils/TimeUtils.h"
 #include "utils/log.h"
 

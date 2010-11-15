@@ -23,7 +23,7 @@
 
 #include "Application.h"
 #include "GUIWindowManager.h"
-#include "GUISettings.h"
+#include "settings/GUISettings.h"
 
 #include "karaokelyrics.h"
 #include "karaokelyricsfactory.h"

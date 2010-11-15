@@ -41,7 +41,7 @@
 
 #include "XBPython.h"
 #include "XBPythonDll.h"
-#include "Settings.h"
+#include "settings/Settings.h"
 #include "Profile.h"
 #include "FileSystem/File.h"
 #include "FileSystem/SpecialProtocol.h"

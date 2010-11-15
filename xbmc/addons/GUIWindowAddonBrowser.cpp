@@ -42,13 +42,13 @@
 #include "utils/JobManager.h"
 #include "utils/log.h"
 #include "utils/SingleLock.h"
-#include "Settings.h"
+#include "settings/Settings.h"
 #include "StringUtils.h"
 #include "Application.h"
 #include "AddonDatabase.h"
-#include "AdvancedSettings.h"
+#include "settings/AdvancedSettings.h"
 #include "MediaManager.h"
-#include "GUISettings.h"
+#include "settings/GUISettings.h"
 
 #define CONTROL_AUTOUPDATE 5
 #define CONTROL_SHUTUP     6

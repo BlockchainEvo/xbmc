@@ -21,7 +21,7 @@
 
 #include "VirtualPathDirectory.h"
 #include "Directory.h"
-#include "Settings.h"
+#include "settings/Settings.h"
 #include "Util.h"
 #include "URL.h"
 #include "GUIWindowManager.h"

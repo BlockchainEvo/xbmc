@@ -21,7 +21,7 @@
 
 #include "GUIRSSControl.h"
 #include "GUIWindowManager.h"
-#include "GUISettings.h"
+#include "settings/GUISettings.h"
 #include "utils/CriticalSection.h"
 #include "utils/SingleLock.h"
 #include "utils/RssReader.h"

@@ -23,8 +23,8 @@
 #include "Util.h"
 #include "GUIWindowFileManager.h"
 #include "FileItem.h"
-#include "GUISettings.h"
-#include "Settings.h"
+#include "settings/GUISettings.h"
+#include "settings/Settings.h"
 #include "log.h"
 
 using namespace XFILE;

@@ -22,7 +22,7 @@
 #include "ViewDatabase.h"
 #include "Util.h"
 #include "FileSystem/SpecialProtocol.h"
-#include "Settings.h"
+#include "settings/Settings.h"
 #include "ViewState.h"
 #include "utils/log.h"
 #ifdef _LINUX

@@ -34,7 +34,7 @@
 #include "cddb.h"
 #include "DNSNameCache.h"
 #include "music/tags/Id3Tag.h"
-#include "AdvancedSettings.h"
+#include "settings/AdvancedSettings.h"
 #include "StringUtils.h"
 #include "Util.h"
 #include "FileSystem/File.h"

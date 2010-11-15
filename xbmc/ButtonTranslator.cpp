@@ -23,7 +23,7 @@
 #include "utils/Builtins.h"
 #include "ButtonTranslator.h"
 #include "Util.h"
-#include "Settings.h"
+#include "settings/Settings.h"
 #include "Key.h"
 #include "File.h"
 #include "Directory.h"

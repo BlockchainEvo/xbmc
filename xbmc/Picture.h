@@ -20,7 +20,7 @@
  *
  */
 #include "StdString.h"
-#include "Job.h"
+#include "utils/Job.h"
 
 class CPicture
 {

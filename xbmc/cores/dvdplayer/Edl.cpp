@@ -24,7 +24,7 @@
 #include "Util.h"
 #include "FileSystem/File.h"
 #include "FileSystem/MythFile.h"
-#include "AdvancedSettings.h"
+#include "settings/AdvancedSettings.h"
 #include "utils/log.h"
 #include "tinyXML/tinyxml.h"
 #include "PlatformDefs.h"

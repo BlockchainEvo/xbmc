@@ -61,7 +61,7 @@
 #include "cores/VideoRenderers/RenderManager.h"
 #endif
 #include "utils/RegExp.h"
-#include "GUISettings.h"
+#include "settings/GUISettings.h"
 #include "TextureManager.h"
 #include "utils/fstrcmp.h"
 #include "MediaManager.h"
@@ -79,9 +79,9 @@
 #include "GUIUserMessages.h"
 #include "FileSystem/File.h"
 #include "Crc32.h"
-#include "Settings.h"
+#include "settings/Settings.h"
 #include "StringUtils.h"
-#include "AdvancedSettings.h"
+#include "settings/AdvancedSettings.h"
 #ifdef HAS_LIRC
 #include "common/LIRC.h"
 #endif

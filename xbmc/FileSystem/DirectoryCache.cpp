@@ -21,7 +21,7 @@
 
 #include "DirectoryCache.h"
 #include "Util.h"
-#include "Settings.h"
+#include "settings/Settings.h"
 #include "FileItem.h"
 #include "utils/SingleLock.h"
 #include "utils/log.h"

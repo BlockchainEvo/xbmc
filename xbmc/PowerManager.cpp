@@ -23,7 +23,7 @@
 #include "PowerManager.h"
 #include "Application.h"
 #include "KeyboardStat.h"
-#include "GUISettings.h"
+#include "settings/GUISettings.h"
 #include "WindowingFactory.h"
 #include "utils/log.h"
 #include "utils/Weather.h"

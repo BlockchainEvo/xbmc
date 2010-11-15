@@ -19,8 +19,9 @@
  *
  */
 
+#include "DVDFileInfo.h"
 #include "FileItem.h"
-#include "AdvancedSettings.h"
+#include "settings/AdvancedSettings.h"
 #include "Picture.h"
 #include "VideoInfoTag.h"
 #include "Util.h"
@@ -29,7 +30,6 @@
 #include "utils/TimeUtils.h"
 
 #include "DVDClock.h"
-#include "DVDFileInfo.h"
 #include "DVDStreamInfo.h"
 #include "DVDInputStreams/DVDInputStream.h"
 #include "DVDInputStreams/DVDInputStreamBluray.h"

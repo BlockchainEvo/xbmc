@@ -22,8 +22,8 @@
 #include "system.h"
 #include "AudioContext.h"
 #include "GUIAudioManager.h"
-#include "Settings.h"
-#include "GUISettings.h"
+#include "settings/Settings.h"
+#include "settings/GUISettings.h"
 #ifdef _WIN32
 #include "WINDirectSound.h"
 #endif

@@ -19,8 +19,8 @@
  *
  */
 
-#include "GUISettings.h"
 #include "GUIDialogKeyboard.h"
+#include "settings/GUISettings.h"
 #include "GUILabelControl.h"
 #include "GUIButtonControl.h"
 #include "GUIDialogNumeric.h"
@@ -32,7 +32,7 @@
 #include "utils/md5.h"
 #include "utils/TimeUtils.h"
 #include "Application.h"
-#include "AdvancedSettings.h"
+#include "settings/AdvancedSettings.h"
 #include "LocalizeStrings.h"
 
 // Symbol mapping (based on MS virtual keyboard - may need improving)

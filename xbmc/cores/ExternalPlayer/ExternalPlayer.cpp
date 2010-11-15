@@ -32,7 +32,6 @@
 #include "GUIWindowManager.h"
 #include "Application.h"
 #include "FileSystem/FileMusicDatabase.h"
-#include "Settings.h"
 #include "FileItem.h"
 #include "RegExp.h"
 #include "StringUtils.h"

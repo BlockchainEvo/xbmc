@@ -21,7 +21,7 @@
 
 #include "system.h"
 #include "AudioRendererFactory.h"
-#include "GUISettings.h"
+#include "settings/GUISettings.h"
 #include "log.h"
 #include "NullDirectSound.h"
 

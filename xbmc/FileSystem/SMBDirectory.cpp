@@ -40,7 +40,7 @@
 #include "GUIWindowManager.h"
 #include "Application.h"
 #include "FileItem.h"
-#include "AdvancedSettings.h"
+#include "settings/AdvancedSettings.h"
 #include "StringUtils.h"
 #include "utils/log.h"
 #include "utils/SingleLock.h"

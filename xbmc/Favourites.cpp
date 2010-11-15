@@ -23,12 +23,12 @@
 #include "Favourites.h"
 #include "Util.h"
 #include "Key.h"
-#include "Settings.h"
+#include "settings/Settings.h"
 #include "FileItem.h"
 #include "VideoInfoTag.h"
 #include "tinyXML/tinyxml.h"
 #include "utils/log.h"
-#include "AdvancedSettings.h"
+#include "settings/AdvancedSettings.h"
 
 bool CFavourites::Load(CFileItemList &items)
 {

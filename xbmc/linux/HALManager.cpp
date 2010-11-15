@@ -28,9 +28,8 @@
 #include "SingleLock.h"
 #include "Util.h"
 #include "LocalizeStrings.h"
-#include "GUISettings.h"
 #include "PowerManager.h"
-#include "AdvancedSettings.h"
+#include "settings/AdvancedSettings.h"
 
 #ifdef HAS_SDL_JOYSTICK
 #include <SDL/SDL.h>

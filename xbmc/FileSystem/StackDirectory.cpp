@@ -24,7 +24,7 @@
 #include "Util.h"
 #include "FileItem.h"
 #include "StringUtils.h"
-#include "AdvancedSettings.h"
+#include "settings/AdvancedSettings.h"
 
 #define PRE_2_1_STACK_COMPATIBILITY
 

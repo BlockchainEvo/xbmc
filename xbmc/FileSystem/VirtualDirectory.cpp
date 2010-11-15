@@ -23,7 +23,7 @@
 #include "system.h"
 #include "VirtualDirectory.h"
 #include "FactoryDirectory.h"
-#include "Settings.h"
+#include "settings/Settings.h"
 #include "Util.h"
 #include "Profile.h"
 #include "Directory.h"

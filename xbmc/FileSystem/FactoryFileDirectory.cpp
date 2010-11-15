@@ -45,8 +45,7 @@
 #include "FileSystem/Directory.h"
 #include "FileSystem/File.h"
 #include "FileSystem/ZipManager.h"
-#include "AdvancedSettings.h"
-#include "GUISettings.h"
+#include "settings/AdvancedSettings.h"
 #include "FileItem.h"
 
 using namespace XFILE;

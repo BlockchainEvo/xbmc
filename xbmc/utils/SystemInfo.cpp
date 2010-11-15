@@ -32,7 +32,7 @@
 #include "Application.h"
 #include "GraphicContext.h"
 #include "WindowingFactory.h"
-#include "Settings.h"
+#include "settings/Settings.h"
 #include "LocalizeStrings.h"
 #include "CPUInfo.h"
 #include "utils/TimeUtils.h"

@@ -32,7 +32,7 @@
 #include "FileSystem/File.h"
 #include "TextureManager.h"
 #include "../XBPython.h"
-#include "GUISettings.h"
+#include "settings/GUISettings.h"
 #include "LocalizeStrings.h"
 #include "utils/log.h"
 #include "tinyXML/tinyxml.h"

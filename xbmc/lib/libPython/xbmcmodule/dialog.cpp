@@ -38,7 +38,7 @@
 #endif
 #include "../XBPythonDll.h"
 #include "Application.h"
-#include "Settings.h"
+#include "settings/Settings.h"
 #include "pyutil.h"
 #include "GUIDialogFileBrowser.h"
 #include "GUIDialogNumeric.h"

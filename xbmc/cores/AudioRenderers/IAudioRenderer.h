@@ -31,7 +31,7 @@
 
 #include "StdString.h"
 #include "cores/IAudioCallback.h"
-#include "PCMRemap.h"
+#include "utils/PCMRemap.h"
 extern void RegisterAudioCallback(IAudioCallback* pCallback);
 extern void UnRegisterAudioCallback();
 

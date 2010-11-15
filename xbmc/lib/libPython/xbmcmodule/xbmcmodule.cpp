@@ -58,11 +58,11 @@
 #include "Util.h"
 #include "FileSystem/File.h"
 #include "FileSystem/SpecialProtocol.h"
-#include "GUISettings.h"
+#include "settings/GUISettings.h"
 #include "TextureManager.h"
 #include "LangInfo.h"
 #include "SectionLoader.h"
-#include "Settings.h"
+#include "settings/Settings.h"
 #include "LocalizeStrings.h"
 
 // include for constants

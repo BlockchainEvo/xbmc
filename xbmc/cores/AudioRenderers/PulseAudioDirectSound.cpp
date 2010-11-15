@@ -23,8 +23,8 @@
 #ifdef HAS_PULSEAUDIO
 #include "PulseAudioDirectSound.h"
 #include "AudioContext.h"
-#include "AdvancedSettings.h"
-#include "GUISettings.h"
+#include "settings/AdvancedSettings.h"
+#include "settings/Settings.h"
 #include "utils/log.h"
 #include "Util.h"
 #include "LocalizeStrings.h"

@@ -49,7 +49,7 @@
 #include "MediaManager.h"
 #include "RssReader.h"
 #include "PartyModeManager.h"
-#include "Settings.h"
+#include "settings/Settings.h"
 #include "StringUtils.h"
 #include "Util.h"
 

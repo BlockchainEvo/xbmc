@@ -20,12 +20,12 @@
  */
 
 #include "FileSystem/File.h"
-#include "Settings.h"
+#include "settings/Settings.h"
 #include "system.h"
 #include "Texture.h"
 #include "GUITexture.h"
-#include "AdvancedSettings.h"
-#include "MathUtils.h"
+#include "settings/AdvancedSettings.h"
+#include "utils/MathUtils.h"
 #include "utils/log.h"
 #include "karaokelyricscdg.h"
 

@@ -21,7 +21,7 @@
 
 #include "EncoderLame.h"
 #include "music/tags/Id3Tag.h"
-#include "GUISettings.h"
+#include "settings/GUISettings.h"
 #include "utils/log.h"
 
 #ifdef _WIN32

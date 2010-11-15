@@ -38,9 +38,9 @@
 #include "FileSystem/File.h"
 #include "FileItem.h"
 #include "FileSystem/MultiPathDirectory.h"
-#include "AdvancedSettings.h"
-#include "Settings.h"
-#include "GUISettings.h"
+#include "settings/AdvancedSettings.h"
+#include "settings/Settings.h"
+#include "settings/GUISettings.h"
 #include "LocalizeStrings.h"
 #include "utils/log.h"
 

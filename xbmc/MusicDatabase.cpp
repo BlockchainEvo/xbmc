@@ -43,15 +43,15 @@
 #include "GUIDialogYesNo.h"
 #include "GUIDialogSelect.h"
 #include "FileSystem/File.h"
-#include "GUISettings.h"
-#include "AdvancedSettings.h"
+#include "settings/GUISettings.h"
+#include "settings/AdvancedSettings.h"
 #include "FileItem.h"
 #include "Application.h"
 #ifdef HAS_KARAOKE
 #include "karaoke/karaokelyricsfactory.h"
 #endif
 #include "MediaManager.h"
-#include "Settings.h"
+#include "settings/Settings.h"
 #include "StringUtils.h"
 #include "LocalizeStrings.h"
 #include "utils/log.h"

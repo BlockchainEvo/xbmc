@@ -22,7 +22,7 @@
 #include "DVDSubtitlesLibass.h"
 #include "DVDClock.h"
 #include "FileSystem/SpecialProtocol.h"
-#include "GUISettings.h"
+#include "settings/GUISettings.h"
 #include "utils/log.h"
 #include "utils/SingleLock.h"
 

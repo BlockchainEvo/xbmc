@@ -34,7 +34,7 @@
 #include "EncoderFFmpeg.h"
 #include "FileSystem/File.h"
 #include "utils/log.h"
-#include "GUISettings.h"
+#include "settings/GUISettings.h"
 #include "Util.h"
 
 /* AV_PKT_FLAG_KEY was named PKT_FLAG_KEY in older versions of libavcodec */

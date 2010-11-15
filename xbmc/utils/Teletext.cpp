@@ -27,12 +27,10 @@
  */
 
 #include "Teletext.h"
-#include "GUISettings.h"
 #include "Application.h"
 #include "utils/log.h"
 #include "utils/TimeUtils.h"
 #include "FileSystem/SpecialProtocol.h"
-#include "Settings.h"
 
 using namespace std;
 

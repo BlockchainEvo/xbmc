@@ -24,7 +24,7 @@
 #include "utils/GUIInfoManager.h"
 #include "Application.h"
 #include "music/tags/MusicInfoTag.h"
-#include "Settings.h"
+#include "settings/Settings.h"
 #include "WindowingFactory.h"
 #include "Util.h"
 #ifdef _LINUX

@@ -26,10 +26,10 @@
 #include "FileSystem/SpecialProtocol.h"
 #include "Key.h"
 #include "Util.h"
-#include "Settings.h"
+#include "settings/Settings.h"
 #include "utils/log.h"
 #include "XMLUtils.h"
-#include "GUISettings.h"
+#include "settings/GUISettings.h"
 
 using namespace std;
 using namespace XFILE;

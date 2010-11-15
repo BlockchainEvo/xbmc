@@ -23,7 +23,7 @@
 #include "FileSystem/Directory.h"
 #include "SectionLoader.h"
 #include "URL.h"
-#include "AdvancedSettings.h"
+#include "settings/AdvancedSettings.h"
 #include "utils/CharsetConverter.h"
 #include "utils/log.h"
 

@@ -20,7 +20,7 @@
  */
 
 #include "MediaSource.h"
-#include "AdvancedSettings.h"
+#include "settings/AdvancedSettings.h"
 #include "Util.h"
 #include "URL.h"
 #include "FileSystem/MultiPathDirectory.h"

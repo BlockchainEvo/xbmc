@@ -21,7 +21,7 @@
 
 #include "GUILargeTextureManager.h"
 #include "Picture.h"
-#include "GUISettings.h"
+#include "settings/GUISettings.h"
 #include "FileItem.h"
 #include "Texture.h"
 #include "utils/SingleLock.h"

@@ -28,8 +28,8 @@
 #include "utils/log.h"
 
 #include "Application.h"
-#include "Settings.h"
-#include "GUISettings.h"
+#include "settings/Settings.h"
+#include "settings/GUISettings.h"
 
 #ifdef _LINUX
 #include "PlatformInclude.h"

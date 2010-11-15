@@ -27,7 +27,7 @@
 #include "utils/ScraperUrl.h"
 #include "utils/CharsetConverter.h"
 #include "utils/log.h"
-#include "AdvancedSettings.h"
+#include "settings/AdvancedSettings.h"
 #include "FileItem.h"
 #include "XMLUtils.h"
 #include "MusicDatabase.h"

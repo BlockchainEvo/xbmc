@@ -19,8 +19,8 @@
  *
  */
 
-#include "AdvancedSettings.h"
 #include "Album.h"
+#include "settings/AdvancedSettings.h"
 #include "StringUtils.h"
 #include "XMLUtils.h"
 #include "MathUtils.h"

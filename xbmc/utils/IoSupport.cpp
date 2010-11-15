@@ -24,7 +24,6 @@
 
 #include "system.h"
 #include "IoSupport.h"
-#include "Settings.h"
 #include "utils/log.h"
 #ifdef _WIN32
 #include "my_ntddcdrm.h"

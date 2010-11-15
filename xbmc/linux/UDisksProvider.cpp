@@ -21,7 +21,7 @@
 #include "UDisksProvider.h"
 #ifdef HAS_DBUS
 #include "Util.h"
-#include "AdvancedSettings.h"
+#include "settings/AdvancedSettings.h"
 #include "LocalizeStrings.h"
 #include "log.h"
 

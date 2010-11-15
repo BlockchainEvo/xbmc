@@ -23,12 +23,12 @@
 #include "DllAddon.h"
 #include "AddonManager.h"
 #include "AddonStatusHandler.h"
-#include "GUIDialogSettings.h"
+#include "settings/GUIDialogSettings.h"
 #include "Util.h"
 #include "FileSystem/File.h"
 #include "FileSystem/SpecialProtocol.h"
 #include "FileSystem/Directory.h"
-#include "log.h"
+#include "utils/log.h"
 
 using namespace XFILE;
 

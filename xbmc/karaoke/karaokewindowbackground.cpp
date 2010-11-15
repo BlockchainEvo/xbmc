@@ -22,7 +22,7 @@
 // C++ Implementation: karaokewindowbackground
 
 #include "system.h"
-#include "AdvancedSettings.h"
+#include "settings/AdvancedSettings.h"
 #include "GUIWindowManager.h"
 #include "Application.h"
 #include "GUIUserMessages.h"

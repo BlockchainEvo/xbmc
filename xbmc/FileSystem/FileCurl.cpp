@@ -22,9 +22,9 @@
 #include "FileCurl.h"
 #include "Util.h"
 #include "URL.h"
-#include "AdvancedSettings.h"
-#include "GUISettings.h"
-#include "Settings.h"
+#include "settings/AdvancedSettings.h"
+#include "settings/GUISettings.h"
+#include "settings/Settings.h"
 #include "File.h"
 
 #include <vector>

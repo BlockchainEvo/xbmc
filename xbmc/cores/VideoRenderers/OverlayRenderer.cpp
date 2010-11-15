@@ -29,7 +29,7 @@
 #include "cores/VideoRenderers/RenderManager.h"
 #include "Application.h"
 #include "WindowingFactory.h"
-#include "../../Settings.h"
+#include "settings/Settings.h"
 #include "SingleLock.h"
 #if defined(HAS_GL) || defined(HAS_GLES)
 #include "OverlayRendererGL.h"

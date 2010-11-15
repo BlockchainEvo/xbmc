@@ -25,14 +25,14 @@
 #include "GUIWindowWeather.h"
 #include "GUIImage.h"
 #include "utils/Weather.h"
-#include "GUISettings.h"
+#include "settings/GUISettings.h"
 #include "GUIWindowManager.h"
 #include "Util.h"
 #include "lib/libPython/XBPython.h"
 #include "LangInfo.h"
 #include "utils/log.h"
 #include "utils/SystemInfo.h"
-#include "Settings.h"
+#include "settings/Settings.h"
 #include "addons/AddonManager.h"
 
 using namespace ADDON;

@@ -24,8 +24,8 @@
 #include <math.h>
 
 #include "utils/CharsetConverter.h"
-#include "Settings.h"
-#include "GUISettings.h"
+#include "settings/Settings.h"
+#include "settings/GUISettings.h"
 #include "GUITextLayout.h"
 #include "GUIFont.h"
 #include "karaokelyricstext.h"

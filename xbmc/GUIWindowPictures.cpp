@@ -34,8 +34,8 @@
 #include "GUIDialogOK.h"
 #include "FileSystem/File.h"
 #include "playlists/PlayList.h"
-#include "Settings.h"
-#include "GUISettings.h"
+#include "settings/Settings.h"
+#include "settings/GUISettings.h"
 #include "utils/TimeUtils.h"
 #include "utils/log.h"
 

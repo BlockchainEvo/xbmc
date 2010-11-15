@@ -26,7 +26,7 @@
 #include "Picture.h"
 #include "FileSystem/File.h"
 #include "FileItem.h"
-#include "GUISettings.h"
+#include "settings/GUISettings.h"
 #include "GUIUserMessages.h"
 #include "GUIWindowManager.h"
 #include "TextureManager.h"

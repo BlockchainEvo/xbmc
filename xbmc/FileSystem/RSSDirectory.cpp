@@ -22,7 +22,7 @@
 #include "RSSDirectory.h"
 #include "FileItem.h"
 #include "FileCurl.h"
-#include "Settings.h"
+#include "settings/Settings.h"
 #include "Util.h"
 #include "tinyXML/tinyxml.h"
 #include "HTMLUtil.h"

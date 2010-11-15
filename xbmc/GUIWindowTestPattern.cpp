@@ -22,7 +22,7 @@
  */
 
 #include "GUIWindowTestPattern.h"
-#include "Settings.h"
+#include "settings/Settings.h"
 #include "GUIWindowManager.h"
 #include "Key.h"
 

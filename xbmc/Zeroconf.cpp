@@ -20,7 +20,7 @@
  */
 #include "system.h" //HAS_ZEROCONF define
 #include "Zeroconf.h"
-#include "Settings.h"
+#include "settings/Settings.h"
 
 #ifdef _LINUX
 #ifndef __APPLE__

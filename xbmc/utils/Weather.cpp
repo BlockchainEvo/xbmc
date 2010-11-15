@@ -34,7 +34,7 @@
 #include "Network.h"
 #include "Util.h"
 #include "Application.h"
-#include "GUISettings.h"
+#include "settings/GUISettings.h"
 #include "GUIWindowManager.h"
 #include "GUIUserMessages.h"
 #include "GUIDialogProgress.h"

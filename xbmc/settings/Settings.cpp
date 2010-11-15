@@ -51,14 +51,14 @@
 #include "LangInfo.h"
 #include "LocalizeStrings.h"
 #include "StringUtils.h"
-#include "SystemInfo.h"
+#include "utils/SystemInfo.h"
 #ifdef _WIN32
 #include "win32/WIN32Util.h"
 #endif
 #if defined(_LINUX) && defined(HAS_FILESYSTEM_SMB)
 #include "FileSystem/SMBDirectory.h"
 #endif
-#include "playercorefactory/PlayerCoreFactory.h"
+#include "cores/playercorefactory/PlayerCoreFactory.h"
 #include "utils/FileUtils.h"
 #include "MouseStat.h"
 

@@ -38,14 +38,14 @@
 #endif
 #include "Autorun.h"
 #include "GUIUserMessages.h"
-#include "Settings.h"
+#include "settings/Settings.h"
 #include "tinyXML/tinyxml.h"
 #include "utils/SingleLock.h"
 #include "utils/log.h"
 #include "Application.h"
 #include "utils/JobManager.h"
 #include "AutorunMediaJob.h"
-#include "GUISettings.h"
+#include "settings/GUISettings.h"
 
 #ifdef __APPLE__
 #include "DarwinStorageProvider.h"

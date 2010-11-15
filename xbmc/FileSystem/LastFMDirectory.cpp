@@ -26,7 +26,7 @@
 #include "URL.h"
 #include "GUIWindowManager.h"
 #include "GUIDialogProgress.h"
-#include "GUISettings.h"
+#include "settings/GUISettings.h"
 #include "FileItem.h"
 #include "FileCurl.h"
 #include "StringUtils.h"

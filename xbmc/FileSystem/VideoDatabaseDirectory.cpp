@@ -26,7 +26,7 @@
 #include "TextureManager.h"
 #include "FileSystem/File.h"
 #include "FileItem.h"
-#include "Settings.h"
+#include "settings/Settings.h"
 #include "Crc32.h"
 #include "LocalizeStrings.h"
 #include "utils/log.h"

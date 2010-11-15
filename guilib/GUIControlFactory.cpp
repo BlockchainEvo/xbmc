@@ -61,7 +61,7 @@
 #include "XMLUtils.h"
 #include "GUIFontManager.h"
 #include "GUIColorManager.h"
-#include "Settings.h"
+#include "settings/Settings.h"
 #include "StringUtils.h"
 
 using namespace std;

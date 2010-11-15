@@ -22,7 +22,6 @@
 #include "GUIDialogFileStacking.h"
 #include "LocalizeStrings.h"
 #include "FileItem.h"
-#include "Settings.h" // for the ifdef
 
 using namespace std;
 

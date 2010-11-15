@@ -29,7 +29,7 @@
 #include "LIRC.h"
 #include "ButtonTranslator.h"
 #include "log.h"
-#include "AdvancedSettings.h"
+#include "settings/AdvancedSettings.h"
 #include "FileSystem/File.h"
 #include "utils/TimeUtils.h"
 

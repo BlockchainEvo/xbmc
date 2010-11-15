@@ -34,8 +34,8 @@
 #include "FileSystem/SpecialProtocol.h"
 #include "FileSystem/Directory.h"
 #include "MediaManager.h"
-#include "Settings.h"
-#include "GUISettings.h"
+#include "settings/Settings.h"
+#include "settings/GUISettings.h"
 #include "LocalizeStrings.h"
 #include "utils/log.h"
 

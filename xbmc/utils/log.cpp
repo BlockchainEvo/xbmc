@@ -28,8 +28,7 @@
 #include "CriticalSection.h"
 #include "SingleLock.h"
 #include "FileSystem/File.h"
-#include "Settings.h"
-#include "AdvancedSettings.h"
+#include "settings/AdvancedSettings.h"
 #include "Thread.h"
 #include "WindowingFactory.h"
 

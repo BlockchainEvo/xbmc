@@ -26,7 +26,7 @@
 #include "MathUtils.h"
 #include "Application.h"
 #include "MusicDatabase.h"
-#include "AdvancedSettings.h"
+#include "settings/AdvancedSettings.h"
 #include "utils/log.h"
 
 #include "karaokelyrics.h"

@@ -22,11 +22,11 @@
 #include "GUIDialogTeletext.h"
 #include "utils/log.h"
 #include "GUIWindowManager.h"
-#include "GUISettings.h"
+#include "settings/GUISettings.h"
 #include "Application.h"
 #include "GUITexture.h"
 #include "Texture.h"
-#include "Settings.h"
+#include "settings/Settings.h"
 #include "LocalizeStrings.h"
 
 using namespace std;

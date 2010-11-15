@@ -22,8 +22,8 @@
 #include "SpecialProtocol.h"
 #include "URL.h"
 #include "Util.h"
-#include "GUISettings.h"
-#include "Settings.h"
+#include "settings/GUISettings.h"
+#include "settings/Settings.h"
 #include "utils/log.h"
 
 #ifdef _LINUX

@@ -28,10 +28,10 @@
 #include "utils/SingleLock.h"
 #include "FileItem.h"
 #include "LangInfo.h"
-#include "Settings.h"
-#include "GUISettings.h"
+#include "settings/Settings.h"
+#include "settings/GUISettings.h"
 #include "DownloadQueueManager.h"
-#include "AdvancedSettings.h"
+#include "settings/AdvancedSettings.h"
 #include "log.h"
 
 #ifdef HAS_VISUALISATION

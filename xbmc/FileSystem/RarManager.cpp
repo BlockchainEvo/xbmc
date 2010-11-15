@@ -31,7 +31,7 @@
 #include "GUIDialogYesNo.h"
 #include "FileSystem/Directory.h"
 #include "FileSystem/SpecialProtocol.h"
-#include "AdvancedSettings.h"
+#include "settings/AdvancedSettings.h"
 #include "FileItem.h"
 #include "utils/log.h"
 

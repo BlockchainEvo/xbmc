@@ -85,7 +85,6 @@
 #include "FileItem.h"
 #include "GUIToggleButtonControl.h"
 #include "FileSystem/SpecialProtocol.h"
-#include "File.h"
 
 #include "Zeroconf.h"
 

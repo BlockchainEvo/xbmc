@@ -43,7 +43,7 @@
 #include "DirectoryNodeYearSong.h"
 #include "DirectoryNodeSingles.h"
 #include "URL.h"
-#include "AdvancedSettings.h"
+#include "settings/AdvancedSettings.h"
 #include "FileItem.h"
 #include "StringUtils.h"
 #include "LocalizeStrings.h"

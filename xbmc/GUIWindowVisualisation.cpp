@@ -28,8 +28,8 @@
 #include "ButtonTranslator.h"
 #include "GUIDialogVisualisationPresetList.h"
 #include "GUIWindowManager.h"
-#include "Settings.h"
-#include "AdvancedSettings.h"
+#include "settings/Settings.h"
+#include "settings/AdvancedSettings.h"
 
 using namespace MUSIC_INFO;
 

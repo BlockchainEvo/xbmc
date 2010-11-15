@@ -38,7 +38,7 @@
 #include <linux/cdrom.h>
 #endif
 #endif
-#include "AdvancedSettings.h"
+#include "settings/AdvancedSettings.h"
 #include "GUIUserMessages.h"
 #include "Util.h"
 #include "Picture.h"

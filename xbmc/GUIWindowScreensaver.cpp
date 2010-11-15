@@ -24,7 +24,7 @@
 #include "addons/AddonManager.h"
 #include "Application.h"
 #include "GUIPassword.h"
-#include "GUISettings.h"
+#include "settings/GUISettings.h"
 #include "GUIUserMessages.h"
 #include "GUIWindowManager.h"
 #include "utils/SingleLock.h"

@@ -25,7 +25,7 @@
 #include "GUITextLayout.h"
 #include "GUIFont.h" // for XBFONT_* defines
 #include "Application.h"
-#include "AdvancedSettings.h"
+#include "settings/AdvancedSettings.h"
 #include "WindowingFactory.h"
 #include "utils/log.h"
 #include "utils/TimeUtils.h"

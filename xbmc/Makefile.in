@@ -20,13 +20,6 @@ INCLUDES+=-Ilib/cpluff/libcpluff
 
 SRCS=Application.cpp \
      CueDocument.cpp \
-     GUISettings.cpp \
-     GUIWindowSettings.cpp \
-     GUIWindowSettingsCategory.cpp \
-     GUIWindowSettingsProfile.cpp \
-     GUIWindowSettingsScreenCalibration.cpp \
-     Settings.cpp \
-     SettingsControls.cpp \
      GUIDialogMusicScan.cpp \
      GUIViewControl.cpp \
      GUIViewState.cpp \
@@ -81,16 +74,13 @@ SRCS=Application.cpp \
      Song.cpp \
      VideoDatabase.cpp \
      ViewDatabase.cpp \
-     GUIDialogAudioSubtitleSettings.cpp \
      GUIDialogBoxBase.cpp \
      GUIDialogButtonMenu.cpp \
-     GUIDialogContentSettings.cpp \
      GUIDialogContextMenu.cpp \
      GUIDialogFileBrowser.cpp \
      GUIDialogFileStacking.cpp \
      GUIDialogGamepad.cpp \
      GUIDialogKeyboard.cpp \
-     GUIDialogLockSettings.cpp \
      GUIDialogMediaSource.cpp \
      GUIDialogMusicOSD.cpp \
      GUIDialogMuteBug.cpp \
@@ -98,16 +88,13 @@ SRCS=Application.cpp \
      GUIDialogNumeric.cpp \
      GUIDialogOK.cpp \
      GUIDialogPlayerControls.cpp \
-     GUIDialogProfileSettings.cpp \
      GUIDialogProgress.cpp \
      GUIDialogSeekBar.cpp \
      GUIDialogSelect.cpp \
-     GUIDialogSettings.cpp \
      GUIDialogSubMenu.cpp \
      GUIDialogTeletext.cpp \
      GUIDialogTextViewer.cpp \
      GUIDialogVideoBookmarks.cpp \
-     GUIDialogVideoSettings.cpp \
      GUIDialogVisualisationPresetList.cpp \
      GUIDialogVolumeBar.cpp \
      GUIDialogSlider.cpp \
@@ -174,7 +161,6 @@ SRCS=Application.cpp \
      WinSystemX11GL.cpp \
      WinSystemEGL.cpp \
      WinEventsSDL.cpp \
-     AdvancedSettings.cpp \
      Bookmark.cpp \
      TextureCache.cpp \
      TextureDatabase.cpp \

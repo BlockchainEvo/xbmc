@@ -54,12 +54,12 @@
 #else
 #define MEASURE_FUNCTION
 #endif
-#include "AdvancedSettings.h"
+#include "settings/AdvancedSettings.h"
 #include "FileItem.h"
 #include "MouseStat.h"
-#include "GUISettings.h"
+#include "settings/GUISettings.h"
 #include "GUIUserMessages.h"
-#include "Settings.h"
+#include "settings/Settings.h"
 #include "LocalizeStrings.h"
 #include "utils/log.h"
 #include "utils/TimeUtils.h"

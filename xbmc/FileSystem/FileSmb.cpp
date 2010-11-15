@@ -32,8 +32,8 @@
 #include "Util.h"
 #include <libsmbclient.h>
 #include "../utils/Network.h"
-#include "AdvancedSettings.h"
-#include "GUISettings.h"
+#include "settings/AdvancedSettings.h"
+#include "settings/GUISettings.h"
 #include "utils/SingleLock.h"
 #include "utils/log.h"
 #include "utils/TimeUtils.h"

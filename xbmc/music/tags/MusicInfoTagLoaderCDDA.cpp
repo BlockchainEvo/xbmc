@@ -23,7 +23,7 @@
 #include "MusicInfoTagLoaderCDDA.h"
 #include "FileSystem/cddb.h"
 #include "MusicInfoTag.h"
-#include "Settings.h"
+#include "settings/Settings.h"
 #include "MediaManager.h"
 #include "utils/log.h"
 

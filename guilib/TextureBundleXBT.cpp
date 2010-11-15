@@ -26,7 +26,7 @@
 #include "GraphicContext.h"
 #include "utils/log.h"
 #include "addons/Skin.h"
-#include "GUISettings.h"
+#include "settings/GUISettings.h"
 #include "Util.h"
 #include "FileSystem/SpecialProtocol.h"
 #include "utils/EndianSwap.h"

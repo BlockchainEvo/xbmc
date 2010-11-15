@@ -25,10 +25,9 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "system.h"
-#include "AdvancedSettings.h"
 #include "Application.h"
 #include "FileShoutcast.h"
-#include "GUISettings.h"
+#include "settings/GUISettings.h"
 #include "GUIDialogProgress.h"
 #include "GUIWindowManager.h"
 #include "URL.h"

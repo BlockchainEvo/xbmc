@@ -29,7 +29,7 @@
 #include "FileItem.h"
 #include "GUIEditControl.h"
 #include "LocalizeStrings.h"
-#include "Settings.h"
+#include "settings/Settings.h"
 #include "MediaManager.h"
 
 #define CONTROL_FIELD           15

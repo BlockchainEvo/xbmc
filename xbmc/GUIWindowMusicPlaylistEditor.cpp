@@ -33,7 +33,7 @@
 #include "GUIWindowManager.h"
 #include "GUIDialogKeyboard.h"
 #include "FileItem.h"
-#include "GUISettings.h"
+#include "settings/GUISettings.h"
 #include "GUIUserMessages.h"
 #include "LocalizeStrings.h"
 

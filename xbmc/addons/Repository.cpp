@@ -25,7 +25,7 @@
 #include "XMLUtils.h"
 #include "AddonDatabase.h"
 #include "Application.h"
-#include "Settings.h"
+#include "settings/Settings.h"
 #include "FileItem.h"
 #include "utils/JobManager.h"
 #include "utils/FileOperationJob.h"

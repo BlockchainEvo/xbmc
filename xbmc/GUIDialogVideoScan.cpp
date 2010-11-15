@@ -24,7 +24,7 @@
 #include "GUIUserMessages.h"
 #include "Util.h"
 #include "GUIWindowManager.h"
-#include "GUISettings.h"
+#include "settings/GUISettings.h"
 #include "Application.h"
 #include "utils/SingleLock.h"
 #include "utils/log.h"

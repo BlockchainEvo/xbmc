@@ -27,8 +27,8 @@
 #include "utils/GUIInfoManager.h"
 #include "utils/SingleLock.h"
 #include "Util.h"
-#include "GUISettings.h"
-#include "Settings.h"
+#include "settings/GUISettings.h"
+#include "settings/Settings.h"
 #include "addons/Skin.h"
 
 using namespace std;
