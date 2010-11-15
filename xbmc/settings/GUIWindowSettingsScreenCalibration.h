@@ -21,7 +21,7 @@
  *
  */
 
-#include "guilib/GUIWindow.h"
+#include "GUIWindow.h"
 
 class CGUIWindowSettingsScreenCalibration : public CGUIWindow
 {

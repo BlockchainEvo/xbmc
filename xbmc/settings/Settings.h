@@ -41,8 +41,8 @@
 #include "settings/VideoSettings.h"
 #include "Profile.h"
 #include "ViewState.h"
-#include "guilib/Resolution.h"
-#include "guilib/GraphicContext.h"
+#include "Resolution.h"
+#include "GraphicContext.h" //TODO: only due to VIEW_TYPE
 
 #include <vector>
 #include <map>

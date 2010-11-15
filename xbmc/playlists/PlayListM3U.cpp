@@ -30,7 +30,7 @@
 #include "cores/dllloader/exports/emu_msvcrt.h"
 #endif
 
-#include "AdvancedSettings.h"
+#include "settings/AdvancedSettings.h"
 #include "music/tags/MusicInfoTag.h"
 
 using namespace PLAYLIST;

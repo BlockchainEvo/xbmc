@@ -23,7 +23,7 @@
 #include "addons/GUIDialogAddonSettings.h"
 #include "GUIDialogOK.h"
 #include "GUISettings.h"
-#include "guilib/GUIWindowManager.h"
+#include "GUIWindowManager.h"
 #include "addons/IAddon.h"
 #include "Application.h"
 #include "FileItem.h"
@@ -113,9 +113,6 @@ void CGUIDialogContentSettings::OnWindowLoaded()
 
 void CGUIDialogContentSettings::SetupPage()
 {
-  CGUIMessage msgReset(GUI_MSG_LABEL_RESET, GetID(), CONTROL_SCRAPER_LIST);
-  OnMessage(msgReset);
-  m_vecItems->Clear();
   if (m_content == CONTENT_NONE)
   {
     m_bShowScanSettings = false;
@@ -302,8 +299,11 @@ void CGUIDialogContentSettings::FillContentTypes(const CONTENT_TYPE &content)
 
 void CGUIDialogContentSettings::FillListControl()
 {
+  CGUIMessage msgReset(GUI_MSG_LABEL_RESET, GetID(), CONTROL_SCRAPER_LIST);
+  OnMessage(msgReset);
   int iIndex=0;
   int selectedIndex = 0;
+  m_vecItems->Clear();
 
   if (m_scrapers.size() == 0 || m_scrapers.find(m_content) == m_scrapers.end())
     return;

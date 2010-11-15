@@ -24,13 +24,13 @@
 #include "GUIWindowSettingsCategory.h"
 #include "Application.h"
 #include "utils/Builtins.h"
-#include "input/KeyboardLayoutConfiguration.h"
+#include "KeyboardLayoutConfiguration.h"
 #include "FileSystem/Directory.h"
 #include "Util.h"
-#include "guilib/GUISpinControlEx.h"
-#include "guilib/GUIRadioButtonControl.h"
-#include "guilib/GUIEditControl.h"
-#include "guilib/GUIImage.h"
+#include "GUISpinControlEx.h"
+#include "GUIRadioButtonControl.h"
+#include "GUIEditControl.h"
+#include "GUIImage.h"
 #include "utils/Weather.h"
 #include "MusicDatabase.h"
 #include "VideoDatabase.h"
@@ -41,8 +41,8 @@
 #endif
 #include "PlayListPlayer.h"
 #include "addons/Skin.h"
-#include "guilib/GUIAudioManager.h"
-#include "guilib/AudioContext.h"
+#include "GUIAudioManager.h"
+#include "AudioContext.h"
 #include "lib/libscrobbler/lastfmscrobbler.h"
 #include "lib/libscrobbler/librefmscrobbler.h"
 #include "GUIPassword.h"
@@ -59,11 +59,11 @@
 #include "GUIWindowPrograms.h"
 #include "addons/Visualisation.h"
 #include "addons/AddonManager.h"
-#include "storage/MediaManager.h"
-#include "network/Network.h"
-#include "guilib/GUIControlGroupList.h"
-#include "guilib/GUIWindowManager.h"
-#include "guilib/GUIFontManager.h"
+#include "MediaManager.h"
+#include "utils/Network.h"
+#include "GUIControlGroupList.h"
+#include "GUIWindowManager.h"
+#include "GUIFontManager.h"
 #ifdef _LINUX
 #include "LinuxTimezone.h"
 #include <dlfcn.h>
@@ -79,14 +79,14 @@
 #include "CoreAudio.h"
 #include "XBMCHelper.h"
 #endif
-#include "network/GUIDialogAccessPoints.h"
+#include "GUIDialogAccessPoints.h"
 #include "FileSystem/Directory.h"
 
 #include "FileItem.h"
-#include "guilib/GUIToggleButtonControl.h"
+#include "GUIToggleButtonControl.h"
 #include "FileSystem/SpecialProtocol.h"
 
-#include "network/Zeroconf.h"
+#include "Zeroconf.h"
 
 #ifdef _WIN32
 #include "WIN32Util.h"
@@ -95,10 +95,10 @@
 #include <map>
 #include "Settings.h"
 #include "AdvancedSettings.h"
-#include "input/MouseStat.h"
-#include "guilib/LocalizeStrings.h"
+#include "MouseStat.h"
+#include "LocalizeStrings.h"
 #include "LangInfo.h"
-#include "utils/StringUtils.h"
+#include "StringUtils.h"
 #include "WindowingFactory.h"
 
 #if defined(HAVE_LIBCRYSTALHD)

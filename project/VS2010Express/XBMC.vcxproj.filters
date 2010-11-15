@@ -9800,6 +9800,60 @@
     <ClInclude Include="..\..\xbmc\addons\AddonDatabase.h">
       <Filter>Source Files\Addons</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\xbmc\GUIWindowTestPatternGL.h">
+      <Filter>Source Files\GUI Other</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\GUIWindowTestPattern.h">
+      <Filter>Source Files\GUI Other</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\GUIWindowTestPatternDX.h">
+      <Filter>Source Files\GUI Other</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\settings\AdvancedSettings.h">
+      <Filter>Source Files\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\settings\GUIDialogAudioSubtitleSettings.h">
+      <Filter>Source Files\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\settings\GUIDialogContentSettings.h">
+      <Filter>Source Files\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\settings\GUIDialogLockSettings.h">
+      <Filter>Source Files\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\settings\GUIDialogProfileSettings.h">
+      <Filter>Source Files\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\settings\GUIDialogSettings.h">
+      <Filter>Source Files\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\settings\GUIDialogVideoSettings.h">
+      <Filter>Source Files\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\settings\GUISettings.h">
+      <Filter>Source Files\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\settings\GUIWindowSettings.h">
+      <Filter>Source Files\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\settings\GUIWindowSettingsCategory.h">
+      <Filter>Source Files\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\settings\GUIWindowSettingsProfile.h">
+      <Filter>Source Files\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\settings\GUIWindowSettingsScreenCalibration.h">
+      <Filter>Source Files\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\settings\Settings.h">
+      <Filter>Source Files\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\settings\SettingsControls.h">
+      <Filter>Source Files\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\settings\VideoSettings.h">
+      <Filter>Source Files\Settings</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\xbmc\win32\XBMC.ico">

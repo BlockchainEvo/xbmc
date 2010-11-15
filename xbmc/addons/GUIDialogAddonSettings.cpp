@@ -42,7 +42,7 @@
 #include "Application.h"
 #include "GUIDialogKeyboard.h"
 #include "FileItem.h"
-#include "Settings.h"
+#include "settings/Settings.h"
 #include "GUIInfoManager.h"
 #include "GUIDialogSelect.h"
 

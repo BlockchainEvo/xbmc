@@ -24,7 +24,7 @@
 #include "Util.h"
 #include "StringUtils.h"
 #include "FileSystem/File.h"
-#include "AdvancedSettings.h"
+#include "settings/AdvancedSettings.h"
 #include "music/tags/MusicInfoTag.h"
 #include "utils/CharsetConverter.h"
 #include "utils/log.h"

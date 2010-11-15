@@ -25,16 +25,16 @@
 #include "Application.h"
 #include "GUIDialogContextMenu.h"
 #include "GUIDialogProfileSettings.h"
-#include "network/Network.h"
+#include "utils/Network.h"
 #include "utils/Weather.h"
 #include "GUIPassword.h"
 #include "GUIWindowLoginScreen.h"
-#include "guilib/GUIWindowManager.h"
+#include "GUIWindowManager.h"
 #include "FileSystem/Directory.h"
 #include "FileItem.h"
 #include "Util.h"
 #include "Settings.h"
-#include "guilib/LocalizeStrings.h"
+#include "LocalizeStrings.h"
 
 using namespace XFILE;
 

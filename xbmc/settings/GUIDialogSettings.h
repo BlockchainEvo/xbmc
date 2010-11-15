@@ -21,7 +21,7 @@
  *
  */
 
-#include "guilib/GUIDialog.h"
+#include "GUIDialog.h"
 #include "GUIDialogSlider.h"
 
 class CGUISpinControlEx;

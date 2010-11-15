@@ -24,9 +24,9 @@
 #include "GUIDialogKeyboard.h"
 #include "GUIDialogGamepad.h"
 #include "GUIDialogContextMenu.h"
-#include "guilib/GUIWindowManager.h"
+#include "GUIWindowManager.h"
 #include "Util.h"
-#include "guilib/LocalizeStrings.h"
+#include "LocalizeStrings.h"
 
 CGUIDialogLockSettings::CGUIDialogLockSettings(void)
     : CGUIDialogSettings(WINDOW_DIALOG_LOCK_SETTINGS, "LockSettings.xml")

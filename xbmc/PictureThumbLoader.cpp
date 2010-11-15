@@ -34,8 +34,6 @@
 #include "Util.h"
 #include "settings/Settings.h"
 
-#include "cores/dvdplayer/DVDFileInfo.h"
-
 using namespace XFILE;
 using namespace std;
 

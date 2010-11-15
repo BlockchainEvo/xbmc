@@ -21,10 +21,10 @@
 
 #include "system.h"
 #include "GUIDialogVideoSettings.h"
-#include "guilib/GUIWindowManager.h"
+#include "GUIWindowManager.h"
 #include "GUIPassword.h"
 #include "Util.h"
-#include "utils/MathUtils.h"
+#include "MathUtils.h"
 #include "GUISettings.h"
 #ifdef HAS_VIDEO_PLAYBACK
 #include "cores/VideoRenderers/RenderManager.h"

@@ -20,12 +20,12 @@
  */
 
 #include "GUIDialogSettings.h"
-#include "guilib/GUISpinControlEx.h"
-#include "guilib/GUIRadioButtonControl.h"
-#include "guilib/GUISettingsSliderControl.h"
-#include "guilib/GUIImage.h"
-#include "guilib/GUIControlGroupList.h"
-#include "guilib/LocalizeStrings.h"
+#include "GUISpinControlEx.h"
+#include "GUIRadioButtonControl.h"
+#include "GUISettingsSliderControl.h"
+#include "GUIImage.h"
+#include "GUIControlGroupList.h"
+#include "LocalizeStrings.h"
 #include "GUISettings.h"
 #include "utils/log.h"
 

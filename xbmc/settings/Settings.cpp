@@ -23,31 +23,34 @@
 #include "Settings.h"
 #include "AdvancedSettings.h"
 #include "Application.h"
-#include "input/KeyboardLayoutConfiguration.h"
+#include "KeyboardLayoutConfiguration.h"
 #include "Util.h"
 #include "URL.h"
 #include "GUIWindowFileManager.h"
 #include "GUIDialogButtonMenu.h"
-#include "guilib/GUIFontManager.h"
+#include "GUIFontManager.h"
 #include "LangCodeExpander.h"
-#include "input/ButtonTranslator.h"
-#include "utils/XMLUtils.h"
+#include "ButtonTranslator.h"
+#include "XMLUtils.h"
 #include "utils/PasswordManager.h"
 #include "utils/RegExp.h"
 #include "GUIPassword.h"
-#include "guilib/GUIAudioManager.h"
-#include "guilib/AudioContext.h"
+#include "GUIAudioManager.h"
+#include "AudioContext.h"
 #include "utils/GUIInfoManager.h"
+#include "utils/Network.h"
 #include "FileSystem/MultiPathDirectory.h"
 #include "FileSystem/SpecialProtocol.h"
-#include "guilib/GUIBaseContainer.h" // for VIEW_TYPE enum
-#include "guilib/GUIWindowManager.h"
+#include "GUIBaseContainer.h" // for VIEW_TYPE enum
+#include "MediaManager.h"
+#include "DNSNameCache.h"
+#include "GUIWindowManager.h"
 #include "GUIDialogYesNo.h"
 #include "FileSystem/Directory.h"
 #include "FileItem.h"
 #include "LangInfo.h"
-#include "guilib/LocalizeStrings.h"
-#include "utils/StringUtils.h"
+#include "LocalizeStrings.h"
+#include "StringUtils.h"
 #include "utils/SystemInfo.h"
 #ifdef _WIN32
 #include "win32/WIN32Util.h"
@@ -57,7 +60,7 @@
 #endif
 #include "cores/playercorefactory/PlayerCoreFactory.h"
 #include "utils/FileUtils.h"
-#include "input/MouseStat.h"
+#include "MouseStat.h"
 
 using namespace std;
 using namespace XFILE;
@@ -91,7 +94,7 @@ void CSettings::Initialize()
   m_bMyVideoPlaylistShuffle = false;
   m_bMyVideoNavFlatten = false;
   m_bStartVideoWindowed = false;
-  m_bAddonAutoUpdate = true;
+  m_bAddonAutoUpdate = false;
   m_bAddonNotifications = true;
 
   m_nVolumeLevel = 0;
@@ -680,8 +683,6 @@ bool CSettings::LoadSettings(const CStdString& strSettingsFile)
     GetInteger(pElement, "systemtotaluptime", m_iSystemTimeTotalUp, 0, 0, INT_MAX);
     GetInteger(pElement, "httpapibroadcastlevel", m_HttpApiBroadcastLevel, 0, 0, 255);
     GetInteger(pElement, "httpapibroadcastport", m_HttpApiBroadcastPort, 8278, 1, 65535);
-    XMLUtils::GetBoolean(pElement, "addonautoupdate", m_bAddonAutoUpdate);
-    XMLUtils::GetBoolean(pElement, "addonnotifications", m_bAddonNotifications);
   }
 
   pElement = pRootElement->FirstChildElement("defaultvideosettings");
@@ -711,6 +712,8 @@ bool CSettings::LoadSettings(const CStdString& strSettingsFile)
     GetFloat(pElement, "subtitledelay", m_defaultVideoSettings.m_SubtitleDelay, 0.0f, -10.0f, 10.0f);
     XMLUtils::GetBoolean(pElement, "autocrop", m_defaultVideoSettings.m_Crop);
     XMLUtils::GetBoolean(pElement, "nonlinstretch", m_defaultVideoSettings.m_CustomNonLinStretch);
+    XMLUtils::GetBoolean(pElement, "addonautoupdate", m_bAddonAutoUpdate);
+    XMLUtils::GetBoolean(pElement, "addonnotifications", m_bAddonNotifications);
 
     m_defaultVideoSettings.m_SubtitleCached = false;
   }
@@ -853,8 +856,6 @@ bool CSettings::SaveSettings(const CStdString& strSettingsFile, CGUISettings *lo
   XMLUtils::SetInt(pNode, "systemtotaluptime", m_iSystemTimeTotalUp);
   XMLUtils::SetInt(pNode, "httpapibroadcastport", m_HttpApiBroadcastPort);
   XMLUtils::SetInt(pNode, "httpapibroadcastlevel", m_HttpApiBroadcastLevel);
-  XMLUtils::SetBoolean(pNode, "addonautoupdate", m_bAddonAutoUpdate);
-  XMLUtils::SetBoolean(pNode, "addonnotifications", m_bAddonNotifications);
 
   // default video settings
   TiXmlElement videoSettingsNode("defaultvideosettings");
@@ -879,6 +880,8 @@ bool CSettings::SaveSettings(const CStdString& strSettingsFile, CGUISettings *lo
   XMLUtils::SetFloat(pNode, "subtitledelay", m_defaultVideoSettings.m_SubtitleDelay);
   XMLUtils::SetBoolean(pNode, "autocrop", m_defaultVideoSettings.m_Crop); 
   XMLUtils::SetBoolean(pNode, "nonlinstretch", m_defaultVideoSettings.m_CustomNonLinStretch);
+  XMLUtils::SetBoolean(pNode, "addonautoupdate", m_bAddonAutoUpdate);
+  XMLUtils::SetBoolean(pNode, "addonnotifications", m_bAddonNotifications);
 
 
   // audio settings
