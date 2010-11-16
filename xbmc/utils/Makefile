@@ -6,6 +6,7 @@ SRCS=AlarmClock.cpp \
      Builtins.cpp \
      CharsetConverter.cpp \
      CriticalSection.cpp \
+     Crc32.cpp \
      DownloadQueue.cpp \
      DownloadQueueManager.cpp \
      Event.cpp \

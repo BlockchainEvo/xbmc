@@ -44,7 +44,6 @@ SRCS=Application.cpp \
      MusicInfoLoader.cpp \
      MusicInfoScanner.cpp \
      AutoSwitch.cpp \
-     Crc32.cpp \
      DateTime.cpp \
      DetectDVDType.cpp \
      DNSNameCache.cpp \
