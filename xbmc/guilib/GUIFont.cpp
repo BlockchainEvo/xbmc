@@ -25,7 +25,7 @@
 
 #include "utils/SingleLock.h"
 #include "utils/TimeUtils.h"
-#include "utils/MathUtils.h"
+#include "MathUtils.h"
 
 #define ROUND(x) (float)(MathUtils::round_int(x))
 

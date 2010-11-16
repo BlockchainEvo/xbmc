@@ -26,8 +26,8 @@
 #include "GUIDialogKeyboard.h"
 #include "GUIDialogGamepad.h"
 #include "GUIDialogLockSettings.h"
-#include "GUIImage.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIImage.h"
+#include "guilib/GUIWindowManager.h"
 #include "MediaManager.h"
 #include "Util.h"
 #include "GUIPassword.h"
@@ -38,7 +38,7 @@
 #include "FileItem.h"
 #include "Settings.h"
 #include "GUISettings.h"
-#include "LocalizeStrings.h"
+#include "guilib/LocalizeStrings.h"
 #include "TextureCache.h"
 
 using namespace XFILE;

@@ -9896,6 +9896,303 @@
     <ClInclude Include="..\..\xbmc\system.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\xbmc\input\SDLJoystick.h">
+      <Filter>guilib\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\input\windows\IRServerSuite.h">
+      <Filter>guilib\common\IRServerSuite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\input\windows\IrssMessage.h">
+      <Filter>guilib\common\IRServerSuite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\tinyXML\tinystr.h">
+      <Filter>guilib\tinyxml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lib\tinyXML\tinyxml.h">
+      <Filter>guilib\tinyxml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\AnimatedGif.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\AudioContext.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\D3DResource.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\DDSImage.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\DirectXGraphics.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\FrameBufferObject.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\Geometry.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\gui3d.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUIActionDescriptor.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUIAudioManager.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUIBaseContainer.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUIBorderedImage.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUIButtonControl.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUIButtonScroller.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUICallback.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUICheckMarkControl.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUIColorManager.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUIControl.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUIControlFactory.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUIControlGroup.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUIControlGroupList.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUIControlProfiler.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUIDialog.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUIEditControl.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUIFadeLabelControl.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUIFixedListContainer.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUIFont.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUIFontManager.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUIImage.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUIIncludes.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUIInfoTypes.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUILabel.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUILabelControl.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUIListContainer.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUIListGroup.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUIListItem.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUIListItemLayout.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUIListLabel.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUIMessage.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUIMoverControl.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUIMultiImage.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUIMultiSelectText.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUIPanelContainer.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUIProgressControl.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUIRadioButtonControl.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUIRenderingControl.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUIResizeControl.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUIRSSControl.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUIScrollBarControl.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUISelectButtonControl.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUISettingsSliderControl.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUIShader.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUISliderControl.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUISound.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUISpinControl.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUISpinControlEx.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUIStandardWindow.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUIStaticItem.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUITextBox.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUITextLayout.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUIToggleButtonControl.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUIVideoControl.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUIVisualisationControl.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUIWindow.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUIWindowManager.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUIWrappingListContainer.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\IAudioDeviceChangedCallback.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\IMsgTargetCallback.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\IWindowManagerCallback.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\Key.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\LocalizeStrings.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\MatrixGLES.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\Resolution.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\Shader.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\TextureBundle.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\TextureBundleXBT.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\TextureBundleXPR.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\TransformMatrix.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\Tween.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\VisibleEffect.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\XBTF.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\XBTFReader.h">
+      <Filter>guilib\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\TextureManager.h">
+      <Filter>guilib\Rendering\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GraphicContext.h">
+      <Filter>guilib\Rendering\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUIFontTTF.h">
+      <Filter>guilib\Rendering\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUITexture.h">
+      <Filter>guilib\Rendering\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\Texture.h">
+      <Filter>guilib\Rendering\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\TextureDX.h">
+      <Filter>guilib\Rendering\DX</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUIFontTTFDX.h">
+      <Filter>guilib\Rendering\DX</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUITextureD3D.h">
+      <Filter>guilib\Rendering\DX</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\TextureGL.h">
+      <Filter>guilib\Rendering\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUIFontTTFGL.h">
+      <Filter>guilib\Rendering\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUITextureGL.h">
+      <Filter>guilib\Rendering\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\guilib\GUITextureGLES.h">
+      <Filter>guilib\Rendering\GL</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\xbmc\win32\XBMC.ico">

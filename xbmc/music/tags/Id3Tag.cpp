@@ -24,7 +24,7 @@
 #include "StringUtils.h"
 #include "Picture.h"
 #include "settings/AdvancedSettings.h"
-#include "LocalizeStrings.h"
+#include "guilib/LocalizeStrings.h"
 #include "utils/CharsetConverter.h"
 #include "utils/log.h"
 

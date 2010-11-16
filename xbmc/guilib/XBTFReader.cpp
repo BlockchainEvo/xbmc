@@ -21,8 +21,8 @@
 
 #include <sys/stat.h>
 #include "XBTFReader.h"
-#include "utils/EndianSwap.h"
-#include "utils/CharsetConverter.h"
+#include "EndianSwap.h"
+#include "CharsetConverter.h"
 #ifdef _WIN32
 #include "FileSystem/SpecialProtocol.h"
 #include "PlatformDefs.h" //for PRIdS, PRId64

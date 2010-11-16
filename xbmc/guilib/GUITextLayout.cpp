@@ -24,7 +24,7 @@
 #include "GUIControl.h"
 #include "GUIColorManager.h"
 #include "utils/CharsetConverter.h"
-#include "utils/StringUtils.h"
+#include "StringUtils.h"
 
 using namespace std;
 

@@ -25,7 +25,7 @@
 #include "utils/CriticalSection.h"
 #include "utils/SingleLock.h"
 #include "utils/RssReader.h"
-#include "utils/StringUtils.h"
+#include "StringUtils.h"
 
 using namespace std;
 

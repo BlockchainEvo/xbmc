@@ -24,7 +24,7 @@
 #include "utils/CharsetConverter.h"
 #include "utils/log.h"
 #include "FileSystem/SpecialProtocol.h"
-#include "utils/XMLUtils.h"
+#include "XMLUtils.h"
 
 CLocalizeStrings::CLocalizeStrings(void)
 {

@@ -24,7 +24,7 @@
 #include "utils/GUIInfoManager.h"
 #include "utils/log.h"
 #include "tinyXML/tinyxml.h"
-#include "utils/StringUtils.h"
+#include "StringUtils.h"
 
 using namespace std;
 

@@ -28,7 +28,7 @@
 #define GUILIB_TEXTURE_H
 
 #include "gui3d.h"
-#include "utils/StdString.h"
+#include "StdString.h"
 #include "XBTF.h"
 
 #pragma pack(1)

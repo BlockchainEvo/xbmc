@@ -21,7 +21,7 @@
 
 #include "GUIListContainer.h"
 #include "GUIListItem.h"
-#include "utils/GUIInfoManager.h"
+#include "GUIInfoManager.h"
 #include "Key.h"
 
 CGUIListContainer::CGUIListContainer(int parentID, int controlID, float posX, float posY, float width, float height, ORIENTATION orientation, int scrollTime, int preloadItems)
@@ -126,10 +126,7 @@ bool CGUIListContainer::OnMessage(CGUIMessage& message)
     else if (message.GetMessage() == GUI_MSG_SETFOCUS)
     {
       if (message.GetParam1()) // subfocus item is specified, so set the offset appropriately
-      {
-        int item = std::min(m_offset + (int)message.GetParam1() - 1, (int)m_items.size() - 1);
-        SelectItem(item);
-      }
+        m_cursor = (int)message.GetParam1() - 1;
     }
   }
   return CGUIBaseContainer::OnMessage(message);

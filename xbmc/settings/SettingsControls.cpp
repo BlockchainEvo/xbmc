@@ -20,16 +20,16 @@
  */
 
 #include "SettingsControls.h"
-#include "GUIRadioButtonControl.h"
-#include "GUISpinControlEx.h"
-#include "GUIEditControl.h"
+#include "guilib/GUIRadioButtonControl.h"
+#include "guilib/GUISpinControlEx.h"
+#include "guilib/GUIEditControl.h"
 #include "GUIDialogNumeric.h"
 #include "Util.h"
 #include "GUIDialogOK.h"
 #include "GUIDialogKeyboard.h"
 #include "GUISettings.h"
-#include "GUIImage.h"
-#include "LocalizeStrings.h"
+#include "guilib/GUIImage.h"
+#include "guilib/LocalizeStrings.h"
 #include "addons/AddonManager.h"
 
 CBaseSettingControl::CBaseSettingControl(int id, CSetting *pSetting)

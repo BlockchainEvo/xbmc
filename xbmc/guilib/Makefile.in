@@ -1,4 +1,4 @@
-INCLUDES=-I. -I../  -I../linux -I/usr/include/freetype2 -I/usr/include/SDL -I../lib/libsquish -I../../lib/
+INCLUDES=-I. -I../  -I../linux -I../utils -I/usr/include/freetype2 -I/usr/include/SDL -I../lib/libsquish -I../../lib/
 ifneq (@USE_EXTERNAL_FFMPEG@,1)
   INCLUDES+=-I../cores/dvdplayer/Codecs/ffmpeg
 endif
