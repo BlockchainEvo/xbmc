@@ -22,7 +22,7 @@
 #pragma once
 
 #include <stdint.h>
-#include "StdString.h"
+#include "utils/StdString.h"
 
 typedef int DisplayMode;
 #define DM_WINDOWED     -1

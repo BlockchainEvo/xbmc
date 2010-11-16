@@ -20,7 +20,7 @@
  *
  */
 
-#include "StdString.h"
+#include "utils/StdString.h"
 
 #ifdef _WIN32
 #undef SetPort // WIN32INCLUDES this is defined as SetPortA in WinSpool.h which is being included _somewhere_

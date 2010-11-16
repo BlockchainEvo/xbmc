@@ -32,7 +32,7 @@ class CGUIListItem;
 
 #include "TransformMatrix.h"  // needed for the TransformMatrix member
 #include "Geometry.h"         // for CPoint, CRect
-#include "StdString.h"
+#include "utils/StdString.h"
 
 enum ANIMATION_TYPE
 {

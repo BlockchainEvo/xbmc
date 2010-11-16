@@ -23,7 +23,7 @@
  */
 
 #include <vector>
-#include "StdString.h"
+#include "utils/StdString.h"
 #include "utils/Network.h"
 
 class CNetworkLinux;

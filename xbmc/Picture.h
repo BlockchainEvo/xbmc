@@ -19,7 +19,7 @@
  *  http://www.gnu.org/copyleft/gpl.html
  *
  */
-#include "StdString.h"
+#include "utils/StdString.h"
 #include "utils/Job.h"
 
 class CPicture

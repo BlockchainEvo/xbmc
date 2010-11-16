@@ -28,7 +28,7 @@
  *
  */
 
-#include "StdString.h"
+#include "utils/StdString.h"
 #include <assert.h>
 
 typedef uint32_t character_t;

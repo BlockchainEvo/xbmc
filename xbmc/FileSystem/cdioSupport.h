@@ -39,7 +39,7 @@
 
 #include <cdio/cdio.h>
 #include "../utils/CriticalSection.h"
-#include "../guilib/StdString.h"
+#include "utils/StdString.h"
 
 namespace MEDIA_DETECT
 {

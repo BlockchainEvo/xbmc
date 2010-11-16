@@ -44,7 +44,7 @@
 #include "TransformMatrix.h"        // for the members m_guiTransform etc.
 #include "Geometry.h"               // for CRect/CPoint
 #include "gui3d.h"
-#include "StdString.h"
+#include "utils/StdString.h"
 #include "Resolution.h"
 
 enum VIEW_TYPE { VIEW_TYPE_NONE = 0,

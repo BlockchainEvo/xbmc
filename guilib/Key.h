@@ -30,7 +30,7 @@
  */
 
 #include "XBIRRemote.h"
-#include <StdString.h>
+#include "utils/StdString.h"
 
 // Analogue - don't change order
 #define KEY_BUTTON_A                        256

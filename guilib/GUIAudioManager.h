@@ -23,7 +23,7 @@
 
 #include "utils/CriticalSection.h"
 #include "utils/log.h"
-#include "StdString.h"
+#include "utils/StdString.h"
 
 #include <map>
 

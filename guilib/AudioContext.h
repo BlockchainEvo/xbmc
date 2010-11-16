@@ -26,7 +26,7 @@
  *
  */
 
-#include "StdString.h"
+#include "utils/StdString.h"
 
 #define DSMIXBINTYPE_STANDARD 1
 #define DSMIXBINTYPE_DMO 2

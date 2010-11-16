@@ -22,7 +22,7 @@
 #ifndef GUI_ACTION_DESCRIPTOR
 #define GUI_ACTION_DESCRIPTOR
 
-#include "StdString.h"
+#include "utils/StdString.h"
 #include "system.h"
 
 class CGUIActionDescriptor
