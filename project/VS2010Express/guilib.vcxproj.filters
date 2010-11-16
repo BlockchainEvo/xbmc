@@ -1229,5 +1229,9 @@
       <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>
+<<<<<<< HEAD
 >>>>>>> changed: move StdString.h to utils/
 </Project>
+=======
+</Project>
+>>>>>>> changed: move StdString.h to utils/

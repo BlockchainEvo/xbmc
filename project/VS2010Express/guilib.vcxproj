@@ -861,5 +861,9 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+<<<<<<< HEAD
 >>>>>>> changed: move StdString.h to utils/
 </Project>
+=======
+</Project>
+>>>>>>> changed: move StdString.h to utils/

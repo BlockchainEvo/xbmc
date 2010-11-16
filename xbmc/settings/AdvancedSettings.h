@@ -21,7 +21,7 @@
  */
 
 #include <vector>
-#include "StdString.h"
+#include "utils/StdString.h"
 
 class TiXmlElement;
 
