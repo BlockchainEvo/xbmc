@@ -22,7 +22,7 @@
 #include "PlayListM3U.h"
 #include "FileSystem/File.h"
 #include "Util.h"
-#include "StringUtils.h"
+#include "utils/StringUtils.h"
 #include "utils/CharsetConverter.h"
 #include "utils/RegExp.h"
 #include "utils/log.h"

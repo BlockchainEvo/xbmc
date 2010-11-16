@@ -25,7 +25,7 @@
 #include "id3v1genre.h"
 #include "MusicInfoTag.h"
 #include "guilib/LocalizeStrings.h"
-#include "AutoPtrHandle.h"
+#include "utils/AutoPtrHandle.h"
 #include "utils/log.h"
 
 using namespace XFILE;

@@ -23,7 +23,7 @@
 #include "utils/GUIInfoManager.h"
 #include "utils/log.h"
 #include "addons/Skin.h" // for the effect time adjustments
-#include "StringUtils.h"
+#include "utils/StringUtils.h"
 #include "Tween.h"
 #include "tinyXML/tinyxml.h"
 

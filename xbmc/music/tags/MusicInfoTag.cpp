@@ -21,7 +21,7 @@
 
 #include "MusicInfoTag.h"
 #include "Album.h"
-#include "StringUtils.h"
+#include "utils/StringUtils.h"
 #include "settings/AdvancedSettings.h"
 #include "utils/Variant.h"
 

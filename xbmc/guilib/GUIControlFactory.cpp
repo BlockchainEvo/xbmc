@@ -57,11 +57,11 @@
 #include "utils/GUIInfoManager.h"
 #include "utils/CharsetConverter.h"
 #include "utils/log.h"
-#include "XMLUtils.h"
+#include "utils/XMLUtils.h"
 #include "GUIFontManager.h"
 #include "GUIColorManager.h"
 #include "settings/Settings.h"
-#include "StringUtils.h"
+#include "utils/StringUtils.h"
 
 using namespace std;
 
