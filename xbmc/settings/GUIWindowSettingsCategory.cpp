@@ -98,7 +98,7 @@
 #include "MouseStat.h"
 #include "LocalizeStrings.h"
 #include "LangInfo.h"
-#include "StringUtils.h"
+#include "utils/StringUtils.h"
 #include "WindowingFactory.h"
 
 #if defined(HAVE_LIBCRYSTALHD)

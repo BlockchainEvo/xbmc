@@ -48,7 +48,7 @@
 #include "settings/AdvancedSettings.h"
 #include "FileItem.h"
 #include "FileSystem/File.h"
-#include "StringUtils.h"
+#include "utils/StringUtils.h"
 #include "LocalizeStrings.h"
 
 using namespace std;

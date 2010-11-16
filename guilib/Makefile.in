@@ -67,7 +67,6 @@ SRCS=AnimatedGif.cpp \
      TextureBundle.cpp \
      TextureManager.cpp \
      VisibleEffect.cpp \
-     XMLUtils.cpp \
      GUISound.cpp \
      GUIColorManager.cpp \
      FrameBufferObject.cpp \
@@ -92,6 +91,6 @@ include ../Makefile.include
 -include $(patsubst %.cpp,%.P,$(patsubst %.c,%.P,$(SRCS)))
 
 try : try.o TextureBundle.o DirectXGraphics.o GUIFontTTF.o
-	g++ -o try try.o TextureBundle.o DirectXGraphics.o GraphicContext.o GUIIncludes.o ../xbmc/utils/CriticalSection.o ../xbmc/XBVideoConfig.o SkinInfo.o tinyXML/tinyxml.a ../xbmc/linux/CriticalSection.o GUIFontTTF.o GUIFontBase.o GUIFontManager.o GUIFont.o XMLUtils.o GUIImage.o GUIControl.o TextureManager.o GUIMessage.o ../xbmc/utils/SingleLock.o VisibleEffect.o GUIWindowManager.o AnimatedGif.o -lSDL_image -lSDL_gfx -lSDL -llzo -lfreetype
+	g++ -o try try.o TextureBundle.o DirectXGraphics.o GraphicContext.o GUIIncludes.o ../xbmc/utils/CriticalSection.o ../xbmc/XBVideoConfig.o SkinInfo.o tinyXML/tinyxml.a ../xbmc/linux/CriticalSection.o GUIFontTTF.o GUIFontBase.o GUIFontManager.o GUIFont.o ../xbmc/utils/XMLUtils.o GUIImage.o GUIControl.o TextureManager.o GUIMessage.o ../xbmc/utils/SingleLock.o VisibleEffect.o GUIWindowManager.o AnimatedGif.o -lSDL_image -lSDL_gfx -lSDL -llzo -lfreetype
 
 

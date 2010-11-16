@@ -31,9 +31,9 @@
 #include "Util.h"
 #include "GUISettings.h"
 #include "Settings.h"
-#include "StringUtils.h"
+#include "utils/StringUtils.h"
 #include "utils/SystemInfo.h"
-#include "XMLUtils.h"
+#include "utils/XMLUtils.h"
 #include "utils/log.h"
 
 using namespace XFILE;

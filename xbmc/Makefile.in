@@ -63,7 +63,6 @@ SRCS=Application.cpp \
      SectionLoader.cpp \
      Shortcut.cpp \
      SortFileItem.cpp \
-     StringUtils.cpp \
      Temperature.cpp \
      ThumbnailCache.cpp \
      URL.cpp \
@@ -164,7 +163,6 @@ SRCS=Application.cpp \
      Bookmark.cpp \
      TextureCache.cpp \
      TextureDatabase.cpp \
-     URIUtils.cpp \
      SystemGlobals.cpp \
 
 LIB=xbmc.a

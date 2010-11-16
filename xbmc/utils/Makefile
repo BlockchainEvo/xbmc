@@ -70,7 +70,10 @@ SRCS=AlarmClock.cpp \
      RingBuffer.cpp \
      FileOperationJob.cpp \
      FileUtils.cpp \
-     Variant.cpp
+     Variant.cpp \
+     XMLUtils.cpp \
+     StringUtils.cpp \
+     URIUtils.cpp \
 
 LIB=utils.a
 
