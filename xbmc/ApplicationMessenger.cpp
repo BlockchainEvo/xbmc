@@ -40,7 +40,7 @@
 #include "FileItem.h"
 #include "guilib/GUIDialog.h"
 #include "WindowingFactory.h"
-#include "GUIInfoManager.h"
+#include "utils/GUIInfoManager.h"
 
 #include "PowerManager.h"
 
@@ -52,7 +52,7 @@
 #endif
 #include "MediaManager.h"
 #include "guilib/LocalizeStrings.h"
-#include "SingleLock.h"
+#include "utils/SingleLock.h"
 #include "lib/libPython/xbmcmodule/GUIPythonWindowDialog.h"
 #include "lib/libPython/xbmcmodule/GUIPythonWindowXMLDialog.h"
 

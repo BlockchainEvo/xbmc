@@ -29,7 +29,7 @@
 #include "utils/log.h"
 #include "settings/AdvancedSettings.h"
 #include "FileItem.h"
-#include "XMLUtils.h"
+#include "utils/XMLUtils.h"
 #include "MusicDatabase.h"
 #include "VideoDatabase.h"
 #include <sstream>

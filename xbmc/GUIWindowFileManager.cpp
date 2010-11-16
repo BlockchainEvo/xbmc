@@ -60,12 +60,12 @@
 #include "settings/GUISettings.h"
 #include "input/MouseStat.h"
 #include "guilib/LocalizeStrings.h"
-#include "StringUtils.h"
+#include "utils/StringUtils.h"
 #include "utils/log.h"
 
-#include "JobManager.h"
-#include "FileOperationJob.h"
-#include "FileUtils.h"
+#include "utils/JobManager.h"
+#include "utils/FileOperationJob.h"
+#include "utils/FileUtils.h"
 
 using namespace std;
 using namespace XFILE;

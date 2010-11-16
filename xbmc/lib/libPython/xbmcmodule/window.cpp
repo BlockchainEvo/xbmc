@@ -30,7 +30,7 @@
 #include "guilib/GUIRadioButtonControl.h"
 #include "guilib/GUIWindowManager.h"
 #include "Application.h"
-#include "SingleLock.h"
+#include "utils/SingleLock.h"
 
 using namespace std;
 

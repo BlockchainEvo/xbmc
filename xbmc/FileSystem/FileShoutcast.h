@@ -27,8 +27,8 @@
 
 #include "IFile.h"
 #include "FileCurl.h"
-#include "StdString.h"
-#include "MusicInfoTag.h"
+#include "utils/StdString.h"
+#include "music/tags/MusicInfoTag.h"
 
 namespace XFILE
 {

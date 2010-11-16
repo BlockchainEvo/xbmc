@@ -22,9 +22,11 @@
 #include "URL.h"
 #include "PlayerSelectionRule.h"
 #include "VideoInfoTag.h"
-#include "StreamDetails.h"
+#include "utils/StreamDetails.h"
 #include "settings/GUISettings.h"
 #include "utils/log.h"
+#include "utils/RegExp.h"
+#include "tinyXML/tinyxml.h"
 
 CPlayerSelectionRule::CPlayerSelectionRule(TiXmlElement* pRule)
 {

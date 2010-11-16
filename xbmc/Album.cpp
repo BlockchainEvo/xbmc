@@ -21,8 +21,8 @@
 
 #include "Album.h"
 #include "settings/AdvancedSettings.h"
-#include "StringUtils.h"
-#include "XMLUtils.h"
+#include "utils/StringUtils.h"
+#include "utils/XMLUtils.h"
 #include "MathUtils.h"
 
 using namespace std;

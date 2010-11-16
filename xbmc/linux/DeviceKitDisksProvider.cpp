@@ -23,7 +23,7 @@
 #include "Util.h"
 #include "settings/AdvancedSettings.h"
 #include "guilib/LocalizeStrings.h"
-#include "log.h"
+#include "utils/log.h"
 
 void CDeviceKitDiskDeviceOldAPI::Update()
 {

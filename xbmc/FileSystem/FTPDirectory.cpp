@@ -25,7 +25,7 @@
 #include "Util.h"
 #include "FileCurl.h"
 #include "FileItem.h"
-#include "StringUtils.h"
+#include "utils/StringUtils.h"
 #include "utils/CharsetConverter.h"
 
 using namespace XFILE;

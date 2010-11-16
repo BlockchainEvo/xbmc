@@ -29,7 +29,7 @@
 #include "settings/GUISettings.h"
 #include "FileItem.h"
 #include "FileCurl.h"
-#include "StringUtils.h"
+#include "utils/StringUtils.h"
 #include "guilib/LocalizeStrings.h"
 #include "utils/log.h"
 

@@ -22,7 +22,6 @@
 #include "Repository.h"
 #include "tinyXML/tinyxml.h"
 #include "FileSystem/File.h"
-#include "XMLUtils.h"
 #include "AddonDatabase.h"
 #include "Application.h"
 #include "settings/Settings.h"
@@ -33,7 +32,6 @@
 #include "guilib/GUIWindowManager.h"
 #include "GUIWindowAddonBrowser.h"
 #include "GUIDialogYesNo.h"
-#include "StringUtils.h"
 
 using namespace XFILE;
 using namespace ADDON;

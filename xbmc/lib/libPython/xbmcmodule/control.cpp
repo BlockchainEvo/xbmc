@@ -24,7 +24,7 @@
 #include "utils/GUIInfoManager.h"
 #include "guilib/GUIControlFactory.h"
 #include "guilib/GUITexture.h"
-#include "StringUtils.h"
+#include "utils/StringUtils.h"
 #include "tinyXML/tinyxml.h"
 
 using namespace std;

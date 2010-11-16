@@ -28,7 +28,7 @@
 #include "utils/log.h"
 #include "utils/Weather.h"
 #include "utils/Builtins.h"
-#include "AnnouncementManager.h"
+#include "utils/AnnouncementManager.h"
 #include "guilib/LocalizeStrings.h"
 
 #if defined(HAVE_LIBCRYSTALHD)

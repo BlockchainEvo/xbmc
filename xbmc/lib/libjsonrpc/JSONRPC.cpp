@@ -30,9 +30,9 @@
 #include "VideoLibrary.h"
 #include "SystemOperations.h"
 #include "XBMCOperations.h"
-#include "AnnouncementManager.h"
-#include "log.h"
-#include "Variant.h"
+#include "utils/AnnouncementManager.h"
+#include "utils/log.h"
+#include "utils/Variant.h"
 #include <string.h>
 
 using namespace ANNOUNCEMENT;

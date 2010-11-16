@@ -25,11 +25,11 @@
 
 #include "DetectDVDType.h"
 #include "guilib/LocalizeStrings.h"
-#include "StringUtils.h"
+#include "utils/StringUtils.h"
 #include "utils/log.h"
 #include "FileSystem/cdioSupport.h"
 #include "FileSystem/iso9660.h"
-#include "SingleLock.h"
+#include "utils/SingleLock.h"
 #ifdef _LINUX
 #include <sys/types.h>
 #include <sys/ioctl.h>

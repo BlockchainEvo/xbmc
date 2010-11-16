@@ -25,7 +25,7 @@
 #include "FileItem.h"
 #include "settings/GUISettings.h"
 #include "settings/Settings.h"
-#include "log.h"
+#include "utils/log.h"
 
 using namespace XFILE;
 

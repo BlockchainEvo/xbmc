@@ -40,7 +40,7 @@
 #include "Application.h"
 #include "FileItem.h"
 #include "settings/AdvancedSettings.h"
-#include "StringUtils.h"
+#include "utils/StringUtils.h"
 #include "utils/log.h"
 #include "utils/SingleLock.h"
 #include "utils/PasswordManager.h"

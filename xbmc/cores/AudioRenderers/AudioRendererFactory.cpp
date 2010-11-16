@@ -22,7 +22,7 @@
 #include "system.h"
 #include "AudioRendererFactory.h"
 #include "settings/GUISettings.h"
-#include "log.h"
+#include "utils/log.h"
 #include "NullDirectSound.h"
 
 #ifdef HAS_PULSEAUDIO

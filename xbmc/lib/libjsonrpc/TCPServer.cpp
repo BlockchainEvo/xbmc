@@ -4,10 +4,10 @@
 #include <memory.h>
 #include "JSONRPC.h"
 #include "json/json.h"
-#include "AnnouncementManager.h"
-#include "log.h"
-#include "Variant.h"
-#include "SingleLock.h"
+#include "utils/AnnouncementManager.h"
+#include "utils/log.h"
+#include "utils/Variant.h"
+#include "utils/SingleLock.h"
 
 #ifdef _WIN32
 extern "C" int inet_pton(int af, const char *src, void *dst);

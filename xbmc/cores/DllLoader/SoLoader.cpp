@@ -21,7 +21,7 @@
 
 #include <dlfcn.h>
 #include "SoLoader.h"
-#include "StdString.h"
+#include "utils/StdString.h"
 #include "FileSystem/SpecialProtocol.h"
 #include "utils/log.h"
 

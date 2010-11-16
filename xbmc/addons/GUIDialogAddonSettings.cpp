@@ -29,7 +29,7 @@
 #include "guilib/GUIControlGroupList.h"
 #include "guilib/GUISettingsSliderControl.h"
 #include "Util.h"
-#include "StringUtils.h"
+#include "utils/StringUtils.h"
 #include "MediaManager.h"
 #include "guilib/GUILabelControl.h"
 #include "guilib/GUIRadioButtonControl.h"
@@ -43,7 +43,7 @@
 #include "GUIDialogKeyboard.h"
 #include "FileItem.h"
 #include "settings/Settings.h"
-#include "GUIInfoManager.h"
+#include "utils/GUIInfoManager.h"
 #include "GUIDialogSelect.h"
 #include "utils/log.h"
 

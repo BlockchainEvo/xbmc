@@ -1,4 +1,4 @@
-INCLUDES=-I../../.. -I. -I.. -I../../ -I../../../ -I../../linux -I../../utils -I../dvdplayer
+INCLUDES=-I../../.. -I. -I.. -I../../ -I../../../ -I../../linux -I../dvdplayer
 ifneq (@USE_EXTERNAL_FFMPEG@,1)
   INCLUDES+=-I../dvdplayer/Codecs/ffmpeg
 endif

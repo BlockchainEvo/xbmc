@@ -1,6 +1,6 @@
 ARCH=@ARCH@
 
-INCLUDES=-I. -I.. -I../../guilib -I../utils -I../cores -I../FileSystem -I../../lib
+INCLUDES=-I. -I.. -I../../guilib -I../cores -I../FileSystem -I../../lib
 ifeq ($(findstring osx,$(ARCH)), osx)
 	INCLUDES+=-I../osx
 endif

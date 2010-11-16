@@ -29,12 +29,12 @@
 #include "DirectoryCache.h"
 #include "settings/GUISettings.h"
 #include "utils/log.h"
-#include "Job.h"
-#include "JobManager.h"
+#include "utils/Job.h"
+#include "utils/JobManager.h"
 #include "Application.h"
 #include "guilib/GUIWindowManager.h"
 #include "GUIDialogBusy.h"
-#include "SingleLock.h"
+#include "utils/SingleLock.h"
 #include "Util.h"
 
 using namespace std;

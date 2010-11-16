@@ -24,7 +24,8 @@
 #include "playlists/PlayListFactory.h"
 #include "Util.h"
 #include "GUIUserMessages.h"
-#include "StringUtils.h"
+#include "utils/StringUtils.h"
+#include "utils/SingleLock.h"
 
 using namespace Json;
 using namespace JSONRPC;

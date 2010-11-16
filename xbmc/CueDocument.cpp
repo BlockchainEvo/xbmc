@@ -55,7 +55,7 @@
 
 #include "CueDocument.h"
 #include "Util.h"
-#include "StringUtils.h"
+#include "utils/StringUtils.h"
 #include "utils/CharsetConverter.h"
 
 #include <set>

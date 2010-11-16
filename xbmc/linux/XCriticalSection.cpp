@@ -19,9 +19,9 @@
 */
 
 #include "system.h"
-#include "CriticalSection.h"
+#include "utils/CriticalSection.h"
 #include "utils/log.h"
-#include "Thread.h"
+#include "utils/Thread.h"
 #define SAFELY(expr)                                   \
 {                                                      \
 	int err = 0;                                         \

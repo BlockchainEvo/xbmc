@@ -30,7 +30,7 @@
 #include "dll_tracker.h" // for python unload hack
 #include "FileSystem/File.h"
 #include "Util.h"
-#include "StringUtils.h"
+#include "utils/StringUtils.h"
 #include "utils/log.h"
 
 #define ENV_PATH "special://xbmcbin/system/;" \

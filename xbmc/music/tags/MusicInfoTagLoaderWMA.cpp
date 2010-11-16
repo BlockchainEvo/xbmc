@@ -25,7 +25,7 @@
 #include "MusicInfoTag.h"
 #include "FileSystem/File.h"
 #include "settings/AdvancedSettings.h"
-#include "AutoPtrHandle.h"
+#include "utils/AutoPtrHandle.h"
 #include "utils/CharsetConverter.h"
 #include "utils/log.h"
 

@@ -25,8 +25,8 @@
 #include "addons/Skin.h"
 #include "tinyXML/tinyxml.h"
 #include "utils/CharsetConverter.h"
-#include "CriticalSection.h"
-#include "SingleLock.h"
+#include "utils/CriticalSection.h"
+#include "utils/SingleLock.h"
 #include "Application.h"
 
 using namespace std;

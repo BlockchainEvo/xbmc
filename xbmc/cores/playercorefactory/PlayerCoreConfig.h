@@ -21,7 +21,6 @@
  */
 
 #include "tinyXML/tinyxml.h"
-#include "XMLUtils.h"
 #include "IPlayer.h"
 #include "PlayerCoreFactory.h"
 #include "dvdplayer/DVDPlayer.h"

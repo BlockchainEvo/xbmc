@@ -24,7 +24,6 @@
 #ifdef HAS_AVAHI
 
 #include <utils/log.h>
-#include <SingleLock.h>
 #include "guilib/GUIWindowManager.h"
 #include "guilib/GUIMessage.h"
 #include "GUIUserMessages.h"

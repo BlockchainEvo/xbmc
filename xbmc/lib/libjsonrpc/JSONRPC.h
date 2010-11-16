@@ -20,13 +20,13 @@
  *
  */
 
-#include "StdString.h"
+#include "utils/StdString.h"
 #include <map>
 #include <stdio.h>
 #include <string>
 #include <iostream>
 #include "ITransportLayer.h"
-#include "IAnnouncer.h"
+#include "utils/IAnnouncer.h"
 #include "json/json.h"
 
 namespace JSONRPC

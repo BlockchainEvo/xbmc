@@ -1,4 +1,4 @@
-INCLUDES+= -I../utils
+INCLUDES+= -I..
 
 SRCS= \
 	SemaphorePOSIX.cpp

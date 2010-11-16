@@ -27,8 +27,9 @@
 #include <map>
 
 #include "ZeroconfBrowser.h"
-#include <Thread.h>
-#include <CriticalSection.h>
+#include "utils/Thread.h"
+#include "utils/CriticalSection.h"
+
 #include <avahi-client/client.h>
 #include <avahi-client/lookup.h>
 #include <avahi-common/thread-watch.h>

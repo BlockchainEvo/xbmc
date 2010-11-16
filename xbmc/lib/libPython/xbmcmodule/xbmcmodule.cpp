@@ -54,7 +54,7 @@
 #include "guilib/GUIWindowManager.h"
 #include "guilib/GUIAudioManager.h"
 #include "Application.h"
-#include "Crc32.h"
+#include "utils/Crc32.h"
 #include "Util.h"
 #include "FileSystem/File.h"
 #include "FileSystem/SpecialProtocol.h"

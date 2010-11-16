@@ -1,5 +1,5 @@
 #include "HttpApi.h"
-#include "log.h"
+#include "utils/log.h"
 #include "XBMChttp.h"
 #include "Application.h"
 #include "ApplicationMessenger.h"

@@ -24,7 +24,7 @@
 #include "utils/md5.h"
 #include "guilib/GUIWindowManager.h"
 #include "GUIDialogOK.h"
-#include "StringUtils.h"
+#include "utils/StringUtils.h"
 #include "guilib/LocalizeStrings.h"
 
 #define CONTROL_HEADING_LABEL  1

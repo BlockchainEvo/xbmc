@@ -1,4 +1,4 @@
-INCLUDES+=-I. -I../ -I../utils -I../linux -I../../lib
+INCLUDES+=-I. -I../ -I../linux -I../../lib
 
 SRCS=Addon.cpp \
      AddonDatabase.cpp \

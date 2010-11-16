@@ -41,7 +41,6 @@
 #include "DAVDirectory.h"
 #include "UDFDirectory.h"
 #include "Application.h"
-#include "StringUtils.h"
 #include "addons/Addon.h"
 #include "utils/log.h"
 

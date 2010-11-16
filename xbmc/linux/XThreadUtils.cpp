@@ -25,7 +25,7 @@
 #include "XTimeUtils.h"
 #include "XEventUtils.h"
 #include "system.h"
-#include "log.h"
+#include "utils/log.h"
 
 #ifdef _LINUX
 #include <signal.h>

@@ -28,9 +28,9 @@
 #include "errors.h"
 #include "utils/Atomics.h"
 #include "settings/GUISettings.h"
-#include "XMLUtils.h"
+#include "utils/XMLUtils.h"
 #include "Application.h"
-#include "SingleLock.h"
+#include "utils/SingleLock.h"
 #include "guilib/LocalizeStrings.h"
 #include "File.h"
 

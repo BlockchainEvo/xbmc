@@ -32,7 +32,7 @@
 #include "URL.h"
 #include "FileItem.h"
 #include "settings/AdvancedSettings.h"
-#include "AutoPtrHandle.h"
+#include "utils/AutoPtrHandle.h"
 #include "ExternalPlayer/ExternalPlayer.h"
 #include "PlayerCoreConfig.h"
 #include "PlayerSelectionRule.h"

@@ -27,7 +27,7 @@
 #include "LocalizeStrings.h"
 #include "GUIColorManager.h"
 #include "GUIListItem.h"
-#include "StringUtils.h"
+#include "utils/StringUtils.h"
 
 using namespace std;
 using ADDON::CAddonMgr;

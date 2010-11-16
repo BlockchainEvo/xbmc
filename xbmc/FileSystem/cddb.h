@@ -32,7 +32,7 @@
 #endif
 #include "cdioSupport.h"
 
-#include "AutoPtrHandle.h"
+#include "utils/AutoPtrHandle.h"
 
 namespace CDDB
 {

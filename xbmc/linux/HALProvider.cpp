@@ -21,7 +21,7 @@
 #include "HALProvider.h"
 #ifdef HAS_HAL
 #include "HALManager.h"
-#include "log.h"
+#include "utils/log.h"
 #include "PosixMountProvider.h"
 
 CHALProvider::CHALProvider()

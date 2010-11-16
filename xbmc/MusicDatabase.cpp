@@ -52,7 +52,7 @@
 #endif
 #include "MediaManager.h"
 #include "settings/Settings.h"
-#include "StringUtils.h"
+#include "utils/StringUtils.h"
 #include "guilib/LocalizeStrings.h"
 #include "utils/log.h"
 #include "utils/TimeUtils.h"

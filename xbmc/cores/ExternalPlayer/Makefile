@@ -1,4 +1,4 @@
-INCLUDES=-I. -I.. -I../../ -I../../linux -I../../utils -I../../../lib
+INCLUDES=-I. -I.. -I../../ -I../../linux -I../../../lib
 SRCS=ExternalPlayer.cpp
 LIB=ExternalPlayer.a
 

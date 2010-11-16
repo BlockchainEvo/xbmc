@@ -25,7 +25,7 @@
 #include "Application.h"
 #include "utils/Builtins.h"
 #include "utils/Variant.h"
-#include "Splash.h"
+#include "utils/Splash.h"
 #include "input/KeyboardLayoutConfiguration.h"
 #include "LangInfo.h"
 #include "Util.h"
@@ -86,7 +86,7 @@
 #include "settings/Settings.h"
 #include "settings/AdvancedSettings.h"
 #include "guilib/LocalizeStrings.h"
-#include "CPUInfo.h"
+#include "utils/CPUInfo.h"
 
 #include "input/KeyboardStat.h"
 #include "input/MouseStat.h"

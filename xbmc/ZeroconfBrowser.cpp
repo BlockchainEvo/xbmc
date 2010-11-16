@@ -33,9 +33,9 @@
 #endif
 #endif
 
-#include "CriticalSection.h"
-#include "SingleLock.h"
-#include "Atomics.h"
+#include "utils/CriticalSection.h"
+#include "utils/SingleLock.h"
+#include "utils/Atomics.h"
 
 #ifndef HAS_ZEROCONF
 //dummy implementation used if no zeroconf is present

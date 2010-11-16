@@ -34,9 +34,9 @@
 #include "settings/AdvancedSettings.h"
 #include "FileItem.h"
 #include "guilib/Texture.h"
-#include "Crc32.h"
+#include "utils/Crc32.h"
 #include "guilib/LocalizeStrings.h"
-#include "StringUtils.h"
+#include "utils/StringUtils.h"
 #include "utils/SingleLock.h"
 
 using namespace std;

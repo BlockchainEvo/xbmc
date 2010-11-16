@@ -26,11 +26,11 @@
 #include "utils/GUIInfoManager.h"
 #include "utils/TimeUtils.h"
 #include "utils/log.h"
-#include "XMLUtils.h"
-#include "StringUtils.h"
+#include "utils/StringUtils.h"
 #include "GUIStaticItem.h"
 #include "Key.h"
 #include "MathUtils.h"
+#include "tinyXML/tinyxml.h"
 
 using namespace std;
 

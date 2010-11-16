@@ -20,7 +20,7 @@
  */
 
 #include "GUIStaticItem.h"
-#include "XMLUtils.h"
+#include "utils/XMLUtils.h"
 #include "GUIControlFactory.h"
 
 using namespace std;

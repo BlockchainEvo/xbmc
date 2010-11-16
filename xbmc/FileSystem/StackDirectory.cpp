@@ -23,7 +23,7 @@
 #include "utils/log.h"
 #include "Util.h"
 #include "FileItem.h"
-#include "StringUtils.h"
+#include "utils/StringUtils.h"
 #include "settings/AdvancedSettings.h"
 
 #define PRE_2_1_STACK_COMPATIBILITY

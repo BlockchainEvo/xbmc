@@ -21,11 +21,11 @@
 
 #include "SmartPlayList.h"
 #include "utils/log.h"
-#include "StringUtils.h"
+#include "utils/StringUtils.h"
 #include "FileSystem/SmartPlaylistDirectory.h"
 #include "FileSystem/File.h"
 #include "utils/CharsetConverter.h"
-#include "XMLUtils.h"
+#include "utils/XMLUtils.h"
 #include "VideoDatabase.h"
 #include "Util.h"
 #include "DateTime.h"

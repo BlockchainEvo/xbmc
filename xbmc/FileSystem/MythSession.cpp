@@ -27,7 +27,7 @@
 #include "FileItem.h"
 #include "URL.h"
 #include "Util.h"
-#include "StringUtils.h"
+#include "utils/StringUtils.h"
 #include "utils/SingleLock.h"
 #include "utils/log.h"
 #include "utils/TimeUtils.h"

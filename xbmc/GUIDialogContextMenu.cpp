@@ -42,7 +42,6 @@
 #include "Picture.h"
 #include "settings/Settings.h"
 #include "guilib/LocalizeStrings.h"
-#include "StringUtils.h"
 #include "TextureCache.h"
 
 #ifdef _WIN32

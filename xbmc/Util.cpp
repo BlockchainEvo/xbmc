@@ -36,7 +36,7 @@
 #endif
 
 #include "Application.h"
-#include "AutoPtrHandle.h"
+#include "utils/AutoPtrHandle.h"
 #include "Util.h"
 #include "addons/Addon.h"
 #include "utils/IoSupport.h"
@@ -78,9 +78,9 @@
 #include "GUIDialogYesNo.h"
 #include "GUIUserMessages.h"
 #include "FileSystem/File.h"
-#include "Crc32.h"
+#include "utils/Crc32.h"
 #include "settings/Settings.h"
-#include "StringUtils.h"
+#include "utils/StringUtils.h"
 #include "settings/AdvancedSettings.h"
 #ifdef HAS_IRSERVERSUITE
   #include "common/IRServerSuite/IRServerSuite.h"
@@ -91,7 +91,7 @@
 #include "utils/TimeUtils.h"
 #include "utils/log.h"
 #include "Picture.h"
-#include "JobManager.h"
+#include "utils/JobManager.h"
 #include "cores/dvdplayer/DVDSubtitles/DVDSubtitleTagSami.h"
 #include "cores/dvdplayer/DVDSubtitles/DVDSubtitleStream.h"
 

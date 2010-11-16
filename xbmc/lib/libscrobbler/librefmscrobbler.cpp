@@ -21,7 +21,7 @@
 
 #include "librefmscrobbler.h"
 #include "Application.h"
-#include "Atomics.h"
+#include "utils/Atomics.h"
 #include "settings/GUISettings.h"
 #include "settings/Settings.h"
 #include "Util.h"

@@ -20,11 +20,10 @@
  *
  */
 
-#include "StdString.h"
+#include "utils/StdString.h"
 #include "JSONRPC.h"
 #include "FileItemHandler.h"
 #include "playlists/PlayList.h"
-#include "SingleLock.h"
 
 namespace JSONRPC
 {

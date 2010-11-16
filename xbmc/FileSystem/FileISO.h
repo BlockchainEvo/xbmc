@@ -30,7 +30,7 @@
 #endif // _MSC_VER > 1000
 
 #include "IFile.h"
-#include "RingBuffer.h"
+#include "utils/RingBuffer.h"
 
 namespace XFILE
 {

@@ -28,7 +28,6 @@
 #include "FileItem.h"
 #include "addons/Repository.h"
 #include "addons/PluginSource.h"
-#include "StringUtils.h"
 #include "guilib/TextureManager.h"
 #include "File.h"
 

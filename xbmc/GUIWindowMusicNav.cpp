@@ -48,7 +48,6 @@
 #include "settings/Settings.h"
 #include "settings/AdvancedSettings.h"
 #include "guilib/LocalizeStrings.h"
-#include "StringUtils.h"
 #include "utils/log.h"
 #include "TextureCache.h"
 

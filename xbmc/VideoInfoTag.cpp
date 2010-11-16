@@ -20,7 +20,7 @@
  */
 
 #include "VideoInfoTag.h"
-#include "XMLUtils.h"
+#include "utils/XMLUtils.h"
 #include "guilib/LocalizeStrings.h"
 #include "settings/GUISettings.h"
 #include "settings/AdvancedSettings.h"

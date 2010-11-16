@@ -26,7 +26,7 @@
 #include "guilib/Key.h"
 #include "guilib/LocalizeStrings.h"
 #ifdef HAS_SYSINFO
-#include "SystemInfo.h"
+#include "utils/SystemInfo.h"
 #endif
 #include "MediaManager.h"
 

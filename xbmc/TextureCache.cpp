@@ -22,7 +22,7 @@
 #include "TextureCache.h"
 #include "FileSystem/File.h"
 #include "utils/SingleLock.h"
-#include "Crc32.h"
+#include "utils/Crc32.h"
 #include "Util.h"
 #include "settings/Settings.h"
 #include "settings/AdvancedSettings.h"
@@ -32,7 +32,7 @@
 #include "guilib/DDSImage.h"
 #include "Picture.h"
 #include "guilib/TextureManager.h"
-#include "URIUtils.h"
+#include "utils/URIUtils.h"
 
 using namespace XFILE;
 

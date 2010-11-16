@@ -38,7 +38,7 @@
 #include "settings/AdvancedSettings.h"
 #include "settings/GUISettings.h"
 #include "settings/Settings.h"
-#include "StringUtils.h"
+#include "utils/StringUtils.h"
 #include "guilib/LocalizeStrings.h"
 #include "utils/TimeUtils.h"
 #include "utils/log.h"

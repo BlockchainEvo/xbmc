@@ -24,7 +24,7 @@
 #include "guilib/GUIAudioManager.h"
 #include "guilib/GUIWindowManager.h"
 #include "GUIDialogOK.h"
-#include "StringUtils.h"
+#include "utils/StringUtils.h"
 #include "guilib/LocalizeStrings.h"
 
 CGUIDialogGamepad::CGUIDialogGamepad(void)

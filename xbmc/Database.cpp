@@ -23,9 +23,9 @@
 #include "Util.h"
 #include "settings/Settings.h"
 #include "settings/AdvancedSettings.h"
-#include "Crc32.h"
+#include "utils/Crc32.h"
 #include "FileSystem/SpecialProtocol.h"
-#include "AutoPtrHandle.h"
+#include "utils/AutoPtrHandle.h"
 #include "utils/log.h"
 
 using namespace AUTOPTR;

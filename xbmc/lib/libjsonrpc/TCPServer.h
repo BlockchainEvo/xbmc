@@ -9,10 +9,10 @@
 #endif
 #include <string>
 #include <vector>
-#include "IAnnouncer.h"
+#include "utils/IAnnouncer.h"
 #include "ITransportLayer.h"
-#include "Thread.h"
-#include "CriticalSection.h"
+#include "utils/Thread.h"
+#include "utils/CriticalSection.h"
 
 class CVariant;
 namespace JSONRPC

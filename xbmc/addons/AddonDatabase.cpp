@@ -23,7 +23,7 @@
 #include "addons/AddonManager.h"
 #include "utils/log.h"
 #include "DateTime.h"
-#include "StringUtils.h"
+#include "utils/StringUtils.h"
 #include "addons/Service.h"
 
 using namespace ADDON;

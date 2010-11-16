@@ -26,7 +26,7 @@
 
 #ifdef HAS_XRANDR
 
-#include "StdString.h"
+#include "utils/StdString.h"
 #include <vector>
 #include <map>
 

@@ -59,7 +59,7 @@
 #include "settings/AdvancedSettings.h"
 #include "settings/GUISettings.h"
 #include "guilib/LocalizeStrings.h"
-#include "StringUtils.h"
+#include "utils/StringUtils.h"
 #include "utils/log.h"
 #include "utils/FileUtils.h"
 #include "utils/AnnouncementManager.h"

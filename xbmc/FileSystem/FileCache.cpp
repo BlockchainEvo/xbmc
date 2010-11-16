@@ -19,7 +19,7 @@
  *
  */
 
-#include "AutoPtrHandle.h"
+#include "utils/AutoPtrHandle.h"
 #include "FileCache.h"
 #include "utils/Thread.h"
 #include "File.h"

@@ -42,7 +42,7 @@
 #include "FileItem.h"
 #include "VideoReferenceClock.h"
 #include "settings/AdvancedSettings.h"
-#include "CPUInfo.h"
+#include "utils/CPUInfo.h"
 #include "settings/GUISettings.h"
 #include "guilib/LocalizeStrings.h"
 #include "utils/SingleLock.h"

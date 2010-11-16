@@ -27,7 +27,7 @@
 #include "DVDMessageQueue.h"
 #include "DVDDemuxers/DVDDemuxUtils.h"
 #include "DVDStreamInfo.h"
-#include "BitstreamStats.h"
+#include "utils/BitstreamStats.h"
 #include "DVDPlayerAudioResampler.h"
 
 #include <list>

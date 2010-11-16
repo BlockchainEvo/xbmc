@@ -39,7 +39,7 @@
 #include "PlatformDefs.h"
 #include "NetworkLinux.h"
 #include "Util.h"
-#include "log.h"
+#include "utils/log.h"
 
 using namespace std;
 

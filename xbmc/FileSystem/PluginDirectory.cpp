@@ -37,7 +37,6 @@
 #include "guilib/LocalizeStrings.h"
 #include "utils/log.h"
 #include "utils/TimeUtils.h"
-#include "StringUtils.h"
 #include "Application.h"
 
 using namespace XFILE;

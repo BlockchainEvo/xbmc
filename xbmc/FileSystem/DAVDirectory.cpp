@@ -25,9 +25,8 @@
 #include "FileCurl.h"
 #include "FileItem.h"
 #include "utils/RegExp.h"
-#include "StringUtils.h"
+#include "utils/StringUtils.h"
 #include "utils/CharsetConverter.h"
-#include "XMLUtils.h"
 #include "utils/log.h"
 
 using namespace XFILE;

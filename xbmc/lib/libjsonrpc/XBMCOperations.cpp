@@ -24,7 +24,7 @@
 #include "ApplicationMessenger.h"
 #include "FileItem.h"
 #include "Util.h"
-#include "log.h"
+#include "utils/log.h"
 
 using namespace Json;
 using namespace JSONRPC;

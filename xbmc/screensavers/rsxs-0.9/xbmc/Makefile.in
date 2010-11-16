@@ -1,5 +1,5 @@
 ARCH=@ARCH@
-INCLUDES=-I. -I../ -I../linux -I../utils
+INCLUDES=-I. -I../ -I../linux
 CXXFLAGS=-fPIC
 
 .PHONY: compile

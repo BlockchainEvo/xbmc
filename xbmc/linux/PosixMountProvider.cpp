@@ -19,10 +19,10 @@
  *
  */
 #include "PosixMountProvider.h"
-#include "RegExp.h"
-#include "StdString.h"
+#include "utils/RegExp.h"
+#include "utils/StdString.h"
 #include "Util.h"
-#include "log.h"
+#include "utils/log.h"
 
 CPosixMountProvider::CPosixMountProvider()
 {

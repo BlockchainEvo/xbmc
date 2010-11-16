@@ -23,7 +23,7 @@
 
 #include "guilib/GUIWindow.h"
 #include "music/tags/MusicInfoTag.h"
-#include "Stopwatch.h"
+#include "utils/Stopwatch.h"
 
 class CGUIWindowVisualisation :
       public CGUIWindow

@@ -25,7 +25,7 @@
 #include "iso9660.h"
 #include "URL.h"
 #include "FileItem.h"
-#include "AutoPtrHandle.h"
+#include "utils/AutoPtrHandle.h"
 #include "utils/AliasShortcutUtils.h"
 
 #ifndef _LINUX

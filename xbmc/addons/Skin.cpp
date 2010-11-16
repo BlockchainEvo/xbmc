@@ -27,7 +27,6 @@
 #include "Util.h"
 #include "settings/Settings.h"
 #include "utils/log.h"
-#include "XMLUtils.h"
 #include "settings/GUISettings.h"
 
 using namespace std;

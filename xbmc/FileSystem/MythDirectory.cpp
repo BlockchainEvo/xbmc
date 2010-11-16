@@ -28,11 +28,11 @@
 #include "settings/GUISettings.h"
 #include "settings/AdvancedSettings.h"
 #include "FileItem.h"
-#include "StringUtils.h"
+#include "utils/StringUtils.h"
 #include "guilib/LocalizeStrings.h"
 #include "utils/log.h"
 #include "DirectoryCache.h"
-#include "TimeUtils.h"
+#include "utils/TimeUtils.h"
 
 extern "C"
 {

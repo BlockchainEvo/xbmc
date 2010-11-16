@@ -23,13 +23,12 @@
 #include "AddonManager.h"
 #include "settings/Settings.h"
 #include "settings/GUISettings.h"
-#include "StringUtils.h"
 #include "FileSystem/Directory.h"
 #include "FileSystem/File.h"
 #ifdef __APPLE__
 #include "../osx/OSXGNUReplacements.h"
 #endif
-#include "log.h"
+#include "utils/log.h"
 #include <vector>
 #include <string.h>
 

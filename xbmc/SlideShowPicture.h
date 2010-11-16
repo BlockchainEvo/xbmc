@@ -22,7 +22,7 @@
 
 #include "utils/CriticalSection.h"
 #include "guilib/gui3d.h"
-#include "StdString.h"
+#include "utils/StdString.h"
 
 typedef uint32_t color_t;
 

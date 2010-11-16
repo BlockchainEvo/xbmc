@@ -42,7 +42,7 @@
 #include "utils/log.h"
 #include "utils/SingleLock.h"
 #include "settings/Settings.h"
-#include "StringUtils.h"
+#include "utils/StringUtils.h"
 #include "Application.h"
 #include "AddonDatabase.h"
 #include "settings/AdvancedSettings.h"
