@@ -25,8 +25,8 @@
 #ifndef _XBMC_events_h
 #define _XBMC_events_h
 
-#include "XBMC_keyboard.h"
-#include "XBMC_mouse.h"
+#include "input/XBMC_keyboard.h"
+#include "input/XBMC_mouse.h"
 
 
 /* General keyboard/mouse state definitions */

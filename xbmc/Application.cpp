@@ -26,7 +26,7 @@
 #include "utils/Builtins.h"
 #include "utils/Variant.h"
 #include "Splash.h"
-#include "KeyboardLayoutConfiguration.h"
+#include "input/KeyboardLayoutConfiguration.h"
 #include "LangInfo.h"
 #include "Util.h"
 #include "Picture.h"
@@ -48,7 +48,7 @@
 #ifdef HAS_PYTHON
 #include "lib/libPython/XBPython.h"
 #endif
-#include "ButtonTranslator.h"
+#include "input/ButtonTranslator.h"
 #include "GUIAudioManager.h"
 #include "lib/libscrobbler/lastfmscrobbler.h"
 #include "lib/libscrobbler/librefmscrobbler.h"
@@ -88,8 +88,8 @@
 #include "LocalizeStrings.h"
 #include "CPUInfo.h"
 
-#include "KeyboardStat.h"
-#include "MouseStat.h"
+#include "input/KeyboardStat.h"
+#include "input/MouseStat.h"
 
 #if defined(FILESYSTEM) && !defined(_LINUX)
 #include "FileSystem/FileDAAP.h"
@@ -261,10 +261,10 @@
 #endif
 
 #ifdef HAS_LIRC
-#include "common/LIRC.h"
+#include "input/linux/LIRC.h"
 #endif
 #ifdef HAS_IRSERVERSUITE
-  #include "common/IRServerSuite/IRServerSuite.h"
+  #include "input/windows/IRServerSuite.h"
 #endif
 
 using namespace std;

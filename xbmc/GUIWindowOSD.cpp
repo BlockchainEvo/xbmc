@@ -23,7 +23,7 @@
 #include "Application.h"
 #include "GUIUserMessages.h"
 #include "GUIWindowManager.h"
-#include "MouseStat.h"
+#include "input/MouseStat.h"
 
 CGUIWindowOSD::CGUIWindowOSD(void)
     : CGUIDialog(WINDOW_OSD, "VideoOSD.xml")

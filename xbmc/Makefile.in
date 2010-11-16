@@ -44,7 +44,6 @@ SRCS=Application.cpp \
      MusicInfoLoader.cpp \
      MusicInfoScanner.cpp \
      AutoSwitch.cpp \
-     ButtonTranslator.cpp \
      Crc32.cpp \
      DateTime.cpp \
      DetectDVDType.cpp \
@@ -135,7 +134,6 @@ SRCS=Application.cpp \
      PictureInfoTag.cpp \
      GUILargeTextureManager.cpp \
      GUIDialogKaiToast.cpp \
-     KeyboardLayoutConfiguration.cpp \
      GUIDialogAccessPoints.cpp \
      Artist.cpp \
      Album.cpp \
@@ -153,8 +151,6 @@ SRCS=Application.cpp \
      RenderSystem.cpp \
      RenderSystemGL.cpp \
      RenderSystemGLES.cpp \
-     KeyboardStat.cpp \
-     MouseStat.cpp \
      WinSystem.cpp \
      WinSystemX11.cpp \
      WinSystemX11GL.cpp \

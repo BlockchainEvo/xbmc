@@ -22,7 +22,7 @@
 #include "system.h"
 #include "PowerManager.h"
 #include "Application.h"
-#include "KeyboardStat.h"
+#include "input/KeyboardStat.h"
 #include "settings/GUISettings.h"
 #include "WindowingFactory.h"
 #include "utils/log.h"
@@ -49,13 +49,6 @@
 #elif defined(_WIN32)
 #include "win32/Win32PowerSyscall.h"
 extern HWND g_hWnd;
-#endif
-
-#ifdef HAS_LIRC
-#include "common/LIRC.h"
-#endif
-#ifdef HAS_IRSERVERSUITE
-  #include "common/IRServerSuite/IRServerSuite.h"
 #endif
 
 using namespace ANNOUNCEMENT;

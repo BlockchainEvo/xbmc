@@ -25,10 +25,10 @@
 #include "Util.h"
 #include "settings/Settings.h"
 #include "Key.h"
-#include "File.h"
-#include "Directory.h"
+#include "FileSystem/File.h"
+#include "FileSystem/Directory.h"
 #include "FileItem.h"
-#include "StringUtils.h"
+#include "utils/StringUtils.h"
 #include "utils/log.h"
 #include "tinyXML/tinyxml.h"
 

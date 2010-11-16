@@ -22,7 +22,7 @@
 #include "GUIDialogMusicOSD.h"
 #include "Application.h"
 #include "GUIWindowManager.h"
-#include "MouseStat.h"
+#include "input/MouseStat.h"
 #include "GUIUserMessages.h"
 #include "settings/Settings.h"
 #include "settings/GUISettings.h"

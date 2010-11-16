@@ -27,8 +27,8 @@
 #include <limits.h>
 #include <unistd.h>
 #include "LIRC.h"
-#include "ButtonTranslator.h"
-#include "log.h"
+#include "input/ButtonTranslator.h"
+#include "utils/log.h"
 #include "settings/AdvancedSettings.h"
 #include "FileSystem/File.h"
 #include "utils/TimeUtils.h"

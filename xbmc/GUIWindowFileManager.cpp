@@ -58,7 +58,7 @@
 #include "settings/Settings.h"
 #include "settings/AdvancedSettings.h"
 #include "settings/GUISettings.h"
-#include "MouseStat.h"
+#include "input/MouseStat.h"
 #include "LocalizeStrings.h"
 #include "StringUtils.h"
 #include "utils/log.h"

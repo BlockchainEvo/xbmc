@@ -32,7 +32,7 @@
 #endif
 
 #if defined(HAS_SDL_JOYSTICK) || defined(HAS_EVENT_SERVER)
-#include "../guilib/common/SDLJoystick.h"
+#include "SDLJoystick.h"
 #endif
 
 class CKey;

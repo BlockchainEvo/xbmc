@@ -31,7 +31,7 @@
 #include "Weather.h"
 #include "PartyModeManager.h"
 #include "addons/Visualisation.h"
-#include "ButtonTranslator.h"
+#include "input/ButtonTranslator.h"
 #include "utils/AlarmClock.h"
 #ifdef HAS_LCD
 #include "utils/LCD.h"

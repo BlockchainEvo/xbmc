@@ -34,7 +34,7 @@
 #ifdef HAS_SDL_JOYSTICK
 #include <SDL/SDL.h>
 #include <SDL/SDL_version.h>
-#include "../../guilib/common/SDLJoystick.h"
+#include "input/SDLJoystick.h"
 #endif
 
 bool CHALManager::NewMessage;

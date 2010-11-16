@@ -22,8 +22,8 @@
 #ifndef LIRC_H
 #define LIRC_H
 
-#include "../system.h"
-#include "StdString.h"
+#include "system.h"
+#include "utils/StdString.h"
 
 class CRemoteControl
 {

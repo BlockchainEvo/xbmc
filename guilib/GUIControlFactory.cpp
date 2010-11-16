@@ -57,7 +57,6 @@
 #include "utils/GUIInfoManager.h"
 #include "utils/CharsetConverter.h"
 #include "utils/log.h"
-#include "ButtonTranslator.h"
 #include "XMLUtils.h"
 #include "GUIFontManager.h"
 #include "GUIColorManager.h"

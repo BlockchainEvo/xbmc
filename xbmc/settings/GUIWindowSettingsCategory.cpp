@@ -24,7 +24,7 @@
 #include "GUIWindowSettingsCategory.h"
 #include "Application.h"
 #include "utils/Builtins.h"
-#include "KeyboardLayoutConfiguration.h"
+#include "input/KeyboardLayoutConfiguration.h"
 #include "FileSystem/Directory.h"
 #include "Util.h"
 #include "GUISpinControlEx.h"
@@ -95,7 +95,7 @@
 #include <map>
 #include "Settings.h"
 #include "AdvancedSettings.h"
-#include "MouseStat.h"
+#include "input/MouseStat.h"
 #include "LocalizeStrings.h"
 #include "LangInfo.h"
 #include "utils/StringUtils.h"

@@ -22,7 +22,7 @@
 #include "WindowingFactory.h"
 #include "cores/VideoRenderers/RenderManager.h"
 #include "GraphicContext.h"
-#include "MouseStat.h"
+#include "input/MouseStat.h"
 #include "Application.h"
 #include "GUILargeTextureManager.h"
 #include "TextureManager.h"

@@ -26,7 +26,7 @@
 #include "Application.h"
 #include "Autorun.h"
 #include "Builtins.h"
-#include "ButtonTranslator.h"
+#include "input/ButtonTranslator.h"
 #include "FileItem.h"
 #include "addons/GUIDialogAddonSettings.h"
 #include "GUIDialogFileBrowser.h"
@@ -64,11 +64,11 @@
 #include "system.h"
 
 #ifdef HAS_LIRC
-#include "common/LIRC.h"
+#include "input/linux/LIRC.h"
 #endif
 #ifdef HAS_IRSERVERSUITE
 
-  #include "common/IRServerSuite/IRServerSuite.h"
+  #include "input/windows/IRServerSuite.h"
 
 #endif
 

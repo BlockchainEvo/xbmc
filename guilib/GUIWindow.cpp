@@ -37,7 +37,7 @@
 #include "utils/log.h"
 #include "utils/SingleLock.h"
 #include "utils/TimeUtils.h"
-#include "ButtonTranslator.h"
+#include "input/ButtonTranslator.h"
 #include "XMLUtils.h"
 
 #ifdef HAS_PERFORMANCE_SAMPLE

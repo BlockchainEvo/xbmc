@@ -42,11 +42,11 @@
 #if defined(_WIN32)
   #include "Windows.h"
   #ifdef HAS_IRSERVERSUITE
-    #include "common/IRServerSuite/IRServerSuite.h"
+    #include "input/windows/IRServerSuite.h"
   #endif
 #endif
 #if defined(HAS_LIRC)
-  #include "common/LIRC.h"
+  #include "input/linux/LIRC.h"
 #endif
 
 // If the process ends in less than this time (ms), we assume it's a launcher

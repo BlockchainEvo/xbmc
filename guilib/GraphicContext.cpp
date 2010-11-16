@@ -29,7 +29,7 @@
 #include "cores/VideoRenderers/RenderManager.h"
 #include "WindowingFactory.h"
 #include "TextureManager.h"
-#include "MouseStat.h"
+#include "input/MouseStat.h"
 #include "GUIWindowManager.h"
 #include "utils/JobManager.h"
 #include "VideoReferenceClock.h"

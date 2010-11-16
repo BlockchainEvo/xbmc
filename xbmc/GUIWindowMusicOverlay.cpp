@@ -22,7 +22,7 @@
 #include "GUIWindowMusicOverlay.h"
 #include "utils/GUIInfoManager.h"
 #include "GUIWindowManager.h"
-#include "MouseStat.h"
+#include "input/MouseStat.h"
 
 #define CONTROL_LOGO_PIC    1
 

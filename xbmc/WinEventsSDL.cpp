@@ -22,11 +22,10 @@
 #include "system.h"
 #include "WinEvents.h"
 #include "Application.h"
-#include "XBMC_vkeys.h"
 #ifdef HAS_SDL_JOYSTICK
-#include "common/SDLJoystick.h"
+#include "input/SDLJoystick.h"
 #endif
-#include "MouseStat.h"
+#include "input/MouseStat.h"
 #include "WindowingFactory.h"
 #if defined(__APPLE__)
 #include "osx/CocoaInterface.h"

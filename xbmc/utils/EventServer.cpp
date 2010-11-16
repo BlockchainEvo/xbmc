@@ -30,7 +30,7 @@
 #include "CriticalSection.h"
 #include "Application.h"
 #include "Builtins.h"
-#include "ButtonTranslator.h"
+#include "input/ButtonTranslator.h"
 #include "SingleLock.h"
 #include "Zeroconf.h"
 #include "GUIAudioManager.h"

@@ -56,7 +56,6 @@
 #endif
 #include "settings/AdvancedSettings.h"
 #include "FileItem.h"
-#include "MouseStat.h"
 #include "settings/GUISettings.h"
 #include "GUIUserMessages.h"
 #include "settings/Settings.h"

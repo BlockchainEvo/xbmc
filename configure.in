@@ -1397,7 +1397,6 @@ OUTPUT_FILES="Makefile \
     xbmc/karaoke/Makefile \
     xbmc/osx/Makefile \
     guilib/Makefile \
-    guilib/common/Makefile \
     xbmc/lib/libXBMS/Makefile \
     xbmc/lib/libRTV/Makefile \
     xbmc/lib/libexif/Makefile \
