@@ -31,7 +31,7 @@
 #include "GUIFontManager.h"
 #include "LangCodeExpander.h"
 #include "ButtonTranslator.h"
-#include "XMLUtils.h"
+#include "utils/XMLUtils.h"
 #include "utils/PasswordManager.h"
 #include "utils/RegExp.h"
 #include "GUIPassword.h"
@@ -50,7 +50,7 @@
 #include "FileItem.h"
 #include "LangInfo.h"
 #include "LocalizeStrings.h"
-#include "StringUtils.h"
+#include "utils/StringUtils.h"
 #include "utils/SystemInfo.h"
 #ifdef _WIN32
 #include "win32/WIN32Util.h"
