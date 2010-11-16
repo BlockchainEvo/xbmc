@@ -20,6 +20,7 @@
 */
 
 #include "system.h"
+#include "Key.h"
 #include "SDLJoystick.h"
 #include "ButtonTranslator.h"
 #include "settings/AdvancedSettings.h"

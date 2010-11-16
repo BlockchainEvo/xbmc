@@ -23,14 +23,14 @@
 #include "Settings.h"
 #include "AdvancedSettings.h"
 #include "Application.h"
-#include "KeyboardLayoutConfiguration.h"
+#include "input/KeyboardLayoutConfiguration.h"
 #include "Util.h"
 #include "URL.h"
 #include "GUIWindowFileManager.h"
 #include "GUIDialogButtonMenu.h"
 #include "GUIFontManager.h"
 #include "LangCodeExpander.h"
-#include "ButtonTranslator.h"
+#include "input/ButtonTranslator.h"
 #include "utils/XMLUtils.h"
 #include "utils/PasswordManager.h"
 #include "utils/RegExp.h"
@@ -60,7 +60,7 @@
 #endif
 #include "cores/playercorefactory/PlayerCoreFactory.h"
 #include "utils/FileUtils.h"
-#include "MouseStat.h"
+#include "input/MouseStat.h"
 
 using namespace std;
 using namespace XFILE;

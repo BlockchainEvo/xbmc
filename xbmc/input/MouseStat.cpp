@@ -20,7 +20,7 @@
  */
 
 #include "MouseStat.h"
-#include "guilib/Key.h"
+#include "Key.h"
 #include "WindowingFactory.h"
 #include "utils/log.h"
 #include "utils/TimeUtils.h"
