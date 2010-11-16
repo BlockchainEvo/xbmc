@@ -23,7 +23,7 @@
  *
  */
 
-#include "../../guilib/system.h"
+#include "system.h"
 #include <string.h>
 #include <stdio.h>
 #include <dbus/dbus.h>
