@@ -25,7 +25,6 @@
 
 #ifdef HAS_DBUS
 #include "Application.h"
-#include "LocalizeStrings.h"
 #include "DBusUtil.h"
 
 CConsoleDeviceKitPowerSyscall::CConsoleDeviceKitPowerSyscall()

@@ -36,9 +36,9 @@
   #include "lib/libPython/Python/Include/Python.h"
 #endif
 #include "../XBPythonDll.h"
-#include "GUIFadeLabelControl.h"
-#include "GUIFontManager.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIFadeLabelControl.h"
+#include "guilib/GUIFontManager.h"
+#include "guilib/GUIWindowManager.h"
 #include "control.h"
 #include "pyutil.h"
 

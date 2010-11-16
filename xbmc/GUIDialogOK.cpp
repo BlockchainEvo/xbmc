@@ -20,7 +20,7 @@
  */
 
 #include "GUIDialogOK.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 
 #define ID_BUTTON_OK   10
 

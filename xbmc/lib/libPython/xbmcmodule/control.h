@@ -36,10 +36,12 @@
   #include "lib/libPython/Python/Include/Python.h"
 #endif
 #include "../XBPythonDll.h"
-#include "GUIControl.h"
 #include "listitem.h"
+#include "guilib/GUIColorManager.h"
 
 #pragma once
+
+class CGUIControl;
 
 // python type checking
 #define Control_Check(op) PyObject_TypeCheck(op, &Control_Type)

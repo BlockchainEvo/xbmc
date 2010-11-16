@@ -20,15 +20,15 @@
  */
 
 #include "GUIDialogNetworkSetup.h"
-#include "GUISpinControlEx.h"
+#include "guilib/GUISpinControlEx.h"
 #include "GUIDialogNumeric.h"
 #include "GUIDialogKeyboard.h"
 #include "GUIDialogFileBrowser.h"
-#include "GUIWindowManager.h"
-#include "GUIEditControl.h"
+#include "guilib/GUIWindowManager.h"
+#include "guilib/GUIEditControl.h"
 #include "Util.h"
 #include "URL.h"
-#include "LocalizeStrings.h"
+#include "guilib/LocalizeStrings.h"
 
 #define CONTROL_PROTOCOL        10
 #define CONTROL_SERVER_ADDRESS  11

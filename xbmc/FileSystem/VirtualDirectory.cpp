@@ -31,7 +31,7 @@
 #include "../MediaManager.h"
 #include "File.h"
 #include "FileItem.h"
-#include "TextureManager.h"
+#include "guilib/TextureManager.h"
 #ifdef _WIN32
 #include "WIN32Util.h"
 #endif

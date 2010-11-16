@@ -20,7 +20,7 @@
  */
 
 #include "GUIWindowStartup.h"
-#include "Key.h"
+#include "guilib/Key.h"
 
 CGUIWindowStartup::CGUIWindowStartup(void)
     : CGUIWindow(WINDOW_STARTUP_ANIM, "Startup.xml")

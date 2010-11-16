@@ -21,7 +21,7 @@
 
 #include "DirectoryNodeMusicVideosOverview.h"
 #include "FileItem.h"
-#include "LocalizeStrings.h"
+#include "guilib/LocalizeStrings.h"
 
 using namespace XFILE::VIDEODATABASEDIRECTORY;
 

@@ -29,7 +29,7 @@
 #include "VideoDatabase.h"
 #include "Util.h"
 #include "DateTime.h"
-#include "LocalizeStrings.h"
+#include "guilib/LocalizeStrings.h"
 
 using namespace std;
 using namespace XFILE;

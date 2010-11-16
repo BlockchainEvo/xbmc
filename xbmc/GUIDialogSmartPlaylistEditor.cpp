@@ -23,12 +23,12 @@
 #include "GUIDialogKeyboard.h"
 #include "Util.h"
 #include "GUIDialogSmartPlaylistRule.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 #include "FileSystem/File.h"
 #include "settings/GUISettings.h"
 #include "settings/Settings.h"
 #include "FileItem.h"
-#include "LocalizeStrings.h"
+#include "guilib/LocalizeStrings.h"
 
 using namespace std;
 

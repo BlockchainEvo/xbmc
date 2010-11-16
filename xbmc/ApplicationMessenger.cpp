@@ -23,7 +23,7 @@
 #include "ApplicationMessenger.h"
 #include "Application.h"
 
-#include "TextureManager.h"
+#include "guilib/TextureManager.h"
 #include "PlayListPlayer.h"
 #include "Util.h"
 #include "SectionLoader.h"
@@ -34,11 +34,11 @@
 #include "utils/Builtins.h"
 #include "utils/Network.h"
 #include "utils/log.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 #include "settings/Settings.h"
 #include "settings/GUISettings.h"
 #include "FileItem.h"
-#include "GUIDialog.h"
+#include "guilib/GUIDialog.h"
 #include "WindowingFactory.h"
 #include "GUIInfoManager.h"
 
@@ -51,7 +51,7 @@
 #include "CocoaInterface.h"
 #endif
 #include "MediaManager.h"
-#include "LocalizeStrings.h"
+#include "guilib/LocalizeStrings.h"
 #include "SingleLock.h"
 #include "lib/libPython/xbmcmodule/GUIPythonWindowDialog.h"
 #include "lib/libPython/xbmcmodule/GUIPythonWindowXMLDialog.h"

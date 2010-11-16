@@ -27,7 +27,7 @@
 #include "WinSystemX11.h"
 #include "SpecialProtocol.h"
 #include "settings/Settings.h"
-#include "Texture.h"
+#include "guilib/Texture.h"
 #include "utils/log.h"
 #include "linux/XRandR.h"
 #include <vector>

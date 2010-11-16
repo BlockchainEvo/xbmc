@@ -21,9 +21,9 @@
  
 #include "dlgcache.h"
 #include "Application.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 #include "GUIDialogProgress.h"
-#include "LocalizeStrings.h"
+#include "guilib/LocalizeStrings.h"
 #include "utils/log.h"
 #include "utils/SingleLock.h"
 #include "utils/TimeUtils.h"

@@ -29,7 +29,7 @@
 #include "addons/Repository.h"
 #include "addons/PluginSource.h"
 #include "StringUtils.h"
-#include "TextureManager.h"
+#include "guilib/TextureManager.h"
 #include "File.h"
 
 using namespace ADDON;

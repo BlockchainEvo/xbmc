@@ -24,7 +24,7 @@
 
 #ifdef HAS_GL
 
-#include "GraphicContext.h"
+#include "guilib/GraphicContext.h"
 #include "settings/AdvancedSettings.h"
 #include "RenderSystemGL.h"
 #include "utils/log.h"

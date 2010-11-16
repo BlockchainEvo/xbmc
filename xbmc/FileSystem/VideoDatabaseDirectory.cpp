@@ -23,12 +23,12 @@
 #include "Util.h"
 #include "VideoDatabaseDirectory/QueryParams.h"
 #include "VideoDatabase.h"
-#include "TextureManager.h"
+#include "guilib/TextureManager.h"
 #include "FileSystem/File.h"
 #include "FileItem.h"
 #include "settings/Settings.h"
 #include "Crc32.h"
-#include "LocalizeStrings.h"
+#include "guilib/LocalizeStrings.h"
 #include "utils/log.h"
 
 using namespace std;

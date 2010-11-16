@@ -29,14 +29,13 @@
 #endif
 #include "Picture.h"
 #include "GUIDialogContextMenu.h"
-#include "GUIWindowManager.h"
 #include "ViewState.h"
 #include "settings/Settings.h"
 #include "settings/AdvancedSettings.h"
 #include "FileItem.h"
-#include "Texture.h"
+#include "guilib/Texture.h"
 #include "Crc32.h"
-#include "LocalizeStrings.h"
+#include "guilib/LocalizeStrings.h"
 #include "StringUtils.h"
 #include "utils/SingleLock.h"
 

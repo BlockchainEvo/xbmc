@@ -39,8 +39,7 @@
 // ASCII/unicode could be derived from scancodes, virtual keys, modifiers and/or other ASCII/unicode.
 
 #include "XBMC_events.h"
-#include "system.h" // for DWORD
-#include "Key.h"
+#include "guilib/Key.h"
 
 class CKeyboardStat
 {

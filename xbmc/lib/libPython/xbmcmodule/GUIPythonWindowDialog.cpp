@@ -20,7 +20,7 @@
  */
 
 #include "GUIPythonWindowDialog.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 #include "Application.h"
 
 CGUIPythonWindowDialog::CGUIPythonWindowDialog(int id)

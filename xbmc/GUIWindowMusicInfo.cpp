@@ -20,9 +20,9 @@
  */
 
 #include "GUIWindowMusicInfo.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 #include "Util.h"
-#include "GUIImage.h"
+#include "guilib/GUIImage.h"
 #include "Picture.h"
 #include "GUIDialogFileBrowser.h"
 #include "GUIPassword.h"
@@ -39,7 +39,7 @@
 #include "settings/Settings.h"
 #include "settings/AdvancedSettings.h"
 #include "settings/GUISettings.h"
-#include "LocalizeStrings.h"
+#include "guilib/LocalizeStrings.h"
 #include "utils/log.h"
 #include "TextureCache.h"
 

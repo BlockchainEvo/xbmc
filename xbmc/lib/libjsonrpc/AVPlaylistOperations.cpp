@@ -23,7 +23,7 @@
 #include "PlayListPlayer.h"
 #include "playlists/PlayListFactory.h"
 #include "Util.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 #include "GUIUserMessages.h"
 #include "Application.h"
 

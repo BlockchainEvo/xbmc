@@ -22,7 +22,7 @@
 #ifdef HAS_DBUS
 #include "Util.h"
 #include "settings/AdvancedSettings.h"
-#include "LocalizeStrings.h"
+#include "guilib/LocalizeStrings.h"
 #include "log.h"
 
 CUDiskDevice::CUDiskDevice(const char *DeviceKitUDI)

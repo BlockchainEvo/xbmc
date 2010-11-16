@@ -21,9 +21,9 @@
 #include "AutorunMediaJob.h"
 #include "Application.h"
 #include "utils/Builtins.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 #include "GUIDialogSelect.h"
-#include "Key.h"
+#include "guilib/Key.h"
 
 CAutorunMediaJob::CAutorunMediaJob(const CStdString &label, const CStdString &path)
 {

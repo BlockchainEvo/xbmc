@@ -20,15 +20,15 @@
  */
 
 #include "system.h"
-#include "LocalizeStrings.h"
 #include "MediaManager.h"
+#include "guilib/LocalizeStrings.h"
 #include "utils/IoSupport.h"
 #include "URL.h"
 #include "Util.h"
 #ifdef _WIN32
 #include "WIN32Util.h"
 #endif
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 #ifdef HAS_DVD_DRIVE
 #include "FileSystem/cdioSupport.h"
 #ifndef _WIN32

@@ -30,7 +30,7 @@
 #include "GUIDialogProgress.h"
 #include "playlists/PlayListFactory.h"
 #include "PictureInfoLoader.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 #include "GUIDialogOK.h"
 #include "FileSystem/File.h"
 #include "playlists/PlayList.h"

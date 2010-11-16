@@ -19,7 +19,7 @@
 
 #include "system.h" // WIN32INCLUDES - not sure why this is needed
 #include "GUIUserMessages.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 #include <string.h>
 #include "SAPDirectory.h"
 #include "Util.h"

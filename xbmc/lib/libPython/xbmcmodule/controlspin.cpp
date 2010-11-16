@@ -36,7 +36,7 @@
   #include "lib/libPython/Python/Include/Python.h"
 #endif
 #include "../XBPythonDll.h"
-#include "GUISpinControl.h"
+#include "guilib/GUISpinControl.h"
 #include "control.h"
 #include "pyutil.h"
 

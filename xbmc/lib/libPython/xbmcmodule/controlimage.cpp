@@ -36,7 +36,7 @@
   #include "lib/libPython/Python/Include/Python.h"
 #endif
 #include "../XBPythonDll.h"
-#include "GUIImage.h"
+#include "guilib/GUIImage.h"
 #include "control.h"
 #include "pyutil.h"
 

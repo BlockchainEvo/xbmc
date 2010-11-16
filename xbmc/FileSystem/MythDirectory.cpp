@@ -29,7 +29,7 @@
 #include "settings/AdvancedSettings.h"
 #include "FileItem.h"
 #include "StringUtils.h"
-#include "LocalizeStrings.h"
+#include "guilib/LocalizeStrings.h"
 #include "utils/log.h"
 #include "DirectoryCache.h"
 #include "TimeUtils.h"

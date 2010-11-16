@@ -22,7 +22,7 @@
 #include "GUIWindowOSD.h"
 #include "Application.h"
 #include "GUIUserMessages.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 #include "input/MouseStat.h"
 
 CGUIWindowOSD::CGUIWindowOSD(void)

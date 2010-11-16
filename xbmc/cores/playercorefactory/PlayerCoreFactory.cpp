@@ -30,14 +30,13 @@
 #include "utils/HttpHeader.h"
 #include "settings/GUISettings.h"
 #include "URL.h"
-#include "GUIWindowManager.h"
 #include "FileItem.h"
 #include "settings/AdvancedSettings.h"
 #include "AutoPtrHandle.h"
 #include "ExternalPlayer/ExternalPlayer.h"
 #include "PlayerCoreConfig.h"
 #include "PlayerSelectionRule.h"
-#include "LocalizeStrings.h"
+#include "guilib/LocalizeStrings.h"
 
 using namespace AUTOPTR;
 

@@ -35,7 +35,7 @@
 #else
   #include "lib/libPython/Python/Include/Python.h"
 #endif
-#include "GUISliderControl.h"
+#include "guilib/GUISliderControl.h"
 #include "control.h"
 #include "pyutil.h"
 #include "utils/log.h"

@@ -20,8 +20,8 @@
  */
 
 #include "GUIDialogButtonMenu.h"
-#include "GUILabelControl.h"
-#include "GUIButtonControl.h"
+#include "guilib/GUILabelControl.h"
+#include "guilib/GUIButtonControl.h"
 
 
 #define CONTROL_BUTTON_LABEL  3100

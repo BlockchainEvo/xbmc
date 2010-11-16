@@ -1,5 +1,5 @@
 ARCH=@ARCH@
-INCLUDES =-I../../xbmc/utils -I../../guilib -I../../xbmc/linux -I../../xbmc/lib/libsquish
+INCLUDES =-I../../xbmc -I../../xbmc/linux -I../../xbmc/lib/libsquish
 DEFINES = 
 ifeq ($(findstring osx,$(ARCH)),osx)
 LIBS = ../../xbmc/lib/libsquish/libsquish-@ARCH@.a -L/opt/local/lib -lSDL_image -lSDL -llzo2
@@ -12,7 +12,7 @@ OBJS = \
 	XBTFWriter.o \
 	XBMCTex.o \
 	md5.o \
-	../../guilib/XBTF.o
+	../../xbmc/guilib/XBTF.o
 
 TARGET = TexturePacker
 CLEAN_FILES=$(TARGET)

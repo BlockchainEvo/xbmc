@@ -20,7 +20,7 @@
  */
 
 #include "GUIDialogYesNo.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 
 CGUIDialogYesNo::CGUIDialogYesNo(void)
     : CGUIDialogBoxBase(WINDOW_DIALOG_YES_NO, "DialogYesNo.xml")

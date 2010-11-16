@@ -31,7 +31,7 @@
 #include <SDL/SDL_image.h>
 #include <cerrno>
 #include <cstring>
-#include "XBTF.h"
+#include "guilib/XBTF.h"
 #include "XBTFWriter.h"
 #include "SDL_anigif.h"
 #include "cmdlineargs.h"

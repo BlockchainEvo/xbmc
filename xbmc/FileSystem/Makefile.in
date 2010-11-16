@@ -1,6 +1,6 @@
 ARCH=@ARCH@
 
-INCLUDES=-I. -I../ -I../cores -I../linux -I../../guilib -I../lib/UnrarXLib -I../utils -I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include -I../lib -I../../lib/
+INCLUDES=-I. -I../ -I../cores -I../linux -I../lib/UnrarXLib -I../utils -I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include -I../lib -I../../lib/
 INCLUDES+=-I../lib/libcdio/libcdio/include
 ifeq ($(findstring osx,$(ARCH)), osx)
 INCLUDES+=-I../../lib/libcurl-OSX/include

@@ -1,4 +1,4 @@
-INCLUDES=-I. -I.. -I../../ -I../linux -I../cores -I../../guilib -I../posix -I../../lib/jsoncpp/jsoncpp/include -I../../lib
+INCLUDES=-I. -I.. -I../../ -I../linux -I../cores -I../posix -I../../lib/jsoncpp/jsoncpp/include -I../../lib
 
 SRCS=AlarmClock.cpp \
      Archive.cpp \

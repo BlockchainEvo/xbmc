@@ -36,10 +36,11 @@
   #include "lib/libPython/Python/Include/Python.h"
 #endif
 #include "../XBPythonDll.h"
-#include "GUIControl.h"
 #include "listitem.h"
 
 #pragma once
+
+class CAction;
 
 // python type checking
 #define Action_Check(op) PyObject_TypeCheck(op, &Action_Type)

@@ -21,7 +21,7 @@
  *
  */
 
-#include "GUIDialog.h"
+#include "guilib/GUIDialog.h"
 
 class CGUIWindowMusicOverlay: public CGUIDialog
 {

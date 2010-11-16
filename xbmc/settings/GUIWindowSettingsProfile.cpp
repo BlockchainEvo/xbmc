@@ -29,12 +29,12 @@
 #include "utils/Weather.h"
 #include "GUIPassword.h"
 #include "GUIWindowLoginScreen.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 #include "FileSystem/Directory.h"
 #include "FileItem.h"
 #include "Util.h"
 #include "Settings.h"
-#include "LocalizeStrings.h"
+#include "guilib/LocalizeStrings.h"
 
 using namespace XFILE;
 

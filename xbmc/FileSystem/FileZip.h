@@ -29,7 +29,6 @@
 #include <zlib.h>
 #endif
 #include "utils/log.h"
-#include "GUIWindowManager.h"
 #include "FileSystem/File.h"
 #include "FileSystem/ZipManager.h"
 

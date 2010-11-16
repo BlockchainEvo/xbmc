@@ -36,7 +36,7 @@
 #include "music/tags/MusicInfoTagLoaderFactory.h"
 #include "utils/LabelFormatter.h"
 #include "music/tags/MusicInfoTag.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 #include "GUIDialogOK.h"
 #include "GUIDialogProgress.h"
 #include "GUIDialogKeyboard.h"
@@ -44,7 +44,7 @@
 #include "FileItem.h"
 #include "FileSystem/SpecialProtocol.h"
 #include "MediaManager.h"
-#include "LocalizeStrings.h"
+#include "guilib/LocalizeStrings.h"
 #include "utils/log.h"
 #include "utils/TimeUtils.h"
 

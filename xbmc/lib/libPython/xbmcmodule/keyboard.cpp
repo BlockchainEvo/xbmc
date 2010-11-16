@@ -21,7 +21,7 @@
 
 #include "keyboard.h"
 #include "pyutil.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 #include "GUIDialogKeyboard.h"
 #include "Application.h"
 

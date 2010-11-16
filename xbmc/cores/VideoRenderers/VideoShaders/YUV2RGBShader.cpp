@@ -23,7 +23,7 @@
 #include "../RenderFlags.h"
 #include "YUV2RGBShader.h"
 #include "settings/AdvancedSettings.h"
-#include "TransformMatrix.h"
+#include "guilib/TransformMatrix.h"
 #include "utils/log.h"
 
 #include <string>

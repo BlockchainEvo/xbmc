@@ -24,7 +24,7 @@
 #include "Builtins.h"
 #include "Util.h"
 #include "PlayListPlayer.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 
 using namespace Json;
 using namespace JSONRPC;

@@ -23,7 +23,7 @@
 #include "LangCodeExpander.h"
 #include "settings/AdvancedSettings.h"
 #include "settings/GUISettings.h"
-#include "LocalizeStrings.h"
+#include "guilib/LocalizeStrings.h"
 #include "utils/log.h"
 #include "tinyXML/tinyxml.h"
 

@@ -29,19 +29,19 @@
 #include "Util.h"
 #include "URL.h"
 #include "GUIPassword.h"
-#include "GUIBaseContainer.h" // for VIEW_TYPE_*
+#include "guilib/GUIBaseContainer.h" // for VIEW_TYPE_*
 #include "ViewDatabase.h"
 #include "AutoSwitch.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 #include "addons/AddonManager.h"
 #include "ViewState.h"
 #include "settings/GUISettings.h"
 #include "settings/AdvancedSettings.h"
 #include "settings/Settings.h"
 #include "FileItem.h"
-#include "Key.h"
+#include "guilib/Key.h"
 #include "FileSystem/AddonsDirectory.h"
-#include "TextureManager.h"
+#include "guilib/TextureManager.h"
 
 using namespace std;
 

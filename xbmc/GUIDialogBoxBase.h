@@ -21,7 +21,7 @@
  *
  */
 
-#include "GUIDialog.h"
+#include "guilib/GUIDialog.h"
 #include "utils/Variant.h"
 
 class CGUIDialogBoxBase :

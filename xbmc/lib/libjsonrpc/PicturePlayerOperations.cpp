@@ -21,7 +21,7 @@
 
 #include "PicturePlayerOperations.h"
 #include "Application.h"
-#include "Key.h"
+#include "guilib/Key.h"
 
 using namespace Json;
 using namespace JSONRPC;

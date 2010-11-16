@@ -24,8 +24,8 @@
 
 #pragma once
 
-#include "Geometry.h"
-#include "TransformMatrix.h"
+#include "guilib/Geometry.h"
+#include "guilib/TransformMatrix.h"
 #include "utils/StdString.h"
 #include <stdint.h>
 

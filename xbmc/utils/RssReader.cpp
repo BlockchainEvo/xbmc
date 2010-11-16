@@ -31,8 +31,8 @@
 #include "CocoaInterface.h"
 #endif
 #include "settings/Settings.h"
-#include "LocalizeStrings.h"
-#include "GUIRSSControl.h"
+#include "guilib/LocalizeStrings.h"
+#include "guilib/GUIRSSControl.h"
 #include "utils/TimeUtils.h"
 #include "SingleLock.h"
 #include "log.h"

@@ -20,11 +20,11 @@
  */
 
 #include "GUIDialogMusicScan.h"
-#include "GUIProgressControl.h"
+#include "guilib/GUIProgressControl.h"
 #include "Application.h"
 #include "Util.h"
 #include "URL.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 #include "settings/GUISettings.h"
 #include "GUIUserMessages.h"
 #include "utils/SingleLock.h"

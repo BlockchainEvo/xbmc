@@ -22,7 +22,7 @@
  */
 
 #include <set>
-#include "GUIWindow.h"
+#include "guilib/GUIWindow.h"
 #include "utils/Thread.h"
 #include "utils/CriticalSection.h"
 #include "SlideShowPicture.h"

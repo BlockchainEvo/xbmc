@@ -25,7 +25,7 @@
 #pragma once
 
 #include <vector>
-#include "GUIDialog.h"
+#include "guilib/GUIDialog.h"
 #include "utils/Network.h"
 
 class CFileItemList;

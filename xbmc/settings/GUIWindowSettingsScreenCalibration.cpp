@@ -21,17 +21,17 @@
 
 #include "system.h"
 #include "GUIWindowSettingsScreenCalibration.h"
-#include "GUIMoverControl.h"
-#include "GUIResizeControl.h"
+#include "guilib/GUIMoverControl.h"
+#include "guilib/GUIResizeControl.h"
 #ifdef HAS_VIDEO_PLAYBACK
 #include "cores/VideoRenderers/RenderManager.h"
 #endif
 #include "Application.h"
 #include "Settings.h"
 #include "GUISettings.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 #include "GUIDialogYesNo.h"
-#include "LocalizeStrings.h"
+#include "guilib/LocalizeStrings.h"
 #include "utils/log.h"
 
 using namespace std;

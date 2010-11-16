@@ -30,7 +30,7 @@
 #include "utils/JobManager.h"
 #include "utils/FileOperationJob.h"
 #include "utils/log.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 #include "GUIWindowAddonBrowser.h"
 #include "GUIDialogYesNo.h"
 #include "StringUtils.h"

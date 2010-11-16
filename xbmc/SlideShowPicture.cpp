@@ -21,7 +21,7 @@
 
 #include "SlideShowPicture.h"
 #include "system.h"
-#include "Texture.h"
+#include "guilib/Texture.h"
 #include "cores/ssrc.h"         // for M_PI
 #include "utils/GUIInfoManager.h"
 #include "settings/AdvancedSettings.h"

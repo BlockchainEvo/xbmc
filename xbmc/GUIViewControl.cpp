@@ -20,12 +20,12 @@
  */
 
 #include "GUIViewControl.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 #include "Util.h"
 #include "FileItem.h"
-#include "LocalizeStrings.h"
+#include "guilib/LocalizeStrings.h"
 #include "utils/GUIInfoManager.h"
-#include "Key.h"
+#include "guilib/Key.h"
 
 CGUIViewControl::CGUIViewControl(void)
 {

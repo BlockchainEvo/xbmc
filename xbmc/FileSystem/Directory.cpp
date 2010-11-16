@@ -32,7 +32,7 @@
 #include "Job.h"
 #include "JobManager.h"
 #include "Application.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 #include "GUIDialogBusy.h"
 #include "SingleLock.h"
 #include "Util.h"

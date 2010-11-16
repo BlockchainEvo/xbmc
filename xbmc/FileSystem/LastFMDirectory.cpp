@@ -24,13 +24,13 @@
 #include "Util.h"
 #include "music/tags/MusicInfoTag.h"
 #include "URL.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 #include "GUIDialogProgress.h"
 #include "settings/GUISettings.h"
 #include "FileItem.h"
 #include "FileCurl.h"
 #include "StringUtils.h"
-#include "LocalizeStrings.h"
+#include "guilib/LocalizeStrings.h"
 #include "utils/log.h"
 
 using namespace MUSIC_INFO;

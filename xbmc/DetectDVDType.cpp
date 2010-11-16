@@ -24,7 +24,7 @@
 #ifdef HAS_DVD_DRIVE
 
 #include "DetectDVDType.h"
-#include "LocalizeStrings.h"
+#include "guilib/LocalizeStrings.h"
 #include "StringUtils.h"
 #include "utils/log.h"
 #include "FileSystem/cdioSupport.h"
@@ -45,7 +45,7 @@
 #if defined (LIBCDIO_VERSION_NUM) && (LIBCDIO_VERSION_NUM > 77) || defined (__APPLE__)
 #define USING_CDIO78
 #endif
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 #include "FileSystem/File.h"
 #include "FileItem.h"
 #include "Application.h"

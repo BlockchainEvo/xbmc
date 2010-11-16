@@ -21,11 +21,11 @@
 
 #include "GUIDialogVisualisationPresetList.h"
 #include "addons/Visualisation.h"
-#include "GUIWindowManager.h"
-#include "GUIListContainer.h"
+#include "guilib/GUIWindowManager.h"
+#include "guilib/GUIListContainer.h"
 #include "GUIUserMessages.h"
 #include "FileItem.h"
-#include "LocalizeStrings.h"
+#include "guilib/LocalizeStrings.h"
 
 #define CONTROL_LIST           2
 #define CONTROL_PRESETS_LABEL  3

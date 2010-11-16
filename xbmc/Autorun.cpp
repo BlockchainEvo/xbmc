@@ -39,7 +39,7 @@
 #include "settings/AdvancedSettings.h"
 #include "settings/Settings.h"
 #include "playlists/PlayList.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 #include "MediaManager.h"
 
 using namespace std;

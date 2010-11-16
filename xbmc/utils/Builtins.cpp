@@ -59,8 +59,8 @@
 #endif
 #include "FileSystem/ZipManager.h"
 
-#include "GUIWindowManager.h"
-#include "LocalizeStrings.h"
+#include "guilib/GUIWindowManager.h"
+#include "guilib/LocalizeStrings.h"
 #include "system.h"
 
 #ifdef HAS_LIRC

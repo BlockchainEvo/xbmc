@@ -22,7 +22,7 @@
 #include "PAPlayer.h"
 #include "CodecFactory.h"
 #include "../../utils/GUIInfoManager.h"
-#include "AudioContext.h"
+#include "guilib/AudioContext.h"
 #include "../../FileSystem/FileShoutcast.h"
 #include "../../Application.h"
 #include "FileItem.h"

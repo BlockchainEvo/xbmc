@@ -28,7 +28,7 @@
 #include "AutoSwitch.h"
 #include "utils/Network.h"
 #include "GUIPassword.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 #include "Application.h"
 #include "GUIDialogOK.h"
 #include "GUIDialogYesNo.h"
@@ -41,7 +41,7 @@
 #include "settings/AdvancedSettings.h"
 #include "settings/Settings.h"
 #include "settings/GUISettings.h"
-#include "LocalizeStrings.h"
+#include "guilib/LocalizeStrings.h"
 #include "utils/log.h"
 
 using namespace XFILE;

@@ -32,7 +32,7 @@
 #include "Application.h"
 #include "FileSystem/SpecialProtocol.h"
 #include "AdvancedSettings.h"
-#include "LocalizeStrings.h"
+#include "guilib/LocalizeStrings.h"
 #include "utils/StringUtils.h"
 #include "utils/SystemInfo.h"
 #include "utils/log.h"
@@ -41,7 +41,7 @@
 #include "PowerManager.h"
 #include "cores/dvdplayer/DVDCodecs/Video/CrystalHD.h"
 #include "utils/PCMRemap.h"
-#include "GUIFont.h" // for FONT_STYLE_* definitions
+#include "guilib/GUIFont.h" // for FONT_STYLE_* definitions
 
 using namespace std;
 using namespace ADDON;

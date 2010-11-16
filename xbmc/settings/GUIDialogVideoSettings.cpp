@@ -21,7 +21,7 @@
 
 #include "system.h"
 #include "GUIDialogVideoSettings.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 #include "GUIPassword.h"
 #include "Util.h"
 #include "MathUtils.h"

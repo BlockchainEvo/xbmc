@@ -27,7 +27,7 @@
 #include "settings/GUISettings.h"
 #include "LangInfo.h"
 #include "utils/log.h"
-#include "Geometry.h"
+#include "guilib/Geometry.h"
 #include "FileSystem/IFile.h"
 #ifdef __APPLE__
 #include "CocoaInterface.h"

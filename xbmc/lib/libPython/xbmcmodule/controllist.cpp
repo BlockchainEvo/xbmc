@@ -36,10 +36,10 @@
   #include "lib/libPython/Python/Include/Python.h"
 #endif
 #include "../XBPythonDll.h"
-#include "GUIListContainer.h"
-#include "GUIFontManager.h"
-#include "GUIWindowManager.h"
-#include "GUILabel.h"
+#include "guilib/GUIListContainer.h"
+#include "guilib/GUIFontManager.h"
+#include "guilib/GUIWindowManager.h"
+#include "guilib/GUILabel.h"
 #include "control.h"
 #include "pyutil.h"
 

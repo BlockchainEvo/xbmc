@@ -26,8 +26,8 @@
 #include "FileSystem/File.h"
 #include "FileItem.h"
 #include "Crc32.h"
-#include "TextureManager.h"
-#include "LocalizeStrings.h"
+#include "guilib/TextureManager.h"
+#include "guilib/LocalizeStrings.h"
 #include "utils/log.h"
 
 using namespace std;

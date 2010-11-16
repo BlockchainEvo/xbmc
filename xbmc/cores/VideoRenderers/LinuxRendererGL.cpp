@@ -33,11 +33,10 @@
 #include "settings/Settings.h"
 #include "settings/AdvancedSettings.h"
 #include "settings/GUISettings.h"
-#include "FrameBufferObject.h"
 #include "VideoShaders/YUV2RGBShader.h"
 #include "VideoShaders/VideoFilterShader.h"
 #include "WindowingFactory.h"
-#include "Texture.h"
+#include "guilib/Texture.h"
 #include "../dvdplayer/Codecs/DllSwScale.h"
 #include "../dvdplayer/Codecs/DllAvCodec.h"
 

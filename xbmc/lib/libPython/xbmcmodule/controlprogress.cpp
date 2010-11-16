@@ -35,7 +35,7 @@
 #else
   #include "lib/libPython/Python/Include/Python.h"
 #endif
-#include "GUIProgressControl.h"
+#include "guilib/GUIProgressControl.h"
 #include "control.h"
 #include "pyutil.h"
 

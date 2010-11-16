@@ -21,7 +21,7 @@
  *
  */
 
-#include "GUIDialog.h"
+#include "guilib/GUIDialog.h"
 #include "utils/Variant.h"
 
 enum KEYBOARD {CAPS, LOWER, SYMBOLS };

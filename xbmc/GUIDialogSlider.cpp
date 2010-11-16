@@ -20,9 +20,9 @@
  */
 
 #include "GUIDialogSlider.h"
-#include "GUISliderControl.h"
-#include "GUIWindowManager.h"
-#include "LocalizeStrings.h"
+#include "guilib/GUISliderControl.h"
+#include "guilib/GUIWindowManager.h"
+#include "guilib/LocalizeStrings.h"
 
 #define CONTROL_HEADING 10
 #define CONTROL_SLIDER  11

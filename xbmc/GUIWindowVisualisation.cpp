@@ -20,13 +20,12 @@
  */
 
 #include "GUIWindowVisualisation.h"
-#include "GUIVisualisationControl.h"
 #include "Application.h"
 #include "GUIDialogMusicOSD.h"
 #include "GUIUserMessages.h"
 #include "utils/GUIInfoManager.h"
 #include "GUIDialogVisualisationPresetList.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 #include "settings/Settings.h"
 #include "settings/AdvancedSettings.h"
 

@@ -27,7 +27,7 @@
 #include "playlists/SmartPlayList.h"
 #include "GUIDialogProgress.h"
 #include "GUIUserMessages.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 #include "GUIDialogOK.h"
 #include "playlists/PlayList.h"
 #include "settings/Settings.h"

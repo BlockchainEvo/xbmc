@@ -22,7 +22,7 @@
 #include "File.h"
 #include "Favourites.h"
 #include "Util.h"
-#include "Key.h"
+#include "guilib/Key.h"
 #include "settings/Settings.h"
 #include "FileItem.h"
 #include "VideoInfoTag.h"

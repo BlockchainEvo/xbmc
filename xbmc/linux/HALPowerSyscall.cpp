@@ -25,7 +25,6 @@
 
 #ifdef HAS_HAL
 #include "Application.h"
-#include "LocalizeStrings.h"
 #include <dbus/dbus.h>
 #include <stdlib.h>
 

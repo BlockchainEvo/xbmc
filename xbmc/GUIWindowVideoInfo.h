@@ -21,8 +21,8 @@
  *
  */
 
-#include "GUIDialog.h"
-#include "GUIListItem.h"
+#include "guilib/GUIDialog.h"
+#include "guilib/GUIListItem.h"
 #include "GUIWindowVideoBase.h"
 #include "GUIWindowVideoFiles.h"
 #include "ThumbLoader.h"

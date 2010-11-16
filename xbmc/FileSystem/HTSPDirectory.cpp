@@ -23,7 +23,7 @@
 #include "URL.h"
 #include "FileItem.h"
 #include "settings/GUISettings.h"
-#include "LocalizeStrings.h"
+#include "guilib/LocalizeStrings.h"
 #include "cores/dvdplayer/DVDInputStreams/DVDInputStreamHTSP.h"
 #include "utils/SingleLock.h"
 #include "utils/log.h"

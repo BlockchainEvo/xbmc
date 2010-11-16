@@ -26,6 +26,8 @@
 #include "DateTime.h"
 #include "VideoInfoTag.h"
 
+#undef max
+
 #include <queue>
 
 extern "C" {

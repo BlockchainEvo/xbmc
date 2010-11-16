@@ -1,4 +1,4 @@
-INCLUDES=-I. -I../../ -I../../linux -I../../../guilib -I../../../xbmc -I../../utils
+INCLUDES=-I. -I../../ -I../../linux -I../../../xbmc -I../../utils
 CFLAGS+=-DAPI_DEBUG
 CXXFLAGS+=-DAPI_DEBUG
 

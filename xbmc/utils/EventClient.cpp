@@ -28,8 +28,6 @@
 #include "Application.h"
 #include "SingleLock.h"
 #include "input/ButtonTranslator.h"
-#include "GraphicContext.h"
-#include "Key.h"
 #include <map>
 #include <queue>
 #include "FileSystem/File.h"

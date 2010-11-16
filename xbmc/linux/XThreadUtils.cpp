@@ -26,7 +26,6 @@
 #include "XEventUtils.h"
 #include "system.h"
 #include "log.h"
-#include "GraphicContext.h"
 
 #ifdef _LINUX
 #include <signal.h>

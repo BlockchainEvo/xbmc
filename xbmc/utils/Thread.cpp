@@ -34,7 +34,6 @@ typedef int (*PBEGINTHREADEX_THREADFUNC)(LPVOID lpThreadParameter);
 #endif
 
 #include "log.h"
-#include "GraphicContext.h"
 #include "utils/TimeUtils.h"
 
 #ifdef __APPLE__

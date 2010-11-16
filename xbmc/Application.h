@@ -24,7 +24,7 @@
 #include "system.h" // for HAS_DVD_DRIVE et. al.
 #include "XBApplicationEx.h"
 
-#include "IMsgTargetCallback.h"
+#include "guilib/IMsgTargetCallback.h"
 
 class CFileItem;
 class CFileItemList;

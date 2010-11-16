@@ -20,11 +20,11 @@
  */
 
 #include "GUIDialogProgress.h"
-#include "GUIProgressControl.h"
+#include "guilib/GUIProgressControl.h"
 #include "Application.h"
 #include "utils/GUIInfoManager.h"
-#include "GUIWindowManager.h"
-#include "LocalizeStrings.h"
+#include "guilib/GUIWindowManager.h"
+#include "guilib/LocalizeStrings.h"
 #include "utils/SingleLock.h"
 #include "utils/log.h"
 

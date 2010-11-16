@@ -29,7 +29,7 @@
 
 #include "Temperature.h"
 #include "CriticalSection.h"
-#include "IMsgTargetCallback.h"
+#include "guilib/IMsgTargetCallback.h"
 #include "inttypes.h"
 #include "DateTime.h"
 

@@ -40,7 +40,7 @@
 
 #include "Util.h"
 #include "utils/GUIInfoManager.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 #include "Application.h"
 #include "DVDPerformanceCounter.h"
 #include "FileSystem/File.h"
@@ -59,7 +59,6 @@
 #include "settings/GUISettings.h"
 #include "GUIUserMessages.h"
 #include "settings/Settings.h"
-#include "LocalizeStrings.h"
 #include "utils/log.h"
 #include "utils/TimeUtils.h"
 #include "utils/StreamDetails.h"

@@ -62,12 +62,12 @@
 #endif
 #include "utils/RegExp.h"
 #include "settings/GUISettings.h"
-#include "TextureManager.h"
+#include "guilib/TextureManager.h"
 #include "utils/fstrcmp.h"
 #include "MediaManager.h"
-#include "DirectXGraphics.h"
+#include "guilib/DirectXGraphics.h"
 #include "DNSNameCache.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 #ifdef _WIN32
 #include <shlobj.h>
 #include "WIN32Util.h"
@@ -86,7 +86,7 @@
   #include "common/IRServerSuite/IRServerSuite.h"
 #endif
 #include "WindowingFactory.h"
-#include "LocalizeStrings.h"
+#include "guilib/LocalizeStrings.h"
 #include "utils/md5.h"
 #include "utils/TimeUtils.h"
 #include "utils/log.h"

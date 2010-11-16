@@ -35,13 +35,13 @@
 #include "utils/Network.h"
 #include "addons/Skin.h"
 #include "Profile.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 #include "GUIDialogOK.h"
 #include "settings/Settings.h"
 #include "settings/GUISettings.h"
 #include "FileSystem/File.h"
 #include "FileItem.h"
-#include "LocalizeStrings.h"
+#include "guilib/LocalizeStrings.h"
 
 using namespace XFILE;
 

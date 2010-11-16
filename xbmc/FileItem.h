@@ -25,7 +25,7 @@
  *
  */
 
-#include "GUIListItem.h"
+#include "guilib/GUIListItem.h"
 #include "utils/Archive.h"
 #include "utils/ISerializable.h"
 #include "DateTime.h"

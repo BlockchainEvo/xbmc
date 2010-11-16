@@ -25,7 +25,7 @@
 #include "BaseRenderer.h"
 #include "settings/Settings.h"
 #include "settings/GUISettings.h"
-#include "GraphicContext.h"
+#include "guilib/GraphicContext.h"
 #include "utils/log.h"
 #include "MathUtils.h"
 #include "settings/AdvancedSettings.h"

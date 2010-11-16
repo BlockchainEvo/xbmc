@@ -20,7 +20,7 @@
  */
 
 #include "FileItem.h"
-#include "LocalizeStrings.h"
+#include "guilib/LocalizeStrings.h"
 #include "StringUtils.h"
 #include "Util.h"
 #include "Picture.h"

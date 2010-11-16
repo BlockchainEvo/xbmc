@@ -43,7 +43,7 @@
 #include "GUIDialogFileBrowser.h"
 #include "GUIDialogNumeric.h"
 #include "GUIDialogGamepad.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 #include "GUIDialogOK.h"
 #include "GUIDialogProgress.h"
 #include "GUIDialogYesNo.h"

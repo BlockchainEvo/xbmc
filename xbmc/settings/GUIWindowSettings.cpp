@@ -21,8 +21,8 @@
 
 #include "system.h"
 #include "GUIWindowSettings.h"
-#include "GUIWindowManager.h"
-#include "Key.h"
+#include "guilib/GUIWindowManager.h"
+#include "guilib/Key.h"
 #ifdef HAS_CREDITS
 #include "Credits.h"
 #endif

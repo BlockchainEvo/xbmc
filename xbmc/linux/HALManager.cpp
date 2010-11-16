@@ -27,7 +27,7 @@
 #include <libhal-storage.h>
 #include "SingleLock.h"
 #include "Util.h"
-#include "LocalizeStrings.h"
+#include "guilib/LocalizeStrings.h"
 #include "PowerManager.h"
 #include "settings/AdvancedSettings.h"
 

@@ -21,7 +21,7 @@
  *
  */
 
-#include "GUIWindow.h"
+#include "guilib/GUIWindow.h"
 #include "SettingsControls.h"
 #include "GUISettings.h"
 #include "utils/Stopwatch.h"

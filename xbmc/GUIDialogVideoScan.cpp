@@ -20,10 +20,10 @@
  */
 
 #include "GUIDialogVideoScan.h"
-#include "GUIProgressControl.h"
+#include "guilib/GUIProgressControl.h"
 #include "GUIUserMessages.h"
 #include "Util.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 #include "settings/GUISettings.h"
 #include "Application.h"
 #include "utils/SingleLock.h"

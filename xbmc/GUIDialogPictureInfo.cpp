@@ -21,9 +21,9 @@
 
 #include "GUIDialogPictureInfo.h"
 #include "utils/GUIInfoManager.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 #include "FileItem.h"
-#include "LocalizeStrings.h"
+#include "guilib/LocalizeStrings.h"
 
 #define CONTROL_PICTURE_INFO 5
 

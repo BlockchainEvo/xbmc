@@ -25,9 +25,9 @@
 
 #include <utils/log.h>
 #include <SingleLock.h>
-#include <GUIWindowManager.h>
-#include <GUIMessage.h>
-#include <GUIUserMessages.h>
+#include "guilib/GUIWindowManager.h"
+#include "guilib/GUIMessage.h"
+#include "GUIUserMessages.h"
 #include <avahi-common/malloc.h>
 #include <avahi-common/error.h>
 namespace

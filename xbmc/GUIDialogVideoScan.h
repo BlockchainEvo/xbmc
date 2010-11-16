@@ -21,7 +21,7 @@
  *
  */
 
-#include "GUIDialog.h"
+#include "guilib/GUIDialog.h"
 #include "VideoInfoScanner.h"
 #include "utils/CriticalSection.h"
 

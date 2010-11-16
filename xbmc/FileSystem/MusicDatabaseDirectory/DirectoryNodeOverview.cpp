@@ -22,7 +22,7 @@
 #include "DirectoryNodeOverview.h"
 #include "FileItem.h"
 #include "MusicDatabase.h"
-#include "LocalizeStrings.h"
+#include "guilib/LocalizeStrings.h"
 
 using namespace std;
 using namespace XFILE::MUSICDATABASEDIRECTORY;

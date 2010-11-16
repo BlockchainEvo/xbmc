@@ -42,9 +42,9 @@
 #endif
 #include "XBPythonDll.h"
 #include "FileSystem/SpecialProtocol.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 #include "GUIDialogKaiToast.h"
-#include "LocalizeStrings.h"
+#include "guilib/LocalizeStrings.h"
 #include "utils/log.h"
 #include "utils/SingleLock.h"
 #include "Util.h"

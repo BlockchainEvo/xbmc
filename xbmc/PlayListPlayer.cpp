@@ -25,7 +25,7 @@
 #include "PartyModeManager.h"
 #include "settings/AdvancedSettings.h"
 #include "GUIUserMessages.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 #include "GUIDialogOK.h"
 #include "playlists/PlayList.h"
 #include "utils/log.h"

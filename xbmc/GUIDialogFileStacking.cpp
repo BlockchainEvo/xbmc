@@ -20,7 +20,7 @@
  */
 
 #include "GUIDialogFileStacking.h"
-#include "LocalizeStrings.h"
+#include "guilib/LocalizeStrings.h"
 #include "FileItem.h"
 
 using namespace std;

@@ -36,8 +36,8 @@
   #include "lib/libPython/Python/Include/Python.h"
 #endif
 #include "../XBPythonDll.h"
-#include "GUIRadioButtonControl.h"
-#include "GUIFontManager.h"
+#include "guilib/GUIRadioButtonControl.h"
+#include "guilib/GUIFontManager.h"
 #include "control.h"
 #include "pyutil.h"
 

@@ -20,7 +20,7 @@
  */
 
 #include "GUIPythonWindowXMLDialog.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 #include "Application.h"
 
 CGUIPythonWindowXMLDialog::CGUIPythonWindowXMLDialog(int id, CStdString strXML, CStdString strFallBackPath)

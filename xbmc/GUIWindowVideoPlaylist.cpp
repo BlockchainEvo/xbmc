@@ -27,13 +27,13 @@
 #include "PlayListPlayer.h"
 #include "PartyModeManager.h"
 #include "GUIDialogSmartPlaylistEditor.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 #include "GUIDialogKeyboard.h"
 #include "GUIUserMessages.h"
 #include "Favourites.h"
 #include "settings/Settings.h"
 #include "settings/GUISettings.h"
-#include "LocalizeStrings.h"
+#include "guilib/LocalizeStrings.h"
 #include "utils/log.h"
 
 using namespace PLAYLIST;

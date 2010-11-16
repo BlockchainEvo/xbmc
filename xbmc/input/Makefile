@@ -1,4 +1,4 @@
-INCLUDES=-I. -I.. -I../linux -I../../guilib -I../../lib
+INCLUDES=-I. -I.. -I../linux -I../../lib
 
 SRCS=ButtonTranslator.cpp \
      KeyboardLayoutConfiguration.cpp \

@@ -23,7 +23,7 @@
  *
  */
 
-#include "GUIWindow.h"
+#include "guilib/GUIWindow.h"
 
 #define TEST_PATTERNS_COUNT 5
 #define TEST_PATTERNS_BOUNCE_SQUARE_SIZE 100

@@ -25,7 +25,7 @@
 #include "settings/GUISettings.h"
 #include "settings/Settings.h"
 #include "Util.h"
-#include "LocalizeStrings.h"
+#include "guilib/LocalizeStrings.h"
 
 long CLastfmScrobbler::m_instanceLock = 0;
 CLastfmScrobbler *CLastfmScrobbler::m_pInstance = NULL;

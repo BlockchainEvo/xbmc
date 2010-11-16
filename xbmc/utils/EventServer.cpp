@@ -33,7 +33,7 @@
 #include "input/ButtonTranslator.h"
 #include "SingleLock.h"
 #include "Zeroconf.h"
-#include "GUIAudioManager.h"
+#include "guilib/GUIAudioManager.h"
 #include <map>
 #include <queue>
 

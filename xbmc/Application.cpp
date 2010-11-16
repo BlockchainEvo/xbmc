@@ -30,26 +30,26 @@
 #include "LangInfo.h"
 #include "Util.h"
 #include "Picture.h"
-#include "TextureManager.h"
+#include "guilib/TextureManager.h"
 #include "cores/dvdplayer/DVDFileInfo.h"
 #include "PlayListPlayer.h"
 #include "Autorun.h"
 #ifdef HAS_LCD
 #include "utils/LCDFactory.h"
 #endif
-#include "GUIControlProfiler.h"
+#include "guilib/GUIControlProfiler.h"
 #include "LangCodeExpander.h"
 #include "utils/GUIInfoManager.h"
 #include "playlists/PlayListFactory.h"
-#include "GUIFontManager.h"
-#include "GUIColorManager.h"
-#include "GUITextLayout.h"
+#include "guilib/GUIFontManager.h"
+#include "guilib/GUIColorManager.h"
+#include "guilib/GUITextLayout.h"
 #include "addons/Skin.h"
 #ifdef HAS_PYTHON
 #include "lib/libPython/XBPython.h"
 #endif
 #include "input/ButtonTranslator.h"
-#include "GUIAudioManager.h"
+#include "guilib/GUIAudioManager.h"
 #include "lib/libscrobbler/lastfmscrobbler.h"
 #include "lib/libscrobbler/librefmscrobbler.h"
 #include "GUIPassword.h"
@@ -85,7 +85,7 @@
 #include "DPMSSupport.h"
 #include "settings/Settings.h"
 #include "settings/AdvancedSettings.h"
-#include "LocalizeStrings.h"
+#include "guilib/LocalizeStrings.h"
 #include "CPUInfo.h"
 
 #include "input/KeyboardStat.h"
@@ -113,8 +113,8 @@
 #include "karaoke/GUIDialogKaraokeSongSelector.h"
 #include "karaoke/GUIWindowKaraokeLyrics.h"
 #endif
-#include "AudioContext.h"
-#include "GUIFontTTF.h"
+#include "guilib/AudioContext.h"
+#include "guilib/GUIFontTTF.h"
 #include "utils/Network.h"
 #include "utils/IoSupport.h"
 #include "Zeroconf.h"
@@ -141,9 +141,9 @@
 #include "utils/AnnouncementManager.h"
 
 // Windows includes
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 #include "GUIWindowHome.h"
-#include "GUIStandardWindow.h"
+#include "guilib/GUIStandardWindow.h"
 #include "settings/GUIWindowSettings.h"
 #include "GUIWindowFileManager.h"
 #include "settings/GUIWindowSettingsCategory.h"
@@ -219,7 +219,7 @@
 #include "GUIDialogFullScreenInfo.h"
 #include "GUIDialogTeletext.h"
 #include "GUIDialogSlider.h"
-#include "GUIControlFactory.h"
+#include "guilib/GUIControlFactory.h"
 #include "cores/dlgcache.h"
 
 #ifdef HAS_PERFORMANCE_SAMPLE

@@ -21,15 +21,15 @@
 
 #include "GUIViewStateMusic.h"
 #include "PlayListPlayer.h"
-#include "GUIBaseContainer.h" // for VIEW_TYPE_*
+#include "guilib/GUIBaseContainer.h" // for VIEW_TYPE_*
 #include "VideoDatabase.h"
 #include "settings/GUISettings.h"
 #include "settings/AdvancedSettings.h"
 #include "settings/Settings.h"
 #include "FileItem.h"
-#include "Key.h"
+#include "guilib/Key.h"
 #include "Util.h"
-#include "LocalizeStrings.h"
+#include "guilib/LocalizeStrings.h"
 #include "utils/log.h"
 
 #include "FileSystem/Directory.h"

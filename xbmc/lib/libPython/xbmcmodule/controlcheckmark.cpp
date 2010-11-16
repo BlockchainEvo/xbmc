@@ -36,8 +36,8 @@
   #include "lib/libPython/Python/Include/Python.h"
 #endif
 #include "../XBPythonDll.h"
-#include "GUICheckMarkControl.h"
-#include "GUIFontManager.h"
+#include "guilib/GUICheckMarkControl.h"
+#include "guilib/GUIFontManager.h"
 #include "control.h"
 #include "pyutil.h"
 

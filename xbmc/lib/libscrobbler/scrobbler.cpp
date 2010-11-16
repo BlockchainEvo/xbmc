@@ -31,7 +31,7 @@
 #include "XMLUtils.h"
 #include "Application.h"
 #include "SingleLock.h"
-#include "LocalizeStrings.h"
+#include "guilib/LocalizeStrings.h"
 #include "File.h"
 
 #define SCROBBLER_CLIENT              "xbm"

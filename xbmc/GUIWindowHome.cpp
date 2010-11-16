@@ -20,7 +20,7 @@
  */
 
 #include "GUIWindowHome.h"
-#include "Key.h"
+#include "guilib/Key.h"
 
 CGUIWindowHome::CGUIWindowHome(void) : CGUIWindow(WINDOW_HOME, "Home.xml")
 {

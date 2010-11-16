@@ -30,8 +30,8 @@
 #include "fstrcmp.h"
 #include "GUIDialogOK.h"
 #include "Application.h"
-#include "GUIWindowManager.h"
-#include "LocalizeStrings.h"
+#include "guilib/GUIWindowManager.h"
+#include "guilib/LocalizeStrings.h"
 #include "log.h"
 
 using namespace HTML;

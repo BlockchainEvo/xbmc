@@ -23,8 +23,8 @@
 
 #include "GUIWindowTestPattern.h"
 #include "settings/Settings.h"
-#include "GUIWindowManager.h"
-#include "Key.h"
+#include "guilib/GUIWindowManager.h"
+#include "guilib/Key.h"
 
 CGUIWindowTestPattern::CGUIWindowTestPattern(void)
     : CGUIWindow(WINDOW_TEST_PATTERN, "")

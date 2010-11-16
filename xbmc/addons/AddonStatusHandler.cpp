@@ -22,11 +22,10 @@
 #include "AddonManager.h"
 #include "SingleLock.h"
 #include "Application.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 #include "GUIDialogAddonSettings.h"
 #include "GUIDialogYesNo.h"
 #include "GUIDialogOK.h"
-#include "GUIWindowManager.h"
 #include "log.h"
 
 namespace ADDON

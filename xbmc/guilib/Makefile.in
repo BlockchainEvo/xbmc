@@ -1,6 +1,6 @@
-INCLUDES=-I. -I../ -Icommon -I../xbmc -I../xbmc/linux -I../xbmc/utils -I/usr/include/freetype2 -I/usr/include/SDL -I../xbmc/lib/libsquish -I../lib/
+INCLUDES=-I. -I../  -I../linux -I../utils -I/usr/include/freetype2 -I/usr/include/SDL -I../lib/libsquish -I../../lib/
 ifneq (@USE_EXTERNAL_FFMPEG@,1)
-  INCLUDES+=-I../xbmc/cores/dvdplayer/Codecs/ffmpeg
+  INCLUDES+=-I../cores/dvdplayer/Codecs/ffmpeg
 endif
 
 SRCS=AnimatedGif.cpp \
@@ -87,10 +87,10 @@ SRCS=AnimatedGif.cpp \
 
 LIB=guilib.a
 
-include ../Makefile.include
+include ../../Makefile.include
 -include $(patsubst %.cpp,%.P,$(patsubst %.c,%.P,$(SRCS)))
 
 try : try.o TextureBundle.o DirectXGraphics.o GUIFontTTF.o
-	g++ -o try try.o TextureBundle.o DirectXGraphics.o GraphicContext.o GUIIncludes.o ../xbmc/utils/CriticalSection.o ../xbmc/XBVideoConfig.o SkinInfo.o tinyXML/tinyxml.a ../xbmc/linux/CriticalSection.o GUIFontTTF.o GUIFontBase.o GUIFontManager.o GUIFont.o ../xbmc/utils/XMLUtils.o GUIImage.o GUIControl.o TextureManager.o GUIMessage.o ../xbmc/utils/SingleLock.o VisibleEffect.o GUIWindowManager.o AnimatedGif.o -lSDL_image -lSDL_gfx -lSDL -llzo -lfreetype
+	g++ -o try try.o TextureBundle.o DirectXGraphics.o GraphicContext.o GUIIncludes.o ../utils/CriticalSection.o ../XBVideoConfig.o SkinInfo.o ../../lib/tinyXML/tinyxml.a ../linux/CriticalSection.o GUIFontTTF.o GUIFontBase.o GUIFontManager.o GUIFont.o ../utils/XMLUtils.o GUIImage.o GUIControl.o TextureManager.o GUIMessage.o ../utils/SingleLock.o VisibleEffect.o GUIWindowManager.o AnimatedGif.o -lSDL_image -lSDL_gfx -lSDL -llzo -lfreetype
 
 

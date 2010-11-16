@@ -21,7 +21,7 @@
 
 #include "AsyncFileCopy.h"
 #include "GUIDialogProgress.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 #include "log.h"
 #include "utils/TimeUtils.h"
 

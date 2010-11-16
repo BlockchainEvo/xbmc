@@ -29,7 +29,7 @@
 #include "utils/Weather.h"
 #include "utils/Builtins.h"
 #include "AnnouncementManager.h"
-#include "LocalizeStrings.h"
+#include "guilib/LocalizeStrings.h"
 
 #if defined(HAVE_LIBCRYSTALHD)
 #include "cores/dvdplayer/DVDCodecs/Video/CrystalHD.h"

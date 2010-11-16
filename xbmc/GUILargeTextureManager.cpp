@@ -23,11 +23,11 @@
 #include "Picture.h"
 #include "settings/GUISettings.h"
 #include "FileItem.h"
-#include "Texture.h"
+#include "guilib/Texture.h"
 #include "utils/SingleLock.h"
 #include "utils/TimeUtils.h"
 #include "utils/JobManager.h"
-#include "GraphicContext.h"
+#include "guilib/GraphicContext.h"
 #include "utils/log.h"
 #include "TextureCache.h"
 

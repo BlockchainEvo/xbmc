@@ -21,13 +21,12 @@
 
 #include "GUIDialogTeletext.h"
 #include "utils/log.h"
-#include "GUIWindowManager.h"
 #include "settings/GUISettings.h"
 #include "Application.h"
-#include "GUITexture.h"
-#include "Texture.h"
+#include "guilib/GUITexture.h"
+#include "guilib/Texture.h"
 #include "settings/Settings.h"
-#include "LocalizeStrings.h"
+#include "guilib/LocalizeStrings.h"
 
 using namespace std;
 

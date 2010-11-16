@@ -20,7 +20,7 @@
  */
 
 #include "action.h"
-#include "Key.h"
+#include "guilib/Key.h"
 #include "pyutil.h"
 
 using namespace std;

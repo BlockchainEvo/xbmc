@@ -26,7 +26,7 @@
 #endif
 #include "Application.h"
 #include "FileItem.h"
-#include "LocalizeStrings.h"
+#include "guilib/LocalizeStrings.h"
 
 #define CONTROL_ACCESS_POINTS 3
 

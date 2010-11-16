@@ -24,7 +24,7 @@
 #include "window.h"
 #include "control.h"
 #include "action.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 #include "../XBPython.h"
 #include "utils/log.h"
 #include "utils/SingleLock.h"

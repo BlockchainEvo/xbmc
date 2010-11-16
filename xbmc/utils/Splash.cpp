@@ -21,7 +21,7 @@
 
 #include "system.h"
 #include "Splash.h"
-#include "GUIImage.h"
+#include "guilib/GUIImage.h"
 #include "FileSystem/File.h"
 #include "WindowingFactory.h"
 #include "RenderSystem.h"

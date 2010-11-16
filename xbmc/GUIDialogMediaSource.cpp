@@ -24,7 +24,7 @@
 #include "GUIDialogFileBrowser.h"
 #include "GUIWindowVideoFiles.h"
 #include "GUIDialogVideoScan.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 #include "Util.h"
 #include "FileSystem/PluginDirectory.h"
 #include "GUIDialogYesNo.h"
@@ -32,7 +32,7 @@
 #include "FileItem.h"
 #include "settings/Settings.h"
 #include "settings/GUISettings.h"
-#include "LocalizeStrings.h"
+#include "guilib/LocalizeStrings.h"
 
 using namespace std;
 using namespace XFILE;

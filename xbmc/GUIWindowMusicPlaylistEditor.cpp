@@ -30,12 +30,12 @@
 #include "FileSystem/SpecialProtocol.h"
 #include "FileSystem/Directory.h"
 #include "playlists/PlayListM3U.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 #include "GUIDialogKeyboard.h"
 #include "FileItem.h"
 #include "settings/GUISettings.h"
 #include "GUIUserMessages.h"
-#include "LocalizeStrings.h"
+#include "guilib/LocalizeStrings.h"
 
 #define CONTROL_LABELFILES        12
 

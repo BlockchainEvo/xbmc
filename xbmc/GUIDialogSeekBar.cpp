@@ -20,7 +20,7 @@
  */
 
 #include "GUIDialogSeekBar.h"
-#include "GUISliderControl.h"
+#include "guilib/GUISliderControl.h"
 #include "GUIUserMessages.h"
 #include "Application.h"
 #include "utils/GUIInfoManager.h"

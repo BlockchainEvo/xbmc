@@ -1,7 +1,6 @@
 abs_top_srcdir=@abs_top_srcdir@
 
 INCLUDES=-I$(abs_top_srcdir) \
-	 -I$(abs_top_srcdir)/guilib \
 	 -I$(abs_top_srcdir)/xbmc \
 	 -I$(abs_top_srcdir)/xbmc/linux \
 	 -I$(abs_top_srcdir)/xbmc/utils \

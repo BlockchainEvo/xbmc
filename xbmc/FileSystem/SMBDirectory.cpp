@@ -36,8 +36,7 @@
 #if defined(HAS_FILESYSTEM_SMB)
 #include "SMBDirectory.h"
 #include "Util.h"
-#include "LocalizeStrings.h"
-#include "GUIWindowManager.h"
+#include "guilib/LocalizeStrings.h"
 #include "Application.h"
 #include "FileItem.h"
 #include "settings/AdvancedSettings.h"

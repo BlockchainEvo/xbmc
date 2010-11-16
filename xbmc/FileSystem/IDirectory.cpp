@@ -22,7 +22,6 @@
 
 #include "IDirectory.h"
 #include "Util.h"
-#include "GUIWindowManager.h"
 #include "GUIDialogOK.h"
 #include "GUIDialogKeyboard.h"
 #include "URL.h"

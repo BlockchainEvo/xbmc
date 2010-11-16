@@ -21,7 +21,7 @@
  *
  */
 
-#include "GUIWindow.h"
+#include "guilib/GUIWindow.h"
 #include "music/tags/MusicInfoTag.h"
 #include "Stopwatch.h"
 

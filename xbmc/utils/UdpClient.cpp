@@ -24,7 +24,7 @@
 #include <sys/ioctl.h>
 #endif
 #include "../utils/Network.h"
-#include "GraphicContext.h"
+#include "guilib/GraphicContext.h"
 #include "log.h"
 #include "utils/TimeUtils.h"
 

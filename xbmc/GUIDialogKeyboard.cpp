@@ -21,19 +21,18 @@
 
 #include "GUIDialogKeyboard.h"
 #include "settings/GUISettings.h"
-#include "GUILabelControl.h"
-#include "GUIButtonControl.h"
+#include "guilib/GUILabelControl.h"
 #include "GUIDialogNumeric.h"
 #include "GUIDialogOK.h"
 #include "GUIUserMessages.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 #include "utils/RegExp.h"
 #include "GUIPassword.h"
 #include "utils/md5.h"
 #include "utils/TimeUtils.h"
 #include "Application.h"
 #include "settings/AdvancedSettings.h"
-#include "LocalizeStrings.h"
+#include "guilib/LocalizeStrings.h"
 
 // Symbol mapping (based on MS virtual keyboard - may need improving)
 static char symbol_map[37] = ")!@#$%^&*([]{}-_=+;:\'\",.<>/?\\|`~    ";

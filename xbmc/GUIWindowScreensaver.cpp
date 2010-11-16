@@ -26,7 +26,7 @@
 #include "GUIPassword.h"
 #include "settings/GUISettings.h"
 #include "GUIUserMessages.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 #include "utils/SingleLock.h"
 
 using namespace ADDON;

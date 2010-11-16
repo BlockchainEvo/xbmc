@@ -22,8 +22,8 @@
  */
 
 #include "TeletextDefines.h"
-#include "Key.h"
-#include "GUITexture.h"
+#include "guilib/Key.h"
+#include "guilib/GUITexture.h"
 
 // stuff for freetype
 #ifndef _LINUX

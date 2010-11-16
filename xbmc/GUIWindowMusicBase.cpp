@@ -46,7 +46,7 @@
 #include "GUIDialogSmartPlaylistEditor.h"
 #include "LastFmManager.h"
 #include "music/tags/MusicInfoTag.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 #include "GUIDialogOK.h"
 #include "GUIDialogKeyboard.h"
 #include "GUIDialogProgress.h"
@@ -56,7 +56,7 @@
 #include "settings/Settings.h"
 #include "settings/AdvancedSettings.h"
 #include "settings/GUISettings.h"
-#include "LocalizeStrings.h"
+#include "guilib/LocalizeStrings.h"
 #include "utils/TimeUtils.h"
 #include "utils/log.h"
 

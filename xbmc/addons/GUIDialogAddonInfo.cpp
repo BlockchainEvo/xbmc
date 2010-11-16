@@ -30,7 +30,7 @@
 #include "GUIDialogTextViewer.h"
 #include "GUIUserMessages.h"
 #include "GUIWindowAddonBrowser.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 #include "URL.h"
 #include "utils/JobManager.h"
 #include "utils/FileOperationJob.h"

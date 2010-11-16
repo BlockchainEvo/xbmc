@@ -46,8 +46,8 @@
 #include "winxml.h"
 #include "pyutil.h"
 #include "action.h"
-#include "GUIWindowManager.h"
-#include "GUIListItem.h"
+#include "guilib/GUIWindowManager.h"
+#include "guilib/GUIListItem.h"
 
 #ifndef __GNUC__
 #pragma code_seg("PY_TEXT")

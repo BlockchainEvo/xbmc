@@ -21,8 +21,8 @@
 
 #include "Application.h"
 #include "GUIDialogBoxBase.h"
-#include "GUIWindowManager.h"
-#include "LocalizeStrings.h"
+#include "guilib/GUIWindowManager.h"
+#include "guilib/LocalizeStrings.h"
 
 using namespace std;
 

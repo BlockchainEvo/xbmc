@@ -25,7 +25,6 @@
 #include "FileSystem/File.h"
 #include "FileItem.h"
 #include "VideoInfoTag.h"
-#include "TextureManager.h"
 #include "TextureCache.h"
 #include "FileSystem/Directory.h"
 #include "FileSystem/MultiPathDirectory.h"

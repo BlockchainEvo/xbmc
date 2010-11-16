@@ -21,7 +21,7 @@
 
 #include "GUIDialogMusicOSD.h"
 #include "Application.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 #include "input/MouseStat.h"
 #include "GUIUserMessages.h"
 #include "settings/Settings.h"

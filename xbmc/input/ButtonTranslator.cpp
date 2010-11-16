@@ -24,7 +24,7 @@
 #include "ButtonTranslator.h"
 #include "Util.h"
 #include "settings/Settings.h"
-#include "Key.h"
+#include "guilib/Key.h"
 #include "FileSystem/File.h"
 #include "FileSystem/Directory.h"
 #include "FileItem.h"

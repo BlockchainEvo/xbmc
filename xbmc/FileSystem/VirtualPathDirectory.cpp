@@ -24,7 +24,7 @@
 #include "settings/Settings.h"
 #include "Util.h"
 #include "URL.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 #include "GUIDialogProgress.h"
 #include "FileItem.h"
 #include "utils/log.h"

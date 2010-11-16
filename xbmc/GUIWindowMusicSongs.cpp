@@ -29,14 +29,14 @@
 #include "GUIDialogMusicScan.h"
 #include "GUIDialogYesNo.h"
 #include "GUIUserMessages.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 #include "FileItem.h"
 #include "FileSystem/SpecialProtocol.h"
 #include "FileSystem/Directory.h"
 #include "MediaManager.h"
 #include "settings/Settings.h"
 #include "settings/GUISettings.h"
-#include "LocalizeStrings.h"
+#include "guilib/LocalizeStrings.h"
 #include "utils/log.h"
 
 #define CONTROL_BTNVIEWASICONS     2

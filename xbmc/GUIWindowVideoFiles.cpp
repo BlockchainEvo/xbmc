@@ -35,14 +35,13 @@
 #include "GUIDialogVideoScan.h"
 #include "FileSystem/MultiPathDirectory.h"
 #include "utils/RegExp.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 #include "GUIDialogOK.h"
 #include "GUIDialogYesNo.h"
 #include "FileSystem/File.h"
 #include "playlists/PlayList.h"
 #include "settings/Settings.h"
 #include "settings/GUISettings.h"
-#include "LocalizeStrings.h"
 #include "utils/log.h"
 
 using namespace std;

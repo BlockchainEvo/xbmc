@@ -21,7 +21,7 @@
 
 #include "AlarmClock.h"
 #include "Application.h"
-#include "LocalizeStrings.h"
+#include "guilib/LocalizeStrings.h"
 #include "SingleLock.h"
 #include "log.h"
 

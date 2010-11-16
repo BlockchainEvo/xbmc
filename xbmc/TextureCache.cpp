@@ -28,10 +28,10 @@
 #include "settings/AdvancedSettings.h"
 #include "utils/log.h"
 
-#include "Texture.h"
-#include "DDSImage.h"
+#include "guilib/Texture.h"
+#include "guilib/DDSImage.h"
 #include "Picture.h"
-#include "TextureManager.h"
+#include "guilib/TextureManager.h"
 #include "URIUtils.h"
 
 using namespace XFILE;

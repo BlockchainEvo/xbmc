@@ -20,12 +20,12 @@
  */
 
 #include "GUIDialogNumeric.h"
-#include "GUILabelControl.h"
+#include "guilib/GUILabelControl.h"
 #include "utils/md5.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 #include "GUIDialogOK.h"
 #include "StringUtils.h"
-#include "LocalizeStrings.h"
+#include "guilib/LocalizeStrings.h"
 
 #define CONTROL_HEADING_LABEL  1
 #define CONTROL_INPUT_LABEL    4

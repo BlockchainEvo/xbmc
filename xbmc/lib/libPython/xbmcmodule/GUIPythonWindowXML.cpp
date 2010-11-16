@@ -20,20 +20,18 @@
  */
 
 #include "GUIPythonWindowXML.h"
-#include "GUIWindow.h"
 #include "pyutil.h"
-#include "GUIMediaWindow.h"
 #include "window.h"
 #include "control.h"
 #include "action.h"
 #include "Util.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 #include "FileItem.h"
 #include "FileSystem/File.h"
-#include "TextureManager.h"
+#include "guilib/TextureManager.h"
 #include "../XBPython.h"
 #include "settings/GUISettings.h"
-#include "LocalizeStrings.h"
+#include "guilib/LocalizeStrings.h"
 #include "utils/log.h"
 #include "tinyXML/tinyxml.h"
 

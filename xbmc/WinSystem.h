@@ -23,7 +23,7 @@
 #define WINDOW_SYSTEM_BASE_H
 
 #include "WinEvents.h"
-#include "Resolution.h"
+#include "guilib/Resolution.h"
 #include <vector>
 
 typedef enum _WindowSystemType

@@ -39,7 +39,7 @@
 #include "settings/GUISettings.h"
 #include "settings/Settings.h"
 #include "StringUtils.h"
-#include "LocalizeStrings.h"
+#include "guilib/LocalizeStrings.h"
 #include "utils/TimeUtils.h"
 #include "utils/log.h"
 #include "utils/Variant.h"

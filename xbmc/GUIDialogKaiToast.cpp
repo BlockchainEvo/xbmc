@@ -20,9 +20,8 @@
  */
 
 #include "GUIDialogKaiToast.h"
-#include "GUISliderControl.h"
-#include "GUIImage.h"
-#include "GUIAudioManager.h"
+#include "guilib/GUIImage.h"
+#include "guilib/GUIAudioManager.h"
 #include "utils/SingleLock.h"
 #include "utils/TimeUtils.h"
 

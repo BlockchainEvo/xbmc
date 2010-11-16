@@ -20,7 +20,6 @@
  */
 
 #include "GUIViewStatePictures.h"
-#include "GUIBaseContainer.h"
 #include "FileItem.h"
 #include "ViewState.h"
 #include "settings/GUISettings.h"
@@ -29,8 +28,8 @@
 #include "FileSystem/Directory.h"
 #include "FileSystem/PluginDirectory.h"
 #include "Util.h"
-#include "LocalizeStrings.h"
-#include "Key.h"
+#include "guilib/LocalizeStrings.h"
+#include "guilib/Key.h"
 
 using namespace XFILE;
 using namespace ADDON;

@@ -51,19 +51,19 @@
 #endif
 #include "pyjsonrpc.h"
 #include "utils/GUIInfoManager.h"
-#include "GUIWindowManager.h"
-#include "GUIAudioManager.h"
+#include "guilib/GUIWindowManager.h"
+#include "guilib/GUIAudioManager.h"
 #include "Application.h"
 #include "Crc32.h"
 #include "Util.h"
 #include "FileSystem/File.h"
 #include "FileSystem/SpecialProtocol.h"
 #include "settings/GUISettings.h"
-#include "TextureManager.h"
+#include "guilib/TextureManager.h"
 #include "LangInfo.h"
 #include "SectionLoader.h"
 #include "settings/Settings.h"
-#include "LocalizeStrings.h"
+#include "guilib/LocalizeStrings.h"
 
 // include for constants
 #include "pyutil.h"

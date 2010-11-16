@@ -21,7 +21,7 @@
  *
  */
 
-#include "GUIWindow.h"
+#include "guilib/GUIWindow.h"
 #include "utils/CriticalSection.h"
 #include "GUIDialogSlider.h"
 

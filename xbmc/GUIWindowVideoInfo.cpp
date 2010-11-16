@@ -19,11 +19,11 @@
  *
  */
 
-#include "GUIWindow.h"
 #include "GUIWindowVideoInfo.h"
+#include "guilib/GUIWindow.h"
 #include "Util.h"
 #include "Picture.h"
-#include "GUIImage.h"
+#include "guilib/GUIImage.h"
 #include "StringUtils.h"
 #include "GUIWindowVideoBase.h"
 #include "GUIWindowVideoFiles.h"
@@ -32,7 +32,7 @@
 #include "VideoInfoScanner.h"
 #include "Application.h"
 #include "VideoInfoTag.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 #include "GUIDialogOK.h"
 #include "GUIDialogYesNo.h"
 #include "GUIDialogSelect.h"
@@ -45,7 +45,7 @@
 #include "settings/Settings.h"
 #include "settings/AdvancedSettings.h"
 #include "settings/GUISettings.h"
-#include "LocalizeStrings.h"
+#include "guilib/LocalizeStrings.h"
 #include "GUIUserMessages.h"
 #include "TextureCache.h"
 

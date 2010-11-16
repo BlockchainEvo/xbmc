@@ -23,15 +23,15 @@
 #include "PlayListPlayer.h"
 #include "FileSystem/VideoDatabaseDirectory.h"
 #include "FileSystem/PluginDirectory.h"
-#include "GUIBaseContainer.h"
+#include "guilib/GUIBaseContainer.h"
 #include "VideoDatabase.h"
 #include "settings/GUISettings.h"
 #include "settings/AdvancedSettings.h"
 #include "settings/Settings.h"
 #include "FileItem.h"
 #include "Util.h"
-#include "Key.h"
-#include "LocalizeStrings.h"
+#include "guilib/Key.h"
+#include "guilib/LocalizeStrings.h"
 
 using namespace XFILE;
 using namespace VIDEODATABASEDIRECTORY;

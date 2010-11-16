@@ -27,7 +27,7 @@
 #include "music/tags/MusicInfoTag.h"
 #include "FileItem.h"
 #include "StringUtils.h"
-#include "LocalizeStrings.h"
+#include "guilib/LocalizeStrings.h"
 
 using namespace MUSIC_INFO;
 

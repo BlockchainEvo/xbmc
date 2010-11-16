@@ -23,7 +23,7 @@
 
 #include <vector>
 #include <map>
-#include "Resolution.h"
+#include "guilib/Resolution.h"
 #include "addons/IAddon.h"
 
 class TiXmlNode;
