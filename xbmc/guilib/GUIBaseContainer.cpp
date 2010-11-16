@@ -29,7 +29,7 @@
 #include "utils/StringUtils.h"
 #include "GUIStaticItem.h"
 #include "Key.h"
-#include "MathUtils.h"
+#include "utils/MathUtils.h"
 #include "tinyXML/tinyxml.h"
 
 using namespace std;

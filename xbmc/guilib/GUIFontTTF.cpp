@@ -25,7 +25,7 @@
 #include "Texture.h"
 #include "GraphicContext.h"
 #include "FileSystem/SpecialProtocol.h"
-#include "MathUtils.h"
+#include "utils/MathUtils.h"
 #include "utils/log.h"
 #include "WindowingFactory.h"
 
