@@ -1,4 +1,4 @@
-INCLUDES=-I. -I../../ -I../../linux -I../../../guilib -I../../utils -I../../FileSystem
+INCLUDES=-I. -I../../ -I../../linux -I../../../guilib -I../../utils -I../../FileSystem -I../../../lib
 INCLUDES+=-I../../cores
 SRCS=scrobbler.cpp lastfmscrobbler.cpp librefmscrobbler.cpp
 

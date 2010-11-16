@@ -1,4 +1,4 @@
-INCLUDES=-I../../ -I. -I.. -I../utils -I../../guilib -I../linux
+INCLUDES=-I../../ -I. -I.. -I../utils -I../../guilib -I../linux -I../../lib
 
 SRCS=PlayListB4S.cpp \
      PlayList.cpp \

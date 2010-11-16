@@ -1,4 +1,4 @@
-INCLUDES=-I../../.. -I. -I.. -I../../ -I../../linux -I../../utils -I../../../guilib -I../../lib
+INCLUDES=-I../../.. -I. -I.. -I../../ -I../../linux -I../../utils -I../../../guilib -I../../lib -I../../../lib
 ifneq (@USE_EXTERNAL_FFMPEG@,1)
   INCLUDES+=-ICodecs/ffmpeg
 endif

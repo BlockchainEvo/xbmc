@@ -1,4 +1,4 @@
-INCLUDES=-I../../ -I. -I../../utils -I../../linux -I../../../guilib -I../../cores/dvdplayer/Codecs/ffmpeg
+INCLUDES=-I../../ -I. -I../../utils -I../../linux -I../../../guilib -I../../cores/dvdplayer/Codecs/ffmpeg -I../../../lib
 
 SRCS=APEv2Tag.cpp \
      FlacTag.cpp \

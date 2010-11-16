@@ -1,4 +1,4 @@
-INCLUDES=-I../ -I../../guilib -I../linux
+INCLUDES=-I../ -I../../guilib -I../linux -I../../lib
 
 SRCS=AdvancedSettings.cpp \
      GUIDialogAudioSubtitleSettings.cpp \

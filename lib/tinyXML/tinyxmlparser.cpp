@@ -26,7 +26,7 @@ distribution.
 #include <stddef.h>
 
 #include "tinyxml.h"
-#include "CharsetConverter.h"
+#include "utils/CharsetConverter.h"
 
 //#define DEBUG_PARSER
 #if defined( DEBUG_PARSER )
