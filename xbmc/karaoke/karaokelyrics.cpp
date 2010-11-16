@@ -23,7 +23,7 @@
 
 #include <math.h>
 
-#include "MathUtils.h"
+#include "utils/MathUtils.h"
 #include "Application.h"
 #include "MusicDatabase.h"
 #include "settings/AdvancedSettings.h"

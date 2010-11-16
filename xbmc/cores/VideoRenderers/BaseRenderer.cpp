@@ -27,7 +27,7 @@
 #include "settings/GUISettings.h"
 #include "guilib/GraphicContext.h"
 #include "utils/log.h"
-#include "MathUtils.h"
+#include "utils/MathUtils.h"
 #include "settings/AdvancedSettings.h"
 
 

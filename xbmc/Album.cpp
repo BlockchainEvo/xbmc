@@ -23,7 +23,7 @@
 #include "settings/AdvancedSettings.h"
 #include "utils/StringUtils.h"
 #include "utils/XMLUtils.h"
-#include "MathUtils.h"
+#include "utils/MathUtils.h"
 
 using namespace std;
 using namespace MUSIC_INFO;

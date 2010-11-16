@@ -26,7 +26,7 @@
 #include "Util.h"
 #include "FileSystem/File.h"
 #include "settings/AdvancedSettings.h"
-#include "MathUtils.h"
+#include "utils/MathUtils.h"
 #include "utils/log.h"
 
 #include "karaokelyricstextlrc.h"

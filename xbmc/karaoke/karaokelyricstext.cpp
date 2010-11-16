@@ -33,7 +33,7 @@
 #include "FileSystem/File.h"
 #include "guilib/GUIFontManager.h"
 #include "addons/Skin.h"
-#include "MathUtils.h"
+#include "utils/MathUtils.h"
 #include "utils/log.h"
 
 typedef struct

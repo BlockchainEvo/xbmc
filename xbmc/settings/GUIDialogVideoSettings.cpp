@@ -24,7 +24,7 @@
 #include "guilib/GUIWindowManager.h"
 #include "GUIPassword.h"
 #include "Util.h"
-#include "MathUtils.h"
+#include "utils/MathUtils.h"
 #include "GUISettings.h"
 #ifdef HAS_VIDEO_PLAYBACK
 #include "cores/VideoRenderers/RenderManager.h"

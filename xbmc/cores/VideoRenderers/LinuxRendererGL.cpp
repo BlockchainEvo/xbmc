@@ -29,7 +29,6 @@
 #include <locale.h>
 #include "LinuxRendererGL.h"
 #include "Application.h"
-#include "MathUtils.h"
 #include "settings/Settings.h"
 #include "settings/AdvancedSettings.h"
 #include "settings/GUISettings.h"
