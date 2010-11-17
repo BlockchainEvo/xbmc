@@ -10283,6 +10283,12 @@
     <ClInclude Include="..\..\xbmc\music\infoscanner\MusicInfoScraper.h">
       <Filter>Source Files\GUI Music</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\xbmc\powermanagement\PowerManager.h">
+      <Filter>Source Files\Powermanagement</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\powermanagement\windows\Win32PowerSyscall.h">
+      <Filter>Source Files\Powermanagement</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\xbmc\win32\XBMC.ico">
