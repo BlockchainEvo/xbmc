@@ -10271,6 +10271,18 @@
     <ClInclude Include="..\..\xbmc\music\windows\GUIWindowMusicSongs.h">
       <Filter>Source Files\GUI Music</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\xbmc\music\infoscanner\MusicAlbumInfo.h">
+      <Filter>Source Files\GUI Music</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\music\infoscanner\MusicArtistInfo.h">
+      <Filter>Source Files\GUI Music</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\music\infoscanner\MusicInfoScanner.h">
+      <Filter>Source Files\GUI Music</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\music\infoscanner\MusicInfoScraper.h">
+      <Filter>Source Files\GUI Music</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\xbmc\win32\XBMC.ico">
