@@ -19,7 +19,7 @@
  *
  */
 
-#include "GUIWindowMusicInfo.h"
+#include "GUIDialogMusicInfo.h"
 #include "guilib/GUIWindowManager.h"
 #include "Util.h"
 #include "guilib/GUIImage.h"
@@ -57,20 +57,20 @@ using namespace XFILE;
 
 #define CONTROL_LIST            50
 
-CGUIWindowMusicInfo::CGUIWindowMusicInfo(void)
-    : CGUIDialog(WINDOW_MUSIC_INFO, "DialogAlbumInfo.xml")
+CGUIDialogMusicInfo::CGUIDialogMusicInfo(void)
+    : CGUIDialog(WINDOW_DIALOG_MUSIC_INFO, "DialogAlbumInfo.xml")
     , m_albumItem(new CFileItem)
 {
   m_bRefresh = false;
   m_albumSongs = new CFileItemList;
 }
 
-CGUIWindowMusicInfo::~CGUIWindowMusicInfo(void)
+CGUIDialogMusicInfo::~CGUIDialogMusicInfo(void)
 {
   delete m_albumSongs;
 }
 
-bool CGUIWindowMusicInfo::OnMessage(CGUIMessage& message)
+bool CGUIDialogMusicInfo::OnMessage(CGUIMessage& message)
 {
   switch ( message.GetMessage() )
   {
@@ -147,7 +147,7 @@ bool CGUIWindowMusicInfo::OnMessage(CGUIMessage& message)
   return CGUIDialog::OnMessage(message);
 }
 
-void CGUIWindowMusicInfo::SetAlbum(const CAlbum& album, const CStdString &path)
+void CGUIDialogMusicInfo::SetAlbum(const CAlbum& album, const CStdString &path)
 {
   m_album = album;
   SetSongs(m_album.songs);
@@ -171,7 +171,7 @@ void CGUIWindowMusicInfo::SetAlbum(const CAlbum& album, const CStdString &path)
   m_albumSongs->SetContent("albums");
 }
 
-void CGUIWindowMusicInfo::SetArtist(const CArtist& artist, const CStdString &path)
+void CGUIDialogMusicInfo::SetArtist(const CArtist& artist, const CStdString &path)
 {
   m_artist = artist;
   SetDiscography();
@@ -191,7 +191,7 @@ void CGUIWindowMusicInfo::SetArtist(const CArtist& artist, const CStdString &pat
   m_albumSongs->SetContent("artists");
 }
 
-void CGUIWindowMusicInfo::SetSongs(const VECSONGS &songs)
+void CGUIDialogMusicInfo::SetSongs(const VECSONGS &songs)
 {
   m_albumSongs->Clear();
   for (unsigned int i = 0; i < songs.size(); i++)
@@ -202,7 +202,7 @@ void CGUIWindowMusicInfo::SetSongs(const VECSONGS &songs)
   }
 }
 
-void CGUIWindowMusicInfo::SetDiscography()
+void CGUIDialogMusicInfo::SetDiscography()
 {
   m_albumSongs->Clear();
   CMusicDatabase database;
@@ -226,7 +226,7 @@ void CGUIWindowMusicInfo::SetDiscography()
   }
 }
 
-void CGUIWindowMusicInfo::Update()
+void CGUIDialogMusicInfo::Update()
 {
   if (m_bArtistInfo)
   {
@@ -300,7 +300,7 @@ void CGUIWindowMusicInfo::Update()
 
 }
 
-void CGUIWindowMusicInfo::SetLabel(int iControl, const CStdString& strLabel)
+void CGUIDialogMusicInfo::SetLabel(int iControl, const CStdString& strLabel)
 {
   if (strLabel.IsEmpty())
   {
@@ -312,7 +312,7 @@ void CGUIWindowMusicInfo::SetLabel(int iControl, const CStdString& strLabel)
   }
 }
 
-void CGUIWindowMusicInfo::RefreshThumb()
+void CGUIDialogMusicInfo::RefreshThumb()
 {
   CStdString thumbImage = m_albumItem->GetThumbnailImage();
   if (!m_albumItem->HasThumbnail())
@@ -334,12 +334,12 @@ void CGUIWindowMusicInfo::RefreshThumb()
   m_albumItem->SetThumbnailImage(thumbImage);
 }
 
-bool CGUIWindowMusicInfo::NeedRefresh() const
+bool CGUIDialogMusicInfo::NeedRefresh() const
 {
   return m_bRefresh;
 }
 
-bool CGUIWindowMusicInfo::DownloadThumbnail(const CStdString &thumbFile)
+bool CGUIDialogMusicInfo::DownloadThumbnail(const CStdString &thumbFile)
 {
   const CScraperUrl &url = (m_bArtistInfo) ? m_artist.thumbURL : m_album.thumbURL;
   for (unsigned int i = 0; i < url.m_url.size(); ++i)
@@ -350,7 +350,7 @@ bool CGUIWindowMusicInfo::DownloadThumbnail(const CStdString &thumbFile)
   return false;
 }
 
-void CGUIWindowMusicInfo::OnInitWindow()
+void CGUIDialogMusicInfo::OnInitWindow()
 {
   CGUIDialog::OnInitWindow();
 }
@@ -364,7 +364,7 @@ void CGUIWindowMusicInfo::OnInitWindow()
 
 // TODO: Currently no support for "embedded thumb" as there is no easy way to grab it
 //       without sending a file that has this as it's album to this class
-void CGUIWindowMusicInfo::OnGetThumb()
+void CGUIDialogMusicInfo::OnGetThumb()
 {
   CFileItemList items;
 
@@ -478,7 +478,7 @@ void CGUIWindowMusicInfo::OnGetThumb()
 
 
 // Allow user to select a Fanart
-void CGUIWindowMusicInfo::OnGetFanart()
+void CGUIDialogMusicInfo::OnGetFanart()
 {
   CFileItemList items;
 
@@ -580,7 +580,7 @@ void CGUIWindowMusicInfo::OnGetFanart()
   Update();
 }
 
-void CGUIWindowMusicInfo::OnSearch(const CFileItem* pItem)
+void CGUIDialogMusicInfo::OnSearch(const CFileItem* pItem)
 {
   CMusicDatabase database;
   database.Open();
@@ -598,7 +598,7 @@ void CGUIWindowMusicInfo::OnSearch(const CFileItem* pItem)
   }
 }
 
-CFileItemPtr CGUIWindowMusicInfo::GetCurrentListItem(int offset)
+CFileItemPtr CGUIDialogMusicInfo::GetCurrentListItem(int offset)
 {
   return m_albumItem;
 }

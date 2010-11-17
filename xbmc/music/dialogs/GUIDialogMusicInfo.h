@@ -29,12 +29,12 @@
 class CFileItem;
 class CFileItemList;
 
-class CGUIWindowMusicInfo :
+class CGUIDialogMusicInfo :
       public CGUIDialog
 {
 public:
-  CGUIWindowMusicInfo(void);
-  virtual ~CGUIWindowMusicInfo(void);
+  CGUIDialogMusicInfo(void);
+  virtual ~CGUIDialogMusicInfo(void);
   virtual bool OnMessage(CGUIMessage& message);
   void SetAlbum(const CAlbum& album, const CStdString &path);
   void SetArtist(const CArtist& artist, const CStdString &path);
