@@ -24,18 +24,12 @@ using namespace Json;
 
 CTCPServer *CTCPServer::ServerInstance = NULL;
 
-bool CTCPServer::StartServer(int port, bool nonlocal)
+void CTCPServer::StartServer(int port, bool nonlocal)
 {
   StopServer(true);
 
   ServerInstance = new CTCPServer(port, nonlocal);
-  if (ServerInstance->Initialize())
-  {
-    ServerInstance->Create();
-    return true;
-  }
-  else
-    return false;
+  ServerInstance->Create();
 }
 
 void CTCPServer::StopServer(bool bWait)
@@ -60,7 +54,7 @@ CTCPServer::CTCPServer(int port, bool nonlocal)
 
 void CTCPServer::Process()
 {
-  m_bStop = false;
+  m_bStop = !Initialize();
 
   while (!m_bStop)
   {
@@ -139,27 +133,21 @@ int CTCPServer::GetCapabilities()
   return Response | Announcing;
 }
 
-void CTCPServer::Announce(EAnnouncementFlag flag, const char *sender, const char *message, const CVariant &data)
+void CTCPServer::Announce(EAnnouncementFlag flag, const char *sender, const char *message, CVariant *data)
 {
   Value root;
   root["jsonrpc"] = "2.0";
   root["method"]  = "Announcement";
   root["params"]["sender"] = sender;
   root["params"]["message"] = message;
-  if (!data.isNull())
-    data.toJsonValue(root["params"]["data"]);
+  if (data)
+    data->toJsonValue(root["params"]["data"]);
 
   StyledWriter writer;
   std::string str = writer.write(root);
 
   for (unsigned int i = 0; i < m_connections.size(); i++)
   {
-    {
-      CSingleLock lock (m_connections[i].m_critSection);
-      if ((m_connections[i].GetAnnouncementFlags() & flag) == 0)
-        continue;
-    }
-
     unsigned int sent = 0;
     do
     {
@@ -242,7 +230,7 @@ void CTCPServer::Deinitialize()
 
 CTCPServer::CTCPClient::CTCPClient()
 {
-  m_announcementflags = ANNOUNCE_ALL;
+  m_announcementflags = 0;
   m_socket = -1;
   m_beginBrackets = 0;
   m_endBrackets = 0;

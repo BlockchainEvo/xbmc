@@ -21,7 +21,7 @@
 
 #include "system.h" // for HAS_DVD_DRIVE
 #include "MusicInfoTagLoaderCDDA.h"
-#include "FileSystem/cddb.h"
+#include "network/cddb.h"
 #include "MusicInfoTag.h"
 #include "settings/Settings.h"
 #include "MediaManager.h"

@@ -25,7 +25,7 @@
 #include "Application.h"
 #include "GUIDialogContextMenu.h"
 #include "GUIDialogProfileSettings.h"
-#include "utils/Network.h"
+#include "network/Network.h"
 #include "utils/Weather.h"
 #include "GUIPassword.h"
 #include "GUIWindowLoginScreen.h"

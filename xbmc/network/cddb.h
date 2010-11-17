@@ -30,7 +30,7 @@
 #ifndef _LINUX
 #include <strstream>
 #endif
-#include "storage/cdioSupport.h"
+#include "cdioSupport.h"
 
 #include "utils/AutoPtrHandle.h"
 
