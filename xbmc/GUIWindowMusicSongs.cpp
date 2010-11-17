@@ -26,7 +26,7 @@
 #include "Application.h"
 #include "CueDocument.h"
 #include "GUIPassword.h"
-#include "GUIDialogMusicScan.h"
+#include "music/dialogs/GUIDialogMusicScan.h"
 #include "GUIDialogYesNo.h"
 #include "GUIUserMessages.h"
 #include "guilib/GUIWindowManager.h"

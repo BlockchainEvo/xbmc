@@ -31,7 +31,7 @@
 #include "addons/GUIDialogAddonSettings.h"
 #include "GUIDialogFileBrowser.h"
 #include "GUIDialogKeyboard.h"
-#include "GUIDialogMusicScan.h"
+#include "music/dialogs/GUIDialogMusicScan.h"
 #include "GUIDialogNumeric.h"
 #include "GUIDialogProgress.h"
 #include "GUIDialogVideoScan.h"

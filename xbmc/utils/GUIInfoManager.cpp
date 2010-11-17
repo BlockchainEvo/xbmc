@@ -46,7 +46,7 @@
 #include "LastFmManager.h"
 #include "PictureInfoTag.h"
 #include "music/tags/MusicInfoTag.h"
-#include "GUIDialogMusicScan.h"
+#include "music/dialogs/GUIDialogMusicScan.h"
 #include "GUIDialogVideoScan.h"
 #include "guilib/GUIWindowManager.h"
 #include "FileSystem/File.h"

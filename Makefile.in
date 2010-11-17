@@ -27,6 +27,7 @@ BIN_DIRS=	\
 	xbmc/FileSystem/MusicDatabaseDirectory \
 	xbmc/FileSystem/VideoDatabaseDirectory \
 	xbmc/karaoke \
+	xbmc/music/dialogs \
 	xbmc/music/tags \
 	xbmc/network \
 	xbmc/playlists \
@@ -240,6 +241,8 @@ xbmc/playlists/playlists.a: force
 	$(MAKE) -C xbmc/playlists
 xbmc/music/tags/musictags.a: force
 	$(MAKE) -C xbmc/music/tags
+xbmc/music/dialogs/musicdialogs.a: force
+	$(MAKE) -C xbmc/music/dialogs
 xbmc/lib/cmyth/libcmyth/libcmyth.a: force
 	$(MAKE) -C xbmc/lib/cmyth/libcmyth
 xbmc/lib/cmyth/librefmem/librefmem.a: force
@@ -433,6 +436,7 @@ OBJSXBMC=	\
 	xbmc/FileSystem/VideoDatabaseDirectory/videodatabasedirectory.a \
 	xbmc/input/input.a \
 	xbmc/karaoke/karaoke.a \
+	xbmc/music/dialogs/musicdialogs.a \
 	xbmc/music/tags/musictags.a \
 	xbmc/playlists/playlists.a \
 	xbmc/lib/libPython/xbmcmodule/xbmcmodule.a \

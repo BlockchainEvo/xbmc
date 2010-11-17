@@ -12,7 +12,6 @@ INCLUDES+=-Ilib/cpluff/libcpluff
 
 SRCS=Application.cpp \
      CueDocument.cpp \
-     GUIDialogMusicScan.cpp \
      GUIViewControl.cpp \
      GUIViewState.cpp \
      GUIViewStateMusic.cpp \
@@ -70,7 +69,6 @@ SRCS=Application.cpp \
      GUIDialogGamepad.cpp \
      GUIDialogKeyboard.cpp \
      GUIDialogMediaSource.cpp \
-     GUIDialogMusicOSD.cpp \
      GUIDialogMuteBug.cpp \
      GUIDialogNumeric.cpp \
      GUIDialogOK.cpp \
@@ -82,7 +80,6 @@ SRCS=Application.cpp \
      GUIDialogTeletext.cpp \
      GUIDialogTextViewer.cpp \
      GUIDialogVideoBookmarks.cpp \
-     GUIDialogVisualisationPresetList.cpp \
      GUIDialogVolumeBar.cpp \
      GUIDialogSlider.cpp \
      GUIDialogYesNo.cpp \
@@ -109,7 +106,6 @@ SRCS=Application.cpp \
      XBApplicationEx.cpp \
      xbmc.cpp \
      GUIDialogFavourites.cpp \
-     GUIDialogSongInfo.cpp \
      Favourites.cpp \
      GUIDialogSmartPlaylistEditor.cpp \
      GUIDialogSmartPlaylistRule.cpp \

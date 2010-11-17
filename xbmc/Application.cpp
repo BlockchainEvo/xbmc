@@ -180,8 +180,8 @@
 #include "GUIWindowVideoOverlay.h"
 
 // Dialog includes
-#include "GUIDialogMusicOSD.h"
-#include "GUIDialogVisualisationPresetList.h"
+#include "music/dialogs/GUIDialogMusicOSD.h"
+#include "music/dialogs/GUIDialogVisualisationPresetList.h"
 #include "GUIDialogTextViewer.h"
 #include "network/GUIDialogNetworkSetup.h"
 #include "GUIDialogMediaSource.h"
@@ -205,9 +205,9 @@
 #include "GUIDialogFavourites.h"
 #include "GUIDialogButtonMenu.h"
 #include "GUIDialogContextMenu.h"
-#include "GUIDialogMusicScan.h"
+#include "music/dialogs/GUIDialogMusicScan.h"
 #include "GUIDialogPlayerControls.h"
-#include "GUIDialogSongInfo.h"
+#include "music/dialogs/GUIDialogSongInfo.h"
 #include "GUIDialogSmartPlaylistEditor.h"
 #include "GUIDialogSmartPlaylistRule.h"
 #include "GUIDialogPictureInfo.h"

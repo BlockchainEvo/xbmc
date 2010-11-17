@@ -21,10 +21,10 @@
 
 #include "GUIWindowVisualisation.h"
 #include "Application.h"
-#include "GUIDialogMusicOSD.h"
+#include "music/dialogs/GUIDialogMusicOSD.h"
 #include "GUIUserMessages.h"
 #include "utils/GUIInfoManager.h"
-#include "GUIDialogVisualisationPresetList.h"
+#include "music/dialogs/GUIDialogVisualisationPresetList.h"
 #include "guilib/GUIWindowManager.h"
 #include "settings/Settings.h"
 #include "settings/AdvancedSettings.h"

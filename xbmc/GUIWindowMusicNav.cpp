@@ -33,7 +33,7 @@
 #include "PartyModeManager.h"
 #include "playlists/PlayList.h"
 #include "playlists/PlayListFactory.h"
-#include "GUIDialogMusicScan.h"
+#include "music/dialogs/GUIDialogMusicScan.h"
 #include "VideoDatabase.h"
 #include "GUIWindowVideoNav.h"
 #include "music/tags/MusicInfoTag.h"
