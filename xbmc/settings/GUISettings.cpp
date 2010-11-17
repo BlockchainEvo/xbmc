@@ -37,7 +37,7 @@
 #include "utils/log.h"
 #include "tinyXML/tinyxml.h"
 #include "WindowingFactory.h"
-#include "PowerManager.h"
+#include "powermanagement/PowerManager.h"
 #include "cores/dvdplayer/DVDCodecs/Video/CrystalHD.h"
 #include "utils/PCMRemap.h"
 #include "guilib/GUIFont.h" // for FONT_STYLE_* definitions

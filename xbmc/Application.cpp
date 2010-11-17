@@ -81,7 +81,7 @@
 #endif
 #include "playlists/PlayList.h"
 #include "WindowingFactory.h"
-#include "PowerManager.h"
+#include "powermanagement/PowerManager.h"
 #include "DPMSSupport.h"
 #include "settings/Settings.h"
 #include "settings/AdvancedSettings.h"

@@ -8,14 +8,11 @@ endif
 CXXFLAGS+=-fPIC #-DHAS_SDL
 
 SRCS=ConvUtils.cpp \
-     ConsoleDeviceKitPowerSyscall.cpp \
-     ConsoleUPowerSyscall.cpp \
      DeviceKitDisksProvider.cpp \
      DBusUtil.cpp \
      DBusMessage.cpp \
      DBusReserve.cpp \
      HALManager.cpp \
-     HALPowerSyscall.cpp \
      HALProvider.cpp \
      LinuxResourceCounter.cpp \
      LinuxTimezone.cpp \

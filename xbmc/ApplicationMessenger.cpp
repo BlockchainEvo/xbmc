@@ -42,7 +42,7 @@
 #include "WindowingFactory.h"
 #include "utils/GUIInfoManager.h"
 
-#include "PowerManager.h"
+#include "powermanagement/PowerManager.h"
 
 #ifdef _WIN32
 #include "WIN32Util.h"

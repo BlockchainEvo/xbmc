@@ -53,7 +53,7 @@
 #include "playlists/PlayList.h"
 #include "TuxBoxUtil.h"
 #include "WindowingFactory.h"
-#include "PowerManager.h"
+#include "powermanagement/PowerManager.h"
 #include "settings/AdvancedSettings.h"
 #include "settings/Settings.h"
 #include "guilib/LocalizeStrings.h"
