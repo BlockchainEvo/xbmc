@@ -22,9 +22,8 @@
 
 #include "MediaSource.h" // for VECSOURCES
 #include <map>
-#include "utils/SingleLock.h"
 #ifdef HAS_DVD_DRIVE
-#include "FileSystem/cdioSupport.h"
+#include "cdioSupport.h"
 #endif
 #include "URL.h"
 #include "utils/Job.h"
@@ -71,9 +70,9 @@ public:
 #ifdef HAS_DVD_DRIVE
   CCdInfo* GetCdInfo(const CStdString& devicePath="");
   bool RemoveCdInfo(const CStdString& devicePath="");
+#endif
   CStdString GetDiskLabel(const CStdString& devicePath="");
   CStdString GetDiscPath();
-#endif
   void SetHasOpticalDrive(bool bstatus);
 
   bool Eject(CStdString mountpath);

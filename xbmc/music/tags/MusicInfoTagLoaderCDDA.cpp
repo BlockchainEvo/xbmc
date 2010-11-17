@@ -24,7 +24,7 @@
 #include "network/cddb.h"
 #include "MusicInfoTag.h"
 #include "settings/Settings.h"
-#include "MediaManager.h"
+#include "storage/MediaManager.h"
 #include "utils/log.h"
 
 using namespace MEDIA_DETECT;

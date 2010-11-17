@@ -22,7 +22,7 @@
 #include "system.h"
 #include "MediaManager.h"
 #include "guilib/LocalizeStrings.h"
-#include "utils/IoSupport.h"
+#include "IoSupport.h"
 #include "URL.h"
 #include "Util.h"
 #ifdef _WIN32
@@ -30,7 +30,7 @@
 #endif
 #include "guilib/GUIWindowManager.h"
 #ifdef HAS_DVD_DRIVE
-#include "FileSystem/cdioSupport.h"
+#include "cdioSupport.h"
 #ifndef _WIN32
 // TODO: switch all ports to use auto sources
 #include "DetectDVDType.h"
@@ -48,11 +48,11 @@
 #include "settings/GUISettings.h"
 
 #ifdef __APPLE__
-#include "DarwinStorageProvider.h"
+#include "osx/DarwinStorageProvider.h"
 #elif defined(_LINUX)
-#include "LinuxStorageProvider.h"
+#include "linux/LinuxStorageProvider.h"
 #elif _WIN32
-#include "Win32StorageProvider.h"
+#include "windows/Win32StorageProvider.h"
 #endif
 
 using namespace std;

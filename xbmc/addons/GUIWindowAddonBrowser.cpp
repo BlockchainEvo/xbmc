@@ -46,7 +46,7 @@
 #include "Application.h"
 #include "AddonDatabase.h"
 #include "settings/AdvancedSettings.h"
-#include "MediaManager.h"
+#include "storage/MediaManager.h"
 #include "settings/GUISettings.h"
 
 #define CONTROL_AUTOUPDATE 5

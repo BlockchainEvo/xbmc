@@ -28,7 +28,7 @@
 #include "GUIDialogLockSettings.h"
 #include "guilib/GUIImage.h"
 #include "guilib/GUIWindowManager.h"
-#include "MediaManager.h"
+#include "storage/MediaManager.h"
 #include "Util.h"
 #include "GUIPassword.h"
 #include "Picture.h"

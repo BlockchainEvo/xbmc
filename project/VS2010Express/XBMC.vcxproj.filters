@@ -10289,6 +10289,18 @@
     <ClInclude Include="..\..\xbmc\powermanagement\windows\Win32PowerSyscall.h">
       <Filter>Source Files\Powermanagement</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\xbmc\storage\AutorunMediaJob.h">
+      <Filter>Source Files\Storage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\storage\IoSupport.h">
+      <Filter>Source Files\Storage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\storage\cdioSupport.h">
+      <Filter>Source Files\Storage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\storage\windows\Win32StorageProvider.h">
+      <Filter>Source Files\Storage</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\xbmc\win32\XBMC.ico">
