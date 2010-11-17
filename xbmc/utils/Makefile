@@ -19,8 +19,6 @@ SRCS=AlarmClock.cpp \
      InfoLoader.cpp \
      IoSupport.cpp \
      log.cpp \
-     MusicAlbumInfo.cpp \
-     MusicInfoScraper.cpp \
      RegExp.cpp \
      RssReader.cpp \
      ScraperParser.cpp \
@@ -44,7 +42,6 @@ SRCS=AlarmClock.cpp \
      LCD.cpp \
      Fanart.cpp \
      ScraperUrl.cpp \
-     MusicArtistInfo.cpp \
      Mutex.cpp \
      md5.cpp \
      ArabicShaping.cpp \

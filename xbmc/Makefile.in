@@ -26,7 +26,6 @@ SRCS=Application.cpp \
      VideoInfoScanner.cpp \
      PlayListPlayer.cpp \
      MusicInfoLoader.cpp \
-     MusicInfoScanner.cpp \
      AutoSwitch.cpp \
      DateTime.cpp \
      DetectDVDType.cpp \

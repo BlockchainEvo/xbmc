@@ -20,11 +20,8 @@
  */
 
 #include "MusicArtistInfo.h"
-#include "ScraperParser.h"
 #include "addons/Scraper.h"
-#include "XMLUtils.h"
-#include "CharsetConverter.h"
-#include "log.h"
+#include "utils/log.h"
 
 using namespace MUSIC_GRABBER;
 using namespace XFILE;

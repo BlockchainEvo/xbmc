@@ -22,7 +22,7 @@
  */
 
 #include "guilib/GUIDialog.h"
-#include "MusicInfoScanner.h"
+#include "music/infoscanner/MusicInfoScanner.h"
 #include "utils/CriticalSection.h"
 
 class CGUIDialogMusicScan: public CGUIDialog, public MUSIC_INFO::IMusicInfoScannerObserver

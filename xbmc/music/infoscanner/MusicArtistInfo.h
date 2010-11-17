@@ -24,7 +24,7 @@
 #include "Song.h"
 #include "Artist.h"
 #include "addons/Scraper.h"
-#include "ScraperParser.h"
+#include "utils/ScraperParser.h"
 
 class TiXmlDocument;
 class CScraperUrl;

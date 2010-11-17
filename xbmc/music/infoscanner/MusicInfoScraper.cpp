@@ -19,17 +19,12 @@
  *
  */
 
-#include "XMLUtils.h"
 #include "MusicInfoScraper.h"
-#include "HTMLUtil.h"
-#include "HTMLTable.h"
 #include "Util.h"
-#include "ScraperParser.h"
-#include "CharsetConverter.h"
-#include "log.h"
+#include "utils/CharsetConverter.h"
+#include "utils/log.h"
 
 using namespace MUSIC_GRABBER;
-using namespace HTML;
 using namespace ADDON;
 using namespace std;
 

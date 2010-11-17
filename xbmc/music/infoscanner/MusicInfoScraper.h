@@ -24,7 +24,7 @@
 #include "MusicAlbumInfo.h"
 #include "MusicArtistInfo.h"
 #include "addons/Scraper.h"
-#include "Thread.h"
+#include "utils/Thread.h"
 #include "FileSystem/FileCurl.h"
 
 namespace XFILE { class CFileCurl; }
