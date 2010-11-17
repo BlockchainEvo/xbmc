@@ -33,7 +33,7 @@
 #include "settings/GUISettings.h"
 #include "GUIDialogMediaSource.h"
 #include "settings/GUIDialogLockSettings.h"
-#include "MediaManager.h"
+#include "storage/MediaManager.h"
 #include "guilib/GUIWindowManager.h"
 #include "GUIDialogYesNo.h"
 #include "addons/AddonManager.h"

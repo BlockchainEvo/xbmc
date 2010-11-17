@@ -17,7 +17,6 @@ SRCS=AlarmClock.cpp \
      HttpHeader.cpp \
      IMDB.cpp \
      InfoLoader.cpp \
-     IoSupport.cpp \
      log.cpp \
      RegExp.cpp \
      RssReader.cpp \

@@ -33,7 +33,7 @@
 #include "FileItem.h"
 #include "FileSystem/SpecialProtocol.h"
 #include "FileSystem/Directory.h"
-#include "MediaManager.h"
+#include "storage/MediaManager.h"
 #include "settings/Settings.h"
 #include "settings/GUISettings.h"
 #include "guilib/LocalizeStrings.h"

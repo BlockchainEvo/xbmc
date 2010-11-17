@@ -41,7 +41,6 @@
 #include "FileSystem/MultiPathDirectory.h"
 #include "FileSystem/SpecialProtocol.h"
 #include "guilib/GUIBaseContainer.h" // for VIEW_TYPE enum
-#include "MediaManager.h"
 #include "guilib/GUIWindowManager.h"
 #include "GUIDialogYesNo.h"
 #include "FileSystem/Directory.h"

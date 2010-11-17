@@ -52,7 +52,7 @@
 #include "GUIDialogProgress.h"
 #include "FileItem.h"
 #include "FileSystem/File.h"
-#include "MediaManager.h"
+#include "storage/MediaManager.h"
 #include "settings/Settings.h"
 #include "settings/AdvancedSettings.h"
 #include "settings/GUISettings.h"

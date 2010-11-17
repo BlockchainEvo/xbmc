@@ -27,7 +27,7 @@
 #include "MusicDatabase.h"
 #include "FileItem.h"
 #include "FileSystem/File.h"
-#include "MediaManager.h"
+#include "storage/MediaManager.h"
 
 using namespace XFILE;
 using namespace MEDIA_DETECT;

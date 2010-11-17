@@ -47,7 +47,7 @@
 #include "guilib/GUIWindowManager.h"
 #include "GUIDialogOK.h"
 #include "playlists/PlayList.h"
-#include "MediaManager.h"
+#include "storage/MediaManager.h"
 #include "settings/Settings.h"
 #include "utils/StringUtils.h"
 #include "guilib/LocalizeStrings.h"

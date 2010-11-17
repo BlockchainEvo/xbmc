@@ -28,7 +28,7 @@
 #include "Profile.h"
 #include "Directory.h"
 #include "DirectoryCache.h"
-#include "../MediaManager.h"
+#include "storage/MediaManager.h"
 #include "File.h"
 #include "FileItem.h"
 #include "guilib/TextureManager.h"

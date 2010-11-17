@@ -43,7 +43,7 @@
 #include "settings/GUISettings.h"
 #include "FileItem.h"
 #include "FileSystem/SpecialProtocol.h"
-#include "MediaManager.h"
+#include "storage/MediaManager.h"
 #include "guilib/LocalizeStrings.h"
 #include "utils/log.h"
 #include "utils/TimeUtils.h"

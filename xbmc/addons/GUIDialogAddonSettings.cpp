@@ -30,7 +30,7 @@
 #include "guilib/GUISettingsSliderControl.h"
 #include "Util.h"
 #include "utils/StringUtils.h"
-#include "MediaManager.h"
+#include "storage/MediaManager.h"
 #include "guilib/GUILabelControl.h"
 #include "guilib/GUIRadioButtonControl.h"
 #include "guilib/GUISpinControlEx.h"

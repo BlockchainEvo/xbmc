@@ -27,7 +27,7 @@
 #include "guilib/LocalizeStrings.h"
 #include "utils/StringUtils.h"
 #include "utils/log.h"
-#include "FileSystem/cdioSupport.h"
+#include "cdioSupport.h"
 #include "FileSystem/iso9660.h"
 #include "utils/SingleLock.h"
 #ifdef _LINUX

@@ -69,7 +69,7 @@
 #include "GUIUserMessages.h"
 #include "GUIWindowVideoInfo.h"
 #include "music/dialogs/GUIDialogMusicInfo.h"
-#include "MediaManager.h"
+#include "storage/MediaManager.h"
 #include "TimeUtils.h"
 #include "SingleLock.h"
 #include "log.h"

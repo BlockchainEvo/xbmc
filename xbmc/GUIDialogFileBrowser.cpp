@@ -24,7 +24,7 @@
 #include "network/GUIDialogNetworkSetup.h"
 #include "GUIDialogMediaSource.h"
 #include "GUIDialogContextMenu.h"
-#include "MediaManager.h"
+#include "storage/MediaManager.h"
 #include "AutoSwitch.h"
 #include "network/Network.h"
 #include "GUIPassword.h"

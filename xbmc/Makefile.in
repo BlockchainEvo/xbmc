@@ -28,14 +28,11 @@ SRCS=Application.cpp \
      MusicInfoLoader.cpp \
      AutoSwitch.cpp \
      DateTime.cpp \
-     DetectDVDType.cpp \
      DynamicDll.cpp \
      FileItem.cpp \
      GUIPassword.cpp \
      LangCodeExpander.cpp \
      LangInfo.cpp \
-     AutorunMediaJob.cpp \
-     MediaManager.cpp \
      NfoFile.cpp \
      PartyModeManager.cpp \
      Picture.cpp \

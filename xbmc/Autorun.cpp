@@ -40,7 +40,7 @@
 #include "settings/Settings.h"
 #include "playlists/PlayList.h"
 #include "guilib/GUIWindowManager.h"
-#include "MediaManager.h"
+#include "storage/MediaManager.h"
 
 using namespace std;
 using namespace XFILE;

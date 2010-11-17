@@ -25,7 +25,7 @@
 #ifdef HAS_DVD_DRIVE
 
 #include "IFile.h"
-#include "cdioSupport.h"
+#include "storage/cdioSupport.h"
 
 namespace XFILE
 {

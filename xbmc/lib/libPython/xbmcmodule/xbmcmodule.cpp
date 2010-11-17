@@ -39,7 +39,7 @@
 #include "player.h"
 #include "pyplaylist.h"
 #include "keyboard.h"
-#include "utils/IoSupport.h"
+#include "storage/IoSupport.h"
 #ifndef _LINUX
 #include <ConIo.h>
 #endif

@@ -38,9 +38,9 @@
 #include <dirent.h>
 #include <errno.h>
 
-#include "cdioSupport.h"
+#include "storage/cdioSupport.h"
 
-#include "../utils/log.h"
+#include "utils/log.h"
 #include "utils/RegExp.h"
 #include "utils/AliasShortcutUtils.h"
 

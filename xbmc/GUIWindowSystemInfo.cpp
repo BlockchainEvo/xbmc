@@ -28,7 +28,7 @@
 #ifdef HAS_SYSINFO
 #include "utils/SystemInfo.h"
 #endif
-#include "MediaManager.h"
+#include "storage/MediaManager.h"
 
 #define CONTROL_BT_STORAGE  94
 #define CONTROL_BT_DEFAULT  95

@@ -19,33 +19,27 @@
  *  http://www.gnu.org/copyleft/gpl.html
  *
  */
-#include "system.h"
-#include "MediaSource.h"
+#include "storage/IStorageProvider.h"
+#ifdef HAS_HAL
 
-class IStorageEventsCallback
+class CHALProvider : public IStorageProvider
 {
 public:
-  virtual ~IStorageEventsCallback() { }
+  CHALProvider();
+  virtual ~CHALProvider() { }
 
-  virtual void OnStorageAdded(const CStdString &label, const CStdString &path) = 0;
-  virtual void OnStorageSafelyRemoved(const CStdString &label) = 0;
-  virtual void OnStorageUnsafelyRemoved(const CStdString &label) = 0;
+  virtual void Initialize();
+  virtual void Stop();
+
+  virtual void GetLocalDrives(VECSOURCES &localDrives);
+  virtual void GetRemovableDrives(VECSOURCES &removableDrives);
+
+  virtual bool Eject(CStdString mountpath);
+
+  virtual std::vector<CStdString> GetDiskUsage();
+
+  virtual bool PumpDriveChangeEvents(IStorageEventsCallback *callback);
+private:
+  unsigned int m_removableLength;
 };
-
-class IStorageProvider
-{
-public:
-  virtual ~IStorageProvider() { }
-
-  virtual void Initialize() = 0;
-  virtual void Stop() = 0;
-
-  virtual void GetLocalDrives(VECSOURCES &localDrives) = 0;
-  virtual void GetRemovableDrives(VECSOURCES &removableDrives) = 0;
-
-  virtual bool Eject(CStdString mountpath) = 0;
-
-  virtual std::vector<CStdString> GetDiskUsage() = 0;
-
-  virtual bool PumpDriveChangeEvents(IStorageEventsCallback *callback) = 0;
-};
+#endif

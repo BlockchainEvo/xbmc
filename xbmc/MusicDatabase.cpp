@@ -50,7 +50,7 @@
 #ifdef HAS_KARAOKE
 #include "karaoke/karaokelyricsfactory.h"
 #endif
-#include "MediaManager.h"
+#include "storage/MediaManager.h"
 #include "settings/Settings.h"
 #include "utils/StringUtils.h"
 #include "guilib/LocalizeStrings.h"

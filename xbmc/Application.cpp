@@ -116,7 +116,7 @@
 #include "guilib/AudioContext.h"
 #include "guilib/GUIFontTTF.h"
 #include "network/Network.h"
-#include "utils/IoSupport.h"
+#include "storage/IoSupport.h"
 #include "network/Zeroconf.h"
 #include "network/ZeroconfBrowser.h"
 #ifndef _LINUX
@@ -251,7 +251,7 @@
 #include "linux/HALManager.h"
 #endif
 
-#include "MediaManager.h"
+#include "storage/MediaManager.h"
 #include "utils/JobManager.h"
 #include "utils/SaveFileStateJob.h"
 #include "utils/AlarmClock.h"

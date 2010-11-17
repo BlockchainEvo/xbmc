@@ -13,7 +13,6 @@ SRCS=AddonsDirectory.cpp \
      CacheMemBuffer.cpp \
      CacheStrategy.cpp \
      CDDADirectory.cpp \
-     cdioSupport.cpp \
      DAAPDirectory.cpp \
      DAVDirectory.cpp \
      DirectoryCache.cpp \

@@ -65,7 +65,6 @@
 #include "utils/AnnouncementManager.h"
 
 #include "addons/Skin.h"
-#include "MediaManager.h"
 
 using namespace std;
 using namespace XFILE;

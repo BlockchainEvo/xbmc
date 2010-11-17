@@ -35,6 +35,10 @@ BIN_DIRS=	\
 	xbmc/playlists \
 	xbmc/powermanagement \
         xbmc/powermanagement/linux \
+        xbmc/powermanagement/linux \
+	xbmc/storage \
+	xbmc/storage/linux \
+	xbmc/storage/osx \
 	xbmc/lib/cmyth/libcmyth \
 	xbmc/lib/cmyth/librefmem \
 	xbmc/lib/libhts \
@@ -247,6 +251,10 @@ xbmc/powermanagement/powermanagement.a: force
 	$(MAKE) -C xbmc/powermanagement
 xbmc/powermanagement/linux/powermanagement_linux.a: force
 	$(MAKE) -C xbmc/powermanagement/linux
+xbmc/storage/storage.a: force
+	$(MAKE) -C xbmc/storage
+xbmc/storage/linux/storage_linux.a: force
+	$(MAKE) -C xbmc/storage/linux
 xbmc/music/tags/musictags.a: force
 	$(MAKE) -C xbmc/music/tags
 xbmc/music/dialogs/musicdialogs.a: force
@@ -454,6 +462,7 @@ OBJSXBMC=	\
 	xbmc/music/windows/musicwindows.a \
 	xbmc/playlists/playlists.a \
 	xbmc/powermanagement/powermanagement.a \
+	xbmc/storage/storage.a \
 	xbmc/lib/libPython/xbmcmodule/xbmcmodule.a \
 	xbmc/lib/libscrobbler/scrobbler.a \
 	xbmc/lib/libRTV/librtv-@ARCH@.a \
@@ -492,7 +501,8 @@ OBJSXBMC += \
 	xbmc/posix/posix.a \
 	xbmc/input/linux/input_linux.a \
 	xbmc/network/linux/network_linux.a \
-	xbmc/powermanagement/linux/powermanagement_linux.a
+	xbmc/powermanagement/linux/powermanagement_linux.a \
+	xbmc/storage/linux/storage_linux.a
 endif
 
 DYNOBJSXBMC= \

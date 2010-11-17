@@ -33,8 +33,8 @@
 
 #ifdef HAS_DVD_DRIVE
 
-#include "utils/IoSupport.h"
-#include "FileSystem/cdioSupport.h"
+#include "IoSupport.h"
+#include "cdioSupport.h"
 #include "utils/CriticalSection.h"
 
 #include "utils/Thread.h"

@@ -59,7 +59,7 @@
 #include "GUIWindowPrograms.h"
 #include "addons/Visualisation.h"
 #include "addons/AddonManager.h"
-#include "MediaManager.h"
+#include "storage/MediaManager.h"
 #include "network/Network.h"
 #include "guilib/GUIControlGroupList.h"
 #include "guilib/GUIWindowManager.h"

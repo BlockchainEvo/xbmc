@@ -62,7 +62,7 @@
 #include "utils/log.h"
 #include "utils/TimeUtils.h"
 #include "utils/StreamDetails.h"
-#include "MediaManager.h"
+#include "storage/MediaManager.h"
 #include "GUIDialogBusy.h"
 
 using namespace std;

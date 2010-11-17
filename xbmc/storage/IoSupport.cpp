@@ -52,9 +52,9 @@
 #include <IOKit/storage/IODVDMediaBSDClient.h>
 #include <IOKit/storage/IOStorageDeviceCharacteristics.h>
 #endif
-#include "../FileSystem/cdioSupport.h"
-#include "../FileSystem/iso9660.h"
-#include "../MediaManager.h"
+#include "cdioSupport.h"
+#include "FileSystem/iso9660.h"
+#include "MediaManager.h"
 #ifdef _LINUX
 #include "XHandle.h"
 #endif

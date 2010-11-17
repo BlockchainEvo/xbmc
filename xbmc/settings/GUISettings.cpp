@@ -24,7 +24,7 @@
 #include <float.h>
 #include "Settings.h"
 #include "GUIDialogFileBrowser.h"
-#include "MediaManager.h"
+#include "storage/MediaManager.h"
 #ifdef _LINUX
 #include "LinuxTimezone.h"
 #endif

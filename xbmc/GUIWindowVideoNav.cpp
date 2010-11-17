@@ -49,7 +49,7 @@
 #include "settings/AdvancedSettings.h"
 #include "settings/GUISettings.h"
 #include "guilib/LocalizeStrings.h"
-#include "MediaManager.h"
+#include "storage/MediaManager.h"
 #include "utils/log.h"
 #include "TextureCache.h"
 

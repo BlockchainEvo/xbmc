@@ -21,7 +21,7 @@
 
 #include "SystemOperations.h"
 #include "Application.h"
-#include "PowerManager.h"
+#include "powermanagement/PowerManager.h"
 
 using namespace Json;
 using namespace JSONRPC;

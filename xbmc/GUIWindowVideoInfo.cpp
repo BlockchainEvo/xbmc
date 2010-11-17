@@ -40,7 +40,7 @@
 #include "FileSystem/Directory.h"
 #include "FileSystem/File.h"
 #include "FileItem.h"
-#include "MediaManager.h"
+#include "storage/MediaManager.h"
 #include "utils/AsyncFileCopy.h"
 #include "settings/Settings.h"
 #include "settings/AdvancedSettings.h"

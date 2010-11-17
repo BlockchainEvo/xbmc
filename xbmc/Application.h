@@ -45,7 +45,7 @@ namespace ADDON
 #include "cores/playercorefactory/PlayerCoreFactory.h"
 #include "PlayListPlayer.h"
 #if !defined(_WIN32) && defined(HAS_DVD_DRIVE)
-#include "DetectDVDType.h"
+#include "storage/DetectDVDType.h"
 #endif
 #ifdef _WIN32
 #include "win32/WIN32Util.h"

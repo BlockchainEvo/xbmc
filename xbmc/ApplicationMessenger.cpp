@@ -50,7 +50,7 @@
 #elif defined __APPLE__
 #include "CocoaInterface.h"
 #endif
-#include "MediaManager.h"
+#include "storage/MediaManager.h"
 #include "guilib/LocalizeStrings.h"
 #include "utils/SingleLock.h"
 #include "lib/libPython/xbmcmodule/GUIPythonWindowDialog.h"
