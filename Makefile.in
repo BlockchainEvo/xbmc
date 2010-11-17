@@ -234,6 +234,8 @@ xbmc/karaoke/karaoke.a: force
 	$(MAKE) -C xbmc/karaoke
 xbmc/network/network.a: force
 	$(MAKE) -C xbmc/network
+xbmc/network/linux/network_linux.a: force
+	$(MAKE) -C xbmc/network/linux
 xbmc/playlists/playlists.a: force
 	$(MAKE) -C xbmc/playlists
 xbmc/music/tags/musictags.a: force
@@ -469,7 +471,8 @@ OBJSXBMC += \
 else
 OBJSXBMC += \
 	xbmc/posix/posix.a \
-        xbmc/input/linux/input_linux.a
+	xbmc/input/linux/input_linux.a \
+	xbmc/network/linux/network_linux.a
 endif
 
 DYNOBJSXBMC= \

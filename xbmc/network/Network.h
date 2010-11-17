@@ -121,6 +121,6 @@ public:
 #ifdef HAS_LINUX_NETWORK
 #include "linux/NetworkLinux.h"
 #else
-#include "win32/NetworkWin32.h"
+#include "windows/NetworkWin32.h"
 #endif
 #endif

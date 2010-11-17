@@ -1,6 +1,6 @@
 ARCH=@ARCH@
 
-INCLUDES=-I. -I.. -I../../guilib -I../cores -I../FileSystem -I../../lib
+INCLUDES=-I. -I.. -I../cores -I../FileSystem -I../../lib
 ifeq ($(findstring osx,$(ARCH)), osx)
 	INCLUDES+=-I../osx
 endif
@@ -19,7 +19,6 @@ SRCS=ConvUtils.cpp \
      HALProvider.cpp \
      LinuxResourceCounter.cpp \
      LinuxTimezone.cpp \
-     NetworkLinux.cpp \
      PosixMountProvider.cpp \
      UDisksProvider.cpp \
      XCriticalSection.cpp \
@@ -32,9 +31,6 @@ SRCS=ConvUtils.cpp \
      XTimeUtils.cpp \
      XThreadUtils.cpp \
      XRandR.cpp \
-     ZeroconfAvahi.cpp \
-     ZeroconfBrowserAvahi.cpp \
-
 
 LIB=linux.a
 

@@ -22,7 +22,7 @@
 #include "GUIDialogAccessPoints.h"
 #include "GUIDialogKeyboard.h"
 #ifdef _LINUX
-#include "NetworkLinux.h"
+#include "linux/NetworkLinux.h"
 #endif
 #include "Application.h"
 #include "FileItem.h"
