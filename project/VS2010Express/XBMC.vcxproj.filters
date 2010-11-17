@@ -10253,6 +10253,24 @@
     <ClInclude Include="..\..\xbmc\network\windows\NetworkWin32.h">
       <Filter>win32</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\xbmc\music\windows\GUIWindowMusicBase.h">
+      <Filter>Source Files\GUI Music</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\music\windows\GUIWindowMusicNav.h">
+      <Filter>Source Files\GUI Music</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\music\windows\GUIWindowMusicOverlay.h">
+      <Filter>Source Files\GUI Music</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\music\windows\GUIWindowMusicPlaylist.h">
+      <Filter>Source Files\GUI Music</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\music\windows\GUIWindowMusicPlaylistEditor.h">
+      <Filter>Source Files\GUI Music</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\music\windows\GUIWindowMusicSongs.h">
+      <Filter>Source Files\GUI Music</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\xbmc\win32\XBMC.ico">
