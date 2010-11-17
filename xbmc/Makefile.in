@@ -15,12 +15,6 @@ SRCS=Application.cpp \
      GUIViewControl.cpp \
      GUIViewState.cpp \
      GUIViewStateMusic.cpp \
-     GUIWindowMusicBase.cpp \
-     GUIWindowMusicNav.cpp \
-     GUIWindowMusicOverlay.cpp \
-     GUIWindowMusicPlaylist.cpp \
-     GUIWindowMusicPlaylistEditor.cpp \
-     GUIWindowMusicSongs.cpp \
      GUIDialogVideoScan.cpp \
      GUIViewStateVideo.cpp \
      GUIWindowVideoBase.cpp \

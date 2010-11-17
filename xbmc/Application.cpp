@@ -147,10 +147,10 @@
 #include "settings/GUIWindowSettings.h"
 #include "GUIWindowFileManager.h"
 #include "settings/GUIWindowSettingsCategory.h"
-#include "GUIWindowMusicPlaylist.h"
-#include "GUIWindowMusicSongs.h"
-#include "GUIWindowMusicNav.h"
-#include "GUIWindowMusicPlaylistEditor.h"
+#include "music/windows/GUIWindowMusicPlaylist.h"
+#include "music/windows/GUIWindowMusicSongs.h"
+#include "music/windows/GUIWindowMusicNav.h"
+#include "music/windows/GUIWindowMusicPlaylistEditor.h"
 #include "GUIWindowVideoPlaylist.h"
 #include "music/dialogs/GUIDialogMusicInfo.h"
 #include "GUIWindowVideoInfo.h"
@@ -176,7 +176,7 @@
 #include "GUIWindowStartup.h"
 #include "GUIWindowFullScreen.h"
 #include "GUIWindowOSD.h"
-#include "GUIWindowMusicOverlay.h"
+#include "music/windows/GUIWindowMusicOverlay.h"
 #include "GUIWindowVideoOverlay.h"
 
 // Dialog includes

@@ -26,7 +26,7 @@
 #include "GUIPassword.h"
 #include "GUIUserMessages.h"
 #include "MusicDatabase.h"
-#include "GUIWindowMusicBase.h"
+#include "music/windows/GUIWindowMusicBase.h"
 #include "music/tags/MusicInfoTag.h"
 #include "guilib/GUIWindowManager.h"
 #include "FileSystem/File.h"
