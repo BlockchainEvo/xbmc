@@ -10235,6 +10235,27 @@
     <ClInclude Include="..\..\xbmc\network\cddb.h">
       <Filter>Source Files\Network</Filter>
     </ClInclude>
+<<<<<<< HEAD
+=======
+    <ClInclude Include="..\..\xbmc\music\dialogs\GUIDialogMusicOSD.h">
+      <Filter>Source Files\GUI Music</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\music\dialogs\GUIDialogMusicScan.h">
+      <Filter>Source Files\GUI Music</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\music\dialogs\GUIDialogSongInfo.h">
+      <Filter>Source Files\GUI Music</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\music\dialogs\GUIDialogVisualisationPresetList.h">
+      <Filter>Source Files\GUI Music</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\music\dialogs\GUIDialogMusicInfo.h">
+      <Filter>Source Files\GUI Music</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\network\windows\NetworkWin32.h">
+      <Filter>win32</Filter>
+    </ClInclude>
+>>>>>>> d3927e6... [WIN32] changed: move platform specific network classes into subfolders of network
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\xbmc\win32\XBMC.ico">
