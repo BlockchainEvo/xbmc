@@ -42,7 +42,7 @@
 #endif
 #include "GUIWindowSlideShow.h"
 #include "playlists/PlayListFactory.h"
-#include "utils/Network.h"
+#include "network/Network.h"
 #include "guilib/GUIWindowManager.h"
 #include "GUIDialogOK.h"
 #include "GUIDialogYesNo.h"

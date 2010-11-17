@@ -21,7 +21,7 @@
 
 #include "system.h"
 #include "MusicDatabase.h"
-#include "FileSystem/cddb.h"
+#include "network/cddb.h"
 #include "FileSystem/DirectoryCache.h"
 #include "FileSystem/MusicDatabaseDirectory/DirectoryNode.h"
 #include "FileSystem/MusicDatabaseDirectory/QueryParams.h"

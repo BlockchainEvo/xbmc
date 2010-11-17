@@ -32,7 +32,7 @@
 #include "lib/libscrobbler/scrobbler.h"
 #include "utils/Builtins.h"
 #include "utils/Weather.h"
-#include "utils/Network.h"
+#include "network/Network.h"
 #include "addons/Skin.h"
 #include "Profile.h"
 #include "guilib/GUIWindowManager.h"

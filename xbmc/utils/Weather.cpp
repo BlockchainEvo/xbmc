@@ -31,7 +31,7 @@
 #include "FileSystem/FileCurl.h"
 #include "XMLUtils.h"
 #include "Temperature.h"
-#include "Network.h"
+#include "network/Network.h"
 #include "Util.h"
 #include "Application.h"
 #include "settings/GUISettings.h"

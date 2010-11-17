@@ -28,6 +28,7 @@ BIN_DIRS=	\
 	xbmc/FileSystem/VideoDatabaseDirectory \
 	xbmc/karaoke \
 	xbmc/music/tags \
+	xbmc/network \
 	xbmc/playlists \
 	xbmc/lib/cmyth/libcmyth \
 	xbmc/lib/cmyth/librefmem \
@@ -231,6 +232,8 @@ xbmc/input/linux/input_linux.a: force
 	$(MAKE) -C xbmc/input/linux
 xbmc/karaoke/karaoke.a: force
 	$(MAKE) -C xbmc/karaoke
+xbmc/network/network.a: force
+	$(MAKE) -C xbmc/network
 xbmc/playlists/playlists.a: force
 	$(MAKE) -C xbmc/playlists
 xbmc/music/tags/musictags.a: force
@@ -442,7 +445,7 @@ OBJSXBMC=	\
 	xbmc/lib/libsquish/libsquish-@ARCH@.a \
 	lib/libapetag/.libs/libapetag.a \
 	lib/xbmc-dll-symbols/dll-symbols.a \
-	xbmc/settings/settings.a
+	xbmc/settings/settings.a \
 
 ifeq (@HAVE_XBMC_NONFREE@,1)
 OBJSXBMC+= \
@@ -473,6 +476,7 @@ DYNOBJSXBMC= \
 	xbmc/lib/cmyth/libcmyth/libcmyth.a \
 	xbmc/lib/cmyth/librefmem/librefmem.a \
 	xbmc/linux/linux.a \
+	xbmc/network/network.a \
 	xbmc/utils/utils.a \
 	xbmc/cores/DllLoader/exports/util/exports_utils.a \
 	xbmc/cores/DllLoader/exports/exports.a

@@ -66,7 +66,7 @@
 #include "utils/fstrcmp.h"
 #include "MediaManager.h"
 #include "guilib/DirectXGraphics.h"
-#include "DNSNameCache.h"
+#include "network/DNSNameCache.h"
 #include "guilib/GUIWindowManager.h"
 #ifdef _WIN32
 #include <shlobj.h>

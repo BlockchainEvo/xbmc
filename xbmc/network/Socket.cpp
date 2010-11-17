@@ -23,7 +23,7 @@
 #ifdef HAS_EVENT_SERVER
 
 #include "Socket.h"
-#include "log.h"
+#include "utils/log.h"
 #include <vector>
 
 using namespace SOCKETS;

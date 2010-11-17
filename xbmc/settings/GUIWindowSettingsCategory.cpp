@@ -60,7 +60,7 @@
 #include "addons/Visualisation.h"
 #include "addons/AddonManager.h"
 #include "MediaManager.h"
-#include "utils/Network.h"
+#include "network/Network.h"
 #include "guilib/GUIControlGroupList.h"
 #include "guilib/GUIWindowManager.h"
 #include "guilib/GUIFontManager.h"
@@ -79,14 +79,14 @@
 #include "CoreAudio.h"
 #include "XBMCHelper.h"
 #endif
-#include "GUIDialogAccessPoints.h"
+#include "network/GUIDialogAccessPoints.h"
 #include "FileSystem/Directory.h"
 
 #include "FileItem.h"
 #include "guilib/GUIToggleButtonControl.h"
 #include "FileSystem/SpecialProtocol.h"
 
-#include "Zeroconf.h"
+#include "network/Zeroconf.h"
 
 #ifdef _WIN32
 #include "WIN32Util.h"

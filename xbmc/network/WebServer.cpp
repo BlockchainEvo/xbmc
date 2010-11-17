@@ -21,13 +21,13 @@
 
 #include "WebServer.h"
 #ifdef HAS_WEB_SERVER
-#include "../lib/libjsonrpc/JSONRPC.h"
-#include "../lib/libhttpapi/HttpApi.h"
-#include "../FileSystem/File.h"
-#include "../FileSystem/Directory.h"
-#include "../Util.h"
-#include "log.h"
-#include "SingleLock.h"
+#include "lib/libjsonrpc/JSONRPC.h"
+#include "lib/libhttpapi/HttpApi.h"
+#include "FileSystem/File.h"
+#include "FileSystem/Directory.h"
+#include "Util.h"
+#include "utils/log.h"
+#include "utils/SingleLock.h"
 #include "DateTime.h"
 #include "addons/AddonManager.h"
 

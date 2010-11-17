@@ -1,6 +1,6 @@
 #pragma once
 
-#include "utils/UdpClient.h"
+#include "network/UdpClient.h"
 #include "guilib/Key.h"
 #include "boost/shared_ptr.hpp"
 

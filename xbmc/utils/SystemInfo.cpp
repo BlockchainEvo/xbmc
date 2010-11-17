@@ -28,7 +28,7 @@
 #endif
 #include "utils/GUIInfoManager.h"
 #include "FileSystem/FileCurl.h"
-#include "Network.h"
+#include "network/Network.h"
 #include "Application.h"
 #include "WindowingFactory.h"
 #include "settings/Settings.h"

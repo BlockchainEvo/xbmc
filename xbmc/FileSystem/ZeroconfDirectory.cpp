@@ -25,7 +25,7 @@
 #include "URL.h"
 #include "Util.h"
 #include "FileItem.h"
-#include "ZeroconfBrowser.h"
+#include "network/ZeroconfBrowser.h"
 #include "Directory.h"
 #include "utils/log.h"
 

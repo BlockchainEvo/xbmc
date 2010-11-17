@@ -22,7 +22,7 @@
 
 #include "system.h"
 #ifdef HAS_WEB_SERVER
-#include "StdString.h"
+#include "utils/StdString.h"
 #include <sys/types.h>
 #ifndef _WIN32
 #include <sys/select.h>
@@ -40,7 +40,7 @@
 #include <microhttpd.h>
 #endif
 #include "../lib/libjsonrpc/ITransportLayer.h"
-#include "CriticalSection.h"
+#include "utils/CriticalSection.h"
 
 class CWebServer : public JSONRPC::ITransportLayer
 {

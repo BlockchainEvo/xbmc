@@ -95,7 +95,7 @@
 #include "FileSystem/FileDAAP.h"
 #endif
 #ifdef HAS_UPNP
-#include "UPnP.h"
+#include "network/UPnP.h"
 #include "FileSystem/UPnPDirectory.h"
 #endif
 #if defined(_LINUX) && defined(HAS_FILESYSTEM_SMB)
@@ -115,15 +115,15 @@
 #endif
 #include "guilib/AudioContext.h"
 #include "guilib/GUIFontTTF.h"
-#include "utils/Network.h"
+#include "network/Network.h"
 #include "utils/IoSupport.h"
-#include "Zeroconf.h"
-#include "ZeroconfBrowser.h"
+#include "network/Zeroconf.h"
+#include "network/ZeroconfBrowser.h"
 #ifndef _LINUX
 #include "utils/Win32Exception.h"
 #endif
 #ifdef HAS_EVENT_SERVER
-#include "utils/EventServer.h"
+#include "network/EventServer.h"
 #endif
 #ifdef HAS_DBUS_SERVER
 #include "utils/DbusServer.h"
@@ -133,7 +133,7 @@
 #endif
 #ifdef HAS_JSONRPC
 #include "lib/libjsonrpc/JSONRPC.h"
-#include "lib/libjsonrpc/TCPServer.h"
+#include "network/TCPServer.h"
 #endif
 #if defined(HAVE_LIBCRYSTALHD)
 #include "cores/dvdplayer/DVDCodecs/Video/CrystalHD.h"
@@ -183,7 +183,7 @@
 #include "GUIDialogMusicOSD.h"
 #include "GUIDialogVisualisationPresetList.h"
 #include "GUIDialogTextViewer.h"
-#include "GUIDialogNetworkSetup.h"
+#include "network/GUIDialogNetworkSetup.h"
 #include "GUIDialogMediaSource.h"
 #include "settings/GUIDialogVideoSettings.h"
 #include "settings/GUIDialogAudioSubtitleSettings.h"
@@ -214,7 +214,7 @@
 #include "addons/GUIDialogAddonSettings.h"
 #include "addons/GUIDialogAddonInfo.h"
 #ifdef HAS_LINUX_NETWORK
-#include "GUIDialogAccessPoints.h"
+#include "network/GUIDialogAccessPoints.h"
 #endif
 #include "GUIDialogFullScreenInfo.h"
 #include "GUIDialogTeletext.h"

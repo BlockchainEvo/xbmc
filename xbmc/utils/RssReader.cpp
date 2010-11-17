@@ -21,7 +21,6 @@
 
 #include "RssReader.h"
 #include "utils/HTMLUtil.h"
-#include "../utils/Network.h"
 #include "Application.h"
 #include "CharsetConverter.h"
 #include "URL.h"

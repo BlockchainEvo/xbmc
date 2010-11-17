@@ -26,7 +26,7 @@
 
 #include <vector>
 #include "guilib/GUIDialog.h"
-#include "utils/Network.h"
+#include "Network.h"
 
 class CFileItemList;
 

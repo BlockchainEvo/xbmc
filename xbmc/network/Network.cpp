@@ -21,11 +21,11 @@
 
 #include "system.h"
 #include "Network.h"
-#include "../Application.h"
-#include "../lib/libscrobbler/lastfmscrobbler.h"
-#include "../lib/libscrobbler/librefmscrobbler.h"
-#include "RssReader.h"
-#include "log.h"
+#include "Application.h"
+#include "lib/libscrobbler/lastfmscrobbler.h"
+#include "lib/libscrobbler/librefmscrobbler.h"
+#include "utils/RssReader.h"
+#include "utils/log.h"
 
 using namespace std;
 

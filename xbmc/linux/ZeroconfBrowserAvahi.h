@@ -26,7 +26,7 @@
 #include <memory>
 #include <map>
 
-#include "ZeroconfBrowser.h"
+#include "network/ZeroconfBrowser.h"
 #include "utils/Thread.h"
 #include "utils/CriticalSection.h"
 

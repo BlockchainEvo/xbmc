@@ -30,7 +30,7 @@
 #include "FileSystem/MultiPathDirectory.h"
 #include "GUIPassword.h"
 #include "Application.h"
-#include "utils/Network.h"
+#include "network/Network.h"
 #include "utils/RegExp.h"
 #include "PartyModeManager.h"
 #include "GUIDialogMediaSource.h"

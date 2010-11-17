@@ -54,7 +54,7 @@ namespace ADDON
 #include "Bookmark.h"
 #include "utils/Stopwatch.h"
 #include "ApplicationMessenger.h"
-#include "utils/Network.h"
+#include "network/Network.h"
 #include "utils/CharsetConverter.h"
 #ifdef HAS_PERFORMANCE_SAMPLE
 #include "utils/PerformanceStats.h"
@@ -66,7 +66,7 @@ namespace ADDON
 #include "utils/Thread.h"
 
 #ifdef HAS_WEB_SERVER
-#include "utils/WebServer.h"
+#include "network/WebServer.h"
 #endif
 
 #ifdef HAS_SDL

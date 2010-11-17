@@ -27,7 +27,7 @@
 #include <memory>
 #include <map>
 #include <string>
-#include "Zeroconf.h"
+#include "network/Zeroconf.h"
 
 #include <boost/shared_ptr.hpp>
 #include <avahi-client/client.h>

@@ -31,7 +31,6 @@
 #include "SMBDirectory.h"
 #include "Util.h"
 #include <libsmbclient.h>
-#include "../utils/Network.h"
 #include "settings/AdvancedSettings.h"
 #include "settings/GUISettings.h"
 #include "utils/SingleLock.h"

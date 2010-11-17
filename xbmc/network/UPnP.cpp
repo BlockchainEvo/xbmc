@@ -24,7 +24,7 @@
 #include "Util.h"
 #include "Application.h"
 
-#include "utils/Network.h"
+#include "Network.h"
 #include "utils/log.h"
 #include "UPnP.h"
 #include "FileSystem/MusicDatabaseDirectory.h"
@@ -33,7 +33,7 @@
 #include "VideoDatabase.h"
 #include "FileSystem/VideoDatabaseDirectory/DirectoryNode.h"
 #include "FileSystem/VideoDatabaseDirectory/QueryParams.h"
-#include "File.h"
+#include "FileSystem/File.h"
 #include "NptStrings.h"
 #include "Platinum.h"
 #include "PltMediaConnect.h"

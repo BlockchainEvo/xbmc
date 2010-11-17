@@ -24,7 +24,7 @@
 
 #include <vector>
 #include "utils/StdString.h"
-#include "utils/Network.h"
+#include "network/Network.h"
 
 class CNetworkLinux;
 

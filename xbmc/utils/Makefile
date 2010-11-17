@@ -29,7 +29,6 @@ SRCS=AlarmClock.cpp \
      Stopwatch.cpp \
      SystemInfo.cpp \
      TuxBoxUtil.cpp \
-     UdpClient.cpp \
      Weather.cpp \
      Thread.cpp \
      SharedSection.cpp \
@@ -38,16 +37,11 @@ SRCS=AlarmClock.cpp \
      PCMAmplifier.cpp \
      PCMRemap.cpp \
      LabelFormatter.cpp \
-     Network.cpp \
      BitstreamStats.cpp \
      PerformanceStats.cpp \
      PerformanceSample.cpp \
      LCDFactory.cpp \
      LCD.cpp \
-     EventServer.cpp \
-     EventPacket.cpp \
-     EventClient.cpp \
-     Socket.cpp \
      Fanart.cpp \
      ScraperUrl.cpp \
      MusicArtistInfo.cpp \
@@ -65,7 +59,6 @@ SRCS=AlarmClock.cpp \
      fastmemcpy.c \
      PasswordManager.cpp \
      AliasShortcutUtils.cpp \
-     WebServer.cpp \
      AnnouncementManager.cpp \
      Semaphore.cpp \
      RingBuffer.cpp \

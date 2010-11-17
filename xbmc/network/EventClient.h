@@ -22,8 +22,8 @@
  *
  */
 
-#include "Thread.h"
-#include "CriticalSection.h"
+#include "utils/Thread.h"
+#include "utils/CriticalSection.h"
 #include "Socket.h"
 #include "EventPacket.h"
 #include "settings/GUISettings.h"

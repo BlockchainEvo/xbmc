@@ -23,9 +23,9 @@
 #ifdef _LINUX
 #include <sys/ioctl.h>
 #endif
-#include "../utils/Network.h"
+#include "Network.h"
 #include "guilib/GraphicContext.h"
-#include "log.h"
+#include "utils/log.h"
 #include "utils/TimeUtils.h"
 
 #define UDPCLIENT_DEBUG_LEVEL LOGDEBUG

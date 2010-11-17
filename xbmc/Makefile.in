@@ -4,14 +4,6 @@ ifneq (@USE_EXTERNAL_FFMPEG@,1)
   INCLUDES+=-Icores/dvdplayer/Codecs/ffmpeg
 endif
 
-INCLUDES+=-Ilib/libUPnP/Platinum/Source/Core \
-          -Ilib/libUPnP/Platinum/Source/Platinum \
-          -Ilib/libUPnP/Platinum/Source/Devices/MediaServer \
-          -Ilib/libUPnP/Platinum/Source/Devices/MediaConnect \
-          -Ilib/libUPnP/Platinum/Source/Devices/MediaRenderer \
-          -Ilib/libUPnP/Neptune/Source/System/Posix \
-          -Ilib/libUPnP/Neptune/Source/Core
-
 INCLUDES+=-Ilib/libcdio/libcdio/include
 
 INCLUDES+=-I../lib/jsoncpp/jsoncpp/include
@@ -46,7 +38,6 @@ SRCS=Application.cpp \
      AutoSwitch.cpp \
      DateTime.cpp \
      DetectDVDType.cpp \
-     DNSNameCache.cpp \
      DynamicDll.cpp \
      FileItem.cpp \
      GUIPassword.cpp \
@@ -81,7 +72,6 @@ SRCS=Application.cpp \
      GUIDialogMediaSource.cpp \
      GUIDialogMusicOSD.cpp \
      GUIDialogMuteBug.cpp \
-     GUIDialogNetworkSetup.cpp \
      GUIDialogNumeric.cpp \
      GUIDialogOK.cpp \
      GUIDialogPlayerControls.cpp \
@@ -126,14 +116,12 @@ SRCS=Application.cpp \
      SlideShowPicture.cpp \
      GUIDialogBusy.cpp \
      GUIWindowStartup.cpp \
-     UPnP.cpp \
      PictureInfoLoader.cpp \
      GUIDialogPictureInfo.cpp \
      LastFmManager.cpp \
      PictureInfoTag.cpp \
      GUILargeTextureManager.cpp \
      GUIDialogKaiToast.cpp \
-     GUIDialogAccessPoints.cpp \
      Artist.cpp \
      Album.cpp \
      MediaSource.cpp \
@@ -142,8 +130,6 @@ SRCS=Application.cpp \
      GUIViewStatePictures.cpp \
      GUIDialogFullScreenInfo.cpp \
      PowerManager.cpp \
-     Zeroconf.cpp \
-     ZeroconfBrowser.cpp \
      VideoReferenceClock.cpp \
      DPMSSupport.cpp \
      GUIWindowTestPatternGL.cpp \

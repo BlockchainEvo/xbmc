@@ -37,7 +37,6 @@
 #include "guilib/GUIButtonScroller.h"
 #include "FileSystem/Directory.h"
 #include "FileSystem/VirtualDirectory.h"
-#include "utils/UdpClient.h"
 #include "FileSystem/Directory.h"
 #include "music/tags/MusicInfoTag.h"
 #include "PictureInfoTag.h"

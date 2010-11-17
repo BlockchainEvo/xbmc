@@ -32,7 +32,7 @@
 #endif
 #include "GUIWindowSlideShow.h"
 #include "utils/Builtins.h"
-#include "utils/Network.h"
+#include "network/Network.h"
 #include "utils/log.h"
 #include "guilib/GUIWindowManager.h"
 #include "settings/Settings.h"

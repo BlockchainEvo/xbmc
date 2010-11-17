@@ -79,7 +79,6 @@
 #ifdef HAS_FILESYSTEM_HTSP
 #include "HTSPDirectory.h"
 #endif
-#include "../utils/Network.h"
 #include "ZipDirectory.h"
 #ifdef HAS_FILESYSTEM_RAR
 #include "RarDirectory.h"

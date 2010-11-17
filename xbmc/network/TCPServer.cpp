@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <memory.h>
-#include "JSONRPC.h"
+#include "lib/libjsonrpc/JSONRPC.h"
 #include "json/json.h"
 #include "utils/AnnouncementManager.h"
 #include "utils/log.h"

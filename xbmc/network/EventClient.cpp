@@ -26,7 +26,7 @@
 #include "EventClient.h"
 #include "EventPacket.h"
 #include "Application.h"
-#include "SingleLock.h"
+#include "utils/SingleLock.h"
 #include "input/ButtonTranslator.h"
 #include <map>
 #include <queue>

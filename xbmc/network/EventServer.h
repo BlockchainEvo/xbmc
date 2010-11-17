@@ -22,11 +22,11 @@
  *
  */
 
-#include "Thread.h"
+#include "utils/Thread.h"
 #include "Socket.h"
 #include "EventClient.h"
-#include "CriticalSection.h"
-#include "SingleLock.h"
+#include "utils/CriticalSection.h"
+#include "utils/SingleLock.h"
 
 #include <map>
 #include <queue>
