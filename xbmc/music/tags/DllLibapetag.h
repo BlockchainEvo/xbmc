@@ -25,8 +25,8 @@
 #include "utils/log.h"
 extern "C" {
 #undef strcasecmp
-#include "lib/libapetag/file_io.h"
-#include "lib/libapetag/apetaglib.h"
+#include "libapetag/file_io.h"
+#include "libapetag/apetaglib.h"
 }
 
 class DllLibApeTagInterface

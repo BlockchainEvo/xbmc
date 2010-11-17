@@ -97,7 +97,7 @@ LIB_DIRS=\
 	xbmc/lib/libexif \
 	xbmc/lib/libhdhomerun \
 	xbmc/lib/libid3tag \
-	xbmc/lib/libapetag \
+	lib/libapetag \
 	xbmc/lib/libPython/linux \
 	lib/cpluff \
 	lib/libmodplug \
@@ -279,8 +279,8 @@ xbmc/utils/utils.a: force
 	$(MAKE) -C xbmc/utils
 xbmc/osx/osx.a: force
 	$(MAKE) -C xbmc/osx
-xbmc/lib/libapetag/.libs/libapetag.a: force
-	$(MAKE) -C xbmc/lib/libapetag
+lib/libapetag/.libs/libapetag.a: force
+	$(MAKE) -C lib/libapetag
 lib/cpluff/libcpluff/.libs/libcpluff.a: force
 	$(MAKE) -C lib/cpluff/libcpluff
 system/libcpluff-$(ARCH).so: lib/cpluff/libcpluff/.libs/libcpluff.a
@@ -388,7 +388,7 @@ externals: codecs libs python visualizations screensavers
 xcode_depends: \
 	codecs libs python visualizations screensavers eventclients skins \
 	xbmc/lib/libsquish/libsquish-@ARCH@.a \
-	xbmc/lib/libapetag/.libs/libapetag.a \
+	lib/libapetag/.libs/libapetag.a \
 	xbmc/lib/cmyth/libcmyth/libcmyth.a \
 	xbmc/lib/cmyth/librefmem/librefmem.a \
 	xbmc/lib/libXBMS/libxbms-@ARCH@.a \
@@ -440,7 +440,7 @@ OBJSXBMC=	\
 	xbmc/lib/libhttpapi/libhttpapi.a \
 	xbmc/lib/sqLite/sqllite.a \
 	xbmc/lib/libsquish/libsquish-@ARCH@.a \
-	xbmc/lib/libapetag/.libs/libapetag.a \
+	lib/libapetag/.libs/libapetag.a \
 	lib/xbmc-dll-symbols/dll-symbols.a \
 	xbmc/settings/settings.a
 
