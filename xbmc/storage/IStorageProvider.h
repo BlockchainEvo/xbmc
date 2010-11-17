@@ -19,25 +19,33 @@
  *  http://www.gnu.org/copyleft/gpl.html
  *
  */
-#include "IStorageProvider.h"
+#include "system.h"
+#include "MediaSource.h"
 
-class CWin32StorageProvider : public IStorageProvider
+class IStorageEventsCallback
 {
 public:
-  virtual ~CWin32StorageProvider() { }
+  virtual ~IStorageEventsCallback() { }
 
-  virtual void Initialize() { }
-  virtual void Stop() { }
+  virtual void OnStorageAdded(const CStdString &label, const CStdString &path) = 0;
+  virtual void OnStorageSafelyRemoved(const CStdString &label) = 0;
+  virtual void OnStorageUnsafelyRemoved(const CStdString &label) = 0;
+};
 
-  virtual void GetLocalDrives(VECSOURCES &localDrives);
-  virtual void GetRemovableDrives(VECSOURCES &removableDrives);
+class IStorageProvider
+{
+public:
+  virtual ~IStorageProvider() { }
 
-  virtual bool Eject(CStdString mountpath);
+  virtual void Initialize() = 0;
+  virtual void Stop() = 0;
 
-  virtual std::vector<CStdString> GetDiskUsage();
+  virtual void GetLocalDrives(VECSOURCES &localDrives) = 0;
+  virtual void GetRemovableDrives(VECSOURCES &removableDrives) = 0;
 
-  virtual bool PumpDriveChangeEvents(IStorageEventsCallback *callback);
+  virtual bool Eject(CStdString mountpath) = 0;
 
-  static void SetEvent() { event = true; }
-  static bool event;
+  virtual std::vector<CStdString> GetDiskUsage() = 0;
+
+  virtual bool PumpDriveChangeEvents(IStorageEventsCallback *callback) = 0;
 };
