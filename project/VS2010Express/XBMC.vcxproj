@@ -1028,7 +1028,10 @@
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release (OpenGL)|Win32'">CompileAsCpp</CompileAs>
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">CompileAsCpp</CompileAs>
     </ClCompile>
+    <ClCompile Include="..\..\xbmc\utils\StringUtils.cpp" />
+    <ClCompile Include="..\..\xbmc\utils\URIUtils.cpp" />
     <ClCompile Include="..\..\xbmc\utils\Variant.cpp" />
+    <ClCompile Include="..\..\xbmc\utils\XMLUtils.cpp" />
     <ClCompile Include="..\..\xbmc\win32\NetworkWin32.cpp" />
     <ClCompile Include="..\..\xbmc\win32\pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug (DirectX)|Win32'">Create</PrecompiledHeader>
@@ -1321,7 +1324,6 @@
     <ClCompile Include="..\..\xbmc\utils\Splash.cpp" />
     <ClCompile Include="..\..\xbmc\utils\Stopwatch.cpp" />
     <ClCompile Include="..\..\xbmc\utils\StreamDetails.cpp" />
-    <ClCompile Include="..\..\xbmc\StringUtils.cpp" />
     <ClCompile Include="..\..\xbmc\utils\SystemInfo.cpp" />
     <ClCompile Include="..\..\xbmc\utils\Teletext.cpp" />
     <ClCompile Include="..\..\xbmc\Temperature.cpp" />
@@ -1659,7 +1661,6 @@
     <ClCompile Include="..\..\lib\jsoncpp\jsoncpp\src\lib_json\json_reader.cpp" />
     <ClCompile Include="..\..\lib\jsoncpp\jsoncpp\src\lib_json\json_value.cpp" />
     <ClCompile Include="..\..\lib\jsoncpp\jsoncpp\src\lib_json\json_writer.cpp" />
-    <ClCompile Include="..\..\xbmc\URIUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
 >>>>>>> changed: move settings related files to settings directory
@@ -2561,7 +2562,10 @@
     <ClInclude Include="..\..\xbmc\settings\VideoSettings.h" />
     <ClInclude Include="..\..\xbmc\utils\ISerializable.h" />
     <ClInclude Include="..\..\xbmc\utils\StdString.h" />
+    <ClInclude Include="..\..\xbmc\utils\StringUtils.h" />
+    <ClInclude Include="..\..\xbmc\utils\URIUtils.h" />
     <ClInclude Include="..\..\xbmc\utils\Variant.h" />
+    <ClInclude Include="..\..\xbmc\utils\XMLUtils.h" />
     <ClInclude Include="..\..\xbmc\win32\NetworkWin32.h" />
     <ClInclude Include="..\..\xbmc\win32\pch.h" />
     <ClInclude Include="..\..\xbmc\win32\PlatformDefs.h" />
@@ -3145,7 +3149,6 @@
     <ClInclude Include="..\..\xbmc\Song.h" />
     <ClInclude Include="..\..\xbmc\SortFileItem.h" />
     <ClInclude Include="..\..\xbmc\utils\Splash.h" />
-    <ClInclude Include="..\..\xbmc\StringUtils.h" />
     <ClInclude Include="..\..\xbmc\utils\TeletextDefines.h" />
     <ClInclude Include="..\..\xbmc\Temperature.h" />
     <ClInclude Include="..\..\xbmc\utils\Thread.h" />
@@ -3287,7 +3290,6 @@
     <ClInclude Include="..\..\xbmc\lib\libjsonrpc\TCPServer.h" />
     <ClInclude Include="..\..\xbmc\lib\libjsonrpc\VideoLibrary.h" />
     <ClInclude Include="..\..\xbmc\lib\libjsonrpc\XBMCOperations.h" />
-    <ClInclude Include="..\..\xbmc\URIUtils.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\xbmc\win32\XBMC.ico" />

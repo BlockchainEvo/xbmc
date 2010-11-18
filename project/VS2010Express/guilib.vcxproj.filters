@@ -876,9 +876,6 @@
     <ClCompile Include="..\..\guilib\XBTFReader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\guilib\XMLUtils.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\guilib\tinyXML\tinyxml.cpp">
       <Filter>tinyxml</Filter>
     </ClCompile>
@@ -1173,9 +1170,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\guilib\VisibleEffect.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\guilib\XMLUtils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\guilib\tinyXML\tinystr.h">

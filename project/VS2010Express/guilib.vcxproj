@@ -735,7 +735,6 @@
     <ClCompile Include="..\..\guilib\VisibleEffect.cpp" />
     <ClCompile Include="..\..\guilib\XBTF.cpp" />
     <ClCompile Include="..\..\guilib\XBTFReader.cpp" />
-    <ClCompile Include="..\..\guilib\XMLUtils.cpp" />
     <ClCompile Include="..\..\guilib\tinyXML\tinyxml.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug (DirectX)|Win32'">
       </PrecompiledHeader>
@@ -869,7 +868,6 @@
     <ClInclude Include="..\..\guilib\TransformMatrix.h" />
     <ClInclude Include="..\..\guilib\Tween.h" />
     <ClInclude Include="..\..\guilib\VisibleEffect.h" />
-    <ClInclude Include="..\..\guilib\XMLUtils.h" />
     <ClInclude Include="..\..\guilib\tinyXML\tinystr.h" />
     <ClInclude Include="..\..\guilib\tinyXML\tinyxml.h" />
     <ClInclude Include="..\..\guilib\common\SDLJoystick.h" />
