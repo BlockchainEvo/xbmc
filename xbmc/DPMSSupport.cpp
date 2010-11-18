@@ -27,7 +27,7 @@
 #include <assert.h>
 #include <string>
 #ifdef _WIN32
-#include "GraphicContext.h"
+#include "guilib/GraphicContext.h"
 #endif
 
 //////// Generic, non-platform-specific code

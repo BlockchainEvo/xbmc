@@ -1711,9 +1711,6 @@
     <ClCompile Include="..\..\xbmc\utils\CPUInfo.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\Crc32.cpp">
-      <Filter>Source Files\Utils</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\xbmc\utils\CriticalSection.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
@@ -2204,12 +2201,6 @@
       <Filter>Source Files\Filesystem</Filter>
     </ClCompile>
     <ClCompile Include="..\..\xbmc\FileSystem\IFile.cpp">
-      <Filter>Source Files\Filesystem</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\FileSystem\iso9660.cpp">
-      <Filter>Source Files\Filesystem</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\FileSystem\ISO9660Directory.cpp">
       <Filter>Source Files\Filesystem</Filter>
     </ClCompile>
     <ClCompile Include="..\..\xbmc\FileSystem\LastFMDirectory.cpp">
@@ -5314,6 +5305,9 @@
     <ClCompile Include="..\..\xbmc\storage\MediaManager.cpp">
       <Filter>Source Files\Storage</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\xbmc\utils\Crc32.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\xbmc\win32\pch.h">
@@ -6249,9 +6243,6 @@
     <ClInclude Include="..\..\xbmc\FileSystem\HTTPDirectory.h">
       <Filter>Source Files\Filesystem</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\xbmc\FileSystem\ISO9660Directory.h">
-      <Filter>Source Files\Filesystem</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\xbmc\FileSystem\LastFMDirectory.h">
       <Filter>Source Files\Filesystem</Filter>
     </ClInclude>
@@ -6617,9 +6608,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\utils\CharsetConverter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\Crc32.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\utils\CriticalSection.h">
@@ -10297,6 +10285,9 @@
     </ClInclude>
     <ClInclude Include="..\..\xbmc\storage\MediaManager.h">
       <Filter>Source Files\Storage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\utils\Crc32.h">
+      <Filter>Source Files\Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

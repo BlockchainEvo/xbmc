@@ -1471,6 +1471,7 @@
     <ClCompile Include="..\..\xbmc\storage\MediaManager.cpp" />
     <ClCompile Include="..\..\xbmc\storage\windows\Win32StorageProvider.cpp" />
     <ClCompile Include="..\..\xbmc\SystemGlobals.cpp" />
+    <ClCompile Include="..\..\xbmc\utils\Crc32.cpp" />
     <ClCompile Include="..\..\xbmc\utils\fstrcmp.c">
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug (DirectX)|Win32'">CompileAsCpp</CompileAs>
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug (OpenGL)|Win32'">CompileAsCpp</CompileAs>
@@ -1691,7 +1692,6 @@
     <ClCompile Include="..\..\xbmc\utils\Builtins.cpp" />
     <ClCompile Include="..\..\xbmc\utils\CharsetConverter.cpp" />
     <ClCompile Include="..\..\xbmc\utils\CPUInfo.cpp" />
-    <ClCompile Include="..\..\xbmc\Crc32.cpp" />
     <ClCompile Include="..\..\xbmc\utils\CriticalSection.cpp" />
     <ClCompile Include="..\..\xbmc\DateTime.cpp" />
     <ClCompile Include="..\..\xbmc\utils\DownloadQueue.cpp" />
@@ -1865,8 +1865,6 @@
     <ClCompile Include="..\..\xbmc\FileSystem\HTTPDirectory.cpp" />
     <ClCompile Include="..\..\xbmc\FileSystem\IDirectory.cpp" />
     <ClCompile Include="..\..\xbmc\FileSystem\IFile.cpp" />
-    <ClCompile Include="..\..\xbmc\FileSystem\iso9660.cpp" />
-    <ClCompile Include="..\..\xbmc\FileSystem\ISO9660Directory.cpp" />
     <ClCompile Include="..\..\xbmc\FileSystem\LastFMDirectory.cpp" />
     <ClCompile Include="..\..\xbmc\FileSystem\MultiPathDirectory.cpp" />
     <ClCompile Include="..\..\xbmc\FileSystem\MultiPathFile.cpp" />
@@ -3157,6 +3155,7 @@
     <ClInclude Include="..\..\xbmc\storage\MediaManager.h" />
     <ClInclude Include="..\..\xbmc\storage\windows\Win32StorageProvider.h" />
     <ClInclude Include="..\..\xbmc\system.h" />
+    <ClInclude Include="..\..\xbmc\utils\Crc32.h" />
     <ClInclude Include="..\..\xbmc\utils\ISerializable.h" />
     <ClInclude Include="..\..\xbmc\utils\MathUtils.h" />
     <ClInclude Include="..\..\xbmc\utils\StdString.h" />
@@ -3480,7 +3479,6 @@
     <ClInclude Include="..\..\xbmc\FileSystem\HTSPDirectory.h" />
     <ClInclude Include="..\..\xbmc\FileSystem\HTSPSession.h" />
     <ClInclude Include="..\..\xbmc\FileSystem\HTTPDirectory.h" />
-    <ClInclude Include="..\..\xbmc\FileSystem\ISO9660Directory.h" />
     <ClInclude Include="..\..\xbmc\FileSystem\LastFMDirectory.h" />
     <ClInclude Include="..\..\xbmc\FileSystem\MultiPathDirectory.h" />
     <ClInclude Include="..\..\xbmc\FileSystem\MultiPathFile.h" />
@@ -3604,7 +3602,6 @@
     <ClInclude Include="..\..\xbmc\ButtonTranslator.h" />
     <ClInclude Include="..\..\xbmc\FileSystem\cdioSupport.h" />
     <ClInclude Include="..\..\xbmc\utils\CharsetConverter.h" />
-    <ClInclude Include="..\..\xbmc\Crc32.h" />
     <ClInclude Include="..\..\xbmc\utils\CriticalSection.h" />
     <ClInclude Include="..\..\xbmc\CueDocument.h" />
     <ClInclude Include="..\..\xbmc\DateTime.h" />
