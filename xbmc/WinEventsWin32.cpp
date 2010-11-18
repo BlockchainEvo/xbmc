@@ -25,16 +25,16 @@
 #include "WIN32Util.h"
 #include "storage/windows/Win32StorageProvider.h"
 #include "Application.h"
-#include "XBMC_vkeys.h"
-#include "MouseStat.h"
-#include "MediaManager.h"
+#include "input/XBMC_vkeys.h"
+#include "input/MouseStat.h"
+#include "storage/MediaManager.h"
 #include "WindowingFactory.h"
 #include <dbt.h>
-#include "LocalizeStrings.h"
-#include "KeyboardStat.h"
-#include "GUIWindowManager.h"
-#include "GUIControl.h"       // for EVENT_RESULT
-#include "Win32PowerSyscall.h"
+#include "guilib/LocalizeStrings.h"
+#include "input/KeyboardStat.h"
+#include "guilib/GUIWindowManager.h"
+#include "guilib/GUIControl.h"       // for EVENT_RESULT
+#include "powermanagement/windows/Win32PowerSyscall.h"
 #include "Shlobj.h"
 
 #ifdef _WIN32

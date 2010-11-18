@@ -2008,9 +2008,6 @@
     <ClCompile Include="..\..\xbmc\GUIDialogVideoBookmarks.cpp">
       <Filter>Source Files\GUI Dialog</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\GUIDialogVideoSettings.cpp">
-      <Filter>Source Files\GUI Dialog</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\xbmc\GUIDialogVolumeBar.cpp">
       <Filter>Source Files\GUI Dialog</Filter>
     </ClCompile>
@@ -5314,6 +5311,9 @@
     <ClCompile Include="..\..\xbmc\storage\MediaManager.cpp">
       <Filter>Source Files\Storage</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\xbmc\storage\MediaManager.cpp">
+      <Filter>Source Files\Storage</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\xbmc\win32\pch.h">
@@ -6112,9 +6112,6 @@
       <Filter>Source Files\GUI Dialog</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\GUIDialogVideoBookmarks.h">
-      <Filter>Source Files\GUI Dialog</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\GUIDialogVideoSettings.h">
       <Filter>Source Files\GUI Dialog</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\GUILargeTextureManager.h">
@@ -10297,6 +10294,9 @@
     </ClInclude>
     <ClInclude Include="..\..\xbmc\network\Zeroconf.h">
       <Filter>Source Files\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\storage\MediaManager.h">
+      <Filter>Source Files\Storage</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

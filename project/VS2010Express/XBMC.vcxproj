@@ -1799,7 +1799,6 @@
     <ClCompile Include="..\..\xbmc\GUIDialogSubMenu.cpp" />
     <ClCompile Include="..\..\xbmc\GUIDialogTeletext.cpp" />
     <ClCompile Include="..\..\xbmc\GUIDialogVideoBookmarks.cpp" />
-    <ClCompile Include="..\..\xbmc\GUIDialogVideoSettings.cpp" />
     <ClCompile Include="..\..\xbmc\GUIDialogVolumeBar.cpp" />
     <ClCompile Include="..\..\xbmc\GUIDialogYesNo.cpp" />
     <ClCompile Include="..\..\xbmc\GUILargeTextureManager.cpp" />
@@ -3436,7 +3435,6 @@
     <ClInclude Include="..\..\xbmc\GUIDialogSlider.h" />
     <ClInclude Include="..\..\xbmc\GUIDialogTeletext.h" />
     <ClInclude Include="..\..\xbmc\GUIDialogVideoBookmarks.h" />
-    <ClInclude Include="..\..\xbmc\GUIDialogVideoSettings.h" />
     <ClInclude Include="..\..\xbmc\GUILargeTextureManager.h" />
     <ClInclude Include="..\..\xbmc\GUIMediaWindow.h" />
     <ClInclude Include="..\..\xbmc\GUIViewStatePictures.h" />

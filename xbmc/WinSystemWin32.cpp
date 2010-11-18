@@ -23,8 +23,8 @@
 #include "WinEventsWin32.h"
 #include "settings/Settings.h"
 #include "resource.h"
-#include "GUISettings.h"
-#include "AdvancedSettings.h"
+#include "settings/GUISettings.h"
+#include "settings/AdvancedSettings.h"
 #include "utils/log.h"
 
 #ifdef _WIN32

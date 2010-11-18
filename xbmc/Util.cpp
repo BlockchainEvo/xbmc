@@ -83,7 +83,7 @@
 #include "utils/StringUtils.h"
 #include "settings/AdvancedSettings.h"
 #ifdef HAS_IRSERVERSUITE
-  #include "common/IRServerSuite/IRServerSuite.h"
+  #include "input/windows/IRServerSuite.h"
 #endif
 #include "WindowingFactory.h"
 #include "guilib/LocalizeStrings.h"
