@@ -277,7 +277,7 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\xbmc\AddonDatabase.cpp" />
+    <ClCompile Include="..\..\xbmc\addons\AddonDatabase.cpp" />
     <ClCompile Include="..\..\xbmc\addons\PluginSource.cpp" />
     <ClCompile Include="..\..\xbmc\addons\Repository.cpp" />
     <ClCompile Include="..\..\xbmc\addons\Service.cpp" />
@@ -289,9 +289,9 @@
     <ClCompile Include="..\..\xbmc\FileSystem\udf25.cpp" />
     <ClCompile Include="..\..\xbmc\FileSystem\UDFDirectory.cpp" />
     <ClCompile Include="..\..\xbmc\FileSystem\VideoDatabaseDirectory\DirectoryNodeCountry.cpp" />
-    <ClCompile Include="..\..\xbmc\GUIDialogAddonInfo.cpp" />
+    <ClCompile Include="..\..\xbmc\addons\GUIDialogAddonInfo.cpp" />
     <ClCompile Include="..\..\xbmc\GUIDialogTextViewer.cpp" />
-    <ClCompile Include="..\..\xbmc\GUIViewStateAddonBrowser.cpp" />
+    <ClCompile Include="..\..\xbmc\addons\GUIViewStateAddonBrowser.cpp" />
     <ClCompile Include="..\..\xbmc\GUIWindowSystemInfo.cpp" />
     <ClCompile Include="..\..\xbmc\lib\libjsonrpc\AudioLibrary.cpp" />
     <ClCompile Include="..\..\xbmc\lib\libPython\xbmcmodule\PythonAddon.cpp" />
@@ -529,12 +529,12 @@
     <ClCompile Include="..\..\xbmc\playlists\PlayListWPL.cpp" />
     <ClCompile Include="..\..\xbmc\playlists\PlayListXML.cpp" />
     <ClCompile Include="..\..\xbmc\playlists\SmartPlayList.cpp" />
-    <ClCompile Include="..\..\xbmc\APEv2Tag.cpp" />
-    <ClCompile Include="..\..\xbmc\FlacTag.cpp" />
-    <ClCompile Include="..\..\xbmc\Id3Tag.cpp" />
+    <ClCompile Include="..\..\xbmc\music\tags\APEv2Tag.cpp" />
+    <ClCompile Include="..\..\xbmc\music\tags\FlacTag.cpp" />
+    <ClCompile Include="..\..\xbmc\music\tags\Id3Tag.cpp" />
     <ClCompile Include="..\..\xbmc\MusicInfoLoader.cpp" />
     <ClCompile Include="..\..\xbmc\MusicInfoScanner.cpp" />
-    <ClCompile Include="..\..\xbmc\musicInfoTag.cpp" />
+    <ClCompile Include="..\..\xbmc\music\tags\musicInfoTag.cpp" />
     <ClCompile Include="..\..\xbmc\music\tags\MusicInfoTagLoaderAAC.cpp" />
     <ClCompile Include="..\..\xbmc\music\tags\MusicInfoTagLoaderApe.cpp" />
     <ClCompile Include="..\..\xbmc\music\tags\MusicInfoTagLoaderASAP.cpp" />
@@ -555,8 +555,8 @@
     <ClCompile Include="..\..\xbmc\music\tags\MusicInfoTagLoaderWavPack.cpp" />
     <ClCompile Include="..\..\xbmc\music\tags\MusicInfoTagLoaderWMA.cpp" />
     <ClCompile Include="..\..\xbmc\music\tags\MusicInfoTagLoaderYM.cpp" />
-    <ClCompile Include="..\..\xbmc\OggTag.cpp" />
-    <ClCompile Include="..\..\xbmc\VorbisTag.cpp" />
+    <ClCompile Include="..\..\xbmc\music\tags\OggTag.cpp" />
+    <ClCompile Include="..\..\xbmc\music\tags\VorbisTag.cpp" />
     <ClCompile Include="..\..\xbmc\PictureInfoLoader.cpp" />
     <ClCompile Include="..\..\xbmc\PictureInfoTag.cpp" />
     <ClCompile Include="..\..\xbmc\utils\AlarmClock.cpp" />
@@ -675,7 +675,7 @@
     <ClCompile Include="..\..\xbmc\VideoDatabase.cpp" />
     <ClCompile Include="..\..\xbmc\ViewDatabase.cpp" />
     <ClCompile Include="..\..\xbmc\GUIDialogAccessPoints.cpp" />
-    <ClCompile Include="..\..\xbmc\GUIDialogAddonSettings.cpp" />
+    <ClCompile Include="..\..\xbmc\addons\GUIDialogAddonSettings.cpp" />
     <ClCompile Include="..\..\xbmc\GUIDialogAudioSubtitleSettings.cpp" />
     <ClCompile Include="..\..\xbmc\GUIDialogBoxBase.cpp" />
     <ClCompile Include="..\..\xbmc\GUIDialogBusy.cpp" />
@@ -716,7 +716,7 @@
     <ClCompile Include="..\..\xbmc\GUIMediaWindow.cpp" />
     <ClCompile Include="..\..\xbmc\GUIViewStatePictures.cpp" />
     <ClCompile Include="..\..\xbmc\GUIViewStatePrograms.cpp" />
-    <ClCompile Include="..\..\xbmc\GUIWindowAddonBrowser.cpp" />
+    <ClCompile Include="..\..\xbmc\addons\GUIWindowAddonBrowser.cpp" />
     <ClCompile Include="..\..\xbmc\GUIWindowFileManager.cpp" />
     <ClCompile Include="..\..\xbmc\GUIWindowFullScreen.cpp" />
     <ClCompile Include="..\..\xbmc\GUIWindowHome.cpp" />
@@ -993,7 +993,7 @@
     <ClCompile Include="..\..\xbmc\URIUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\xbmc\AddonDatabase.h" />
+    <ClInclude Include="..\..\xbmc\addons\AddonDatabase.h" />
     <ClInclude Include="..\..\xbmc\addons\PluginSource.h" />
     <ClInclude Include="..\..\xbmc\addons\Repository.h" />
     <ClInclude Include="..\..\xbmc\addons\Service.h" />
@@ -1005,9 +1005,9 @@
     <ClInclude Include="..\..\xbmc\FileSystem\udf25.h" />
     <ClInclude Include="..\..\xbmc\FileSystem\UDFDirectory.h" />
     <ClInclude Include="..\..\xbmc\FileSystem\VideoDatabaseDirectory\DirectoryNodeCountry.h" />
-    <ClInclude Include="..\..\xbmc\GUIDialogAddonInfo.h" />
+    <ClInclude Include="..\..\xbmc\addons\GUIDialogAddonInfo.h" />
     <ClInclude Include="..\..\xbmc\GUIDialogTextViewer.h" />
-    <ClInclude Include="..\..\xbmc\GUIViewStateAddonBrowser.h" />
+    <ClInclude Include="..\..\xbmc\addons\GUIViewStateAddonBrowser.h" />
     <ClInclude Include="..\..\xbmc\lib\libjsonrpc\AudioLibrary.h" />
     <ClInclude Include="..\..\xbmc\lib\libPython\xbmcmodule\PythonAddon.h" />
     <ClInclude Include="..\..\xbmc\RenderSystemGLES.h" />
@@ -1310,7 +1310,7 @@
     <ClInclude Include="..\..\xbmc\VideoDatabase.h" />
     <ClInclude Include="..\..\xbmc\ViewDatabase.h" />
     <ClInclude Include="..\..\xbmc\GUIDialogAccessPoints.h" />
-    <ClInclude Include="..\..\xbmc\GUIDialogAddonSettings.h" />
+    <ClInclude Include="..\..\xbmc\addons\GUIDialogAddonSettings.h" />
     <ClInclude Include="..\..\xbmc\GUIDialogAudioSubtitleSettings.h" />
     <ClInclude Include="..\..\xbmc\GUIDialogBoxBase.h" />
     <ClInclude Include="..\..\xbmc\GUIDialogBusy.h" />
@@ -1337,7 +1337,7 @@
     <ClInclude Include="..\..\xbmc\GUIMediaWindow.h" />
     <ClInclude Include="..\..\xbmc\GUIViewStatePictures.h" />
     <ClInclude Include="..\..\xbmc\GUIViewStatePrograms.h" />
-    <ClInclude Include="..\..\xbmc\GUIWindowAddonBrowser.h" />
+    <ClInclude Include="..\..\xbmc\addons\GUIWindowAddonBrowser.h" />
     <ClInclude Include="..\..\xbmc\karaoke\GUIWindowKaraokeLyrics.h" />
     <ClInclude Include="..\..\xbmc\GUIWindowLoginScreen.h" />
     <ClInclude Include="..\..\xbmc\GUIWindowStartup.h" />
