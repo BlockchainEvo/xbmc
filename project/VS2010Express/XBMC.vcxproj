@@ -931,7 +931,14 @@
     <ClCompile Include="..\..\xbmc\music\dialogs\GUIDialogMusicScan.cpp" />
     <ClCompile Include="..\..\xbmc\music\dialogs\GUIDialogSongInfo.cpp" />
     <ClCompile Include="..\..\xbmc\music\dialogs\GUIDialogVisualisationPresetList.cpp" />
+<<<<<<< HEAD
 >>>>>>> changed: move music related dialogs to music/dialogs
+=======
+    <ClCompile Include="..\..\xbmc\music\infoscanner\MusicAlbumInfo.cpp" />
+    <ClCompile Include="..\..\xbmc\music\infoscanner\MusicArtistInfo.cpp" />
+    <ClCompile Include="..\..\xbmc\music\infoscanner\MusicInfoScanner.cpp" />
+    <ClCompile Include="..\..\xbmc\music\infoscanner\MusicInfoScraper.cpp" />
+>>>>>>> changed: move music info scanner related files to music/infoscanner
     <ClCompile Include="..\..\xbmc\music\tags\APEv2Tag.cpp" />
     <ClCompile Include="..\..\xbmc\music\tags\FlacTag.cpp" />
     <ClCompile Include="..\..\xbmc\music\tags\Id3Tag.cpp" />
@@ -1714,9 +1721,6 @@
     </ClCompile>
     <ClCompile Include="..\..\xbmc\MediaManager.cpp" />
     <ClCompile Include="..\..\xbmc\MediaSource.cpp" />
-    <ClCompile Include="..\..\xbmc\utils\MusicAlbumInfo.cpp" />
-    <ClCompile Include="..\..\xbmc\utils\MusicArtistInfo.cpp" />
-    <ClCompile Include="..\..\xbmc\utils\MusicInfoScraper.cpp" />
     <ClCompile Include="..\..\xbmc\utils\Mutex.cpp" />
     <ClCompile Include="..\..\xbmc\NfoFile.cpp" />
     <ClCompile Include="..\..\xbmc\PartyModeManager.cpp" />
@@ -2442,6 +2446,10 @@
     <ClInclude Include="..\..\xbmc\music\dialogs\GUIDialogMusicScan.h" />
     <ClInclude Include="..\..\xbmc\music\dialogs\GUIDialogSongInfo.h" />
     <ClInclude Include="..\..\xbmc\music\dialogs\GUIDialogVisualisationPresetList.h" />
+    <ClInclude Include="..\..\xbmc\music\infoscanner\MusicAlbumInfo.h" />
+    <ClInclude Include="..\..\xbmc\music\infoscanner\MusicArtistInfo.h" />
+    <ClInclude Include="..\..\xbmc\music\infoscanner\MusicInfoScanner.h" />
+    <ClInclude Include="..\..\xbmc\music\infoscanner\MusicInfoScraper.h" />
     <ClInclude Include="..\..\xbmc\music\tags\APEv2Tag.h" />
     <ClInclude Include="..\..\xbmc\music\tags\DllLibapetag.h" />
     <ClInclude Include="..\..\xbmc\music\tags\DllLibid3tag.h" />
@@ -3375,7 +3383,6 @@
     <ClInclude Include="..\..\xbmc\LastFmManager.h" />
     <ClInclude Include="..\..\xbmc\utils\md5.h" />
     <ClInclude Include="..\..\xbmc\MediaSource.h" />
-    <ClInclude Include="..\..\xbmc\utils\MusicArtistInfo.h" />
     <ClInclude Include="..\..\xbmc\utils\Mutex.h" />
     <ClInclude Include="..\..\xbmc\utils\PasswordManager.h" />
     <ClInclude Include="..\..\xbmc\utils\PCMAmplifier.h" />
@@ -3662,10 +3669,6 @@
     <ClInclude Include="..\..\xbmc\LangInfo.h" />
     <ClInclude Include="..\..\xbmc\utils\log.h" />
     <ClInclude Include="..\..\xbmc\MediaManager.h" />
-    <ClInclude Include="..\..\xbmc\utils\MusicAlbumInfo.h" />
-    <ClInclude Include="..\..\xbmc\MusicInfoLoader.h" />
-    <ClInclude Include="..\..\xbmc\MusicInfoScanner.h" />
-    <ClInclude Include="..\..\xbmc\utils\MusicInfoScraper.h" />
     <ClInclude Include="..\..\xbmc\MusicInfoTagLoaderCDDA.h" />
     <ClInclude Include="..\..\xbmc\musicInfoTagLoaderFactory.h" />
     <ClInclude Include="..\..\xbmc\MusicInfoTagLoaderFlac.h" />

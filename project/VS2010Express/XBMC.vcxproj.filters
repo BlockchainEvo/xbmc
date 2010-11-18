@@ -1782,15 +1782,6 @@
     <ClCompile Include="..\..\xbmc\MediaSource.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\utils\MusicAlbumInfo.cpp">
-      <Filter>Source Files\Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\utils\MusicArtistInfo.cpp">
-      <Filter>Source Files\Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\utils\MusicInfoScraper.cpp">
-      <Filter>Source Files\Utils</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\xbmc\utils\Mutex.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
@@ -5289,6 +5280,18 @@
     <ClCompile Include="..\..\xbmc\music\windows\GUIWindowMusicSongs.cpp">
       <Filter>Source Files\GUI Music</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\xbmc\music\infoscanner\MusicAlbumInfo.cpp">
+      <Filter>Source Files\GUI Music</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\music\infoscanner\MusicArtistInfo.cpp">
+      <Filter>Source Files\GUI Music</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\music\infoscanner\MusicInfoScanner.cpp">
+      <Filter>Source Files\GUI Music</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\music\infoscanner\MusicInfoScraper.cpp">
+      <Filter>Source Files\GUI Music</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\xbmc\win32\pch.h">
@@ -5982,9 +5985,6 @@
       <Filter>Source Files\Utils</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\MediaSource.h">
-      <Filter>Source Files\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\utils\MusicArtistInfo.h">
       <Filter>Source Files\Utils</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\utils\Mutex.h">
@@ -6841,18 +6841,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\MediaManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\utils\MusicAlbumInfo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\MusicInfoLoader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\MusicInfoScanner.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\utils\MusicInfoScraper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\MusicInfoTagLoaderCDDA.h">
@@ -9635,6 +9623,18 @@
       <Filter>Source Files\GUI Music</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\music\windows\GUIWindowMusicSongs.h">
+      <Filter>Source Files\GUI Music</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\music\infoscanner\MusicAlbumInfo.h">
+      <Filter>Source Files\GUI Music</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\music\infoscanner\MusicArtistInfo.h">
+      <Filter>Source Files\GUI Music</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\music\infoscanner\MusicInfoScanner.h">
+      <Filter>Source Files\GUI Music</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\music\infoscanner\MusicInfoScraper.h">
       <Filter>Source Files\GUI Music</Filter>
     </ClInclude>
   </ItemGroup>
