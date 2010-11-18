@@ -962,6 +962,7 @@
     <ClCompile Include="..\..\xbmc\music\tags\VorbisTag.cpp" />
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     <ClCompile Include="..\..\xbmc\PictureInfoLoader.cpp" />
     <ClCompile Include="..\..\xbmc\PictureInfoTag.cpp" />
     <ClCompile Include="..\..\xbmc\utils\AlarmClock.cpp" />
@@ -1400,6 +1401,14 @@
   <ItemGroup>
 =======
 =======
+=======
+    <ClCompile Include="..\..\xbmc\music\windows\GUIWindowMusicBase.cpp" />
+    <ClCompile Include="..\..\xbmc\music\windows\GUIWindowMusicNav.cpp" />
+    <ClCompile Include="..\..\xbmc\music\windows\GUIWindowMusicOverlay.cpp" />
+    <ClCompile Include="..\..\xbmc\music\windows\GUIWindowMusicPlaylist.cpp" />
+    <ClCompile Include="..\..\xbmc\music\windows\GUIWindowMusicPlaylistEditor.cpp" />
+    <ClCompile Include="..\..\xbmc\music\windows\GUIWindowMusicSongs.cpp" />
+>>>>>>> changed: move music related windows to music/windows
     <ClCompile Include="..\..\xbmc\network\cddb.cpp" />
     <ClCompile Include="..\..\xbmc\network\DNSNameCache.cpp" />
     <ClCompile Include="..\..\xbmc\network\EventClient.cpp" />
@@ -1640,12 +1649,6 @@
     <ClCompile Include="..\..\xbmc\GUIViewControl.cpp" />
     <ClCompile Include="..\..\xbmc\GUIViewState.cpp" />
     <ClCompile Include="..\..\xbmc\GUIViewStateMusic.cpp" />
-    <ClCompile Include="..\..\xbmc\GUIWindowMusicBase.cpp" />
-    <ClCompile Include="..\..\xbmc\GUIWindowMusicNav.cpp" />
-    <ClCompile Include="..\..\xbmc\GUIWindowMusicOverlay.cpp" />
-    <ClCompile Include="..\..\xbmc\GUIWindowMusicPlaylist.cpp" />
-    <ClCompile Include="..\..\xbmc\GUIWindowMusicPlaylistEditor.cpp" />
-    <ClCompile Include="..\..\xbmc\GUIWindowMusicSongs.cpp" />
     <ClCompile Include="..\..\xbmc\GUIDialogVideoScan.cpp" />
     <ClCompile Include="..\..\xbmc\GUIViewStateVideo.cpp" />
     <ClCompile Include="..\..\xbmc\GUIWindowVideoBase.cpp" />
@@ -2820,6 +2823,12 @@
     <ClInclude Include="..\..\xbmc\music\tags\OggTag.h" />
     <ClInclude Include="..\..\xbmc\music\tags\Tag.h" />
     <ClInclude Include="..\..\xbmc\music\tags\VorbisTag.h" />
+    <ClInclude Include="..\..\xbmc\music\windows\GUIWindowMusicBase.h" />
+    <ClInclude Include="..\..\xbmc\music\windows\GUIWindowMusicNav.h" />
+    <ClInclude Include="..\..\xbmc\music\windows\GUIWindowMusicOverlay.h" />
+    <ClInclude Include="..\..\xbmc\music\windows\GUIWindowMusicPlaylist.h" />
+    <ClInclude Include="..\..\xbmc\music\windows\GUIWindowMusicPlaylistEditor.h" />
+    <ClInclude Include="..\..\xbmc\music\windows\GUIWindowMusicSongs.h" />
     <ClInclude Include="..\..\xbmc\network\cddb.h" />
     <ClInclude Include="..\..\xbmc\network\DNSNameCache.h" />
     <ClInclude Include="..\..\xbmc\network\EventClient.h" />
@@ -3340,8 +3349,6 @@
     <ClInclude Include="..\..\xbmc\GUIViewControl.h" />
     <ClInclude Include="..\..\xbmc\GUIViewState.h" />
     <ClInclude Include="..\..\xbmc\GUIViewStateMusic.h" />
-    <ClInclude Include="..\..\xbmc\GUIWindowMusicNav.h" />
-    <ClInclude Include="..\..\xbmc\GUIWindowMusicPlaylistEditor.h" />
     <ClInclude Include="..\..\xbmc\GUIDialogVideoScan.h" />
     <ClInclude Include="..\..\xbmc\GUIViewStateVideo.h" />
     <ClInclude Include="..\..\xbmc\GUIWindowVideoNav.h" />

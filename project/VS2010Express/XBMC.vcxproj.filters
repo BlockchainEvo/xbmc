@@ -1617,24 +1617,6 @@
     <ClCompile Include="..\..\xbmc\GUIViewStateMusic.cpp">
       <Filter>Source Files\GUI Music</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\GUIWindowMusicBase.cpp">
-      <Filter>Source Files\GUI Music</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\GUIWindowMusicNav.cpp">
-      <Filter>Source Files\GUI Music</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\GUIWindowMusicOverlay.cpp">
-      <Filter>Source Files\GUI Music</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\GUIWindowMusicPlaylist.cpp">
-      <Filter>Source Files\GUI Music</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\GUIWindowMusicPlaylistEditor.cpp">
-      <Filter>Source Files\GUI Music</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\GUIWindowMusicSongs.cpp">
-      <Filter>Source Files\GUI Music</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\xbmc\GUIDialogVideoScan.cpp">
       <Filter>Source Files\GUI Video</Filter>
     </ClCompile>
@@ -5289,6 +5271,24 @@
     <ClCompile Include="..\..\xbmc\network\windows\NetworkWin32.cpp">
       <Filter>win32</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\xbmc\music\windows\GUIWindowMusicBase.cpp">
+      <Filter>Source Files\GUI Music</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\music\windows\GUIWindowMusicNav.cpp">
+      <Filter>Source Files\GUI Music</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\music\windows\GUIWindowMusicOverlay.cpp">
+      <Filter>Source Files\GUI Music</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\music\windows\GUIWindowMusicPlaylist.cpp">
+      <Filter>Source Files\GUI Music</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\music\windows\GUIWindowMusicPlaylistEditor.cpp">
+      <Filter>Source Files\GUI Music</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\music\windows\GUIWindowMusicSongs.cpp">
+      <Filter>Source Files\GUI Music</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\xbmc\win32\pch.h">
@@ -5904,12 +5904,6 @@
       <Filter>Source Files\GUI Music</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\GUIViewStateMusic.h">
-      <Filter>Source Files\GUI Music</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\GUIWindowMusicNav.h">
-      <Filter>Source Files\GUI Music</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\GUIWindowMusicPlaylistEditor.h">
       <Filter>Source Files\GUI Music</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\GUIDialogVideoScan.h">
@@ -9624,6 +9618,24 @@
     </ClInclude>
     <ClInclude Include="..\..\xbmc\network\windows\NetworkWin32.h">
       <Filter>win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\music\windows\GUIWindowMusicBase.h">
+      <Filter>Source Files\GUI Music</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\music\windows\GUIWindowMusicNav.h">
+      <Filter>Source Files\GUI Music</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\music\windows\GUIWindowMusicOverlay.h">
+      <Filter>Source Files\GUI Music</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\music\windows\GUIWindowMusicPlaylist.h">
+      <Filter>Source Files\GUI Music</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\music\windows\GUIWindowMusicPlaylistEditor.h">
+      <Filter>Source Files\GUI Music</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\music\windows\GUIWindowMusicSongs.h">
+      <Filter>Source Files\GUI Music</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
