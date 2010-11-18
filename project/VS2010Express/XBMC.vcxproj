@@ -1461,6 +1461,10 @@
     <ClCompile Include="..\..\xbmc\settings\Settings.cpp" />
     <ClCompile Include="..\..\xbmc\settings\SettingsControls.cpp" />
     <ClCompile Include="..\..\xbmc\settings\VideoSettings.cpp" />
+    <ClCompile Include="..\..\xbmc\storage\AutorunMediaJob.cpp" />
+    <ClCompile Include="..\..\xbmc\storage\cdioSupport.cpp" />
+    <ClCompile Include="..\..\xbmc\storage\IoSupport.cpp" />
+    <ClCompile Include="..\..\xbmc\storage\windows\Win32StorageProvider.cpp" />
     <ClCompile Include="..\..\xbmc\SystemGlobals.cpp" />
     <ClCompile Include="..\..\xbmc\utils\fstrcmp.c">
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug (DirectX)|Win32'">CompileAsCpp</CompileAs>
@@ -1481,7 +1485,6 @@
     </ClCompile>
     <ClCompile Include="..\..\xbmc\win32\strverscmp.cpp" />
     <ClCompile Include="..\..\xbmc\win32\Win32DelayedDllLoad.cpp" />
-    <ClCompile Include="..\..\xbmc\win32\Win32StorageProvider.cpp" />
     <ClCompile Include="..\..\xbmc\win32\WIN32Util.cpp" />
     <ClCompile Include="..\..\xbmc\win32\WINDirectSound.cpp" />
     <ClCompile Include="..\..\xbmc\win32\WindowHelper.cpp" />
@@ -1678,7 +1681,6 @@
     <ClCompile Include="..\..\xbmc\utils\Atomics.cpp" />
     <ClCompile Include="..\..\xbmc\utils\AutoPtrHandle.cpp" />
     <ClCompile Include="..\..\xbmc\Autorun.cpp" />
-    <ClCompile Include="..\..\xbmc\AutorunMediaJob.cpp" />
     <ClCompile Include="..\..\xbmc\AutoSwitch.cpp" />
     <ClCompile Include="..\..\xbmc\utils\BitstreamStats.cpp" />
     <ClCompile Include="..\..\xbmc\utils\Builtins.cpp" />
@@ -1824,7 +1826,6 @@
     <ClCompile Include="..\..\xbmc\FileSystem\CacheMemBuffer.cpp" />
     <ClCompile Include="..\..\xbmc\FileSystem\CacheStrategy.cpp" />
     <ClCompile Include="..\..\xbmc\FileSystem\CDDADirectory.cpp" />
-    <ClCompile Include="..\..\xbmc\FileSystem\cdioSupport.cpp" />
     <ClCompile Include="..\..\xbmc\FileSystem\DAAPDirectory.cpp" />
     <ClCompile Include="..\..\xbmc\FileSystem\DAVDirectory.cpp" />
     <ClCompile Include="..\..\xbmc\FileSystem\Directory.cpp" />
@@ -1975,7 +1976,6 @@
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release (DirectX)|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release (OpenGL)|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\utils\IoSupport.cpp" />
     <ClCompile Include="..\..\xbmc\karaoke\karaokelyrics.cpp" />
     <ClCompile Include="..\..\xbmc\karaoke\karaokelyricscdg.cpp" />
     <ClCompile Include="..\..\xbmc\karaoke\karaokelyricsfactory.cpp" />
@@ -3144,6 +3144,10 @@
     <ClInclude Include="..\..\xbmc\settings\Settings.h" />
     <ClInclude Include="..\..\xbmc\settings\SettingsControls.h" />
     <ClInclude Include="..\..\xbmc\settings\VideoSettings.h" />
+    <ClInclude Include="..\..\xbmc\storage\AutorunMediaJob.h" />
+    <ClInclude Include="..\..\xbmc\storage\cdioSupport.h" />
+    <ClInclude Include="..\..\xbmc\storage\IoSupport.h" />
+    <ClInclude Include="..\..\xbmc\storage\windows\Win32StorageProvider.h" />
     <ClInclude Include="..\..\xbmc\system.h" />
     <ClInclude Include="..\..\xbmc\utils\ISerializable.h" />
     <ClInclude Include="..\..\xbmc\utils\MathUtils.h" />
@@ -3155,7 +3159,6 @@
     <ClInclude Include="..\..\xbmc\win32\pch.h" />
     <ClInclude Include="..\..\xbmc\win32\PlatformDefs.h" />
     <ClInclude Include="..\..\xbmc\win32\PlatformInclude.h" />
-    <ClInclude Include="..\..\xbmc\win32\Win32StorageProvider.h" />
     <ClInclude Include="..\..\xbmc\win32\WIN32Util.h" />
     <ClInclude Include="..\..\xbmc\win32\WINDirectSound.h" />
     <ClInclude Include="..\..\xbmc\win32\WindowHelper.h" />
@@ -3591,7 +3594,6 @@
     <ClInclude Include="..\..\xbmc\utils\Archive.h" />
     <ClInclude Include="..\..\xbmc\utils\AutoPtrHandle.h" />
     <ClInclude Include="..\..\xbmc\Autorun.h" />
-    <ClInclude Include="..\..\xbmc\AutorunMediaJob.h" />
     <ClInclude Include="..\..\xbmc\AutoSwitch.h" />
     <ClInclude Include="..\..\xbmc\ButtonTranslator.h" />
     <ClInclude Include="..\..\xbmc\FileSystem\cdioSupport.h" />
@@ -3666,7 +3668,6 @@
     <ClInclude Include="..\..\xbmc\utils\IMDB.h" />
     <ClInclude Include="..\..\xbmc\ImusicInfoTagLoader.h" />
     <ClInclude Include="..\..\xbmc\utils\InfoLoader.h" />
-    <ClInclude Include="..\..\xbmc\utils\IoSupport.h" />
     <ClInclude Include="..\..\xbmc\FileSystem\iso9660.h" />
     <ClInclude Include="..\..\xbmc\LangCodeExpander.h" />
     <ClInclude Include="..\..\xbmc\LangInfo.h" />

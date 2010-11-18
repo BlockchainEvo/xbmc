@@ -123,9 +123,6 @@
     <Filter Include="Source Files\Filesystem\VideoDatabaseDirectory">
       <UniqueIdentifier>{a9c70632-dcfa-4019-b785-da8ba68d998a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\common">
-      <UniqueIdentifier>{4e6846f6-c134-4aa3-b912-29eba8053a5f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Karaoke">
       <UniqueIdentifier>{0364d1da-0b74-48ee-91e2-ad8003107179}</UniqueIdentifier>
     </Filter>
@@ -224,6 +221,7 @@
     <Filter Include="cores\dvdplayer\DVDSubtitles">
       <UniqueIdentifier>{83ae8e22-c3a0-45c6-bbc2-29d0bb180e2d}</UniqueIdentifier>
     </Filter>
+<<<<<<< HEAD
     <Filter Include="cores\paplayer">
       <UniqueIdentifier>{ef82a765-fb92-4244-b2dd-212704a98407}</UniqueIdentifier>
     </Filter>
@@ -1160,6 +1158,13 @@
   </ItemGroup>
   <ItemGroup>
 >>>>>>> changed: move powermanagement related code to a separate dir and move platform specific implementations to subdirs
+=======
+    <Filter Include="Source Files\Storage">
+      <UniqueIdentifier>{5e4d186d-d26a-4b00-95f8-898cd833a53b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+>>>>>>> changed: move storage related files to storage and platform specific implementations to subdirectories
     <ClCompile Include="..\..\xbmc\win32\pch.cpp">
       <Filter>win32</Filter>
     </ClCompile>
@@ -1170,6 +1175,7 @@
       <Filter>win32</Filter>
     </ClCompile>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <ClCompile Include="..\..\xbmc\win32\Win32PowerSyscall.cpp">
       <Filter>win32</Filter>
     </ClCompile>
@@ -1178,6 +1184,8 @@
     <ClCompile Include="..\..\xbmc\win32\Win32StorageProvider.cpp">
       <Filter>win32</Filter>
     </ClCompile>
+=======
+>>>>>>> changed: move storage related files to storage and platform specific implementations to subdirectories
     <ClCompile Include="..\..\xbmc\win32\WIN32Util.cpp">
       <Filter>win32</Filter>
     </ClCompile>
@@ -1688,9 +1696,6 @@
     <ClCompile Include="..\..\xbmc\Autorun.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\AutorunMediaJob.cpp">
-      <Filter>Source Files\Utils</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\xbmc\AutoSwitch.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
@@ -2099,9 +2104,6 @@
     <ClCompile Include="..\..\xbmc\FileSystem\CDDADirectory.cpp">
       <Filter>Source Files\Filesystem</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\FileSystem\cdioSupport.cpp">
-      <Filter>Source Files\Filesystem</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\xbmc\FileSystem\DAAPDirectory.cpp">
       <Filter>Source Files\Filesystem</Filter>
     </ClCompile>
@@ -2461,9 +2463,6 @@
     </ClCompile>
     <ClCompile Include="..\..\xbmc\FileSystem\VideoDatabaseDirectory\QueryParams.cpp">
       <Filter>Source Files\Filesystem\VideoDatabaseDirectory</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\utils\IoSupport.cpp">
-      <Filter>Source Files\common</Filter>
     </ClCompile>
     </ClCompile>
     <ClCompile Include="..\..\xbmc\karaoke\karaokelyrics.cpp">
@@ -5306,6 +5305,18 @@
     <ClCompile Include="..\..\xbmc\powermanagement\windows\Win32PowerSyscall.cpp">
       <Filter>Source Files\Powermanagement</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\xbmc\storage\AutorunMediaJob.cpp">
+      <Filter>Source Files\Storage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\storage\IoSupport.cpp">
+      <Filter>Source Files\Storage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\storage\cdioSupport.cpp">
+      <Filter>Source Files\Storage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\storage\windows\Win32StorageProvider.cpp">
+      <Filter>Source Files\Storage</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\xbmc\win32\pch.h">
@@ -5315,9 +5326,6 @@
       <Filter>win32</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\win32\PlatformInclude.h">
-      <Filter>win32</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\win32\Win32StorageProvider.h">
       <Filter>win32</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\win32\WIN32Util.h">
@@ -6608,9 +6616,6 @@
     <ClInclude Include="..\..\xbmc\Autorun.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\xbmc\AutorunMediaJob.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\xbmc\AutoSwitch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -6831,9 +6836,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\utils\InfoLoader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\utils\IoSupport.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\FileSystem\iso9660.h">
@@ -9650,6 +9652,18 @@
     </ClInclude>
     <ClInclude Include="..\..\xbmc\powermanagement\windows\Win32PowerSyscall.h">
       <Filter>Source Files\Powermanagement</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\storage\AutorunMediaJob.h">
+      <Filter>Source Files\Storage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\storage\IoSupport.h">
+      <Filter>Source Files\Storage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\storage\cdioSupport.h">
+      <Filter>Source Files\Storage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\storage\windows\Win32StorageProvider.h">
+      <Filter>Source Files\Storage</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
