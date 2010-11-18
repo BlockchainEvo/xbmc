@@ -510,7 +510,7 @@
     <ClCompile Include="..\..\xbmc\GUIWindowMusicPlaylist.cpp" />
     <ClCompile Include="..\..\xbmc\GUIWindowMusicPlaylistEditor.cpp" />
     <ClCompile Include="..\..\xbmc\GUIWindowMusicSongs.cpp" />
-    <ClCompile Include="..\..\xbmc\SmartPlaylist.cpp" />
+    <ClCompile Include="..\..\xbmc\playlists\SmartPlaylist.cpp" />
     <ClCompile Include="..\..\xbmc\GUIDialogVideoScan.cpp" />
     <ClCompile Include="..\..\xbmc\GUIViewStateVideo.cpp" />
     <ClCompile Include="..\..\xbmc\GUIWindowVideoBase.cpp" />
