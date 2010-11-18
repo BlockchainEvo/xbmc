@@ -786,67 +786,67 @@
     <ClCompile Include="..\..\xbmc\MusicInfoScanner.cpp">
       <Filter>Source Files\infoTagReaders</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\musicInfoTag.cpp">
+    <ClCompile Include="..\..\xbmc\music\tags\musicInfoTag.cpp">
       <Filter>Source Files\infoTagReaders</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\MusicInfoTagLoaderAAC.cpp">
+    <ClCompile Include="..\..\xbmc\music\tags\MusicInfoTagLoaderAAC.cpp">
       <Filter>Source Files\infoTagReaders</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\MusicInfoTagLoaderApe.cpp">
+    <ClCompile Include="..\..\xbmc\music\tags\MusicInfoTagLoaderApe.cpp">
       <Filter>Source Files\infoTagReaders</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\MusicInfoTagLoaderASAP.cpp">
+    <ClCompile Include="..\..\xbmc\music\tags\MusicInfoTagLoaderASAP.cpp">
       <Filter>Source Files\infoTagReaders</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\MusicInfoTagLoaderCDDA.cpp">
+    <ClCompile Include="..\..\xbmc\music\tags\MusicInfoTagLoaderCDDA.cpp">
       <Filter>Source Files\infoTagReaders</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\MusicInfoTagLoaderDatabase.cpp">
+    <ClCompile Include="..\..\xbmc\music\tags\MusicInfoTagLoaderDatabase.cpp">
       <Filter>Source Files\infoTagReaders</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\musicInfoTagLoaderFactory.cpp">
+    <ClCompile Include="..\..\xbmc\music\tags\musicInfoTagLoaderFactory.cpp">
       <Filter>Source Files\infoTagReaders</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\MusicInfoTagLoaderFlac.cpp">
+    <ClCompile Include="..\..\xbmc\music\tags\MusicInfoTagLoaderFlac.cpp">
       <Filter>Source Files\infoTagReaders</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\MusicInfoTagLoaderMidi.cpp">
+    <ClCompile Include="..\..\xbmc\music\tags\MusicInfoTagLoaderMidi.cpp">
       <Filter>Source Files\infoTagReaders</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\MusicInfoTagLoaderMod.cpp">
+    <ClCompile Include="..\..\xbmc\music\tags\MusicInfoTagLoaderMod.cpp">
       <Filter>Source Files\infoTagReaders</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\MusicInfoTagLoaderMP3.cpp">
+    <ClCompile Include="..\..\xbmc\music\tags\MusicInfoTagLoaderMP3.cpp">
       <Filter>Source Files\infoTagReaders</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\MusicInfoTagLoaderMP4.cpp">
+    <ClCompile Include="..\..\xbmc\music\tags\MusicInfoTagLoaderMP4.cpp">
       <Filter>Source Files\infoTagReaders</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\MusicInfoTagLoaderMPC.cpp">
+    <ClCompile Include="..\..\xbmc\music\tags\MusicInfoTagLoaderMPC.cpp">
       <Filter>Source Files\infoTagReaders</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\MusicInfoTagLoaderNSF.cpp">
+    <ClCompile Include="..\..\xbmc\music\tags\MusicInfoTagLoaderNSF.cpp">
       <Filter>Source Files\infoTagReaders</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\MusicInfoTagLoaderOgg.cpp">
+    <ClCompile Include="..\..\xbmc\music\tags\MusicInfoTagLoaderOgg.cpp">
       <Filter>Source Files\infoTagReaders</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\MusicInfoTagLoaderShn.cpp">
+    <ClCompile Include="..\..\xbmc\music\tags\MusicInfoTagLoaderShn.cpp">
       <Filter>Source Files\infoTagReaders</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\MusicInfoTagLoaderSPC.cpp">
+    <ClCompile Include="..\..\xbmc\music\tags\MusicInfoTagLoaderSPC.cpp">
       <Filter>Source Files\infoTagReaders</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\MusicInfoTagLoaderWav.cpp">
+    <ClCompile Include="..\..\xbmc\music\tags\MusicInfoTagLoaderWav.cpp">
       <Filter>Source Files\infoTagReaders</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\MusicInfoTagLoaderWavPack.cpp">
+    <ClCompile Include="..\..\xbmc\music\tags\MusicInfoTagLoaderWavPack.cpp">
       <Filter>Source Files\infoTagReaders</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\MusicInfoTagLoaderWMA.cpp">
+    <ClCompile Include="..\..\xbmc\music\tags\MusicInfoTagLoaderWMA.cpp">
       <Filter>Source Files\infoTagReaders</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\MusicInfoTagLoaderYM.cpp">
+    <ClCompile Include="..\..\xbmc\music\tags\MusicInfoTagLoaderYM.cpp">
       <Filter>Source Files\infoTagReaders</Filter>
     </ClCompile>
     <ClCompile Include="..\..\xbmc\OggTag.cpp">
@@ -2783,46 +2783,46 @@
     <ClInclude Include="..\..\xbmc\Id3Tag.h">
       <Filter>Source Files\infoTagReaders</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\xbmc\musicInfoTag.h">
+    <ClInclude Include="..\..\xbmc\music\tags\musicInfoTag.h">
       <Filter>Source Files\infoTagReaders</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\xbmc\MusicInfoTagLoaderAAC.h">
+    <ClInclude Include="..\..\xbmc\music\tags\MusicInfoTagLoaderAAC.h">
       <Filter>Source Files\infoTagReaders</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\xbmc\MusicInfoTagLoaderApe.h">
+    <ClInclude Include="..\..\xbmc\music\tags\MusicInfoTagLoaderApe.h">
       <Filter>Source Files\infoTagReaders</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\xbmc\MusicInfoTagLoaderASAP.h">
+    <ClInclude Include="..\..\xbmc\music\tags\MusicInfoTagLoaderASAP.h">
       <Filter>Source Files\infoTagReaders</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\xbmc\MusicInfoTagLoaderDatabase.h">
+    <ClInclude Include="..\..\xbmc\music\tags\MusicInfoTagLoaderDatabase.h">
       <Filter>Source Files\infoTagReaders</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\xbmc\MusicInfoTagLoaderMidi.h">
+    <ClInclude Include="..\..\xbmc\music\tags\MusicInfoTagLoaderMidi.h">
       <Filter>Source Files\infoTagReaders</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\xbmc\MusicInfoTagLoaderMod.h">
+    <ClInclude Include="..\..\xbmc\music\tags\MusicInfoTagLoaderMod.h">
       <Filter>Source Files\infoTagReaders</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\xbmc\MusicInfoTagLoaderMPC.h">
+    <ClInclude Include="..\..\xbmc\music\tags\MusicInfoTagLoaderMPC.h">
       <Filter>Source Files\infoTagReaders</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\xbmc\MusicInfoTagLoaderNSF.h">
+    <ClInclude Include="..\..\xbmc\music\tags\MusicInfoTagLoaderNSF.h">
       <Filter>Source Files\infoTagReaders</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\xbmc\MusicInfoTagLoaderShn.h">
+    <ClInclude Include="..\..\xbmc\music\tags\MusicInfoTagLoaderShn.h">
       <Filter>Source Files\infoTagReaders</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\xbmc\MusicInfoTagLoaderSPC.h">
+    <ClInclude Include="..\..\xbmc\music\tags\MusicInfoTagLoaderSPC.h">
       <Filter>Source Files\infoTagReaders</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\xbmc\MusicInfoTagLoaderWav.h">
+    <ClInclude Include="..\..\xbmc\music\tags\MusicInfoTagLoaderWav.h">
       <Filter>Source Files\infoTagReaders</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\xbmc\MusicInfoTagLoaderWavPack.h">
+    <ClInclude Include="..\..\xbmc\music\tags\MusicInfoTagLoaderWavPack.h">
       <Filter>Source Files\infoTagReaders</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\xbmc\MusicInfoTagLoaderYM.h">
+    <ClInclude Include="..\..\xbmc\music\tags\MusicInfoTagLoaderYM.h">
       <Filter>Source Files\infoTagReaders</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\OggTag.h">
@@ -3821,7 +3821,7 @@
     <ClInclude Include="..\..\xbmc\utils\IMDB.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\xbmc\ImusicInfoTagLoader.h">
+    <ClInclude Include="..\..\xbmc\music\tags\ImusicInfoTagLoader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\utils\InfoLoader.h">
@@ -3857,25 +3857,25 @@
     <ClInclude Include="..\..\xbmc\utils\MusicInfoScraper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\xbmc\MusicInfoTagLoaderCDDA.h">
+    <ClInclude Include="..\..\xbmc\music\tags\MusicInfoTagLoaderCDDA.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\xbmc\musicInfoTagLoaderFactory.h">
+    <ClInclude Include="..\..\xbmc\music\tags\musicInfoTagLoaderFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\xbmc\MusicInfoTagLoaderFlac.h">
+    <ClInclude Include="..\..\xbmc\music\tags\MusicInfoTagLoaderFlac.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\xbmc\MusicInfoTagLoaderMP3.h">
+    <ClInclude Include="..\..\xbmc\music\tags\MusicInfoTagLoaderMP3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\xbmc\MusicInfoTagLoaderMP4.h">
+    <ClInclude Include="..\..\xbmc\music\tags\MusicInfoTagLoaderMP4.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\xbmc\MusicInfoTagLoaderOgg.h">
+    <ClInclude Include="..\..\xbmc\music\tags\MusicInfoTagLoaderOgg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\xbmc\MusicInfoTagLoaderWMA.h">
+    <ClInclude Include="..\..\xbmc\music\tags\MusicInfoTagLoaderWMA.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\NfoFile.h">
