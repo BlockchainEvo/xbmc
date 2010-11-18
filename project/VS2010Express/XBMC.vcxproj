@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
@@ -277,6 +278,291 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+=======
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug (DirectX)|Win32">
+      <Configuration>Debug (DirectX)</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug (OpenGL)|Win32">
+      <Configuration>Debug (OpenGL)</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release (DirectX)|Win32">
+      <Configuration>Release (DirectX)</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release (OpenGL)|Win32">
+      <Configuration>Release (OpenGL)</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Template|Win32">
+      <Configuration>Template</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{3A68081D-E8F9-4523-9436-530DE9E5530A}</ProjectGuid>
+    <RootNamespace>XBMC_PC</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug (OpenGL)|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release (DirectX)|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug (DirectX)|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <CLRSupport>false</CLRSupport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release (OpenGL)|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug (OpenGL)|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+    <Import Project="XBMC for Windows.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release (DirectX)|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+    <Import Project="XBMC for Windows.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug (DirectX)|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+    <Import Project="XBMC for Windows.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release (OpenGL)|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+    <Import Project="XBMC for Windows.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release (OpenGL)|Win32'">XBMC\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release (OpenGL)|Win32'">XBMC\$(Configuration)\objs\</IntDir>
+    <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Release (OpenGL)|Win32'">false</IgnoreImportLibrary>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release (OpenGL)|Win32'">false</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug (DirectX)|Win32'">XBMC\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug (DirectX)|Win32'">XBMC\$(Configuration)\objs\</IntDir>
+    <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Debug (DirectX)|Win32'">false</IgnoreImportLibrary>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug (DirectX)|Win32'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release (DirectX)|Win32'">XBMC\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release (DirectX)|Win32'">XBMC\$(Configuration)\objs\</IntDir>
+    <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Release (DirectX)|Win32'">false</IgnoreImportLibrary>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release (DirectX)|Win32'">false</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug (OpenGL)|Win32'">XBMC\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug (OpenGL)|Win32'">XBMC\$(Configuration)\objs\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug (OpenGL)|Win32'">true</LinkIncremental>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug (DirectX)|Win32'">$(DXSDK_DIR)Include;$(IncludePath)</IncludePath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug (DirectX)|Win32'">$(DXSDK_DIR)Lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release (DirectX)|Win32'">$(DXSDK_DIR)Include;$(IncludePath)</IncludePath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release (DirectX)|Win32'">$(DXSDK_DIR)Lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug (OpenGL)|Win32'">$(DXSDK_DIR)Include;$(IncludePath)</IncludePath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release (OpenGL)|Win32'">$(DXSDK_DIR)Include;$(IncludePath)</IncludePath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug (OpenGL)|Win32'">$(DXSDK_DIR)Lib\x86;$(LibraryPath)</LibraryPath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release (OpenGL)|Win32'">$(DXSDK_DIR)Lib\x86;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release (OpenGL)|Win32'">
+    <ClCompile>
+      <AdditionalOptions>/MP %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>Full</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <OmitFramePointers>true</OmitFramePointers>
+      <AdditionalIncludeDirectories>..\..\xbmc\cores\dvdplayer;..\..\xbmc\win32;..\..\xbmc\cores\dvdplayer\Codecs\ffmpeg\include;..\..\xbmc\cores\dvdplayer\Codecs\ffmpeg;..\..\xbmc\cores;..\..\xbmc\;..\..\xbmc\utils;..\..\guilib\;..\..\;..\..\xbmc\lib\libUPnP\Platinum\Source\Devices\MediaRenderer;..\..\xbmc\lib\libUPnP\Platinum\Source\Devices\MediaConnect;..\..\xbmc\lib\libUPnP\Platinum\Source\Devices\MediaServer;..\..\xbmc\lib\libUPnP\Platinum\Source\Platinum;..\..\xbmc\lib\libUPnP\Platinum\Source\Core;..\..\xbmc\lib\libUPnP\Neptune\Source\Core;..\..\xbmc\lib\libUPnP\Neptune\Source\System\Win32;..\..\xbmc\cores\dvdplayer\DVDCodecs\Overlay;..\..\xbmc\FileSystem;..\..\xbmc\lib\libRTMP;..\..\xbmc\lib\boost;..\..\xbmc\lib\libPython\Python\PC;..\..\xbmc\lib\libsamplerate\src;..\..\xbmc\lib;..\..\lib\freetype\include;..\..\lib\libiconv\include;..\..\lib\libcdio\include;..\..\lib;..\..\lib\jsoncpp\jsoncpp\include;..\..\lib\libmicrohttpd_win32\include;..\..\lib\libssh_win32\include;..\..\lib\liblame\include;..\..\lib\libbluray_win32;..\..\lib\pcre</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_WINDOWS;_MSVC;WIN32;NDEBUG;_WIN32_WINNT=0x0501;WINVER=0x0500;NOMINMAX;_USE_32BIT_TIME_T;HAS_GL;__STDC_CONSTANT_MACROS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>false</StringPooling>
+      <MinimalRebuild>false</MinimalRebuild>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions</EnableEnhancedInstructionSet>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <ForcedIncludeFiles>pch.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ShowIncludes>false</ShowIncludes>
+    </ClCompile>
+    <Link>
+      <AdditionalOptions>/MACHINE:I386 /IGNORE:4089 /ignore:4254 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>SDL.lib;opengl32.lib;DSound.lib;glew32.lib;glu32.lib;winmm.lib;ws2_32.lib;Mpr.lib;Iphlpapi.lib;PowrProf.lib;setupapi.lib;dwmapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)XBMC.exe</OutputFile>
+      <AdditionalLibraryDirectories>..\..\lib\libSDL-WIN32\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries>libc;msvcrt;libci;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <DelayLoadDLLs>dwmapi.dll;libmicrohttpd-5.dll;libssh.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)XBMC.pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <LargeAddressAware>true</LargeAddressAware>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <Manifest>
+      <AdditionalManifestFiles>VC90.CRT.x86.manifest;%(AdditionalManifestFiles)</AdditionalManifestFiles>
+      <EnableDPIAwareness>true</EnableDPIAwareness>
+    </Manifest>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug (DirectX)|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\xbmc\cores\dvdplayer;..\..\xbmc\win32;..\..\xbmc\cores\dvdplayer\Codecs\ffmpeg\include;..\..\xbmc\cores\dvdplayer\Codecs\ffmpeg;..\..\xbmc\cores;..\..\xbmc\;..\..\xbmc\utils;..\..\lib\libcurl-mingw32\include;..\..\guilib\;..\..\;..\..\xbmc\lib\libUPnP\Platinum\Source\Devices\MediaRenderer;..\..\xbmc\lib\libUPnP\Platinum\Source\Devices\MediaConnect;..\..\xbmc\lib\libUPnP\Platinum\Source\Devices\MediaServer;..\..\xbmc\lib\libUPnP\Platinum\Source\Platinum;..\..\xbmc\lib\libUPnP\Platinum\Source\Core;..\..\xbmc\lib\libUPnP\Neptune\Source\Core;..\..\xbmc\lib\libUPnP\Neptune\Source\System\Win32;..\..\xbmc\cores\dvdplayer\DVDCodecs\Overlay;..\..\xbmc\FileSystem;..\..\xbmc\lib\libRTMP;..\..\xbmc\lib\boost;..\..\lib\libSDL-WIN32\include;..\..\xbmc\lib\libPython\Python\PC;..\..\xbmc\lib\libsamplerate\src;..\..\xbmc\lib;..\..\lib\freetype\include;..\..\lib\libiconv\include;..\..\lib\libcdio\include;..\..\lib;..\..\lib\jsoncpp\jsoncpp\include;..\..\lib\libmicrohttpd_win32\include;..\..\lib\libssh_win32\include;..\..\lib\liblame\include;..\..\lib\libbluray_win32;..\..\lib\pcre;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_WINDOWS;_MSVC;WIN32;_DEBUG;_WIN32_WINNT=0x0501;WINVER=0x0500;NOMINMAX;_USE_32BIT_TIME_T;HAS_DX;Py_NO_ENABLE_SHARED;D3D_DEBUG_INFO;__STDC_CONSTANT_MACROS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <ForcedIncludeFiles>pch.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ShowIncludes>false</ShowIncludes>
+    </ClCompile>
+    <Link>
+      <AdditionalOptions>/MACHINE:I386 /IGNORE:4089 /ignore:4254 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>SDL.lib;D3D9.lib;D3dx9.lib;DInput8.lib;DSound.lib;winmm.lib;ws2_32.lib;Mpr.lib;Iphlpapi.lib;PowrProf.lib;setupapi.lib;dwmapi.lib;strmiids.lib;dxguid.lib;mfuuid.lib;comctl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)XBMC.exe</OutputFile>
+      <AdditionalLibraryDirectories>..\..\lib\libSDL-WIN32\lib;..\..\xbmc\cores\DSPlayer\Libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries>libc;msvcrt;libcmt;msvcrtd;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ModuleDefinitionFile>
+      </ModuleDefinitionFile>
+      <DelayLoadDLLs>dwmapi.dll;libmicrohttpd-5.dll;libssh.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)XBMC.pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <LargeAddressAware>true</LargeAddressAware>
+      <EntryPointSymbol>
+      </EntryPointSymbol>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <Manifest>
+      <AdditionalManifestFiles>VC90.CRT.x86.manifest;%(AdditionalManifestFiles)</AdditionalManifestFiles>
+      <EnableDPIAwareness>true</EnableDPIAwareness>
+    </Manifest>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release (DirectX)|Win32'">
+    <ClCompile>
+      <AdditionalOptions>/MP %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>Full</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <OmitFramePointers>true</OmitFramePointers>
+      <AdditionalIncludeDirectories>..\..\xbmc\cores\dvdplayer;..\..\xbmc\win32;..\..\xbmc\cores\dvdplayer\Codecs\ffmpeg\include;..\..\xbmc\cores\dvdplayer\Codecs\ffmpeg;..\..\xbmc\cores;..\..\xbmc\;..\..\xbmc\utils;..\..\lib\libcurl-mingw32\include;..\..\guilib\;..\..\;..\..\xbmc\lib\libUPnP\Platinum\Source\Devices\MediaRenderer;..\..\xbmc\lib\libUPnP\Platinum\Source\Devices\MediaConnect;..\..\xbmc\lib\libUPnP\Platinum\Source\Devices\MediaServer;..\..\xbmc\lib\libUPnP\Platinum\Source\Platinum;..\..\xbmc\lib\libUPnP\Platinum\Source\Core;..\..\xbmc\lib\libUPnP\Neptune\Source\Core;..\..\xbmc\lib\libUPnP\Neptune\Source\System\Win32;..\..\xbmc\cores\dvdplayer\DVDCodecs\Overlay;..\..\xbmc\FileSystem;..\..\xbmc\lib\libRTMP;..\..\xbmc\lib\boost;..\..\lib\libSDL-WIN32\include;..\..\xbmc\lib\libPython\Python\PC;..\..\xbmc\lib\libsamplerate\src;..\..\xbmc\lib;..\..\lib\freetype\include;..\..\lib\libiconv\include;..\..\lib\libcdio\include;..\..\lib;..\..\lib\jsoncpp\jsoncpp\include;..\..\lib\libmicrohttpd_win32\include;..\..\lib\libssh_win32\include;..\..\lib\liblame\include;..\..\lib\libbluray_win32;..\..\lib\pcre;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_WINDOWS;_MSVC;WIN32;NDEBUG;_WIN32_WINNT=0x0501;WINVER=0x0500;NOMINMAX;_USE_32BIT_TIME_T;HAS_DX;__STDC_CONSTANT_MACROS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>false</StringPooling>
+      <MinimalRebuild>false</MinimalRebuild>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions</EnableEnhancedInstructionSet>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <ForcedIncludeFiles>pch.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ShowIncludes>false</ShowIncludes>
+    </ClCompile>
+    <Link>
+      <AdditionalOptions>/MACHINE:I386 /IGNORE:4089 /ignore:4254 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>SDL.lib;D3D9.lib;D3dx9.lib;DInput8.lib;DSound.lib;winmm.lib;ws2_32.lib;Mpr.lib;Iphlpapi.lib;PowrProf.lib;setupapi.lib;dwmapi.lib;strmiids.lib;mfuuid.lib;comctl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)XBMC.exe</OutputFile>
+      <AdditionalLibraryDirectories>..\..\lib\libSDL-WIN32\lib;..\..\xbmc\cores\DSPlayer\Libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries>libc;msvcrt;libci;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <DelayLoadDLLs>dwmapi.dll;libmicrohttpd-5.dll;libssh.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)XBMC.pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <LargeAddressAware>true</LargeAddressAware>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <Manifest>
+      <AdditionalManifestFiles>VC90.CRT.x86.manifest;%(AdditionalManifestFiles)</AdditionalManifestFiles>
+      <EnableDPIAwareness>true</EnableDPIAwareness>
+    </Manifest>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug (OpenGL)|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\xbmc\cores\dvdplayer;..\..\xbmc\win32;..\..\xbmc\cores\dvdplayer\Codecs\ffmpeg\include;..\..\xbmc\cores\dvdplayer\Codecs\ffmpeg;..\..\xbmc\cores;..\..\xbmc\;..\..\xbmc\utils;..\..\guilib\;..\..\;..\..\xbmc\lib\libUPnP\Platinum\Source\Devices\MediaRenderer;..\..\xbmc\lib\libUPnP\Platinum\Source\Devices\MediaConnect;..\..\xbmc\lib\libUPnP\Platinum\Source\Devices\MediaServer;..\..\xbmc\lib\libUPnP\Platinum\Source\Platinum;..\..\xbmc\lib\libUPnP\Platinum\Source\Core;..\..\xbmc\lib\libUPnP\Neptune\Source\Core;..\..\xbmc\lib\libUPnP\Neptune\Source\System\Win32;..\..\xbmc\cores\dvdplayer\DVDCodecs\Overlay;..\..\xbmc\FileSystem;..\..\xbmc\lib\libRTMP;..\..\xbmc\lib\boost;..\..\xbmc\lib\libPython\Python\PC;..\..\xbmc\lib\libsamplerate\src;..\..\xbmc\lib;..\..\lib\freetype\include;..\..\lib\libiconv\include;..\..\lib\libcdio\include;..\..\lib;..\..\lib\jsoncpp\jsoncpp\include;..\..\lib\libmicrohttpd_win32\include;..\..\lib\libssh_win32\include;..\..\lib\liblame\include;..\..\lib\libbluray_win32;..\..\lib\pcre</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_WINDOWS;_MSVC;WIN32;_DEBUG;_WIN32_WINNT=0x0501;WINVER=0x0500;NOMINMAX;_USE_32BIT_TIME_T;HAS_GL;Py_NO_ENABLE_SHARED;__STDC_CONSTANT_MACROS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <ProgramDataBaseFileName>$(IntDir)XBMC.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <ForcedIncludeFiles>pch.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ShowIncludes>false</ShowIncludes>
+    </ClCompile>
+    <Link>
+      <AdditionalOptions>/MACHINE:I386 /IGNORE:4089 /ignore:4254 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>SDL.lib;D3D9.lib;D3DX9.lib;DInput8.lib;DSound.lib;winmm.lib;ws2_32.lib;Mpr.lib;Iphlpapi.lib;PowrProf.lib;setupapi.lib;dwmapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)XBMC.exe</OutputFile>
+      <AdditionalLibraryDirectories>..\..\lib\libSDL-WIN32\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries>libc;msvcrt;libcmt;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ModuleDefinitionFile>
+      </ModuleDefinitionFile>
+      <DelayLoadDLLs>dwmapi.dll;libmicrohttpd-5.dll;libssh.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)XBMC.pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <LargeAddressAware>true</LargeAddressAware>
+      <EntryPointSymbol>
+      </EntryPointSymbol>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <Manifest>
+      <AdditionalManifestFiles>VC90.CRT.x86.manifest;%(AdditionalManifestFiles)</AdditionalManifestFiles>
+      <EnableDPIAwareness>true</EnableDPIAwareness>
+    </Manifest>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\lib\tinyXML\tinystr.cpp" />
+    <ClCompile Include="..\..\lib\tinyXML\tinyxml.cpp" />
+    <ClCompile Include="..\..\lib\tinyXML\tinyxmlerror.cpp" />
+    <ClCompile Include="..\..\lib\tinyXML\tinyxmlparser.cpp" />
+>>>>>>> changed: move guilib to xbmc/guilib. Moved guilib project into XBMC (hopefully this works afterwards)
     <ClCompile Include="..\..\xbmc\addons\AddonDatabase.cpp" />
     <ClCompile Include="..\..\xbmc\addons\PluginSource.cpp" />
     <ClCompile Include="..\..\xbmc\addons\Repository.cpp" />
@@ -541,11 +827,99 @@
     <ClCompile Include="..\..\xbmc\cores\VideoRenderers\VideoShaders\WinVideoFilter.cpp" />
     <ClCompile Include="..\..\xbmc\FileSystem\VideoDatabaseDirectory\DirectoryNodeCountry.cpp" />
     <ClCompile Include="..\..\xbmc\GUIDialogTextViewer.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\AnimatedGif.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\AudioContext.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\D3DResource.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\DDSImage.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\DirectXGraphics.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\FrameBufferObject.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GraphicContext.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUIAudioManager.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUIBaseContainer.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUIBorderedImage.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUIButtonControl.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUIButtonScroller.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUICheckMarkControl.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUIColorManager.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUIControl.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUIControlFactory.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUIControlGroup.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUIControlGroupList.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUIControlProfiler.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUIDialog.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUIEditControl.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUIFadeLabelControl.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUIFixedListContainer.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUIFont.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUIFontManager.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUIFontTTF.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUIFontTTFDX.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUIFontTTFGL.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUIImage.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUIIncludes.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUIInfoTypes.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUILabel.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUILabelControl.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUIListContainer.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUIListGroup.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUIListItem.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUIListItemLayout.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUIListLabel.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUIMessage.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUIMoverControl.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUIMultiImage.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUIMultiSelectText.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUIPanelContainer.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUIProgressControl.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUIRadioButtonControl.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUIRenderingControl.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUIResizeControl.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUIRSSControl.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUIScrollBarControl.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUISelectButtonControl.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUISettingsSliderControl.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUIShader.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUISliderControl.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUISound.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUISpinControl.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUISpinControlEx.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUIStandardWindow.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUIStaticItem.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUITextBox.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUITextLayout.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUITexture.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUITextureD3D.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUITextureGL.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUITextureGLES.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUIToggleButtonControl.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUIVideoControl.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUIVisualisationControl.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUIWindow.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUIWindowManager.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\GUIWrappingListContainer.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\IWindowManagerCallback.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\Key.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\LocalizeStrings.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\MatrixGLES.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\Shader.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\Texture.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\TextureBundle.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\TextureBundleXBT.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\TextureBundleXPR.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\TextureDX.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\TextureGL.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\TextureManager.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\VisibleEffect.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\XBTF.cpp" />
+    <ClCompile Include="..\..\xbmc\guilib\XBTFReader.cpp" />
     <ClCompile Include="..\..\xbmc\GUIWindowSystemInfo.cpp" />
     <ClCompile Include="..\..\xbmc\input\ButtonTranslator.cpp" />
     <ClCompile Include="..\..\xbmc\input\KeyboardLayoutConfiguration.cpp" />
     <ClCompile Include="..\..\xbmc\input\KeyboardStat.cpp" />
     <ClCompile Include="..\..\xbmc\input\MouseStat.cpp" />
+    <ClCompile Include="..\..\xbmc\input\SDLJoystick.cpp" />
+    <ClCompile Include="..\..\xbmc\input\windows\IRServerSuite.cpp" />
+    <ClCompile Include="..\..\xbmc\input\windows\IrssMessage.cpp" />
     <ClCompile Include="..\..\xbmc\lib\libjsonrpc\AudioLibrary.cpp" />
     <ClCompile Include="..\..\xbmc\lib\libPython\xbmcmodule\PythonAddon.cpp" />
     <ClCompile Include="..\..\xbmc\lib\libPython\xbmcmodule\xbmcaddonmodule.cpp" />
@@ -1680,7 +2054,12 @@
     <ClCompile Include="..\..\lib\jsoncpp\jsoncpp\src\lib_json\json_writer.cpp" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
 >>>>>>> changed: move settings related files to settings directory
+=======
+    <ClInclude Include="..\..\lib\tinyXML\tinystr.h" />
+    <ClInclude Include="..\..\lib\tinyXML\tinyxml.h" />
+>>>>>>> changed: move guilib to xbmc/guilib. Moved guilib project into XBMC (hopefully this works afterwards)
     <ClInclude Include="..\..\xbmc\addons\AddonDatabase.h" />
     <ClInclude Include="..\..\xbmc\addons\PluginSource.h" />
     <ClInclude Include="..\..\xbmc\addons\Repository.h" />
@@ -1938,10 +2317,107 @@
     <ClInclude Include="..\..\xbmc\cores\VideoRenderers\VideoShaders\WinVideoFilter.h" />
     <ClInclude Include="..\..\xbmc\FileSystem\VideoDatabaseDirectory\DirectoryNodeCountry.h" />
     <ClInclude Include="..\..\xbmc\GUIDialogTextViewer.h" />
+    <ClInclude Include="..\..\xbmc\guilib\AnimatedGif.h" />
+    <ClInclude Include="..\..\xbmc\guilib\AudioContext.h" />
+    <ClInclude Include="..\..\xbmc\guilib\D3DResource.h" />
+    <ClInclude Include="..\..\xbmc\guilib\DDSImage.h" />
+    <ClInclude Include="..\..\xbmc\guilib\DirectXGraphics.h" />
+    <ClInclude Include="..\..\xbmc\guilib\FrameBufferObject.h" />
+    <ClInclude Include="..\..\xbmc\guilib\Geometry.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GraphicContext.h" />
+    <ClInclude Include="..\..\xbmc\guilib\gui3d.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUIActionDescriptor.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUIAudioManager.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUIBaseContainer.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUIBorderedImage.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUIButtonControl.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUIButtonScroller.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUICallback.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUICheckMarkControl.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUIColorManager.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUIControl.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUIControlFactory.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUIControlGroup.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUIControlGroupList.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUIControlProfiler.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUIDialog.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUIEditControl.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUIFadeLabelControl.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUIFixedListContainer.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUIFont.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUIFontManager.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUIFontTTF.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUIFontTTFDX.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUIFontTTFGL.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUIImage.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUIIncludes.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUIInfoTypes.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUILabel.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUILabelControl.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUIListContainer.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUIListGroup.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUIListItem.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUIListItemLayout.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUIListLabel.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUIMessage.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUIMoverControl.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUIMultiImage.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUIMultiSelectText.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUIPanelContainer.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUIProgressControl.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUIRadioButtonControl.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUIRenderingControl.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUIResizeControl.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUIRSSControl.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUIScrollBarControl.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUISelectButtonControl.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUISettingsSliderControl.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUIShader.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUISliderControl.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUISound.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUISpinControl.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUISpinControlEx.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUIStandardWindow.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUIStaticItem.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUITextBox.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUITextLayout.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUITexture.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUITextureD3D.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUITextureGL.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUITextureGLES.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUIToggleButtonControl.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUIVideoControl.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUIVisualisationControl.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUIWindow.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUIWindowManager.h" />
+    <ClInclude Include="..\..\xbmc\guilib\GUIWrappingListContainer.h" />
+    <ClInclude Include="..\..\xbmc\guilib\IAudioDeviceChangedCallback.h" />
+    <ClInclude Include="..\..\xbmc\guilib\IMsgTargetCallback.h" />
+    <ClInclude Include="..\..\xbmc\guilib\IWindowManagerCallback.h" />
+    <ClInclude Include="..\..\xbmc\guilib\Key.h" />
+    <ClInclude Include="..\..\xbmc\guilib\LocalizeStrings.h" />
+    <ClInclude Include="..\..\xbmc\guilib\MatrixGLES.h" />
+    <ClInclude Include="..\..\xbmc\guilib\Resolution.h" />
+    <ClInclude Include="..\..\xbmc\guilib\Shader.h" />
+    <ClInclude Include="..\..\xbmc\guilib\Texture.h" />
+    <ClInclude Include="..\..\xbmc\guilib\TextureBundle.h" />
+    <ClInclude Include="..\..\xbmc\guilib\TextureBundleXBT.h" />
+    <ClInclude Include="..\..\xbmc\guilib\TextureBundleXPR.h" />
+    <ClInclude Include="..\..\xbmc\guilib\TextureDX.h" />
+    <ClInclude Include="..\..\xbmc\guilib\TextureGL.h" />
+    <ClInclude Include="..\..\xbmc\guilib\TextureManager.h" />
+    <ClInclude Include="..\..\xbmc\guilib\TransformMatrix.h" />
+    <ClInclude Include="..\..\xbmc\guilib\Tween.h" />
+    <ClInclude Include="..\..\xbmc\guilib\VisibleEffect.h" />
+    <ClInclude Include="..\..\xbmc\guilib\XBTF.h" />
+    <ClInclude Include="..\..\xbmc\guilib\XBTFReader.h" />
     <ClInclude Include="..\..\xbmc\input\ButtonTranslator.h" />
     <ClInclude Include="..\..\xbmc\input\KeyboardLayoutConfiguration.h" />
     <ClInclude Include="..\..\xbmc\input\KeyboardStat.h" />
     <ClInclude Include="..\..\xbmc\input\MouseStat.h" />
+    <ClInclude Include="..\..\xbmc\input\SDLJoystick.h" />
+    <ClInclude Include="..\..\xbmc\input\windows\IRServerSuite.h" />
+    <ClInclude Include="..\..\xbmc\input\windows\IrssMessage.h" />
     <ClInclude Include="..\..\xbmc\input\XBIRRemote.h" />
     <ClInclude Include="..\..\xbmc\input\XBMC_keyboard.h" />
     <ClInclude Include="..\..\xbmc\input\XBMC_keysym.h" />
@@ -3411,10 +3887,6 @@
     </ProjectReference>
     <ProjectReference Include="..\..\xbmc\lib\sqLite\sqlite\libsqlite_win32\libsqlite_win32.vcxproj">
       <Project>{9e74df3b-9343-4689-b0ec-4451617f9489}</Project>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
-    <ProjectReference Include="guilib.vcxproj">
-      <Project>{510441ac-b9e1-4b31-9c0c-eb3ad39d90c4}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
     <ProjectReference Include="libPlatinum.vcxproj">
