@@ -953,6 +953,7 @@
     <ClCompile Include="..\..\xbmc\music\tags\OggTag.cpp" />
     <ClCompile Include="..\..\xbmc\music\tags\VorbisTag.cpp" />
 <<<<<<< HEAD
+<<<<<<< HEAD
     <ClCompile Include="..\..\xbmc\PictureInfoLoader.cpp" />
     <ClCompile Include="..\..\xbmc\PictureInfoTag.cpp" />
     <ClCompile Include="..\..\xbmc\utils\AlarmClock.cpp" />
@@ -1390,6 +1391,21 @@
   </ItemGroup>
   <ItemGroup>
 =======
+=======
+    <ClCompile Include="..\..\xbmc\network\cddb.cpp" />
+    <ClCompile Include="..\..\xbmc\network\DNSNameCache.cpp" />
+    <ClCompile Include="..\..\xbmc\network\EventClient.cpp" />
+    <ClCompile Include="..\..\xbmc\network\EventPacket.cpp" />
+    <ClCompile Include="..\..\xbmc\network\EventServer.cpp" />
+    <ClCompile Include="..\..\xbmc\network\GUIDialogAccessPoints.cpp" />
+    <ClCompile Include="..\..\xbmc\network\GUIDialogNetworkSetup.cpp" />
+    <ClCompile Include="..\..\xbmc\network\Network.cpp" />
+    <ClCompile Include="..\..\xbmc\network\Socket.cpp" />
+    <ClCompile Include="..\..\xbmc\network\TCPServer.cpp" />
+    <ClCompile Include="..\..\xbmc\network\UdpClient.cpp" />
+    <ClCompile Include="..\..\xbmc\network\UPnP.cpp" />
+    <ClCompile Include="..\..\xbmc\network\WebServer.cpp" />
+>>>>>>> changed: move network related files to xbmc/network
     <ClCompile Include="..\..\xbmc\playlists\PlayList.cpp" />
     <ClCompile Include="..\..\xbmc\playlists\PlayListB4S.cpp" />
     <ClCompile Include="..\..\xbmc\playlists\PlayListFactory.cpp" />
@@ -1652,15 +1668,11 @@
     <ClCompile Include="..\..\xbmc\Crc32.cpp" />
     <ClCompile Include="..\..\xbmc\utils\CriticalSection.cpp" />
     <ClCompile Include="..\..\xbmc\DateTime.cpp" />
-    <ClCompile Include="..\..\xbmc\DNSNameCache.cpp" />
     <ClCompile Include="..\..\xbmc\utils\DownloadQueue.cpp" />
     <ClCompile Include="..\..\xbmc\utils\DownloadQueueManager.cpp" />
     <ClCompile Include="..\..\xbmc\DPMSSupport.cpp" />
     <ClCompile Include="..\..\xbmc\DynamicDll.cpp" />
     <ClCompile Include="..\..\xbmc\utils\Event.cpp" />
-    <ClCompile Include="..\..\xbmc\utils\EventClient.cpp" />
-    <ClCompile Include="..\..\xbmc\utils\EventPacket.cpp" />
-    <ClCompile Include="..\..\xbmc\utils\EventServer.cpp" />
     <ClCompile Include="..\..\xbmc\utils\Fanart.cpp" />
     <ClCompile Include="..\..\xbmc\Favourites.cpp" />
     <ClCompile Include="..\..\xbmc\FileItem.cpp" />
@@ -1712,7 +1724,6 @@
     <ClCompile Include="..\..\xbmc\utils\SharedSection.cpp" />
     <ClCompile Include="..\..\xbmc\Shortcut.cpp" />
     <ClCompile Include="..\..\xbmc\utils\SingleLock.cpp" />
-    <ClCompile Include="..\..\xbmc\utils\Socket.cpp" />
     <ClCompile Include="..\..\xbmc\SortFileItem.cpp" />
     <ClCompile Include="..\..\xbmc\utils\Splash.cpp" />
     <ClCompile Include="..\..\xbmc\utils\Stopwatch.cpp" />
@@ -1726,13 +1737,11 @@
     <ClCompile Include="..\..\xbmc\ThumbnailCache.cpp" />
     <ClCompile Include="..\..\xbmc\utils\TimeUtils.cpp" />
     <ClCompile Include="..\..\xbmc\utils\TuxBoxUtil.cpp" />
-    <ClCompile Include="..\..\xbmc\utils\UdpClient.cpp" />
     <ClCompile Include="..\..\xbmc\URL.cpp" />
     <ClCompile Include="..\..\xbmc\Util.cpp" />
     <ClCompile Include="..\..\xbmc\VideoInfoTag.cpp" />
     <ClCompile Include="..\..\xbmc\VideoReferenceClock.cpp" />
     <ClCompile Include="..\..\xbmc\utils\Weather.cpp" />
-    <ClCompile Include="..\..\xbmc\utils\WebServer.cpp" />
     <ClCompile Include="..\..\xbmc\utils\Win32Exception.cpp" />
     <ClCompile Include="..\..\xbmc\XBApplicationEx.cpp" />
     <ClCompile Include="..\..\xbmc\Zeroconf.cpp" />
@@ -1745,7 +1754,6 @@
     <ClCompile Include="..\..\xbmc\Song.cpp" />
     <ClCompile Include="..\..\xbmc\VideoDatabase.cpp" />
     <ClCompile Include="..\..\xbmc\ViewDatabase.cpp" />
-    <ClCompile Include="..\..\xbmc\GUIDialogAccessPoints.cpp" />
     <ClCompile Include="..\..\xbmc\GUIDialogBoxBase.cpp" />
     <ClCompile Include="..\..\xbmc\GUIDialogBusy.cpp" />
     <ClCompile Include="..\..\xbmc\GUIDialogButtonMenu.cpp" />
@@ -1761,7 +1769,6 @@
     <ClCompile Include="..\..\xbmc\GUIDialogMediaSource.cpp" />
     <ClCompile Include="..\..\xbmc\GUIDialogMusicOSD.cpp" />
     <ClCompile Include="..\..\xbmc\GUIDialogMuteBug.cpp" />
-    <ClCompile Include="..\..\xbmc\GUIDialogNetworkSetup.cpp" />
     <ClCompile Include="..\..\xbmc\GUIDialogNumeric.cpp" />
     <ClCompile Include="..\..\xbmc\GUIDialogOK.cpp" />
     <ClCompile Include="..\..\xbmc\GUIDialogPictureInfo.cpp" />
@@ -1804,7 +1811,6 @@
     <ClCompile Include="..\..\xbmc\FileSystem\CacheMemBuffer.cpp" />
     <ClCompile Include="..\..\xbmc\FileSystem\CacheStrategy.cpp" />
     <ClCompile Include="..\..\xbmc\FileSystem\CDDADirectory.cpp" />
-    <ClCompile Include="..\..\xbmc\FileSystem\cddb.cpp" />
     <ClCompile Include="..\..\xbmc\FileSystem\cdioSupport.cpp" />
     <ClCompile Include="..\..\xbmc\FileSystem\DAAPDirectory.cpp" />
     <ClCompile Include="..\..\xbmc\FileSystem\DAVDirectory.cpp" />
@@ -1957,8 +1963,6 @@
       <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release (OpenGL)|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
     </ClCompile>
     <ClCompile Include="..\..\xbmc\utils\IoSupport.cpp" />
-    <ClCompile Include="..\..\xbmc\utils\Network.cpp" />
-    <ClCompile Include="..\..\xbmc\UPnP.cpp" />
     <ClCompile Include="..\..\xbmc\karaoke\karaokelyrics.cpp" />
     <ClCompile Include="..\..\xbmc\karaoke\karaokelyricscdg.cpp" />
     <ClCompile Include="..\..\xbmc\karaoke\karaokelyricsfactory.cpp" />
@@ -2046,7 +2050,6 @@
     <ClCompile Include="..\..\xbmc\lib\libjsonrpc\PlayerOperations.cpp" />
     <ClCompile Include="..\..\xbmc\lib\libjsonrpc\PlaylistOperations.cpp" />
     <ClCompile Include="..\..\xbmc\lib\libjsonrpc\SystemOperations.cpp" />
-    <ClCompile Include="..\..\xbmc\lib\libjsonrpc\TCPServer.cpp" />
     <ClCompile Include="..\..\xbmc\lib\libjsonrpc\VideoLibrary.cpp" />
     <ClCompile Include="..\..\xbmc\lib\libjsonrpc\XBMCOperations.cpp" />
     <ClCompile Include="..\..\lib\jsoncpp\jsoncpp\src\lib_json\json_reader.cpp" />
@@ -2447,6 +2450,7 @@
     <ClInclude Include="..\..\xbmc\music\tags\MusicInfoTagLoaderWav.h" />
     <ClInclude Include="..\..\xbmc\music\tags\MusicInfoTagLoaderWavPack.h" />
     <ClInclude Include="..\..\xbmc\music\tags\MusicInfoTagLoaderYM.h" />
+<<<<<<< HEAD
     <ClInclude Include="..\..\xbmc\OggTag.h" />
     <ClInclude Include="..\..\xbmc\Tag.h" />
     <ClInclude Include="..\..\xbmc\VorbisTag.h" />
@@ -2801,6 +2805,24 @@
     <ClInclude Include="..\..\xbmc\music\tags\MusicInfoTagLoaderWMA.h" />
     <ClInclude Include="..\..\xbmc\NfoFile.h" />
     <ClInclude Include="..\..\xbmc\PartyModeManager.h" />
+=======
+    <ClInclude Include="..\..\xbmc\music\tags\OggTag.h" />
+    <ClInclude Include="..\..\xbmc\music\tags\Tag.h" />
+    <ClInclude Include="..\..\xbmc\music\tags\VorbisTag.h" />
+    <ClInclude Include="..\..\xbmc\network\cddb.h" />
+    <ClInclude Include="..\..\xbmc\network\DNSNameCache.h" />
+    <ClInclude Include="..\..\xbmc\network\EventClient.h" />
+    <ClInclude Include="..\..\xbmc\network\EventPacket.h" />
+    <ClInclude Include="..\..\xbmc\network\EventServer.h" />
+    <ClInclude Include="..\..\xbmc\network\GUIDialogAccessPoints.h" />
+    <ClInclude Include="..\..\xbmc\network\GUIDialogNetworkSetup.h" />
+    <ClInclude Include="..\..\xbmc\network\Network.h" />
+    <ClInclude Include="..\..\xbmc\network\Socket.h" />
+    <ClInclude Include="..\..\xbmc\network\TCPServer.h" />
+    <ClInclude Include="..\..\xbmc\network\UdpClient.h" />
+    <ClInclude Include="..\..\xbmc\network\UPnP.h" />
+    <ClInclude Include="..\..\xbmc\network\WebServer.h" />
+>>>>>>> changed: move network related files to xbmc/network
     <ClInclude Include="..\..\xbmc\playlists\PlayList.h" />
     <ClInclude Include="..\..\xbmc\playlists\PlayListB4S.h" />
     <ClInclude Include="..\..\xbmc\playlists\PlayListFactory.h" />
@@ -3322,9 +3344,6 @@
     <ClInclude Include="..\..\xbmc\utils\Builtins.h" />
     <ClInclude Include="..\..\xbmc\utils\CPUInfo.h" />
     <ClInclude Include="..\..\xbmc\DPMSSupport.h" />
-    <ClInclude Include="..\..\xbmc\utils\EventClient.h" />
-    <ClInclude Include="..\..\xbmc\utils\EventPacket.h" />
-    <ClInclude Include="..\..\xbmc\utils\EventServer.h" />
     <ClInclude Include="..\..\xbmc\utils\Fanart.h" />
     <ClInclude Include="..\..\xbmc\utils\fastmemcpy.h" />
     <ClInclude Include="..\..\xbmc\Favourites.h" />
@@ -3344,7 +3363,6 @@
     <ClInclude Include="..\..\xbmc\utils\RingBuffer.h" />
     <ClInclude Include="..\..\xbmc\utils\ScraperParser.h" />
     <ClInclude Include="..\..\xbmc\utils\ScraperUrl.h" />
-    <ClInclude Include="..\..\xbmc\utils\Socket.h" />
     <ClInclude Include="..\..\xbmc\utils\Stopwatch.h" />
     <ClInclude Include="..\..\xbmc\utils\StreamDetails.h" />
     <ClInclude Include="..\..\xbmc\utils\SystemInfo.h" />
@@ -3355,7 +3373,6 @@
     <ClInclude Include="..\..\xbmc\utils\TuxBoxUtil.h" />
     <ClInclude Include="..\..\xbmc\VideoInfoTag.h" />
     <ClInclude Include="..\..\xbmc\VideoReferenceClock.h" />
-    <ClInclude Include="..\..\xbmc\utils\WebServer.h" />
     <ClInclude Include="..\..\xbmc\Zeroconf.h" />
     <ClInclude Include="..\..\xbmc\Album.h" />
     <ClInclude Include="..\..\xbmc\Artist.h" />
@@ -3365,7 +3382,6 @@
     <ClInclude Include="..\..\xbmc\ProgramDatabase.h" />
     <ClInclude Include="..\..\xbmc\VideoDatabase.h" />
     <ClInclude Include="..\..\xbmc\ViewDatabase.h" />
-    <ClInclude Include="..\..\xbmc\GUIDialogAccessPoints.h" />
     <ClInclude Include="..\..\xbmc\GUIDialogBoxBase.h" />
     <ClInclude Include="..\..\xbmc\GUIDialogBusy.h" />
     <ClInclude Include="..\..\xbmc\GUIDialogFavourites.h" />
@@ -3374,7 +3390,6 @@
     <ClInclude Include="..\..\xbmc\karaoke\GUIDialogKaraokeSongSelector.h" />
     <ClInclude Include="..\..\xbmc\GUIDialogMediaSource.h" />
     <ClInclude Include="..\..\xbmc\GUIDialogMusicOSD.h" />
-    <ClInclude Include="..\..\xbmc\GUIDialogNetworkSetup.h" />
     <ClInclude Include="..\..\xbmc\GUIDialogPictureInfo.h" />
     <ClInclude Include="..\..\xbmc\GUIDialogPlayerControls.h" />
     <ClInclude Include="..\..\xbmc\GUIDialogSeekBar.h" />
@@ -3508,8 +3523,6 @@
     <ClInclude Include="..\..\xbmc\FileSystem\VideoDatabaseDirectory\DirectoryNodeTvShowsOverview.h" />
     <ClInclude Include="..\..\xbmc\FileSystem\VideoDatabaseDirectory\DirectoryNodeYear.h" />
     <ClInclude Include="..\..\xbmc\FileSystem\VideoDatabaseDirectory\QueryParams.h" />
-    <ClInclude Include="..\..\xbmc\utils\Network.h" />
-    <ClInclude Include="..\..\xbmc\UPnP.h" />
     <ClInclude Include="..\..\xbmc\karaoke\karaokelyrics.h" />
     <ClInclude Include="..\..\xbmc\karaoke\karaokelyricscdg.h" />
     <ClInclude Include="..\..\xbmc\karaoke\karaokelyricsfactory.h" />
@@ -3563,7 +3576,6 @@
     <ClInclude Include="..\..\xbmc\FileSystem\Directory.h" />
     <ClInclude Include="..\..\xbmc\FileSystem\DirectoryHistory.h" />
     <ClInclude Include="..\..\xbmc\DllImageLib.h" />
-    <ClInclude Include="..\..\xbmc\DNSNameCache.h" />
     <ClInclude Include="..\..\xbmc\utils\DownloadQueue.h" />
     <ClInclude Include="..\..\xbmc\utils\DownloadQueueManager.h" />
     <ClInclude Include="..\..\xbmc\DynamicDll.h" />
@@ -3673,7 +3685,6 @@
     <ClInclude Include="..\..\xbmc\Temperature.h" />
     <ClInclude Include="..\..\xbmc\utils\Thread.h" />
     <ClInclude Include="..\..\xbmc\ThumbnailCache.h" />
-    <ClInclude Include="..\..\xbmc\utils\UdpClient.h" />
     <ClInclude Include="..\..\xbmc\URL.h" />
     <ClInclude Include="..\..\xbmc\Util.h" />
     <ClInclude Include="..\..\xbmc\FileSystem\VirtualDirectory.h" />
@@ -3807,7 +3818,6 @@
     <ClInclude Include="..\..\xbmc\lib\libjsonrpc\PlayerOperations.h" />
     <ClInclude Include="..\..\xbmc\lib\libjsonrpc\PlaylistOperations.h" />
     <ClInclude Include="..\..\xbmc\lib\libjsonrpc\SystemOperations.h" />
-    <ClInclude Include="..\..\xbmc\lib\libjsonrpc\TCPServer.h" />
     <ClInclude Include="..\..\xbmc\lib\libjsonrpc\VideoLibrary.h" />
     <ClInclude Include="..\..\xbmc\lib\libjsonrpc\XBMCOperations.h" />
   </ItemGroup>
@@ -3908,4 +3918,7 @@
     </VisualStudio>
   </ProjectExtensions>
 </Project>
+<<<<<<< HEAD
 >>>>>>> changed: move settings related files to settings directory
+=======
+>>>>>>> changed: move network related files to xbmc/network

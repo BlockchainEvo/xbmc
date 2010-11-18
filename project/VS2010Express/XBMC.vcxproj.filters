@@ -1,9 +1,188 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="win32">
       <UniqueIdentifier>{42ffe691-237e-4fe8-bd06-667936c26238}</UniqueIdentifier>
+=======
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="win32">
+      <UniqueIdentifier>{42ffe691-237e-4fe8-bd06-667936c26238}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cores">
+      <UniqueIdentifier>{d9048f15-4226-45a0-bd7d-c4f326b8c232}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cores\dvdplayer">
+      <UniqueIdentifier>{b7e0c19a-163b-43a8-bc50-47f0f220c225}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cores\dvdplayer\DVDCodecs">
+      <UniqueIdentifier>{f72e399a-b2f5-4f77-a680-797306b37afe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cores\dvdplayer\DVDCodecs\Audio">
+      <UniqueIdentifier>{5bee29f5-b152-4416-9413-0bed2a669575}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cores\dvdplayer\DVDCodecs\Audio\Encoders">
+      <UniqueIdentifier>{950294bc-2e98-414e-8bf4-57c43fb73b31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cores\dvdplayer\DVDCodecs\Video">
+      <UniqueIdentifier>{09e9057e-7017-4f3d-b5d3-2f5e9a23a53c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cores\dvdplayer\DVDCodecs\Overlay">
+      <UniqueIdentifier>{cc80e830-cd3b-4790-9d73-b727b997efdc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cores\dvdplayer\DVDCodecs\Overlay\libspucc">
+      <UniqueIdentifier>{43526341-7b96-462d-9f71-685e426251ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cores\dvdplayer\DVDDemuxers">
+      <UniqueIdentifier>{59ff29b6-c2b5-4ed8-a80c-e5dd130802a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cores\dvdplayer\DVDInputStreams">
+      <UniqueIdentifier>{15bea9e8-7473-4e72-93b1-c403d491160d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cores\dvdplayer\DVDHeaders">
+      <UniqueIdentifier>{9b9c3d13-56db-4db5-98a3-4402ee3b4ff9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cores\dvdplayer\DVDSubtitles">
+      <UniqueIdentifier>{83ae8e22-c3a0-45c6-bbc2-29d0bb180e2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cores\paplayer">
+      <UniqueIdentifier>{ef82a765-fb92-4244-b2dd-212704a98407}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cores\DllLoader">
+      <UniqueIdentifier>{4a0ca8db-d3a3-4360-93bd-0b1fe4cbd203}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cores\DllLoader\exports">
+      <UniqueIdentifier>{aa32e9d0-5753-42d5-889b-3938ce6703a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cores\DllLoader\exports\emu_socket">
+      <UniqueIdentifier>{280834b5-e3ce-48ec-a304-ec6c315beffe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cores\DllLoader\exports\util">
+      <UniqueIdentifier>{111c81df-dc5e-4b93-a21f-c2171434952b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cores\VideoRenderers">
+      <UniqueIdentifier>{09e513b1-adc6-4af0-b0f3-966b8240fad5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cores\VideoRenderers\Shaders">
+      <UniqueIdentifier>{041be182-9ec3-4c1b-abfc-d92f6802e7ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cores\AudioRenderers">
+      <UniqueIdentifier>{6ec3ce08-d27a-460f-abd8-3ccd43a05470}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cores\ExternalPlayer">
+      <UniqueIdentifier>{f98cb00a-d64b-4af9-a386-78bb2be8213d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cores\PlayerCoreFactory">
+      <UniqueIdentifier>{a775e258-5cbc-44fb-b992-05b29699294c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{9a7e7018-25ee-4be9-82a3-399da54a9cbf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Settings">
+      <UniqueIdentifier>{0e51890e-4df4-45fb-8b98-c39fec93f7fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GUI Music">
+      <UniqueIdentifier>{8635d6fb-4149-4f40-9c41-6431fa3caa27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GUI Video">
+      <UniqueIdentifier>{fb23c373-8971-4901-9e55-a16dc5f7ad59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Playlist">
+      <UniqueIdentifier>{b02257f1-2ea8-4ba2-9352-4ce1ceefafaa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\infoTagReaders">
+      <UniqueIdentifier>{bea347d7-9d67-4daa-9cf3-f29fc4e9911d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\infoTagReaders\Pictures">
+      <UniqueIdentifier>{10f046a6-fe2e-4594-af8a-fce431d63380}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utils">
+      <UniqueIdentifier>{2114cbec-71a1-4e49-80aa-e6ddbc899028}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Database">
+      <UniqueIdentifier>{d0f25c78-dcbf-48c2-9fea-3a7ab4351a6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GUI Dialog">
+      <UniqueIdentifier>{bcb7e6bd-8a38-438e-a5d4-2e8d52291501}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GUI Other">
+      <UniqueIdentifier>{b9be76a4-34e7-4ca6-aae8-4588bb16008e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BackgroundLoaders">
+      <UniqueIdentifier>{6b1e4504-c942-4f61-9a32-05d268d7bb78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Filesystem">
+      <UniqueIdentifier>{3b63bf0d-cec2-4324-93ea-4e4d78ba283b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Filesystem\MusicDatabaseDirectory">
+      <UniqueIdentifier>{51f1b8f6-22ea-4263-b307-4ac9dfceb268}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Filesystem\VideoDatabaseDirectory">
+      <UniqueIdentifier>{a9c70632-dcfa-4019-b785-da8ba68d998a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\common">
+      <UniqueIdentifier>{4e6846f6-c134-4aa3-b912-29eba8053a5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Karaoke">
+      <UniqueIdentifier>{0364d1da-0b74-48ee-91e2-ad8003107179}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Windowing">
+      <UniqueIdentifier>{7d79ee8b-a0a2-44b7-87d9-3c0c2b6542bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Windowing\Window System">
+      <UniqueIdentifier>{e93cbb3a-c1d9-4470-845a-2ed2f29c5798}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Windowing\Events">
+      <UniqueIdentifier>{f828efdf-4f0c-49cf-8c9c-4b2d4f7d4677}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Windowing\Render System">
+      <UniqueIdentifier>{12f36365-74f2-4887-b7bd-9596b34ca0ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Picture">
+      <UniqueIdentifier>{c9bca3ab-5b57-4bc3-a21c-6e082673fa11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Addons">
+      <UniqueIdentifier>{0cf03ec7-412f-48ac-827d-358c57245edd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{59f25a6f-aad8-4b4d-9e01-7e84a6f54b50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libraries">
+      <UniqueIdentifier>{4a09e4cc-709d-43b8-86cf-d83ca38d41ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libraries\libPython">
+      <UniqueIdentifier>{265279c3-c0f6-4f0a-bc4c-e994cc239aa0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libraries\libPython\xbmcmodule">
+      <UniqueIdentifier>{e3bda045-f4fb-4115-a37c-b22f9c02a2d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libraries\libPython\python">
+      <UniqueIdentifier>{dc6df341-606f-4fd0-a783-8fc0a3cd02ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libraries\libhttpapi">
+      <UniqueIdentifier>{0ee7becf-1d84-4148-af74-cefe1e4e611b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libraries\sqlite">
+      <UniqueIdentifier>{c9d35dd5-e25d-4b76-bcbe-e8c855de58e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libraries\libScrobbler">
+      <UniqueIdentifier>{53368097-a103-4277-8dca-916f90200973}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libraries\cdrip">
+      <UniqueIdentifier>{595eeac0-ead4-4c21-a22b-deffe179ba17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libraries\libjsonrpc">
+      <UniqueIdentifier>{96910e2c-8b38-4c14-8baa-7c7280bd45cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libraries\jsoncpp">
+      <UniqueIdentifier>{b27f9ce9-0b2e-4456-9bce-8313af739c2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Input">
+      <UniqueIdentifier>{4b734310-1aaa-4ef3-85c7-23887e00b4b2}</UniqueIdentifier>
+>>>>>>> changed: move network related files to xbmc/network
     </Filter>
 <<<<<<< HEAD
     <Filter Include="cores">
@@ -36,6 +215,7 @@
     <Filter Include="cores\dvdplayer\DVDInputStreams">
       <UniqueIdentifier>{15bea9e8-7473-4e72-93b1-c403d491160d}</UniqueIdentifier>
     </Filter>
+<<<<<<< HEAD
     <Filter Include="cores\dvdplayer\DVDHeaders">
       <UniqueIdentifier>{9b9c3d13-56db-4db5-98a3-4402ee3b4ff9}</UniqueIdentifier>
     </Filter>
@@ -957,6 +1137,10 @@
     <Filter Include="guilib\Source Files">
       <UniqueIdentifier>{6c7d48ce-540c-41a4-8a75-cd50ba481cf1}</UniqueIdentifier>
 >>>>>>> changed: move guilib to xbmc/guilib. Moved guilib project into XBMC (hopefully this works afterwards)
+=======
+    <Filter Include="Source Files\Network">
+      <UniqueIdentifier>{dd5b6513-92fb-4010-a846-009f05210352}</UniqueIdentifier>
+>>>>>>> changed: move network related files to xbmc/network
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1542,9 +1726,6 @@
     <ClCompile Include="..\..\xbmc\DateTime.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\DNSNameCache.cpp">
-      <Filter>Source Files\Utils</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\xbmc\utils\DownloadQueue.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
@@ -1558,15 +1739,6 @@
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
     <ClCompile Include="..\..\xbmc\utils\Event.cpp">
-      <Filter>Source Files\Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\utils\EventClient.cpp">
-      <Filter>Source Files\Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\utils\EventPacket.cpp">
-      <Filter>Source Files\Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\utils\EventServer.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
     <ClCompile Include="..\..\xbmc\utils\Fanart.cpp">
@@ -1695,9 +1867,6 @@
     <ClCompile Include="..\..\xbmc\utils\SingleLock.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\utils\Socket.cpp">
-      <Filter>Source Files\Utils</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\xbmc\SortFileItem.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
@@ -1737,9 +1906,6 @@
     <ClCompile Include="..\..\xbmc\utils\TuxBoxUtil.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\utils\UdpClient.cpp">
-      <Filter>Source Files\Utils</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\xbmc\URL.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
@@ -1753,9 +1919,6 @@
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
     <ClCompile Include="..\..\xbmc\utils\Weather.cpp">
-      <Filter>Source Files\Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\utils\WebServer.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
     <ClCompile Include="..\..\xbmc\utils\Win32Exception.cpp">
@@ -1793,9 +1956,6 @@
     </ClCompile>
     <ClCompile Include="..\..\xbmc\ViewDatabase.cpp">
       <Filter>Source Files\Database</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\GUIDialogAccessPoints.cpp">
-      <Filter>Source Files\GUI Dialog</Filter>
     </ClCompile>
     <ClCompile Include="..\..\xbmc\GUIDialogBoxBase.cpp">
       <Filter>Source Files\GUI Dialog</Filter>
@@ -1840,9 +2000,6 @@
       <Filter>Source Files\GUI Dialog</Filter>
     </ClCompile>
     <ClCompile Include="..\..\xbmc\GUIDialogMuteBug.cpp">
-      <Filter>Source Files\GUI Dialog</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\GUIDialogNetworkSetup.cpp">
       <Filter>Source Files\GUI Dialog</Filter>
     </ClCompile>
     <ClCompile Include="..\..\xbmc\GUIDialogNumeric.cpp">
@@ -1969,9 +2126,6 @@
       <Filter>Source Files\Filesystem</Filter>
     </ClCompile>
     <ClCompile Include="..\..\xbmc\FileSystem\CDDADirectory.cpp">
-      <Filter>Source Files\Filesystem</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\FileSystem\cddb.cpp">
       <Filter>Source Files\Filesystem</Filter>
     </ClCompile>
     <ClCompile Include="..\..\xbmc\FileSystem\cdioSupport.cpp">
@@ -2340,11 +2494,6 @@
     <ClCompile Include="..\..\xbmc\utils\IoSupport.cpp">
       <Filter>Source Files\common</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\utils\Network.cpp">
-      <Filter>Source Files\common</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\UPnP.cpp">
-      <Filter>Source Files\UPnP</Filter>
     </ClCompile>
     <ClCompile Include="..\..\xbmc\karaoke\karaokelyrics.cpp">
       <Filter>Source Files\Karaoke</Filter>
@@ -2602,9 +2751,6 @@
       <Filter>libraries\libjsonrpc</Filter>
     </ClCompile>
     <ClCompile Include="..\..\xbmc\lib\libjsonrpc\SystemOperations.cpp">
-      <Filter>libraries\libjsonrpc</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\lib\libjsonrpc\TCPServer.cpp">
       <Filter>libraries\libjsonrpc</Filter>
     </ClCompile>
     <ClCompile Include="..\..\xbmc\lib\libjsonrpc\VideoLibrary.cpp">
@@ -5096,6 +5242,45 @@
     <ClCompile Include="..\..\xbmc\guilib\TextureGL.cpp">
       <Filter>guilib\Rendering\GL</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\xbmc\network\Network.cpp">
+      <Filter>Source Files\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\network\DNSNameCache.cpp">
+      <Filter>Source Files\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\network\EventClient.cpp">
+      <Filter>Source Files\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\network\EventPacket.cpp">
+      <Filter>Source Files\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\network\EventServer.cpp">
+      <Filter>Source Files\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\network\GUIDialogAccessPoints.cpp">
+      <Filter>Source Files\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\network\GUIDialogNetworkSetup.cpp">
+      <Filter>Source Files\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\network\Socket.cpp">
+      <Filter>Source Files\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\network\TCPServer.cpp">
+      <Filter>Source Files\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\network\UPnP.cpp">
+      <Filter>Source Files\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\network\UdpClient.cpp">
+      <Filter>Source Files\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\network\WebServer.cpp">
+      <Filter>Source Files\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\network\cddb.cpp">
+      <Filter>Source Files\Network</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\xbmc\win32\NetworkWin32.h">
@@ -5770,15 +5955,6 @@
     <ClInclude Include="..\..\xbmc\DPMSSupport.h">
       <Filter>Source Files\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\xbmc\utils\EventClient.h">
-      <Filter>Source Files\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\utils\EventPacket.h">
-      <Filter>Source Files\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\utils\EventServer.h">
-      <Filter>Source Files\Utils</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\xbmc\utils\Fanart.h">
       <Filter>Source Files\Utils</Filter>
     </ClInclude>
@@ -5836,9 +6012,6 @@
     <ClInclude Include="..\..\xbmc\utils\ScraperUrl.h">
       <Filter>Source Files\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\xbmc\utils\Socket.h">
-      <Filter>Source Files\Utils</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\xbmc\utils\Stopwatch.h">
       <Filter>Source Files\Utils</Filter>
     </ClInclude>
@@ -5869,9 +6042,6 @@
     <ClInclude Include="..\..\xbmc\VideoReferenceClock.h">
       <Filter>Source Files\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\xbmc\utils\WebServer.h">
-      <Filter>Source Files\Utils</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\xbmc\Zeroconf.h">
       <Filter>Source Files\Utils</Filter>
     </ClInclude>
@@ -5899,9 +6069,6 @@
     <ClInclude Include="..\..\xbmc\ViewDatabase.h">
       <Filter>Source Files\Database</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\xbmc\GUIDialogAccessPoints.h">
-      <Filter>Source Files\GUI Dialog</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\xbmc\GUIDialogBoxBase.h">
       <Filter>Source Files\GUI Dialog</Filter>
     </ClInclude>
@@ -5924,9 +6091,6 @@
       <Filter>Source Files\GUI Dialog</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\GUIDialogMusicOSD.h">
-      <Filter>Source Files\GUI Dialog</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\GUIDialogNetworkSetup.h">
       <Filter>Source Files\GUI Dialog</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\GUIDialogPictureInfo.h">
@@ -6328,11 +6492,6 @@
     <ClInclude Include="..\..\xbmc\FileSystem\VideoDatabaseDirectory\QueryParams.h">
       <Filter>Source Files\Filesystem\VideoDatabaseDirectory</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\xbmc\utils\Network.h">
-      <Filter>Source Files\common</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\UPnP.h">
-      <Filter>Source Files\UPnP</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\karaoke\karaokelyrics.h">
       <Filter>Source Files\Karaoke</Filter>
@@ -6488,9 +6647,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\DllImageLib.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\DNSNameCache.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\utils\DownloadQueue.h">
@@ -6818,9 +6974,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\ThumbnailCache.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\utils\UdpClient.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\URL.h">
@@ -7214,9 +7367,6 @@
       <Filter>libraries\libjsonrpc</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\lib\libjsonrpc\SystemOperations.h">
-      <Filter>libraries\libjsonrpc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\lib\libjsonrpc\TCPServer.h">
       <Filter>libraries\libjsonrpc</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\lib\libjsonrpc\VideoLibrary.h">
@@ -9430,6 +9580,45 @@
     </ClInclude>
     <ClInclude Include="..\..\xbmc\utils\MathUtils.h">
       <Filter>Source Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\network\Network.h">
+      <Filter>Source Files\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\network\DNSNameCache.h">
+      <Filter>Source Files\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\network\EventClient.h">
+      <Filter>Source Files\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\network\EventPacket.h">
+      <Filter>Source Files\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\network\EventServer.h">
+      <Filter>Source Files\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\network\GUIDialogAccessPoints.h">
+      <Filter>Source Files\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\network\GUIDialogNetworkSetup.h">
+      <Filter>Source Files\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\network\Socket.h">
+      <Filter>Source Files\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\network\TCPServer.h">
+      <Filter>Source Files\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\network\UPnP.h">
+      <Filter>Source Files\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\network\UdpClient.h">
+      <Filter>Source Files\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\network\WebServer.h">
+      <Filter>Source Files\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\network\cddb.h">
+      <Filter>Source Files\Network</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
