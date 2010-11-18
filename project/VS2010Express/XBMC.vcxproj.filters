@@ -744,31 +744,31 @@
     <ClCompile Include="..\..\xbmc\VideoInfoScanner.cpp">
       <Filter>Source Files\GUI Video</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\PlayList.cpp">
+    <ClCompile Include="..\..\xbmc\playlists\PlayList.cpp">
       <Filter>Source Files\Playlist</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\PlayListB4S.cpp">
+    <ClCompile Include="..\..\xbmc\playlists\PlayListB4S.cpp">
       <Filter>Source Files\Playlist</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\PlayListFactory.cpp">
+    <ClCompile Include="..\..\xbmc\playlists\PlayListFactory.cpp">
       <Filter>Source Files\Playlist</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\PlayListM3U.cpp">
+    <ClCompile Include="..\..\xbmc\playlists\PlayListM3U.cpp">
       <Filter>Source Files\Playlist</Filter>
     </ClCompile>
     <ClCompile Include="..\..\xbmc\PlayListPlayer.cpp">
       <Filter>Source Files\Playlist</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\PlayListPLS.cpp">
+    <ClCompile Include="..\..\xbmc\playLists\PlayListPLS.cpp">
       <Filter>Source Files\Playlist</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\PlayListURL.cpp">
+    <ClCompile Include="..\..\xbmc\playlists\PlayListURL.cpp">
       <Filter>Source Files\Playlist</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\PlayListWPL.cpp">
+    <ClCompile Include="..\..\xbmc\playlists\PlayListWPL.cpp">
       <Filter>Source Files\Playlist</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\PlayListXML.cpp">
+    <ClCompile Include="..\..\xbmc\playlists\PlayListXML.cpp">
       <Filter>Source Files\Playlist</Filter>
     </ClCompile>
     <ClCompile Include="..\..\xbmc\APEv2Tag.cpp">
@@ -3884,31 +3884,31 @@
     <ClInclude Include="..\..\xbmc\PartyModeManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\xbmc\PlayList.h">
+    <ClInclude Include="..\..\xbmc\playlists\PlayList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\xbmc\PlayListB4S.h">
+    <ClInclude Include="..\..\xbmc\playlists\PlayListB4S.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\xbmc\PlayListFactory.h">
+    <ClInclude Include="..\..\xbmc\playlists\PlayListFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\xbmc\PlayListM3U.h">
+    <ClInclude Include="..\..\xbmc\playlists\PlayListM3U.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\PlayListPlayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\xbmc\PlayListPLS.h">
+    <ClInclude Include="..\..\xbmc\playlists\PlayListPLS.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\xbmc\PlayListURL.h">
+    <ClInclude Include="..\..\xbmc\playlists\PlayListURL.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\xbmc\PlayListWPL.h">
+    <ClInclude Include="..\..\xbmc\playlists\PlayListWPL.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\xbmc\PlayListXML.h">
+    <ClInclude Include="..\..\xbmc\playlists\PlayListXML.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\Profile.h">
