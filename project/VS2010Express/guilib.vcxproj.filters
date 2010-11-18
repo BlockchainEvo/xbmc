@@ -1160,9 +1160,6 @@
     <ClInclude Include="..\..\guilib\Shader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\guilib\system.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\guilib\TextureBundle.h">
       <Filter>Header Files</Filter>
     </ClInclude>

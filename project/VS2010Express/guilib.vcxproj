@@ -842,7 +842,6 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release (DirectX)|Win32'">..\..\xbmc\win32\svn_rev.h;%(Outputs)</Outputs>
     </CustomBuild>
     <ClInclude Include="..\..\guilib\Shader.h" />
-    <ClInclude Include="..\..\guilib\system.h" />
     <ClInclude Include="..\..\guilib\TextureBundle.h" />
     <ClInclude Include="..\..\guilib\TransformMatrix.h" />
     <ClInclude Include="..\..\guilib\Tween.h" />

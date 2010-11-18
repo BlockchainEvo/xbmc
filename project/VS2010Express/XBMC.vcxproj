@@ -2609,6 +2609,7 @@
     <ClInclude Include="..\..\xbmc\settings\Settings.h" />
     <ClInclude Include="..\..\xbmc\settings\SettingsControls.h" />
     <ClInclude Include="..\..\xbmc\settings\VideoSettings.h" />
+    <ClInclude Include="..\..\xbmc\system.h" />
     <ClInclude Include="..\..\xbmc\utils\ISerializable.h" />
     <ClInclude Include="..\..\xbmc\utils\StdString.h" />
     <ClInclude Include="..\..\xbmc\utils\StringUtils.h" />
