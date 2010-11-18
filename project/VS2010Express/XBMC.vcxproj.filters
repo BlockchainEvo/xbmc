@@ -1597,16 +1597,10 @@
     <ClCompile Include="..\..\xbmc\CueDocument.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\GUIDialogMusicScan.cpp">
-      <Filter>Source Files\GUI Music</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\xbmc\GUIDialogSmartPlaylistEditor.cpp">
       <Filter>Source Files\GUI Music</Filter>
     </ClCompile>
     <ClCompile Include="..\..\xbmc\GUIDialogSmartPlaylistRule.cpp">
-      <Filter>Source Files\GUI Music</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\GUIDialogSongInfo.cpp">
       <Filter>Source Files\GUI Music</Filter>
     </ClCompile>
     <ClCompile Include="..\..\xbmc\GUIViewControl.cpp">
@@ -1996,9 +1990,6 @@
     <ClCompile Include="..\..\xbmc\GUIDialogMediaSource.cpp">
       <Filter>Source Files\GUI Dialog</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\GUIDialogMusicOSD.cpp">
-      <Filter>Source Files\GUI Dialog</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\xbmc\GUIDialogMuteBug.cpp">
       <Filter>Source Files\GUI Dialog</Filter>
     </ClCompile>
@@ -2036,9 +2027,6 @@
       <Filter>Source Files\GUI Dialog</Filter>
     </ClCompile>
     <ClCompile Include="..\..\xbmc\GUIDialogVideoSettings.cpp">
-      <Filter>Source Files\GUI Dialog</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\GUIDialogVisualisationPresetList.cpp">
       <Filter>Source Files\GUI Dialog</Filter>
     </ClCompile>
     <ClCompile Include="..\..\xbmc\GUIDialogVolumeBar.cpp">
@@ -5281,6 +5269,21 @@
     <ClCompile Include="..\..\xbmc\network\cddb.cpp">
       <Filter>Source Files\Network</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\xbmc\music\dialogs\GUIDialogMusicOSD.cpp">
+      <Filter>Source Files\GUI Music</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\music\dialogs\GUIDialogMusicScan.cpp">
+      <Filter>Source Files\GUI Music</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\music\dialogs\GUIDialogSongInfo.cpp">
+      <Filter>Source Files\GUI Music</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\music\dialogs\GUIDialogVisualisationPresetList.cpp">
+      <Filter>Source Files\GUI Music</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\music\dialogs\GUIDialogMusicInfo.cpp">
+      <Filter>Source Files\GUI Music</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\xbmc\win32\NetworkWin32.h">
@@ -5892,9 +5895,6 @@
     <ClInclude Include="..\..\xbmc\GUIDialogSmartPlaylistRule.h">
       <Filter>Source Files\GUI Music</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\xbmc\GUIDialogSongInfo.h">
-      <Filter>Source Files\GUI Music</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\xbmc\GUIViewControl.h">
       <Filter>Source Files\GUI Music</Filter>
     </ClInclude>
@@ -6090,9 +6090,6 @@
     <ClInclude Include="..\..\xbmc\GUIDialogMediaSource.h">
       <Filter>Source Files\GUI Dialog</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\xbmc\GUIDialogMusicOSD.h">
-      <Filter>Source Files\GUI Dialog</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\xbmc\GUIDialogPictureInfo.h">
       <Filter>Source Files\GUI Dialog</Filter>
     </ClInclude>
@@ -6112,9 +6109,6 @@
       <Filter>Source Files\GUI Dialog</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\GUIDialogVideoSettings.h">
-      <Filter>Source Files\GUI Dialog</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\GUIDialogVisualisationPresetList.h">
       <Filter>Source Files\GUI Dialog</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\GUILargeTextureManager.h">
@@ -6619,9 +6613,6 @@
     <ClInclude Include="..\..\xbmc\ButtonTranslator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\xbmc\FileSystem\cddb.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\xbmc\FileSystem\cdioSupport.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -6695,9 +6686,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\GUIDialogKeyboard.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\GUIDialogMusicScan.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\GUIDialogMuteBug.h">
@@ -9619,6 +9607,21 @@
     </ClInclude>
     <ClInclude Include="..\..\xbmc\network\cddb.h">
       <Filter>Source Files\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\music\dialogs\GUIDialogMusicOSD.h">
+      <Filter>Source Files\GUI Music</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\music\dialogs\GUIDialogMusicScan.h">
+      <Filter>Source Files\GUI Music</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\music\dialogs\GUIDialogSongInfo.h">
+      <Filter>Source Files\GUI Music</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\music\dialogs\GUIDialogVisualisationPresetList.h">
+      <Filter>Source Files\GUI Music</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\music\dialogs\GUIDialogMusicInfo.h">
+      <Filter>Source Files\GUI Music</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

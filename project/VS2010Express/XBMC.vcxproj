@@ -923,7 +923,15 @@
     <ClCompile Include="..\..\xbmc\lib\libjsonrpc\AudioLibrary.cpp" />
     <ClCompile Include="..\..\xbmc\lib\libPython\xbmcmodule\PythonAddon.cpp" />
     <ClCompile Include="..\..\xbmc\lib\libPython\xbmcmodule\xbmcaddonmodule.cpp" />
+<<<<<<< HEAD
 >>>>>>> changed: move input related files to a input/ and separate platform-specific files into their own subdirs
+=======
+    <ClCompile Include="..\..\xbmc\music\dialogs\GUIDialogMusicInfo.cpp" />
+    <ClCompile Include="..\..\xbmc\music\dialogs\GUIDialogMusicOSD.cpp" />
+    <ClCompile Include="..\..\xbmc\music\dialogs\GUIDialogMusicScan.cpp" />
+    <ClCompile Include="..\..\xbmc\music\dialogs\GUIDialogSongInfo.cpp" />
+    <ClCompile Include="..\..\xbmc\music\dialogs\GUIDialogVisualisationPresetList.cpp" />
+>>>>>>> changed: move music related dialogs to music/dialogs
     <ClCompile Include="..\..\xbmc\music\tags\APEv2Tag.cpp" />
     <ClCompile Include="..\..\xbmc\music\tags\FlacTag.cpp" />
     <ClCompile Include="..\..\xbmc\music\tags\Id3Tag.cpp" />
@@ -1624,10 +1632,8 @@
     <ClCompile Include="..\..\xbmc\GUIWindowTestPattern.cpp" />
     <ClCompile Include="..\..\xbmc\GUIWindowTestPatternDX.cpp" />
     <ClCompile Include="..\..\xbmc\GUIWindowTestPatternGL.cpp" />
-    <ClCompile Include="..\..\xbmc\GUIDialogMusicScan.cpp" />
     <ClCompile Include="..\..\xbmc\GUIDialogSmartPlaylistEditor.cpp" />
     <ClCompile Include="..\..\xbmc\GUIDialogSmartPlaylistRule.cpp" />
-    <ClCompile Include="..\..\xbmc\GUIDialogSongInfo.cpp" />
     <ClCompile Include="..\..\xbmc\GUIViewControl.cpp" />
     <ClCompile Include="..\..\xbmc\GUIViewState.cpp" />
     <ClCompile Include="..\..\xbmc\GUIViewStateMusic.cpp" />
@@ -1767,7 +1773,6 @@
     <ClCompile Include="..\..\xbmc\karaoke\GUIDialogKaraokeSongSelector.cpp" />
     <ClCompile Include="..\..\xbmc\GUIDialogKeyboard.cpp" />
     <ClCompile Include="..\..\xbmc\GUIDialogMediaSource.cpp" />
-    <ClCompile Include="..\..\xbmc\GUIDialogMusicOSD.cpp" />
     <ClCompile Include="..\..\xbmc\GUIDialogMuteBug.cpp" />
     <ClCompile Include="..\..\xbmc\GUIDialogNumeric.cpp" />
     <ClCompile Include="..\..\xbmc\GUIDialogOK.cpp" />
@@ -1781,7 +1786,6 @@
     <ClCompile Include="..\..\xbmc\GUIDialogTeletext.cpp" />
     <ClCompile Include="..\..\xbmc\GUIDialogVideoBookmarks.cpp" />
     <ClCompile Include="..\..\xbmc\GUIDialogVideoSettings.cpp" />
-    <ClCompile Include="..\..\xbmc\GUIDialogVisualisationPresetList.cpp" />
     <ClCompile Include="..\..\xbmc\GUIDialogVolumeBar.cpp" />
     <ClCompile Include="..\..\xbmc\GUIDialogYesNo.cpp" />
     <ClCompile Include="..\..\xbmc\GUILargeTextureManager.cpp" />
@@ -2428,6 +2432,11 @@
     <ClInclude Include="..\..\xbmc\input\XBMC_vkeys.h" />
     <ClInclude Include="..\..\xbmc\lib\libjsonrpc\AudioLibrary.h" />
     <ClInclude Include="..\..\xbmc\lib\libPython\xbmcmodule\PythonAddon.h" />
+    <ClInclude Include="..\..\xbmc\music\dialogs\GUIDialogMusicInfo.h" />
+    <ClInclude Include="..\..\xbmc\music\dialogs\GUIDialogMusicOSD.h" />
+    <ClInclude Include="..\..\xbmc\music\dialogs\GUIDialogMusicScan.h" />
+    <ClInclude Include="..\..\xbmc\music\dialogs\GUIDialogSongInfo.h" />
+    <ClInclude Include="..\..\xbmc\music\dialogs\GUIDialogVisualisationPresetList.h" />
     <ClInclude Include="..\..\xbmc\music\tags\APEv2Tag.h" />
     <ClInclude Include="..\..\xbmc\music\tags\DllLibapetag.h" />
     <ClInclude Include="..\..\xbmc\music\tags\DllLibid3tag.h" />
@@ -3323,7 +3332,6 @@
     <ClInclude Include="..\..\xbmc\GUIWindowTestPatternGL.h" />
     <ClInclude Include="..\..\xbmc\GUIDialogSmartPlaylistEditor.h" />
     <ClInclude Include="..\..\xbmc\GUIDialogSmartPlaylistRule.h" />
-    <ClInclude Include="..\..\xbmc\GUIDialogSongInfo.h" />
     <ClInclude Include="..\..\xbmc\GUIViewControl.h" />
     <ClInclude Include="..\..\xbmc\GUIViewState.h" />
     <ClInclude Include="..\..\xbmc\GUIViewStateMusic.h" />
@@ -3389,7 +3397,6 @@
     <ClInclude Include="..\..\xbmc\GUIDialogFullScreenInfo.h" />
     <ClInclude Include="..\..\xbmc\karaoke\GUIDialogKaraokeSongSelector.h" />
     <ClInclude Include="..\..\xbmc\GUIDialogMediaSource.h" />
-    <ClInclude Include="..\..\xbmc\GUIDialogMusicOSD.h" />
     <ClInclude Include="..\..\xbmc\GUIDialogPictureInfo.h" />
     <ClInclude Include="..\..\xbmc\GUIDialogPlayerControls.h" />
     <ClInclude Include="..\..\xbmc\GUIDialogSeekBar.h" />
@@ -3397,7 +3404,6 @@
     <ClInclude Include="..\..\xbmc\GUIDialogTeletext.h" />
     <ClInclude Include="..\..\xbmc\GUIDialogVideoBookmarks.h" />
     <ClInclude Include="..\..\xbmc\GUIDialogVideoSettings.h" />
-    <ClInclude Include="..\..\xbmc\GUIDialogVisualisationPresetList.h" />
     <ClInclude Include="..\..\xbmc\GUILargeTextureManager.h" />
     <ClInclude Include="..\..\xbmc\GUIMediaWindow.h" />
     <ClInclude Include="..\..\xbmc\GUIViewStatePictures.h" />
@@ -3566,7 +3572,6 @@
     <ClInclude Include="..\..\xbmc\AutorunMediaJob.h" />
     <ClInclude Include="..\..\xbmc\AutoSwitch.h" />
     <ClInclude Include="..\..\xbmc\ButtonTranslator.h" />
-    <ClInclude Include="..\..\xbmc\FileSystem\cddb.h" />
     <ClInclude Include="..\..\xbmc\FileSystem\cdioSupport.h" />
     <ClInclude Include="..\..\xbmc\utils\CharsetConverter.h" />
     <ClInclude Include="..\..\xbmc\Crc32.h" />
@@ -3592,7 +3597,6 @@
     <ClInclude Include="..\..\xbmc\GUIDialogGamepad.h" />
     <ClInclude Include="..\..\xbmc\GUIDialogKaiToast.h" />
     <ClInclude Include="..\..\xbmc\GUIDialogKeyboard.h" />
-    <ClInclude Include="..\..\xbmc\GUIDialogMusicScan.h" />
     <ClInclude Include="..\..\xbmc\GUIDialogMuteBug.h" />
     <ClInclude Include="..\..\xbmc\GUIDialogNumeric.h" />
     <ClInclude Include="..\..\xbmc\GUIDialogOK.h" />
