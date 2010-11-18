@@ -6876,6 +6876,9 @@
     <ClInclude Include="..\..\xbmc\settings\VideoSettings.h">
       <Filter>Source Files\Settings</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\xbmc\utils\StdString.h">
+      <Filter>Source Files\Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\xbmc\win32\XBMC.ico">
