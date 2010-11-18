@@ -712,6 +712,10 @@
     <ClCompile Include="..\..\guilib\IWindowManagerCallback.cpp" />
     <ClCompile Include="..\..\guilib\Key.cpp" />
     <ClCompile Include="..\..\guilib\LocalizeStrings.cpp" />
+    <ClCompile Include="..\..\lib\tinyXML\tinystr.cpp" />
+    <ClCompile Include="..\..\lib\tinyXML\tinyxml.cpp" />
+    <ClCompile Include="..\..\lib\tinyXML\tinyxmlerror.cpp" />
+    <ClCompile Include="..\..\lib\tinyXML\tinyxmlparser.cpp" />
     <ClCompile Include="..\..\xbmc\input\SDLJoystick.cpp" />
     <ClCompile Include="..\..\xbmc\input\windows\IRServerSuite.cpp" />
     <ClCompile Include="..\..\xbmc\input\windows\IrssMessage.cpp" />
@@ -738,36 +742,6 @@
     <ClCompile Include="..\..\guilib\VisibleEffect.cpp" />
     <ClCompile Include="..\..\guilib\XBTF.cpp" />
     <ClCompile Include="..\..\guilib\XBTFReader.cpp" />
-    <ClCompile Include="..\..\guilib\tinyXML\tinyxml.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug (DirectX)|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug (OpenGL)|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release (DirectX)|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release (OpenGL)|Win32'">
-      </PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="..\..\guilib\tinyXML\tinyxmlerror.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug (DirectX)|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug (OpenGL)|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release (DirectX)|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release (OpenGL)|Win32'">
-      </PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="..\..\guilib\tinyXML\tinyxmlparser.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug (DirectX)|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug (OpenGL)|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release (DirectX)|Win32'">
-      </PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release (OpenGL)|Win32'">
-      </PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="..\..\guilib\GraphicContext.cpp" />
     <ClCompile Include="..\..\guilib\GUIFontTTF.cpp" />
     <ClCompile Include="..\..\guilib\GUITexture.cpp" />
@@ -855,6 +829,8 @@
     <ClInclude Include="..\..\guilib\IWindowManagerCallback.h" />
     <ClInclude Include="..\..\guilib\Key.h" />
     <ClInclude Include="..\..\guilib\LocalizeStrings.h" />
+    <ClInclude Include="..\..\lib\tinyXML\tinystr.h" />
+    <ClInclude Include="..\..\lib\tinyXML\tinyxml.h" />
     <ClInclude Include="..\..\xbmc\input\SDLJoystick.h" />
     <ClInclude Include="..\..\xbmc\input\windows\IRServerSuite.h" />
     <ClInclude Include="..\..\xbmc\input\windows\IrssMessage.h" />
@@ -871,8 +847,6 @@
     <ClInclude Include="..\..\guilib\TransformMatrix.h" />
     <ClInclude Include="..\..\guilib\Tween.h" />
     <ClInclude Include="..\..\guilib\VisibleEffect.h" />
-    <ClInclude Include="..\..\guilib\tinyXML\tinystr.h" />
-    <ClInclude Include="..\..\guilib\tinyXML\tinyxml.h" />
     <ClInclude Include="..\..\guilib\GraphicContext.h" />
     <ClInclude Include="..\..\guilib\GUIFontTTF.h" />
     <ClInclude Include="..\..\guilib\GUITexture.h" />
