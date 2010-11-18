@@ -219,6 +219,7 @@
     <Filter Include="cores\dvdplayer\DVDHeaders">
       <UniqueIdentifier>{9b9c3d13-56db-4db5-98a3-4402ee3b4ff9}</UniqueIdentifier>
     </Filter>
+<<<<<<< HEAD
     <Filter Include="cores\dvdplayer\DVDSubtitles">
       <UniqueIdentifier>{83ae8e22-c3a0-45c6-bbc2-29d0bb180e2d}</UniqueIdentifier>
     </Filter>
@@ -1147,6 +1148,10 @@
     <ClCompile Include="..\..\xbmc\win32\NetworkWin32.cpp">
       <Filter>win32</Filter>
     </ClCompile>
+=======
+  </ItemGroup>
+  <ItemGroup>
+>>>>>>> changed: move platform specific network classes into subfolders of network
     <ClCompile Include="..\..\xbmc\win32\pch.cpp">
       <Filter>win32</Filter>
     </ClCompile>
@@ -5284,11 +5289,11 @@
     <ClCompile Include="..\..\xbmc\music\dialogs\GUIDialogMusicInfo.cpp">
       <Filter>Source Files\GUI Music</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\xbmc\network\windows\NetworkWin32.cpp">
+      <Filter>win32</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\xbmc\win32\NetworkWin32.h">
-      <Filter>win32</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\xbmc\win32\pch.h">
       <Filter>win32</Filter>
     </ClInclude>
@@ -9622,6 +9627,9 @@
     </ClInclude>
     <ClInclude Include="..\..\xbmc\music\dialogs\GUIDialogMusicInfo.h">
       <Filter>Source Files\GUI Music</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\network\windows\NetworkWin32.h">
+      <Filter>win32</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

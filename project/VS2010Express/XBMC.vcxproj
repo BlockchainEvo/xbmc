@@ -1413,7 +1413,11 @@
     <ClCompile Include="..\..\xbmc\network\UdpClient.cpp" />
     <ClCompile Include="..\..\xbmc\network\UPnP.cpp" />
     <ClCompile Include="..\..\xbmc\network\WebServer.cpp" />
+<<<<<<< HEAD
 >>>>>>> changed: move network related files to xbmc/network
+=======
+    <ClCompile Include="..\..\xbmc\network\windows\NetworkWin32.cpp" />
+>>>>>>> changed: move platform specific network classes into subfolders of network
     <ClCompile Include="..\..\xbmc\playlists\PlayList.cpp" />
     <ClCompile Include="..\..\xbmc\playlists\PlayListB4S.cpp" />
     <ClCompile Include="..\..\xbmc\playlists\PlayListFactory.cpp" />
@@ -1451,7 +1455,6 @@
     <ClCompile Include="..\..\xbmc\utils\URIUtils.cpp" />
     <ClCompile Include="..\..\xbmc\utils\Variant.cpp" />
     <ClCompile Include="..\..\xbmc\utils\XMLUtils.cpp" />
-    <ClCompile Include="..\..\xbmc\win32\NetworkWin32.cpp" />
     <ClCompile Include="..\..\xbmc\win32\pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug (DirectX)|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug (OpenGL)|Win32'">Create</PrecompiledHeader>
@@ -2831,7 +2834,11 @@
     <ClInclude Include="..\..\xbmc\network\UdpClient.h" />
     <ClInclude Include="..\..\xbmc\network\UPnP.h" />
     <ClInclude Include="..\..\xbmc\network\WebServer.h" />
+<<<<<<< HEAD
 >>>>>>> changed: move network related files to xbmc/network
+=======
+    <ClInclude Include="..\..\xbmc\network\windows\NetworkWin32.h" />
+>>>>>>> changed: move platform specific network classes into subfolders of network
     <ClInclude Include="..\..\xbmc\playlists\PlayList.h" />
     <ClInclude Include="..\..\xbmc\playlists\PlayListB4S.h" />
     <ClInclude Include="..\..\xbmc\playlists\PlayListFactory.h" />
@@ -3124,7 +3131,6 @@
     <ClInclude Include="..\..\xbmc\utils\URIUtils.h" />
     <ClInclude Include="..\..\xbmc\utils\Variant.h" />
     <ClInclude Include="..\..\xbmc\utils\XMLUtils.h" />
-    <ClInclude Include="..\..\xbmc\win32\NetworkWin32.h" />
     <ClInclude Include="..\..\xbmc\win32\pch.h" />
     <ClInclude Include="..\..\xbmc\win32\PlatformDefs.h" />
     <ClInclude Include="..\..\xbmc\win32\PlatformInclude.h" />
