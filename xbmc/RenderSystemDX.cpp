@@ -22,7 +22,7 @@
 
 #ifdef HAS_DX
 
-#include "Settings.h"
+#include "settings/Settings.h"
 #include "RenderSystemDX.h"
 #include "utils/log.h"
 #include "utils/TimeUtils.h"

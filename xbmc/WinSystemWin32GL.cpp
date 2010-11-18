@@ -27,7 +27,7 @@
  */
 #include "WinSystemWin32GL.h"
 #include "WIN32Util.h"
-#include "GUISettings.h"
+#include "settings/GUISettings.h"
 #include "guilib/gui3d.h"
 
 #ifdef HAS_GL

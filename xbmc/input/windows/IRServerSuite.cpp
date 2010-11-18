@@ -21,9 +21,9 @@
 
 #include "IRServerSuite.h"
 #include "IrssMessage.h"
-#include "ButtonTranslator.h"
+#include "input/ButtonTranslator.h"
 #include "log.h"
-#include "AdvancedSettings.h"
+#include "settings/AdvancedSettings.h"
 #include "utils/TimeUtils.h"
 #include <Ws2tcpip.h>
 

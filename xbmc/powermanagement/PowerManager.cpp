@@ -47,7 +47,7 @@
 #include "linux/HALPowerSyscall.h"
 #endif
 #elif defined(_WIN32)
-#include "win32/Win32PowerSyscall.h"
+#include "powermanagement/windows/Win32PowerSyscall.h"
 extern HWND g_hWnd;
 #endif
 
