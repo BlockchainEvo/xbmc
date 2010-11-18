@@ -22,7 +22,7 @@
 
 #include "Codecs/DllAvCodec.h"
 #include "DVDVideoCodecFFmpeg.h"
-#include "D3DResource.h"
+#include "guilib/D3DResource.h"
 #include "Event.h"
 #include <dxva2api.h>
 #include <deque>

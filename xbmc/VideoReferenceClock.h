@@ -32,7 +32,7 @@
   #include <GL/glx.h>
 #elif defined(_WIN32) && defined(HAS_DX)
   #include <d3d9.h>
-  #include "D3DResource.h"
+  #include "guilib/D3DResource.h"
 
 class CD3DCallback : public ID3DResource
 {

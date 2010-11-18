@@ -28,8 +28,8 @@
 #include <initguid.h>
 #include <Mmreg.h>
 #include "Win32WASAPI.h"
-#include "AudioContext.h"
-#include "Settings.h"
+#include "guilib/AudioContext.h"
+#include "settings/Settings.h"
 #include "SingleLock.h"
 #include "SystemInfo.h"
 #include "utils/log.h"

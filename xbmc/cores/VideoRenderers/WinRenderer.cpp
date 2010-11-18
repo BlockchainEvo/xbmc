@@ -24,11 +24,11 @@
 #include "WinRenderer.h"
 #include "Application.h"
 #include "Util.h"
-#include "Settings.h"
-#include "GUISettings.h"
-#include "Texture.h"
+#include "settings/Settings.h"
+#include "settings/GUISettings.h"
+#include "guilib/Texture.h"
 #include "WindowingFactory.h"
-#include "AdvancedSettings.h"
+#include "settings/AdvancedSettings.h"
 #include "SingleLock.h"
 #include "utils/log.h"
 #include "FileSystem/File.h"
@@ -37,7 +37,7 @@
 #include "VideoShaders/WinVideoFilter.h"
 #include "../dvdplayer/Codecs/DllSwScale.h"
 #include "../dvdplayer/Codecs/DllAvCodec.h"
-#include "LocalizeStrings.h"
+#include "guilib/LocalizeStrings.h"
 
 typedef struct {
   RenderMethod  method;

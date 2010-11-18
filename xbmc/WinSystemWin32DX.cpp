@@ -21,7 +21,7 @@
 
 
 #include "WinSystemWin32DX.h"
-#include "GUISettings.h"
+#include "settings/GUISettings.h"
 #include "guilib/gui3d.h"
 
 #ifdef HAS_DX

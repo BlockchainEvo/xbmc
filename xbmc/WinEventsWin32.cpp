@@ -23,7 +23,7 @@
 #include "Windowsx.h"
 #include "WinEvents.h"
 #include "WIN32Util.h"
-#include "storage/Win32StorageProvider.h"
+#include "storage/windows/Win32StorageProvider.h"
 #include "Application.h"
 #include "XBMC_vkeys.h"
 #include "MouseStat.h"

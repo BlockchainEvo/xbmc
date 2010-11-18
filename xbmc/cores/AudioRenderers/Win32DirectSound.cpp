@@ -20,7 +20,7 @@
 
 #include "system.h" // WIN32INCLUDES needed for the directsound stuff below
 #include "Win32DirectSound.h"
-#include "AudioContext.h"
+#include "guilib/AudioContext.h"
 #include "Settings.h"
 #include <initguid.h>
 #include <Mmreg.h>

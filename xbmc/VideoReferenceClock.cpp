@@ -46,7 +46,7 @@
     #pragma comment (lib,"Dxerr9.lib")
   #endif
   #include "WindowingFactory.h"
-  #include "AdvancedSettings.h"
+  #include "settings/AdvancedSettings.h"
 #endif
 
 using namespace std;

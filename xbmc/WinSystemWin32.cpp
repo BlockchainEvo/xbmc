@@ -21,7 +21,7 @@
 
 #include "WinSystemWin32.h"
 #include "WinEventsWin32.h"
-#include "Settings.h"
+#include "settings/Settings.h"
 #include "resource.h"
 #include "GUISettings.h"
 #include "AdvancedSettings.h"

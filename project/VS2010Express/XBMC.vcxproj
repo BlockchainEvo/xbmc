@@ -1433,7 +1433,11 @@
 >>>>>>> changed: move network related files to xbmc/network
 =======
     <ClCompile Include="..\..\xbmc\network\windows\NetworkWin32.cpp" />
+<<<<<<< HEAD
 >>>>>>> changed: move platform specific network classes into subfolders of network
+=======
+    <ClCompile Include="..\..\xbmc\network\Zeroconf.cpp" />
+>>>>>>> more compile fixes
     <ClCompile Include="..\..\xbmc\playlists\PlayList.cpp" />
     <ClCompile Include="..\..\xbmc\playlists\PlayListB4S.cpp" />
     <ClCompile Include="..\..\xbmc\playlists\PlayListFactory.cpp" />
@@ -1761,7 +1765,6 @@
     <ClCompile Include="..\..\xbmc\utils\Weather.cpp" />
     <ClCompile Include="..\..\xbmc\utils\Win32Exception.cpp" />
     <ClCompile Include="..\..\xbmc\XBApplicationEx.cpp" />
-    <ClCompile Include="..\..\xbmc\Zeroconf.cpp" />
     <ClCompile Include="..\..\xbmc\Album.cpp" />
     <ClCompile Include="..\..\xbmc\Artist.cpp" />
     <ClCompile Include="..\..\xbmc\Bookmark.cpp" />
@@ -2854,7 +2857,11 @@
 >>>>>>> changed: move network related files to xbmc/network
 =======
     <ClInclude Include="..\..\xbmc\network\windows\NetworkWin32.h" />
+<<<<<<< HEAD
 >>>>>>> changed: move platform specific network classes into subfolders of network
+=======
+    <ClInclude Include="..\..\xbmc\network\Zeroconf.h" />
+>>>>>>> more compile fixes
     <ClInclude Include="..\..\xbmc\playlists\PlayList.h" />
     <ClInclude Include="..\..\xbmc\playlists\PlayListB4S.h" />
     <ClInclude Include="..\..\xbmc\playlists\PlayListFactory.h" />
@@ -3408,7 +3415,6 @@
     <ClInclude Include="..\..\xbmc\utils\TuxBoxUtil.h" />
     <ClInclude Include="..\..\xbmc\VideoInfoTag.h" />
     <ClInclude Include="..\..\xbmc\VideoReferenceClock.h" />
-    <ClInclude Include="..\..\xbmc\Zeroconf.h" />
     <ClInclude Include="..\..\xbmc\Album.h" />
     <ClInclude Include="..\..\xbmc\Artist.h" />
     <ClInclude Include="..\..\xbmc\Bookmark.h" />

@@ -23,7 +23,7 @@
 #include "OverlayRenderer.h"
 #include "OverlayRendererUtil.h"
 #include "RenderSystemDX.h"
-#include "D3DResource.h"
+#include "guilib/D3DResource.h"
 
 #ifdef HAS_DX
 

@@ -32,10 +32,10 @@
 #include "DXVA.h"
 #include "WindowingFactory.h"
 #include "../../../VideoRenderers/WinRenderer.h"
-#include "Settings.h"
+#include "settings/Settings.h"
 #include "boost/shared_ptr.hpp"
 #include "AutoPtrHandle.h"
-#include "AdvancedSettings.h"
+#include "settings/AdvancedSettings.h"
 
 #define ALLOW_ADDING_SURFACES 0
 

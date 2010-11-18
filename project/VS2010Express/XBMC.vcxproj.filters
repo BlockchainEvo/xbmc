@@ -1906,9 +1906,6 @@
     <ClCompile Include="..\..\xbmc\XBApplicationEx.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\Zeroconf.cpp">
-      <Filter>Source Files\Utils</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\xbmc\Album.cpp">
       <Filter>Source Files\Database</Filter>
     </ClCompile>
@@ -6052,9 +6049,6 @@
       <Filter>Source Files\Utils</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\VideoReferenceClock.h">
-      <Filter>Source Files\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\Zeroconf.h">
       <Filter>Source Files\Utils</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\Album.h">
@@ -10300,6 +10294,9 @@
     </ClInclude>
     <ClInclude Include="..\..\xbmc\storage\windows\Win32StorageProvider.h">
       <Filter>Source Files\Storage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\network\Zeroconf.h">
+      <Filter>Source Files\Network</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

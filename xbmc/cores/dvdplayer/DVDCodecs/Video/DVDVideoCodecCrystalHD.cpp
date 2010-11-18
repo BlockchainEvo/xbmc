@@ -27,7 +27,7 @@
 #endif
 
 #if defined(HAVE_LIBCRYSTALHD)
-#include "GUISettings.h"
+#include "settings/GUISettings.h"
 #include "DVDClock.h"
 #include "DVDStreamInfo.h"
 #include "DVDVideoCodecCrystalHD.h"
