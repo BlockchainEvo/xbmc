@@ -1792,9 +1792,6 @@
     <ClCompile Include="..\..\xbmc\utils\md5.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\MediaManager.cpp">
-      <Filter>Source Files\Utils</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\xbmc\MediaSource.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
@@ -5315,6 +5312,9 @@
       <Filter>Source Files\Storage</Filter>
     </ClCompile>
     <ClCompile Include="..\..\xbmc\storage\windows\Win32StorageProvider.cpp">
+      <Filter>Source Files\Storage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\storage\MediaManager.cpp">
       <Filter>Source Files\Storage</Filter>
     </ClCompile>
   </ItemGroup>

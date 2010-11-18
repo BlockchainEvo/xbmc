@@ -24,7 +24,7 @@
 
 #include <vector>
 #include "StdString.h"
-#include "utils/Network.h"
+#include "network/Network.h"
 #include "Iphlpapi.h"
 #include "stopwatch.h"
 #include "utils/CriticalSection.h"

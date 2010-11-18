@@ -19,7 +19,7 @@
  *
  */
 
-#include "../../xbmc/AdvancedSettings.h"
+#include "settings/AdvancedSettings.h"
 #include "../../xbmc/utils/log.h"
 #include "WIN32Util.h"
 #include "shellapi.h"

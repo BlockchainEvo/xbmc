@@ -1464,6 +1464,7 @@
     <ClCompile Include="..\..\xbmc\storage\AutorunMediaJob.cpp" />
     <ClCompile Include="..\..\xbmc\storage\cdioSupport.cpp" />
     <ClCompile Include="..\..\xbmc\storage\IoSupport.cpp" />
+    <ClCompile Include="..\..\xbmc\storage\MediaManager.cpp" />
     <ClCompile Include="..\..\xbmc\storage\windows\Win32StorageProvider.cpp" />
     <ClCompile Include="..\..\xbmc\SystemGlobals.cpp" />
     <ClCompile Include="..\..\xbmc\utils\fstrcmp.c">
@@ -1722,7 +1723,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release (OpenGL)|Win32'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\MediaManager.cpp" />
     <ClCompile Include="..\..\xbmc\MediaSource.cpp" />
     <ClCompile Include="..\..\xbmc\utils\Mutex.cpp" />
     <ClCompile Include="..\..\xbmc\NfoFile.cpp" />
@@ -3147,6 +3147,8 @@
     <ClInclude Include="..\..\xbmc\storage\AutorunMediaJob.h" />
     <ClInclude Include="..\..\xbmc\storage\cdioSupport.h" />
     <ClInclude Include="..\..\xbmc\storage\IoSupport.h" />
+    <ClInclude Include="..\..\xbmc\storage\IStorageProvider.h" />
+    <ClInclude Include="..\..\xbmc\storage\MediaManager.h" />
     <ClInclude Include="..\..\xbmc\storage\windows\Win32StorageProvider.h" />
     <ClInclude Include="..\..\xbmc\system.h" />
     <ClInclude Include="..\..\xbmc\utils\ISerializable.h" />
@@ -3878,7 +3880,7 @@
       <Project>{d8097c41-605d-4917-8957-9df7f44a18cd}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
-    <ProjectReference Include="..\..\xbmc\lib\libapetag\libapetag.vcxproj">
+    <ProjectReference Include="..\..\lib\libapetag\libapetag.vcxproj">
       <Project>{bdd2cb99-93c5-4a70-acbf-396ffb961ad3}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>

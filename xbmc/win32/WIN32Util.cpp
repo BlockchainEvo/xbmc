@@ -20,9 +20,9 @@
  */
 
 #include "WIN32Util.h"
-#include "GUISettings.h"
+#include "settings/GUISettings.h"
 #include "../Util.h"
-#include "FileSystem/cdioSupport.h"
+#include "storage/cdioSupport.h"
 #include "PowrProf.h"
 #include "WindowHelper.h"
 #include "Application.h"
@@ -32,9 +32,9 @@
 #if _MSC_VER > 1400
 #include "Setupapi.h"
 #endif
-#include "MediaManager.h"
+#include "storage/MediaManager.h"
 #include "WindowingFactory.h"
-#include "LocalizeStrings.h"
+#include "guilib/LocalizeStrings.h"
 #include "log.h"
 #include "StringUtils.h"
 #include "DllPaths_win32.h"
