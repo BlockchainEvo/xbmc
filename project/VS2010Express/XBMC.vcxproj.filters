@@ -1620,9 +1620,6 @@
     <ClCompile Include="..\..\xbmc\GUIWindowMusicBase.cpp">
       <Filter>Source Files\GUI Music</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\GuiWindowMusicInfo.cpp">
-      <Filter>Source Files\GUI Music</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\xbmc\GUIWindowMusicNav.cpp">
       <Filter>Source Files\GUI Music</Filter>
     </ClCompile>
@@ -6739,9 +6736,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\GUIWindowMusicBase.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\GuiWindowMusicInfo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\GuiWindowMusicOverlay.h">

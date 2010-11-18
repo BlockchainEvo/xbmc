@@ -1641,7 +1641,6 @@
     <ClCompile Include="..\..\xbmc\GUIViewState.cpp" />
     <ClCompile Include="..\..\xbmc\GUIViewStateMusic.cpp" />
     <ClCompile Include="..\..\xbmc\GUIWindowMusicBase.cpp" />
-    <ClCompile Include="..\..\xbmc\GuiWindowMusicInfo.cpp" />
     <ClCompile Include="..\..\xbmc\GUIWindowMusicNav.cpp" />
     <ClCompile Include="..\..\xbmc\GUIWindowMusicOverlay.cpp" />
     <ClCompile Include="..\..\xbmc\GUIWindowMusicPlaylist.cpp" />
@@ -3619,7 +3618,6 @@
     <ClInclude Include="..\..\xbmc\GUIWindowFullScreen.h" />
     <ClInclude Include="..\..\xbmc\GUIWindowHome.h" />
     <ClInclude Include="..\..\xbmc\GUIWindowMusicBase.h" />
-    <ClInclude Include="..\..\xbmc\GuiWindowMusicInfo.h" />
     <ClInclude Include="..\..\xbmc\GuiWindowMusicOverlay.h" />
     <ClInclude Include="..\..\xbmc\GUIWindowMusicPlaylist.h" />
     <ClInclude Include="..\..\xbmc\GUIWindowMusicSongs.h" />
