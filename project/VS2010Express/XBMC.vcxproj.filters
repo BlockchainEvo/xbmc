@@ -9428,6 +9428,9 @@
     <ClInclude Include="..\..\xbmc\guilib\GUITextureGLES.h">
       <Filter>guilib\Rendering\GL</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\xbmc\utils\MathUtils.h">
+      <Filter>Source Files\Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\xbmc\win32\XBMC.ico">

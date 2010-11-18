@@ -3087,6 +3087,7 @@
     <ClInclude Include="..\..\xbmc\settings\VideoSettings.h" />
     <ClInclude Include="..\..\xbmc\system.h" />
     <ClInclude Include="..\..\xbmc\utils\ISerializable.h" />
+    <ClInclude Include="..\..\xbmc\utils\MathUtils.h" />
     <ClInclude Include="..\..\xbmc\utils\StdString.h" />
     <ClInclude Include="..\..\xbmc\utils\StringUtils.h" />
     <ClInclude Include="..\..\xbmc\utils\URIUtils.h" />
