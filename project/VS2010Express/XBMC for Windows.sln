@@ -73,7 +73,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "visDirectxSpectrum", "..\..
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libmodplug_2010", "..\..\lib\libmodplug\libmodplug_2010.vcxproj", "{C15B374E-7126-48FF-B618-A375D7B17FCF}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libapetag", "..\..\xbmc\lib\libapetag\libapetag.vcxproj", "{BDD2CB99-93C5-4A70-ACBF-396FFB961AD3}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libapetag", "..\..\lib\libapetag\libapetag.vcxproj", "{BDD2CB99-93C5-4A70-ACBF-396FFB961AD3}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libRTV", "..\..\xbmc\lib\libRTV\libRTV.vcxproj", "{DD4818AE-7E35-40B7-A6A0-0FF83AA1C916}"
 EndProject
