@@ -885,15 +885,6 @@
     <ClCompile Include="..\..\guilib\tinyXML\tinyxmlparser.cpp">
       <Filter>tinyxml</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\guilib\common\SDLJoystick.cpp">
-      <Filter>common</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\guilib\common\IRServerSuite\IRServerSuite.cpp">
-      <Filter>common\IRServerSuite</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\guilib\common\IRServerSuite\IrssMessage.cpp">
-      <Filter>common\IRServerSuite</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\guilib\GraphicContext.cpp">
       <Filter>Rendering\Base</Filter>
     </ClCompile>
@@ -929,6 +920,15 @@
     </ClCompile>
     <ClCompile Include="..\..\guilib\GUITextureGLES.cpp">
       <Filter>Rendering\GL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\input\SDLJoystick.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\input\windows\IRServerSuite.cpp">
+      <Filter>common\IRServerSuite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\input\windows\IrssMessage.cpp">
+      <Filter>common\IRServerSuite</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1178,15 +1178,6 @@
     <ClInclude Include="..\..\guilib\tinyXML\tinyxml.h">
       <Filter>tinyxml</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\guilib\common\SDLJoystick.h">
-      <Filter>common</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\guilib\common\IRServerSuite\IRServerSuite.h">
-      <Filter>common\IRServerSuite</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\guilib\common\IRServerSuite\IrssMessage.h">
-      <Filter>common\IRServerSuite</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\guilib\GraphicContext.h">
       <Filter>Rendering\Base</Filter>
     </ClInclude>
@@ -1222,6 +1213,15 @@
     </ClInclude>
     <ClInclude Include="..\..\guilib\GUITextureGLES.h">
       <Filter>Rendering\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\input\SDLJoystick.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\input\windows\IRServerSuite.h">
+      <Filter>common\IRServerSuite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\input\windows\IrssMessage.h">
+      <Filter>common\IRServerSuite</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

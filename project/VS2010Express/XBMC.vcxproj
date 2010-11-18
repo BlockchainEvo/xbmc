@@ -292,6 +292,7 @@
     <ClCompile Include="..\..\xbmc\addons\GUIDialogAddonInfo.cpp" />
     <ClCompile Include="..\..\xbmc\GUIDialogTextViewer.cpp" />
     <ClCompile Include="..\..\xbmc\addons\GUIViewStateAddonBrowser.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="..\..\xbmc\GUIWindowSystemInfo.cpp" />
     <ClCompile Include="..\..\xbmc\lib\libjsonrpc\AudioLibrary.cpp" />
     <ClCompile Include="..\..\xbmc\lib\libPython\xbmcmodule\PythonAddon.cpp" />
@@ -529,6 +530,26 @@
     <ClCompile Include="..\..\xbmc\playlists\PlayListWPL.cpp" />
     <ClCompile Include="..\..\xbmc\playlists\PlayListXML.cpp" />
     <ClCompile Include="..\..\xbmc\playlists\SmartPlayList.cpp" />
+=======
+    <ClCompile Include="..\..\xbmc\addons\GUIWindowAddonBrowser.cpp" />
+    <ClCompile Include="..\..\xbmc\addons\PluginSource.cpp" />
+    <ClCompile Include="..\..\xbmc\addons\Repository.cpp" />
+    <ClCompile Include="..\..\xbmc\addons\Service.cpp" />
+    <ClCompile Include="..\..\xbmc\addons\Skin.cpp" />
+    <ClCompile Include="..\..\xbmc\cores\dvdplayer\DVDCodecs\Video\CrystalHD.cpp" />
+    <ClCompile Include="..\..\xbmc\cores\dvdplayer\DVDInputStreams\DVDInputStreamBluray.cpp" />
+    <ClCompile Include="..\..\xbmc\cores\VideoRenderers\VideoShaders\WinVideoFilter.cpp" />
+    <ClCompile Include="..\..\xbmc\FileSystem\VideoDatabaseDirectory\DirectoryNodeCountry.cpp" />
+    <ClCompile Include="..\..\xbmc\GUIDialogTextViewer.cpp" />
+    <ClCompile Include="..\..\xbmc\GUIWindowSystemInfo.cpp" />
+    <ClCompile Include="..\..\xbmc\input\ButtonTranslator.cpp" />
+    <ClCompile Include="..\..\xbmc\input\KeyboardLayoutConfiguration.cpp" />
+    <ClCompile Include="..\..\xbmc\input\KeyboardStat.cpp" />
+    <ClCompile Include="..\..\xbmc\input\MouseStat.cpp" />
+    <ClCompile Include="..\..\xbmc\lib\libjsonrpc\AudioLibrary.cpp" />
+    <ClCompile Include="..\..\xbmc\lib\libPython\xbmcmodule\PythonAddon.cpp" />
+    <ClCompile Include="..\..\xbmc\lib\libPython\xbmcmodule\xbmcaddonmodule.cpp" />
+>>>>>>> changed: move input related files to a input/ and separate platform-specific files into their own subdirs
     <ClCompile Include="..\..\xbmc\music\tags\APEv2Tag.cpp" />
     <ClCompile Include="..\..\xbmc\music\tags\FlacTag.cpp" />
     <ClCompile Include="..\..\xbmc\music\tags\Id3Tag.cpp" />
@@ -1252,7 +1273,6 @@
     <ClCompile Include="..\..\xbmc\AutoSwitch.cpp" />
     <ClCompile Include="..\..\xbmc\utils\BitstreamStats.cpp" />
     <ClCompile Include="..\..\xbmc\utils\Builtins.cpp" />
-    <ClCompile Include="..\..\xbmc\ButtonTranslator.cpp" />
     <ClCompile Include="..\..\xbmc\utils\CharsetConverter.cpp" />
     <ClCompile Include="..\..\xbmc\utils\CPUInfo.cpp" />
     <ClCompile Include="..\..\xbmc\Crc32.cpp" />
@@ -1280,7 +1300,6 @@
     <ClCompile Include="..\..\xbmc\utils\IMDB.cpp" />
     <ClCompile Include="..\..\xbmc\utils\InfoLoader.cpp" />
     <ClCompile Include="..\..\xbmc\utils\JobManager.cpp" />
-    <ClCompile Include="..\..\xbmc\KeyboardLayoutConfiguration.cpp" />
     <ClCompile Include="..\..\xbmc\utils\LabelFormatter.cpp" />
     <ClCompile Include="..\..\xbmc\LangCodeExpander.cpp" />
     <ClCompile Include="..\..\xbmc\LangInfo.cpp" />
@@ -1575,12 +1594,10 @@
     <ClCompile Include="..\..\xbmc\karaoke\karaokelyricstextlrc.cpp" />
     <ClCompile Include="..\..\xbmc\karaoke\karaokelyricstextustar.cpp" />
     <ClCompile Include="..\..\xbmc\karaoke\karaokewindowbackground.cpp" />
-    <ClCompile Include="..\..\xbmc\KeyboardStat.cpp" />
     <ClCompile Include="..\..\xbmc\WinSystem.cpp" />
     <ClCompile Include="..\..\xbmc\WinSystemWin32.cpp" />
     <ClCompile Include="..\..\xbmc\WinSystemWin32DX.cpp" />
     <ClCompile Include="..\..\xbmc\WinSystemWin32GL.cpp" />
-    <ClCompile Include="..\..\xbmc\MouseStat.cpp" />
     <ClCompile Include="..\..\xbmc\WinEventsSDL.cpp" />
     <ClCompile Include="..\..\xbmc\WinEventsWin32.cpp" />
     <ClCompile Include="..\..\xbmc\RenderSystem.cpp" />
@@ -1679,6 +1696,7 @@
     <ClInclude Include="..\..\xbmc\addons\GUIDialogAddonInfo.h" />
     <ClInclude Include="..\..\xbmc\GUIDialogTextViewer.h" />
     <ClInclude Include="..\..\xbmc\addons\GUIViewStateAddonBrowser.h" />
+<<<<<<< HEAD
     <ClInclude Include="..\..\xbmc\lib\libjsonrpc\AudioLibrary.h" />
     <ClInclude Include="..\..\xbmc\lib\libPython\xbmcmodule\PythonAddon.h" />
     <ClInclude Include="..\..\xbmc\RenderSystemGLES.h" />
@@ -1909,6 +1927,37 @@
     <ClInclude Include="..\..\xbmc\FlacTag.h" />
     <ClInclude Include="..\..\xbmc\Id3Tag.h" />
     <ClInclude Include="..\..\xbmc\musicInfoTag.h" />
+=======
+    <ClInclude Include="..\..\xbmc\addons\GUIWindowAddonBrowser.h" />
+    <ClInclude Include="..\..\xbmc\addons\PluginSource.h" />
+    <ClInclude Include="..\..\xbmc\addons\Repository.h" />
+    <ClInclude Include="..\..\xbmc\addons\Service.h" />
+    <ClInclude Include="..\..\xbmc\addons\Skin.h" />
+    <ClInclude Include="..\..\xbmc\cores\dvdplayer\DVDCodecs\Video\CrystalHD.h" />
+    <ClInclude Include="..\..\xbmc\cores\dvdplayer\DVDInputStreams\DVDInputStreamBluray.h" />
+    <ClInclude Include="..\..\xbmc\cores\VideoRenderers\VideoShaders\WinVideoFilter.h" />
+    <ClInclude Include="..\..\xbmc\FileSystem\VideoDatabaseDirectory\DirectoryNodeCountry.h" />
+    <ClInclude Include="..\..\xbmc\GUIDialogTextViewer.h" />
+    <ClInclude Include="..\..\xbmc\input\ButtonTranslator.h" />
+    <ClInclude Include="..\..\xbmc\input\KeyboardLayoutConfiguration.h" />
+    <ClInclude Include="..\..\xbmc\input\KeyboardStat.h" />
+    <ClInclude Include="..\..\xbmc\input\MouseStat.h" />
+    <ClInclude Include="..\..\xbmc\input\XBIRRemote.h" />
+    <ClInclude Include="..\..\xbmc\input\XBMC_keyboard.h" />
+    <ClInclude Include="..\..\xbmc\input\XBMC_keysym.h" />
+    <ClInclude Include="..\..\xbmc\input\XBMC_mouse.h" />
+    <ClInclude Include="..\..\xbmc\input\XBMC_vkeys.h" />
+    <ClInclude Include="..\..\xbmc\lib\libjsonrpc\AudioLibrary.h" />
+    <ClInclude Include="..\..\xbmc\lib\libPython\xbmcmodule\PythonAddon.h" />
+    <ClInclude Include="..\..\xbmc\music\tags\APEv2Tag.h" />
+    <ClInclude Include="..\..\xbmc\music\tags\DllLibapetag.h" />
+    <ClInclude Include="..\..\xbmc\music\tags\DllLibid3tag.h" />
+    <ClInclude Include="..\..\xbmc\music\tags\FlacTag.h" />
+    <ClInclude Include="..\..\xbmc\music\tags\Id3Tag.h" />
+    <ClInclude Include="..\..\xbmc\music\tags\id3v1genre.h" />
+    <ClInclude Include="..\..\xbmc\music\tags\ImusicInfoTagLoader.h" />
+    <ClInclude Include="..\..\xbmc\music\tags\MusicInfoTag.h" />
+>>>>>>> changed: move input related files to a input/ and separate platform-specific files into their own subdirs
     <ClInclude Include="..\..\xbmc\music\tags\MusicInfoTagLoaderAAC.h" />
     <ClInclude Include="..\..\xbmc\music\tags\MusicInfoTagLoaderApe.h" />
     <ClInclude Include="..\..\xbmc\music\tags\MusicInfoTagLoaderASAP.h" />
@@ -2805,7 +2854,6 @@
     <ClInclude Include="..\..\xbmc\utils\FileUtils.h" />
     <ClInclude Include="..\..\xbmc\utils\Job.h" />
     <ClInclude Include="..\..\xbmc\utils\JobManager.h" />
-    <ClInclude Include="..\..\xbmc\KeyboardLayoutConfiguration.h" />
     <ClInclude Include="..\..\xbmc\utils\LabelFormatter.h" />
     <ClInclude Include="..\..\xbmc\LastFmManager.h" />
     <ClInclude Include="..\..\xbmc\utils\md5.h" />
@@ -2993,17 +3041,11 @@
     <ClInclude Include="..\..\xbmc\karaoke\karaokelyricstextlrc.h" />
     <ClInclude Include="..\..\xbmc\karaoke\karaokelyricstextustar.h" />
     <ClInclude Include="..\..\xbmc\karaoke\karaokewindowbackground.h" />
-    <ClInclude Include="..\..\xbmc\KeyboardStat.h" />
-    <ClInclude Include="..\..\xbmc\XBMC_keyboard.h" />
-    <ClInclude Include="..\..\xbmc\XBMC_keysym.h" />
-    <ClInclude Include="..\..\xbmc\XBMC_vkeys.h" />
     <ClInclude Include="..\..\xbmc\WindowingFactory.h" />
     <ClInclude Include="..\..\xbmc\WinSystem.h" />
     <ClInclude Include="..\..\xbmc\WinSystemWin32.h" />
     <ClInclude Include="..\..\xbmc\WinSystemWin32DX.h" />
     <ClInclude Include="..\..\xbmc\WinSystemWin32GL.h" />
-    <ClInclude Include="..\..\xbmc\MouseStat.h" />
-    <ClInclude Include="..\..\xbmc\XBMC_mouse.h" />
     <ClInclude Include="..\..\xbmc\WinEvents.h" />
     <ClInclude Include="..\..\xbmc\WinEventsSDL.h" />
     <ClInclude Include="..\..\xbmc\WinEventsWin32.h" />

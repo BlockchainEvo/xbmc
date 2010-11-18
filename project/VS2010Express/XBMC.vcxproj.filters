@@ -875,14 +875,8 @@
     <Filter Include="Source Files\Windowing">
       <UniqueIdentifier>{7d79ee8b-a0a2-44b7-87d9-3c0c2b6542bd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Windowing\Keyboard">
-      <UniqueIdentifier>{0e9bf6cc-c915-48d7-9e10-8856040054a1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Windowing\Window System">
       <UniqueIdentifier>{e93cbb3a-c1d9-4470-845a-2ed2f29c5798}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Windowing\Mouse">
-      <UniqueIdentifier>{715a0681-4678-435c-8481-7e2fa21de2d7}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Windowing\Events">
       <UniqueIdentifier>{f828efdf-4f0c-49cf-8c9c-4b2d4f7d4677}</UniqueIdentifier>
@@ -928,6 +922,9 @@
     </Filter>
     <Filter Include="libraries\jsoncpp">
       <UniqueIdentifier>{b27f9ce9-0b2e-4456-9bce-8313af739c2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Input">
+      <UniqueIdentifier>{4b734310-1aaa-4ef3-85c7-23887e00b4b2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1498,9 +1495,6 @@
     <ClCompile Include="..\..\xbmc\utils\Builtins.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\ButtonTranslator.cpp">
-      <Filter>Source Files\Utils</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\xbmc\utils\CharsetConverter.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
@@ -1580,9 +1574,6 @@
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
     <ClCompile Include="..\..\xbmc\utils\JobManager.cpp">
-      <Filter>Source Files\Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\KeyboardLayoutConfiguration.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
     <ClCompile Include="..\..\xbmc\utils\LabelFormatter.cpp">
@@ -2350,9 +2341,6 @@
     <ClCompile Include="..\..\xbmc\karaoke\karaokewindowbackground.cpp">
       <Filter>Source Files\Karaoke</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\KeyboardStat.cpp">
-      <Filter>Source Files\Windowing\Keyboard</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\xbmc\WinSystem.cpp">
       <Filter>Source Files\Windowing\Window System</Filter>
     </ClCompile>
@@ -2364,9 +2352,6 @@
     </ClCompile>
     <ClCompile Include="..\..\xbmc\WinSystemWin32GL.cpp">
       <Filter>Source Files\Windowing\Window System</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\MouseStat.cpp">
-      <Filter>Source Files\Windowing\Mouse</Filter>
     </ClCompile>
     <ClCompile Include="..\..\xbmc\WinEventsSDL.cpp">
       <Filter>Source Files\Windowing\Events</Filter>
@@ -2859,6 +2844,7 @@
     <ClCompile Include="..\..\xbmc\DynamicDll.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="..\..\xbmc\utils\Event.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
@@ -4788,6 +4774,19 @@
     </ClCompile>
     <ClCompile Include="..\..\xbmc\utils\URIUtils.cpp">
       <Filter>Source Files\Utils</Filter>
+=======
+    <ClCompile Include="..\..\xbmc\input\ButtonTranslator.cpp">
+      <Filter>Source Files\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\input\KeyboardLayoutConfiguration.cpp">
+      <Filter>Source Files\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\input\KeyboardStat.cpp">
+      <Filter>Source Files\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\input\MouseStat.cpp">
+      <Filter>Source Files\Input</Filter>
+>>>>>>> changed: move input related files to a input/ and separate platform-specific files into their own subdirs
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -5493,9 +5492,6 @@
     <ClInclude Include="..\..\xbmc\utils\JobManager.h">
       <Filter>Source Files\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\xbmc\KeyboardLayoutConfiguration.h">
-      <Filter>Source Files\Utils</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\xbmc\utils\LabelFormatter.h">
       <Filter>Source Files\Utils</Filter>
     </ClInclude>
@@ -6057,18 +6053,6 @@
     <ClInclude Include="..\..\xbmc\karaoke\karaokewindowbackground.h">
       <Filter>Source Files\Karaoke</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\xbmc\KeyboardStat.h">
-      <Filter>Source Files\Windowing\Keyboard</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\XBMC_keyboard.h">
-      <Filter>Source Files\Windowing\Keyboard</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\XBMC_keysym.h">
-      <Filter>Source Files\Windowing\Keyboard</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\XBMC_vkeys.h">
-      <Filter>Source Files\Windowing\Keyboard</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\xbmc\WindowingFactory.h">
       <Filter>Source Files\Windowing\Window System</Filter>
     </ClInclude>
@@ -6083,12 +6067,6 @@
     </ClInclude>
     <ClInclude Include="..\..\xbmc\WinSystemWin32GL.h">
       <Filter>Source Files\Windowing\Window System</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\MouseStat.h">
-      <Filter>Source Files\Windowing\Mouse</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\XBMC_mouse.h">
-      <Filter>Source Files\Windowing\Mouse</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\WinEvents.h">
       <Filter>Source Files\Windowing\Events</Filter>
@@ -8814,6 +8792,33 @@
     </ClInclude>
     <ClInclude Include="..\..\xbmc\utils\URIUtils.h">
       <Filter>Source Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\input\ButtonTranslator.h">
+      <Filter>Source Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\input\KeyboardLayoutConfiguration.h">
+      <Filter>Source Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\input\KeyboardStat.h">
+      <Filter>Source Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\input\XBMC_keyboard.h">
+      <Filter>Source Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\input\XBMC_keysym.h">
+      <Filter>Source Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\input\XBMC_vkeys.h">
+      <Filter>Source Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\input\MouseStat.h">
+      <Filter>Source Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\input\XBMC_mouse.h">
+      <Filter>Source Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\input\XBIRRemote.h">
+      <Filter>Source Files\Input</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
