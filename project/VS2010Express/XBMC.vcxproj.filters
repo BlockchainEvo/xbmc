@@ -220,6 +220,7 @@
       <UniqueIdentifier>{9b9c3d13-56db-4db5-98a3-4402ee3b4ff9}</UniqueIdentifier>
     </Filter>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <Filter Include="cores\dvdplayer\DVDSubtitles">
       <UniqueIdentifier>{83ae8e22-c3a0-45c6-bbc2-29d0bb180e2d}</UniqueIdentifier>
     </Filter>
@@ -1152,6 +1153,13 @@
   </ItemGroup>
   <ItemGroup>
 >>>>>>> changed: move platform specific network classes into subfolders of network
+=======
+    <Filter Include="Source Files\Powermanagement">
+      <UniqueIdentifier>{71638efb-5f11-4bc7-bdab-b79b2c408f55}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+>>>>>>> changed: move powermanagement related code to a separate dir and move platform specific implementations to subdirs
     <ClCompile Include="..\..\xbmc\win32\pch.cpp">
       <Filter>win32</Filter>
     </ClCompile>
@@ -1161,9 +1169,12 @@
     <ClCompile Include="..\..\xbmc\win32\Win32DelayedDllLoad.cpp">
       <Filter>win32</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="..\..\xbmc\win32\Win32PowerSyscall.cpp">
       <Filter>win32</Filter>
     </ClCompile>
+=======
+>>>>>>> changed: move powermanagement related code to a separate dir and move platform specific implementations to subdirs
     <ClCompile Include="..\..\xbmc\win32\Win32StorageProvider.cpp">
       <Filter>win32</Filter>
     </ClCompile>
@@ -1801,9 +1812,6 @@
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
     <ClCompile Include="..\..\xbmc\utils\PerformanceStats.cpp">
-      <Filter>Source Files\Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\PowerManager.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
     <ClCompile Include="..\..\xbmc\Profile.cpp">
@@ -5292,6 +5300,12 @@
     <ClCompile Include="..\..\xbmc\music\infoscanner\MusicInfoScraper.cpp">
       <Filter>Source Files\GUI Music</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\xbmc\powermanagement\PowerManager.cpp">
+      <Filter>Source Files\Powermanagement</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\powermanagement\windows\Win32PowerSyscall.cpp">
+      <Filter>Source Files\Powermanagement</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\xbmc\win32\pch.h">
@@ -5301,9 +5315,6 @@
       <Filter>win32</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\win32\PlatformInclude.h">
-      <Filter>win32</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\win32\Win32PowerSyscall.h">
       <Filter>win32</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\win32\Win32StorageProvider.h">
@@ -5994,9 +6005,6 @@
       <Filter>Source Files\Utils</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\utils\PCMAmplifier.h">
-      <Filter>Source Files\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\PowerManager.h">
       <Filter>Source Files\Utils</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\utils\RingBuffer.h">
@@ -9636,6 +9644,12 @@
     </ClInclude>
     <ClInclude Include="..\..\xbmc\music\infoscanner\MusicInfoScraper.h">
       <Filter>Source Files\GUI Music</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\powermanagement\PowerManager.h">
+      <Filter>Source Files\Powermanagement</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\powermanagement\windows\Win32PowerSyscall.h">
+      <Filter>Source Files\Powermanagement</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
