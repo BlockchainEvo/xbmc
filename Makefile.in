@@ -42,7 +42,7 @@ BIN_DIRS=	\
 	xbmc/lib/cmyth/librefmem \
 	xbmc/lib/libhts \
 	xbmc/lib/libjsonrpc \
-	xbmc/lib/libhttpapi \
+	xbmc/interfaces/http-api \
 	xbmc/lib/libPython \
 	xbmc/lib/libPython/xbmcmodule \
 	xbmc/lib/libRTV \
@@ -286,8 +286,8 @@ lib/jsoncpp/jsoncpp/src/lib_json/libjsoncpp.a: force
 	$(MAKE) -C lib/jsoncpp/jsoncpp/src/lib_json
 xbmc/lib/libjsonrpc/libjsonrpc.a: force
 	$(MAKE) -C xbmc/lib/libjsonrpc
-xbmc/lib/libhttpapi/libhttpapi.a: force
-	$(MAKE) -C xbmc/lib/libhttpapi
+xbmc/interfaces/http-api/http-api.a: force
+	$(MAKE) -C xbmc/interfaces/http-api
 xbmc/lib/sqLite/sqllite.a: force
 	$(MAKE) -C xbmc/lib/sqLite
 xbmc/lib/UnrarXLib/UnrarXLib.a: force
@@ -422,7 +422,7 @@ xcode_depends: \
 	xbmc/lib/libRTV/librtv-@ARCH@.a \
 	xbmc/lib/libXDAAP/libxdaap-@ARCH@.a \
 	xbmc/lib/libjsonrpc/libjsonrpc.a \
-	xbmc/lib/libhttpapi/libhttpapi.a \
+	xbmc/interfaces/http-api/http-api.a \
 	lib/jsoncpp/jsoncpp/src/lib_json/libjsoncpp.a \
 	lib/libmicrohttpd/src/daemon/.libs/libmicrohttpd.a
 
@@ -469,7 +469,7 @@ OBJSXBMC=	\
 	xbmc/lib/libXDAAP/libxdaap-@ARCH@.a \
 	xbmc/lib/libjsonrpc/libjsonrpc.a \
 	lib/jsoncpp/jsoncpp/src/lib_json/libjsoncpp.a \
-	xbmc/lib/libhttpapi/libhttpapi.a \
+	xbmc/interfaces/http-api/http-api.a \
 	xbmc/lib/sqLite/sqllite.a \
 	xbmc/lib/libsquish/libsquish-@ARCH@.a \
 	lib/libapetag/.libs/libapetag.a \

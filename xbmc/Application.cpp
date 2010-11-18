@@ -129,7 +129,7 @@
 #include "utils/DbusServer.h"
 #endif
 #ifdef HAS_HTTPAPI
-#include "lib/libhttpapi/XBMChttp.h"
+#include "interfaces/http-api/XBMChttp.h"
 #endif
 #ifdef HAS_JSONRPC
 #include "lib/libjsonrpc/JSONRPC.h"

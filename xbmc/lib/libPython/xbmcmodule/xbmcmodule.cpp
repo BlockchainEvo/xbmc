@@ -46,8 +46,8 @@
 #include "infotagvideo.h"
 #include "infotagmusic.h"
 #ifdef HAS_HTTPAPI
-#include "lib/libhttpapi/XBMChttp.h"
-#include "lib/libhttpapi/HttpApi.h"
+#include "interfaces/http-api/XBMChttp.h"
+#include "interfaces/http-api/HttpApi.h"
 #endif
 #include "pyjsonrpc.h"
 #include "utils/GUIInfoManager.h"

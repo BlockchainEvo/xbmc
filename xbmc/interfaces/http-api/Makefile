@@ -2,7 +2,7 @@ INCLUDES=-I. -I../ -I../../ -I../../../ -I../../FileSystem -I../../linux -I../..
 
 SRCS=HttpApi.cpp XBMChttp.cpp
 
-LIB= libhttpapi.a
+LIB=http-api.a
 
 include ../../../Makefile.include
 

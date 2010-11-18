@@ -57,7 +57,7 @@
 #include "lib/libPython/xbmcmodule/GUIPythonWindowXMLDialog.h"
 
 #ifdef HAS_HTTPAPI
-#include "lib/libhttpapi/XBMChttp.h"
+#include "interfaces/http-api/XBMChttp.h"
 #endif
 
 #include "playlists/PlayList.h"
