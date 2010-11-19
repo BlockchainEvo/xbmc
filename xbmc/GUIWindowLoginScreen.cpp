@@ -29,7 +29,6 @@
 #ifdef HAS_PYTHON
 #include "interfaces/python/XBPython.h"
 #endif
-#include "lib/libscrobbler/scrobbler.h"
 #include "utils/Builtins.h"
 #include "utils/Weather.h"
 #include "network/Network.h"

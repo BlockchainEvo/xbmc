@@ -22,8 +22,8 @@
 #include "system.h"
 #include "Network.h"
 #include "Application.h"
-#include "lib/libscrobbler/lastfmscrobbler.h"
-#include "lib/libscrobbler/librefmscrobbler.h"
+#include "libscrobbler/lastfmscrobbler.h"
+#include "libscrobbler/librefmscrobbler.h"
 #include "utils/RssReader.h"
 #include "utils/log.h"
 

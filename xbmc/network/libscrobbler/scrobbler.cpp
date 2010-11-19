@@ -32,7 +32,7 @@
 #include "Application.h"
 #include "utils/SingleLock.h"
 #include "guilib/LocalizeStrings.h"
-#include "File.h"
+#include "FileSystem/File.h"
 
 #define SCROBBLER_CLIENT              "xbm"
 //#define SCROBBLER_CLIENT              "tst"     // For testing ONLY!

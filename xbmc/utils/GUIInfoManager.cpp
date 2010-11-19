@@ -27,7 +27,7 @@
 #include "GUIDialogProgress.h"
 #include "Application.h"
 #include "Util.h"
-#include "lib/libscrobbler/lastfmscrobbler.h"
+#include "network/libscrobbler/lastfmscrobbler.h"
 #include "Weather.h"
 #include "PartyModeManager.h"
 #include "addons/Visualisation.h"

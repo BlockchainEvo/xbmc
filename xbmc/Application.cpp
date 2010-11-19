@@ -50,8 +50,8 @@
 #endif
 #include "input/ButtonTranslator.h"
 #include "guilib/GUIAudioManager.h"
-#include "lib/libscrobbler/lastfmscrobbler.h"
-#include "lib/libscrobbler/librefmscrobbler.h"
+#include "network/libscrobbler/lastfmscrobbler.h"
+#include "network/libscrobbler/librefmscrobbler.h"
 #include "GUIPassword.h"
 #include "ApplicationMessenger.h"
 #include "SectionLoader.h"
