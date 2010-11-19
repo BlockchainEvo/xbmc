@@ -144,9 +144,6 @@
     <Filter Include="Source Files\Addons">
       <UniqueIdentifier>{0cf03ec7-412f-48ac-827d-358c57245edd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{59f25a6f-aad8-4b4d-9e01-7e84a6f54b50}</UniqueIdentifier>
-    </Filter>
     <Filter Include="libraries">
       <UniqueIdentifier>{4a09e4cc-709d-43b8-86cf-d83ca38d41ce}</UniqueIdentifier>
     </Filter>

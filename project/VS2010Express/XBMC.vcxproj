@@ -3173,7 +3173,6 @@
     <ClInclude Include="..\..\xbmc\storage\windows\Win32StorageProvider.h" />
     <ClInclude Include="..\..\xbmc\system.h" />
     <ClInclude Include="..\..\xbmc\utils\Crc32.h" />
-    <ClInclude Include="..\..\xbmc\utils\ISerializable.h" />
     <ClInclude Include="..\..\xbmc\utils\MathUtils.h" />
     <ClInclude Include="..\..\xbmc\utils\StdString.h" />
     <ClInclude Include="..\..\xbmc\utils\StringUtils.h" />
@@ -3610,9 +3609,6 @@
     <ClInclude Include="..\..\xbmc\addons\Scraper.h" />
     <ClInclude Include="..\..\xbmc\addons\ScreenSaver.h" />
     <ClInclude Include="..\..\xbmc\addons\Visualisation.h" />
-    <ClInclude Include="..\..\xbmc\utils\AlarmClock.h" />
-    <ClInclude Include="..\..\xbmc\ApplicationMessenger.h" />
-    <ClInclude Include="..\..\xbmc\utils\Archive.h" />
     <ClInclude Include="..\..\xbmc\utils\AutoPtrHandle.h" />
     <ClInclude Include="..\..\xbmc\Autorun.h" />
     <ClInclude Include="..\..\xbmc\AutoSwitch.h" />
