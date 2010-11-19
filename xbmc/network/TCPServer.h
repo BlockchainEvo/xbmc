@@ -10,7 +10,7 @@
 #include <string>
 #include <vector>
 #include "utils/IAnnouncer.h"
-#include "lib/libjsonrpc/ITransportLayer.h"
+#include "interfaces/json-rpc/ITransportLayer.h"
 #include "utils/Thread.h"
 #include "utils/CriticalSection.h"
 

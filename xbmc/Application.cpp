@@ -132,7 +132,7 @@
 #include "interfaces/http-api/XBMChttp.h"
 #endif
 #ifdef HAS_JSONRPC
-#include "lib/libjsonrpc/JSONRPC.h"
+#include "interfaces/json-rpc/JSONRPC.h"
 #include "network/TCPServer.h"
 #endif
 #if defined(HAVE_LIBCRYSTALHD)

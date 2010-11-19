@@ -39,7 +39,7 @@
 #else
 #include <microhttpd.h>
 #endif
-#include "../lib/libjsonrpc/ITransportLayer.h"
+#include "interfaces/json-rpc/ITransportLayer.h"
 #include "utils/CriticalSection.h"
 
 class CWebServer : public JSONRPC::ITransportLayer

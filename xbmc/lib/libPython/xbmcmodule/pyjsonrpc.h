@@ -20,8 +20,8 @@
  *
  */
 #include "system.h"
-#include "../lib/libjsonrpc/ITransportLayer.h"
-#include "../lib/libjsonrpc/JSONRPC.h"
+#include "interfaces/json-rpc/ITransportLayer.h"
+#include "interfaces/json-rpc/JSONRPC.h"
 
 #ifdef HAS_JSONRPC
 class CPythonTransport : public JSONRPC::ITransportLayer

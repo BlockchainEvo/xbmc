@@ -21,8 +21,8 @@
 
 #include "WebServer.h"
 #ifdef HAS_WEB_SERVER
-#include "lib/libjsonrpc/JSONRPC.h"
 #include "interfaces/http-api/HttpApi.h"
+#include "interfaces/json-rpc/JSONRPC.h"
 #include "FileSystem/File.h"
 #include "FileSystem/Directory.h"
 #include "Util.h"
