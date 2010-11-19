@@ -1,4 +1,4 @@
-INCLUDES=-I. -I../../ -I../../linux
+INCLUDES=-I. -I../../xbmc -I../../xbmc/linux
 
 CXXFLAGS+=-DSILENT
 
@@ -6,5 +6,5 @@ SRCS=archive.cpp arcread.cpp cmddata.cpp consio.cpp crc.cpp crypt.cpp encname.cp
 
 LIB=UnrarXLib.a
 
-include ../../../Makefile.include
+include ../../Makefile.include
 -include $(patsubst %.cpp,%.P,$(patsubst %.c,%.P,$(SRCS)))

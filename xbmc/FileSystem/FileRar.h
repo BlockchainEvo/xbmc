@@ -26,7 +26,7 @@
 #define FILERAR_H_
 
 #include "IFile.h"
-#include "lib/UnrarXLib/rar.hpp"
+#include "UnrarXLib/rar.hpp"
 #include "utils/Thread.h"
 
 namespace XFILE

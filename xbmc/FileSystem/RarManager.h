@@ -28,7 +28,7 @@
 #include "utils/StdString.h"
 #include "utils/CriticalSection.h"
 #include <map>
-#include "lib/UnrarXLib/UnrarX.hpp"
+#include "UnrarXLib/UnrarX.hpp"
 #include "utils/Stopwatch.h"
 
 #include "utils/Thread.h"

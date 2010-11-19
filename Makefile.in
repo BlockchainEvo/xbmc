@@ -51,7 +51,7 @@ BIN_DIRS=	\
 	xbmc/lib/libXBMS \
 	xbmc/lib/libXDAAP \
 	xbmc/lib/sqLite \
-	xbmc/lib/UnrarXLib \
+	lib/UnrarXLib \
 	xbmc/lib/libsquish \
 	xbmc/visualizations \
 	xbmc/screensavers \
@@ -290,8 +290,8 @@ xbmc/interfaces/json-rpc/json-rpc.a: force
 	$(MAKE) -C xbmc/interfaces/json-rpc
 xbmc/lib/sqLite/sqllite.a: force
 	$(MAKE) -C xbmc/lib/sqLite
-xbmc/lib/UnrarXLib/UnrarXLib.a: force
-	$(MAKE) -C xbmc/lib/UnrarXLib
+lib/UnrarXLib/UnrarXLib.a: force
+	$(MAKE) -C lib/UnrarXLib
 xbmc/lib/libsquish/libsquish-@ARCH@.a: force
 	$(MAKE) -C xbmc/lib/libsquish
 xbmc/linux/linux.a: force
@@ -480,7 +480,7 @@ OBJSXBMC=	\
 ifeq (@HAVE_XBMC_NONFREE@,1)
 OBJSXBMC+= \
 	xbmc/lib/libXBMS/libxbms-@ARCH@.a \
-	xbmc/lib/UnrarXLib/UnrarXLib.a
+	lib/UnrarXLib/UnrarXLib.a
 endif
 
 ifneq (arm, $(ARCH))
