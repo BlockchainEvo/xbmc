@@ -30,7 +30,7 @@
 #include "../../../FileSystem/SpecialProtocol.h"
 #include "../../../utils/log.h"
 #ifdef HAS_PYTHON
-#include "../../../lib/libPython/XBPython.h"
+#include "lib/libPython/XBPython.h"
 #endif
 #include "../DllLoaderContainer.h"
 

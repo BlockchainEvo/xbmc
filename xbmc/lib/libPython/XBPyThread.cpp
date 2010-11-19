@@ -37,8 +37,8 @@
     #error "Could not determine version of Python to use."
   #endif
 #else
-  #include "Python/Include/Python.h"
-  #include "Python/Include/osdefs.h"
+  #include "python/Include/Python.h"
+  #include "python/Include/osdefs.h"
 #endif
 #include "XBPythonDll.h"
 #include "FileSystem/SpecialProtocol.h"

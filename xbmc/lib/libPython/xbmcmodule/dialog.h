@@ -33,7 +33,7 @@
     #error "Could not determine version of Python to use."
   #endif
 #else
-  #include "lib/libPython/Python/Include/Python.h"
+  #include "python/Include/Python.h"
 #endif
 #include "window.h"
 #pragma once

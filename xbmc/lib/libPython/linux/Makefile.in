@@ -1,9 +1,10 @@
+abs_top_srcdir=@abs_top_srcdir@
 ARCH=@ARCH@
 CC=@CC@
 CFLAGS=@CFLAGS@
 LDFLAGS=@LDFLAGS@
 SHELL=/bin/bash
-SYSDIR=../../../../system/python
+SYSDIR=$(abs_top_srcdir)/system/python
 
 ifeq (@USE_PYTHON2_6@,1)
     PYVERSION=python2.6
@@ -19,8 +20,8 @@ else
 endif
 SLIB=$(SYSDIR)/$(SO)
 ZIP=$(SYSDIR)/python24.zip  ##Should probably add arch here too
-DIRS=../Python
-WRAPPER=../../../cores/DllLoader/exports/wrapper.o
+DIRS=${abs_src_root}/lib/python
+WRAPPER=$(abs_top_srcdir)/xbmc/cores/DllLoader/exports/wrapper.o
 WRAPPERDEF=$(WRAPPER:.o=.def)
 PYWRAP=wrapper_python.o
 PYWRAPDEF=$(PYWRAP:.o=.def)
@@ -52,10 +53,10 @@ else
 	PYDIRS+=plat-linux2
 endif
 
-PY=$(wildcard ../Python/Lib/*.py)
-PY+=$(foreach DIR, $(PYDIRS), $(wildcard ../Python/Lib/$(DIR)/*.py))
-PY+=$(foreach DIR, $(PYDIRS), $(wildcard ../Python/Lib/$(DIR)/*/*.py))
-PY+=$(foreach DIR, $(PYDIRS), $(wildcard ../Python/Lib/$(DIR)/*/*/*.py))
+PY=$(wildcard $(abs_top_srcdir)/lib/python/Lib/*.py)
+PY+=$(foreach DIR, $(PYDIRS), $(wildcard $(abs_top_srcdir)/lib/python/Lib/$(DIR)/*.py))
+PY+=$(foreach DIR, $(PYDIRS), $(wildcard $(abs_top_srcdir)/lib/python/Lib/$(DIR)/*/*.py))
+PY+=$(foreach DIR, $(PYDIRS), $(wildcard $(abs_top_srcdir)/lib/python/Lib/$(DIR)/*/*/*.py))
 PYC=$(addsuffix c, $(PY))
 PYO=$(addsuffix o, $(PY))
 
@@ -64,26 +65,26 @@ PYO=$(addsuffix o, $(PY))
 ifeq ($(findstring osx,$(ARCH)), osx)
 all: $(SLIB)
 
-$(SLIB): $(PYWRAP) ../Python/libpython2.4.a $(PYO) ../../../../tools/Mach5/wrapper.rb
+$(SLIB): $(PYWRAP) $(abs_top_srcdir)/lib/python/libpython2.4.a $(PYO) $(abs_top_srcdir)/tools/Mach5/wrapper.rb
 	rm -rf $(SYSDIR)/Lib
-	rsync -a --exclude '.svn' -t ../Python/build/$(PYLIBDIR)/*.so $(SYSDIR)/Lib
-	rsync -a --exclude '.svn' -t ../Python/Lib/*.{py,pyo} $(SYSDIR)/Lib
-	for dirs in $(PYDIRS); do rsync -a --exclude 'test*'  --exclude '.svn' ../Python/Lib/$$dirs $(SYSDIR)/Lib; done
+	rsync -a --exclude '.svn' -t $(abs_top_srcdir)/lib/python/build/$(PYLIBDIR)/*.so $(SYSDIR)/Lib
+	rsync -a --exclude '.svn' -t $(abs_top_srcdir)/lib/python/Lib/*.{py,pyo} $(SYSDIR)/Lib
+	for dirs in $(PYDIRS); do rsync -a --exclude 'test*'  --exclude '.svn' $(abs_top_srcdir)/lib/python/Lib/$$dirs $(SYSDIR)/Lib; done
 	(mkdir -p tmp && rm -rf tmp/*)
-	(cd ./tmp && ar x ../../Python/libpython2.4.a)
+	(cd ./tmp && ar x $(abs_top_srcdir)/lib/python/libpython2.4.a)
 	$(CXX) -bundle -flat_namespace -undefined suppress -shared -o $@ \
 		tmp/*.o \
 		wrapper_python.o
-	../../../../tools/Mach5/wrapper.rb $@ libpython;mv output.so $@
-	../../../../tools/Mach5/wrapper.rb $@;mv output.so $@
+	$(abs_top_srcdir)/tools/Mach5/wrapper.rb $@ libpython;mv output.so $@
+	$(abs_top_srcdir)/tools/Mach5/wrapper.rb $@;mv output.so $@
 	@rm -rf tmp
 
-../Python/libpython2.4.a: compile
-	$(MAKE) -C ../Python
+$(abs_top_srcdir)/lib/python/libpython2.4.a: compile
+	$(MAKE) -C $(abs_top_srcdir)/lib/python
 
 %pyo: %py
 	@echo Compiling $@
-	@../Python/python.exe -O ../Python/Lib/py_compile.py $<
+	@$(abs_top_srcdir)/lib/python/python.exe -O $(abs_top_srcdir)/lib/python/Lib/py_compile.py $<
 
 $(PYWRAP): $(PYWRAP:.o=.c)
 	 $(CC) $(CFLAGS) -fPIC -o $@ -D_FILE_DEFINED -D_REENTRANT -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -c $<
@@ -95,39 +96,39 @@ ifneq (@USE_EXTERNAL_PYTHON@,1)
 endif
 
 ifneq (@USE_EXTERNAL_PYTHON@,1)
-$(SLIB): $(WRAPPER) $(WRAPPERDEF) $(PYWRAP) $(PYWRAPDEF) ../Python/libpython2.4.a
-	$(CC) $(LDFLAGS) -shared -o $@ -Wl,--whole-archive ../Python/libpython2.4.a \
+$(SLIB): $(WRAPPER) $(WRAPPERDEF) $(PYWRAP) $(PYWRAPDEF) $(abs_top_srcdir)/lib/python/libpython2.4.a
+	$(CC) $(LDFLAGS) -shared -o $@ -Wl,--whole-archive $(abs_top_srcdir)/lib/python/libpython2.4.a \
 		-Wl,--no-whole-archive `cat wrapper_python.def` wrapper_python.o \
-		`cat ../../../cores/DllLoader/exports/wrapper.def` \
-		../../../cores/DllLoader/exports/wrapper.o
+		`cat $(abs_top_srcdir)/xbmc/cores/DllLoader/exports/wrapper.def` \
+		$(abs_top_srcdir)/xbmc/cores/DllLoader/exports/wrapper.o
 else
 $(SLIB): $(WRAPPER) $(WRAPPERDEF) $(PYWRAP) $(PYWRAPDEF)
 	$(CC) $(LDFLAGS) -shared -o $@ -Wl,--no-as-needed -l$(PYVERSION) \
 		`cat wrapper_python.def` wrapper_python.o \
-		`cat ../../../cores/DllLoader/exports/wrapper.def` \
-		../../../cores/DllLoader/exports/wrapper.o
+		`cat $(abs_top_srcdir)/xbmc/cores/DllLoader/exports/wrapper.def` \
+		$(abs_top_srcdir)/xbmc/cores/DllLoader/exports/wrapper.o
 endif
 
 $(ZIP): $(PYC) $(PYO)
-	pushd ../Python/build/$(PYLIBDIR)/ && \
+	pushd $(abs_top_srcdir)/lib/python/build/$(PYLIBDIR)/ && \
 		zip -0guq ../../$@ *.so; \
 		popd
-	pushd ../Python/Lib/ && \
+	pushd $(abs_top_srcdir)/lib/python/Lib/ && \
 		zip -0gurq ../$@ *.py* $(PYDIRS) -x *.svn* *test*; \
 		popd
 
-../Python/libpython2.4.a: compile
-	$(MAKE) -C ../Python
+$(abs_top_srcdir)/lib/python/libpython2.4.a: compile
+	$(MAKE) -C $(abs_top_srcdir)/lib/python
 
 %pyc: %py
 	@echo Compiling $@
-	@LD_PRELOAD=../Python/libpython2.4.so.1.0 ../Python/python \
-		../Python/Lib/py_compile.py $<
+	@LD_PRELOAD=$(abs_top_srcdir)/lib/python/libpython2.4.so.1.0 $(abs_top_srcdir)/lib/python/python \
+		$(abs_top_srcdir)/lib/python/Lib/py_compile.py $<
 
 %pyo: %py
 	@echo Compiling $@
-	@LD_PRELOAD=../Python/libpython2.4.so.1.0 ../Python/python -O \
-		../Python/Lib/py_compile.py $<
+	@LD_PRELOAD=$(abs_top_srcdir)/lib/python/libpython2.4.so.1.0 $(abs_top_srcdir)/lib/python/python -O \
+		$(abs_top_srcdir)/lib/python/Lib/py_compile.py $<
 
 $(PYWRAP): $(PYWRAP:.o=.c)
 	 $(CC) $(CFLAGS) -fPIC -o $@ -D_FILE_DEFINED -D_REENTRANT -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -c $<
@@ -146,14 +147,14 @@ endif
 
 clean:
 	for d in $(DIRS); do [ ! -f $$d/Makefile ] || make -C $$d clean; done
-	rm -f $(SLIB) $(ZIP) $(PYC) $(PYO) ../Python/libpython2.4.a $(PYWRAP) $(PYWRAPDEF)
+	rm -f $(SLIB) $(ZIP) $(PYC) $(PYO) $(abs_top_srcdir)/lib/python/libpython2.4.a $(PYWRAP) $(PYWRAPDEF)
 ifeq ($(findstring osx,$(ARCH)), osx)
 	rm -rf $(SYSDIR)/Lib
 endif
 
 distclean:
 	for d in $(DIRS); do [ ! -f $$d/Makefile ] || make -C $$d distclean; done
-	rm -f $(SLIB) $(ZIP) $(PYC) $(PYO) ../Python/libpython2.4.a $(PYWRAP) $(PYWRAPDEF)
+	rm -f $(SLIB) $(ZIP) $(PYC) $(PYO) $(abs_top_srcdir)/lib/python/libpython2.4.a $(PYWRAP) $(PYWRAPDEF)
 ifeq ($(findstring osx,$(ARCH)), osx)
 	rm -rf $(SYSDIR)/Lib
 endif

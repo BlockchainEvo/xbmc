@@ -36,7 +36,7 @@
     #error "Could not determine version of Python to use."
   #endif
 #else
-  #include "lib/libPython/Python/Include/structmember.h"
+  #include "python/Include/structmember.h"
 #endif
 #include "../XBPythonDll.h"
 #include "playlists/PlayListFactory.h"

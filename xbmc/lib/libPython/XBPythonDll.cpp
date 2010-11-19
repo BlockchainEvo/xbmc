@@ -33,7 +33,7 @@
     #error "Could not determine version of Python to use."
   #endif
 #else
-  #include "Python/Include/pyconfig.h"
+  #include "python/Include/pyconfig.h"
 #endif
 
 #include "XBPythonDll.h"

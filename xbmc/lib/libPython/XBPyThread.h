@@ -36,7 +36,7 @@
     #error "Could not determine version of Python to use."
   #endif
 #else
-  #include "Python/Include/Python.h"
+  #include "python/Include/Python.h"
 #endif
 #include "utils/Thread.h"
 

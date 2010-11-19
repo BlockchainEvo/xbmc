@@ -1,4 +1,4 @@
-INCLUDES=-I. -I../../../ -I../../../linux
+INCLUDES=-I. -I../../../ -I../../../linux -I../../../../lib
 
 SRCS=emu_dummy.cpp emu_kernel32.cpp emu_msvcrt.cpp exports_python_linux.cpp wrapper.c
 
