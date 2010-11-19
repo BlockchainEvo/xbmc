@@ -41,6 +41,7 @@ ISO9660
 
 */
 #include "iso9660.h"
+#include "storage/IoSupport.h"
 #include "utils/CharsetConverter.h"
 #include "IFile.h"
 

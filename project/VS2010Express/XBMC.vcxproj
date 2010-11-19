@@ -825,6 +825,8 @@
     <ClCompile Include="..\..\xbmc\cores\dvdplayer\DVDCodecs\Video\CrystalHD.cpp" />
     <ClCompile Include="..\..\xbmc\cores\dvdplayer\DVDInputStreams\DVDInputStreamBluray.cpp" />
     <ClCompile Include="..\..\xbmc\cores\VideoRenderers\VideoShaders\WinVideoFilter.cpp" />
+    <ClCompile Include="..\..\xbmc\FileSystem\iso9660.cpp" />
+    <ClCompile Include="..\..\xbmc\FileSystem\ISO9660Directory.cpp" />
     <ClCompile Include="..\..\xbmc\FileSystem\VideoDatabaseDirectory\DirectoryNodeCountry.cpp" />
     <ClCompile Include="..\..\xbmc\GUIDialogTextViewer.cpp" />
     <ClCompile Include="..\..\xbmc\guilib\AnimatedGif.cpp" />
@@ -924,8 +926,13 @@
     <ClCompile Include="..\..\xbmc\lib\libPython\xbmcmodule\PythonAddon.cpp" />
     <ClCompile Include="..\..\xbmc\lib\libPython\xbmcmodule\xbmcaddonmodule.cpp" />
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> changed: move input related files to a input/ and separate platform-specific files into their own subdirs
 =======
+=======
+    <ClCompile Include="..\..\xbmc\MediaSource.cpp" />
+    <ClCompile Include="..\..\xbmc\MusicInfoLoader.cpp" />
+>>>>>>> some more linker error fixes. XBMC compiles now on win32
     <ClCompile Include="..\..\xbmc\music\dialogs\GUIDialogMusicInfo.cpp" />
     <ClCompile Include="..\..\xbmc\music\dialogs\GUIDialogMusicOSD.cpp" />
     <ClCompile Include="..\..\xbmc\music\dialogs\GUIDialogMusicScan.cpp" />
@@ -1437,7 +1444,11 @@
 >>>>>>> changed: move platform specific network classes into subfolders of network
 =======
     <ClCompile Include="..\..\xbmc\network\Zeroconf.cpp" />
+<<<<<<< HEAD
 >>>>>>> more compile fixes
+=======
+    <ClCompile Include="..\..\xbmc\PlayListPlayer.cpp" />
+>>>>>>> some more linker error fixes. XBMC compiles now on win32
     <ClCompile Include="..\..\xbmc\playlists\PlayList.cpp" />
     <ClCompile Include="..\..\xbmc\playlists\PlayListB4S.cpp" />
     <ClCompile Include="..\..\xbmc\playlists\PlayListFactory.cpp" />
@@ -2331,6 +2342,7 @@
     <ClInclude Include="..\..\xbmc\cores\dvdplayer\DVDCodecs\Video\CrystalHD.h" />
     <ClInclude Include="..\..\xbmc\cores\dvdplayer\DVDInputStreams\DVDInputStreamBluray.h" />
     <ClInclude Include="..\..\xbmc\cores\VideoRenderers\VideoShaders\WinVideoFilter.h" />
+    <ClInclude Include="..\..\xbmc\FileSystem\ISO9660Directory.h" />
     <ClInclude Include="..\..\xbmc\FileSystem\VideoDatabaseDirectory\DirectoryNodeCountry.h" />
     <ClInclude Include="..\..\xbmc\GUIDialogTextViewer.h" />
     <ClInclude Include="..\..\xbmc\guilib\AnimatedGif.h" />
@@ -2441,6 +2453,7 @@
     <ClInclude Include="..\..\xbmc\input\XBMC_vkeys.h" />
     <ClInclude Include="..\..\xbmc\lib\libjsonrpc\AudioLibrary.h" />
     <ClInclude Include="..\..\xbmc\lib\libPython\xbmcmodule\PythonAddon.h" />
+    <ClInclude Include="..\..\xbmc\MusicInfoLoader.h" />
     <ClInclude Include="..\..\xbmc\music\dialogs\GUIDialogMusicInfo.h" />
     <ClInclude Include="..\..\xbmc\music\dialogs\GUIDialogMusicOSD.h" />
     <ClInclude Include="..\..\xbmc\music\dialogs\GUIDialogMusicScan.h" />
@@ -2858,7 +2871,11 @@
 >>>>>>> changed: move platform specific network classes into subfolders of network
 =======
     <ClInclude Include="..\..\xbmc\network\Zeroconf.h" />
+<<<<<<< HEAD
 >>>>>>> more compile fixes
+=======
+    <ClInclude Include="..\..\xbmc\PlayListPlayer.h" />
+>>>>>>> some more linker error fixes. XBMC compiles now on win32
     <ClInclude Include="..\..\xbmc\playlists\PlayList.h" />
     <ClInclude Include="..\..\xbmc\playlists\PlayListB4S.h" />
     <ClInclude Include="..\..\xbmc\playlists\PlayListFactory.h" />
@@ -3689,7 +3706,6 @@
     <ClInclude Include="..\..\xbmc\PlayListB4S.h" />
     <ClInclude Include="..\..\xbmc\PlayListFactory.h" />
     <ClInclude Include="..\..\xbmc\PlayListM3U.h" />
-    <ClInclude Include="..\..\xbmc\PlayListPlayer.h" />
     <ClInclude Include="..\..\xbmc\PlayListPLS.h" />
     <ClInclude Include="..\..\xbmc\PlayListURL.h" />
     <ClInclude Include="..\..\xbmc\PlayListWPL.h" />

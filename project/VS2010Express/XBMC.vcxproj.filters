@@ -5308,6 +5308,21 @@
     <ClCompile Include="..\..\xbmc\utils\Crc32.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\xbmc\MusicInfoLoader.cpp">
+      <Filter>Source Files\infoTagReaders</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\FileSystem\iso9660.cpp">
+      <Filter>Source Files\Filesystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\FileSystem\ISO9660Directory.cpp">
+      <Filter>Source Files\Filesystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\MediaSource.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\PlayListPlayer.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\xbmc\win32\pch.h">
@@ -6869,9 +6884,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\PlayListM3U.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\PlayListPlayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\PlayListPLS.h">
@@ -10287,6 +10299,15 @@
       <Filter>Source Files\Storage</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\utils\Crc32.h">
+      <Filter>Source Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\MusicInfoLoader.h">
+      <Filter>Source Files\infoTagReaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\FileSystem\ISO9660Directory.h">
+      <Filter>Source Files\Filesystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\PlayListPlayer.h">
       <Filter>Source Files\Utils</Filter>
     </ClInclude>
   </ItemGroup>
