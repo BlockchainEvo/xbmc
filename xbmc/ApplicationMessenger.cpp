@@ -28,7 +28,7 @@
 #include "Util.h"
 #include "SectionLoader.h"
 #ifdef HAS_PYTHON
-#include "lib/libPython/XBPython.h"
+#include "interfaces/python/XBPython.h"
 #endif
 #include "GUIWindowSlideShow.h"
 #include "utils/Builtins.h"
@@ -53,8 +53,10 @@
 #include "storage/MediaManager.h"
 #include "guilib/LocalizeStrings.h"
 #include "utils/SingleLock.h"
-#include "lib/libPython/xbmcmodule/GUIPythonWindowDialog.h"
-#include "lib/libPython/xbmcmodule/GUIPythonWindowXMLDialog.h"
+#ifdef HAS_PYTHON
+#include "interfaces/python/xbmcmodule/GUIPythonWindowDialog.h"
+#include "interfaces/python/xbmcmodule/GUIPythonWindowXMLDialog.h"
+#endif
 
 #ifdef HAS_HTTPAPI
 #include "interfaces/http-api/XBMChttp.h"

@@ -38,7 +38,7 @@
 #include "GUIPassword.h"
 #include "GUIUserMessages.h"
 #ifdef HAS_PYTHON
-#include "lib/libPython/XBPython.h"
+#include "interfaces/python/XBPython.h"
 #endif
 #include "GUIWindowSlideShow.h"
 #include "playlists/PlayListFactory.h"

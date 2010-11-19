@@ -27,7 +27,7 @@
 #include "settings/GUIDialogProfileSettings.h"
 #include "GUIPassword.h"
 #ifdef HAS_PYTHON
-#include "lib/libPython/XBPython.h"
+#include "interfaces/python/XBPython.h"
 #endif
 #include "lib/libscrobbler/scrobbler.h"
 #include "utils/Builtins.h"

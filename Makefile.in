@@ -43,8 +43,8 @@ BIN_DIRS=	\
 	xbmc/lib/libhts \
 	xbmc/interfaces/http-api \
 	xbmc/interfaces/json-rcp \
-	xbmc/lib/libPython \
-	xbmc/lib/libPython/xbmcmodule \
+	xbmc/interfaces/python \
+	xbmc/interfaces/python/xbmcmodule \
 	xbmc/lib/libRTV \
 	xbmc/lib/libscrobbler \
 	xbmc/lib/libUPnP \
@@ -107,7 +107,7 @@ LIB_DIRS=\
 	xbmc/lib/libhdhomerun \
 	xbmc/lib/libid3tag \
 	lib/libapetag \
-	xbmc/lib/libPython/linux \
+	xbmc/interfaces/python/linux \
 	lib/cpluff \
 	lib/libmodplug \
 	lib/xbmc-dll-symbols \
@@ -268,10 +268,10 @@ xbmc/lib/cmyth/librefmem/librefmem.a: force
 	$(MAKE) -C xbmc/lib/cmyth/librefmem
 xbmc/lib/libhts/libhts.a: force
 	$(MAKE) -C xbmc/lib/libhts
-xbmc/lib/libPython/python.a: force
-	$(MAKE) -C xbmc/lib/libPython
-xbmc/lib/libPython/xbmcmodule/xbmcmodule.a: force
-	$(MAKE) -C xbmc/lib/libPython/xbmcmodule
+xbmc/interfaces/python/python.a: force
+	$(MAKE) -C xbmc/interfaces/python
+xbmc/interfaces/python/xbmcmodule/xbmcmodule.a: force
+	$(MAKE) -C xbmc/interfaces/python/xbmcmodule
 xbmc/lib/libscrobbler/scrobbler.a: force
 	$(MAKE) -C xbmc/lib/libscrobbler
 xbmc/lib/libRTV/librtv-@ARCH@.a: force
@@ -358,10 +358,10 @@ ifneq (arm, $(ARCH))
 	$(MAKE) -C xbmc/screensavers/rsxs-0.9/xbmc
 endif
 libpython: dllloader
-	$(MAKE) -C xbmc/lib/libPython
-	$(MAKE) -C xbmc/lib/libPython/xbmcmodule
+	$(MAKE) -C xbmc/interfaces/python
+	$(MAKE) -C xbmc/interfaces/python/xbmcmodule
 python: dllloader
-	$(MAKE) -C xbmc/lib/libPython/linux
+	$(MAKE) -C xbmc/interfaces/python/linux
 dvdpcodecs: dllloader
 	$(MAKE) -C xbmc/cores/dvdplayer/Codecs
 	$(MAKE) -C xbmc/cores/dvdplayer/Codecs/libdvd
@@ -440,7 +440,7 @@ OBJSXBMC=	\
 	lib/tinyXML/tinyxml.a \
 	xbmc/cdrip/cdrip.a \
 	xbmc/cores/cores.a \
-	xbmc/lib/libPython/python.a \
+	xbmc/interfaces/python/python.a \
 	xbmc/cores/DllLoader/dllloader.a \
 	xbmc/cores/dvdplayer/DVDCodecs/DVDCodecs.a \
 	xbmc/cores/dvdplayer/DVDCodecs/Audio/Audio.a \
@@ -463,7 +463,7 @@ OBJSXBMC=	\
 	xbmc/playlists/playlists.a \
 	xbmc/powermanagement/powermanagement.a \
 	xbmc/storage/storage.a \
-	xbmc/lib/libPython/xbmcmodule/xbmcmodule.a \
+	xbmc/interfaces/python/xbmcmodule/xbmcmodule.a \
 	xbmc/lib/libscrobbler/scrobbler.a \
 	xbmc/lib/libRTV/librtv-@ARCH@.a \
 	xbmc/lib/libUPnP/libupnp-@ARCH@.a \

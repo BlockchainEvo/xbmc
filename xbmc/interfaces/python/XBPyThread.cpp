@@ -53,7 +53,7 @@
 #include "XBPyThread.h"
 #include "XBPython.h"
 
-#include "lib/libPython/xbmcmodule/pyutil.h"
+#include "xbmcmodule/pyutil.h"
 
 #ifndef __GNUC__
 #pragma code_seg("PY_TEXT")

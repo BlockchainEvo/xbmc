@@ -44,7 +44,7 @@
 #include "guilib/LocalizeStrings.h"
 #include "guilib/GUIWindowManager.h"
 #ifdef HAS_PYTHON
-#include "lib/libPython/XBPython.h"
+#include "interfaces/python/XBPython.h"
 #endif
 
   CGUISettings       g_guiSettings;

@@ -58,7 +58,7 @@
 #include "guilib/GUIEditControl.h"
 #include "GUIDialogKeyboard.h"
 #ifdef HAS_PYTHON
-#include "lib/libPython/XBPython.h"
+#include "interfaces/python/XBPython.h"
 #endif
 #include "utils/Builtins.h"
 

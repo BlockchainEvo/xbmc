@@ -73,7 +73,7 @@
 #endif
 
 #ifdef HAS_PYTHON
-#include "lib/libPython/XBPython.h"
+#include "interfaces/python/XBPython.h"
 #endif
 
 #if defined(__APPLE__)

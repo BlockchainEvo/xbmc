@@ -1406,7 +1406,7 @@ OUTPUT_FILES="Makefile \
     xbmc/lib/libsquish/Makefile \
     xbmc/lib/libid3tag/Makefile \
     xbmc/lib/cximage-6.0/Makefile \
-    xbmc/lib/libPython/linux/Makefile \
+    xbmc/interfaces/python/linux/Makefile \
     xbmc/lib/libUPnP/Makefile \
     xbmc/DllPaths_generated.h \
     xbmc/linux/Makefile \
@@ -1562,7 +1562,7 @@ XB_CONFIG_MODULE([lib/python], [
       --without-cxx \
       --enable-shared \
       --without-pymalloc \
-      --prefix=`pwd`/../../xbmc/lib/libPython/linux/python-lib CFLAGS="$CFLAGS" \
+      --prefix=`pwd`/../../xbmc/interfaces/python/linux/python-lib CFLAGS="$CFLAGS" \
       CC="$CC" \
       CXX="$CXX" &&
     sed -i -e "s/define HAVE_GETC_UNLOCKED 1/undef HAVE_GETC_UNLOCKED/" pyconfig.h &&
