@@ -1011,7 +1011,6 @@ Global
 		{C15B374E-7126-48FF-B618-A375D7B17FCF}.Release (OpenGL)|Win32.ActiveCfg = Release|Win32
 		{C15B374E-7126-48FF-B618-A375D7B17FCF}.Release (OpenGL)|Win32.Build.0 = Release|Win32
 		{BDD2CB99-93C5-4A70-ACBF-396FFB961AD3}.Debug (DirectX)|Win32.ActiveCfg = Debug|Win32
-		{BDD2CB99-93C5-4A70-ACBF-396FFB961AD3}.Debug (DirectX)|Win32.Build.0 = Debug|Win32
 		{BDD2CB99-93C5-4A70-ACBF-396FFB961AD3}.Debug (OpenGL)|Win32.ActiveCfg = Debug|Win32
 		{BDD2CB99-93C5-4A70-ACBF-396FFB961AD3}.Debug (OpenGL)|Win32.Build.0 = Debug|Win32
 		{BDD2CB99-93C5-4A70-ACBF-396FFB961AD3}.Release (DirectX)|Win32.ActiveCfg = Release|Win32
