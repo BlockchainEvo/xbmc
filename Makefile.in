@@ -104,7 +104,7 @@ endif
 LIB_DIRS=\
 	xbmc/lib/cximage-6.0 \
 	xbmc/lib/libexif \
-	xbmc/lib/libhdhomerun \
+	lib/libhdhomerun \
 	xbmc/lib/libid3tag \
 	lib/libapetag \
 	xbmc/interfaces/python/linux \
@@ -377,7 +377,7 @@ endif
 libexif: dllloader
 	$(MAKE) -C xbmc/lib/libexif
 libhdhomerun: dllloader
-	$(MAKE) -C xbmc/lib/libhdhomerun
+	$(MAKE) -C lib/libhdhomerun
 libid3tag: dllloader
 	$(MAKE) -C xbmc/lib/libid3tag
 papcodecs: dllloader dvdpcodecs
