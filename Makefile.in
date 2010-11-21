@@ -106,7 +106,7 @@ LIB_DIRS=\
 	xbmc/lib/cximage-6.0 \
 	lib/libexif \
 	lib/libhdhomerun \
-	xbmc/lib/libid3tag \
+	lib/libid3tag \
 	lib/libapetag \
 	xbmc/interfaces/python/linux \
 	lib/cpluff \
@@ -382,7 +382,7 @@ libexif: dllloader
 libhdhomerun: dllloader
 	$(MAKE) -C lib/libhdhomerun
 libid3tag: dllloader
-	$(MAKE) -C xbmc/lib/libid3tag
+	$(MAKE) -C lib/libid3tag
 papcodecs: dllloader dvdpcodecs
 ifeq (@USE_INTERNAL_LIBA52@,1)
 	$(MAKE) -C xbmc/cores/paplayer/AC3Codec

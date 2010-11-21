@@ -1,7 +1,7 @@
 ARCH=@ARCH@
 
 DIRS=libid3tag
-SYSDIR=../../../system
+SYSDIR=../../system
 SO=libid3tag-@ARCH@.so
 SLIB=$(SYSDIR)/$(SO)
 CLEAN_FILES=libid3tag/compat.c libid3tag/frametype.c
@@ -12,13 +12,13 @@ ifeq ($(findstring osx,$(ARCH)), osx)
 $(SLIB): libid3tag/.libs/libid3tag.dylib
 	$(CXX) $(CFLAGS) -bundle -flat_namespace -undefined suppress -shared -fPIC \
 		-o $@ libid3tag/.libs/*.o
-	../../../tools/Mach5/wrapper.rb $@;mv output.so $@
+	../../tools/Mach5/wrapper.rb $@;mv output.so $@
 	chmod +x $@
 else
 $(SLIB): libid3tag/.libs/libid3tag.so
 	$(CXX) $(CXXFLAGS) $(LDFLAGS) -shared -fPIC -o $@ libid3tag/.libs/*.o \
-		`cat ../../cores/DllLoader/exports/wrapper.def` \
-		../../cores/DllLoader/exports/wrapper.o
+		`cat ../../xbmc/cores/DllLoader/exports/wrapper.def` \
+		../../xbmc/cores/DllLoader/exports/wrapper.o
 endif
 
 ifeq ($(findstring osx,$(ARCH)), osx)
@@ -29,5 +29,5 @@ libid3tag/.libs/libid3tag.so: compile
 	$(MAKE) -C libid3tag
 endif
 
-include ../../../Makefile.include
+include ../../Makefile.include
 
