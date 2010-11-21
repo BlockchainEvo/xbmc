@@ -25,7 +25,6 @@
 
 #include <SDL/SDL_syswm.h>
 #include "WinSystemX11.h"
-#include "SpecialProtocol.h"
 #include "settings/Settings.h"
 #include "guilib/Texture.h"
 #include "utils/log.h"

@@ -19,8 +19,8 @@
  *
  */
 
-#include "File.h"
 #include "Favourites.h"
+#include "FileSystem/File.h"
 #include "Util.h"
 #include "guilib/Key.h"
 #include "settings/Settings.h"

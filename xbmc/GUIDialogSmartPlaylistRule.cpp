@@ -25,7 +25,7 @@
 #include "VideoDatabase.h"
 #include "guilib/GUIWindowManager.h"
 #include "GUIDialogSelect.h"
-#include "Directory.h"
+#include "FileSystem/Directory.h"
 #include "FileItem.h"
 #include "guilib/GUIEditControl.h"
 #include "guilib/LocalizeStrings.h"

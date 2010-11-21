@@ -1,4 +1,4 @@
-INCLUDES+=-I../ -I. -Ilinux -Icores -IFileSystem -I/usr/include/freetype2 -Icores/dvdplayer -I../lib
+INCLUDES+=-I../ -I. -Ilinux -Icores -I/usr/include/freetype2 -Icores/dvdplayer -I../lib
 
 ifneq (@USE_EXTERNAL_FFMPEG@,1)
   INCLUDES+=-Icores/dvdplayer/Codecs/ffmpeg
