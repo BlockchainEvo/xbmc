@@ -23,8 +23,8 @@
  */
 
 #include "system.h"
-#include "Thread.h"
-#include "CriticalSection.h"
+#include "threads/Thread.h"
+#include "threads/CriticalSection.h"
 #include <map>
 #include <queue>
 #include <dbus/dbus.h>

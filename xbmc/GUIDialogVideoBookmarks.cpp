@@ -37,7 +37,7 @@
 #include "utils/Crc32.h"
 #include "guilib/LocalizeStrings.h"
 #include "utils/StringUtils.h"
-#include "utils/SingleLock.h"
+#include "threads/SingleLock.h"
 
 using namespace std;
 

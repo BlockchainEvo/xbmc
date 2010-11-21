@@ -24,7 +24,7 @@
 #include "URL.h"
 #include "settings/Settings.h"
 #include "XMLUtils.h"
-#include "utils/SingleLock.h"
+#include "threads/SingleLock.h"
 #include "utils/log.h"
 #include "FileSystem/File.h"
 

@@ -26,7 +26,7 @@
 #endif
 #include "Util.h"
 #include "utils/CharsetConverter.h"
-#include "utils/SingleLock.h"
+#include "threads/SingleLock.h"
 #include "GUIDialogYesNo.h"
 #include "FileSystem/Directory.h"
 #include "FileSystem/SpecialProtocol.h"

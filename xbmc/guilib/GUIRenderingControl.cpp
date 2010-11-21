@@ -22,7 +22,7 @@
 #include "GUIRenderingControl.h"
 #include "GUIUserMessages.h"
 #include "addons/Visualisation.h"
-#include "utils/SingleLock.h"
+#include "threads/SingleLock.h"
 
 using namespace std;
 using namespace ADDON;

@@ -40,7 +40,7 @@
 #include "utils/FileOperationJob.h"
 #include "utils/JobManager.h"
 #include "utils/log.h"
-#include "utils/SingleLock.h"
+#include "threads/SingleLock.h"
 #include "settings/Settings.h"
 #include "utils/StringUtils.h"
 #include "Application.h"

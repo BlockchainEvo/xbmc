@@ -25,7 +25,7 @@
 #include "GUIDialogProgress.h"
 #include "guilib/LocalizeStrings.h"
 #include "utils/log.h"
-#include "utils/SingleLock.h"
+#include "threads/SingleLock.h"
 #include "utils/TimeUtils.h"
 
 CDlgCache::CDlgCache(DWORD dwDelay, const CStdString& strHeader, const CStdString& strMsg)

@@ -21,7 +21,7 @@
 
 #include "utils/BitstreamStats.h"
 #include "PlayerCoreFactory.h"
-#include "utils/SingleLock.h"
+#include "threads/SingleLock.h"
 #include "dvdplayer/DVDPlayer.h"
 #include "paplayer/PAPlayer.h"
 #include "paplayer/DVDPlayerCodec.h"

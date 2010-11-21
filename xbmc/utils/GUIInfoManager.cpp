@@ -71,7 +71,7 @@
 #include "music/dialogs/GUIDialogMusicInfo.h"
 #include "storage/MediaManager.h"
 #include "TimeUtils.h"
-#include "SingleLock.h"
+#include "threads/SingleLock.h"
 #include "log.h"
 
 #include "addons/AddonManager.h"

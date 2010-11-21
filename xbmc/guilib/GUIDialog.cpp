@@ -23,7 +23,7 @@
 #include "GUIWindowManager.h"
 #include "GUILabelControl.h"
 #include "GUIAudioManager.h"
-#include "utils/SingleLock.h"
+#include "threads/SingleLock.h"
 #include "utils/TimeUtils.h"
 #include "Application.h"
 

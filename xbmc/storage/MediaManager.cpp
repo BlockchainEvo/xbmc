@@ -40,7 +40,7 @@
 #include "GUIUserMessages.h"
 #include "settings/Settings.h"
 #include "tinyXML/tinyxml.h"
-#include "utils/SingleLock.h"
+#include "threads/SingleLock.h"
 #include "utils/log.h"
 #include "Application.h"
 #include "utils/JobManager.h"

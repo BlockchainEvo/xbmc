@@ -27,7 +27,7 @@
 #include "GUIWindowKaraokeLyrics.h"
 #include "karaokelyrics.h"
 #include "karaokewindowbackground.h"
-#include "utils/SingleLock.h"
+#include "threads/SingleLock.h"
 
 
 CGUIWindowKaraokeLyrics::CGUIWindowKaraokeLyrics(void)

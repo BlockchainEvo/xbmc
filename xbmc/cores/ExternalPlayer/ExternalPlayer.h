@@ -22,7 +22,7 @@
  */
 
 #include "IPlayer.h"
-#include "utils/Thread.h"
+#include "threads/Thread.h"
 
 class CGUIDialogOK;
 

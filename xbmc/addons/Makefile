@@ -4,7 +4,6 @@ SRCS=Addon.cpp \
      AddonDatabase.cpp \
      AddonManager.cpp \
      AddonStatusHandler.cpp \
-     fft.cpp \
      GUIWindowAddonBrowser.cpp \
      GUIViewStateAddonBrowser.cpp \
      GUIDialogAddonInfo.cpp \

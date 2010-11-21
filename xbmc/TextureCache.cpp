@@ -21,7 +21,7 @@
 
 #include "TextureCache.h"
 #include "FileSystem/File.h"
-#include "utils/SingleLock.h"
+#include "threads/SingleLock.h"
 #include "utils/Crc32.h"
 #include "Util.h"
 #include "settings/Settings.h"

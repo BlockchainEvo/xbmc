@@ -27,9 +27,9 @@
 #endif
 #include <dbus/dbus.h>
 #include "DbusServer.h"
-#include "CriticalSection.h"
+#include "threads/CriticalSection.h"
 #include "Application.h"
-#include "SingleLock.h"
+#include "threads/SingleLock.h"
 #include "log.h"
 #include <map>
 #include <queue>

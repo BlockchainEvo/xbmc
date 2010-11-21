@@ -30,7 +30,7 @@
 #include "settings/AdvancedSettings.h"
 #include "DVDInputStreamRTMP.h"
 #include "FileSystem/IFile.h"
-#include "utils/SingleLock.h"
+#include "threads/SingleLock.h"
 #include "utils/log.h"
 
 #include <string>

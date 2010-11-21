@@ -27,7 +27,7 @@
 #include "FileSystem/Directory.h"
 #include "Util.h"
 #include "utils/log.h"
-#include "utils/SingleLock.h"
+#include "threads/SingleLock.h"
 #include "DateTime.h"
 #include "addons/AddonManager.h"
 

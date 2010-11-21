@@ -27,7 +27,7 @@
 
 #include "IFile.h"
 #include "UnrarXLib/rar.hpp"
-#include "utils/Thread.h"
+#include "threads/Thread.h"
 
 namespace XFILE
 {

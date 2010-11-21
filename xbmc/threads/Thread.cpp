@@ -33,7 +33,7 @@ typedef unsigned (WINAPI *PBEGINTHREADEX_THREADFUNC)(LPVOID lpThreadParameter);
 typedef int (*PBEGINTHREADEX_THREADFUNC)(LPVOID lpThreadParameter);
 #endif
 
-#include "log.h"
+#include "utils/log.h"
 #include "utils/TimeUtils.h"
 
 #ifdef __APPLE__

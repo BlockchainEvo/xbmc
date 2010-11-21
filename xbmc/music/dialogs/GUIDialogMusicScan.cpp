@@ -27,7 +27,7 @@
 #include "guilib/GUIWindowManager.h"
 #include "settings/GUISettings.h"
 #include "GUIUserMessages.h"
-#include "utils/SingleLock.h"
+#include "threads/SingleLock.h"
 #include "utils/log.h"
 
 using namespace MUSIC_INFO;

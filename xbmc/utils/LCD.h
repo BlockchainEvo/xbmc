@@ -21,7 +21,7 @@
  *
  */
 
-#include "Thread.h"
+#include "threads/Thread.h"
 #include "tinyXML/tinyxml.h"
 #include "guilib/GUILabelControl.h"  // for CInfoPortion
 

@@ -30,7 +30,7 @@
 #include "Application.h"
 #include "WindowingFactory.h"
 #include "settings/Settings.h"
-#include "utils/SingleLock.h"
+#include "threads/SingleLock.h"
 #if defined(HAS_GL) || defined(HAS_GLES)
 #include "OverlayRendererGL.h"
 #elif defined(HAS_DX)

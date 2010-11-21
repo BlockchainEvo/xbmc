@@ -75,7 +75,7 @@ extern "C" {
                                            CH_FRONT_LEFT_OF_CENTER|CH_FRONT_RIGHT_OF_CENTER)
 #endif
 
-#include "utils/SingleLock.h"
+#include "threads/SingleLock.h"
 
 class DllAvCodecInterface
 {

@@ -25,7 +25,7 @@
 #include "Application.h"
 #include "GUIPassword.h"
 #include "utils/GUIInfoManager.h"
-#include "utils/SingleLock.h"
+#include "threads/SingleLock.h"
 #include "Util.h"
 #include "settings/GUISettings.h"
 #include "settings/Settings.h"

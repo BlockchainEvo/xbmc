@@ -30,7 +30,7 @@
  *
  */
 
-#include "Thread.h"
+#include "threads/Thread.h"
 #include "VideoInfoTag.h"
 #include "addons/Scraper.h"
 #include "DateTime.h"

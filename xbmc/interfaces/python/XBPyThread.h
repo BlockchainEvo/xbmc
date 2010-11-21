@@ -38,7 +38,7 @@
 #else
   #include "python/Include/Python.h"
 #endif
-#include "utils/Thread.h"
+#include "threads/Thread.h"
 
 class XBPython;
 

@@ -21,7 +21,7 @@
 
 #include "system.h"
 #include "GraphicContext.h"
-#include "utils/SingleLock.h"
+#include "threads/SingleLock.h"
 #include "Application.h"
 #include "settings/GUISettings.h"
 #include "settings/Settings.h"

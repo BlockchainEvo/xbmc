@@ -26,7 +26,7 @@
 #include "IFile.h"
 #include "URL.h"
 #include "FileItem.h"
-#include "utils/CriticalSection.h"
+#include "threads/CriticalSection.h"
 
 #include <libssh/libssh.h>
 #include <libssh/sftp.h>

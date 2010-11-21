@@ -20,7 +20,7 @@
  */
 #include "AddonStatusHandler.h"
 #include "AddonManager.h"
-#include "utils/SingleLock.h"
+#include "threads/SingleLock.h"
 #include "Application.h"
 #include "guilib/GUIWindowManager.h"
 #include "GUIDialogAddonSettings.h"

@@ -23,7 +23,7 @@
 
 #include "addons/Addon.h"
 #include "GUIMediaWindow.h"
-#include "utils/CriticalSection.h"
+#include "threads/CriticalSection.h"
 #include "utils/Job.h"
 #include "PictureThumbLoader.h"
 

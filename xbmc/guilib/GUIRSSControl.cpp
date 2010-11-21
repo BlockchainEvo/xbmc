@@ -22,8 +22,8 @@
 #include "GUIRSSControl.h"
 #include "GUIWindowManager.h"
 #include "settings/GUISettings.h"
-#include "utils/CriticalSection.h"
-#include "utils/SingleLock.h"
+#include "threads/CriticalSection.h"
+#include "threads/SingleLock.h"
 #include "utils/RssReader.h"
 #include "utils/StringUtils.h"
 

@@ -33,7 +33,7 @@
 #include "guilib/LocalizeStrings.h"
 #include "guilib/GUIRSSControl.h"
 #include "utils/TimeUtils.h"
-#include "SingleLock.h"
+#include "threads/SingleLock.h"
 #include "log.h"
 
 using namespace std;

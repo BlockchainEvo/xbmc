@@ -31,10 +31,10 @@
 #include <vector>
 
 #define BYTE char
-#include "../utils/log.h"
-#include "../utils/CriticalSection.h"
-#include "../Util.h"
-#include "../MediaSource.h"
+#include "utils/log.h"
+#include "threads/CriticalSection.h"
+#include "Util.h"
+#include "MediaSource.h"
 #include "settings/GUISettings.h"
 
 class CHALDevice

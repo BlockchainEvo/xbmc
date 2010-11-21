@@ -23,7 +23,7 @@
 #include "Util.h"
 #include "settings/Settings.h"
 #include "FileItem.h"
-#include "utils/SingleLock.h"
+#include "threads/SingleLock.h"
 #include "utils/log.h"
 
 using namespace std;

@@ -26,11 +26,11 @@
 #include "Util.h"
 #include "music/tags/MusicInfoTag.h"
 #include "errors.h"
-#include "utils/Atomics.h"
+#include "threads/Atomics.h"
 #include "settings/GUISettings.h"
 #include "utils/XMLUtils.h"
 #include "Application.h"
-#include "utils/SingleLock.h"
+#include "threads/SingleLock.h"
 #include "guilib/LocalizeStrings.h"
 #include "FileSystem/File.h"
 

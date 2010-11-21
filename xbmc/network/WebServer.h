@@ -40,7 +40,7 @@
 #include <microhttpd.h>
 #endif
 #include "interfaces/json-rpc/ITransportLayer.h"
-#include "utils/CriticalSection.h"
+#include "threads/CriticalSection.h"
 
 class CWebServer : public JSONRPC::ITransportLayer
 {

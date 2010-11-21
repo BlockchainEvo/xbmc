@@ -23,7 +23,7 @@
 #include "GUIFontTTF.h"
 #include "GraphicContext.h"
 
-#include "utils/SingleLock.h"
+#include "threads/SingleLock.h"
 #include "utils/TimeUtils.h"
 #include "utils/MathUtils.h"
 

@@ -20,9 +20,9 @@
  */
 #pragma once
 #include "IDirectory.h"
-#include "utils/Thread.h"
-#include "utils/CriticalSection.h"
-#include "utils/Event.h"
+#include "threads/Thread.h"
+#include "threads/CriticalSection.h"
+#include "threads/Event.h"
 #include "URL.h"
 #include "HTSPSession.h"
 #include "boost/shared_ptr.hpp"

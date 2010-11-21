@@ -29,7 +29,7 @@
 #include "guilib/GUIVisualisationControl.h"
 #include "guilib/GUIImage.h"
 #include "cores/dvdplayer/DVDPlayer.h"
-#include "utils/SingleLock.h"
+#include "threads/SingleLock.h"
 #include "utils/log.h"
 
 #include "karaokewindowbackground.h"

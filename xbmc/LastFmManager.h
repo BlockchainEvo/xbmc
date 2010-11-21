@@ -20,8 +20,8 @@
  *
  */
 
-#include "utils/CriticalSection.h"
-#include "utils/Thread.h"
+#include "threads/CriticalSection.h"
+#include "threads/Thread.h"
 #include "PlayListPlayer.h"
 
 namespace PLAYLIST

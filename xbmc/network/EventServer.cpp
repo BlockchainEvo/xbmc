@@ -27,11 +27,11 @@
 #include "EventPacket.h"
 #include "EventClient.h"
 #include "Socket.h"
-#include "utils/CriticalSection.h"
+#include "threads/CriticalSection.h"
 #include "Application.h"
 #include "utils/Builtins.h"
 #include "input/ButtonTranslator.h"
-#include "utils/SingleLock.h"
+#include "threads/SingleLock.h"
 #include "Zeroconf.h"
 #include "guilib/GUIAudioManager.h"
 #include <map>

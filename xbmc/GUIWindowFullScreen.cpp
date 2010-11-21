@@ -45,7 +45,7 @@
 #include "utils/CPUInfo.h"
 #include "settings/GUISettings.h"
 #include "guilib/LocalizeStrings.h"
-#include "utils/SingleLock.h"
+#include "threads/SingleLock.h"
 #include "utils/log.h"
 #include "utils/TimeUtils.h"
 #include "DateTime.h"

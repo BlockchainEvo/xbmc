@@ -24,7 +24,7 @@
 #include "SAPDirectory.h"
 #include "Util.h"
 #include "FileItem.h"
-#include "utils/SingleLock.h"
+#include "threads/SingleLock.h"
 #include "utils/log.h"
 #include "utils/TimeUtils.h"
 #ifdef __APPLE__

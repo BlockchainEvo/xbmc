@@ -27,8 +27,8 @@
 
 #include <string>
 #include <vector>
-#include "../utils/CriticalSection.h"
-#include "../addons/IAddon.h"
+#include "threads/CriticalSection.h"
+#include "addons/IAddon.h"
 
 class CURL;
 class CFileItemList;

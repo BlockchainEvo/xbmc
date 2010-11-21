@@ -52,7 +52,7 @@
 #endif
 #include "storage/MediaManager.h"
 #include "guilib/LocalizeStrings.h"
-#include "utils/SingleLock.h"
+#include "threads/SingleLock.h"
 #ifdef HAS_PYTHON
 #include "interfaces/python/xbmcmodule/GUIPythonWindowDialog.h"
 #include "interfaces/python/xbmcmodule/GUIPythonWindowXMLDialog.h"

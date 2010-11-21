@@ -21,10 +21,10 @@
 
 #include "system.h"
 #include "RenderManager.h"
-#include "utils/CriticalSection.h"
+#include "threads/CriticalSection.h"
 #include "VideoReferenceClock.h"
 #include "utils/MathUtils.h"
-#include "utils/SingleLock.h"
+#include "threads/SingleLock.h"
 #include "utils/log.h"
 
 #include "Application.h"

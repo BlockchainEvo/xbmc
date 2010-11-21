@@ -29,8 +29,8 @@
 #include "XHandlePublic.h"
 #include "XFileUtils.h"
 #endif
-#include "utils/CriticalSection.h"
-#include "utils/Event.h"
+#include "threads/CriticalSection.h"
+#include "threads/Event.h"
 
 namespace XFILE {
 

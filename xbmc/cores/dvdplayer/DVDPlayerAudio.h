@@ -20,7 +20,7 @@
  */
 
 #pragma once
-#include "utils/Thread.h"
+#include "threads/Thread.h"
 
 #include "DVDAudio.h"
 #include "DVDClock.h"

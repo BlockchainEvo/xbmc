@@ -23,7 +23,7 @@
 #include "IDirectory.h"
 #include "FileSystem/FileCurl.h"
 #include "tinyXML/tinyxml.h"
-#include "utils/Thread.h"
+#include "threads/Thread.h"
 
 class CGUIDialogProgress;
 

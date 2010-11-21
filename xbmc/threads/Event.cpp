@@ -19,7 +19,7 @@
 */
 
 #include "Event.h"
-#include "log.h"
+#include "utils/log.h"
 
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction

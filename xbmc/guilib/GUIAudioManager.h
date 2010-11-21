@@ -21,7 +21,7 @@
  *
  */
 
-#include "utils/CriticalSection.h"
+#include "threads/CriticalSection.h"
 #include "utils/log.h"
 #include "utils/StdString.h"
 

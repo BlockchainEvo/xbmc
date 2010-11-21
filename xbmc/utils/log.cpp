@@ -25,11 +25,11 @@
 #include <share.h>
 #include "CharsetConverter.h"
 #endif
-#include "CriticalSection.h"
-#include "SingleLock.h"
+#include "threads/CriticalSection.h"
+#include "threads/SingleLock.h"
 #include "FileSystem/File.h"
 #include "settings/AdvancedSettings.h"
-#include "Thread.h"
+#include "threads/Thread.h"
 #include "WindowingFactory.h"
 
 FILE*       CLog::m_file            = NULL;

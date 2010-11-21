@@ -24,7 +24,7 @@
 #include "guilib/GUIWindow.h"
 #include "FileSystem/VirtualDirectory.h"
 #include "FileSystem/DirectoryHistory.h"
-#include "utils/CriticalSection.h"
+#include "threads/CriticalSection.h"
 #include "FileSystem/File.h"
 #include "utils/Job.h"
 

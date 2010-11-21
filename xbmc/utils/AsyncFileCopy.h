@@ -21,7 +21,7 @@
  *
  */
 
-#include "Thread.h"
+#include "threads/Thread.h"
 #include "FileSystem/File.h"
 
 class CAsyncFileCopy : public CThread, public XFILE::IFileCallback

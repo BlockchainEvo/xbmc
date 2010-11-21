@@ -23,17 +23,16 @@
 #include "Texture.h"
 #include "AnimatedGif.h"
 #include "GraphicContext.h"
-#include "utils/SingleLock.h"
+#include "threads/SingleLock.h"
 #include "utils/CharsetConverter.h"
-#include "utils/log.h"
 #include "utils/log.h"
 #include "addons/Skin.h"
 #ifdef _DEBUG
 #include "utils/TimeUtils.h"
 #endif
-#include "../xbmc/Util.h"
-#include "../xbmc/FileSystem/File.h"
-#include "../xbmc/FileSystem/Directory.h"
+#include "Util.h"
+#include "FileSystem/File.h"
+#include "FileSystem/Directory.h"
 #include <assert.h>
 
 using namespace std;

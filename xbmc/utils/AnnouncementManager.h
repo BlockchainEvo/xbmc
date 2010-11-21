@@ -21,8 +21,8 @@
  */
 
 #include "IAnnouncer.h"
-#include "CriticalSection.h"
 #include "FileItem.h"
+#include "threads/CriticalSection.h"
 #include <vector>
 
 namespace ANNOUNCEMENT

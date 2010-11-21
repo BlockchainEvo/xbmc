@@ -63,7 +63,7 @@ namespace ADDON
 #include "linux/LinuxResourceCounter.h"
 #endif
 #include "XBMC_events.h"
-#include "utils/Thread.h"
+#include "threads/Thread.h"
 
 #ifdef HAS_WEB_SERVER
 #include "network/WebServer.h"

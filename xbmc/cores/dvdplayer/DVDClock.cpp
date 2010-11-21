@@ -23,7 +23,7 @@
 #include "VideoReferenceClock.h"
 #include <math.h>
 #include "MathUtils.h"
-#include "utils/SingleLock.h"
+#include "threads/SingleLock.h"
 #include "utils/log.h"
 
 int64_t CDVDClock::m_systemOffset;

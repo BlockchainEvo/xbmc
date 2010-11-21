@@ -41,7 +41,7 @@
 #include "FileSystem/File.h"
 #include "FileSystem/Directory.h"
 #include "utils/log.h"
-#include "utils/Thread.h"
+#include "threads/Thread.h"
 #include "utils/TimeUtils.h"
 
 void CDemuxStreamAudioFFmpeg::GetStreamInfo(std::string& strInfo)

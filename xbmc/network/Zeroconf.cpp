@@ -31,9 +31,9 @@
 #endif
 #endif
 
-#include "utils/CriticalSection.h"
-#include "utils/SingleLock.h"
-#include "utils/Atomics.h"
+#include "threads/CriticalSection.h"
+#include "threads/SingleLock.h"
+#include "threads/Atomics.h"
 
 #ifndef HAS_ZEROCONF
 //dummy implementation used if no zeroconf is present

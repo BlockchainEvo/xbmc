@@ -38,7 +38,7 @@
 #include "storage/IoSupport.h"
 
 #include <cdio/cdio.h>
-#include "../utils/CriticalSection.h"
+#include "threads/CriticalSection.h"
 #include "utils/StdString.h"
 
 namespace MEDIA_DETECT

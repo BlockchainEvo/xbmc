@@ -21,7 +21,7 @@
  */
 
 #include "DynamicDll.h"
-#include "utils/CriticalSection.h"
+#include "threads/CriticalSection.h"
 
 /* put types of curl in namespace to avoid namespace pollution */
 namespace XCURL

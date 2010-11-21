@@ -19,7 +19,7 @@
 
 #include "SAPFile.h"
 #include "SAPDirectory.h"
-#include "utils/SingleLock.h"
+#include "threads/SingleLock.h"
 
 #include <sys/stat.h>
 #include <vector>

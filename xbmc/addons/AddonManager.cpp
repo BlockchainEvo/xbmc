@@ -23,7 +23,7 @@
 #include "DllLibCPluff.h"
 #include "utils/StringUtils.h"
 #include "utils/JobManager.h"
-#include "utils/SingleLock.h"
+#include "threads/SingleLock.h"
 #include "FileItem.h"
 #include "LangInfo.h"
 #include "settings/Settings.h"

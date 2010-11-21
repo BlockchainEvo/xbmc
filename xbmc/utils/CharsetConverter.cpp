@@ -23,7 +23,7 @@
 #include "Util.h"
 #include "ArabicShaping.h"
 #include "LangInfo.h"
-#include "SingleLock.h"
+#include "threads/SingleLock.h"
 #include "log.h"
 
 #include <errno.h>

@@ -23,7 +23,7 @@
 #ifndef SEMAPHORE_POSIX_H__
 #define SEMAPHORE_POSIX_H__
 
-#include "utils/ISemaphore.h"
+#include "threads/ISemaphore.h"
 #include <semaphore.h>
 
 class CSemaphorePOSIX : public ISemaphore

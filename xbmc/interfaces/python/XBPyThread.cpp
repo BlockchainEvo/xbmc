@@ -46,7 +46,7 @@
 #include "GUIDialogKaiToast.h"
 #include "guilib/LocalizeStrings.h"
 #include "utils/log.h"
-#include "utils/SingleLock.h"
+#include "threads/SingleLock.h"
 #include "Util.h"
 #include "addons/AddonManager.h"
 

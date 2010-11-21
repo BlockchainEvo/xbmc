@@ -25,7 +25,7 @@
 #include "utils/MathUtils.h"
 #include "utils/log.h"
 #include "utils/TimeUtils.h"
-#include "utils/SingleLock.h"
+#include "threads/SingleLock.h"
 
 #if defined(HAS_GLX) && defined(HAS_XRANDR)
   #include <sstream>

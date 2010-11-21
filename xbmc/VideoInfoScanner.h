@@ -19,7 +19,7 @@
  *  http://www.gnu.org/copyleft/gpl.html
  *
  */
-#include "utils/Thread.h"
+#include "threads/Thread.h"
 #include "VideoDatabase.h"
 #include "addons/Scraper.h"
 #include "NfoFile.h"

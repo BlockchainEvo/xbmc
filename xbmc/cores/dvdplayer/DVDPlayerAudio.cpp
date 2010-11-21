@@ -19,7 +19,7 @@
  *
  */
 
-#include "utils/SingleLock.h"
+#include "threads/SingleLock.h"
 #include "DVDPlayerAudio.h"
 #include "DVDPlayer.h"
 #include "DVDCodecs/Audio/DVDAudioCodec.h"

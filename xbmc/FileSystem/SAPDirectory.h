@@ -18,8 +18,8 @@
 * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 */
 #include "IDirectory.h"
-#include "utils/Thread.h"
-#include "utils/CriticalSection.h"
+#include "threads/Thread.h"
+#include "threads/CriticalSection.h"
 
 
 namespace SDP

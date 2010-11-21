@@ -11,8 +11,8 @@
 #include <vector>
 #include "utils/IAnnouncer.h"
 #include "interfaces/json-rpc/ITransportLayer.h"
-#include "utils/Thread.h"
-#include "utils/CriticalSection.h"
+#include "threads/Thread.h"
+#include "threads/CriticalSection.h"
 
 class CVariant;
 namespace JSONRPC

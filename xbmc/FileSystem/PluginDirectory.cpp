@@ -28,7 +28,7 @@
 #ifdef HAS_PYTHON
 #include "interfaces/python/XBPython.h"
 #endif
-#include "../utils/SingleLock.h"
+#include "threads/SingleLock.h"
 #include "guilib/GUIWindowManager.h"
 #include "GUIDialogProgress.h"
 #include "FileSystem/File.h"

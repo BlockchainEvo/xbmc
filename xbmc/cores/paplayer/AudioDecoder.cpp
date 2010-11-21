@@ -24,7 +24,7 @@
 #include "settings/GUISettings.h"
 #include "FileItem.h"
 #include "music/tags/MusicInfoTag.h"
-#include "utils/SingleLock.h"
+#include "threads/SingleLock.h"
 #include "utils/log.h"
 #include <math.h>
 

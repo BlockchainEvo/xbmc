@@ -20,7 +20,7 @@
  */
 #include "system.h"
 #include "Visualisation.h"
-#include "fft.h"
+#include "utils/fft.h"
 #include "utils/GUIInfoManager.h"
 #include "Application.h"
 #include "music/tags/MusicInfoTag.h"

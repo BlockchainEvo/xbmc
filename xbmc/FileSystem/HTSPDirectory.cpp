@@ -25,7 +25,7 @@
 #include "settings/GUISettings.h"
 #include "guilib/LocalizeStrings.h"
 #include "cores/dvdplayer/DVDInputStreams/DVDInputStreamHTSP.h"
-#include "utils/SingleLock.h"
+#include "threads/SingleLock.h"
 #include "utils/log.h"
 #include "utils/TimeUtils.h"
 

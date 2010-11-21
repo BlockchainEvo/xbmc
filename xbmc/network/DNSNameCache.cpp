@@ -21,7 +21,7 @@
 
 #include "DNSNameCache.h"
 #include "Application.h"
-#include "utils/SingleLock.h"
+#include "threads/SingleLock.h"
 #include "utils/log.h"
 
 CDNSNameCache g_DNSCache;

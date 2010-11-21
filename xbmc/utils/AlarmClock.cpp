@@ -22,7 +22,7 @@
 #include "AlarmClock.h"
 #include "Application.h"
 #include "guilib/LocalizeStrings.h"
-#include "SingleLock.h"
+#include "threads/SingleLock.h"
 #include "log.h"
 
 using namespace std;

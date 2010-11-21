@@ -24,7 +24,7 @@
 #ifdef HAS_DVD_DRIVE
 
 #include "cdioSupport.h"
-#include "utils/SingleLock.h"
+#include "threads/SingleLock.h"
 #include "utils/log.h"
 #include <cdio/logging.h>
 #include <cdio/util.h>

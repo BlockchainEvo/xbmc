@@ -7,7 +7,7 @@
 #include "utils/AnnouncementManager.h"
 #include "utils/log.h"
 #include "utils/Variant.h"
-#include "utils/SingleLock.h"
+#include "threads/SingleLock.h"
 
 #ifdef _WIN32
 extern "C" int inet_pton(int af, const char *src, void *dst);

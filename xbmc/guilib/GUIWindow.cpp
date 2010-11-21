@@ -35,7 +35,7 @@
 #include "addons/Skin.h"
 #include "utils/GUIInfoManager.h"
 #include "utils/log.h"
-#include "utils/SingleLock.h"
+#include "threads/SingleLock.h"
 #include "utils/TimeUtils.h"
 #include "input/ButtonTranslator.h"
 #include "utils/XMLUtils.h"

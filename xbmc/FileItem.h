@@ -32,8 +32,7 @@
 #include "SortFileItem.h"
 #include "utils/LabelFormatter.h"
 #include "GUIPassword.h"
-#include "utils/CriticalSection.h"
-#include "VideoDatabase.h"
+#include "threads/CriticalSection.h"
 
 #include <vector>
 #include "boost/shared_ptr.hpp"

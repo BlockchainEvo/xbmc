@@ -25,7 +25,7 @@
 #endif
 #include "Util.h"
 #include "utils/log.h"
-#include "utils/SingleLock.h"
+#include "threads/SingleLock.h"
 #include "utils/TimeUtils.h"
 #ifdef _WIN32
 #include "PlatformDefs.h" //for PRIdS, PRId64

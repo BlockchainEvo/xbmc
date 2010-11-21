@@ -61,7 +61,8 @@ BIN_DIRS=	\
         xbmc/input \
         xbmc/input/linux \
 	xbmc/osx \
-	xbmc/posix
+	xbmc/posix \
+        xbmc/threads \
 
 EC_DIRS= \
 	tools/EventClients
@@ -254,6 +255,8 @@ xbmc/storage/storage.a: force
 	$(MAKE) -C xbmc/storage
 xbmc/storage/linux/storage_linux.a: force
 	$(MAKE) -C xbmc/storage/linux
+xbmc/threads/threads.a: force
+	$(MAKE) -C xbmc/threads
 xbmc/music/tags/musictags.a: force
 	$(MAKE) -C xbmc/music/tags
 xbmc/music/dialogs/musicdialogs.a: force
@@ -463,6 +466,7 @@ OBJSXBMC=	\
 	xbmc/playlists/playlists.a \
 	xbmc/powermanagement/powermanagement.a \
 	xbmc/storage/storage.a \
+	xbmc/threads/threads.a \
 	xbmc/interfaces/python/xbmcmodule/xbmcmodule.a \
 	xbmc/network/libscrobbler/scrobbler.a \
 	xbmc/lib/libRTV/librtv-@ARCH@.a \

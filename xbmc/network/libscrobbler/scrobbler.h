@@ -24,9 +24,9 @@
 
 #include <vector>
 #include "utils/StdString.h"
-#include "utils/Thread.h"
+#include "threads/Thread.h"
 #include "FileSystem/FileCurl.h"
-#include "utils/CriticalSection.h"
+#include "threads/CriticalSection.h"
 
 #define SCROBBLER_USER_ERROR_BADAUTH  1
 #define SCROBBLER_USER_ERROR_BANNED   2

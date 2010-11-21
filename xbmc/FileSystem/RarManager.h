@@ -26,12 +26,12 @@
  */
 
 #include "utils/StdString.h"
-#include "utils/CriticalSection.h"
+#include "threads/CriticalSection.h"
 #include <map>
 #include "UnrarXLib/UnrarX.hpp"
 #include "utils/Stopwatch.h"
 
-#include "utils/Thread.h"
+#include "threads/Thread.h"
 
 class CFileItemList;
 

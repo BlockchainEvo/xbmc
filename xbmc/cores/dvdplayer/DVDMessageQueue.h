@@ -24,7 +24,7 @@
 #include "DVDMessage.h"
 #include <string>
 #include <list>
-#include "utils/CriticalSection.h"
+#include "threads/CriticalSection.h"
 
 struct DVDMessageListItem
 {

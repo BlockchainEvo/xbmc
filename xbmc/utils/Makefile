@@ -5,12 +5,11 @@ SRCS=AlarmClock.cpp \
      AutoPtrHandle.cpp \
      Builtins.cpp \
      CharsetConverter.cpp \
-     CriticalSection.cpp \
      Crc32.cpp \
      DownloadQueue.cpp \
      DownloadQueueManager.cpp \
-     Event.cpp \
      fstrcmp.c \
+     fft.cpp \
      GUIInfoManager.cpp \
      HTMLTable.cpp \
      HTMLUtil.cpp \
@@ -21,14 +20,11 @@ SRCS=AlarmClock.cpp \
      RegExp.cpp \
      RssReader.cpp \
      ScraperParser.cpp \
-     SingleLock.cpp \
      Splash.cpp \
      Stopwatch.cpp \
      SystemInfo.cpp \
      TuxBoxUtil.cpp \
      Weather.cpp \
-     Thread.cpp \
-     SharedSection.cpp \
      Win32Exception.cpp \
      CPUInfo.cpp \
      PCMAmplifier.cpp \
@@ -41,13 +37,10 @@ SRCS=AlarmClock.cpp \
      LCD.cpp \
      Fanart.cpp \
      ScraperUrl.cpp \
-     Mutex.cpp \
      md5.cpp \
      ArabicShaping.cpp \
      AsyncFileCopy.cpp \
      DbusServer.cpp \
-     Atomics.cpp \
-     LockFree.cpp \
      StreamDetails.cpp \
      TimeUtils.cpp \
      JobManager.cpp \
@@ -56,7 +49,6 @@ SRCS=AlarmClock.cpp \
      PasswordManager.cpp \
      AliasShortcutUtils.cpp \
      AnnouncementManager.cpp \
-     Semaphore.cpp \
      RingBuffer.cpp \
      FileOperationJob.cpp \
      FileUtils.cpp \

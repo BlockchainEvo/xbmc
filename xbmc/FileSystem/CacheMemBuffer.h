@@ -23,8 +23,8 @@
 #define CACHEMEMBUFFER_H
 
 #include "CacheStrategy.h"
-#include "utils/CriticalSection.h"
-#include "utils/Event.h"
+#include "threads/CriticalSection.h"
+#include "threads/Event.h"
 #include "utils/RingBuffer.h"
 
 /**

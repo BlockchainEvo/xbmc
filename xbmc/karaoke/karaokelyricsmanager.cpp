@@ -31,7 +31,7 @@
 
 #include "GUIDialogKaraokeSongSelector.h"
 #include "GUIWindowKaraokeLyrics.h"
-#include "utils/SingleLock.h"
+#include "threads/SingleLock.h"
 #include "utils/log.h"
 #include "utils/TimeUtils.h"
 

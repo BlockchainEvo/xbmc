@@ -46,7 +46,7 @@
 #include "FileSystem/File.h"
 #include "FileSystem/SpecialProtocol.h"
 #include "utils/log.h"
-#include "utils/SingleLock.h"
+#include "threads/SingleLock.h"
 #include "utils/TimeUtils.h"
 
 #ifndef _LINUX

@@ -23,8 +23,8 @@
 
 #include <set>
 #include "guilib/GUIWindow.h"
-#include "utils/Thread.h"
-#include "utils/CriticalSection.h"
+#include "threads/Thread.h"
+#include "threads/CriticalSection.h"
 #include "SlideShowPicture.h"
 #include "DllImageLib.h"
 #include "SortFileItem.h"

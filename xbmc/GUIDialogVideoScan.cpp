@@ -26,7 +26,7 @@
 #include "guilib/GUIWindowManager.h"
 #include "settings/GUISettings.h"
 #include "Application.h"
-#include "utils/SingleLock.h"
+#include "threads/SingleLock.h"
 #include "utils/log.h"
 
 #define CONTROL_LABELSTATUS       401

@@ -21,10 +21,10 @@
  *
  */
 
-#include "utils/CriticalSection.h"
+#include "threads/CriticalSection.h"
 #include "utils/StdString.h"
 #include "guilib/Key.h"
-#include "utils/Thread.h"
+#include "threads/Thread.h"
 
 #include <queue>
 

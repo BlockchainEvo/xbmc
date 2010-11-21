@@ -34,7 +34,7 @@
 #include "Application.h"
 #include "guilib/GUIWindowManager.h"
 #include "GUIDialogBusy.h"
-#include "utils/SingleLock.h"
+#include "threads/SingleLock.h"
 #include "Util.h"
 
 using namespace std;

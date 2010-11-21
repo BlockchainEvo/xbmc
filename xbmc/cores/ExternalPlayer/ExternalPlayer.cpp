@@ -22,7 +22,7 @@
 #include "system.h"
 #include "signal.h"
 #include "limits.h"
-#include "utils/SingleLock.h"
+#include "threads/SingleLock.h"
 #include "guilib/AudioContext.h"
 #include "ExternalPlayer.h"
 #include "WindowingFactory.h"

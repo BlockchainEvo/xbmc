@@ -25,7 +25,7 @@
 #include "Util.h"
 #include "GUIUserMessages.h"
 #include "utils/StringUtils.h"
-#include "utils/SingleLock.h"
+#include "threads/SingleLock.h"
 
 using namespace Json;
 using namespace JSONRPC;

@@ -26,9 +26,9 @@
 #include "GUISound.h"
 #include "settings/GUISettings.h"
 #include "input/ButtonTranslator.h"
-#include "utils/SingleLock.h"
-#include "../xbmc/Util.h"
-#include "../xbmc/FileSystem/Directory.h"
+#include "threads/SingleLock.h"
+#include "Util.h"
+#include "FileSystem/Directory.h"
 #include "tinyXML/tinyxml.h"
 #include "addons/Skin.h"
 #ifdef HAS_SDL_AUDIO
