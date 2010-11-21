@@ -104,7 +104,7 @@ endif
 
 LIB_DIRS=\
 	xbmc/lib/cximage-6.0 \
-	xbmc/lib/libexif \
+	lib/libexif \
 	lib/libhdhomerun \
 	xbmc/lib/libid3tag \
 	lib/libapetag \
@@ -378,7 +378,7 @@ else
 	$(MAKE) -C tools/EventClients
 endif
 libexif: dllloader
-	$(MAKE) -C xbmc/lib/libexif
+	$(MAKE) -C lib/libexif
 libhdhomerun: dllloader
 	$(MAKE) -C lib/libhdhomerun
 libid3tag: dllloader
