@@ -2,5 +2,5 @@ SRCS= daap.c debug.c dmap_generics.c global.c httpClient.c ioloop.c libXDAAP.c t
 
 LIB=libxdaap-@ARCH@.a
 
-include ../../../Makefile.include
+include ../../Makefile.include
 
