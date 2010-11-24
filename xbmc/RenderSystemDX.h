@@ -26,7 +26,7 @@
 
 #include <vector>
 #include "RenderSystem.h"
-#include "CriticalSection.h"
+#include "threads/CriticalSection.h"
 
 enum PCI_Vendors
 {

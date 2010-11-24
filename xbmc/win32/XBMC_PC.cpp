@@ -20,12 +20,12 @@
  */
 
 #include "settings/AdvancedSettings.h"
-#include "../../xbmc/utils/log.h"
+#include "utils/log.h"
 #include "WIN32Util.h"
 #include "shellapi.h"
 #include "dbghelp.h"
 #include "DateTime.h"
-#include "utils/Thread.h"
+#include "threads/Thread.h"
 #include "Application.h"
 
 typedef BOOL (WINAPI *MINIDUMPWRITEDUMP)(HANDLE hProcess, DWORD dwPid, HANDLE hFile, MINIDUMP_TYPE DumpType,

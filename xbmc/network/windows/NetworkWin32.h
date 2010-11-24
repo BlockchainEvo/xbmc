@@ -27,7 +27,7 @@
 #include "network/Network.h"
 #include "Iphlpapi.h"
 #include "stopwatch.h"
-#include "utils/CriticalSection.h"
+#include "threads/CriticalSection.h"
 
 class CNetworkWin32;
 
