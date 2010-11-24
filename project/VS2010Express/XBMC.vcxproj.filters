@@ -150,12 +150,6 @@
     <Filter Include="libraries\libPython">
       <UniqueIdentifier>{265279c3-c0f6-4f0a-bc4c-e994cc239aa0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="libraries\libPython\xbmcmodule">
-      <UniqueIdentifier>{e3bda045-f4fb-4115-a37c-b22f9c02a2d4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="libraries\libPython\python">
-      <UniqueIdentifier>{dc6df341-606f-4fd0-a783-8fc0a3cd02ea}</UniqueIdentifier>
-    </Filter>
     <Filter Include="libraries\libhttpapi">
       <UniqueIdentifier>{0ee7becf-1d84-4148-af74-cefe1e4e611b}</UniqueIdentifier>
     </Filter>
@@ -222,6 +216,7 @@
     <Filter Include="cores\paplayer">
       <UniqueIdentifier>{ef82a765-fb92-4244-b2dd-212704a98407}</UniqueIdentifier>
     </Filter>
+<<<<<<< HEAD
     <Filter Include="cores\DllLoader">
       <UniqueIdentifier>{4a0ca8db-d3a3-4360-93bd-0b1fe4cbd203}</UniqueIdentifier>
     </Filter>
@@ -1162,6 +1157,16 @@
   </ItemGroup>
   <ItemGroup>
 >>>>>>> changed: move storage related files to storage and platform specific implementations to subdirectories
+=======
+    <Filter Include="libraries\libPython\xbmcmodule">
+      <UniqueIdentifier>{a9ec686c-f497-4771-b65e-55a4afb1a92f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\threads">
+      <UniqueIdentifier>{a3b4d542-945d-4eb4-b923-4c87b9e2a638}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+>>>>>>> synced some more: various moves
     <ClCompile Include="..\..\xbmc\win32\pch.cpp">
       <Filter>win32</Filter>
     </ClCompile>
@@ -1171,6 +1176,7 @@
     <ClCompile Include="..\..\xbmc\win32\Win32DelayedDllLoad.cpp">
       <Filter>win32</Filter>
     </ClCompile>
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     <ClCompile Include="..\..\xbmc\win32\Win32PowerSyscall.cpp">
@@ -1183,6 +1189,8 @@
     </ClCompile>
 =======
 >>>>>>> changed: move storage related files to storage and platform specific implementations to subdirectories
+=======
+>>>>>>> synced some more: various moves
     <ClCompile Include="..\..\xbmc\win32\WIN32Util.cpp">
       <Filter>win32</Filter>
     </ClCompile>
@@ -1687,9 +1695,6 @@
     <ClCompile Include="..\..\xbmc\utils\AsyncFileCopy.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\utils\Atomics.cpp">
-      <Filter>Source Files\Utils</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\xbmc\Autorun.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
@@ -1708,9 +1713,6 @@
     <ClCompile Include="..\..\xbmc\utils\CPUInfo.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\utils\CriticalSection.cpp">
-      <Filter>Source Files\Utils</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\xbmc\DateTime.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
@@ -1724,9 +1726,6 @@
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
     <ClCompile Include="..\..\xbmc\DynamicDll.cpp">
-      <Filter>Source Files\Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\utils\Event.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
     <ClCompile Include="..\..\xbmc\utils\Fanart.cpp">
@@ -1831,13 +1830,7 @@
     <ClCompile Include="..\..\xbmc\SectionLoader.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\utils\SharedSection.cpp">
-      <Filter>Source Files\Utils</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\xbmc\Shortcut.cpp">
-      <Filter>Source Files\Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\utils\SingleLock.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
     <ClCompile Include="..\..\xbmc\SortFileItem.cpp">
@@ -1865,9 +1858,6 @@
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
     <ClCompile Include="..\..\xbmc\TextureDatabase.cpp">
-      <Filter>Source Files\Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\utils\Thread.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
     <ClCompile Include="..\..\xbmc\ThumbnailCache.cpp">
@@ -2510,9 +2500,6 @@
     <ClCompile Include="..\..\xbmc\addons\AddonStatusHandler.cpp">
       <Filter>Source Files\Addons</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\addons\fft.cpp">
-      <Filter>Source Files\Addons</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\xbmc\addons\Scraper.cpp">
       <Filter>Source Files\Addons</Filter>
     </ClCompile>
@@ -2521,120 +2508,6 @@
     </ClCompile>
     <ClCompile Include="..\..\xbmc\addons\Visualisation.cpp">
       <Filter>Source Files\Addons</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\win32\WIN32XBPythonDll.cpp">
-      <Filter>libraries\libPython</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\lib\libPython\XBPython.cpp">
-      <Filter>libraries\libPython</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\lib\libPython\XBPyThread.cpp">
-      <Filter>libraries\libPython</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\lib\libPython\xbmcmodule\action.cpp">
-      <Filter>libraries\libPython\xbmcmodule</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\lib\libPython\xbmcmodule\control.cpp">
-      <Filter>libraries\libPython\xbmcmodule</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\lib\libPython\xbmcmodule\controlbutton.cpp">
-      <Filter>libraries\libPython\xbmcmodule</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\lib\libPython\xbmcmodule\controlcheckmark.cpp">
-      <Filter>libraries\libPython\xbmcmodule</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\lib\libPython\xbmcmodule\controlfadelabel.cpp">
-      <Filter>libraries\libPython\xbmcmodule</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\lib\libPython\xbmcmodule\controlgroup.cpp">
-      <Filter>libraries\libPython\xbmcmodule</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\lib\libPython\xbmcmodule\controlimage.cpp">
-      <Filter>libraries\libPython\xbmcmodule</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\lib\libPython\xbmcmodule\controllabel.cpp">
-      <Filter>libraries\libPython\xbmcmodule</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\lib\libPython\xbmcmodule\controllist.cpp">
-      <Filter>libraries\libPython\xbmcmodule</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\lib\libPython\xbmcmodule\controlprogress.cpp">
-      <Filter>libraries\libPython\xbmcmodule</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\lib\libPython\xbmcmodule\controlradiobutton.cpp">
-      <Filter>libraries\libPython\xbmcmodule</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\lib\libPython\xbmcmodule\controlslider.cpp">
-      <Filter>libraries\libPython\xbmcmodule</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\lib\libPython\xbmcmodule\controlspin.cpp">
-      <Filter>libraries\libPython\xbmcmodule</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\lib\libPython\xbmcmodule\controltextbox.cpp">
-      <Filter>libraries\libPython\xbmcmodule</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\lib\libPython\xbmcmodule\dialog.cpp">
-      <Filter>libraries\libPython\xbmcmodule</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\lib\libPython\xbmcmodule\GUIPythonWindow.cpp">
-      <Filter>libraries\libPython\xbmcmodule</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\lib\libPython\xbmcmodule\GUIPythonWindowDialog.cpp">
-      <Filter>libraries\libPython\xbmcmodule</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\lib\libPython\xbmcmodule\GUIPythonWindowXML.cpp">
-      <Filter>libraries\libPython\xbmcmodule</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\lib\libPython\xbmcmodule\GUIPythonWindowXMLDialog.cpp">
-      <Filter>libraries\libPython\xbmcmodule</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\lib\libPython\xbmcmodule\infotagmusic.cpp">
-      <Filter>libraries\libPython\xbmcmodule</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\lib\libPython\xbmcmodule\infotagvideo.cpp">
-      <Filter>libraries\libPython\xbmcmodule</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\lib\libPython\xbmcmodule\keyboard.cpp">
-      <Filter>libraries\libPython\xbmcmodule</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\lib\libPython\xbmcmodule\listitem.cpp">
-      <Filter>libraries\libPython\xbmcmodule</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\lib\libPython\xbmcmodule\player.cpp">
-      <Filter>libraries\libPython\xbmcmodule</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\lib\libPython\xbmcmodule\pyplaylist.cpp">
-      <Filter>libraries\libPython\xbmcmodule</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\lib\libPython\xbmcmodule\PythonPlayer.cpp">
-      <Filter>libraries\libPython\xbmcmodule</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\lib\libPython\xbmcmodule\pyutil.cpp">
-      <Filter>libraries\libPython\xbmcmodule</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\lib\libPython\xbmcmodule\window.cpp">
-      <Filter>libraries\libPython\xbmcmodule</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\lib\libPython\xbmcmodule\winxml.cpp">
-      <Filter>libraries\libPython\xbmcmodule</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\lib\libPython\xbmcmodule\winxmldialog.cpp">
-      <Filter>libraries\libPython\xbmcmodule</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\lib\libPython\xbmcmodule\xbmcguimodule.cpp">
-      <Filter>libraries\libPython\xbmcmodule</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\lib\libPython\xbmcmodule\xbmcmodule.cpp">
-      <Filter>libraries\libPython\xbmcmodule</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\lib\libPython\xbmcmodule\xbmcplugin.cpp">
-      <Filter>libraries\libPython\xbmcmodule</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\lib\libhttpapi\HttpApi.cpp">
-      <Filter>libraries\libhttpapi</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\lib\libhttpapi\XBMChttp.cpp">
-      <Filter>libraries\libhttpapi</Filter>
     </ClCompile>
     <ClCompile Include="..\..\xbmc\lib\sqLite\dataset.cpp">
       <Filter>libraries\sqlite</Filter>
@@ -2647,15 +2520,6 @@
     </ClCompile>
     <ClCompile Include="..\..\xbmc\lib\sqLite\sqlitedataset.cpp">
       <Filter>libraries\sqlite</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\lib\libscrobbler\lastfmscrobbler.cpp">
-      <Filter>libraries\libScrobbler</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\lib\libscrobbler\librefmscrobbler.cpp">
-      <Filter>libraries\libScrobbler</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\lib\libscrobbler\scrobbler.cpp">
-      <Filter>libraries\libScrobbler</Filter>
     </ClCompile>
     <ClCompile Include="..\..\xbmc\cdrip\CDDAReader.cpp">
       <Filter>libraries\cdrip</Filter>
@@ -2675,39 +2539,6 @@
     <ClCompile Include="..\..\xbmc\cdrip\EncoderWav.cpp">
       <Filter>libraries\cdrip</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\lib\libjsonrpc\AVPlayerOperations.cpp">
-      <Filter>libraries\libjsonrpc</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\lib\libjsonrpc\AVPlaylistOperations.cpp">
-      <Filter>libraries\libjsonrpc</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\lib\libjsonrpc\FileItemHandler.cpp">
-      <Filter>libraries\libjsonrpc</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\lib\libjsonrpc\FileOperations.cpp">
-      <Filter>libraries\libjsonrpc</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\lib\libjsonrpc\JSONRPC.cpp">
-      <Filter>libraries\libjsonrpc</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\lib\libjsonrpc\PicturePlayerOperations.cpp">
-      <Filter>libraries\libjsonrpc</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\lib\libjsonrpc\PlayerOperations.cpp">
-      <Filter>libraries\libjsonrpc</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\lib\libjsonrpc\PlaylistOperations.cpp">
-      <Filter>libraries\libjsonrpc</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\lib\libjsonrpc\SystemOperations.cpp">
-      <Filter>libraries\libjsonrpc</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\lib\libjsonrpc\VideoLibrary.cpp">
-      <Filter>libraries\libjsonrpc</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\lib\libjsonrpc\XBMCOperations.cpp">
-      <Filter>libraries\libjsonrpc</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\lib\jsoncpp\jsoncpp\src\lib_json\json_reader.cpp">
       <Filter>libraries\jsoncpp</Filter>
     </ClCompile>
@@ -2726,9 +2557,6 @@
     <ClCompile Include="..\..\xbmc\GUIDialogTextViewer.cpp">
       <Filter>Source Files\GUI Dialog</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\lib\libjsonrpc\AudioLibrary.cpp">
-      <Filter>libraries\libjsonrpc</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\xbmc\GUIWindowSystemInfo.cpp">
       <Filter>Source Files\GUI Other</Filter>
     </ClCompile>
@@ -2740,12 +2568,6 @@
     </ClCompile>
     <ClCompile Include="..\..\xbmc\addons\PluginSource.cpp">
       <Filter>Source Files\Addons</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\lib\libPython\xbmcmodule\PythonAddon.cpp">
-      <Filter>libraries\libPython\xbmcmodule</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\lib\libPython\xbmcmodule\xbmcaddonmodule.cpp">
-      <Filter>libraries\libPython\xbmcmodule</Filter>
     </ClCompile>
     <ClCompile Include="..\..\xbmc\cores\dvdplayer\DVDCodecs\Video\CrystalHD.cpp">
       <Filter>cores\dvdplayer\DVDCodecs\Video</Filter>
@@ -5320,6 +5142,201 @@
     <ClCompile Include="..\..\xbmc\PlayListPlayer.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\xbmc\utils\fft.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\interfaces\http-api\HttpApi.cpp">
+      <Filter>libraries\libhttpapi</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\interfaces\http-api\XBMCConfiguration.cpp">
+      <Filter>libraries\libhttpapi</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\interfaces\http-api\XBMChttp.cpp">
+      <Filter>libraries\libhttpapi</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\interfaces\json-rpc\AudioLibrary.cpp">
+      <Filter>libraries\libjsonrpc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\interfaces\json-rpc\AVPlayerOperations.cpp">
+      <Filter>libraries\libjsonrpc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\interfaces\json-rpc\AVPlaylistOperations.cpp">
+      <Filter>libraries\libjsonrpc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\interfaces\json-rpc\FileItemHandler.cpp">
+      <Filter>libraries\libjsonrpc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\interfaces\json-rpc\FileOperations.cpp">
+      <Filter>libraries\libjsonrpc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\interfaces\json-rpc\JSONRPC.cpp">
+      <Filter>libraries\libjsonrpc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\interfaces\json-rpc\PicturePlayerOperations.cpp">
+      <Filter>libraries\libjsonrpc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\interfaces\json-rpc\PlayerOperations.cpp">
+      <Filter>libraries\libjsonrpc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\interfaces\json-rpc\PlaylistOperations.cpp">
+      <Filter>libraries\libjsonrpc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\interfaces\json-rpc\SystemOperations.cpp">
+      <Filter>libraries\libjsonrpc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\interfaces\json-rpc\VideoLibrary.cpp">
+      <Filter>libraries\libjsonrpc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\interfaces\json-rpc\XBMCOperations.cpp">
+      <Filter>libraries\libjsonrpc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\interfaces\python\XBPython.cpp">
+      <Filter>libraries\libPython</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\interfaces\python\XBPythonDll.cpp">
+      <Filter>libraries\libPython</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\interfaces\python\XBPyThread.cpp">
+      <Filter>libraries\libPython</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\interfaces\python\xbmcmodule\action.cpp">
+      <Filter>libraries\libPython\xbmcmodule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\interfaces\python\xbmcmodule\control.cpp">
+      <Filter>libraries\libPython\xbmcmodule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\interfaces\python\xbmcmodule\controlbutton.cpp">
+      <Filter>libraries\libPython\xbmcmodule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\interfaces\python\xbmcmodule\controlcheckmark.cpp">
+      <Filter>libraries\libPython\xbmcmodule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\interfaces\python\xbmcmodule\controlfadelabel.cpp">
+      <Filter>libraries\libPython\xbmcmodule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\interfaces\python\xbmcmodule\controlgroup.cpp">
+      <Filter>libraries\libPython\xbmcmodule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\interfaces\python\xbmcmodule\controlimage.cpp">
+      <Filter>libraries\libPython\xbmcmodule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\interfaces\python\xbmcmodule\controllabel.cpp">
+      <Filter>libraries\libPython\xbmcmodule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\interfaces\python\xbmcmodule\controllist.cpp">
+      <Filter>libraries\libPython\xbmcmodule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\interfaces\python\xbmcmodule\controlprogress.cpp">
+      <Filter>libraries\libPython\xbmcmodule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\interfaces\python\xbmcmodule\controlradiobutton.cpp">
+      <Filter>libraries\libPython\xbmcmodule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\interfaces\python\xbmcmodule\controlslider.cpp">
+      <Filter>libraries\libPython\xbmcmodule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\interfaces\python\xbmcmodule\controlspin.cpp">
+      <Filter>libraries\libPython\xbmcmodule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\interfaces\python\xbmcmodule\controltextbox.cpp">
+      <Filter>libraries\libPython\xbmcmodule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\interfaces\python\xbmcmodule\dialog.cpp">
+      <Filter>libraries\libPython\xbmcmodule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\interfaces\python\xbmcmodule\GUIPythonWindow.cpp">
+      <Filter>libraries\libPython\xbmcmodule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\interfaces\python\xbmcmodule\GUIPythonWindowDialog.cpp">
+      <Filter>libraries\libPython\xbmcmodule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\interfaces\python\xbmcmodule\GUIPythonWindowXML.cpp">
+      <Filter>libraries\libPython\xbmcmodule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\interfaces\python\xbmcmodule\GUIPythonWindowXMLDialog.cpp">
+      <Filter>libraries\libPython\xbmcmodule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\interfaces\python\xbmcmodule\infotagmusic.cpp">
+      <Filter>libraries\libPython\xbmcmodule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\interfaces\python\xbmcmodule\infotagvideo.cpp">
+      <Filter>libraries\libPython\xbmcmodule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\interfaces\python\xbmcmodule\keyboard.cpp">
+      <Filter>libraries\libPython\xbmcmodule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\interfaces\python\xbmcmodule\listitem.cpp">
+      <Filter>libraries\libPython\xbmcmodule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\interfaces\python\xbmcmodule\player.cpp">
+      <Filter>libraries\libPython\xbmcmodule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\interfaces\python\xbmcmodule\pyplaylist.cpp">
+      <Filter>libraries\libPython\xbmcmodule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\interfaces\python\xbmcmodule\PythonAddon.cpp">
+      <Filter>libraries\libPython\xbmcmodule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\interfaces\python\xbmcmodule\PythonPlayer.cpp">
+      <Filter>libraries\libPython\xbmcmodule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\interfaces\python\xbmcmodule\pyutil.cpp">
+      <Filter>libraries\libPython\xbmcmodule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\interfaces\python\xbmcmodule\window.cpp">
+      <Filter>libraries\libPython\xbmcmodule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\interfaces\python\xbmcmodule\winxml.cpp">
+      <Filter>libraries\libPython\xbmcmodule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\interfaces\python\xbmcmodule\winxmldialog.cpp">
+      <Filter>libraries\libPython\xbmcmodule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\interfaces\python\xbmcmodule\xbmcaddonmodule.cpp">
+      <Filter>libraries\libPython\xbmcmodule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\interfaces\python\xbmcmodule\xbmcguimodule.cpp">
+      <Filter>libraries\libPython\xbmcmodule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\interfaces\python\xbmcmodule\xbmcmodule.cpp">
+      <Filter>libraries\libPython\xbmcmodule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\interfaces\python\xbmcmodule\xbmcplugin.cpp">
+      <Filter>libraries\libPython\xbmcmodule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\network\libscrobbler\lastfmscrobbler.cpp">
+      <Filter>libraries\libScrobbler</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\network\libscrobbler\librefmscrobbler.cpp">
+      <Filter>libraries\libScrobbler</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\network\libscrobbler\scrobbler.cpp">
+      <Filter>libraries\libScrobbler</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\threads\Atomics.cpp">
+      <Filter>Source Files\threads</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\threads\CriticalSection.cpp">
+      <Filter>Source Files\threads</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\threads\Event.cpp">
+      <Filter>Source Files\threads</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\threads\LockFree.cpp">
+      <Filter>Source Files\threads</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\threads\Mutex.cpp">
+      <Filter>Source Files\threads</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\threads\SharedSection.cpp">
+      <Filter>Source Files\threads</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\threads\SingleLock.cpp">
+      <Filter>Source Files\threads</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\threads\Thread.cpp">
+      <Filter>Source Files\threads</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\xbmc\win32\pch.h">
@@ -5961,9 +5978,6 @@
     <ClInclude Include="..\..\xbmc\utils\AsyncFileCopy.h">
       <Filter>Source Files\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\xbmc\utils\Atomics.h">
-      <Filter>Source Files\Utils</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\xbmc\utils\BitstreamStats.h">
       <Filter>Source Files\Utils</Filter>
     </ClInclude>
@@ -6007,9 +6021,6 @@
       <Filter>Source Files\Utils</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\MediaSource.h">
-      <Filter>Source Files\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\utils\Mutex.h">
       <Filter>Source Files\Utils</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\utils\PasswordManager.h">
@@ -6581,9 +6592,6 @@
       <Filter>Source Files\Addons</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\addons\DllVisualisation.h">
-      <Filter>Source Files\Addons</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\addons\fft.h">
       <Filter>Source Files\Addons</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\addons\IAddon.h">
@@ -7264,15 +7272,6 @@
     <ClInclude Include="..\..\xbmc\lib\sqLite\sqlitedataset.h">
       <Filter>libraries\sqlite</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\xbmc\lib\libscrobbler\lastfmscrobbler.h">
-      <Filter>libraries\libScrobbler</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\lib\libscrobbler\librefmscrobbler.h">
-      <Filter>libraries\libScrobbler</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\lib\libscrobbler\scrobbler.h">
-      <Filter>libraries\libScrobbler</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\xbmc\cdrip\CDDAReader.h">
       <Filter>libraries\cdrip</Filter>
     </ClInclude>
@@ -7303,45 +7302,6 @@
     <ClInclude Include="..\..\xbmc\cdrip\EncoderWav.h">
       <Filter>libraries\cdrip</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\xbmc\lib\libjsonrpc\AVPlayerOperations.h">
-      <Filter>libraries\libjsonrpc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\lib\libjsonrpc\AVPlaylistOperations.h">
-      <Filter>libraries\libjsonrpc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\lib\libjsonrpc\FileItemHandler.h">
-      <Filter>libraries\libjsonrpc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\lib\libjsonrpc\FileOperations.h">
-      <Filter>libraries\libjsonrpc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\lib\libjsonrpc\IClient.h">
-      <Filter>libraries\libjsonrpc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\lib\libjsonrpc\ITransportLayer.h">
-      <Filter>libraries\libjsonrpc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\lib\libjsonrpc\JSONRPC.h">
-      <Filter>libraries\libjsonrpc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\lib\libjsonrpc\PicturePlayerOperations.h">
-      <Filter>libraries\libjsonrpc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\lib\libjsonrpc\PlayerOperations.h">
-      <Filter>libraries\libjsonrpc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\lib\libjsonrpc\PlaylistOperations.h">
-      <Filter>libraries\libjsonrpc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\lib\libjsonrpc\SystemOperations.h">
-      <Filter>libraries\libjsonrpc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\lib\libjsonrpc\VideoLibrary.h">
-      <Filter>libraries\libjsonrpc</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\lib\libjsonrpc\XBMCOperations.h">
-      <Filter>libraries\libjsonrpc</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\xbmc\addons\Repository.h">
       <Filter>Source Files\Addons</Filter>
     </ClInclude>
@@ -7350,9 +7310,6 @@
     </ClInclude>
     <ClInclude Include="..\..\xbmc\GUIDialogTextViewer.h">
       <Filter>Source Files\GUI Dialog</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\lib\libjsonrpc\AudioLibrary.h">
-      <Filter>libraries\libjsonrpc</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\FileSystem\VideoDatabaseDirectory\DirectoryNodeCountry.h">
       <Filter>Source Files\Filesystem\VideoDatabaseDirectory</Filter>
@@ -7365,9 +7322,6 @@
     </ClInclude>
     <ClInclude Include="..\..\xbmc\addons\PluginSource.h">
       <Filter>Source Files\Addons</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\lib\libPython\xbmcmodule\PythonAddon.h">
-      <Filter>libraries\libPython\xbmcmodule</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\cores\dvdplayer\DVDCodecs\Video\CrystalHD.h">
       <Filter>cores\dvdplayer\DVDCodecs\Video</Filter>
@@ -10306,6 +10260,168 @@
     </ClInclude>
     <ClInclude Include="..\..\xbmc\PlayListPlayer.h">
       <Filter>Source Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\utils\fft.h">
+      <Filter>Source Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\interfaces\http-api\HttpApi.h">
+      <Filter>libraries\libhttpapi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\interfaces\http-api\XBMCConfiguration.h">
+      <Filter>libraries\libhttpapi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\interfaces\http-api\XBMChttp.h">
+      <Filter>libraries\libhttpapi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\interfaces\json-rpc\AudioLibrary.h">
+      <Filter>libraries\libjsonrpc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\interfaces\json-rpc\AVPlayerOperations.h">
+      <Filter>libraries\libjsonrpc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\interfaces\json-rpc\AVPlaylistOperations.h">
+      <Filter>libraries\libjsonrpc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\interfaces\json-rpc\FileItemHandler.h">
+      <Filter>libraries\libjsonrpc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\interfaces\json-rpc\FileOperations.h">
+      <Filter>libraries\libjsonrpc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\interfaces\json-rpc\IClient.h">
+      <Filter>libraries\libjsonrpc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\interfaces\json-rpc\ITransportLayer.h">
+      <Filter>libraries\libjsonrpc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\interfaces\json-rpc\JSONRPC.h">
+      <Filter>libraries\libjsonrpc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\interfaces\json-rpc\JSONUtils.h">
+      <Filter>libraries\libjsonrpc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\interfaces\json-rpc\PicturePlayerOperations.h">
+      <Filter>libraries\libjsonrpc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\interfaces\json-rpc\PlayerOperations.h">
+      <Filter>libraries\libjsonrpc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\interfaces\json-rpc\PlaylistOperations.h">
+      <Filter>libraries\libjsonrpc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\interfaces\json-rpc\SystemOperations.h">
+      <Filter>libraries\libjsonrpc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\interfaces\json-rpc\VideoLibrary.h">
+      <Filter>libraries\libjsonrpc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\interfaces\json-rpc\XBMCOperations.h">
+      <Filter>libraries\libjsonrpc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\interfaces\python\XBPython.h">
+      <Filter>libraries\libPython</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\interfaces\python\XBPythonDll.h">
+      <Filter>libraries\libPython</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\interfaces\python\XBPyThread.h">
+      <Filter>libraries\libPython</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\interfaces\python\xbmcmodule\action.h">
+      <Filter>libraries\libPython\xbmcmodule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\interfaces\python\xbmcmodule\control.h">
+      <Filter>libraries\libPython\xbmcmodule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\interfaces\python\xbmcmodule\dialog.h">
+      <Filter>libraries\libPython\xbmcmodule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\interfaces\python\xbmcmodule\GUIPythonWindow.h">
+      <Filter>libraries\libPython\xbmcmodule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\interfaces\python\xbmcmodule\GUIPythonWindowDialog.h">
+      <Filter>libraries\libPython\xbmcmodule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\interfaces\python\xbmcmodule\GUIPythonWindowXML.h">
+      <Filter>libraries\libPython\xbmcmodule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\interfaces\python\xbmcmodule\GUIPythonWindowXMLDialog.h">
+      <Filter>libraries\libPython\xbmcmodule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\interfaces\python\xbmcmodule\infotagmusic.h">
+      <Filter>libraries\libPython\xbmcmodule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\interfaces\python\xbmcmodule\infotagvideo.h">
+      <Filter>libraries\libPython\xbmcmodule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\interfaces\python\xbmcmodule\keyboard.h">
+      <Filter>libraries\libPython\xbmcmodule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\interfaces\python\xbmcmodule\listitem.h">
+      <Filter>libraries\libPython\xbmcmodule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\interfaces\python\xbmcmodule\player.h">
+      <Filter>libraries\libPython\xbmcmodule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\interfaces\python\xbmcmodule\pyjsonrpc.h">
+      <Filter>libraries\libPython\xbmcmodule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\interfaces\python\xbmcmodule\pyplaylist.h">
+      <Filter>libraries\libPython\xbmcmodule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\interfaces\python\xbmcmodule\PythonAddon.h">
+      <Filter>libraries\libPython\xbmcmodule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\interfaces\python\xbmcmodule\PythonPlayer.h">
+      <Filter>libraries\libPython\xbmcmodule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\interfaces\python\xbmcmodule\pyutil.h">
+      <Filter>libraries\libPython\xbmcmodule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\interfaces\python\xbmcmodule\window.h">
+      <Filter>libraries\libPython\xbmcmodule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\interfaces\python\xbmcmodule\winxml.h">
+      <Filter>libraries\libPython\xbmcmodule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\network\libscrobbler\errors.h">
+      <Filter>libraries\libScrobbler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\network\libscrobbler\lastfmscrobbler.h">
+      <Filter>libraries\libScrobbler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\network\libscrobbler\librefmscrobbler.h">
+      <Filter>libraries\libScrobbler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\network\libscrobbler\scrobbler.h">
+      <Filter>libraries\libScrobbler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\threads\Atomics.h">
+      <Filter>Source Files\threads</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\threads\CriticalSection.h">
+      <Filter>Source Files\threads</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\threads\Event.h">
+      <Filter>Source Files\threads</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\threads\ISemaphore.h">
+      <Filter>Source Files\threads</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\threads\LockFree.h">
+      <Filter>Source Files\threads</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\threads\Mutex.h">
+      <Filter>Source Files\threads</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\threads\SharedSection.h">
+      <Filter>Source Files\threads</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\threads\SingleLock.h">
+      <Filter>Source Files\threads</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\threads\Thread.h">
+      <Filter>Source Files\threads</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

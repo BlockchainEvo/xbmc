@@ -33,7 +33,7 @@
 #include "XBTF.h"
 #include "WindowingFactory.h"
 #ifndef _LINUX
-#include "lib/liblzo/LZO1X.H"
+#include "lib/win32/liblzo/LZO1X.H"
 #else
 #include <lzo/lzo1x.h>
 #endif

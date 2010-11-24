@@ -28,7 +28,7 @@
 #ifndef _LINUX
 #include <sys/stat.h>
 #include "utils/CharsetConverter.h"
-#include "lib/liblzo/LZO1X.H"
+#include "lib/win32/liblzo/LZO1X.H"
 #else
 #include <lzo/lzo1x.h>
 #endif

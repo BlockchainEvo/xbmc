@@ -40,7 +40,7 @@
 #include <libmms/mmsx.h>
 #undef this
 #else
-#include "libmms/libmms_win32/src/mmsx.h"
+#include "win32/libmms_win32/src/mmsx.h"
 #endif
 
 using namespace XFILE;

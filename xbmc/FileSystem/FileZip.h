@@ -24,7 +24,7 @@
 
 #include "IFile.h"
 #ifdef _WIN32
-#include "lib/zlib/zlib.h"
+#include "lib/win32/zlib/zlib.h"
 #else
 #include <zlib.h>
 #endif
