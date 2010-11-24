@@ -643,9 +643,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UnrarXLib", "UnrarXLib.vcxp
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libhts", "..\..\xbmc\lib\libhts\Win32\libhts_2010.vcxproj", "{00700E12-A63B-4E54-B962-4011A90584BD}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libmms", "..\..\xbmc\lib\libmms\libmms_win32\msvc++\libmms.vcxproj", "{3A575CF0-45B3-41CC-85E2-9F9CE8C56B38}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libmms", "..\..\lib\win32\libmms_win32\msvc++\libmms.vcxproj", "{3A575CF0-45B3-41CC-85E2-9F9CE8C56B38}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "glib", "..\..\xbmc\lib\libmms\glib-2.20.4\build\win32\vs10\glib.vcxproj", "{12BCA020-EABF-429E-876A-A476BC9C10C0}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "glib", "..\..\lib\win32\glib-2.20.4\build\win32\vs10\glib.vcxproj", "{12BCA020-EABF-429E-876A-A476BC9C10C0}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libass_dll", "..\..\lib\libass\xbmc\libass_win32\libass_win32_vs2010.vcxproj", "{BA5B08FC-2ECB-4571-9F25-F8054522FC65}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -658,21 +658,21 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libfaad2_dll", "..\..\xbmc\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libcmyth_dll", "..\..\xbmc\lib\cmyth\Win32\libcmyth.vcxproj", "{F9E6874D-60A8-49BA-9393-A2105E63ABCF}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libsamplerate", "..\..\xbmc\lib\libsamplerate\libsamplerate_win32\libsamplerate_win32.vcxproj", "{5013769A-0784-4CE8-9D9D-09AC7F731B4F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libsamplerate", "..\..\lib\win32\libsamplerate\libsamplerate_win32\libsamplerate_win32.vcxproj", "{5013769A-0784-4CE8-9D9D-09AC7F731B4F}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libsqlite", "..\..\xbmc\lib\sqLite\sqlite\libsqlite_win32\libsqlite_win32.vcxproj", "{9E74DF3B-9343-4689-B0EC-4451617F9489}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libfridibidi", "..\..\lib\fribidi\libfridibidi\libfridibidi.vcxproj", "{F7C8AE15-B8C1-4F93-A414-EC908F0592B4}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libfridibidi", "..\..\lib\win32\fribidi\libfridibidi\libfridibidi.vcxproj", "{F7C8AE15-B8C1-4F93-A414-EC908F0592B4}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libpcre", "..\..\lib\pcre\libpcre\libpcre.vcxproj", "{D8097C41-605D-4917-8957-9DF7F44A18CD}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libpcre", "..\..\lib\win32\pcre\libpcre\libpcre.vcxproj", "{D8097C41-605D-4917-8957-9DF7F44A18CD}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libXBMS", "..\..\xbmc\lib\libXBMS\libXBMS\libXBMS.vcxproj", "{706163E2-5422-4A94-8464-082ADA8C2769}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libXDAAP", "..\..\xbmc\lib\libXDAAP\libXDAAP_win32\libXDAAP_win32.vcxproj", "{19B16CD0-3B47-47B7-AB0E-81EF2BF1B187}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libXDAAP", "..\..\lib\libXDAAP\libXDAAP_win32\libXDAAP_win32.vcxproj", "{19B16CD0-3B47-47B7-AB0E-81EF2BF1B187}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libenca", "..\..\lib\enca\libenca_win32\libenca_win32.vcxproj", "{22B25AEC-7223-46FC-8356-4418327EFDE1}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libiconv", "..\..\lib\libiconv\libiconv_win32\libiconv_win32.vcxproj", "{7A74ED4B-2BF5-47D7-B43E-C80F714417FB}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libiconv", "..\..\lib\win32\libiconv\libiconv_win32\libiconv_win32.vcxproj", "{7A74ED4B-2BF5-47D7-B43E-C80F714417FB}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ImageLib_dll", "..\..\xbmc\lib\cximage-6.0\ImageLib.vcxproj", "{3B424C94-2005-44CC-BFB1-4B6C89090732}"
 EndProject
@@ -692,9 +692,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ImageLib_tiff", "..\..\xbmc
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ImageLib_zlib", "..\..\xbmc\lib\cximage-6.0\zlib\zlib.vcxproj", "{96798038-06CE-4382-BD5B-F9C366724DEB}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libexif_dll", "..\..\xbmc\lib\libexif\libexif.vcxproj", "{AD20A3E2-09CB-42DB-9A70-27F7CDC886CE}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libexif_dll", "..\..\lib\libexif\libexif.vcxproj", "{AD20A3E2-09CB-42DB-9A70-27F7CDC886CE}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libcdio", "..\..\lib\libcdio\libcdio.vcxproj", "{E465056A-C6F3-45EE-B791-CAF8E0CE629D}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libcdio", "..\..\lib\win32\libcdio\libcdio.vcxproj", "{E465056A-C6F3-45EE-B791-CAF8E0CE629D}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "visDirectxSpectrum", "..\..\xbmc\visualizations\DirectXSpectrum\directx_spectrum.vcxproj", "{0D91724A-E6F6-4708-AF47-9F88BBE2114C}"
 EndProject
@@ -702,7 +702,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libmodplug_2010", "..\..\li
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libapetag", "..\..\lib\libapetag\libapetag.vcxproj", "{BDD2CB99-93C5-4A70-ACBF-396FFB961AD3}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libRTV", "..\..\xbmc\lib\libRTV\libRTV.vcxproj", "{DD4818AE-7E35-40B7-A6A0-0FF83AA1C916}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libRTV", "..\..\lib\libRTV\libRTV.vcxproj", "{DD4818AE-7E35-40B7-A6A0-0FF83AA1C916}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "visWaveform", "..\..\xbmc\visualizations\WaveForm\Waveform.vcxproj", "{D450FE9A-CE56-4496-B4AB-379094E642F2}"
 EndProject
@@ -728,7 +728,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libmad_dll", "..\..\xbmc\co
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libvgmstream_dll", "..\..\xbmc\cores\paplayer\vgmstream\win32\win32.vcxproj", "{3600E1C5-FECA-468C-83F3-FE467DBE2A66}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libid3tag_dll", "..\..\xbmc\lib\libid3tag\libid3tag\msvc++\libid3tag.vcxproj", "{AEABB6CE-8F0F-4507-8DC4-5E3BCE5962DA}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libid3tag_dll", "..\..\lib\libid3tag\libid3tag\msvc++\libid3tag.vcxproj", "{AEABB6CE-8F0F-4507-8DC4-5E3BCE5962DA}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libadpcm_dll", "..\..\xbmc\cores\paplayer\ADPCMCodec\adpcm.vcxproj", "{2A8CBFB5-C226-4BB3-8C03-7C75D511A4A2}"
 EndProject
@@ -740,23 +740,23 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cpluff", "..\..\lib\cpluff\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libmp3lame_dll", "..\..\lib\liblame\vc_solution\vc10_libmp3lame_dll.vcxproj", "{92BD50AA-04D6-4FBF-ACE1-468FAF6778F2}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "python_make_versioninfo", "..\..\xbmc\lib\libPython\Python\PCbuild\make_versioninfo.vcxproj", "{FC7EBFE5-233C-4608-A4D9-5EF512BA96BF}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "python_make_versioninfo", "..\..\lib\Python\PCbuild\make_versioninfo.vcxproj", "{FC7EBFE5-233C-4608-A4D9-5EF512BA96BF}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pythoncore_dll", "..\..\xbmc\lib\libPython\Python\PCbuild\pythoncore.vcxproj", "{9E417A6D-50DE-4969-8542-F58EA1163376}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pythoncore_dll", "..\..\lib\Python\PCbuild\pythoncore.vcxproj", "{9E417A6D-50DE-4969-8542-F58EA1163376}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "python_zlib.pyd", "..\..\xbmc\lib\libPython\Python\PCbuild\zlib_python.vcxproj", "{680CDC79-9CCA-4282-9A8D-927CB0DB55B2}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "python_zlib.pyd", "..\..\lib\Python\PCbuild\zlib_python.vcxproj", "{680CDC79-9CCA-4282-9A8D-927CB0DB55B2}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "python__socket.pyd", "..\..\xbmc\lib\libPython\Python\PCbuild\_socket.vcxproj", "{324F66C2-44D0-4D50-B979-F9DAE7FD36DB}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "python__socket.pyd", "..\..\lib\Python\PCbuild\_socket.vcxproj", "{324F66C2-44D0-4D50-B979-F9DAE7FD36DB}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "python_pyexpat.pyd", "..\..\xbmc\lib\libPython\Python\PCbuild\pyexpat.vcxproj", "{7E551393-3C43-47F8-9F3F-5BC368A6C487}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "python_pyexpat.pyd", "..\..\lib\Python\PCbuild\pyexpat.vcxproj", "{7E551393-3C43-47F8-9F3F-5BC368A6C487}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "python_select.pyd", "..\..\xbmc\lib\libPython\Python\PCbuild\select.vcxproj", "{97239A56-DBC0-41D2-BC14-C87D9B97D63B}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "python_select.pyd", "..\..\lib\Python\PCbuild\select.vcxproj", "{97239A56-DBC0-41D2-BC14-C87D9B97D63B}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "python_unicodedata.pyd", "..\..\xbmc\lib\libPython\Python\PCbuild\unicodedata.vcxproj", "{FA5FC7EB-C72F-415F-AE42-91DD605ABDDA}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "python_unicodedata.pyd", "..\..\lib\Python\PCbuild\unicodedata.vcxproj", "{FA5FC7EB-C72F-415F-AE42-91DD605ABDDA}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "python_bz2.pyd", "..\..\xbmc\lib\libPython\Python\PCbuild\bz2.vcxproj", "{62C61EDD-FDC6-4F2C-9ED6-0FEC3C07D616}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "python_bz2.pyd", "..\..\lib\Python\PCbuild\bz2.vcxproj", "{62C61EDD-FDC6-4F2C-9ED6-0FEC3C07D616}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libhdhomerun_dll", "..\..\xbmc\lib\libhdhomerun\hdhomerun\hdhomerun.vcxproj", "{1E2FB608-3DD2-4021-A598-90008FA6DE85}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libhdhomerun_dll", "..\..\lib\libhdhomerun\hdhomerun\hdhomerun.vcxproj", "{1E2FB608-3DD2-4021-A598-90008FA6DE85}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

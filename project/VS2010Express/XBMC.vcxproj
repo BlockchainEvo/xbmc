@@ -383,7 +383,7 @@
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <OmitFramePointers>true</OmitFramePointers>
-      <AdditionalIncludeDirectories>..\..\xbmc\cores\dvdplayer;..\..\xbmc\win32;..\..\xbmc\cores\dvdplayer\Codecs\ffmpeg\include;..\..\xbmc\cores\dvdplayer\Codecs\ffmpeg;..\..\xbmc\cores;..\..\xbmc\;..\..\xbmc\utils;..\..\guilib\;..\..\;..\..\xbmc\lib\libUPnP\Platinum\Source\Devices\MediaRenderer;..\..\xbmc\lib\libUPnP\Platinum\Source\Devices\MediaConnect;..\..\xbmc\lib\libUPnP\Platinum\Source\Devices\MediaServer;..\..\xbmc\lib\libUPnP\Platinum\Source\Platinum;..\..\xbmc\lib\libUPnP\Platinum\Source\Core;..\..\xbmc\lib\libUPnP\Neptune\Source\Core;..\..\xbmc\lib\libUPnP\Neptune\Source\System\Win32;..\..\xbmc\cores\dvdplayer\DVDCodecs\Overlay;..\..\xbmc\FileSystem;..\..\xbmc\lib\libRTMP;..\..\xbmc\lib\boost;..\..\xbmc\lib\libPython\Python\PC;..\..\xbmc\lib\libsamplerate\src;..\..\xbmc\lib;..\..\lib\freetype\include;..\..\lib\libiconv\include;..\..\lib\libcdio\include;..\..\lib;..\..\lib\jsoncpp\jsoncpp\include;..\..\lib\libmicrohttpd_win32\include;..\..\lib\libssh_win32\include;..\..\lib\liblame\include;..\..\lib\libbluray_win32;..\..\lib\pcre</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\xbmc\cores\dvdplayer;..\..\xbmc\win32;..\..\xbmc\cores\dvdplayer\Codecs\ffmpeg\include;..\..\xbmc\cores\dvdplayer\Codecs\ffmpeg;..\..\xbmc\cores;..\..\xbmc\;..\..\xbmc\utils;..\..\guilib\;..\..\;..\..\xbmc\lib\libUPnP\Platinum\Source\Devices\MediaRenderer;..\..\xbmc\lib\libUPnP\Platinum\Source\Devices\MediaConnect;..\..\xbmc\lib\libUPnP\Platinum\Source\Devices\MediaServer;..\..\xbmc\lib\libUPnP\Platinum\Source\Platinum;..\..\xbmc\lib\libUPnP\Platinum\Source\Core;..\..\xbmc\lib\libUPnP\Neptune\Source\Core;..\..\xbmc\lib\libUPnP\Neptune\Source\System\Win32;..\..\xbmc\cores\dvdplayer\DVDCodecs\Overlay;..\..\xbmc\FileSystem;..\..\xbmc\lib\libRTMP;..\..\xbmc\lib\boost;..\..\lib\Python\PC;..\..\xbmc\lib\win32\libsamplerate\src;..\..\xbmc\lib;..\..\lib\freetype\include;..\..\lib\win32\libiconv\include;..\..\lib\win32\libcdio\include;..\..\lib;..\..\lib\jsoncpp\jsoncpp\include;..\..\lib\libmicrohttpd_win32\include;..\..\lib\libssh_win32\include;..\..\lib\liblame\include;..\..\lib\libbluray_win32;..\..\lib\win32\pcre</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_WINDOWS;_MSVC;WIN32;NDEBUG;_WIN32_WINNT=0x0501;WINVER=0x0500;NOMINMAX;_USE_32BIT_TIME_T;HAS_GL;__STDC_CONSTANT_MACROS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>false</StringPooling>
       <MinimalRebuild>false</MinimalRebuild>
@@ -427,7 +427,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug (DirectX)|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\xbmc\cores\dvdplayer;..\..\xbmc\win32;..\..\xbmc\cores\dvdplayer\Codecs\ffmpeg\include;..\..\xbmc\cores\dvdplayer\Codecs\ffmpeg;..\..\xbmc\cores;..\..\xbmc\;..\..\xbmc\utils;..\..\lib\libcurl-mingw32\include;..\..\guilib\;..\..\;..\..\xbmc\lib\libUPnP\Platinum\Source\Devices\MediaRenderer;..\..\xbmc\lib\libUPnP\Platinum\Source\Devices\MediaConnect;..\..\xbmc\lib\libUPnP\Platinum\Source\Devices\MediaServer;..\..\xbmc\lib\libUPnP\Platinum\Source\Platinum;..\..\xbmc\lib\libUPnP\Platinum\Source\Core;..\..\xbmc\lib\libUPnP\Neptune\Source\Core;..\..\xbmc\lib\libUPnP\Neptune\Source\System\Win32;..\..\xbmc\cores\dvdplayer\DVDCodecs\Overlay;..\..\xbmc\FileSystem;..\..\xbmc\lib\libRTMP;..\..\xbmc\lib\boost;..\..\lib\libSDL-WIN32\include;..\..\xbmc\lib\libPython\Python\PC;..\..\xbmc\lib\libsamplerate\src;..\..\xbmc\lib;..\..\lib\freetype\include;..\..\lib\libiconv\include;..\..\lib\libcdio\include;..\..\lib;..\..\lib\jsoncpp\jsoncpp\include;..\..\lib\libmicrohttpd_win32\include;..\..\lib\libssh_win32\include;..\..\lib\liblame\include;..\..\lib\libbluray_win32;..\..\lib\pcre;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\xbmc\cores\dvdplayer;..\..\xbmc\win32;..\..\xbmc\cores\dvdplayer\Codecs\ffmpeg\include;..\..\xbmc\cores\dvdplayer\Codecs\ffmpeg;..\..\xbmc\cores;..\..\xbmc\;..\..\xbmc\utils;..\..\lib\libcurl-mingw32\include;..\..\guilib\;..\..\;..\..\xbmc\lib\libUPnP\Platinum\Source\Devices\MediaRenderer;..\..\xbmc\lib\libUPnP\Platinum\Source\Devices\MediaConnect;..\..\xbmc\lib\libUPnP\Platinum\Source\Devices\MediaServer;..\..\xbmc\lib\libUPnP\Platinum\Source\Platinum;..\..\xbmc\lib\libUPnP\Platinum\Source\Core;..\..\xbmc\lib\libUPnP\Neptune\Source\Core;..\..\xbmc\lib\libUPnP\Neptune\Source\System\Win32;..\..\xbmc\cores\dvdplayer\DVDCodecs\Overlay;..\..\xbmc\FileSystem;..\..\xbmc\lib\libRTMP;..\..\xbmc\lib\boost;..\..\lib\libSDL-WIN32\include;..\..\lib\Python\PC;..\..\xbmc\lib\win32\libsamplerate\src;..\..\xbmc\lib;..\..\lib\freetype\include;..\..\lib\win32\libiconv\include;..\..\lib\win32\libcdio\include;..\..\lib;..\..\lib\jsoncpp\jsoncpp\include;..\..\lib\libmicrohttpd_win32\include;..\..\lib\libssh_win32\include;..\..\lib\liblame\include;..\..\lib\libbluray_win32;..\..\lib\win32\pcre;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_WINDOWS;_MSVC;WIN32;_DEBUG;_WIN32_WINNT=0x0501;WINVER=0x0500;NOMINMAX;_USE_32BIT_TIME_T;HAS_DX;Py_NO_ENABLE_SHARED;D3D_DEBUG_INFO;__STDC_CONSTANT_MACROS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <ExceptionHandling>Async</ExceptionHandling>
@@ -473,7 +473,7 @@
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <OmitFramePointers>true</OmitFramePointers>
-      <AdditionalIncludeDirectories>..\..\xbmc\cores\dvdplayer;..\..\xbmc\win32;..\..\xbmc\cores\dvdplayer\Codecs\ffmpeg\include;..\..\xbmc\cores\dvdplayer\Codecs\ffmpeg;..\..\xbmc\cores;..\..\xbmc\;..\..\xbmc\utils;..\..\lib\libcurl-mingw32\include;..\..\guilib\;..\..\;..\..\xbmc\lib\libUPnP\Platinum\Source\Devices\MediaRenderer;..\..\xbmc\lib\libUPnP\Platinum\Source\Devices\MediaConnect;..\..\xbmc\lib\libUPnP\Platinum\Source\Devices\MediaServer;..\..\xbmc\lib\libUPnP\Platinum\Source\Platinum;..\..\xbmc\lib\libUPnP\Platinum\Source\Core;..\..\xbmc\lib\libUPnP\Neptune\Source\Core;..\..\xbmc\lib\libUPnP\Neptune\Source\System\Win32;..\..\xbmc\cores\dvdplayer\DVDCodecs\Overlay;..\..\xbmc\FileSystem;..\..\xbmc\lib\libRTMP;..\..\xbmc\lib\boost;..\..\lib\libSDL-WIN32\include;..\..\xbmc\lib\libPython\Python\PC;..\..\xbmc\lib\libsamplerate\src;..\..\xbmc\lib;..\..\lib\freetype\include;..\..\lib\libiconv\include;..\..\lib\libcdio\include;..\..\lib;..\..\lib\jsoncpp\jsoncpp\include;..\..\lib\libmicrohttpd_win32\include;..\..\lib\libssh_win32\include;..\..\lib\liblame\include;..\..\lib\libbluray_win32;..\..\lib\pcre;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\xbmc\cores\dvdplayer;..\..\xbmc\win32;..\..\xbmc\cores\dvdplayer\Codecs\ffmpeg\include;..\..\xbmc\cores\dvdplayer\Codecs\ffmpeg;..\..\xbmc\cores;..\..\xbmc\;..\..\xbmc\utils;..\..\lib\libcurl-mingw32\include;..\..\guilib\;..\..\;..\..\xbmc\lib\libUPnP\Platinum\Source\Devices\MediaRenderer;..\..\xbmc\lib\libUPnP\Platinum\Source\Devices\MediaConnect;..\..\xbmc\lib\libUPnP\Platinum\Source\Devices\MediaServer;..\..\xbmc\lib\libUPnP\Platinum\Source\Platinum;..\..\xbmc\lib\libUPnP\Platinum\Source\Core;..\..\xbmc\lib\libUPnP\Neptune\Source\Core;..\..\xbmc\lib\libUPnP\Neptune\Source\System\Win32;..\..\xbmc\cores\dvdplayer\DVDCodecs\Overlay;..\..\xbmc\FileSystem;..\..\xbmc\lib\libRTMP;..\..\xbmc\lib\boost;..\..\lib\libSDL-WIN32\include;..\..\lib\Python\PC;..\..\xbmc\lib\win32\libsamplerate\src;..\..\xbmc\lib;..\..\lib\freetype\include;..\..\lib\win32\libiconv\include;..\..\lib\win32\libcdio\include;..\..\lib;..\..\lib\jsoncpp\jsoncpp\include;..\..\lib\libmicrohttpd_win32\include;..\..\lib\libssh_win32\include;..\..\lib\liblame\include;..\..\lib\libbluray_win32;..\..\lib\win32\pcre;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_WINDOWS;_MSVC;WIN32;NDEBUG;_WIN32_WINNT=0x0501;WINVER=0x0500;NOMINMAX;_USE_32BIT_TIME_T;HAS_DX;__STDC_CONSTANT_MACROS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>false</StringPooling>
       <MinimalRebuild>false</MinimalRebuild>
@@ -517,7 +517,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug (OpenGL)|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\xbmc\cores\dvdplayer;..\..\xbmc\win32;..\..\xbmc\cores\dvdplayer\Codecs\ffmpeg\include;..\..\xbmc\cores\dvdplayer\Codecs\ffmpeg;..\..\xbmc\cores;..\..\xbmc\;..\..\xbmc\utils;..\..\guilib\;..\..\;..\..\xbmc\lib\libUPnP\Platinum\Source\Devices\MediaRenderer;..\..\xbmc\lib\libUPnP\Platinum\Source\Devices\MediaConnect;..\..\xbmc\lib\libUPnP\Platinum\Source\Devices\MediaServer;..\..\xbmc\lib\libUPnP\Platinum\Source\Platinum;..\..\xbmc\lib\libUPnP\Platinum\Source\Core;..\..\xbmc\lib\libUPnP\Neptune\Source\Core;..\..\xbmc\lib\libUPnP\Neptune\Source\System\Win32;..\..\xbmc\cores\dvdplayer\DVDCodecs\Overlay;..\..\xbmc\FileSystem;..\..\xbmc\lib\libRTMP;..\..\xbmc\lib\boost;..\..\xbmc\lib\libPython\Python\PC;..\..\xbmc\lib\libsamplerate\src;..\..\xbmc\lib;..\..\lib\freetype\include;..\..\lib\libiconv\include;..\..\lib\libcdio\include;..\..\lib;..\..\lib\jsoncpp\jsoncpp\include;..\..\lib\libmicrohttpd_win32\include;..\..\lib\libssh_win32\include;..\..\lib\liblame\include;..\..\lib\libbluray_win32;..\..\lib\pcre</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\xbmc\cores\dvdplayer;..\..\xbmc\win32;..\..\xbmc\cores\dvdplayer\Codecs\ffmpeg\include;..\..\xbmc\cores\dvdplayer\Codecs\ffmpeg;..\..\xbmc\cores;..\..\xbmc\;..\..\xbmc\utils;..\..\guilib\;..\..\;..\..\xbmc\lib\libUPnP\Platinum\Source\Devices\MediaRenderer;..\..\xbmc\lib\libUPnP\Platinum\Source\Devices\MediaConnect;..\..\xbmc\lib\libUPnP\Platinum\Source\Devices\MediaServer;..\..\xbmc\lib\libUPnP\Platinum\Source\Platinum;..\..\xbmc\lib\libUPnP\Platinum\Source\Core;..\..\xbmc\lib\libUPnP\Neptune\Source\Core;..\..\xbmc\lib\libUPnP\Neptune\Source\System\Win32;..\..\xbmc\cores\dvdplayer\DVDCodecs\Overlay;..\..\xbmc\FileSystem;..\..\xbmc\lib\libRTMP;..\..\xbmc\lib\boost;..\..\lib\Python\PC;..\..\xbmc\lib\win32\libsamplerate\src;..\..\xbmc\lib;..\..\lib\freetype\include;..\..\lib\win32\libiconv\include;..\..\lib\win32\libcdio\include;..\..\lib;..\..\lib\jsoncpp\jsoncpp\include;..\..\lib\libmicrohttpd_win32\include;..\..\lib\libssh_win32\include;..\..\lib\liblame\include;..\..\lib\libbluray_win32;..\..\lib\win32\pcre</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_WINDOWS;_MSVC;WIN32;_DEBUG;_WIN32_WINNT=0x0501;WINVER=0x0500;NOMINMAX;_USE_32BIT_TIME_T;HAS_GL;Py_NO_ENABLE_SHARED;__STDC_CONSTANT_MACROS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <ExceptionHandling>Async</ExceptionHandling>
@@ -3748,80 +3748,80 @@
     <ClInclude Include="..\..\xbmc\lib\libPython\xbmcmodule\pyutil.h" />
     <ClInclude Include="..\..\xbmc\lib\libPython\xbmcmodule\window.h" />
     <ClInclude Include="..\..\xbmc\lib\libPython\xbmcmodule\winxml.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\abstract.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\bitset.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\boolobject.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\bufferobject.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\cellobject.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\ceval.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\classobject.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\cobject.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\codecs.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\compile.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\complexobject.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\cStringIO.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\datetime.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\descrobject.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\dictobject.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\enumobject.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\errcode.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\eval.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\fileobject.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\floatobject.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\frameobject.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\funcobject.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\genobject.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\graminit.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\grammar.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\import.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\intobject.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\intrcheck.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\iterobject.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\listobject.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\longintrepr.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\longobject.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\marshal.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\metagrammar.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\methodobject.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\modsupport.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\moduleobject.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\node.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\object.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\objimpl.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\opcode.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\osdefs.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\parsetok.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\patchlevel.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\pgen.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\pgenheaders.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\py_curses.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\pydebug.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\pyerrors.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\pyfpe.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\pygetopt.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\pymactoolbox.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\pymem.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\pyport.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\pystate.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\pystrtod.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\Python.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\pythonrun.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\pythread.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\rangeobject.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\setobject.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\sliceobject.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\stringobject.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\structmember.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\structseq.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\symtable.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\sysmodule.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\timefuncs.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\token.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\traceback.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\tupleobject.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\ucnhash.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\unicodeobject.h" />
-    <ClInclude Include="..\..\xbmc\lib\libPython\Python\Include\weakrefobject.h" />
+    <ClInclude Include="..\..\lib\Python\Include\abstract.h" />
+    <ClInclude Include="..\..\lib\Python\Include\bitset.h" />
+    <ClInclude Include="..\..\lib\Python\Include\boolobject.h" />
+    <ClInclude Include="..\..\lib\Python\Include\bufferobject.h" />
+    <ClInclude Include="..\..\lib\Python\Include\cellobject.h" />
+    <ClInclude Include="..\..\lib\Python\Include\ceval.h" />
+    <ClInclude Include="..\..\lib\Python\Include\classobject.h" />
+    <ClInclude Include="..\..\lib\Python\Include\cobject.h" />
+    <ClInclude Include="..\..\lib\Python\Include\codecs.h" />
+    <ClInclude Include="..\..\lib\Python\Include\compile.h" />
+    <ClInclude Include="..\..\lib\Python\Include\complexobject.h" />
+    <ClInclude Include="..\..\lib\Python\Include\cStringIO.h" />
+    <ClInclude Include="..\..\lib\Python\Include\datetime.h" />
+    <ClInclude Include="..\..\lib\Python\Include\descrobject.h" />
+    <ClInclude Include="..\..\lib\Python\Include\dictobject.h" />
+    <ClInclude Include="..\..\lib\Python\Include\enumobject.h" />
+    <ClInclude Include="..\..\lib\Python\Include\errcode.h" />
+    <ClInclude Include="..\..\lib\Python\Include\eval.h" />
+    <ClInclude Include="..\..\lib\Python\Include\fileobject.h" />
+    <ClInclude Include="..\..\lib\Python\Include\floatobject.h" />
+    <ClInclude Include="..\..\lib\Python\Include\frameobject.h" />
+    <ClInclude Include="..\..\lib\Python\Include\funcobject.h" />
+    <ClInclude Include="..\..\lib\Python\Include\genobject.h" />
+    <ClInclude Include="..\..\lib\Python\Include\graminit.h" />
+    <ClInclude Include="..\..\lib\Python\Include\grammar.h" />
+    <ClInclude Include="..\..\lib\Python\Include\import.h" />
+    <ClInclude Include="..\..\lib\Python\Include\intobject.h" />
+    <ClInclude Include="..\..\lib\Python\Include\intrcheck.h" />
+    <ClInclude Include="..\..\lib\Python\Include\iterobject.h" />
+    <ClInclude Include="..\..\lib\Python\Include\listobject.h" />
+    <ClInclude Include="..\..\lib\Python\Include\longintrepr.h" />
+    <ClInclude Include="..\..\lib\Python\Include\longobject.h" />
+    <ClInclude Include="..\..\lib\Python\Include\marshal.h" />
+    <ClInclude Include="..\..\lib\Python\Include\metagrammar.h" />
+    <ClInclude Include="..\..\lib\Python\Include\methodobject.h" />
+    <ClInclude Include="..\..\lib\Python\Include\modsupport.h" />
+    <ClInclude Include="..\..\lib\Python\Include\moduleobject.h" />
+    <ClInclude Include="..\..\lib\Python\Include\node.h" />
+    <ClInclude Include="..\..\lib\Python\Include\object.h" />
+    <ClInclude Include="..\..\lib\Python\Include\objimpl.h" />
+    <ClInclude Include="..\..\lib\Python\Include\opcode.h" />
+    <ClInclude Include="..\..\lib\Python\Include\osdefs.h" />
+    <ClInclude Include="..\..\lib\Python\Include\parsetok.h" />
+    <ClInclude Include="..\..\lib\Python\Include\patchlevel.h" />
+    <ClInclude Include="..\..\lib\Python\Include\pgen.h" />
+    <ClInclude Include="..\..\lib\Python\Include\pgenheaders.h" />
+    <ClInclude Include="..\..\lib\Python\Include\py_curses.h" />
+    <ClInclude Include="..\..\lib\Python\Include\pydebug.h" />
+    <ClInclude Include="..\..\lib\Python\Include\pyerrors.h" />
+    <ClInclude Include="..\..\lib\Python\Include\pyfpe.h" />
+    <ClInclude Include="..\..\lib\Python\Include\pygetopt.h" />
+    <ClInclude Include="..\..\lib\Python\Include\pymactoolbox.h" />
+    <ClInclude Include="..\..\lib\Python\Include\pymem.h" />
+    <ClInclude Include="..\..\lib\Python\Include\pyport.h" />
+    <ClInclude Include="..\..\lib\Python\Include\pystate.h" />
+    <ClInclude Include="..\..\lib\Python\Include\pystrtod.h" />
+    <ClInclude Include="..\..\lib\Python\Include\Python.h" />
+    <ClInclude Include="..\..\lib\Python\Include\pythonrun.h" />
+    <ClInclude Include="..\..\lib\Python\Include\pythread.h" />
+    <ClInclude Include="..\..\lib\Python\Include\rangeobject.h" />
+    <ClInclude Include="..\..\lib\Python\Include\setobject.h" />
+    <ClInclude Include="..\..\lib\Python\Include\sliceobject.h" />
+    <ClInclude Include="..\..\lib\Python\Include\stringobject.h" />
+    <ClInclude Include="..\..\lib\Python\Include\structmember.h" />
+    <ClInclude Include="..\..\lib\Python\Include\structseq.h" />
+    <ClInclude Include="..\..\lib\Python\Include\symtable.h" />
+    <ClInclude Include="..\..\lib\Python\Include\sysmodule.h" />
+    <ClInclude Include="..\..\lib\Python\Include\timefuncs.h" />
+    <ClInclude Include="..\..\lib\Python\Include\token.h" />
+    <ClInclude Include="..\..\lib\Python\Include\traceback.h" />
+    <ClInclude Include="..\..\lib\Python\Include\tupleobject.h" />
+    <ClInclude Include="..\..\lib\Python\Include\ucnhash.h" />
+    <ClInclude Include="..\..\lib\Python\Include\unicodeobject.h" />
+    <ClInclude Include="..\..\lib\Python\Include\weakrefobject.h" />
     <ClInclude Include="..\..\xbmc\lib\libhttpapi\HttpApi.h" />
     <ClInclude Include="..\..\xbmc\lib\libhttpapi\XBMChttp.h" />
     <ClInclude Include="..\..\xbmc\lib\sqLite\dataset.h" />
@@ -3873,11 +3873,11 @@
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
       <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
     </ProjectReference>
-    <ProjectReference Include="..\..\lib\fribidi\libfridibidi\libfridibidi.vcxproj">
+    <ProjectReference Include="..\..\lib\win32\fribidi\libfridibidi\libfridibidi.vcxproj">
       <Project>{f7c8ae15-b8c1-4f93-a414-ec908f0592b4}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
-    <ProjectReference Include="..\..\lib\libcdio\libcdio.vcxproj">
+    <ProjectReference Include="..\..\lib\win32\libcdio\libcdio.vcxproj">
       <Project>{e465056a-c6f3-45ee-b791-caf8e0ce629d}</Project>
       <Private>true</Private>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
@@ -3885,11 +3885,11 @@
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
       <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
     </ProjectReference>
-    <ProjectReference Include="..\..\lib\libiconv\libiconv_win32\libiconv_win32.vcxproj">
+    <ProjectReference Include="..\..\lib\win32\libiconv\libiconv_win32\libiconv_win32.vcxproj">
       <Project>{7a74ed4b-2bf5-47d7-b43e-c80f714417fb}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
-    <ProjectReference Include="..\..\lib\pcre\libpcre\libpcre.vcxproj">
+    <ProjectReference Include="..\..\lib\win32\pcre\libpcre\libpcre.vcxproj">
       <Project>{d8097c41-605d-4917-8957-9df7f44a18cd}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
@@ -3901,11 +3901,11 @@
       <Project>{00700e12-a63b-4e54-b962-4011a90584bd}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
-    <ProjectReference Include="..\..\xbmc\lib\libmms\libmms_win32\msvc++\libmms.vcxproj">
+    <ProjectReference Include="..\..\xbmc\lib\win32\libmms_win32\msvc++\libmms.vcxproj">
       <Project>{3a575cf0-45b3-41cc-85e2-9f9ce8c56b38}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
-    <ProjectReference Include="..\..\xbmc\lib\libRTV\libRTV.vcxproj">
+    <ProjectReference Include="..\..\lib\libRTV\libRTV.vcxproj">
       <Project>{dd4818ae-7e35-40b7-a6a0-0ff83aa1c916}</Project>
       <Private>true</Private>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
@@ -3913,7 +3913,7 @@
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
       <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
     </ProjectReference>
-    <ProjectReference Include="..\..\xbmc\lib\libsamplerate\libsamplerate_win32\libsamplerate_win32.vcxproj">
+    <ProjectReference Include="..\..\lib\win32\libsamplerate\libsamplerate_win32\libsamplerate_win32.vcxproj">
       <Project>{5013769a-0784-4ce8-9d9d-09ac7f731b4f}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
@@ -3929,7 +3929,7 @@
       <Project>{706163e2-5422-4a94-8464-082ada8c2769}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
-    <ProjectReference Include="..\..\xbmc\lib\libXDAAP\libXDAAP_win32\libXDAAP_win32.vcxproj">
+    <ProjectReference Include="..\..\lib\libXDAAP\libXDAAP_win32\libXDAAP_win32.vcxproj">
       <Project>{19b16cd0-3b47-47b7-ab0e-81ef2bf1b187}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
