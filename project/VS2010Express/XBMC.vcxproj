@@ -3943,7 +3943,7 @@
       <Project>{00700e12-a63b-4e54-b962-4011a90584bd}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
-    <ProjectReference Include="..\..\xbmc\lib\win32\libmms_win32\msvc++\libmms.vcxproj">
+    <ProjectReference Include="..\..\lib\win32\libmms_win32\msvc++\libmms.vcxproj">
       <Project>{3a575cf0-45b3-41cc-85e2-9f9ce8c56b38}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
