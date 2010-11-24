@@ -24,7 +24,7 @@
 #include "settings/Settings.h"
 #include <initguid.h>
 #include <Mmreg.h>
-#include "SingleLock.h"
+#include "threads/SingleLock.h"
 #include "SystemInfo.h"
 #include "utils/log.h"
 #include "utils/TimeUtils.h"
