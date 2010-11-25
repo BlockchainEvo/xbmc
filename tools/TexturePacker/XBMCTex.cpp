@@ -42,7 +42,7 @@
 #ifdef _LINUX
 #include <lzo/lzo1x.h>
 #else
-#include "../../xbmc/lib/liblzo/LZO1X.H"
+#include "../../lib/win32/liblzo/LZO1X.H"
 #endif
 
 #define DIR_SEPARATOR "/"

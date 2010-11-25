@@ -32,7 +32,7 @@
 #include "addons/AddonManager.h"
 
 #ifdef _WIN32
-#pragma comment(lib, "../../lib/libmicrohttpd_win32/lib/libmicrohttpd.dll.lib")
+#pragma comment(lib, "../../lib/win32/libmicrohttpd_win32/lib/libmicrohttpd.dll.lib")
 #endif
 
 #define MAX_STRING_POST_SIZE 20000

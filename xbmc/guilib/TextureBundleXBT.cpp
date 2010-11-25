@@ -39,7 +39,7 @@
 #endif
 
 #if !defined(__GNUC__)
-#pragma comment(lib,"../../xbmc/lib/liblzo/lzo.lib")
+#pragma comment(lib,"../../lib/win32/liblzo/lzo.lib")
 #endif
 
 CTextureBundleXBT::CTextureBundleXBT(void)

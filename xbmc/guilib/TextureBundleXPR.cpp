@@ -39,7 +39,7 @@
 #include "utils/EndianSwap.h"
 
 #if !defined(__GNUC__)
-#pragma comment(lib,"../../xbmc/lib/liblzo/lzo.lib")
+#pragma comment(lib,"../../lib/win32/liblzo/lzo.lib")
 #endif
 
 // alignment of file blocks - should be a multiple of the sector size of the disk and a power of 2

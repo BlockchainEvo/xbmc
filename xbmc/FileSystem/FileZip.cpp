@@ -26,7 +26,7 @@
 #include <sys/stat.h>
 
 #ifndef __GNUC__
-#pragma comment (lib,"../../xbmc/lib/zlib/zlib.lib")
+#pragma comment (lib,"../../lib/win32/zlib/zlib.lib")
 #endif
 
 #define ZIP_CACHE_LIMIT 4*1024*1024

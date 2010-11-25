@@ -5148,9 +5148,6 @@
     <ClCompile Include="..\..\xbmc\interfaces\http-api\HttpApi.cpp">
       <Filter>libraries\libhttpapi</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\interfaces\http-api\XBMCConfiguration.cpp">
-      <Filter>libraries\libhttpapi</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\xbmc\interfaces\http-api\XBMChttp.cpp">
       <Filter>libraries\libhttpapi</Filter>
     </ClCompile>
@@ -5191,9 +5188,6 @@
       <Filter>libraries\libjsonrpc</Filter>
     </ClCompile>
     <ClCompile Include="..\..\xbmc\interfaces\python\XBPython.cpp">
-      <Filter>libraries\libPython</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\interfaces\python\XBPythonDll.cpp">
       <Filter>libraries\libPython</Filter>
     </ClCompile>
     <ClCompile Include="..\..\xbmc\interfaces\python\XBPyThread.cpp">
@@ -5336,6 +5330,9 @@
     </ClCompile>
     <ClCompile Include="..\..\xbmc\threads\Thread.cpp">
       <Filter>Source Files\threads</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\win32\WIN32XBPythonDll.cpp">
+      <Filter>libraries\libPython</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -10265,9 +10262,6 @@
       <Filter>Source Files\Utils</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\interfaces\http-api\HttpApi.h">
-      <Filter>libraries\libhttpapi</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\interfaces\http-api\XBMCConfiguration.h">
       <Filter>libraries\libhttpapi</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\interfaces\http-api\XBMChttp.h">
