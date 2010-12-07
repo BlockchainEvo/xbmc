@@ -28,9 +28,9 @@
 #include "TextureCache.h"
 #include "FileSystem/Directory.h"
 #include "FileSystem/MultiPathDirectory.h"
-#include "GUIWindowManager.h"
+#include "guilib/GUIWindowManager.h"
 #include "GUIUserMessages.h"
-#include "GUISettings.h"
+#include "settings/GUISettings.h"
 #include "Util.h"
 #include "settings/Settings.h"
 

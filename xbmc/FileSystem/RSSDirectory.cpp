@@ -31,7 +31,7 @@
 #include "music/tags/MusicInfoTag.h"
 #include "utils/log.h"
 #include "URL.h"
-#include "GUISettings.h"
+#include "settings/GUISettings.h"
 
 using namespace XFILE;
 using namespace std;

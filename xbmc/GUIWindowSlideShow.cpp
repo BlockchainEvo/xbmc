@@ -42,7 +42,7 @@
 #include "threads/SingleLock.h"
 #include "utils/log.h"
 #include "utils/TimeUtils.h"
-#include "PlayList.h"
+#include "playlists/PlayList.h"
 
 using namespace XFILE;
 using namespace PLAYLIST;

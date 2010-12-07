@@ -26,7 +26,7 @@
 #include "FileItem.h"
 #include "DVDInputStreamMMS.h"
 #include "FileSystem/IFile.h"
-#include "GUISettings.h"
+#include "settings/GUISettings.h"
 
 #ifndef _WIN32
 // work around for braindead usage of "this" keyword as parameter name in libmms headers

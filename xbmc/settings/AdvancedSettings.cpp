@@ -29,8 +29,8 @@
 #include "LangCodeExpander.h"
 #include "LangInfo.h"
 #include "Util.h"
-#include "GUISettings.h"
-#include "Settings.h"
+#include "settings/GUISettings.h"
+#include "settings/Settings.h"
 #include "utils/StringUtils.h"
 #include "utils/SystemInfo.h"
 #include "utils/XMLUtils.h"
@@ -85,11 +85,10 @@ void CAdvancedSettings::Initialize()
   m_videoIgnoreSecondsAtStart = 3*60;
   m_videoIgnorePercentAtEnd   = 8.0f;
   m_videoPlayCountMinimumPercent = 90.0f;
-  m_videoHighQualityScaling = SOFTWARE_UPSCALING_DISABLED;
-  m_videoHighQualityScalingMethod = VS_SCALINGMETHOD_BICUBIC_SOFTWARE;
   m_videoVDPAUScaling = false;
   m_videoNonLinStretchRatio = 0.5f;
   m_videoAllowLanczos3 = false;
+  m_videoAutoScaleMaxFps = 30.0f;
   m_videoAllowMpeg4VDPAU = false;
   m_DXVACheckCompatibility = false;
   m_DXVACheckCompatibilityPresent = false;
@@ -235,6 +234,8 @@ void CAdvancedSettings::Initialize()
   m_curlconnecttimeout = 10;
   m_curllowspeedtime = 20;
   m_curlretries = 2;
+  m_curlDisableIPV6 = false;      //Certain hardware/OS combinations have trouble
+                                  //with ipv6.
 
   m_fullScreen = m_startFullScreen = false;
 
@@ -418,11 +419,10 @@ bool CAdvancedSettings::Load()
     XMLUtils::GetString(pElement,"cleandatetime", m_videoCleanDateTimeRegExp);
     XMLUtils::GetString(pElement,"ppffmpegdeinterlacing",m_videoPPFFmpegDeint);
     XMLUtils::GetString(pElement,"ppffmpegpostprocessing",m_videoPPFFmpegPostProc);
-    XMLUtils::GetInt(pElement,"highqualityscaling",m_videoHighQualityScaling);
-    XMLUtils::GetInt(pElement,"highqualityscalingmethod",m_videoHighQualityScalingMethod);
     XMLUtils::GetBoolean(pElement,"vdpauscaling",m_videoVDPAUScaling);
     XMLUtils::GetFloat(pElement, "nonlinearstretchratio", m_videoNonLinStretchRatio, 0.01f, 1.0f);
     XMLUtils::GetBoolean(pElement,"allowlanczos3",m_videoAllowLanczos3);
+    XMLUtils::GetFloat(pElement,"autoscalemaxfps",m_videoAutoScaleMaxFps, 0.0f, 1000.0f);
     XMLUtils::GetBoolean(pElement,"allowmpeg4vdpau",m_videoAllowMpeg4VDPAU);
 
     TiXmlElement* pAdjustRefreshrate = pElement->FirstChildElement("adjustrefreshrate");
@@ -436,8 +436,8 @@ bool CAdvancedSettings::Load()
         float fps;
         if (XMLUtils::GetFloat(pRefreshOverride, "fps", fps))
         {
-          override.fpsmin = fps - 0.01;
-          override.fpsmax = fps + 0.01;
+          override.fpsmin = fps - 0.01f;
+          override.fpsmax = fps + 0.01f;
         }
 
         float fpsmin, fpsmax;
@@ -451,8 +451,8 @@ bool CAdvancedSettings::Load()
         float refresh;
         if (XMLUtils::GetFloat(pRefreshOverride, "refresh", refresh))
         {
-          override.refreshmin = refresh - 0.01;
-          override.refreshmax = refresh + 0.01;
+          override.refreshmin = refresh - 0.01f;
+          override.refreshmax = refresh + 0.01f;
         }
 
         float refreshmin, refreshmax;
@@ -484,8 +484,8 @@ bool CAdvancedSettings::Load()
         float refresh;
         if (XMLUtils::GetFloat(pRefreshFallback, "refresh", refresh))
         {
-          fallback.refreshmin = refresh - 0.01;
-          fallback.refreshmax = refresh + 0.01;
+          fallback.refreshmin = refresh - 0.01f;
+          fallback.refreshmax = refresh + 0.01f;
         }
 
         float refreshmin, refreshmax;

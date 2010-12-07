@@ -25,7 +25,7 @@
 #include "log.h"
 #include "Variant.h"
 #include "FileItem.h"
-#include "MusicInfoTag.h"
+#include "music/tags/MusicInfoTag.h"
 
 using namespace std;
 using namespace ANNOUNCEMENT;
