@@ -19,7 +19,7 @@
  *
  */
 
-#include "GUIWindowVideoInfo.h"
+#include "GUIDialogVideoInfo.h"
 #include "guilib/GUIWindow.h"
 #include "Util.h"
 #include "Picture.h"
@@ -64,8 +64,8 @@ using namespace XFILE;
 
 #define CONTROL_LIST                50
 
-CGUIWindowVideoInfo::CGUIWindowVideoInfo(void)
-    : CGUIDialog(WINDOW_VIDEO_INFO, "DialogVideoInfo.xml")
+CGUIDialogVideoInfo::CGUIDialogVideoInfo(void)
+    : CGUIDialog(WINDOW_DIALOG_VIDEO_INFO, "DialogVideoInfo.xml")
     , m_movieItem(new CFileItem)
 {
   m_bRefreshAll = true;
@@ -74,12 +74,12 @@ CGUIWindowVideoInfo::CGUIWindowVideoInfo(void)
   m_castList = new CFileItemList;
 }
 
-CGUIWindowVideoInfo::~CGUIWindowVideoInfo(void)
+CGUIDialogVideoInfo::~CGUIDialogVideoInfo(void)
 {
   delete m_castList;
 }
 
-bool CGUIWindowVideoInfo::OnMessage(CGUIMessage& message)
+bool CGUIDialogVideoInfo::OnMessage(CGUIMessage& message)
 {
   switch ( message.GetMessage() )
   {
@@ -209,7 +209,7 @@ bool CGUIWindowVideoInfo::OnMessage(CGUIMessage& message)
   return CGUIDialog::OnMessage(message);
 }
 
-void CGUIWindowVideoInfo::SetMovie(const CFileItem *item)
+void CGUIDialogVideoInfo::SetMovie(const CFileItem *item)
 {
   *m_movieItem = *item;
   // setup cast list + determine type.  We need to do this here as it makes
@@ -333,7 +333,7 @@ void CGUIWindowVideoInfo::SetMovie(const CFileItem *item)
   m_loader.LoadItem(m_movieItem.get());
 }
 
-void CGUIWindowVideoInfo::Update()
+void CGUIDialogVideoInfo::Update()
 {
   // setup plot text area
   CStdString strTmp = m_movieItem->GetVideoInfoTag()->m_strPlot;
@@ -395,7 +395,7 @@ void CGUIWindowVideoInfo::Update()
   }
 }
 
-void CGUIWindowVideoInfo::Refresh()
+void CGUIDialogVideoInfo::Refresh()
 {
   try
   {
@@ -436,18 +436,18 @@ void CGUIWindowVideoInfo::Refresh()
   catch (...)
   {}
 }
-bool CGUIWindowVideoInfo::NeedRefresh() const
+bool CGUIDialogVideoInfo::NeedRefresh() const
 {
   return m_bRefresh;
 }
 
-bool CGUIWindowVideoInfo::RefreshAll() const
+bool CGUIDialogVideoInfo::RefreshAll() const
 {
   return m_bRefreshAll;
 }
 
 /// \brief Search the current directory for a string got from the virtual keyboard
-void CGUIWindowVideoInfo::OnSearch(CStdString& strSearch)
+void CGUIDialogVideoInfo::OnSearch(CStdString& strSearch)
 {
   if (m_dlgProgress)
   {
@@ -497,7 +497,7 @@ void CGUIWindowVideoInfo::OnSearch(CStdString& strSearch)
 /// \brief Make the actual search for the OnSearch function.
 /// \param strSearch The search string
 /// \param items Items Found
-void CGUIWindowVideoInfo::DoSearch(CStdString& strSearch, CFileItemList& items)
+void CGUIDialogVideoInfo::DoSearch(CStdString& strSearch, CFileItemList& items)
 {
   CVideoDatabase db;
   if (!db.Open())
@@ -544,7 +544,7 @@ void CGUIWindowVideoInfo::DoSearch(CStdString& strSearch, CFileItemList& items)
   db.Close();
 }
 
-VIDEODB_CONTENT_TYPE CGUIWindowVideoInfo::GetContentType(const CFileItem *pItem) const
+VIDEODB_CONTENT_TYPE CGUIDialogVideoInfo::GetContentType(const CFileItem *pItem) const
 {
   VIDEODB_CONTENT_TYPE type = VIDEODB_CONTENT_MOVIES;
   if (pItem->HasVideoInfoTag() && !pItem->GetVideoInfoTag()->m_strShowTitle.IsEmpty()) // tvshow
@@ -558,7 +558,7 @@ VIDEODB_CONTENT_TYPE CGUIWindowVideoInfo::GetContentType(const CFileItem *pItem)
 
 /// \brief React on the selected search item
 /// \param pItem Search result item
-void CGUIWindowVideoInfo::OnSearchItemFound(const CFileItem* pItem)
+void CGUIDialogVideoInfo::OnSearchItemFound(const CFileItem* pItem)
 {
   VIDEODB_CONTENT_TYPE type = GetContentType(pItem);
 
@@ -585,14 +585,14 @@ void CGUIWindowVideoInfo::OnSearchItemFound(const CFileItem* pItem)
   DoModal();
 }
 
-void CGUIWindowVideoInfo::ClearCastList()
+void CGUIDialogVideoInfo::ClearCastList()
 {
   CGUIMessage msg(GUI_MSG_LABEL_RESET, GetID(), CONTROL_LIST);
   OnMessage(msg);
   m_castList->Clear();
 }
 
-void CGUIWindowVideoInfo::Play(bool resume)
+void CGUIDialogVideoInfo::Play(bool resume)
 {
   if (!m_movieItem->GetVideoInfoTag()->m_strEpisodeGuide.IsEmpty())
   {
@@ -629,7 +629,7 @@ void CGUIWindowVideoInfo::Play(bool resume)
 // 2.  IMDb thumb
 // 3.  Local thumb
 // 4.  No thumb (if no Local thumb is available)
-void CGUIWindowVideoInfo::OnGetThumb()
+void CGUIDialogVideoInfo::OnGetThumb()
 {
   CFileItemList items;
 
@@ -727,7 +727,7 @@ void CGUIWindowVideoInfo::OnGetThumb()
 }
 
 // Allow user to select a Fanart
-void CGUIWindowVideoInfo::OnGetFanart()
+void CGUIDialogVideoInfo::OnGetFanart()
 {
   CFileItemList items;
 
@@ -838,7 +838,7 @@ void CGUIWindowVideoInfo::OnGetFanart()
   Update();
 }
 
-void CGUIWindowVideoInfo::PlayTrailer()
+void CGUIDialogVideoInfo::PlayTrailer()
 {
   CFileItem item;
   item.m_strPath = m_movieItem->GetVideoInfoTag()->m_strTrailer;
@@ -858,7 +858,7 @@ void CGUIWindowVideoInfo::PlayTrailer()
     g_application.getApplicationMessenger().PlayFile(item);
 }
 
-void CGUIWindowVideoInfo::SetLabel(int iControl, const CStdString &strLabel)
+void CGUIDialogVideoInfo::SetLabel(int iControl, const CStdString &strLabel)
 {
   if (strLabel.IsEmpty())
   {
@@ -870,7 +870,7 @@ void CGUIWindowVideoInfo::SetLabel(int iControl, const CStdString &strLabel)
   }
 }
 
-const CStdString& CGUIWindowVideoInfo::GetThumbnail() const
+const CStdString& CGUIDialogVideoInfo::GetThumbnail() const
 {
   return m_movieItem->GetThumbnailImage();
 }

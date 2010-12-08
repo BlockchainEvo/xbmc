@@ -153,7 +153,7 @@
 #include "music/windows/GUIWindowMusicPlaylistEditor.h"
 #include "GUIWindowVideoPlaylist.h"
 #include "music/dialogs/GUIDialogMusicInfo.h"
-#include "GUIWindowVideoInfo.h"
+#include "GUIDialogVideoInfo.h"
 #include "GUIWindowVideoFiles.h"
 #include "GUIWindowVideoNav.h"
 #include "settings/GUIWindowSettingsProfile.h"
@@ -1080,7 +1080,7 @@ bool CApplication::Initialize()
   g_windowManager.Add(new CGUIDialogSelect);             // window id = 2000
   g_windowManager.Add(new CGUIDialogMusicInfo);          // window id = 2001
   g_windowManager.Add(new CGUIDialogOK);                 // window id = 2002
-  g_windowManager.Add(new CGUIWindowVideoInfo);                // window id = 2003
+  g_windowManager.Add(new CGUIDialogVideoInfo);          // window id = 2003
   g_windowManager.Add(new CGUIDialogTextViewer);
   g_windowManager.Add(new CGUIWindowFullScreen);         // window id = 2005
   g_windowManager.Add(new CGUIWindowVisualisation);      // window id = 2006
@@ -3057,12 +3057,11 @@ bool CApplication::Cleanup()
     g_windowManager.Delete(WINDOW_MUSIC_FILES);
     g_windowManager.Delete(WINDOW_MUSIC_NAV);
     g_windowManager.Delete(WINDOW_DIALOG_MUSIC_INFO);
-    g_windowManager.Delete(WINDOW_VIDEO_INFO);
+    g_windowManager.Delete(WINDOW_DIALOG_VIDEO_INFO);
     g_windowManager.Delete(WINDOW_VIDEO_FILES);
     g_windowManager.Delete(WINDOW_VIDEO_PLAYLIST);
     g_windowManager.Delete(WINDOW_VIDEO_NAV);
     g_windowManager.Delete(WINDOW_FILES);
-    g_windowManager.Delete(WINDOW_VIDEO_INFO);
     g_windowManager.Delete(WINDOW_DIALOG_YES_NO);
     g_windowManager.Delete(WINDOW_DIALOG_PROGRESS);
     g_windowManager.Delete(WINDOW_DIALOG_NUMERIC);
@@ -5132,9 +5131,9 @@ void CApplication::SeekPercentage(float percent)
 bool CApplication::SwitchToFullScreen()
 {
   // if playing from the video info window, close it first!
-  if (g_windowManager.HasModalDialog() && g_windowManager.GetTopMostModalDialogID() == WINDOW_VIDEO_INFO)
+  if (g_windowManager.HasModalDialog() && g_windowManager.GetTopMostModalDialogID() == WINDOW_DIALOG_VIDEO_INFO)
   {
-    CGUIWindowVideoInfo* pDialog = (CGUIWindowVideoInfo*)g_windowManager.GetWindow(WINDOW_VIDEO_INFO);
+    CGUIDialogVideoInfo* pDialog = (CGUIDialogVideoInfo*)g_windowManager.GetWindow(WINDOW_DIALOG_VIDEO_INFO);
     if (pDialog) pDialog->Close(true);
   }
 

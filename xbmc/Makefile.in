@@ -19,7 +19,7 @@ SRCS=Application.cpp \
      GUIViewStateVideo.cpp \
      GUIWindowVideoBase.cpp \
      GUIWindowVideoFiles.cpp \
-     GUIWindowVideoInfo.cpp \
+     GUIDialogVideoInfo.cpp \
      GUIWindowVideoNav.cpp \
      GUIWindowVideoOverlay.cpp \
      GUIWindowVideoPlaylist.cpp \

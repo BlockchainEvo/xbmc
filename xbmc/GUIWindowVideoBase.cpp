@@ -28,7 +28,7 @@
 #include "utils/Variant.h"
 #include "addons/AddonManager.h"
 #include "addons/IAddon.h"
-#include "GUIWindowVideoInfo.h"
+#include "GUIDialogVideoInfo.h"
 #include "GUIWindowVideoNav.h"
 #include "GUIDialogFileBrowser.h"
 #include "GUIDialogVideoScan.h"
@@ -344,7 +344,7 @@ bool CGUIWindowVideoBase::ShowIMDB(CFileItem *item, const ScraperPtr &info2)
 
   CGUIDialogProgress* pDlgProgress = (CGUIDialogProgress*)g_windowManager.GetWindow(WINDOW_DIALOG_PROGRESS);
   CGUIDialogSelect* pDlgSelect = (CGUIDialogSelect*)g_windowManager.GetWindow(WINDOW_DIALOG_SELECT);
-  CGUIWindowVideoInfo* pDlgInfo = (CGUIWindowVideoInfo*)g_windowManager.GetWindow(WINDOW_VIDEO_INFO);
+  CGUIDialogVideoInfo* pDlgInfo = (CGUIDialogVideoInfo*)g_windowManager.GetWindow(WINDOW_DIALOG_VIDEO_INFO);
 
   ScraperPtr info(info2); // use this as nfo might change it..
 
