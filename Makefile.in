@@ -40,7 +40,7 @@ BIN_DIRS=	\
 	xbmc/storage/osx \
 	lib/cmyth/libcmyth \
 	lib/cmyth/librefmem \
-	xbmc/lib/libhts \
+	lib/libhts \
 	xbmc/interfaces/http-api \
 	xbmc/interfaces/json-rcp \
 	xbmc/interfaces/python \
@@ -269,8 +269,8 @@ lib/cmyth/libcmyth/libcmyth.a: force
 	$(MAKE) -C lib/cmyth/libcmyth
 lib/cmyth/librefmem/librefmem.a: force
 	$(MAKE) -C lib/cmyth/librefmem
-xbmc/lib/libhts/libhts.a: force
-	$(MAKE) -C xbmc/lib/libhts
+lib/libhts/libhts.a: force
+	$(MAKE) -C lib/libhts
 xbmc/interfaces/python/python.a: force
 	$(MAKE) -C xbmc/interfaces/python
 xbmc/interfaces/python/xbmcmodule/xbmcmodule.a: force
@@ -489,7 +489,7 @@ endif
 ifneq (arm, $(ARCH))
 # Can't include libhts for arm due to GPLv3
 OBJSXBMC+= \
-	xbmc/lib/libhts/libhts.a
+	lib/libhts/libhts.a
 endif
 
 # platform dependend objects
