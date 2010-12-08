@@ -26,7 +26,7 @@
 #include "GUIDialogGamepad.h"
 #include "GUIDialogFileBrowser.h"
 #include "GUIUserMessages.h"
-#include "GUIWindowVideoFiles.h"
+#include "video/windows/GUIWindowVideoFiles.h"
 #include "Autorun.h"
 #include "GUIPassword.h"
 #include "Util.h"

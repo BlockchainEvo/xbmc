@@ -31,6 +31,7 @@ BIN_DIRS=	\
 	xbmc/music/infoscanner \
 	xbmc/music/tags \
 	xbmc/music/windows \
+	xbmc/video/windows \
 	xbmc/network \
 	xbmc/playlists \
 	xbmc/powermanagement \
@@ -265,6 +266,8 @@ xbmc/music/windows/musicwindows.a: force
 	$(MAKE) -C xbmc/music/windows
 xbmc/music/infoscanner/musicscanner.a: force
 	$(MAKE) -C xbmc/music/infoscanner
+xbmc/video/windows/videowindows.a: force
+	$(MAKE) -C xbmc/video/windows
 lib/cmyth/libcmyth/libcmyth.a: force
 	$(MAKE) -C lib/cmyth/libcmyth
 lib/cmyth/librefmem/librefmem.a: force
@@ -513,6 +516,7 @@ DYNOBJSXBMC= \
 	lib/cmyth/librefmem/librefmem.a \
 	xbmc/linux/linux.a \
 	xbmc/network/network.a \
+	xbmc/video/windows/videowindows.a \
 	xbmc/utils/utils.a \
 	xbmc/cores/DllLoader/exports/util/exports_utils.a \
 	xbmc/cores/DllLoader/exports/exports.a

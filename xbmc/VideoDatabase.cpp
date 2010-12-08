@@ -20,7 +20,7 @@
  */
 
 #include "VideoDatabase.h"
-#include "GUIWindowVideoBase.h"
+#include "video/windows/GUIWindowVideoBase.h"
 #include "utils/RegExp.h"
 #include "addons/AddonManager.h"
 #include "utils/GUIInfoManager.h"

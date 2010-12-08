@@ -35,7 +35,7 @@
 #include "playlists/PlayListFactory.h"
 #include "music/dialogs/GUIDialogMusicScan.h"
 #include "VideoDatabase.h"
-#include "GUIWindowVideoNav.h"
+#include "video/windows/GUIWindowVideoNav.h"
 #include "music/tags/MusicInfoTag.h"
 #include "guilib/GUIWindowManager.h"
 #include "GUIDialogOK.h"

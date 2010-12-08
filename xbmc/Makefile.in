@@ -17,12 +17,8 @@ SRCS=Application.cpp \
      GUIViewStateMusic.cpp \
      GUIDialogVideoScan.cpp \
      GUIViewStateVideo.cpp \
-     GUIWindowVideoBase.cpp \
-     GUIWindowVideoFiles.cpp \
      GUIDialogVideoInfo.cpp \
-     GUIWindowVideoNav.cpp \
      GUIDialogVideoOverlay.cpp \
-     GUIWindowVideoPlaylist.cpp \
      VideoInfoScanner.cpp \
      PlayListPlayer.cpp \
      MusicInfoLoader.cpp \
@@ -73,7 +69,6 @@ SRCS=Application.cpp \
      GUIDialogYesNo.cpp \
      GUIMediaWindow.cpp \
      GUIWindowFileManager.cpp \
-     GUIWindowFullScreen.cpp \
      GUIWindowHome.cpp \
      GUIWindowLoginScreen.cpp \
      GUIWindowOSD.cpp \

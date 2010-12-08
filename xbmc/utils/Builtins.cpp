@@ -38,7 +38,7 @@
 #include "GUIDialogYesNo.h"
 #include "GUIUserMessages.h"
 #include "GUIWindowLoginScreen.h"
-#include "GUIWindowVideoBase.h"
+#include "video/windows/GUIWindowVideoBase.h"
 #include "addons/GUIWindowAddonBrowser.h"
 #include "addons/Addon.h" // for TranslateType, TranslateContent
 #include "addons/AddonManager.h"

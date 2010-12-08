@@ -23,8 +23,8 @@
 
 #include "guilib/GUIDialog.h"
 #include "guilib/GUIListItem.h"
-#include "GUIWindowVideoBase.h"
-#include "GUIWindowVideoFiles.h"
+#include "video/windows/GUIWindowVideoBase.h"
+#include "video/windows/GUIWindowVideoFiles.h"
 #include "ThumbLoader.h"
 
 class CFileItem;
