@@ -21,7 +21,7 @@
 
 #include "DDSImage.h"
 #include "XBTF.h"
-#include "lib/libsquish/squish.h"
+#include "libsquish/squish.h"
 #include "utils/log.h"
 #include <string.h>
 

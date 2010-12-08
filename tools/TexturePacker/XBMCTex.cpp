@@ -23,7 +23,7 @@
 #include <sys/stat.h>
 #include <dirent.h>
 #include <map>
-#include <squish.h>
+#include <libsquish/squish.h>
 #include <string>
 #define __STDC_FORMAT_MACROS
 #include <inttypes.h>
