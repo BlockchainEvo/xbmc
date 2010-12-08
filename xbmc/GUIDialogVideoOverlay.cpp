@@ -19,7 +19,7 @@
  *
  */
 
-#include "GUIWindowVideoOverlay.h"
+#include "GUIDialogVideoOverlay.h"
 #include "utils/GUIInfoManager.h"
 #include "guilib/GUIWindowManager.h"
 
@@ -32,17 +32,17 @@
 #define CONTROL_RW_LOGO      8
 
 
-CGUIWindowVideoOverlay::CGUIWindowVideoOverlay()
-    : CGUIDialog(WINDOW_VIDEO_OVERLAY, "VideoOverlay.xml")
+CGUIDialogVideoOverlay::CGUIDialogVideoOverlay()
+    : CGUIDialog(WINDOW_DIALOG_VIDEO_OVERLAY, "VideoOverlay.xml")
 {
   m_renderOrder = 0;
   m_visibleCondition = SKIN_HAS_VIDEO_OVERLAY;
 }
 
-CGUIWindowVideoOverlay::~CGUIWindowVideoOverlay()
+CGUIDialogVideoOverlay::~CGUIDialogVideoOverlay()
 {}
 
-void CGUIWindowVideoOverlay::FrameMove()
+void CGUIDialogVideoOverlay::FrameMove()
 {
   if (g_windowManager.GetActiveWindow() == WINDOW_FULLSCREEN_VIDEO)
   { // close immediately
@@ -52,12 +52,12 @@ void CGUIWindowVideoOverlay::FrameMove()
   CGUIDialog::FrameMove();
 }
 
-EVENT_RESULT CGUIWindowVideoOverlay::OnMouseEvent(const CPoint &point, const CMouseEvent &event)
+EVENT_RESULT CGUIDialogVideoOverlay::OnMouseEvent(const CPoint &point, const CMouseEvent &event)
 {
   return EVENT_RESULT_UNHANDLED;
 }
 
-void CGUIWindowVideoOverlay::SetDefaults()
+void CGUIDialogVideoOverlay::SetDefaults()
 {
   CGUIDialog::SetDefaults();
   m_renderOrder = 0;

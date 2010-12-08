@@ -21,7 +21,7 @@ SRCS=Application.cpp \
      GUIWindowVideoFiles.cpp \
      GUIDialogVideoInfo.cpp \
      GUIWindowVideoNav.cpp \
-     GUIWindowVideoOverlay.cpp \
+     GUIDialogVideoOverlay.cpp \
      GUIWindowVideoPlaylist.cpp \
      VideoInfoScanner.cpp \
      PlayListPlayer.cpp \

@@ -23,11 +23,11 @@
 
 #include "guilib/GUIDialog.h"
 
-class CGUIWindowVideoOverlay: public CGUIDialog
+class CGUIDialogVideoOverlay: public CGUIDialog
 {
 public:
-  CGUIWindowVideoOverlay(void);
-  virtual ~CGUIWindowVideoOverlay(void);
+  CGUIDialogVideoOverlay(void);
+  virtual ~CGUIDialogVideoOverlay(void);
   virtual void FrameMove();
 protected:
   virtual EVENT_RESULT OnMouseEvent(const CPoint &point, const CMouseEvent &event);
