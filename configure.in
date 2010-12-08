@@ -1405,7 +1405,7 @@ OUTPUT_FILES="Makefile \
     lib/jsoncpp/jsoncpp/src/lib_json/Makefile \
     lib/libsquish/Makefile \
     lib/libid3tag/Makefile \
-    xbmc/lib/cximage-6.0/Makefile \
+    lib/cximage-6.0/Makefile \
     xbmc/interfaces/python/linux/Makefile \
     xbmc/lib/libUPnP/Makefile \
     xbmc/DllPaths_generated.h \
@@ -1793,7 +1793,7 @@ XB_CONFIG_MODULE([xbmc/cores/dvdplayer/Codecs/libmad], [
   fi
 ], [$HOST_NOT_APPLE])
 
-XB_CONFIG_MODULE([xbmc/lib/cximage-6.0/zlib], [
+XB_CONFIG_MODULE([lib/cximage-6.0/zlib], [
   if test "$host_vendor" = "apple" ; then
     export MACOSX_DEPLOYMENT_TARGET=10.4
     CFLAGS="$CFLAGS -fno-common" \

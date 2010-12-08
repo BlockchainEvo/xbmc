@@ -5,5 +5,5 @@ endif
 LIB=jbig.a
 OBJS=jbig.o jbig_tab.o 
 
-include ../../../../Makefile.include
+include ../../../Makefile.include
 

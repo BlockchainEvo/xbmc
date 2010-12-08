@@ -13,5 +13,5 @@ OBJS= \
 	xmemfile.o ximabmp.o ximaexif.o ximahist.o ximaint.o \
 	ximajpg.o ximamng.o ximapng.o ximaska.o ximatif.o ximawmf.o
 
-include ../../../../Makefile.include
+include ../../../Makefile.include
 

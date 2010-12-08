@@ -5,5 +5,5 @@ endif
 LIB=raw.a
 OBJS=dcr.o libdcr.o
 
-include ../../../../Makefile.include
+include ../../../Makefile.include
 

@@ -103,7 +103,7 @@ PAPCODEC_DIRS+= \
 endif
 
 LIB_DIRS=\
-	xbmc/lib/cximage-6.0 \
+	lib/cximage-6.0 \
 	lib/libexif \
 	lib/libhdhomerun \
 	lib/libid3tag \
@@ -405,7 +405,7 @@ ifeq ($(or $(findstring powerpc,$(ARCH)),$(findstring x86_64-linux,$(ARCH)),$(fi
 	$(MAKE) -C xbmc/cores/paplayer/SPCCodec/SNES/SNESAPU
 endif
 imagelib: dllloader
-	$(MAKE) -C xbmc/lib/cximage-6.0
+	$(MAKE) -C lib/cximage-6.0
 
 codecs: papcodecs dvdpcodecs
 ifeq ($(findstring osx,$(ARCH)), osx)
