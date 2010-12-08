@@ -23,11 +23,11 @@
 
 #include "guilib/GUIDialog.h"
 
-class CGUIWindowMusicOverlay: public CGUIDialog
+class CGUIDialogMusicOverlay: public CGUIDialog
 {
 public:
-  CGUIWindowMusicOverlay(void);
-  virtual ~CGUIWindowMusicOverlay(void);
+  CGUIDialogMusicOverlay(void);
+  virtual ~CGUIDialogMusicOverlay(void);
   virtual bool OnMessage(CGUIMessage& message);
 protected:
   virtual EVENT_RESULT OnMouseEvent(const CPoint &point, const CMouseEvent &event);

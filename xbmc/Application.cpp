@@ -176,7 +176,7 @@
 #include "GUIWindowStartup.h"
 #include "GUIWindowFullScreen.h"
 #include "GUIWindowOSD.h"
-#include "music/windows/GUIWindowMusicOverlay.h"
+#include "music/dialogs/GUIDialogMusicOverlay.h"
 #include "GUIDialogVideoOverlay.h"
 
 // Dialog includes
@@ -1091,7 +1091,7 @@ bool CApplication::Initialize()
 #endif
 
   g_windowManager.Add(new CGUIWindowOSD);                // window id = 2901
-  g_windowManager.Add(new CGUIWindowMusicOverlay);       // window id = 2903
+  g_windowManager.Add(new CGUIDialogMusicOverlay);       // window id = 2903
   g_windowManager.Add(new CGUIDialogVideoOverlay);       // window id = 2904
   g_windowManager.Add(new CGUIWindowScreensaver);        // window id = 2900 Screensaver
   g_windowManager.Add(new CGUIWindowWeather);            // window id = 2600 WEATHER
@@ -1782,7 +1782,7 @@ void CApplication::RenderNoPresent()
     // close window overlays
     CGUIDialog *overlay = (CGUIDialog *)g_windowManager.GetWindow(WINDOW_DIALOG_VIDEO_OVERLAY);
     if (overlay) overlay->Close(true);
-    overlay = (CGUIDialog *)g_windowManager.GetWindow(WINDOW_MUSIC_OVERLAY);
+    overlay = (CGUIDialog *)g_windowManager.GetWindow(WINDOW_DIALOG_MUSIC_OVERLAY);
     if (overlay) overlay->Close(true);
 
   }
@@ -3115,7 +3115,7 @@ bool CApplication::Cleanup()
     g_windowManager.Delete(WINDOW_SYSTEM_INFORMATION);
     g_windowManager.Delete(WINDOW_SCREENSAVER);
     g_windowManager.Delete(WINDOW_OSD);
-    g_windowManager.Delete(WINDOW_MUSIC_OVERLAY);
+    g_windowManager.Delete(WINDOW_DIALOG_MUSIC_OVERLAY);
     g_windowManager.Delete(WINDOW_DIALOG_VIDEO_OVERLAY);
     g_windowManager.Delete(WINDOW_SLIDESHOW);
 

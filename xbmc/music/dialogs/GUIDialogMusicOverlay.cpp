@@ -19,25 +19,25 @@
  *
  */
 
-#include "GUIWindowMusicOverlay.h"
+#include "GUIDialogMusicOverlay.h"
 #include "utils/GUIInfoManager.h"
 #include "guilib/GUIWindowManager.h"
 #include "input/MouseStat.h"
 
 #define CONTROL_LOGO_PIC    1
 
-CGUIWindowMusicOverlay::CGUIWindowMusicOverlay()
-    : CGUIDialog(WINDOW_MUSIC_OVERLAY, "MusicOverlay.xml")
+CGUIDialogMusicOverlay::CGUIDialogMusicOverlay()
+    : CGUIDialog(WINDOW_DIALOG_MUSIC_OVERLAY, "MusicOverlay.xml")
 {
   m_renderOrder = 0;
   m_visibleCondition = SKIN_HAS_MUSIC_OVERLAY;
 }
 
-CGUIWindowMusicOverlay::~CGUIWindowMusicOverlay()
+CGUIDialogMusicOverlay::~CGUIDialogMusicOverlay()
 {
 }
 
-bool CGUIWindowMusicOverlay::OnMessage(CGUIMessage& message)
+bool CGUIDialogMusicOverlay::OnMessage(CGUIMessage& message)
 { // check that the mouse wasn't clicked on the thumb...
   if (message.GetMessage() == GUI_MSG_CLICKED)
   {
@@ -53,7 +53,7 @@ bool CGUIWindowMusicOverlay::OnMessage(CGUIMessage& message)
   return CGUIDialog::OnMessage(message);
 }
 
-EVENT_RESULT CGUIWindowMusicOverlay::OnMouseEvent(const CPoint &point, const CMouseEvent &event)
+EVENT_RESULT CGUIDialogMusicOverlay::OnMouseEvent(const CPoint &point, const CMouseEvent &event)
 {
   CGUIControl *pControl = (CGUIControl *)GetControl(CONTROL_LOGO_PIC);
   if (pControl && pControl->HitTest(point))
@@ -77,7 +77,7 @@ EVENT_RESULT CGUIWindowMusicOverlay::OnMouseEvent(const CPoint &point, const CMo
   return EVENT_RESULT_UNHANDLED;
 }
 
-void CGUIWindowMusicOverlay::SetDefaults()
+void CGUIDialogMusicOverlay::SetDefaults()
 {
   CGUIDialog::SetDefaults();
   m_renderOrder = 0;
