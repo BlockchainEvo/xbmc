@@ -4,5 +4,5 @@ LIB=libxbms-@ARCH@.a
 
 SRCS=ccbuffer.c ccutil.c ccxclient.c ccxclientconnxbox.c ccxdiscover.c ccxencode.c ccxmltrans.c
 
-include ../../../Makefile.include
+include ../../Makefile.include
 

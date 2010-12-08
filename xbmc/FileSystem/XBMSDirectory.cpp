@@ -30,10 +30,10 @@ using namespace XFILE;
 
 extern "C"
 {
-#include "lib/libXBMS/ccincludes.h"
- #include "lib/libXBMS/ccbuffer.h"
- #include "lib/libXBMS/ccxclient.h"
- #include "lib/libXBMS/ccxmltrans.h"
+#include "libXBMS/ccincludes.h"
+#include "libXBMS/ccbuffer.h"
+#include "libXBMS/ccxclient.h"
+#include "libXBMS/ccxmltrans.h"
 }
 
 

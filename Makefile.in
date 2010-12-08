@@ -48,7 +48,7 @@ BIN_DIRS=	\
 	lib/libRTV \
 	xbmc/network/libscrobbler \
 	xbmc/lib/libUPnP \
-	xbmc/lib/libXBMS \
+	lib/libXBMS \
 	lib/libXDAAP \
 	xbmc/lib/sqLite \
 	lib/UnrarXLib \
@@ -281,8 +281,8 @@ lib/libRTV/librtv-@ARCH@.a: force
 	$(MAKE) -C lib/libRTV
 xbmc/lib/libUPnP/libupnp-@ARCH@.a: force
 	$(MAKE) -C xbmc/lib/libUPnP
-xbmc/lib/libXBMS/libxbms-@ARCH@.a: force
-	$(MAKE) -C xbmc/lib/libXBMS
+lib/libXBMS/libxbms-@ARCH@.a: force
+	$(MAKE) -C lib/libXBMS
 lib/libXDAAP/libxdaap-@ARCH@.a: force
 	$(MAKE) -C lib/libXDAAP
 lib/jsoncpp/jsoncpp/src/lib_json/libjsoncpp.a: force
@@ -421,7 +421,7 @@ xcode_depends: \
 	lib/libapetag/.libs/libapetag.a \
 	lib/cmyth/libcmyth/libcmyth.a \
 	lib/cmyth/librefmem/librefmem.a \
-	xbmc/lib/libXBMS/libxbms-@ARCH@.a \
+	lib/libXBMS/libxbms-@ARCH@.a \
 	lib/libRTV/librtv-@ARCH@.a \
 	lib/libXDAAP/libxdaap-@ARCH@.a \
 	xbmc/interfaces/http-api/http-api.a \
@@ -482,7 +482,7 @@ OBJSXBMC=	\
 
 ifeq (@HAVE_XBMC_NONFREE@,1)
 OBJSXBMC+= \
-	xbmc/lib/libXBMS/libxbms-@ARCH@.a \
+	lib/libXBMS/libxbms-@ARCH@.a \
 	lib/UnrarXLib/UnrarXLib.a
 endif
 
