@@ -47,7 +47,7 @@ BIN_DIRS=	\
 	xbmc/interfaces/python/xbmcmodule \
 	lib/libRTV \
 	xbmc/network/libscrobbler \
-	xbmc/lib/libUPnP \
+	lib/libUPnP \
 	lib/libXBMS \
 	lib/libXDAAP \
 	xbmc/lib/sqLite \
@@ -279,8 +279,8 @@ xbmc/network/libscrobbler/scrobbler.a: force
 	$(MAKE) -C xbmc/network/libscrobbler
 lib/libRTV/librtv-@ARCH@.a: force
 	$(MAKE) -C lib/libRTV
-xbmc/lib/libUPnP/libupnp-@ARCH@.a: force
-	$(MAKE) -C xbmc/lib/libUPnP
+lib/libUPnP/libupnp-@ARCH@.a: force
+	$(MAKE) -C lib/libUPnP
 lib/libXBMS/libxbms-@ARCH@.a: force
 	$(MAKE) -C lib/libXBMS
 lib/libXDAAP/libxdaap-@ARCH@.a: force
@@ -469,7 +469,7 @@ OBJSXBMC=	\
 	xbmc/interfaces/python/xbmcmodule/xbmcmodule.a \
 	xbmc/network/libscrobbler/scrobbler.a \
 	lib/libRTV/librtv-@ARCH@.a \
-	xbmc/lib/libUPnP/libupnp-@ARCH@.a \
+	lib/libUPnP/libupnp-@ARCH@.a \
 	lib/libXDAAP/libxdaap-@ARCH@.a \
 	xbmc/interfaces/json-rpc/json-rpc.a \
 	lib/jsoncpp/jsoncpp/src/lib_json/libjsoncpp.a \

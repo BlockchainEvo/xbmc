@@ -78,6 +78,6 @@ INCLUDES=-I./Neptune/Source/Core -I./Platinum/Source/Core -I./Platinum/Source/Pl
 
 LIB=libupnp-@ARCH@.a
 
-include ../../../Makefile.include
+include ../../Makefile.include
 -include $(filter %.P, $(OBJS:.o=.P))
 
