@@ -111,10 +111,10 @@ endif
 
 $(ZIP): $(PYC) $(PYO)
 	pushd $(abs_top_srcdir)/lib/python/build/$(PYLIBDIR)/ && \
-		zip -0guq ../../$@ *.so; \
+		zip -0guq $@ *.so; \
 		popd
 	pushd $(abs_top_srcdir)/lib/python/Lib/ && \
-		zip -0gurq ../$@ *.py* $(PYDIRS) -x *.svn* *test*; \
+		zip -0gurq $@ *.py* $(PYDIRS) -x *.svn* *test*; \
 		popd
 
 $(abs_top_srcdir)/lib/python/libpython2.4.a: compile

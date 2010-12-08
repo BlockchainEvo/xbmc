@@ -38,8 +38,8 @@ BIN_DIRS=	\
 	xbmc/storage \
 	xbmc/storage/linux \
 	xbmc/storage/osx \
-	xbmc/lib/cmyth/libcmyth \
-	xbmc/lib/cmyth/librefmem \
+	lib/cmyth/libcmyth \
+	lib/cmyth/librefmem \
 	xbmc/lib/libhts \
 	xbmc/interfaces/http-api \
 	xbmc/interfaces/json-rcp \
@@ -265,10 +265,10 @@ xbmc/music/windows/musicwindows.a: force
 	$(MAKE) -C xbmc/music/windows
 xbmc/music/infoscanner/musicscanner.a: force
 	$(MAKE) -C xbmc/music/infoscanner
-xbmc/lib/cmyth/libcmyth/libcmyth.a: force
-	$(MAKE) -C xbmc/lib/cmyth/libcmyth
-xbmc/lib/cmyth/librefmem/librefmem.a: force
-	$(MAKE) -C xbmc/lib/cmyth/librefmem
+lib/cmyth/libcmyth/libcmyth.a: force
+	$(MAKE) -C lib/cmyth/libcmyth
+lib/cmyth/librefmem/librefmem.a: force
+	$(MAKE) -C lib/cmyth/librefmem
 xbmc/lib/libhts/libhts.a: force
 	$(MAKE) -C xbmc/lib/libhts
 xbmc/interfaces/python/python.a: force
@@ -419,8 +419,8 @@ xcode_depends: \
 	codecs libs python visualizations screensavers eventclients skins \
 	lib/libsquish/libsquish-@ARCH@.a \
 	lib/libapetag/.libs/libapetag.a \
-	xbmc/lib/cmyth/libcmyth/libcmyth.a \
-	xbmc/lib/cmyth/librefmem/librefmem.a \
+	lib/cmyth/libcmyth/libcmyth.a \
+	lib/cmyth/librefmem/librefmem.a \
 	xbmc/lib/libXBMS/libxbms-@ARCH@.a \
 	lib/libRTV/librtv-@ARCH@.a \
 	lib/libXDAAP/libxdaap-@ARCH@.a \
@@ -509,8 +509,8 @@ OBJSXBMC += \
 endif
 
 DYNOBJSXBMC= \
-	xbmc/lib/cmyth/libcmyth/libcmyth.a \
-	xbmc/lib/cmyth/librefmem/librefmem.a \
+	lib/cmyth/libcmyth/libcmyth.a \
+	lib/cmyth/librefmem/librefmem.a \
 	xbmc/linux/linux.a \
 	xbmc/network/network.a \
 	xbmc/utils/utils.a \

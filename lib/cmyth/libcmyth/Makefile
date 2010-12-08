@@ -4,6 +4,6 @@ SRCS=bookmark.c commbreak.c connection.c event.c file.c freespace.c keyframe.c l
 
 LIB=libcmyth.a
 
-include ../../../../Makefile.include
+include ../../../Makefile.include
 -include $(patsubst %.cpp,%.P,$(patsubst %.c,%.P,$(SRCS)))
 
