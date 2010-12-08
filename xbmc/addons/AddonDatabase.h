@@ -20,7 +20,7 @@
  *
  */
 
-#include "Database.h"
+#include "dbwrappers/Database.h"
 #include "addons/Addon.h"
 #include "utils/StdString.h"
 #include "FileItem.h"

@@ -50,7 +50,7 @@ BIN_DIRS=	\
 	lib/libUPnP \
 	lib/libXBMS \
 	lib/libXDAAP \
-	xbmc/lib/sqLite \
+	xbmc/dbwrappers \
 	lib/UnrarXLib \
 	lib/libsquish \
 	xbmc/visualizations \
@@ -291,8 +291,8 @@ xbmc/interfaces/http-api/http-api.a: force
 	$(MAKE) -C xbmc/interfaces/http-api
 xbmc/interfaces/json-rpc/json-rpc.a: force
 	$(MAKE) -C xbmc/interfaces/json-rpc
-xbmc/lib/sqLite/sqllite.a: force
-	$(MAKE) -C xbmc/lib/sqLite
+xbmc/dbwrappers/dbwrappers.a: force
+	$(MAKE) -C xbmc/dbwrappers
 lib/UnrarXLib/UnrarXLib.a: force
 	$(MAKE) -C lib/UnrarXLib
 lib/libsquish/libsquish-@ARCH@.a: force
@@ -474,7 +474,7 @@ OBJSXBMC=	\
 	xbmc/interfaces/json-rpc/json-rpc.a \
 	lib/jsoncpp/jsoncpp/src/lib_json/libjsoncpp.a \
 	xbmc/interfaces/http-api/http-api.a \
-	xbmc/lib/sqLite/sqllite.a \
+	xbmc/dbwrappers/dbwrappers.a \
 	lib/libsquish/libsquish-@ARCH@.a \
 	lib/libapetag/.libs/libapetag.a \
 	lib/xbmc-dll-symbols/dll-symbols.a \
