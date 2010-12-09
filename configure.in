@@ -1133,12 +1133,17 @@ final_message="$final_message\n  target CPU:\t$use_cpu"
 
 if test "$use_gles" = "yes"; then
   final_message="$final_message\n  OpenGLES:\tYes"
+  USE_OPENGLES=1
+  USE_OPENGL=0
 else
+  USE_OPENGLES=0
   if test "$use_gl" = "yes"; then
     final_message="$final_message\n  OpenGL:\tYes"
+    USE_OPENGL=1
   else
     final_message="$final_message\n  OpenGL:\tNo (Very Slow)"
     SDL_DEFINES="-DHAS_SDL_2D"
+    USE_OPENGL=0
   fi
 fi
 
@@ -1477,6 +1482,8 @@ AC_SUBST(LIBOGG_BASENAME)
 AC_SUBST(LIBVORBISENC_BASENAME)
 AC_SUBST(LIBVORBIS_BASENAME)
 AC_SUBST_FILE(XBMC_STANDALONE_SH_PULSE)
+AC_SUBST(USE_OPENGL)
+AC_SUBST(USE_OPENGLES)
 
 # pushd and popd are not available in other shells besides bash, so implement
 # our own pushd/popd functions

@@ -24,7 +24,7 @@
 
 #pragma once
 
-#include "RenderSystem.h"
+#include "rendering/RenderSystem.h"
 
 class CRenderSystemGL : public CRenderSystemBase
 {

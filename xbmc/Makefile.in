@@ -101,13 +101,9 @@ SRCS=Application.cpp \
      GUIWindowTestPattern.cpp \
      GUIViewStatePrograms.cpp \
      GUIViewStatePictures.cpp \
-     GUIDialogFullScreenInfo.cpp \
      VideoReferenceClock.cpp \
      DPMSSupport.cpp \
      GUIWindowTestPatternGL.cpp \
-     RenderSystem.cpp \
-     RenderSystemGL.cpp \
-     RenderSystemGLES.cpp \
      WinSystem.cpp \
      WinSystemX11.cpp \
      WinSystemX11GL.cpp \

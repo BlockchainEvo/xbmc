@@ -24,7 +24,7 @@
 #include "guilib/GUIImage.h"
 #include "FileSystem/File.h"
 #include "WindowingFactory.h"
-#include "RenderSystem.h"
+#include "rendering/RenderSystem.h"
 #include "log.h"
 
 using namespace XFILE;

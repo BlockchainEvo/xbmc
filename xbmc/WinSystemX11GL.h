@@ -24,7 +24,7 @@
  *
  */
 #include "WinSystemX11.h"
-#include "RenderSystemGL.h"
+#include "rendering/gl/RenderSystemGL.h"
 
 class CWinSystemX11GL : public CWinSystemX11, public CRenderSystemGL
 {
