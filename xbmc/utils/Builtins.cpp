@@ -34,7 +34,7 @@
 #include "music/dialogs/GUIDialogMusicScan.h"
 #include "GUIDialogNumeric.h"
 #include "GUIDialogProgress.h"
-#include "GUIDialogVideoScan.h"
+#include "video/dialogs/GUIDialogVideoScan.h"
 #include "GUIDialogYesNo.h"
 #include "GUIUserMessages.h"
 #include "GUIWindowLoginScreen.h"

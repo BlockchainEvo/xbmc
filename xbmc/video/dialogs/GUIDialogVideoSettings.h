@@ -21,29 +21,20 @@
  *
  */
 
-#include "GUIDialogSettings.h"
+#include "settings/GUIDialogSettings.h"
 
-class CGUIDialogAudioSubtitleSettings :
+class CGUIDialogVideoSettings :
       public CGUIDialogSettings
 {
 public:
-  CGUIDialogAudioSubtitleSettings(void);
-  virtual ~CGUIDialogAudioSubtitleSettings(void);
-  virtual void FrameMove();
+  CGUIDialogVideoSettings(void);
+  virtual ~CGUIDialogVideoSettings(void);
 
-  static CStdString FormatDelay(float value, float minimum);
-  static CStdString FormatDecibel(float value, float minimum);
+  static CStdString FormatInteger(float value, float minimum);
+  static CStdString FormatFloat(float value, float minimum);
 
 protected:
   virtual void CreateSettings();
   virtual void OnSettingChanged(SettingInfo &setting);
-
-  void AddAudioStreams(unsigned int id);
-  void AddSubtitleStreams(unsigned int id);
-
-  float m_volume;
-  int m_audioStream;
-  int m_subtitleStream;
-  int m_outputmode;
-  bool m_subtitleVisible;
 };
+

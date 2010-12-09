@@ -1,12 +1,10 @@
 INCLUDES=-I../ -I../linux -I../../lib
 
 SRCS=AdvancedSettings.cpp \
-     GUIDialogAudioSubtitleSettings.cpp \
      GUIDialogContentSettings.cpp \
      GUIDialogLockSettings.cpp \
      GUIDialogProfileSettings.cpp \
      GUIDialogSettings.cpp \
-     GUIDialogVideoSettings.cpp \
      GUISettings.cpp \
      GUIWindowSettingsCategory.cpp \
      GUIWindowSettings.cpp \

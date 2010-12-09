@@ -33,7 +33,7 @@
 #include "Picture.h"
 #include "FileSystem/VideoDatabaseDirectory.h"
 #include "playlists/PlayListFactory.h"
-#include "GUIDialogVideoScan.h"
+#include "video/dialogs/GUIDialogVideoScan.h"
 #include "GUIDialogOK.h"
 #include "addons/AddonManager.h"
 #include "PartyModeManager.h"

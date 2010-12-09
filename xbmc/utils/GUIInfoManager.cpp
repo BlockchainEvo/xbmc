@@ -47,7 +47,7 @@
 #include "PictureInfoTag.h"
 #include "music/tags/MusicInfoTag.h"
 #include "music/dialogs/GUIDialogMusicScan.h"
-#include "GUIDialogVideoScan.h"
+#include "video/dialogs/GUIDialogVideoScan.h"
 #include "guilib/GUIWindowManager.h"
 #include "FileSystem/File.h"
 #include "playlists/PlayList.h"
@@ -67,7 +67,7 @@
 #include "LabelFormatter.h"
 
 #include "GUIUserMessages.h"
-#include "GUIDialogVideoInfo.h"
+#include "video/dialogs/GUIDialogVideoInfo.h"
 #include "music/dialogs/GUIDialogMusicInfo.h"
 #include "storage/MediaManager.h"
 #include "TimeUtils.h"

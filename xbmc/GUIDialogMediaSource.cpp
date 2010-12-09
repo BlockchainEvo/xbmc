@@ -23,7 +23,7 @@
 #include "GUIDialogKeyboard.h"
 #include "GUIDialogFileBrowser.h"
 #include "video/windows/GUIWindowVideoFiles.h"
-#include "GUIDialogVideoScan.h"
+#include "video/dialogs/GUIDialogVideoScan.h"
 #include "guilib/GUIWindowManager.h"
 #include "Util.h"
 #include "FileSystem/PluginDirectory.h"

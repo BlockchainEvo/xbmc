@@ -31,6 +31,7 @@ BIN_DIRS=	\
 	xbmc/music/infoscanner \
 	xbmc/music/tags \
 	xbmc/music/windows \
+	xbmc/video/dialogs \
 	xbmc/video/windows \
 	xbmc/network \
 	xbmc/playlists \
@@ -266,6 +267,8 @@ xbmc/music/windows/musicwindows.a: force
 	$(MAKE) -C xbmc/music/windows
 xbmc/music/infoscanner/musicscanner.a: force
 	$(MAKE) -C xbmc/music/infoscanner
+xbmc/video/dialogs/videodialogs.a: force
+	$(MAKE) -C xbmc/video/dialogs
 xbmc/video/windows/videowindows.a: force
 	$(MAKE) -C xbmc/video/windows
 lib/cmyth/libcmyth/libcmyth.a: force
@@ -465,6 +468,7 @@ OBJSXBMC=	\
 	xbmc/music/infoscanner/musicscanner.a \
 	xbmc/music/tags/musictags.a \
 	xbmc/music/windows/musicwindows.a \
+	xbmc/video/dialogs/videodialogs.a \
 	xbmc/playlists/playlists.a \
 	xbmc/powermanagement/powermanagement.a \
 	xbmc/storage/storage.a \

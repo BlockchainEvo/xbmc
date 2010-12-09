@@ -32,9 +32,9 @@
 #include "URL.h"
 #include "FileItem.h"
 #include "addons/Skin.h"
-#include "Settings.h"
-#include "AdvancedSettings.h"
-#include "GUISettings.h"
+#include "settings/AdvancedSettings.h"
+#include "settings/Settings.h"
+#include "settings/GUISettings.h"
 #include "guilib/LocalizeStrings.h"
 
 using namespace std;

@@ -25,13 +25,13 @@
 #include "GUIPassword.h"
 #include "Util.h"
 #include "utils/MathUtils.h"
-#include "GUISettings.h"
+#include "settings/GUISettings.h"
 #ifdef HAS_VIDEO_PLAYBACK
 #include "cores/VideoRenderers/RenderManager.h"
 #endif
 #include "VideoDatabase.h"
 #include "GUIDialogYesNo.h"
-#include "Settings.h"
+#include "settings/Settings.h"
 #include "addons/Skin.h"
 
 using namespace std;
