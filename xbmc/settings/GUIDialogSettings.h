@@ -22,7 +22,7 @@
  */
 
 #include "guilib/GUIDialog.h"
-#include "GUIDialogSlider.h"
+#include "dialogs/GUIDialogSlider.h"
 
 class CGUISpinControlEx;
 class CGUIButtonControl;

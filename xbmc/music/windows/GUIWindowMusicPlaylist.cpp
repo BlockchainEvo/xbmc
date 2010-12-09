@@ -20,7 +20,7 @@
  */
 
 #include "GUIWindowMusicPlaylist.h"
-#include "GUIDialogSmartPlaylistEditor.h"
+#include "dialogs/GUIDialogSmartPlaylistEditor.h"
 #include "Util.h"
 #include "playlists/PlayListM3U.h"
 #include "Application.h"
@@ -30,7 +30,7 @@
 #include "utils/LabelFormatter.h"
 #include "music/tags/MusicInfoTag.h"
 #include "guilib/GUIWindowManager.h"
-#include "GUIDialogKeyboard.h"
+#include "dialogs/GUIDialogKeyboard.h"
 #include "GUIUserMessages.h"
 #include "Favourites.h"
 #include "settings/Settings.h"

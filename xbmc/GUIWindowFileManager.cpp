@@ -32,9 +32,9 @@
 #include "FileSystem/MultiPathDirectory.h"
 #include "FileSystem/SpecialProtocol.h"
 #include "Picture.h"
-#include "GUIDialogContextMenu.h"
+#include "dialogs/GUIDialogContextMenu.h"
 #include "guilib/GUIListContainer.h"
-#include "GUIDialogMediaSource.h"
+#include "dialogs/GUIDialogMediaSource.h"
 #include "GUIPassword.h"
 #include "GUIUserMessages.h"
 #ifdef HAS_PYTHON
@@ -44,10 +44,10 @@
 #include "playlists/PlayListFactory.h"
 #include "network/Network.h"
 #include "guilib/GUIWindowManager.h"
-#include "GUIDialogOK.h"
-#include "GUIDialogYesNo.h"
-#include "GUIDialogKeyboard.h"
-#include "GUIDialogProgress.h"
+#include "dialogs/GUIDialogOK.h"
+#include "dialogs/GUIDialogYesNo.h"
+#include "dialogs/GUIDialogKeyboard.h"
+#include "dialogs/GUIDialogProgress.h"
 #ifdef HAS_FILESYSTEM_RAR
 #include "FileSystem/RarManager.h"
 #endif

@@ -26,6 +26,7 @@ BIN_DIRS=	\
 	xbmc/FileSystem \
 	xbmc/FileSystem/MusicDatabaseDirectory \
 	xbmc/FileSystem/VideoDatabaseDirectory \
+	xbmc/dialogs \
 	xbmc/karaoke \
 	xbmc/music/dialogs \
 	xbmc/music/infoscanner \
@@ -298,6 +299,8 @@ xbmc/video/dialogs/videodialogs.a: force
 	$(MAKE) -C xbmc/video/dialogs
 xbmc/video/windows/videowindows.a: force
 	$(MAKE) -C xbmc/video/windows
+xbmc/dialogs/dialogs.a: force
+	$(MAKE) -C xbmc/dialogs
 lib/cmyth/libcmyth/libcmyth.a: force
 	$(MAKE) -C lib/cmyth/libcmyth
 lib/cmyth/librefmem/librefmem.a: force
@@ -490,6 +493,7 @@ OBJSXBMC=	\
 	xbmc/FileSystem/MusicDatabaseDirectory/musicdatabasedirectory.a \
 	xbmc/FileSystem/VideoDatabaseDirectory/videodatabasedirectory.a \
 	xbmc/input/input.a \
+	xbmc/dialogs/dialogs.a \
 	xbmc/karaoke/karaoke.a \
 	xbmc/music/dialogs/musicdialogs.a \
 	xbmc/music/infoscanner/musicscanner.a \

@@ -21,9 +21,9 @@
 
 #include "GUIDialogNetworkSetup.h"
 #include "guilib/GUISpinControlEx.h"
-#include "GUIDialogNumeric.h"
-#include "GUIDialogKeyboard.h"
-#include "GUIDialogFileBrowser.h"
+#include "dialogs/GUIDialogNumeric.h"
+#include "dialogs/GUIDialogKeyboard.h"
+#include "dialogs/GUIDialogFileBrowser.h"
 #include "guilib/GUIWindowManager.h"
 #include "guilib/GUIEditControl.h"
 #include "Util.h"

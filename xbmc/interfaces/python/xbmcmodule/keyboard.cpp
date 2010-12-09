@@ -22,7 +22,7 @@
 #include "keyboard.h"
 #include "pyutil.h"
 #include "guilib/GUIWindowManager.h"
-#include "GUIDialogKeyboard.h"
+#include "dialogs/GUIDialogKeyboard.h"
 #include "Application.h"
 
 using namespace std;

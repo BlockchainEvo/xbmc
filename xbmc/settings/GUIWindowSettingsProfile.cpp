@@ -23,7 +23,7 @@
 #include "GUIWindowFileManager.h"
 #include "Profile.h"
 #include "Application.h"
-#include "GUIDialogContextMenu.h"
+#include "dialogs/GUIDialogContextMenu.h"
 #include "GUIDialogProfileSettings.h"
 #include "network/Network.h"
 #include "utils/Weather.h"

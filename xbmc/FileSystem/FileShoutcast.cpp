@@ -28,7 +28,6 @@
 #include "Application.h"
 #include "FileShoutcast.h"
 #include "settings/GUISettings.h"
-#include "GUIDialogProgress.h"
 #include "guilib/GUIWindowManager.h"
 #include "URL.h"
 #include "utils/TimeUtils.h"

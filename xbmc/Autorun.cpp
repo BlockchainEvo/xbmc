@@ -32,7 +32,6 @@
 #include "PlayListPlayer.h"
 #include "FileSystem/StackDirectory.h"
 #include "ProgramDatabase.h"
-#include "GUIDialogYesNo.h"
 #include "FileSystem/Directory.h"
 #include "FileSystem/File.h"
 #include "settings/GUISettings.h"

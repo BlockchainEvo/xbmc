@@ -27,7 +27,6 @@
 #include "PltSyncMediaBrowser.h"
 #include "VideoInfoTag.h"
 #include "FileItem.h"
-#include "GUIDialogProgress.h"
 #include "utils/log.h"
 
 using namespace MUSIC_INFO;

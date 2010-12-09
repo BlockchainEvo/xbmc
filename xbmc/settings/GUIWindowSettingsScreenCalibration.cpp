@@ -30,7 +30,7 @@
 #include "Settings.h"
 #include "GUISettings.h"
 #include "guilib/GUIWindowManager.h"
-#include "GUIDialogYesNo.h"
+#include "dialogs/GUIDialogYesNo.h"
 #include "guilib/LocalizeStrings.h"
 #include "utils/log.h"
 

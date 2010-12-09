@@ -22,7 +22,7 @@
 #include "GUIDialogSongInfo.h"
 #include "Util.h"
 #include "Picture.h"
-#include "GUIDialogFileBrowser.h"
+#include "dialogs/GUIDialogFileBrowser.h"
 #include "GUIPassword.h"
 #include "GUIUserMessages.h"
 #include "MusicDatabase.h"

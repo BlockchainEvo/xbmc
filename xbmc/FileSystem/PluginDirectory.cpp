@@ -30,7 +30,7 @@
 #endif
 #include "threads/SingleLock.h"
 #include "guilib/GUIWindowManager.h"
-#include "GUIDialogProgress.h"
+#include "dialogs/GUIDialogProgress.h"
 #include "FileSystem/File.h"
 #include "settings/GUISettings.h"
 #include "FileItem.h"

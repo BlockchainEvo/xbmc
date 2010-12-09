@@ -20,7 +20,7 @@
  *
  */
 
-#include "GUIDialogBoxBase.h"
+#include "dialogs/GUIDialogBoxBase.h"
 #include "addons/Addon.h"
 
 class CGUIDialogAddonSettings : public CGUIDialogBoxBase

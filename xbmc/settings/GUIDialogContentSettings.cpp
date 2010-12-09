@@ -21,7 +21,6 @@
 
 #include "GUIDialogContentSettings.h"
 #include "addons/GUIDialogAddonSettings.h"
-#include "GUIDialogOK.h"
 #include "GUISettings.h"
 #include "guilib/GUIWindowManager.h"
 #include "addons/IAddon.h"

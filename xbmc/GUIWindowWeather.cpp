@@ -21,7 +21,7 @@
 
 #include "system.h"
 #include "GUIUserMessages.h"
-#include "GUIDialogOK.h"
+#include "dialogs/GUIDialogOK.h"
 #include "GUIWindowWeather.h"
 #include "guilib/GUIImage.h"
 #include "utils/Weather.h"

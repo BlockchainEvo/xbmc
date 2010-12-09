@@ -27,7 +27,6 @@
 #include "utils/HttpHeader.h"
 #include "utils/TuxBoxUtil.h"
 #include "URL.h"
-#include "GUIDialogProgress.h"
 #include "tinyXML/tinyxml.h"
 #include "settings/AdvancedSettings.h"
 #include "FileItem.h"

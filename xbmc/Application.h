@@ -35,10 +35,10 @@ namespace ADDON
   typedef boost::shared_ptr<IAddon> AddonPtr;
 }
 
-#include "GUIDialogSeekBar.h"
-#include "GUIDialogKaiToast.h"
-#include "GUIDialogVolumeBar.h"
-#include "GUIDialogMuteBug.h"
+#include "dialogs/GUIDialogSeekBar.h"
+#include "dialogs/GUIDialogKaiToast.h"
+#include "dialogs/GUIDialogVolumeBar.h"
+#include "dialogs/GUIDialogMuteBug.h"
 #include "GUIWindowPointer.h"   // Mouse pointer
 
 #include "cores/IPlayer.h"

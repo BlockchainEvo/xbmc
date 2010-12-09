@@ -23,7 +23,7 @@
 #include <limits.h>
 #include <float.h>
 #include "Settings.h"
-#include "GUIDialogFileBrowser.h"
+#include "dialogs/GUIDialogFileBrowser.h"
 #include "storage/MediaManager.h"
 #ifdef _LINUX
 #include "LinuxTimezone.h"

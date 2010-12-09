@@ -33,7 +33,7 @@
 #include "utils/JobManager.h"
 #include "Application.h"
 #include "guilib/GUIWindowManager.h"
-#include "GUIDialogBusy.h"
+#include "dialogs/GUIDialogBusy.h"
 #include "threads/SingleLock.h"
 #include "Util.h"
 

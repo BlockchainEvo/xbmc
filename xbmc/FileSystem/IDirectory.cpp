@@ -22,8 +22,8 @@
 
 #include "IDirectory.h"
 #include "Util.h"
-#include "GUIDialogOK.h"
-#include "GUIDialogKeyboard.h"
+#include "dialogs/GUIDialogOK.h"
+#include "dialogs/GUIDialogKeyboard.h"
 #include "URL.h"
 #include "utils/PasswordManager.h"
 

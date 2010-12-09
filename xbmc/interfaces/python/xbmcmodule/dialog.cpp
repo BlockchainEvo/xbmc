@@ -40,14 +40,14 @@
 #include "Application.h"
 #include "settings/Settings.h"
 #include "pyutil.h"
-#include "GUIDialogFileBrowser.h"
-#include "GUIDialogNumeric.h"
-#include "GUIDialogGamepad.h"
+#include "dialogs/GUIDialogFileBrowser.h"
+#include "dialogs/GUIDialogNumeric.h"
+#include "dialogs/GUIDialogGamepad.h"
 #include "guilib/GUIWindowManager.h"
-#include "GUIDialogOK.h"
-#include "GUIDialogProgress.h"
-#include "GUIDialogYesNo.h"
-#include "GUIDialogSelect.h"
+#include "dialogs/GUIDialogOK.h"
+#include "dialogs/GUIDialogProgress.h"
+#include "dialogs/GUIDialogYesNo.h"
+#include "dialogs/GUIDialogSelect.h"
 
 using namespace std;
 

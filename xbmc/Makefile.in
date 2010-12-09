@@ -42,25 +42,6 @@ SRCS=Application.cpp \
      Song.cpp \
      VideoDatabase.cpp \
      ViewDatabase.cpp \
-     GUIDialogBoxBase.cpp \
-     GUIDialogButtonMenu.cpp \
-     GUIDialogContextMenu.cpp \
-     GUIDialogFileBrowser.cpp \
-     GUIDialogGamepad.cpp \
-     GUIDialogKeyboard.cpp \
-     GUIDialogMediaSource.cpp \
-     GUIDialogMuteBug.cpp \
-     GUIDialogNumeric.cpp \
-     GUIDialogOK.cpp \
-     GUIDialogPlayerControls.cpp \
-     GUIDialogProgress.cpp \
-     GUIDialogSeekBar.cpp \
-     GUIDialogSelect.cpp \
-     GUIDialogSubMenu.cpp \
-     GUIDialogTextViewer.cpp \
-     GUIDialogVolumeBar.cpp \
-     GUIDialogSlider.cpp \
-     GUIDialogYesNo.cpp \
      GUIMediaWindow.cpp \
      GUIWindowFileManager.cpp \
      GUIWindowHome.cpp \
@@ -80,19 +61,14 @@ SRCS=Application.cpp \
      GUIWindowSlideShow.cpp \
      XBApplicationEx.cpp \
      xbmc.cpp \
-     GUIDialogFavourites.cpp \
      Favourites.cpp \
-     GUIDialogSmartPlaylistEditor.cpp \
-     GUIDialogSmartPlaylistRule.cpp \
      SlideShowPicture.cpp \
-     GUIDialogBusy.cpp \
      GUIWindowStartup.cpp \
      PictureInfoLoader.cpp \
      GUIDialogPictureInfo.cpp \
      LastFmManager.cpp \
      PictureInfoTag.cpp \
      GUILargeTextureManager.cpp \
-     GUIDialogKaiToast.cpp \
      Artist.cpp \
      Album.cpp \
      MediaSource.cpp \

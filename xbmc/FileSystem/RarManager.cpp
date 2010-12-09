@@ -27,7 +27,6 @@
 #include "Util.h"
 #include "utils/CharsetConverter.h"
 #include "threads/SingleLock.h"
-#include "GUIDialogYesNo.h"
 #include "FileSystem/Directory.h"
 #include "FileSystem/SpecialProtocol.h"
 #include "settings/AdvancedSettings.h"

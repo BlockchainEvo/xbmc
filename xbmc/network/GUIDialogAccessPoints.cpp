@@ -20,7 +20,7 @@
  */
 
 #include "GUIDialogAccessPoints.h"
-#include "GUIDialogKeyboard.h"
+#include "dialogs/GUIDialogKeyboard.h"
 #ifdef _LINUX
 #include "linux/NetworkLinux.h"
 #endif

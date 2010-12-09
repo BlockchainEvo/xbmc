@@ -22,7 +22,7 @@
 #include "dlgcache.h"
 #include "Application.h"
 #include "guilib/GUIWindowManager.h"
-#include "GUIDialogProgress.h"
+#include "dialogs/GUIDialogProgress.h"
 #include "guilib/LocalizeStrings.h"
 #include "utils/log.h"
 #include "threads/SingleLock.h"

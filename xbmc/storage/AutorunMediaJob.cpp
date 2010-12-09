@@ -22,7 +22,7 @@
 #include "Application.h"
 #include "utils/Builtins.h"
 #include "guilib/GUIWindowManager.h"
-#include "GUIDialogSelect.h"
+#include "dialogs/GUIDialogSelect.h"
 #include "guilib/Key.h"
 
 CAutorunMediaJob::CAutorunMediaJob(const CStdString &label, const CStdString &path)

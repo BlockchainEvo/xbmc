@@ -24,7 +24,7 @@
 #include "Util.h"
 #include "URL.h"
 #include "guilib/GUIWindowManager.h"
-#include "GUIDialogProgress.h"
+#include "dialogs/GUIDialogProgress.h"
 #include "FileItem.h"
 #include "utils/StringUtils.h"
 #include "utils/log.h"

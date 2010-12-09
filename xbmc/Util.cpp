@@ -75,7 +75,6 @@
 #if defined(__APPLE__)
 #include "CocoaInterface.h"
 #endif
-#include "GUIDialogYesNo.h"
 #include "GUIUserMessages.h"
 #include "FileSystem/File.h"
 #include "utils/Crc32.h"

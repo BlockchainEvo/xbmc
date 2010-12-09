@@ -27,7 +27,6 @@
 #include "Util.h"
 #include "URL.h"
 #include "GUIWindowFileManager.h"
-#include "GUIDialogButtonMenu.h"
 #include "guilib/GUIFontManager.h"
 #include "LangCodeExpander.h"
 #include "input/ButtonTranslator.h"
@@ -42,7 +41,7 @@
 #include "FileSystem/SpecialProtocol.h"
 #include "guilib/GUIBaseContainer.h" // for VIEW_TYPE enum
 #include "guilib/GUIWindowManager.h"
-#include "GUIDialogYesNo.h"
+#include "dialogs/GUIDialogYesNo.h"
 #include "FileSystem/Directory.h"
 #include "FileItem.h"
 #include "LangInfo.h"

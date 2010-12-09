@@ -23,7 +23,7 @@
 #include "Application.h"
 #include "GUIWindowLoginScreen.h"
 #include "settings/GUIWindowSettingsProfile.h"
-#include "GUIDialogContextMenu.h"
+#include "dialogs/GUIDialogContextMenu.h"
 #include "settings/GUIDialogProfileSettings.h"
 #include "GUIPassword.h"
 #ifdef HAS_PYTHON
@@ -35,7 +35,7 @@
 #include "addons/Skin.h"
 #include "Profile.h"
 #include "guilib/GUIWindowManager.h"
-#include "GUIDialogOK.h"
+#include "dialogs/GUIDialogOK.h"
 #include "settings/Settings.h"
 #include "settings/GUISettings.h"
 #include "FileSystem/File.h"
