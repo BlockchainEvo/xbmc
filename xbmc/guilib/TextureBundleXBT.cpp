@@ -31,7 +31,6 @@
 #include "FileSystem/SpecialProtocol.h"
 #include "utils/EndianSwap.h"
 #include "XBTF.h"
-#include "WindowingFactory.h"
 #ifndef _LINUX
 #include "lib/win32/liblzo/LZO1X.H"
 #else

@@ -23,7 +23,7 @@
 #include "Splash.h"
 #include "guilib/GUIImage.h"
 #include "FileSystem/File.h"
-#include "WindowingFactory.h"
+#include "windowing/WindowingFactory.h"
 #include "rendering/RenderSystem.h"
 #include "log.h"
 

@@ -34,7 +34,7 @@
 #include "settings/GUISettings.h"
 #include "VideoShaders/YUV2RGBShader.h"
 #include "VideoShaders/VideoFilterShader.h"
-#include "WindowingFactory.h"
+#include "windowing/WindowingFactory.h"
 #include "guilib/Texture.h"
 #include "../dvdplayer/Codecs/DllSwScale.h"
 #include "../dvdplayer/Codecs/DllAvCodec.h"

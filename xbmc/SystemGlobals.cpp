@@ -19,7 +19,7 @@
  *
  */
 #include "system.h"
-#include "WindowingFactory.h"
+#include "windowing/WindowingFactory.h"
 #include "cores/VideoRenderers/RenderManager.h"
 #include "guilib/GraphicContext.h"
 #include "input/MouseStat.h"

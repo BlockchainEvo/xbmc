@@ -23,7 +23,7 @@
  *  http://www.gnu.org/copyleft/gpl.html
  *
  */
-#include "WinSystem.h"
+#include "windowing/WinSystem.h"
 #include "utils/Stopwatch.h"
 #include <GL/glx.h>
 

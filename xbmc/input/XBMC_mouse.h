@@ -25,8 +25,6 @@
 #ifndef _XBMC_mouse_h
 #define _XBMC_mouse_h
 
-#include "XBMC_stdinc.h"
-
 /* Useful data types */
 typedef struct XBMC_Rect {
   int16_t   x, y;

@@ -38,7 +38,7 @@
 // but this allows for double/redundant or ambiguous mapping definition, e.g.
 // ASCII/unicode could be derived from scancodes, virtual keys, modifiers and/or other ASCII/unicode.
 
-#include "XBMC_events.h"
+#include "windowing/XBMC_events.h"
 #include "guilib/Key.h"
 
 class CKeyboardStat

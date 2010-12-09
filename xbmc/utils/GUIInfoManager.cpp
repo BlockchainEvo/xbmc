@@ -52,7 +52,7 @@
 #include "FileSystem/File.h"
 #include "playlists/PlayList.h"
 #include "TuxBoxUtil.h"
-#include "WindowingFactory.h"
+#include "windowing/WindowingFactory.h"
 #include "powermanagement/PowerManager.h"
 #include "settings/AdvancedSettings.h"
 #include "settings/Settings.h"

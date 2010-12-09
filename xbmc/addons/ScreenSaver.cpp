@@ -20,7 +20,7 @@
  */
 #include "ScreenSaver.h"
 #include "settings/Settings.h"
-#include "WindowingFactory.h"
+#include "windowing/WindowingFactory.h"
 
 namespace ADDON
 {

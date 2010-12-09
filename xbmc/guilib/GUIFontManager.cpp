@@ -27,11 +27,11 @@
 #include "GUIFont.h"
 #include "utils/XMLUtils.h"
 #include "GUIControlFactory.h"
-#include "../xbmc/Util.h"
-#include "../xbmc/FileSystem/File.h"
-#include "../xbmc/FileSystem/SpecialProtocol.h"
+#include "Util.h"
+#include "FileSystem/File.h"
+#include "FileSystem/SpecialProtocol.h"
 #include "utils/log.h"
-#include "WindowingFactory.h"
+#include "windowing/WindowingFactory.h"
 
 using namespace std;
 

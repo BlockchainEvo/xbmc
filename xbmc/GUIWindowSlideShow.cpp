@@ -36,7 +36,7 @@
 #include "settings/GUISettings.h"
 #include "FileItem.h"
 #include "guilib/Texture.h"
-#include "WindowingFactory.h"
+#include "windowing/WindowingFactory.h"
 #include "guilib/Texture.h"
 #include "guilib/LocalizeStrings.h"
 #include "threads/SingleLock.h"

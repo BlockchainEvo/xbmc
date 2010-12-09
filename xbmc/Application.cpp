@@ -80,7 +80,7 @@
 #include "FileSystem/RarManager.h"
 #endif
 #include "playlists/PlayList.h"
-#include "WindowingFactory.h"
+#include "windowing/WindowingFactory.h"
 #include "powermanagement/PowerManager.h"
 #include "DPMSSupport.h"
 #include "settings/Settings.h"

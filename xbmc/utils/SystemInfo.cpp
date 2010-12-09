@@ -30,7 +30,7 @@
 #include "FileSystem/FileCurl.h"
 #include "network/Network.h"
 #include "Application.h"
-#include "WindowingFactory.h"
+#include "windowing/WindowingFactory.h"
 #include "settings/Settings.h"
 #include "guilib/LocalizeStrings.h"
 #include "CPUInfo.h"

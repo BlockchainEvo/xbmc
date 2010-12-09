@@ -27,7 +27,6 @@
 
 #include <stdint.h>
 
-#include "XBMC_stdinc.h"
 #include "XBMC_keysym.h"
 
 /* Keysym structure

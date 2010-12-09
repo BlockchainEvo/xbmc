@@ -34,7 +34,7 @@
 #include "cores/dvdplayer/DVDCodecs/Overlay/DVDOverlayImage.h"
 #include "cores/dvdplayer/DVDCodecs/Overlay/DVDOverlaySpu.h"
 #include "cores/dvdplayer/DVDCodecs/Overlay/DVDOverlaySSA.h"
-#include "WindowingFactory.h"
+#include "windowing/WindowingFactory.h"
 #include "settings/Settings.h"
 #include "utils/MathUtils.h"
 

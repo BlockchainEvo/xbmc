@@ -24,7 +24,7 @@
 #include "Application.h"
 #include "input/KeyboardStat.h"
 #include "settings/GUISettings.h"
-#include "WindowingFactory.h"
+#include "windowing/WindowingFactory.h"
 #include "utils/log.h"
 #include "utils/Weather.h"
 #include "utils/Builtins.h"

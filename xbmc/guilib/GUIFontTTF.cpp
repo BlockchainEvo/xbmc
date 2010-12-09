@@ -27,7 +27,7 @@
 #include "FileSystem/SpecialProtocol.h"
 #include "utils/MathUtils.h"
 #include "utils/log.h"
-#include "WindowingFactory.h"
+#include "windowing/WindowingFactory.h"
 
 #include <math.h>
 

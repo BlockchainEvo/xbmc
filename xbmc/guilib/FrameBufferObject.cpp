@@ -23,7 +23,7 @@
 
 #if defined(HAS_GL) || HAS_GLES == 2
 #include "settings/Settings.h"
-#include "WindowingFactory.h"
+#include "windowing/WindowingFactory.h"
 #include "FrameBufferObject.h"
 #include "utils/log.h"
 

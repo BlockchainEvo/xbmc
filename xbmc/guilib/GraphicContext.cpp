@@ -27,7 +27,7 @@
 #include "settings/Settings.h"
 #include "settings/AdvancedSettings.h"
 #include "cores/VideoRenderers/RenderManager.h"
-#include "WindowingFactory.h"
+#include "windowing/WindowingFactory.h"
 #include "TextureManager.h"
 #include "input/MouseStat.h"
 #include "GUIWindowManager.h"

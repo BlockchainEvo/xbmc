@@ -62,7 +62,7 @@ namespace ADDON
 #ifdef _LINUX
 #include "linux/LinuxResourceCounter.h"
 #endif
-#include "XBMC_events.h"
+#include "windowing/XBMC_events.h"
 #include "threads/Thread.h"
 
 #ifdef HAS_WEB_SERVER

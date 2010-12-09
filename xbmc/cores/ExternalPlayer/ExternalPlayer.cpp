@@ -25,7 +25,7 @@
 #include "threads/SingleLock.h"
 #include "guilib/AudioContext.h"
 #include "ExternalPlayer.h"
-#include "WindowingFactory.h"
+#include "windowing/WindowingFactory.h"
 #include "GUIDialogOK.h"
 #include "guilib/GUIWindowManager.h"
 #include "Application.h"

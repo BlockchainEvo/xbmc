@@ -21,7 +21,7 @@
 
 #include "Texture.h"
 #include "Picture.h"
-#include "WindowingFactory.h"
+#include "windowing/WindowingFactory.h"
 #include "utils/log.h"
 #include "DllImageLib.h"
 #include "DDSImage.h"

@@ -25,7 +25,7 @@
 #include "Application.h"
 #include "music/tags/MusicInfoTag.h"
 #include "settings/Settings.h"
-#include "WindowingFactory.h"
+#include "windowing/WindowingFactory.h"
 #include "Util.h"
 #ifdef _LINUX
 #include <dlfcn.h>

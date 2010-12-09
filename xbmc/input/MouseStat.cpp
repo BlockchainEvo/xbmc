@@ -21,7 +21,7 @@
 
 #include "MouseStat.h"
 #include "guilib/Key.h"
-#include "WindowingFactory.h"
+#include "windowing/WindowingFactory.h"
 #include "utils/log.h"
 #include "utils/TimeUtils.h"
 

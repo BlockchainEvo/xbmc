@@ -99,7 +99,7 @@
 #include "guilib/LocalizeStrings.h"
 #include "LangInfo.h"
 #include "utils/StringUtils.h"
-#include "WindowingFactory.h"
+#include "windowing/WindowingFactory.h"
 
 #if defined(HAVE_LIBCRYSTALHD)
 #include "cores/dvdplayer/DVDCodecs/Video/CrystalHD.h"

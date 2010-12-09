@@ -39,7 +39,7 @@
 #include "settings/GUISettings.h"
 #include "FileItem.h"
 #include "guilib/GUIDialog.h"
-#include "WindowingFactory.h"
+#include "windowing/WindowingFactory.h"
 #include "utils/GUIInfoManager.h"
 
 #include "powermanagement/PowerManager.h"

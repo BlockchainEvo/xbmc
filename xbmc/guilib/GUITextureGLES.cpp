@@ -25,7 +25,7 @@
 #endif
 #include "Texture.h"
 #include "utils/log.h"
-#include "WindowingFactory.h"
+#include "windowing/WindowingFactory.h"
 
 #if defined(HAS_GLES)
 

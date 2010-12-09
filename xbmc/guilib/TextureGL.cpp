@@ -21,7 +21,7 @@
 
 #include "system.h"
 #include "TextureGL.h"
-#include "WindowingFactory.h"
+#include "windowing/WindowingFactory.h"
 #include "utils/log.h"
 
 #if defined(HAS_GL) || defined(HAS_GLES)

@@ -19,33 +19,31 @@
 *
 */
 
-#ifndef WINDOWING_FACTORY_H
-#define WINDOWING_FACTORY_H
+#ifndef WINDOW_EVENTS_H
+#define WINDOW_EVENTS_H
 
-#if defined(_WIN32) && defined(HAS_GL)
-#include "WinSystemWin32GL.h"
-extern CWinSystemWin32GL g_Windowing;
+#pragma once
+
+#include "utils/StdString.h"
+#include "XBMC_events.h"
+
+typedef bool (* PHANDLE_EVENT_FUNC)(XBMC_Event& newEvent);
+
+class CWinEventsBase
+{
+public:
+  static PHANDLE_EVENT_FUNC m_pEventFunc;
+};
+
+#ifdef _WIN32
+#include "windows/WinEventsWin32.h"
+#define CWinEvents CWinEventsWin32
 #endif
 
-#if defined(_WIN32) && defined(HAS_DX)
-#include "WinSystemWin32DX.h"
-extern CWinSystemWin32DX g_Windowing;
+#ifdef _LINUX
+#include "WinEventsSDL.h"
+#define CWinEvents CWinEventsSDL
 #endif
 
-#if defined(__APPLE__)
-#include "WinSystemOSXGL.h"
-extern CWinSystemOSXGL g_Windowing;
-#endif
 
-#if defined(HAS_GLX)
-#include "WinSystemX11GL.h"
-extern CWinSystemX11GL g_Windowing;
-#endif
-
-#if defined(HAS_EGL)
-#include "WinSystemEGL.h"
-extern CWinSystemEGL g_Windowing;
-#endif
-
-#endif // WINDOWING_FACTORY_H
-
+#endif // WINDOW_EVENTS_H

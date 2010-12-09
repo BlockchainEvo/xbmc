@@ -26,7 +26,7 @@
 #include "guilib/GUIFont.h" // for XBFONT_* defines
 #include "Application.h"
 #include "settings/AdvancedSettings.h"
-#include "WindowingFactory.h"
+#include "windowing/WindowingFactory.h"
 #include "utils/log.h"
 #include "utils/TimeUtils.h"
 

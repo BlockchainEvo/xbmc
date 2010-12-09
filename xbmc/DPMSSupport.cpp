@@ -22,7 +22,7 @@
 #include "system.h"
 #include "DPMSSupport.h"
 #include "utils/log.h"
-#include "WindowingFactory.h"
+#include "windowing/WindowingFactory.h"
 #include "utils/SystemInfo.h"
 #include <assert.h>
 #include <string>

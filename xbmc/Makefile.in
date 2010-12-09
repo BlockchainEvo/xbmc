@@ -104,11 +104,6 @@ SRCS=Application.cpp \
      VideoReferenceClock.cpp \
      DPMSSupport.cpp \
      GUIWindowTestPatternGL.cpp \
-     WinSystem.cpp \
-     WinSystemX11.cpp \
-     WinSystemX11GL.cpp \
-     WinSystemEGL.cpp \
-     WinEventsSDL.cpp \
      Bookmark.cpp \
      TextureCache.cpp \
      TextureDatabase.cpp \

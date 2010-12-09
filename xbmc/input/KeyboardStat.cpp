@@ -26,7 +26,7 @@
 
 #include "KeyboardStat.h"
 #include "KeyboardLayoutConfiguration.h"
-#include "XBMC_events.h"
+#include "windowing/XBMC_events.h"
 #include "utils/TimeUtils.h"
 
 #if defined(_LINUX) && !defined(__APPLE__)

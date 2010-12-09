@@ -85,7 +85,6 @@
 #ifdef HAS_IRSERVERSUITE
   #include "input/windows/IRServerSuite.h"
 #endif
-#include "WindowingFactory.h"
 #include "guilib/LocalizeStrings.h"
 #include "utils/md5.h"
 #include "utils/TimeUtils.h"

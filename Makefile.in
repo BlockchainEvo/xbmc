@@ -65,12 +65,20 @@ BIN_DIRS=	\
 	xbmc/osx \
 	xbmc/posix \
 	xbmc/threads \
+	xbmc/windowing \
 
 ifeq (@USE_OPENGL@,1)
 BIN_DIRS += xbmc/rendering/gl
 endif
 ifeq (@USE_OPENGLES@,1)
 BIN_DIRS += xbmc/rendering/gles
+BIN_DIRS += xbmc/windowing/gles
+endif
+
+ifeq ($(findstring osx,$(ARCH)),osx)
+BIN_DIRS += xbmc/windowing/osx
+else
+BIN_DIRS += xbmc/windowing/X11
 endif
 
 EC_DIRS= \
@@ -266,6 +274,12 @@ xbmc/rendering/gl/rendering_gl.a: force
 	$(MAKE) -C xbmc/rendering/gl
 xbmc/rendering/gles/rendering_gles.a: force
 	$(MAKE) -C xbmc/rendering/gles
+xbmc/windowing/windowing.a: force
+	$(MAKE) -C xbmc/windowing
+xbmc/windowing/gles/windowing_gles.a: force
+	$(MAKE) -C xbmc/windowing/gles
+xbmc/windowing/X11/windowing_X11.a: force
+	$(MAKE) -C xbmc/windowing/X11
 xbmc/storage/storage.a: force
 	$(MAKE) -C xbmc/storage
 xbmc/storage/linux/storage_linux.a: force
@@ -500,6 +514,7 @@ OBJSXBMC=	\
 	lib/xbmc-dll-symbols/dll-symbols.a \
 	xbmc/settings/settings.a \
         xbmc/rendering/rendering.a \
+        xbmc/windowing/windowing.a \
 
 ifeq (@USE_OPENGL@,1)
 OBJSXBMC+= \
@@ -507,7 +522,8 @@ OBJSXBMC+= \
 endif
 ifeq (@USE_OPENGLES@,1)
 OBJSXBMC+= \
-	xbmc/rendering/gles/rendering_gles.a
+	xbmc/rendering/gles/rendering_gles.a \
+	xbmc/windowing/gles/windowing_gles.a
 endif
 
 ifeq (@HAVE_XBMC_NONFREE@,1)
@@ -526,6 +542,7 @@ endif
 ifeq ($(findstring osx,$(ARCH)), osx)
 OBJSXBMC += \
 	xbmc/osx/osx.a \
+	xbmc/windowing/osx/windowing_osx.a \
 	lib/libSDL-OSX/libSDL-@ARCH@.a \
 	lib/libSDL-OSX/libSDL_mixer-@ARCH@.a \
 	lib/libmicrohttpd/src/daemon/.libs/libmicrohttpd.a
@@ -536,6 +553,10 @@ OBJSXBMC += \
 	xbmc/network/linux/network_linux.a \
 	xbmc/powermanagement/linux/powermanagement_linux.a \
 	xbmc/storage/linux/storage_linux.a
+ifeq (@USE_OPENGL@,1)
+OBJSXBMC+= \
+	xbmc/windowing/X11/windowing_X11.a
+endif
 endif
 
 DYNOBJSXBMC= \
