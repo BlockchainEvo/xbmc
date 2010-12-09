@@ -30,7 +30,7 @@
 #include "guilib/GUIProgressControl.h"
 #include "guilib/GUIAudioManager.h"
 #include "guilib/GUILabelControl.h"
-#include "GUIWindowOSD.h"
+#include "video/dialogs/GUIDialogVideoOSD.h"
 #include "guilib/GUIFontManager.h"
 #include "guilib/GUITextLayout.h"
 #include "guilib/GUIWindowManager.h"
@@ -606,7 +606,7 @@ bool CGUIWindowFullScreen::OnMessage(CGUIMessage& message)
       if (pDialog) pDialog->Close(true);
       CGUIDialogSlider *slider = (CGUIDialogSlider *)g_windowManager.GetWindow(WINDOW_DIALOG_SLIDER);
       if (slider) slider->Close(true);
-      pDialog = (CGUIDialog *)g_windowManager.GetWindow(WINDOW_OSD);
+      pDialog = (CGUIDialog *)g_windowManager.GetWindow(WINDOW_DIALOG_VIDEO_OSD);
       if (pDialog) pDialog->Close(true);
       pDialog = (CGUIDialog *)g_windowManager.GetWindow(WINDOW_DIALOG_FULLSCREEN_INFO);
       if (pDialog) pDialog->Close(true);
@@ -659,7 +659,7 @@ EVENT_RESULT CGUIWindowFullScreen::OnMouseEvent(const CPoint &point, const CMous
   }
   if (event.m_id != ACTION_MOUSE_MOVE || event.m_offsetX || event.m_offsetY)
   { // some other mouse action has occurred - bring up the OSD
-    CGUIWindowOSD *pOSD = (CGUIWindowOSD *)g_windowManager.GetWindow(WINDOW_OSD);
+    CGUIDialogVideoOSD *pOSD = (CGUIDialogVideoOSD *)g_windowManager.GetWindow(WINDOW_DIALOG_VIDEO_OSD);
     if (pOSD)
     {
       pOSD->SetAutoClose(3000);
@@ -991,7 +991,7 @@ void CGUIWindowFullScreen::OnSliderChange(void *data, CGUISliderControl *slider)
 
 void CGUIWindowFullScreen::ToggleOSD()
 {
-  CGUIWindowOSD *pOSD = (CGUIWindowOSD *)g_windowManager.GetWindow(WINDOW_OSD);
+  CGUIDialogVideoOSD *pOSD = (CGUIDialogVideoOSD *)g_windowManager.GetWindow(WINDOW_DIALOG_VIDEO_OSD);
   if (pOSD)
   {
     if (pOSD->IsDialogRunning())

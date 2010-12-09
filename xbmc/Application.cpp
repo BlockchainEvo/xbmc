@@ -175,7 +175,7 @@
 #include "GUIWindowSlideShow.h"
 #include "GUIWindowStartup.h"
 #include "video/windows/GUIWindowFullScreen.h"
-#include "GUIWindowOSD.h"
+#include "video/dialogs/GUIDialogVideoOSD.h"
 #include "music/dialogs/GUIDialogMusicOverlay.h"
 #include "video/dialogs/GUIDialogVideoOverlay.h"
 
@@ -1090,7 +1090,7 @@ bool CApplication::Initialize()
   g_windowManager.Add(new CGUIWindowKaraokeLyrics);      // window id = 2009
 #endif
 
-  g_windowManager.Add(new CGUIWindowOSD);                // window id = 2901
+  g_windowManager.Add(new CGUIDialogVideoOSD);           // window id = 2901
   g_windowManager.Add(new CGUIDialogMusicOverlay);       // window id = 2903
   g_windowManager.Add(new CGUIDialogVideoOverlay);       // window id = 2904
   g_windowManager.Add(new CGUIWindowScreensaver);        // window id = 2900 Screensaver
@@ -3114,7 +3114,7 @@ bool CApplication::Cleanup()
     g_windowManager.Delete(WINDOW_SCREEN_CALIBRATION);
     g_windowManager.Delete(WINDOW_SYSTEM_INFORMATION);
     g_windowManager.Delete(WINDOW_SCREENSAVER);
-    g_windowManager.Delete(WINDOW_OSD);
+    g_windowManager.Delete(WINDOW_DIALOG_VIDEO_OSD);
     g_windowManager.Delete(WINDOW_DIALOG_MUSIC_OVERLAY);
     g_windowManager.Delete(WINDOW_DIALOG_VIDEO_OVERLAY);
     g_windowManager.Delete(WINDOW_SLIDESHOW);

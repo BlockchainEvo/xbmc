@@ -6,6 +6,7 @@ SRCS=GUIDialogAudioSubtitleSettings.cpp \
      GUIDialogTeletext.cpp \
      GUIDialogVideoBookmarks.cpp \
      GUIDialogVideoInfo.cpp \
+     GUIDialogVideoOSD.cpp \
      GUIDialogVideoOverlay.cpp \
      GUIDialogVideoScan.cpp \
      GUIDialogVideoSettings.cpp \

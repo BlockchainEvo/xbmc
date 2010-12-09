@@ -19,28 +19,28 @@
  *
  */
 
-#include "GUIWindowOSD.h"
+#include "GUIDialogVideoOSD.h"
 #include "Application.h"
 #include "GUIUserMessages.h"
 #include "guilib/GUIWindowManager.h"
 #include "input/MouseStat.h"
 
-CGUIWindowOSD::CGUIWindowOSD(void)
-    : CGUIDialog(WINDOW_OSD, "VideoOSD.xml")
+CGUIDialogVideoOSD::CGUIDialogVideoOSD(void)
+    : CGUIDialog(WINDOW_DIALOG_VIDEO_OSD, "VideoOSD.xml")
 {
 }
 
-CGUIWindowOSD::~CGUIWindowOSD(void)
+CGUIDialogVideoOSD::~CGUIDialogVideoOSD(void)
 {
 }
 
-void CGUIWindowOSD::OnWindowLoaded()
+void CGUIDialogVideoOSD::OnWindowLoaded()
 {
   CGUIDialog::OnWindowLoaded();
   m_bRelativeCoords = true;
 }
 
-void CGUIWindowOSD::FrameMove()
+void CGUIDialogVideoOSD::FrameMove()
 {
   if (m_autoClosing)
   {
@@ -54,7 +54,7 @@ void CGUIWindowOSD::FrameMove()
   CGUIDialog::FrameMove();
 }
 
-bool CGUIWindowOSD::OnAction(const CAction &action)
+bool CGUIDialogVideoOSD::OnAction(const CAction &action)
 {
   if (action.GetID() == ACTION_NEXT_ITEM || action.GetID() == ACTION_PREV_ITEM)
   {
@@ -66,7 +66,7 @@ bool CGUIWindowOSD::OnAction(const CAction &action)
   return CGUIDialog::OnAction(action);
 }
 
-EVENT_RESULT CGUIWindowOSD::OnMouseEvent(const CPoint &point, const CMouseEvent &event)
+EVENT_RESULT CGUIDialogVideoOSD::OnMouseEvent(const CPoint &point, const CMouseEvent &event)
 {
   if (event.m_id == ACTION_MOUSE_WHEEL_UP)
   {
@@ -80,7 +80,7 @@ EVENT_RESULT CGUIWindowOSD::OnMouseEvent(const CPoint &point, const CMouseEvent 
   return CGUIDialog::OnMouseEvent(point, event);
 }
 
-bool CGUIWindowOSD::OnMessage(CGUIMessage& message)
+bool CGUIDialogVideoOSD::OnMessage(CGUIMessage& message)
 {
   switch ( message.GetMessage() )
   {

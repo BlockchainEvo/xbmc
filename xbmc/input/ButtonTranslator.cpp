@@ -280,7 +280,7 @@ static const ActionMapping windows[] =
         {"karaoke"                  , WINDOW_KARAOKELYRICS},
         {"weather"                  , WINDOW_WEATHER},
         {"screensaver"              , WINDOW_SCREENSAVER},
-        {"videoosd"                 , WINDOW_OSD},
+        {"videoosd"                 , WINDOW_DIALOG_VIDEO_OSD},
         {"videomenu"                , WINDOW_VIDEO_MENU},
         {"videotimeseek"            , WINDOW_VIDEO_TIME_SEEK},
         {"musicoverlay"             , WINDOW_DIALOG_MUSIC_OVERLAY},

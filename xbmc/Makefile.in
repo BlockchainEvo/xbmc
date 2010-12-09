@@ -65,7 +65,6 @@ SRCS=Application.cpp \
      GUIWindowFileManager.cpp \
      GUIWindowHome.cpp \
      GUIWindowLoginScreen.cpp \
-     GUIWindowOSD.cpp \
      GUIWindowPictures.cpp \
      GUIWindowPointer.cpp \
      GUIWindowPrograms.cpp \
