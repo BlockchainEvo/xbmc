@@ -5,6 +5,7 @@ SRCS=GUIWindowMusicBase.cpp \
      GUIWindowMusicPlaylist.cpp \
      GUIWindowMusicPlaylistEditor.cpp \
      GUIWindowMusicSongs.cpp \
+     GUIWindowVisualisation.cpp \
 
 LIB=musicwindows.a
 

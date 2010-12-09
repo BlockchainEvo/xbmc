@@ -169,7 +169,7 @@
 #include "GUIWindowWeather.h"
 #include "GUIWindowLoginScreen.h"
 #include "addons/GUIWindowAddonBrowser.h"
-#include "GUIWindowVisualisation.h"
+#include "music/windows/GUIWindowVisualisation.h"
 #include "GUIWindowSystemInfo.h"
 #include "GUIWindowScreensaver.h"
 #include "GUIWindowSlideShow.h"

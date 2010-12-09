@@ -70,7 +70,6 @@ SRCS=Application.cpp \
      GUIWindowPrograms.cpp \
      GUIWindowScreensaver.cpp \
      GUIWindowSystemInfo.cpp \
-     GUIWindowVisualisation.cpp \
      GUIWindowWeather.cpp \
      BackgroundInfoLoader.cpp \
      PictureThumbLoader.cpp \
