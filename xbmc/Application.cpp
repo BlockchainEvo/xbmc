@@ -109,9 +109,9 @@
 #include "cores/VideoRenderers/RenderManager.h"
 #endif
 #ifdef HAS_KARAOKE
-#include "karaoke/karaokelyricsmanager.h"
-#include "karaoke/GUIDialogKaraokeSongSelector.h"
-#include "karaoke/GUIWindowKaraokeLyrics.h"
+#include "music/karaoke/karaokelyricsmanager.h"
+#include "music/karaoke/GUIDialogKaraokeSongSelector.h"
+#include "music/karaoke/GUIWindowKaraokeLyrics.h"
 #endif
 #include "guilib/AudioContext.h"
 #include "guilib/GUIFontTTF.h"

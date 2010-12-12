@@ -27,10 +27,10 @@ BIN_DIRS=	\
 	xbmc/FileSystem/MusicDatabaseDirectory \
 	xbmc/FileSystem/VideoDatabaseDirectory \
 	xbmc/dialogs \
-	xbmc/karaoke \
 	xbmc/music \
 	xbmc/music/dialogs \
 	xbmc/music/infoscanner \
+	xbmc/music/karaoke \
 	xbmc/music/tags \
 	xbmc/music/windows \
 	xbmc/video/dialogs \
@@ -258,8 +258,8 @@ xbmc/input/input.a: force
 	$(MAKE) -C xbmc/input
 xbmc/input/linux/input_linux.a: force
 	$(MAKE) -C xbmc/input/linux
-xbmc/karaoke/karaoke.a: force
-	$(MAKE) -C xbmc/karaoke
+xbmc/music/karaoke/karaoke.a: force
+	$(MAKE) -C xbmc/music/karaoke
 xbmc/network/network.a: force
 	$(MAKE) -C xbmc/network
 xbmc/network/linux/network_linux.a: force
@@ -497,7 +497,7 @@ OBJSXBMC=	\
 	xbmc/FileSystem/VideoDatabaseDirectory/videodatabasedirectory.a \
 	xbmc/input/input.a \
 	xbmc/dialogs/dialogs.a \
-	xbmc/karaoke/karaoke.a \
+	xbmc/music/karaoke/karaoke.a \
 	xbmc/music/music.a \
 	xbmc/music/dialogs/musicdialogs.a \
 	xbmc/music/infoscanner/musicscanner.a \

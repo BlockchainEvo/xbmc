@@ -22,7 +22,7 @@
 #ifdef HAS_DBUS
 #ifndef _DBUS_POWER_SYSCALL_H_
 #define _DBUS_POWER_SYSCALL_H_
-#include "IPowerSyscall.h"
+#include "powermanagement/IPowerSyscall.h"
 
 class CConsoleDeviceKitPowerSyscall : public CPowerSyscallWithoutEvents
 {

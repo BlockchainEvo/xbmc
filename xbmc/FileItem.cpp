@@ -54,7 +54,7 @@
 #include "utils/RegExp.h"
 #include "utils/log.h"
 #include "utils/Variant.h"
-#include "karaoke/karaokelyricsfactory.h"
+#include "music/karaoke/karaokelyricsfactory.h"
 
 using namespace std;
 using namespace XFILE;

@@ -19,7 +19,7 @@
  *
  */
 #pragma once
-#include "IPowerSyscall.h"
+#include "powermanagement/IPowerSyscall.h"
 #include "system.h"
 #ifdef HAS_HAL
 

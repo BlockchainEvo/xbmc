@@ -20,7 +20,7 @@
  */
 
 #ifdef HAS_DBUS
-#include "IPowerSyscall.h"
+#include "powermanagement/IPowerSyscall.h"
 #include "DBusUtil.h"
 
 class CConsoleUPowerSyscall : public IPowerSyscall
