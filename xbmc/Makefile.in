@@ -26,7 +26,6 @@ SRCS=Application.cpp \
      LangInfo.cpp \
      NfoFile.cpp \
      PartyModeManager.cpp \
-     Profile.cpp \
      SectionLoader.cpp \
      Shortcut.cpp \
      SortFileItem.cpp \

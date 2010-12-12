@@ -33,7 +33,7 @@
 #include "utils/Weather.h"
 #include "network/Network.h"
 #include "addons/Skin.h"
-#include "Profile.h"
+#include "settings/Profile.h"
 #include "guilib/GUIWindowManager.h"
 #include "dialogs/GUIDialogOK.h"
 #include "settings/Settings.h"

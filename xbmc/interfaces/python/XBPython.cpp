@@ -42,7 +42,6 @@
 #include "XBPython.h"
 #include "XBPythonDll.h"
 #include "settings/Settings.h"
-#include "Profile.h"
 #include "FileSystem/File.h"
 #include "FileSystem/SpecialProtocol.h"
 #include "utils/log.h"

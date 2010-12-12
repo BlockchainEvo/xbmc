@@ -29,7 +29,6 @@
 #include "Autorun.h"
 #include "utils/LabelFormatter.h"
 #include "Autorun.h"
-#include "Profile.h"
 #include "guilib/GUIWindowManager.h"
 #include "dialogs/GUIDialogYesNo.h"
 #include "dialogs/GUIDialogKeyboard.h"

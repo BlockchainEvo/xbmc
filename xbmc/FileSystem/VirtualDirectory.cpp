@@ -25,7 +25,6 @@
 #include "FactoryDirectory.h"
 #include "settings/Settings.h"
 #include "Util.h"
-#include "Profile.h"
 #include "Directory.h"
 #include "DirectoryCache.h"
 #include "storage/MediaManager.h"
