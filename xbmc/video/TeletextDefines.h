@@ -21,7 +21,7 @@
  *
  */
 
-#include "StringUtils.h"
+#include "utils/StdString.h"
 
 #define FLOFSIZE 4
 #define PAGESIZE (40*25)

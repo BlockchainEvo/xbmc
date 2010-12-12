@@ -43,7 +43,6 @@ SRCS=AlarmClock.cpp \
      StreamDetails.cpp \
      TimeUtils.cpp \
      JobManager.cpp \
-     Teletext.cpp \
      fastmemcpy.c \
      PasswordManager.cpp \
      AliasShortcutUtils.cpp \

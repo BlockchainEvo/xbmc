@@ -21,7 +21,7 @@
  */
 
 #include "guilib/GUIDialog.h"
-#include "utils/Teletext.h"
+#include "video/Teletext.h"
 
 class CBaseTexture;
 

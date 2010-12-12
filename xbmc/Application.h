@@ -51,7 +51,7 @@ namespace ADDON
 #include "win32/WIN32Util.h"
 #endif
 #include "Autorun.h"
-#include "Bookmark.h"
+#include "video/Bookmark.h"
 #include "utils/Stopwatch.h"
 #include "ApplicationMessenger.h"
 #include "network/Network.h"

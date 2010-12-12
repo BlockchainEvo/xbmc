@@ -50,7 +50,6 @@ SRCS=Application.cpp \
      GUILargeTextureManager.cpp \
      MediaSource.cpp \
      DPMSSupport.cpp \
-     Bookmark.cpp \
      TextureCache.cpp \
      TextureDatabase.cpp \
      SystemGlobals.cpp \
