@@ -22,7 +22,7 @@
 #include "Texture.h"
 #include "windowing/WindowingFactory.h"
 #include "utils/log.h"
-#include "DllImageLib.h"
+#include "pictures/DllImageLib.h"
 #include "DDSImage.h"
 #include "Util.h"
 
