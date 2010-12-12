@@ -21,7 +21,7 @@
 
 #include "DllLibCMyth.h"
 #include "MythSession.h"
-#include "VideoInfoTag.h"
+#include "video/VideoInfoTag.h"
 #include "settings/AdvancedSettings.h"
 #include "DateTime.h"
 #include "FileItem.h"

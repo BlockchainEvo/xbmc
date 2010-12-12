@@ -23,7 +23,7 @@
 #include "VideoDatabase.h"
 #include "addons/Scraper.h"
 #include "NfoFile.h"
-#include "utils/IMDB.h"
+#include "IMDB.h"
 #include "DateTime.h"
 
 class CIMDB;

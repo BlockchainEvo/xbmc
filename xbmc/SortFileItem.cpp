@@ -22,7 +22,6 @@
 #include "SortFileItem.h"
 #include "settings/AdvancedSettings.h"
 #include "utils/StringUtils.h"
-#include "VideoInfoTag.h"
 #include "music/tags/MusicInfoTag.h"
 #include "FileItem.h"
 #include "URL.h"

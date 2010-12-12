@@ -21,18 +21,18 @@
 
 #include "IMDB.h"
 #include "Util.h"
-#include "HTMLUtil.h"
-#include "XMLUtils.h"
-#include "RegExp.h"
-#include "ScraperParser.h"
+#include "utils/HTMLUtil.h"
+#include "utils/XMLUtils.h"
+#include "utils/RegExp.h"
+#include "utils/ScraperParser.h"
 #include "NfoFile.h"
 #include "dialogs/GUIDialogProgress.h"
-#include "fstrcmp.h"
+#include "utils/fstrcmp.h"
 #include "dialogs/GUIDialogOK.h"
 #include "Application.h"
 #include "guilib/GUIWindowManager.h"
 #include "guilib/LocalizeStrings.h"
-#include "log.h"
+#include "utils/log.h"
 
 using namespace HTML;
 using namespace std;

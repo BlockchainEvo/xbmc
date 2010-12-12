@@ -33,7 +33,7 @@
 #include "guilib/GUIImage.h"
 #include "utils/Weather.h"
 #include "music/MusicDatabase.h"
-#include "VideoDatabase.h"
+#include "video/VideoDatabase.h"
 #include "ViewDatabase.h"
 #ifdef HAS_LCD
 #include "utils/LCDFactory.h"

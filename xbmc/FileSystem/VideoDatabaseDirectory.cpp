@@ -22,7 +22,7 @@
 #include "VideoDatabaseDirectory.h"
 #include "Util.h"
 #include "VideoDatabaseDirectory/QueryParams.h"
-#include "VideoDatabase.h"
+#include "video/VideoDatabase.h"
 #include "guilib/TextureManager.h"
 #include "FileSystem/File.h"
 #include "FileItem.h"

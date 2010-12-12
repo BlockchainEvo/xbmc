@@ -21,7 +21,7 @@
 
 #include "URL.h"
 #include "PlayerSelectionRule.h"
-#include "VideoInfoTag.h"
+#include "video/VideoInfoTag.h"
 #include "utils/StreamDetails.h"
 #include "settings/GUISettings.h"
 #include "utils/log.h"

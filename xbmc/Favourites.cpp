@@ -25,7 +25,6 @@
 #include "guilib/Key.h"
 #include "settings/Settings.h"
 #include "FileItem.h"
-#include "VideoInfoTag.h"
 #include "tinyXML/tinyxml.h"
 #include "utils/log.h"
 #include "settings/AdvancedSettings.h"

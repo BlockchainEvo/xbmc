@@ -25,7 +25,7 @@
 #include "GUIPassword.h"
 #include "Util.h"
 #include "Application.h"
-#include "VideoDatabase.h"
+#include "video/VideoDatabase.h"
 #include "dialogs/GUIDialogYesNo.h"
 #include "FileSystem/Directory.h"
 #include "FileSystem/File.h"

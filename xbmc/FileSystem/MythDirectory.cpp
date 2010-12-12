@@ -23,7 +23,7 @@
 #include "MythSession.h"
 #include "Util.h"
 #include "DllLibCMyth.h"
-#include "VideoInfoTag.h"
+#include "video/VideoInfoTag.h"
 #include "URL.h"
 #include "settings/GUISettings.h"
 #include "settings/AdvancedSettings.h"

@@ -14,7 +14,6 @@ SRCS=AlarmClock.cpp \
      HTMLTable.cpp \
      HTMLUtil.cpp \
      HttpHeader.cpp \
-     IMDB.cpp \
      InfoLoader.cpp \
      log.cpp \
      RegExp.cpp \

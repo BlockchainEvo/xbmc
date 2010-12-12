@@ -29,7 +29,7 @@
 #include "utils/md5.h"
 #include "pictures/Picture.h"
 #include "FileSystem/StackDirectory.h"
-#include "utils/IMDB.h"
+#include "IMDB.h"
 #include "utils/GUIInfoManager.h"
 #include "FileSystem/File.h"
 #include "dialogs/GUIDialogProgress.h"

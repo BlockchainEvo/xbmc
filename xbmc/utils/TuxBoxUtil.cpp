@@ -29,7 +29,7 @@
 #include "dialogs/GUIDialogContextMenu.h"
 #include "Application.h"
 #include "GUIInfoManager.h"
-#include "VideoInfoTag.h"
+#include "video/VideoInfoTag.h"
 #include "guilib/GUIWindowManager.h"
 #include "dialogs/GUIDialogOK.h"
 #include "dialogs/GUIDialogYesNo.h"

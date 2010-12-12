@@ -22,7 +22,7 @@
  */
 
 #include "guilib/GUIDialog.h"
-#include "VideoInfoScanner.h"
+#include "video/VideoInfoScanner.h"
 #include "threads/CriticalSection.h"
 
 class CGUIDialogVideoScan: public CGUIDialog, public VIDEO::IVideoInfoScannerObserver

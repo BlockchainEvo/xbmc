@@ -26,8 +26,8 @@
 #include "addons/IAddon.h"
 #include "Application.h"
 #include "FileItem.h"
-#include "VideoDatabase.h"
-#include "VideoInfoScanner.h"
+#include "video/VideoDatabase.h"
+#include "video/VideoInfoScanner.h"
 #include "GUISettings.h"
 
 #define CONTROL_CONTENT_TYPE        3

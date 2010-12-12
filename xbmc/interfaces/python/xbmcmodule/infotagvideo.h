@@ -35,8 +35,8 @@
 #else
   #include "python/Include/Python.h"
 #endif
-#include "VideoInfoTag.h"
-#include "../../../utils/IMDB.h"
+#include "video/VideoInfoTag.h"
+#include "video/IMDB.h"
 
 #pragma once
 

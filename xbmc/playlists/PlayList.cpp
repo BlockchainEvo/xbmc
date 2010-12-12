@@ -23,7 +23,7 @@
 #include "Util.h"
 #include "PlayListFactory.h"
 #include <sstream>
-#include "VideoInfoTag.h"
+#include "video/VideoInfoTag.h"
 #include "music/tags/MusicInfoTag.h"
 #include "FileSystem/File.h"
 #include "utils/log.h"

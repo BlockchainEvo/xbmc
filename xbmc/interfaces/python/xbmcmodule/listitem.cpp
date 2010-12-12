@@ -38,7 +38,7 @@
 #include "../XBPythonDll.h"
 #include "listitem.h"
 #include "pyutil.h"
-#include "VideoInfoTag.h"
+#include "video/VideoInfoTag.h"
 #include "pictures/PictureInfoTag.h"
 #include "music/tags/MusicInfoTag.h"
 #include "FileItem.h"

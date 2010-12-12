@@ -23,7 +23,7 @@
 #include "settings/AdvancedSettings.h"
 #include "settings/GUISettings.h"
 #include "settings/Settings.h"
-#include "VideoReferenceClock.h"
+#include "video/VideoReferenceClock.h"
 #include "MathUtils.h"
 #include "DVDPlayer.h"
 #include "DVDPlayerVideo.h"

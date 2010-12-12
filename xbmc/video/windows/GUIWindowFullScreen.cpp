@@ -40,7 +40,7 @@
 #include "guilib/GUISliderControl.h"
 #include "settings/Settings.h"
 #include "FileItem.h"
-#include "VideoReferenceClock.h"
+#include "video/VideoReferenceClock.h"
 #include "settings/AdvancedSettings.h"
 #include "utils/CPUInfo.h"
 #include "settings/GUISettings.h"

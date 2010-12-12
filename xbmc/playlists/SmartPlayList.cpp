@@ -26,7 +26,7 @@
 #include "FileSystem/File.h"
 #include "utils/CharsetConverter.h"
 #include "utils/XMLUtils.h"
-#include "VideoDatabase.h"
+#include "video/VideoDatabase.h"
 #include "Util.h"
 #include "DateTime.h"
 #include "guilib/LocalizeStrings.h"

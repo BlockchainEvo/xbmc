@@ -24,7 +24,7 @@
 #include "ILiveTV.h"
 #include "MythSession.h"
 #include "DateTime.h"
-#include "VideoInfoTag.h"
+#include "video/VideoInfoTag.h"
 
 #undef max
 

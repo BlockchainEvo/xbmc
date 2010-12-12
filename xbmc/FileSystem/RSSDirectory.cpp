@@ -27,7 +27,7 @@
 #include "tinyXML/tinyxml.h"
 #include "utils/HTMLUtil.h"
 #include "utils/StringUtils.h"
-#include "VideoInfoTag.h"
+#include "video/VideoInfoTag.h"
 #include "music/tags/MusicInfoTag.h"
 #include "utils/log.h"
 #include "URL.h"

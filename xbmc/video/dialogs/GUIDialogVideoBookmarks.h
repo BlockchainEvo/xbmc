@@ -23,7 +23,7 @@
 
 #include "guilib/GUIDialog.h"
 #include "GUIViewControl.h"
-#include "VideoDatabase.h"
+#include "video/VideoDatabase.h"
 
 class CFileItemList;
 

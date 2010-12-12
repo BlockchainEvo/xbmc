@@ -21,7 +21,6 @@
 
 #include "VTPDirectory.h"
 #include "VTPSession.h"
-#include "VideoInfoTag.h"
 #include "URL.h"
 #include "Util.h"
 #include "FileItem.h"

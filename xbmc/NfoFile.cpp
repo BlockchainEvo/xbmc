@@ -23,7 +23,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "NfoFile.h"
-#include "utils/IMDB.h"
+#include "video/IMDB.h"
 #include "addons/AddonManager.h"
 #include "FileSystem/File.h"
 #include "FileSystem/Directory.h"

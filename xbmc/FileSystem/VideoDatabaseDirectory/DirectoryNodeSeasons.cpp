@@ -21,7 +21,7 @@
 
 #include "DirectoryNodeSeasons.h"
 #include "QueryParams.h"
-#include "VideoDatabase.h"
+#include "video/VideoDatabase.h"
 #include "settings/GUISettings.h"
 #include "settings/Settings.h"
 #include "FileItem.h"

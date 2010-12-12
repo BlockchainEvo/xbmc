@@ -14,8 +14,6 @@ SRCS=Application.cpp \
      CueDocument.cpp \
      GUIViewControl.cpp \
      GUIViewState.cpp \
-     GUIViewStateVideo.cpp \
-     VideoInfoScanner.cpp \
      PlayListPlayer.cpp \
      AutoSwitch.cpp \
      DateTime.cpp \
@@ -31,8 +29,6 @@ SRCS=Application.cpp \
      Temperature.cpp \
      ThumbnailCache.cpp \
      URL.cpp \
-     VideoInfoTag.cpp \
-     VideoDatabase.cpp \
      ViewDatabase.cpp \
      GUIMediaWindow.cpp \
      GUIWindowFileManager.cpp \
@@ -53,7 +49,6 @@ SRCS=Application.cpp \
      GUIWindowStartup.cpp \
      GUILargeTextureManager.cpp \
      MediaSource.cpp \
-     VideoReferenceClock.cpp \
      DPMSSupport.cpp \
      Bookmark.cpp \
      TextureCache.cpp \

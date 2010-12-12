@@ -21,7 +21,7 @@
 
 #include "system.h"
 #include "GUIDialogVideoBookmarks.h"
-#include "VideoDatabase.h"
+#include "video/VideoDatabase.h"
 #include "Application.h"
 #include "Util.h"
 #ifdef HAS_VIDEO_PLAYBACK

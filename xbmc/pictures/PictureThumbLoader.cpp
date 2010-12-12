@@ -24,7 +24,6 @@
 #include "URL.h"
 #include "FileSystem/File.h"
 #include "FileItem.h"
-#include "VideoInfoTag.h"
 #include "TextureCache.h"
 #include "FileSystem/Directory.h"
 #include "FileSystem/MultiPathDirectory.h"

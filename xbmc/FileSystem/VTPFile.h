@@ -22,7 +22,7 @@
 
 #include "IFile.h"
 #include "ILiveTV.h"
-#include "VideoInfoTag.h"
+#include "video/VideoInfoTag.h"
 
 
 class CVTPSession;

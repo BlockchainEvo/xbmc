@@ -22,7 +22,7 @@
 #include "system.h"
 #include "GUIWindowVideoBase.h"
 #include "Util.h"
-#include "utils/IMDB.h"
+#include "video/IMDB.h"
 #include "utils/RegExp.h"
 #include "utils/GUIInfoManager.h"
 #include "utils/Variant.h"

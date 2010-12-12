@@ -29,7 +29,7 @@
 #ifdef HAS_VIDEO_PLAYBACK
 #include "cores/VideoRenderers/RenderManager.h"
 #endif
-#include "VideoDatabase.h"
+#include "video/VideoDatabase.h"
 #include "dialogs/GUIDialogYesNo.h"
 #include "settings/Settings.h"
 #include "addons/Skin.h"

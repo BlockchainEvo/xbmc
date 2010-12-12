@@ -22,7 +22,7 @@
 #include "system.h"
 #include "RenderManager.h"
 #include "threads/CriticalSection.h"
-#include "VideoReferenceClock.h"
+#include "video/VideoReferenceClock.h"
 #include "utils/MathUtils.h"
 #include "threads/SingleLock.h"
 #include "utils/log.h"

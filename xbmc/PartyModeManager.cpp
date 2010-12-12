@@ -22,7 +22,6 @@
 #include "PartyModeManager.h"
 #include "PlayListPlayer.h"
 #include "music/MusicDatabase.h"
-#include "VideoDatabase.h"
 #include "music/windows/GUIWindowMusicPlaylist.h"
 #include "playlists/SmartPlayList.h"
 #include "dialogs/GUIDialogProgress.h"

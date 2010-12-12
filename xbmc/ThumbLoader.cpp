@@ -31,8 +31,6 @@
 #include "guilib/GUIWindowManager.h"
 #include "guilib/TextureManager.h"
 #include "TextureCache.h"
-#include "VideoInfoTag.h"
-#include "VideoDatabase.h"
 #include "utils/log.h"
 #include "programs/Shortcut.h"
 

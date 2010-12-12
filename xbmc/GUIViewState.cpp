@@ -22,7 +22,7 @@
 #include "GUIViewState.h"
 #include "addons/GUIViewStateAddonBrowser.h"
 #include "music/GUIViewStateMusic.h"
-#include "GUIViewStateVideo.h"
+#include "video/GUIViewStateVideo.h"
 #include "pictures/GUIViewStatePictures.h"
 #include "programs/GUIViewStatePrograms.h"
 #include "PlayListPlayer.h"
