@@ -23,7 +23,7 @@
 #include "VideoDatabase.h"
 #include "addons/Scraper.h"
 #include "NfoFile.h"
-#include "IMDB.h"
+#include "VideoInfoDownloader.h"
 #include "DateTime.h"
 
 class CIMDB;
@@ -220,7 +220,7 @@ namespace VIDEO
      \return INFO_ERROR on failure, INFO_CANCELLED on cancellation,
      INFO_NOT_FOUND if an episode isn't found, or INFO_ADDED if all episodes are added.
      */
-    INFO_RET OnProcessSeriesFolder(IMDB_EPISODELIST& episodes, EPISODES& files, const ADDON::ScraperPtr &scraper, bool useLocal, int idShow, const CStdString& strShowTitle, CGUIDialogProgress* pDlgProgress = NULL);
+    INFO_RET OnProcessSeriesFolder(EPISODELIST& episodes, EPISODES& files, const ADDON::ScraperPtr &scraper, bool useLocal, int idShow, const CStdString& strShowTitle, CGUIDialogProgress* pDlgProgress = NULL);
 
     void EnumerateSeriesFolder(CFileItem* item, EPISODES& episodeList);
     bool ProcessItemByVideoInfoTag(const CFileItemPtr item, EPISODES &episodeList);

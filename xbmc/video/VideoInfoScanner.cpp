@@ -29,7 +29,7 @@
 #include "utils/md5.h"
 #include "pictures/Picture.h"
 #include "FileSystem/StackDirectory.h"
-#include "IMDB.h"
+#include "VideoInfoDownloader.h"
 #include "utils/GUIInfoManager.h"
 #include "FileSystem/File.h"
 #include "dialogs/GUIDialogProgress.h"
@@ -608,7 +608,7 @@ namespace VIDEO
 
   INFO_RET CVideoInfoScanner::RetrieveInfoForEpisodes(CFileItemPtr item, long showID, const ADDON::ScraperPtr &scraper, bool useLocal, CGUIDialogProgress *progress)
   {
-    IMDB_EPISODELIST episodes;
+    EPISODELIST episodes;
 
     // enumerate episodes
     EPISODES files;
@@ -636,7 +636,7 @@ namespace VIDEO
         progress->Progress();
       }
 
-      CIMDB imdb(scraper);
+      CVideoInfoDownloader imdb(scraper);
       if (!imdb.GetEpisodeList(url, episodes))
         return INFO_NOT_FOUND;
     }
@@ -1175,7 +1175,7 @@ namespace VIDEO
     }
   }
 
-  INFO_RET CVideoInfoScanner::OnProcessSeriesFolder(IMDB_EPISODELIST& episodes, EPISODES& files, const ADDON::ScraperPtr &scraper, bool useLocal, int idShow, const CStdString& strShowTitle, CGUIDialogProgress* pDlgProgress /* = NULL */)
+  INFO_RET CVideoInfoScanner::OnProcessSeriesFolder(EPISODELIST& episodes, EPISODES& files, const ADDON::ScraperPtr &scraper, bool useLocal, int idShow, const CStdString& strShowTitle, CGUIDialogProgress* pDlgProgress /* = NULL */)
   {
     if (pDlgProgress)
     {
@@ -1249,8 +1249,8 @@ namespace VIDEO
       key.first = file->iSeason;
       key.second = file->iEpisode;
       bool bFound = false;
-      IMDB_EPISODELIST::iterator guide = episodes.begin();;
-      IMDB_EPISODELIST matches;
+      EPISODELIST::iterator guide = episodes.begin();;
+      EPISODELIST matches;
 
       for (; guide != episodes.end(); ++guide )
       {
@@ -1288,7 +1288,7 @@ namespace VIDEO
         {
           double minscore = 0; // Default minimum score is 0 to find whatever is the best match.
 
-          IMDB_EPISODELIST *candidates;
+          EPISODELIST *candidates;
           if (matches.empty()) // No matches found using earlier criteria. Use fuzzy match on titles across all episodes.
           {
             minscore = 0.8; // 80% should ensure a good match.
@@ -1315,7 +1315,7 @@ namespace VIDEO
 
       if (bFound)
       {
-        CIMDB imdb(scraper);
+        CVideoInfoDownloader imdb(scraper);
         CFileItem item;
         item.m_strPath = file->strPath;
         if (!imdb.GetEpisodeDetails(guide->cScraperUrl, *item.GetVideoInfoTag(), pDlgProgress))
@@ -1469,7 +1469,7 @@ namespace VIDEO
     CVideoInfoTag movieDetails;
     movieDetails.m_strFileNameAndPath = pItem->m_strPath;
 
-    CIMDB imdb(scraper);
+    CVideoInfoDownloader imdb(scraper);
     if ( imdb.GetDetails(url, movieDetails, pDialog) )
     {
       if (nfoFile)
@@ -1717,8 +1717,8 @@ namespace VIDEO
 
   int CVideoInfoScanner::FindVideo(const CStdString &videoName, const ScraperPtr &scraper, CScraperUrl &url, CGUIDialogProgress *progress)
   {
-    IMDB_MOVIELIST movielist;
-    CIMDB imdb(scraper);
+    MOVIELIST movielist;
+    CVideoInfoDownloader imdb(scraper);
     int returncode = imdb.FindMovie(videoName, movielist, progress);
     if (returncode < 0 || (returncode == 0 && !DownloadFailed(progress)))
     { // scraper reported an error, or we had an error and user wants to cancel the scan

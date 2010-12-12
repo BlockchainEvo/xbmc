@@ -19,7 +19,7 @@
  *
  */
 
-#include "IMDB.h"
+#include "VideoInfoDownloader.h"
 #include "Util.h"
 #include "utils/HTMLUtil.h"
 #include "utils/XMLUtils.h"
@@ -44,17 +44,19 @@ using namespace std;
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
-CIMDB::CIMDB(const ADDON::ScraperPtr &scraper)
+CVideoInfoDownloader::CVideoInfoDownloader(const ADDON::ScraperPtr &scraper)
 {
   m_info = scraper;
 }
 
-CIMDB::~CIMDB()
+CVideoInfoDownloader::~CVideoInfoDownloader()
 {
 }
 
-int CIMDB::InternalFindMovie(const CStdString &strMovie,
-                             IMDB_MOVIELIST& movielist, bool& sortMovieList, bool cleanChars /* = true */)
+int CVideoInfoDownloader::InternalFindMovie(const CStdString &strMovie,
+                                            MOVIELIST& movielist,
+                                            bool& sortMovieList,
+                                            bool cleanChars /* = true */)
 {
   movielist.clear();
 
@@ -176,7 +178,7 @@ int CIMDB::InternalFindMovie(const CStdString &strMovie,
           title.AppendFormat(" (%s)", language->FirstChild()->Value());
         url.strTitle = title;
         // filter for dupes from naughty scrapers
-        IMDB_MOVIELIST::iterator iter=movielist.begin();
+        MOVIELIST::iterator iter=movielist.begin();
         while (iter != movielist.end())
         {
           if (iter->m_url[0].m_url.Equals(url.m_url[0].m_url) &&
@@ -193,12 +195,13 @@ int CIMDB::InternalFindMovie(const CStdString &strMovie,
   return haveValidResults ? 1 : 0;
 }
 
-bool CIMDB::RelevanceSortFunction(const CScraperUrl &left, const CScraperUrl &right)
+bool CVideoInfoDownloader::RelevanceSortFunction(const CScraperUrl &left,
+                                                 const CScraperUrl &right)
 {
   return left.relevance > right.relevance;
 }
 
-void CIMDB::ShowErrorDialog(const TiXmlElement* element)
+void CVideoInfoDownloader::ShowErrorDialog(const TiXmlElement* element)
 {
   const TiXmlElement* title = element->FirstChildElement("title");
   CStdString strTitle;
@@ -214,9 +217,10 @@ void CIMDB::ShowErrorDialog(const TiXmlElement* element)
   g_application.getApplicationMessenger().DoModal(dialog,WINDOW_DIALOG_OK);
 }
 
-bool CIMDB::InternalGetEpisodeList(const CScraperUrl& url, IMDB_EPISODELIST& details)
+bool CVideoInfoDownloader::InternalGetEpisodeList(const CScraperUrl& url,
+                                                  EPISODELIST& details)
 {
-  IMDB_EPISODELIST temp;
+  EPISODELIST temp;
   vector<CStdString> extras;
   if (url.m_url.empty())
     return false;
@@ -263,7 +267,7 @@ bool CIMDB::InternalGetEpisodeList(const CScraperUrl& url, IMDB_EPISODELIST& det
         if (id && id->FirstChild())
           url2.strId = id->FirstChild()->Value();
         pair<int,int> key(atoi(season->FirstChild()->Value()),atoi(epnum->FirstChild()->Value()));
-        IMDB_EPISODE newEpisode;
+        EPISODE newEpisode;
         newEpisode.key = key;
         newEpisode.cDate.SetValid(FALSE);
         if (aired && aired->FirstChild())
@@ -290,7 +294,7 @@ bool CIMDB::InternalGetEpisodeList(const CScraperUrl& url, IMDB_EPISODELIST& det
 
   // find minimum in each season
   map<int,int> min;
-  for (IMDB_EPISODELIST::iterator iter=temp.begin(); iter != temp.end(); ++iter )
+  for (EPISODELIST::iterator iter=temp.begin(); iter != temp.end(); ++iter )
   {
     if ((signed int) min.size() == (iter->key.first -1))
       min.insert(iter->key);
@@ -298,13 +302,13 @@ bool CIMDB::InternalGetEpisodeList(const CScraperUrl& url, IMDB_EPISODELIST& det
       min[iter->key.first] = iter->key.second;
   }
   // correct episode numbers
-  for (IMDB_EPISODELIST::iterator iter=temp.begin(); iter != temp.end(); ++iter )
+  for (EPISODELIST::iterator iter=temp.begin(); iter != temp.end(); ++iter )
   {
     int episode=iter->key.second - min[iter->key.first];
     if (min[iter->key.first] > 0)
       episode++;
     pair<int,int> key(iter->key.first,episode);
-    IMDB_EPISODE newEpisode;
+    EPISODE newEpisode;
     newEpisode.key = key;
     newEpisode.cDate = iter->cDate;
     newEpisode.cScraperUrl = iter->cScraperUrl;
@@ -314,7 +318,9 @@ bool CIMDB::InternalGetEpisodeList(const CScraperUrl& url, IMDB_EPISODELIST& det
   return true;
 }
 
-bool CIMDB::InternalGetDetails(const CScraperUrl& url, CVideoInfoTag& movieDetails, const CStdString& strFunction)
+bool CVideoInfoDownloader::InternalGetDetails(const CScraperUrl& url,
+                                              CVideoInfoTag& movieDetails,
+                                              const CStdString& strFunction)
 {
   if (url.m_xml.Equals("filenamescrape"))
     return ScrapeFilename(movieDetails.m_strFileNameAndPath,movieDetails);
@@ -341,7 +347,8 @@ bool CIMDB::InternalGetDetails(const CScraperUrl& url, CVideoInfoTag& movieDetai
   return true;
 }
 
-bool CIMDB::ParseDetails(TiXmlDocument &doc, CVideoInfoTag &movieDetails)
+bool CVideoInfoDownloader::ParseDetails(TiXmlDocument &doc,
+                                        CVideoInfoTag &movieDetails)
 {
   TiXmlHandle docHandle( &doc );
   TiXmlElement *details = docHandle.FirstChild( "details" ).Element();
@@ -358,13 +365,16 @@ bool CIMDB::ParseDetails(TiXmlDocument &doc, CVideoInfoTag &movieDetails)
   return true;
 }
 
-void CIMDB::RemoveAllAfter(char* szMovie, const char* szSearch)
+void CVideoInfoDownloader::RemoveAllAfter(char* szMovie, const char* szSearch)
 {
   char* pPtr = strstr(szMovie, szSearch);
   if (pPtr) *pPtr = 0;
 }
 
-void CIMDB::GetURL(const CStdString &movieFile, const CStdString &movieName, const CStdString &movieYear, CScraperUrl& scrURL)
+void CVideoInfoDownloader::GetURL(const CStdString &movieFile,
+                                  const CStdString &movieName,
+                                  const CStdString &movieYear,
+                                  CScraperUrl& scrURL)
 {
   // convert to the encoding requested by the parser
   vector<CStdString> extras;
@@ -381,7 +391,7 @@ void CIMDB::GetURL(const CStdString &movieFile, const CStdString &movieName, con
 }
 
 // threaded functions
-void CIMDB::Process()
+void CVideoInfoDownloader::Process()
 {
   // note here that we're calling our external functions but we're calling them with
   // no progress bar set, so they're effectively calling our internal functions directly.
@@ -419,9 +429,11 @@ void CIMDB::Process()
   m_state = DO_NOTHING;
 }
 
-int CIMDB::FindMovie(const CStdString &strMovie, IMDB_MOVIELIST& movieList, CGUIDialogProgress *pProgress /* = NULL */)
+int CVideoInfoDownloader::FindMovie(const CStdString &strMovie,
+                                    MOVIELIST& movieList,
+                                    CGUIDialogProgress *pProgress /* = NULL */)
 {
-  //CLog::Log(LOGDEBUG,"CIMDB::FindMovie(%s)", strMovie.c_str());
+  //CLog::Log(LOGDEBUG,"CVideoInfoDownloader::FindMovie(%s)", strMovie.c_str());
 
   // load our scraper xml
   if (!m_info->Load())
@@ -469,9 +481,11 @@ int CIMDB::FindMovie(const CStdString &strMovie, IMDB_MOVIELIST& movieList, CGUI
   return success;
 }
 
-bool CIMDB::GetDetails(const CScraperUrl &url, CVideoInfoTag &movieDetails, CGUIDialogProgress *pProgress /* = NULL */)
+bool CVideoInfoDownloader::GetDetails(const CScraperUrl &url,
+                                      CVideoInfoTag &movieDetails,
+                                      CGUIDialogProgress *pProgress /* = NULL */)
 {
-  //CLog::Log(LOGDEBUG,"CIMDB::GetDetails(%s)", url.m_strURL.c_str());
+  //CLog::Log(LOGDEBUG,"CVideoInfoDownloader::GetDetails(%s)", url.m_strURL.c_str());
   m_url = url;
   m_movieDetails = movieDetails;
   // load our scraper xml
@@ -505,9 +519,11 @@ bool CIMDB::GetDetails(const CScraperUrl &url, CVideoInfoTag &movieDetails, CGUI
     return InternalGetDetails(url, movieDetails);
 }
 
-bool CIMDB::GetEpisodeDetails(const CScraperUrl &url, CVideoInfoTag &movieDetails, CGUIDialogProgress *pProgress /* = NULL */)
+bool CVideoInfoDownloader::GetEpisodeDetails(const CScraperUrl &url,
+                                             CVideoInfoTag &movieDetails,
+                                             CGUIDialogProgress *pProgress /* = NULL */)
 {
-  //CLog::Log(LOGDEBUG,"CIMDB::GetDetails(%s)", url.m_strURL.c_str());
+  //CLog::Log(LOGDEBUG,"CVideoInfoDownloader::GetDetails(%s)", url.m_strURL.c_str());
   m_url = url;
   m_movieDetails = movieDetails;
 
@@ -542,9 +558,11 @@ bool CIMDB::GetEpisodeDetails(const CScraperUrl &url, CVideoInfoTag &movieDetail
     return InternalGetDetails(url, movieDetails, "GetEpisodeDetails");
 }
 
-bool CIMDB::GetEpisodeList(const CScraperUrl& url, IMDB_EPISODELIST& movieDetails, CGUIDialogProgress *pProgress /* = NULL */)
+bool CVideoInfoDownloader::GetEpisodeList(const CScraperUrl& url,
+                                          EPISODELIST& movieDetails,
+                                          CGUIDialogProgress *pProgress /* = NULL */)
 {
-  //CLog::Log(LOGDEBUG,"CIMDB::GetDetails(%s)", url.m_strURL.c_str());
+  //CLog::Log(LOGDEBUG,"CVideoInfoDownloader::GetDetails(%s)", url.m_strURL.c_str());
   m_url = url;
   m_episode = movieDetails;
 
@@ -579,7 +597,7 @@ bool CIMDB::GetEpisodeList(const CScraperUrl& url, IMDB_EPISODELIST& movieDetail
     return InternalGetEpisodeList(url, movieDetails);
 }
 
-void CIMDB::CloseThread()
+void CVideoInfoDownloader::CloseThread()
 {
   m_http.Cancel();
   StopThread();
@@ -588,7 +606,8 @@ void CIMDB::CloseThread()
   m_found = 0;
 }
 
-bool CIMDB::ScrapeFilename(const CStdString& strFileName, CVideoInfoTag& details)
+bool CVideoInfoDownloader::ScrapeFilename(const CStdString& strFileName,
+                                          CVideoInfoTag& details)
 {
   CScraperUrl url;
   vector<CStdString> extras;

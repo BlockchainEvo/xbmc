@@ -36,7 +36,7 @@
 #include "guilib/GUISpinControlEx.h"
 #include "guilib/GUIImage.h"
 #include "FileSystem/Directory.h"
-#include "VideoInfoScanner.h"
+#include "video/VideoInfoScanner.h"
 #include "addons/Scraper.h"
 #include "guilib/GUIWindowManager.h"
 #include "Application.h"

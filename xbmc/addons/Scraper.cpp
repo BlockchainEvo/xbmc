@@ -31,7 +31,7 @@
 #include "FileItem.h"
 #include "utils/XMLUtils.h"
 #include "music/MusicDatabase.h"
-#include "VideoDatabase.h"
+#include "video/VideoDatabase.h"
 #include <sstream>
 
 using namespace std;

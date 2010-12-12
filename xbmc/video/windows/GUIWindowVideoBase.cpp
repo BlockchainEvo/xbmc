@@ -22,7 +22,7 @@
 #include "system.h"
 #include "GUIWindowVideoBase.h"
 #include "Util.h"
-#include "video/IMDB.h"
+#include "video/VideoInfoDownloader.h"
 #include "utils/RegExp.h"
 #include "utils/GUIInfoManager.h"
 #include "utils/Variant.h"
@@ -499,7 +499,7 @@ bool CGUIWindowVideoBase::ShowIMDB(CFileItem *item, const ScraperPtr &info2)
 
     // 4. if we don't have an url, or need to refresh the search
     //    then do the web search
-    IMDB_MOVIELIST movielist;
+    MOVIELIST movielist;
     if (info->Content() == CONTENT_TVSHOWS && !item->m_bIsFolder)
       hasDetails = true;
 
@@ -517,7 +517,7 @@ bool CGUIWindowVideoBase::ShowIMDB(CFileItem *item, const ScraperPtr &info2)
 
       // 4b. do the websearch
       info->ClearCache();
-      CIMDB imdb(info);
+      CVideoInfoDownloader imdb(info);
       int returncode = imdb.FindMovie(movieName, movielist, pDlgProgress);
       if (returncode > 0)
       {

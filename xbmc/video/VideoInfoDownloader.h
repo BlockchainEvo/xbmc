@@ -1,13 +1,4 @@
-// IMDB.h: interface for the CIMDB class.
-//
-//////////////////////////////////////////////////////////////////////
-
-#if !defined(AFX_IMDB1_H__562A722A_CD2A_4B4A_8A67_32DE8088A7D3__INCLUDED_)
-#define AFX_IMDB1_H__562A722A_CD2A_4B4A_8A67_32DE8088A7D3__INCLUDED_
-
-#if _MSC_VER > 1000
 #pragma once
-#endif // _MSC_VER > 1000
 
 /*
  *      Copyright (C) 2005-2008 Team XBMC
@@ -40,22 +31,22 @@
 class TiXmlDocument;
 class CGUIDialogProgress;
 
-typedef std::vector<CScraperUrl> IMDB_MOVIELIST;
+typedef std::vector<CScraperUrl> MOVIELIST;
 
 typedef struct
 {
   std::pair<int,int> key;
   CDateTime cDate;
   CScraperUrl cScraperUrl;
-} IMDB_EPISODE;
+} EPISODE;
 
-typedef std::vector<IMDB_EPISODE> IMDB_EPISODELIST;
+typedef std::vector<EPISODE> EPISODELIST;
 
-class CIMDB : public CThread
+class CVideoInfoDownloader : public CThread
 {
 public:
-  CIMDB(const ADDON::ScraperPtr &scraper);
-  virtual ~CIMDB();
+  CVideoInfoDownloader(const ADDON::ScraperPtr &scraper);
+  virtual ~CVideoInfoDownloader();
 
   // threaded lookup functions
 
@@ -65,17 +56,17 @@ public:
    \param pProgress progress bar to update as we go. If NULL we run on thread, if non-NULL we run off thread.
    \return 1 on success, -1 on a scraper-specific error, 0 on some other error
    */
-  int FindMovie(const CStdString& strMovie, IMDB_MOVIELIST& movielist, CGUIDialogProgress *pProgress = NULL);
+  int FindMovie(const CStdString& strMovie, MOVIELIST& movielist, CGUIDialogProgress *pProgress = NULL);
   bool GetDetails(const CScraperUrl& url, CVideoInfoTag &movieDetails, CGUIDialogProgress *pProgress = NULL);
   bool GetEpisodeDetails(const CScraperUrl& url, CVideoInfoTag &movieDetails, CGUIDialogProgress *pProgress = NULL);
-  bool GetEpisodeList(const CScraperUrl& url, IMDB_EPISODELIST& details, CGUIDialogProgress *pProgress = NULL);
+  bool GetEpisodeList(const CScraperUrl& url, EPISODELIST& details, CGUIDialogProgress *pProgress = NULL);
 
   static void ShowErrorDialog(const TiXmlElement* element);
 protected:
   void RemoveAllAfter(char* szMovie, const char* szSearch);
-  int InternalFindMovie(const CStdString& strMovie, IMDB_MOVIELIST& movielist, bool& sortMovieList, bool cleanChars = true);
+  int InternalFindMovie(const CStdString& strMovie, MOVIELIST& movielist, bool& sortMovieList, bool cleanChars = true);
   bool InternalGetDetails(const CScraperUrl& url, CVideoInfoTag& movieDetails, const CStdString& strFunction="GetDetails");
-  bool InternalGetEpisodeList(const CScraperUrl& url, IMDB_EPISODELIST& details);
+  bool InternalGetEpisodeList(const CScraperUrl& url, EPISODELIST& details);
   bool ParseDetails(TiXmlDocument &doc, CVideoInfoTag &movieDetails);
   void GetURL(const CStdString &movieFile, const CStdString &movieName, const CStdString &movieYear, CScraperUrl& strURL);
   bool ScrapeFilename(const CStdString& strFileName, CVideoInfoTag& details);
@@ -94,13 +85,12 @@ protected:
                       GET_EPISODE_LIST = 3,
                       GET_EPISODE_DETAILS = 4 };
   CStdString        m_strMovie;
-  IMDB_MOVIELIST    m_movieList;
+  MOVIELIST         m_movieList;
   CVideoInfoTag     m_movieDetails;
   CScraperUrl       m_url;
-  IMDB_EPISODELIST  m_episode;
+  EPISODELIST       m_episode;
   LOOKUP_STATE      m_state;
   int               m_found;
   ADDON::ScraperPtr m_info;
 };
 
-#endif // !defined(AFX_IMDB1_H__562A722A_CD2A_4B4A_8A67_32DE8088A7D3__INCLUDED_)
