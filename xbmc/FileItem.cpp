@@ -25,7 +25,6 @@
 #include "Util.h"
 #include "pictures/Picture.h"
 #include "playlists/PlayListFactory.h"
-#include "Shortcut.h"
 #include "utils/Crc32.h"
 #include "FileSystem/DirectoryCache.h"
 #include "FileSystem/StackDirectory.h"

@@ -34,6 +34,7 @@ BIN_DIRS=	\
 	xbmc/music/tags \
 	xbmc/music/windows \
 	xbmc/pictures \
+	xbmc/programs \
 	xbmc/video/dialogs \
 	xbmc/video/windows \
 	xbmc/network \
@@ -265,6 +266,8 @@ xbmc/network/network.a: force
 	$(MAKE) -C xbmc/network
 xbmc/pictures/pictures.a: force
 	$(MAKE) -C xbmc/pictures
+xbmc/programs/programs.a: force
+	$(MAKE) -C xbmc/programs
 xbmc/network/linux/network_linux.a: force
 	$(MAKE) -C xbmc/network/linux
 xbmc/playlists/playlists.a: force
@@ -509,6 +512,7 @@ OBJSXBMC=	\
 	xbmc/video/dialogs/videodialogs.a \
 	xbmc/pictures/pictures.a \
 	xbmc/playlists/playlists.a \
+	xbmc/programs/programs.a \
 	xbmc/powermanagement/powermanagement.a \
 	xbmc/storage/storage.a \
 	xbmc/threads/threads.a \

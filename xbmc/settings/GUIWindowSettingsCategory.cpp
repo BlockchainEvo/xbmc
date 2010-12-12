@@ -34,7 +34,6 @@
 #include "utils/Weather.h"
 #include "music/MusicDatabase.h"
 #include "VideoDatabase.h"
-#include "ProgramDatabase.h"
 #include "ViewDatabase.h"
 #ifdef HAS_LCD
 #include "utils/LCDFactory.h"
@@ -56,7 +55,7 @@
 #include "dialogs/GUIDialogKeyboard.h"
 #include "dialogs/GUIDialogYesNo.h"
 #include "dialogs/GUIDialogOK.h"
-#include "GUIWindowPrograms.h"
+#include "dialogs/GUIDialogProgress.h"
 #include "addons/Visualisation.h"
 #include "addons/AddonManager.h"
 #include "storage/MediaManager.h"

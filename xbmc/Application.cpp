@@ -164,7 +164,7 @@
 #include "rendering/dx/GUIWindowTestPatternDX.h"
 #endif
 #include "settings/GUIWindowSettingsScreenCalibration.h"
-#include "GUIWindowPrograms.h"
+#include "programs/GUIWindowPrograms.h"
 #include "pictures/GUIWindowPictures.h"
 #include "GUIWindowWeather.h"
 #include "GUIWindowLoginScreen.h"

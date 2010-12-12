@@ -34,7 +34,7 @@
 #include "VideoInfoTag.h"
 #include "VideoDatabase.h"
 #include "utils/log.h"
-#include "Shortcut.h"
+#include "programs/Shortcut.h"
 
 #include "cores/dvdplayer/DVDFileInfo.h"
 

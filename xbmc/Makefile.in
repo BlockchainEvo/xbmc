@@ -27,13 +27,11 @@ SRCS=Application.cpp \
      NfoFile.cpp \
      PartyModeManager.cpp \
      SectionLoader.cpp \
-     Shortcut.cpp \
      SortFileItem.cpp \
      Temperature.cpp \
      ThumbnailCache.cpp \
      URL.cpp \
      VideoInfoTag.cpp \
-     ProgramDatabase.cpp \
      VideoDatabase.cpp \
      ViewDatabase.cpp \
      GUIMediaWindow.cpp \
@@ -41,7 +39,6 @@ SRCS=Application.cpp \
      GUIWindowHome.cpp \
      GUIWindowLoginScreen.cpp \
      GUIWindowPointer.cpp \
-     GUIWindowPrograms.cpp \
      GUIWindowScreensaver.cpp \
      GUIWindowSystemInfo.cpp \
      GUIWindowWeather.cpp \
@@ -56,7 +53,6 @@ SRCS=Application.cpp \
      GUIWindowStartup.cpp \
      GUILargeTextureManager.cpp \
      MediaSource.cpp \
-     GUIViewStatePrograms.cpp \
      VideoReferenceClock.cpp \
      DPMSSupport.cpp \
      Bookmark.cpp \
