@@ -27,11 +27,11 @@
  */
 
 #include "GUIMediaWindow.h"
-#include "MusicDatabase.h"
+#include "music/MusicDatabase.h"
 #include "music/tags/MusicInfoTagLoaderFactory.h"
 #include "music/infoscanner/MusicInfoScraper.h"
 #include "PlayListPlayer.h"
-#include "MusicInfoLoader.h"
+#include "music/MusicInfoLoader.h"
 
 /*!
  \ingroup windows

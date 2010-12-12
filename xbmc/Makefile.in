@@ -14,11 +14,9 @@ SRCS=Application.cpp \
      CueDocument.cpp \
      GUIViewControl.cpp \
      GUIViewState.cpp \
-     GUIViewStateMusic.cpp \
      GUIViewStateVideo.cpp \
      VideoInfoScanner.cpp \
      PlayListPlayer.cpp \
-     MusicInfoLoader.cpp \
      AutoSwitch.cpp \
      DateTime.cpp \
      DynamicDll.cpp \
@@ -37,9 +35,7 @@ SRCS=Application.cpp \
      ThumbnailCache.cpp \
      URL.cpp \
      VideoInfoTag.cpp \
-     MusicDatabase.cpp \
      ProgramDatabase.cpp \
-     Song.cpp \
      VideoDatabase.cpp \
      ViewDatabase.cpp \
      GUIMediaWindow.cpp \
@@ -66,11 +62,8 @@ SRCS=Application.cpp \
      GUIWindowStartup.cpp \
      PictureInfoLoader.cpp \
      GUIDialogPictureInfo.cpp \
-     LastFmManager.cpp \
      PictureInfoTag.cpp \
      GUILargeTextureManager.cpp \
-     Artist.cpp \
-     Album.cpp \
      MediaSource.cpp \
      GUIWindowTestPattern.cpp \
      GUIViewStatePrograms.cpp \

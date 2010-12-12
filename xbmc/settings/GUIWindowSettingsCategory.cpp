@@ -32,7 +32,7 @@
 #include "guilib/GUIEditControl.h"
 #include "guilib/GUIImage.h"
 #include "utils/Weather.h"
-#include "MusicDatabase.h"
+#include "music/MusicDatabase.h"
 #include "VideoDatabase.h"
 #include "ProgramDatabase.h"
 #include "ViewDatabase.h"

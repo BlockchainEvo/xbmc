@@ -26,7 +26,7 @@
 #include "guilib/AudioContext.h"
 #include "ExternalPlayer.h"
 #include "windowing/WindowingFactory.h"
-#include "GUIDialogOK.h"
+#include "dialogs/GUIDialogOK.h"
 #include "guilib/GUIWindowManager.h"
 #include "Application.h"
 #include "FileSystem/FileMusicDatabase.h"

@@ -43,7 +43,7 @@
 #include "XBPythonDll.h"
 #include "FileSystem/SpecialProtocol.h"
 #include "guilib/GUIWindowManager.h"
-#include "GUIDialogKaiToast.h"
+#include "dialogs/GUIDialogKaiToast.h"
 #include "guilib/LocalizeStrings.h"
 #include "utils/log.h"
 #include "threads/SingleLock.h"

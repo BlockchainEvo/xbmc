@@ -21,7 +21,7 @@
 
 #include "GUIViewState.h"
 #include "addons/GUIViewStateAddonBrowser.h"
-#include "GUIViewStateMusic.h"
+#include "music/GUIViewStateMusic.h"
 #include "GUIViewStateVideo.h"
 #include "GUIViewStatePictures.h"
 #include "GUIViewStatePrograms.h"

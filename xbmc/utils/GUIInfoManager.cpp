@@ -43,7 +43,7 @@
 #include "guilib/GUITextBox.h"
 #include "GUIInfoManager.h"
 #include "GUIWindowSlideShow.h"
-#include "LastFmManager.h"
+#include "music/LastFmManager.h"
 #include "PictureInfoTag.h"
 #include "music/tags/MusicInfoTag.h"
 #include "music/dialogs/GUIDialogMusicScan.h"
@@ -63,7 +63,7 @@
 
 // stuff for current song
 #include "music/tags/MusicInfoTagLoaderFactory.h"
-#include "MusicInfoLoader.h"
+#include "music/MusicInfoLoader.h"
 #include "LabelFormatter.h"
 
 #include "GUIUserMessages.h"

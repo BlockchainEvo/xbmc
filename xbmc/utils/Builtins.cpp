@@ -43,7 +43,7 @@
 #include "addons/Addon.h" // for TranslateType, TranslateContent
 #include "addons/AddonManager.h"
 #include "addons/PluginSource.h"
-#include "LastFmManager.h"
+#include "music/LastFmManager.h"
 #include "LCD.h"
 #include "log.h"
 #include "storage/MediaManager.h"

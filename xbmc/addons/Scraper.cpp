@@ -30,7 +30,7 @@
 #include "settings/AdvancedSettings.h"
 #include "FileItem.h"
 #include "utils/XMLUtils.h"
-#include "MusicDatabase.h"
+#include "music/MusicDatabase.h"
 #include "VideoDatabase.h"
 #include <sstream>
 

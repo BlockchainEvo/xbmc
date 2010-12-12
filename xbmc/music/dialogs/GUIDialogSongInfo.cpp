@@ -25,7 +25,7 @@
 #include "dialogs/GUIDialogFileBrowser.h"
 #include "GUIPassword.h"
 #include "GUIUserMessages.h"
-#include "MusicDatabase.h"
+#include "music/MusicDatabase.h"
 #include "music/windows/GUIWindowMusicBase.h"
 #include "music/tags/MusicInfoTag.h"
 #include "guilib/GUIWindowManager.h"
@@ -37,7 +37,7 @@
 #include "settings/GUISettings.h"
 #include "guilib/LocalizeStrings.h"
 #include "TextureCache.h"
-#include "Album.h"
+#include "music/Album.h"
 
 using namespace XFILE;
 

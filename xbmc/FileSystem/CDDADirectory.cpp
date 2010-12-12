@@ -24,7 +24,7 @@
 #ifdef HAS_DVD_DRIVE
 
 #include "CDDADirectory.h"
-#include "MusicDatabase.h"
+#include "music/MusicDatabase.h"
 #include "FileItem.h"
 #include "FileSystem/File.h"
 #include "storage/MediaManager.h"

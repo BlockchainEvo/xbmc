@@ -31,7 +31,7 @@
 #include "utils/log.h"
 #include "guilib/GUIWindowManager.h"
 #include "GUIWindowAddonBrowser.h"
-#include "GUIDialogYesNo.h"
+#include "dialogs/GUIDialogYesNo.h"
 
 using namespace XFILE;
 using namespace ADDON;

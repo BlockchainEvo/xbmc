@@ -20,7 +20,6 @@
  */
 
 #include "MusicInfoScanner.h"
-#include "MusicDatabase.h"
 #include "music/tags/MusicInfoTagLoaderFactory.h"
 #include "MusicAlbumInfo.h"
 #include "MusicInfoScraper.h"

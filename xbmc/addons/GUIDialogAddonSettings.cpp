@@ -23,9 +23,9 @@
 #include "FileSystem/PluginDirectory.h"
 #include "addons/IAddon.h"
 #include "addons/AddonManager.h"
-#include "GUIDialogNumeric.h"
-#include "GUIDialogFileBrowser.h"
-#include "GUIDialogOK.h"
+#include "dialogs/GUIDialogNumeric.h"
+#include "dialogs/GUIDialogFileBrowser.h"
+#include "dialogs/GUIDialogOK.h"
 #include "guilib/GUIControlGroupList.h"
 #include "guilib/GUISettingsSliderControl.h"
 #include "Util.h"
@@ -40,11 +40,11 @@
 #include "addons/Scraper.h"
 #include "guilib/GUIWindowManager.h"
 #include "Application.h"
-#include "GUIDialogKeyboard.h"
+#include "dialogs/GUIDialogKeyboard.h"
 #include "FileItem.h"
 #include "settings/Settings.h"
 #include "utils/GUIInfoManager.h"
-#include "GUIDialogSelect.h"
+#include "dialogs/GUIDialogSelect.h"
 
 using namespace std;
 using namespace ADDON;

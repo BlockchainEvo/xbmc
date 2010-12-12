@@ -29,7 +29,7 @@
 #include "music/tags/MusicInfoTagLoaderFactory.h"
 #include "music/infoscanner/MusicInfoScraper.h"
 #include "addons/AddonManager.h"
-#include "MusicDatabase.h"
+#include "music/MusicDatabase.h"
 #include "GUIUserMessages.h"
 #include "GUIWindowSlideShow.h"
 #include "GUIMediaWindow.h"

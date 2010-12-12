@@ -22,7 +22,7 @@
 #include "MusicDatabaseDirectory.h"
 #include "Util.h"
 #include "MusicDatabaseDirectory/QueryParams.h"
-#include "MusicDatabase.h"
+#include "music/MusicDatabase.h"
 #include "FileSystem/File.h"
 #include "FileItem.h"
 #include "utils/Crc32.h"

@@ -24,8 +24,8 @@
 #include "Application.h"
 #include "guilib/GUIWindowManager.h"
 #include "GUIDialogAddonSettings.h"
-#include "GUIDialogYesNo.h"
-#include "GUIDialogOK.h"
+#include "dialogs/GUIDialogYesNo.h"
+#include "dialogs/GUIDialogOK.h"
 #include "utils/log.h"
 
 namespace ADDON

@@ -22,8 +22,8 @@
  */
 
 #include "guilib/GUIDialog.h"
-#include "MusicDatabase.h"
-#include "Song.h"
+#include "music/MusicDatabase.h"
+#include "music/Song.h"
 
 
 class CGUIDialogKaraokeSongSelector: public CGUIDialog

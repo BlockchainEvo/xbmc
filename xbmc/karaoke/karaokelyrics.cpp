@@ -25,7 +25,7 @@
 
 #include "utils/MathUtils.h"
 #include "Application.h"
-#include "MusicDatabase.h"
+#include "music/MusicDatabase.h"
 #include "settings/AdvancedSettings.h"
 #include "utils/log.h"
 

@@ -20,14 +20,14 @@
  */
 
 #include "GUIDialogAddonInfo.h"
-#include "GUIDialogYesNo.h"
+#include "dialogs/GUIDialogYesNo.h"
 #include "addons/AddonManager.h"
 #include "AddonDatabase.h"
 #include "FileItem.h"
 #include "FileSystem/File.h"
 #include "FileSystem/SpecialProtocol.h"
 #include "GUIDialogAddonSettings.h"
-#include "GUIDialogTextViewer.h"
+#include "dialogs/GUIDialogTextViewer.h"
 #include "GUIUserMessages.h"
 #include "GUIWindowAddonBrowser.h"
 #include "guilib/GUIWindowManager.h"

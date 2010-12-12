@@ -21,8 +21,8 @@
  *
  */
 
-#include "Song.h"
-#include "Artist.h"
+#include "music/Song.h"
+#include "music/Artist.h"
 #include "addons/Scraper.h"
 #include "utils/ScraperParser.h"
 
