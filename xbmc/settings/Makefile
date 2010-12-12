@@ -10,6 +10,7 @@ SRCS=AdvancedSettings.cpp \
      GUIWindowSettings.cpp \
      GUIWindowSettingsProfile.cpp \
      GUIWindowSettingsScreenCalibration.cpp \
+     GUIWindowTestPattern.cpp \
      SettingsControls.cpp \
      Settings.cpp \
      VideoSettings.cpp \

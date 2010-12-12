@@ -1,6 +1,7 @@
 INCLUDES=-I. -I../.. -I../../linux
 
-SRCS=RenderSystemGL.cpp \
+SRCS=GUIWindowTestPatternGL.cpp \
+     RenderSystemGL.cpp \
      
 LIB=rendering_gl.a
 

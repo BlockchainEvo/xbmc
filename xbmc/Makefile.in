@@ -57,11 +57,9 @@ SRCS=Application.cpp \
      GUIWindowStartup.cpp \
      GUILargeTextureManager.cpp \
      MediaSource.cpp \
-     GUIWindowTestPattern.cpp \
      GUIViewStatePrograms.cpp \
      VideoReferenceClock.cpp \
      DPMSSupport.cpp \
-     GUIWindowTestPatternGL.cpp \
      Bookmark.cpp \
      TextureCache.cpp \
      TextureDatabase.cpp \

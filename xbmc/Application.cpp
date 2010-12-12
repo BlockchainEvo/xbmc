@@ -158,10 +158,10 @@
 #include "video/windows/GUIWindowVideoNav.h"
 #include "settings/GUIWindowSettingsProfile.h"
 #ifdef HAS_GL
-#include "GUIWindowTestPatternGL.h"
+#include "rendering/gl/GUIWindowTestPatternGL.h"
 #endif
 #ifdef HAS_DX
-#include "GUIWindowTestPatternDX.h"
+#include "rendering/dx/GUIWindowTestPatternDX.h"
 #endif
 #include "settings/GUIWindowSettingsScreenCalibration.h"
 #include "GUIWindowPrograms.h"

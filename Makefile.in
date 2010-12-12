@@ -524,7 +524,6 @@ OBJSXBMC=	\
 	lib/libsquish/libsquish-@ARCH@.a \
 	lib/libapetag/.libs/libapetag.a \
 	lib/xbmc-dll-symbols/dll-symbols.a \
-	xbmc/settings/settings.a \
         xbmc/rendering/rendering.a \
         xbmc/windowing/windowing.a \
 
@@ -579,7 +578,8 @@ DYNOBJSXBMC= \
 	xbmc/video/windows/videowindows.a \
 	xbmc/utils/utils.a \
 	xbmc/cores/DllLoader/exports/util/exports_utils.a \
-	xbmc/cores/DllLoader/exports/exports.a
+	xbmc/cores/DllLoader/exports/exports.a \
+	xbmc/settings/settings.a \
 
 ifeq (arm, $(ARCH))
 # Force external python2.5 for now!
