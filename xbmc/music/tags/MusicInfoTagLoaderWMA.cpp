@@ -21,7 +21,7 @@
 
 #include "MusicInfoTagLoaderWMA.h"
 #include "Util.h"
-#include "Picture.h"
+#include "pictures/Picture.h"
 #include "MusicInfoTag.h"
 #include "FileSystem/File.h"
 #include "settings/AdvancedSettings.h"

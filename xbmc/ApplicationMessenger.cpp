@@ -30,7 +30,7 @@
 #ifdef HAS_PYTHON
 #include "interfaces/python/XBPython.h"
 #endif
-#include "GUIWindowSlideShow.h"
+#include "pictures/GUIWindowSlideShow.h"
 #include "utils/Builtins.h"
 #include "network/Network.h"
 #include "utils/log.h"

@@ -41,7 +41,7 @@
 #include "settings/AdvancedSettings.h"
 #include "GUIUserMessages.h"
 #include "Util.h"
-#include "Picture.h"
+#include "pictures/Picture.h"
 #if defined (LIBCDIO_VERSION_NUM) && (LIBCDIO_VERSION_NUM > 77) || defined (__APPLE__)
 #define USING_CDIO78
 #endif

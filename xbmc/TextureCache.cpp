@@ -30,7 +30,7 @@
 
 #include "guilib/Texture.h"
 #include "guilib/DDSImage.h"
-#include "Picture.h"
+#include "pictures/Picture.h"
 #include "guilib/TextureManager.h"
 #include "utils/URIUtils.h"
 

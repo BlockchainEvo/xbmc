@@ -31,7 +31,6 @@
 #include "storage/MediaManager.h"
 #include "Util.h"
 #include "GUIPassword.h"
-#include "Picture.h"
 #include "dialogs/GUIDialogYesNo.h"
 #include "FileSystem/Directory.h"
 #include "FileSystem/File.h"

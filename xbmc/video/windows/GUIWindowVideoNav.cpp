@@ -30,7 +30,6 @@
 #include "PlayListPlayer.h"
 #include "GUIPassword.h"
 #include "dialogs/GUIDialogFileBrowser.h"
-#include "Picture.h"
 #include "FileSystem/VideoDatabaseDirectory.h"
 #include "playlists/PlayListFactory.h"
 #include "video/dialogs/GUIDialogVideoScan.h"

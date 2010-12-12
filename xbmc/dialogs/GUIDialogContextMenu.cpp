@@ -39,7 +39,6 @@
 #include "addons/AddonManager.h"
 #include "FileItem.h"
 #include "FileSystem/File.h"
-#include "Picture.h"
 #include "settings/Settings.h"
 #include "guilib/LocalizeStrings.h"
 #include "TextureCache.h"

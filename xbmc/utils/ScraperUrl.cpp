@@ -27,7 +27,7 @@
 #include "URL.h"
 #include "FileSystem/FileCurl.h"
 #include "FileSystem/FileZip.h"
-#include "Picture.h"
+#include "pictures/Picture.h"
 #include "Util.h"
 
 #include <cstring>

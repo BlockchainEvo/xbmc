@@ -44,7 +44,7 @@
 #include "Application.h"
 #include "DVDPerformanceCounter.h"
 #include "FileSystem/File.h"
-#include "Picture.h"
+#include "pictures/Picture.h"
 #include "Codecs/DllSwScale.h"
 #ifdef HAS_VIDEO_PLAYBACK
 #include "cores/VideoRenderers/RenderManager.h"

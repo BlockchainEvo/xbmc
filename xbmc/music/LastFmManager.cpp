@@ -26,7 +26,7 @@
 #include "PlayListPlayer.h"
 #include "Util.h"
 #include "playlists/PlayListFactory.h"
-#include "Picture.h"
+#include "pictures/Picture.h"
 #include "utils/md5.h"
 #include "FileSystem/File.h"
 #include "FileSystem/FileCurl.h"

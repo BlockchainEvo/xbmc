@@ -26,7 +26,6 @@ SRCS=Application.cpp \
      LangInfo.cpp \
      NfoFile.cpp \
      PartyModeManager.cpp \
-     Picture.cpp \
      Profile.cpp \
      SectionLoader.cpp \
      Shortcut.cpp \
@@ -42,32 +41,24 @@ SRCS=Application.cpp \
      GUIWindowFileManager.cpp \
      GUIWindowHome.cpp \
      GUIWindowLoginScreen.cpp \
-     GUIWindowPictures.cpp \
      GUIWindowPointer.cpp \
      GUIWindowPrograms.cpp \
      GUIWindowScreensaver.cpp \
      GUIWindowSystemInfo.cpp \
      GUIWindowWeather.cpp \
      BackgroundInfoLoader.cpp \
-     PictureThumbLoader.cpp \
      ThumbLoader.cpp \
      ApplicationMessenger.cpp \
      Autorun.cpp \
      Util.cpp \
-     GUIWindowSlideShow.cpp \
      XBApplicationEx.cpp \
      xbmc.cpp \
      Favourites.cpp \
-     SlideShowPicture.cpp \
      GUIWindowStartup.cpp \
-     PictureInfoLoader.cpp \
-     GUIDialogPictureInfo.cpp \
-     PictureInfoTag.cpp \
      GUILargeTextureManager.cpp \
      MediaSource.cpp \
      GUIWindowTestPattern.cpp \
      GUIViewStatePrograms.cpp \
-     GUIViewStatePictures.cpp \
      VideoReferenceClock.cpp \
      DPMSSupport.cpp \
      GUIWindowTestPatternGL.cpp \

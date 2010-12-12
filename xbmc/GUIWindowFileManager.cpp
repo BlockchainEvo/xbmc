@@ -31,7 +31,7 @@
 #include "FileSystem/FactoryFileDirectory.h"
 #include "FileSystem/MultiPathDirectory.h"
 #include "FileSystem/SpecialProtocol.h"
-#include "Picture.h"
+#include "pictures/Picture.h"
 #include "dialogs/GUIDialogContextMenu.h"
 #include "guilib/GUIListContainer.h"
 #include "dialogs/GUIDialogMediaSource.h"
@@ -40,7 +40,7 @@
 #ifdef HAS_PYTHON
 #include "interfaces/python/XBPython.h"
 #endif
-#include "GUIWindowSlideShow.h"
+#include "pictures/GUIWindowSlideShow.h"
 #include "playlists/PlayListFactory.h"
 #include "network/Network.h"
 #include "guilib/GUIWindowManager.h"

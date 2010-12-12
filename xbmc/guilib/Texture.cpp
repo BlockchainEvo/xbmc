@@ -20,7 +20,6 @@
 */
 
 #include "Texture.h"
-#include "Picture.h"
 #include "windowing/WindowingFactory.h"
 #include "utils/log.h"
 #include "DllImageLib.h"

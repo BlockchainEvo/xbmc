@@ -88,7 +88,7 @@
 #include "utils/md5.h"
 #include "utils/TimeUtils.h"
 #include "utils/log.h"
-#include "Picture.h"
+#include "pictures/Picture.h"
 #include "utils/JobManager.h"
 #include "cores/dvdplayer/DVDSubtitles/DVDSubtitleTagSami.h"
 #include "cores/dvdplayer/DVDSubtitles/DVDSubtitleStream.h"

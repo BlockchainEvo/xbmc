@@ -22,7 +22,7 @@
 #include "GUIDialogVideoInfo.h"
 #include "guilib/GUIWindow.h"
 #include "Util.h"
-#include "Picture.h"
+#include "pictures/Picture.h"
 #include "guilib/GUIImage.h"
 #include "utils/StringUtils.h"
 #include "video/windows/GUIWindowVideoBase.h"

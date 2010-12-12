@@ -27,7 +27,7 @@
 #include "NfoFile.h"
 #include "utils/RegExp.h"
 #include "utils/md5.h"
-#include "Picture.h"
+#include "pictures/Picture.h"
 #include "FileSystem/StackDirectory.h"
 #include "utils/IMDB.h"
 #include "utils/GUIInfoManager.h"

@@ -23,7 +23,7 @@
 #include "addons/GUIViewStateAddonBrowser.h"
 #include "music/GUIViewStateMusic.h"
 #include "GUIViewStateVideo.h"
-#include "GUIViewStatePictures.h"
+#include "pictures/GUIViewStatePictures.h"
 #include "GUIViewStatePrograms.h"
 #include "PlayListPlayer.h"
 #include "Util.h"

@@ -38,7 +38,6 @@
 #include "playlists/PlayListFactory.h"
 #include "Application.h"
 #include "NfoFile.h"
-#include "Picture.h"
 #include "PlayListPlayer.h"
 #include "GUIPassword.h"
 #include "FileSystem/ZipManager.h"
