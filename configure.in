@@ -3,7 +3,7 @@
 
 AC_PREREQ(2.59)
 AC_INIT([xbmc], [9.11], [http://trac.xbmc.org])
-AC_CONFIG_HEADERS([config.h])
+AC_CONFIG_HEADERS([xbmc/config.h])
 AH_TOP([#pragma once])
 
 AC_CONFIG_AUX_DIR([build-aux])

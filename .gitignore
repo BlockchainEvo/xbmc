@@ -65,9 +65,9 @@ config.log
 /xbmc.old.log
 /Makefile.depend
 /config.status
-/config.h
-/config.h.in
-/config.h.in~
+/xbmc/config.h
+/xbmc/config.h.in
+/xbmc/config.h.in~
 /configure
 /stamp-h1
 /xbmc.bin

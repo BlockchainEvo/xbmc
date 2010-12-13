@@ -22,7 +22,7 @@
  */
 
 #if defined(HAVE_CONFIG_H) && !defined(_WIN32)
-#include "../config.h"
+#include "config.h"
 #endif
 
 /*****************
