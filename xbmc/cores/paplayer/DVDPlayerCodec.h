@@ -23,7 +23,6 @@
  */
 
 #include "ICodec.h"
-#include "FileSystem/File.h"
 
 #include "cores/dvdplayer/DVDDemuxers/DVDDemux.h"
 #include "cores/dvdplayer/DVDCodecs/Audio/DVDAudioCodec.h"

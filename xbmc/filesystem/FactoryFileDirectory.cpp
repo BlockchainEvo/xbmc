@@ -42,9 +42,9 @@
 #include "playlists/SmartPlayList.h"
 #include "PlaylistFileDirectory.h"
 #include "playlists/PlayListFactory.h"
-#include "FileSystem/Directory.h"
-#include "FileSystem/File.h"
-#include "FileSystem/ZipManager.h"
+#include "Directory.h"
+#include "File.h"
+#include "ZipManager.h"
 #include "settings/AdvancedSettings.h"
 #include "FileItem.h"
 

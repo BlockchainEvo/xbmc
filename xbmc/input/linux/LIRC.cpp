@@ -30,7 +30,6 @@
 #include "input/ButtonTranslator.h"
 #include "utils/log.h"
 #include "settings/AdvancedSettings.h"
-#include "FileSystem/File.h"
 #include "utils/TimeUtils.h"
 
 CRemoteControl g_RemoteControl;

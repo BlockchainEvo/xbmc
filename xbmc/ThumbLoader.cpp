@@ -19,12 +19,12 @@
  *
  */
 
-#include "FileSystem/StackDirectory.h"
+#include "filesystem/StackDirectory.h"
 #include "ThumbLoader.h"
 #include "Util.h"
 #include "URL.h"
 #include "pictures/Picture.h"
-#include "FileSystem/File.h"
+#include "filesystem/File.h"
 #include "FileItem.h"
 #include "settings/GUISettings.h"
 #include "GUIUserMessages.h"

@@ -32,7 +32,6 @@
 #include "PictureInfoLoader.h"
 #include "guilib/GUIWindowManager.h"
 #include "dialogs/GUIDialogOK.h"
-#include "FileSystem/File.h"
 #include "playlists/PlayList.h"
 #include "settings/Settings.h"
 #include "settings/GUISettings.h"

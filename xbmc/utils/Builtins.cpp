@@ -53,11 +53,11 @@
 #include "StringUtils.h"
 #include "Util.h"
 
-#include "FileSystem/PluginDirectory.h"
+#include "filesystem/PluginDirectory.h"
 #ifdef HAS_FILESYSTEM_RAR
-#include "FileSystem/RarManager.h"
+#include "filesystem/RarManager.h"
 #endif
-#include "FileSystem/ZipManager.h"
+#include "filesystem/ZipManager.h"
 
 #include "guilib/GUIWindowManager.h"
 #include "guilib/LocalizeStrings.h"
@@ -77,7 +77,7 @@
 #endif
 
 #if defined(__APPLE__)
-#include "FileSystem/SpecialProtocol.h"
+#include "filesystem/SpecialProtocol.h"
 #include "CocoaInterface.h"
 #endif
 

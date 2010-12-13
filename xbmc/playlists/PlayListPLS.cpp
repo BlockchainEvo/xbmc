@@ -23,7 +23,7 @@
 #include "PlayListFactory.h"
 #include "Util.h"
 #include "utils/StringUtils.h"
-#include "FileSystem/File.h"
+#include "filesystem/File.h"
 #include "settings/AdvancedSettings.h"
 #include "music/tags/MusicInfoTag.h"
 #include "utils/CharsetConverter.h"

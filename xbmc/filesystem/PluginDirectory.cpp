@@ -31,7 +31,6 @@
 #include "threads/SingleLock.h"
 #include "guilib/GUIWindowManager.h"
 #include "dialogs/GUIDialogProgress.h"
-#include "FileSystem/File.h"
 #include "settings/GUISettings.h"
 #include "FileItem.h"
 #include "guilib/LocalizeStrings.h"

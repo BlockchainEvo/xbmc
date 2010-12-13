@@ -31,8 +31,6 @@
 #include "GUIUserMessages.h"
 #include "guilib/GUIWindowManager.h"
 #include "FileItem.h"
-#include "FileSystem/SpecialProtocol.h"
-#include "FileSystem/Directory.h"
 #include "storage/MediaManager.h"
 #include "settings/Settings.h"
 #include "settings/GUISettings.h"

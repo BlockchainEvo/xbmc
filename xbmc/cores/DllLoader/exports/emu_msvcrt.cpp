@@ -46,12 +46,12 @@
 #include "PlatformDefs.h" // for __stat64
 #endif
 #include "Util.h"
-#include "FileSystem/SpecialProtocol.h"
+#include "filesystem/SpecialProtocol.h"
 #include "URL.h"
-#include "FileSystem/File.h"
+#include "filesystem/File.h"
 #include "settings/GUISettings.h"
 #include "FileItem.h"
-#include "FileSystem/Directory.h"
+#include "filesystem/Directory.h"
 
 #include "emu_msvcrt.h"
 #include "emu_dummy.h"

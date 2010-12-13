@@ -19,7 +19,7 @@
  *
  */
 
-#include "FileSystem/PluginDirectory.h"
+#include "filesystem/PluginDirectory.h"
 #include "listitem.h"
 #include "FileItem.h"
 

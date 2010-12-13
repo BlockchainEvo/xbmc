@@ -24,7 +24,7 @@
 #include <math.h>
 
 #include "Util.h"
-#include "FileSystem/File.h"
+#include "filesystem/File.h"
 #include "utils/log.h"
 
 #include "karaokelyricstextustar.h"

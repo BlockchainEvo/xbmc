@@ -22,7 +22,7 @@
 // C++ Implementation: karaokelyricstextkar
 
 #include "utils/CharsetConverter.h"
-#include "FileSystem/File.h"
+#include "filesystem/File.h"
 #include "settings/GUISettings.h"
 #include "utils/log.h"
 #include <math.h>

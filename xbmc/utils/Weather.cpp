@@ -24,11 +24,11 @@
 #endif
 #include "system.h"
 #include "Weather.h"
-#include "FileSystem/ZipManager.h"
+#include "filesystem/ZipManager.h"
 #ifdef HAS_FILESYSTEM_RAR
-#include "FileSystem/RarManager.h"
+#include "filesystem/RarManager.h"
 #endif
-#include "FileSystem/FileCurl.h"
+#include "filesystem/FileCurl.h"
 #include "XMLUtils.h"
 #include "Temperature.h"
 #include "network/Network.h"
@@ -42,7 +42,7 @@
 #include "DateTime.h"
 #include "LangInfo.h"
 #include "guilib/LocalizeStrings.h"
-#include "FileSystem/Directory.h"
+#include "filesystem/Directory.h"
 #include "utils/TimeUtils.h"
 #include "StringUtils.h"
 #include "log.h"

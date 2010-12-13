@@ -19,7 +19,7 @@
  *
  */
 
-#include "FileSystem/File.h"
+#include "filesystem/File.h"
 #include "settings/Settings.h"
 #include "system.h"
 #include "guilib/Texture.h"

@@ -25,7 +25,7 @@
 #include "pictures/Picture.h"
 #include "video/VideoInfoTag.h"
 #include "Util.h"
-#include "FileSystem/StackDirectory.h"
+#include "filesystem/StackDirectory.h"
 #include "utils/log.h"
 #include "utils/TimeUtils.h"
 
@@ -46,7 +46,7 @@
 #include "Codecs/DllAvFormat.h"
 #include "Codecs/DllAvCodec.h"
 #include "Codecs/DllSwScale.h"
-#include "FileSystem/File.h"
+#include "filesystem/File.h"
 
 
 bool CDVDFileInfo::GetFileDuration(const CStdString &path, int& duration)

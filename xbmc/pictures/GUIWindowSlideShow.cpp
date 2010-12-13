@@ -28,7 +28,7 @@
 #include "guilib/TextureManager.h"
 #include "guilib/GUILabelControl.h"
 #include "utils/GUIInfoManager.h"
-#include "FileSystem/Directory.h"
+#include "filesystem/Directory.h"
 #include "GUIDialogPictureInfo.h"
 #include "GUIUserMessages.h"
 #include "guilib/GUIWindowManager.h"

@@ -25,7 +25,7 @@
 #include "VideoInfoTag.h"
 #include "addons/Scraper.h"
 #include "DateTime.h"
-#include "FileSystem/FileCurl.h"
+#include "filesystem/FileCurl.h"
 
 // forward definitions
 class TiXmlDocument;

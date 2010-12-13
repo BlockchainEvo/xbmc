@@ -1415,14 +1415,13 @@ OUTPUT_FILES="Makefile \
     lib/libUPnP/Makefile \
     xbmc/DllPaths_generated.h \
     xbmc/linux/Makefile \
-    xbmc/FileSystem/Makefile \
+    xbmc/filesystem/Makefile \
     xbmc/screensavers/rsxs-0.9/xbmc/Makefile \
     xbmc/visualizations/XBMCProjectM/Makefile \
     xbmc/visualizations/Goom/Makefile \
     xbmc/visualizations/OpenGLSpectrum/Makefile \
     xbmc/visualizations/WaveForm/Makefile \
     xbmc/visualizations/iTunes/Makefile \
-    xbmc/FileSystem/Makefile \
     tools/Linux/xbmc.sh \
     tools/Linux/xbmc-standalone.sh \
     tools/TexturePacker/Makefile \

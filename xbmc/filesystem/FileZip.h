@@ -29,8 +29,8 @@
 #include <zlib.h>
 #endif
 #include "utils/log.h"
-#include "FileSystem/File.h"
-#include "FileSystem/ZipManager.h"
+#include "File.h"
+#include "ZipManager.h"
 
 namespace XFILE
 {

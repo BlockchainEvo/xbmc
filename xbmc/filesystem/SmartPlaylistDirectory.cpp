@@ -24,8 +24,8 @@
 #include "playlists/SmartPlayList.h"
 #include "music/MusicDatabase.h"
 #include "video/VideoDatabase.h"
-#include "FileSystem/Directory.h"
-#include "FileSystem/File.h"
+#include "Directory.h"
+#include "File.h"
 #include "FileItem.h"
 
 namespace XFILE

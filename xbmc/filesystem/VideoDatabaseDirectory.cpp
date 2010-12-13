@@ -24,7 +24,7 @@
 #include "VideoDatabaseDirectory/QueryParams.h"
 #include "video/VideoDatabase.h"
 #include "guilib/TextureManager.h"
-#include "FileSystem/File.h"
+#include "File.h"
 #include "FileItem.h"
 #include "settings/Settings.h"
 #include "utils/Crc32.h"

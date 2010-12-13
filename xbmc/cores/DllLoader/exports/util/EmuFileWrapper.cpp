@@ -20,7 +20,7 @@
  */
  
 #include "EmuFileWrapper.h"
-#include "FileSystem/File.h"
+#include "filesystem/File.h"
 #include "threads/Mutex.h"
 
 CEmuFileWrapper g_emuFileWrapper;

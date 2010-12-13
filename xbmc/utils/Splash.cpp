@@ -22,7 +22,7 @@
 #include "system.h"
 #include "Splash.h"
 #include "guilib/GUIImage.h"
-#include "FileSystem/File.h"
+#include "filesystem/File.h"
 #include "windowing/WindowingFactory.h"
 #include "rendering/RenderSystem.h"
 #include "log.h"

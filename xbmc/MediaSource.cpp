@@ -23,7 +23,7 @@
 #include "settings/AdvancedSettings.h"
 #include "Util.h"
 #include "URL.h"
-#include "FileSystem/MultiPathDirectory.h"
+#include "filesystem/MultiPathDirectory.h"
 
 using namespace std;
 using namespace XFILE;

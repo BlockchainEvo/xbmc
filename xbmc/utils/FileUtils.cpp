@@ -7,7 +7,7 @@
 #include "JobManager.h"
 #include "FileOperationJob.h"
 #include "Util.h"
-#include "FileSystem/MultiPathDirectory.h"
+#include "filesystem/MultiPathDirectory.h"
 #include <vector>
 
 using namespace XFILE;

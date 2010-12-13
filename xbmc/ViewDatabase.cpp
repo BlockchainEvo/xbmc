@@ -21,7 +21,6 @@
 
 #include "ViewDatabase.h"
 #include "Util.h"
-#include "FileSystem/SpecialProtocol.h"
 #include "settings/Settings.h"
 #include "ViewState.h"
 #include "utils/log.h"

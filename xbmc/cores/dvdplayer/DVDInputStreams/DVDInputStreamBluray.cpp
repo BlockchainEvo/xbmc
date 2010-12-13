@@ -25,8 +25,8 @@
 #include "DynamicDll.h"
 #include "Util.h"
 #include "utils/log.h"
-#include "FileSystem/File.h"
-#include "FileSystem/Directory.h"
+#include "filesystem/File.h"
+#include "filesystem/Directory.h"
 
 #define LIBBLURAY_BYTESEEK 0
 

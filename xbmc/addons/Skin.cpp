@@ -21,8 +21,8 @@
 
 #include "Skin.h"
 #include "AddonManager.h"
-#include "FileSystem/File.h"
-#include "FileSystem/SpecialProtocol.h"
+#include "filesystem/File.h"
+#include "filesystem/SpecialProtocol.h"
 #include "guilib/Key.h"
 #include "Util.h"
 #include "settings/Settings.h"

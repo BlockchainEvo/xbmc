@@ -25,7 +25,6 @@
 #include <vector>
 #include "utils/StdString.h"
 #include "threads/Thread.h"
-#include "FileSystem/FileCurl.h"
 #include "threads/CriticalSection.h"
 
 #define SCROBBLER_USER_ERROR_BADAUTH  1
@@ -34,6 +33,11 @@
 namespace MUSIC_INFO
 {
   class CMusicInfoTag;
+}
+
+namespace XFILE
+{
+  class CFileCurl;
 }
 
 /* The following structure describes an entry in the scrobbler submission

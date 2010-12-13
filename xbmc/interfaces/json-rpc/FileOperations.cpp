@@ -22,10 +22,10 @@
 #include "FileOperations.h"
 #include "settings/Settings.h"
 #include "MediaSource.h"
-#include "../FileSystem/Directory.h"
+#include "filesystem/Directory.h"
 #include "FileItem.h"
 #include "settings/AdvancedSettings.h"
-#include "../Util.h"
+#include "Util.h"
 #include "URL.h"
 
 using namespace XFILE;

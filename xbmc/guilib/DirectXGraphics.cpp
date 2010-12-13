@@ -21,7 +21,6 @@
 
 #include "DirectXGraphics.h"
 #include "Texture.h"
-#include "FileSystem/File.h"
 #include "XBTF.h"
 
 LPVOID XPhysicalAlloc(SIZE_T s, DWORD ulPhysicalAddress, DWORD ulAlignment, DWORD flProtect)

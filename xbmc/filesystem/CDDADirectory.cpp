@@ -26,7 +26,7 @@
 #include "CDDADirectory.h"
 #include "music/MusicDatabase.h"
 #include "FileItem.h"
-#include "FileSystem/File.h"
+#include "File.h"
 #include "storage/MediaManager.h"
 
 using namespace XFILE;

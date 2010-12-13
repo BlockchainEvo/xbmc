@@ -40,7 +40,7 @@
 #include "settings/Settings.h"
 #include "FileItem.h"
 #include "guilib/Key.h"
-#include "FileSystem/AddonsDirectory.h"
+#include "filesystem/AddonsDirectory.h"
 #include "guilib/TextureManager.h"
 
 using namespace std;

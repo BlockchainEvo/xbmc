@@ -27,7 +27,7 @@
 #include <sys/utsname.h>
 #endif
 #include "utils/GUIInfoManager.h"
-#include "FileSystem/FileCurl.h"
+#include "filesystem/FileCurl.h"
 #include "network/Network.h"
 #include "Application.h"
 #include "windowing/WindowingFactory.h"

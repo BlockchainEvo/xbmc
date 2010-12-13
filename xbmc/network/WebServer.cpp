@@ -23,8 +23,8 @@
 #ifdef HAS_WEB_SERVER
 #include "interfaces/http-api/HttpApi.h"
 #include "interfaces/json-rpc/JSONRPC.h"
-#include "FileSystem/File.h"
-#include "FileSystem/Directory.h"
+#include "filesystem/File.h"
+#include "filesystem/Directory.h"
 #include "Util.h"
 #include "utils/log.h"
 #include "threads/SingleLock.h"

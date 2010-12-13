@@ -40,19 +40,19 @@
 #include "Util.h"
 #include "addons/Addon.h"
 #include "storage/IoSupport.h"
-#include "FileSystem/StackDirectory.h"
-#include "FileSystem/VirtualPathDirectory.h"
-#include "FileSystem/MultiPathDirectory.h"
-#include "FileSystem/DirectoryCache.h"
-#include "FileSystem/SpecialProtocol.h"
-#include "FileSystem/RSSDirectory.h"
+#include "filesystem/StackDirectory.h"
+#include "filesystem/VirtualPathDirectory.h"
+#include "filesystem/MultiPathDirectory.h"
+#include "filesystem/DirectoryCache.h"
+#include "filesystem/SpecialProtocol.h"
+#include "filesystem/RSSDirectory.h"
 #include "ThumbnailCache.h"
 #ifdef HAS_FILESYSTEM_RAR
-#include "FileSystem/RarManager.h"
+#include "filesystem/RarManager.h"
 #endif
-#include "FileSystem/MythDirectory.h"
+#include "filesystem/MythDirectory.h"
 #ifdef HAS_UPNP
-#include "FileSystem/UPnPDirectory.h"
+#include "filesystem/UPnPDirectory.h"
 #endif
 #ifdef HAS_CREDITS
 #include "Credits.h"
@@ -76,7 +76,7 @@
 #include "CocoaInterface.h"
 #endif
 #include "GUIUserMessages.h"
-#include "FileSystem/File.h"
+#include "filesystem/File.h"
 #include "utils/Crc32.h"
 #include "settings/Settings.h"
 #include "utils/StringUtils.h"

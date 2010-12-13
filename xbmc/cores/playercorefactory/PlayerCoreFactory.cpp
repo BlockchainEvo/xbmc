@@ -26,7 +26,6 @@
 #include "paplayer/PAPlayer.h"
 #include "paplayer/DVDPlayerCodec.h"
 #include "dialogs/GUIDialogContextMenu.h"
-#include "FileSystem/FileCurl.h"
 #include "utils/HttpHeader.h"
 #include "settings/GUISettings.h"
 #include "URL.h"

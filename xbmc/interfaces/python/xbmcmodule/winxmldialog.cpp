@@ -41,7 +41,7 @@
 #include "GUIPythonWindowXMLDialog.h"
 #include "addons/Skin.h"
 #include "Util.h"
-#include "FileSystem/File.h"
+#include "filesystem/File.h"
 
 #define ACTIVE_WINDOW  g_windowManager.GetActiveWindow()
 

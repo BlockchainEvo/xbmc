@@ -41,7 +41,7 @@
 #include "GUIPythonWindowXML.h"
 #include "addons/Skin.h"
 #include "Util.h"
-#include "FileSystem/File.h"
+#include "filesystem/File.h"
 
 using namespace std;
 using namespace ADDON;

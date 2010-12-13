@@ -26,7 +26,7 @@
 #include "XMLUtils.h"
 #include "threads/SingleLock.h"
 #include "utils/log.h"
-#include "FileSystem/File.h"
+#include "filesystem/File.h"
 
 using namespace std;
 

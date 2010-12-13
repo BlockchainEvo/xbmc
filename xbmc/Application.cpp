@@ -57,17 +57,17 @@
 #include "SectionLoader.h"
 #include "cores/DllLoader/DllLoaderContainer.h"
 #include "GUIUserMessages.h"
-#include "FileSystem/DirectoryCache.h"
-#include "FileSystem/StackDirectory.h"
-#include "FileSystem/SpecialProtocol.h"
-#include "FileSystem/DllLibCurl.h"
-#include "FileSystem/MythSession.h"
-#include "FileSystem/PluginDirectory.h"
+#include "filesystem/DirectoryCache.h"
+#include "filesystem/StackDirectory.h"
+#include "filesystem/SpecialProtocol.h"
+#include "filesystem/DllLibCurl.h"
+#include "filesystem/MythSession.h"
+#include "filesystem/PluginDirectory.h"
 #ifdef HAS_FILESYSTEM_SAP
-#include "FileSystem/SAPDirectory.h"
+#include "filesystem/SAPDirectory.h"
 #endif
 #ifdef HAS_FILESYSTEM_HTSP
-#include "FileSystem/HTSPDirectory.h"
+#include "filesystem/HTSPDirectory.h"
 #endif
 #include "utils/TuxBoxUtil.h"
 #include "utils/SystemInfo.h"
@@ -77,7 +77,7 @@
 #include "music/LastFmManager.h"
 #include "playlists/SmartPlayList.h"
 #ifdef HAS_FILESYSTEM_RAR
-#include "FileSystem/RarManager.h"
+#include "filesystem/RarManager.h"
 #endif
 #include "playlists/PlayList.h"
 #include "windowing/WindowingFactory.h"
@@ -92,17 +92,17 @@
 #include "input/MouseStat.h"
 
 #if defined(FILESYSTEM) && !defined(_LINUX)
-#include "FileSystem/FileDAAP.h"
+#include "filesystem/FileDAAP.h"
 #endif
 #ifdef HAS_UPNP
 #include "network/UPnP.h"
-#include "FileSystem/UPnPDirectory.h"
+#include "filesystem/UPnPDirectory.h"
 #endif
 #if defined(_LINUX) && defined(HAS_FILESYSTEM_SMB)
-#include "FileSystem/SMBDirectory.h"
+#include "filesystem/SMBDirectory.h"
 #endif
 #ifdef HAS_FILESYSTEM_SFTP
-#include "FileSystem/FileSFTP.h"
+#include "filesystem/FileSFTP.h"
 #endif
 #include "PartyModeManager.h"
 #ifdef HAS_VIDEO_PLAYBACK

@@ -28,7 +28,6 @@
 #include "input/ButtonTranslator.h"
 #include "threads/SingleLock.h"
 #include "Util.h"
-#include "FileSystem/Directory.h"
 #include "tinyXML/tinyxml.h"
 #include "addons/Skin.h"
 #ifdef HAS_SDL_AUDIO

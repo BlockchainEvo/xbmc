@@ -35,7 +35,7 @@ distribution.
 
 #ifdef USE_XBMC_FILESYSTEM
 bool TiXmlBase::condenseWhiteSpace = false;
-#include "FileSystem/File.h"
+#include "filesystem/File.h"
 using namespace XFILE;
 #else
 bool TiXmlBase::condenseWhiteSpace = true;

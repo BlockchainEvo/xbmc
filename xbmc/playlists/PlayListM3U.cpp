@@ -20,7 +20,7 @@
  */
 
 #include "PlayListM3U.h"
-#include "FileSystem/File.h"
+#include "filesystem/File.h"
 #include "Util.h"
 #include "utils/StringUtils.h"
 #include "utils/CharsetConverter.h"

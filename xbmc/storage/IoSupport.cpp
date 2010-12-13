@@ -53,7 +53,7 @@
 #include <IOKit/storage/IOStorageDeviceCharacteristics.h>
 #endif
 #include "cdioSupport.h"
-#include "FileSystem/iso9660.h"
+#include "filesystem/iso9660.h"
 #include "MediaManager.h"
 #ifdef _LINUX
 #include "XHandle.h"

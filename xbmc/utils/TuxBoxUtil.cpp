@@ -25,7 +25,7 @@
 
 #include "TuxBoxUtil.h"
 #include "Util.h"
-#include "FileSystem/FileCurl.h"
+#include "filesystem/FileCurl.h"
 #include "dialogs/GUIDialogContextMenu.h"
 #include "Application.h"
 #include "GUIInfoManager.h"
@@ -33,7 +33,7 @@
 #include "guilib/GUIWindowManager.h"
 #include "dialogs/GUIDialogOK.h"
 #include "dialogs/GUIDialogYesNo.h"
-#include "FileSystem/File.h"
+#include "filesystem/File.h"
 #include "URL.h"
 #include "settings/AdvancedSettings.h"
 #include "FileItem.h"

@@ -32,7 +32,8 @@
 #include "Application.h"
 #include "threads/SingleLock.h"
 #include "guilib/LocalizeStrings.h"
-#include "FileSystem/File.h"
+#include "filesystem/File.h"
+#include "filesystem/FileCurl.h"
 
 #define SCROBBLER_CLIENT              "xbm"
 //#define SCROBBLER_CLIENT              "tst"     // For testing ONLY!

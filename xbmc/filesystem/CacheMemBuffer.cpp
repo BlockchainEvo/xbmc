@@ -20,9 +20,9 @@
  */
 
 #ifdef _LINUX
-#include "../linux/PlatformDefs.h"
+#include "linux/PlatformDefs.h"
 #endif
-#include "AdvancedSettings.h"
+#include "settings/AdvancedSettings.h"
 #include "CacheMemBuffer.h"
 #include "utils/log.h"
 #include "threads/SingleLock.h"

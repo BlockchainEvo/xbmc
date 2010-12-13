@@ -29,7 +29,7 @@
 #ifdef HAS_LIBRTMP
 #include "settings/AdvancedSettings.h"
 #include "DVDInputStreamRTMP.h"
-#include "FileSystem/IFile.h"
+#include "filesystem/IFile.h"
 #include "threads/SingleLock.h"
 #include "utils/log.h"
 

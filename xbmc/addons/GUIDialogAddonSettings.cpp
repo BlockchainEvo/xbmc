@@ -20,7 +20,7 @@
  */
 
 #include "GUIDialogAddonSettings.h"
-#include "FileSystem/PluginDirectory.h"
+#include "filesystem/PluginDirectory.h"
 #include "addons/IAddon.h"
 #include "addons/AddonManager.h"
 #include "dialogs/GUIDialogNumeric.h"
@@ -35,7 +35,7 @@
 #include "guilib/GUIRadioButtonControl.h"
 #include "guilib/GUISpinControlEx.h"
 #include "guilib/GUIImage.h"
-#include "FileSystem/Directory.h"
+#include "filesystem/Directory.h"
 #include "video/VideoInfoScanner.h"
 #include "addons/Scraper.h"
 #include "guilib/GUIWindowManager.h"

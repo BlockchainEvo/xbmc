@@ -19,9 +19,9 @@
 *
 */
 #include "Scraper.h"
-#include "FileSystem/File.h"
-#include "FileSystem/Directory.h"
-#include "FileSystem/FileCurl.h"
+#include "filesystem/File.h"
+#include "filesystem/Directory.h"
+#include "filesystem/FileCurl.h"
 #include "AddonManager.h"
 #include "utils/ScraperParser.h"
 #include "utils/ScraperUrl.h"

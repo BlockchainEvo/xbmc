@@ -21,7 +21,7 @@
 
 #include "DVDSubtitlesLibass.h"
 #include "DVDClock.h"
-#include "FileSystem/SpecialProtocol.h"
+#include "filesystem/SpecialProtocol.h"
 #include "settings/GUISettings.h"
 #include "utils/log.h"
 #include "threads/SingleLock.h"

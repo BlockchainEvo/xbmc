@@ -23,7 +23,7 @@
 #include "FlacTag.h"
 #include "Util.h"
 #include "pictures/Picture.h"
-#include "FileSystem/File.h"
+#include "filesystem/File.h"
 #include "utils/log.h"
 #include "utils/EndianSwap.h"
 

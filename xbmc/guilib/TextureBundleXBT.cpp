@@ -28,7 +28,7 @@
 #include "addons/Skin.h"
 #include "settings/GUISettings.h"
 #include "Util.h"
-#include "FileSystem/SpecialProtocol.h"
+#include "filesystem/SpecialProtocol.h"
 #include "utils/EndianSwap.h"
 #include "XBTF.h"
 #ifndef _LINUX

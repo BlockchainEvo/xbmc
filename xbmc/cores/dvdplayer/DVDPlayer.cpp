@@ -43,7 +43,7 @@
 #include "guilib/GUIWindowManager.h"
 #include "Application.h"
 #include "DVDPerformanceCounter.h"
-#include "FileSystem/File.h"
+#include "filesystem/File.h"
 #include "pictures/Picture.h"
 #include "Codecs/DllSwScale.h"
 #ifdef HAS_VIDEO_PLAYBACK

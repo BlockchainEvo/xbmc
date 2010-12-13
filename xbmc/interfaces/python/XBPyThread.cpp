@@ -41,7 +41,7 @@
   #include "python/Include/osdefs.h"
 #endif
 #include "XBPythonDll.h"
-#include "FileSystem/SpecialProtocol.h"
+#include "filesystem/SpecialProtocol.h"
 #include "guilib/GUIWindowManager.h"
 #include "dialogs/GUIDialogKaiToast.h"
 #include "guilib/LocalizeStrings.h"

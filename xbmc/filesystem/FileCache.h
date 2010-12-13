@@ -23,7 +23,7 @@
 #include "IFile.h"
 #include "CacheStrategy.h"
 #include "threads/CriticalSection.h"
-#include "FileSystem/File.h"
+#include "File.h"
 #include "threads/Thread.h"
 
 namespace XFILE

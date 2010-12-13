@@ -23,8 +23,8 @@
 #include "Util.h"
 #include "log.h"
 
-#include "FileSystem/File.h"
-#include "FileSystem/FileCurl.h"
+#include "filesystem/File.h"
+#include "filesystem/FileCurl.h"
 
 using namespace std;
 using namespace XFILE;

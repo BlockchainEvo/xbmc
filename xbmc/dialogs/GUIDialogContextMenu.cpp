@@ -38,7 +38,7 @@
 #include "GUIDialogYesNo.h"
 #include "addons/AddonManager.h"
 #include "FileItem.h"
-#include "FileSystem/File.h"
+#include "filesystem/File.h"
 #include "settings/Settings.h"
 #include "guilib/LocalizeStrings.h"
 #include "TextureCache.h"

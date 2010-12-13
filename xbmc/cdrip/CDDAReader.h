@@ -29,7 +29,7 @@
 #include "threads/Thread.h"
 
 #include "FileItem.h"
-#include "FileSystem/File.h"
+#include "filesystem/File.h"
 
 struct RipBuffer
 {

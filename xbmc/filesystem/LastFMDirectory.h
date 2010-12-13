@@ -21,7 +21,7 @@
  */
 
 #include "IDirectory.h"
-#include "FileSystem/FileCurl.h"
+#include "FileCurl.h"
 #include "tinyXML/tinyxml.h"
 #include "threads/Thread.h"
 

@@ -23,8 +23,8 @@
 #include "AddonManager.h"
 #include "settings/Settings.h"
 #include "settings/GUISettings.h"
-#include "FileSystem/Directory.h"
-#include "FileSystem/File.h"
+#include "filesystem/Directory.h"
+#include "filesystem/File.h"
 #ifdef __APPLE__
 #include "../osx/OSXGNUReplacements.h"
 #endif

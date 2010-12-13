@@ -21,8 +21,8 @@
 
 #include "VideoLibrary.h"
 #include "JSONUtils.h"
-#include "../VideoDatabase.h"
-#include "../Util.h"
+#include "video/VideoDatabase.h"
+#include "Util.h"
 #include "Application.h"
 
 using namespace Json;

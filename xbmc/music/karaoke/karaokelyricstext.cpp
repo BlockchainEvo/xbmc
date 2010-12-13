@@ -30,7 +30,7 @@
 #include "guilib/GUIFont.h"
 #include "karaokelyricstext.h"
 #include "Util.h"
-#include "FileSystem/File.h"
+#include "filesystem/File.h"
 #include "guilib/GUIFontManager.h"
 #include "addons/Skin.h"
 #include "utils/MathUtils.h"

@@ -22,7 +22,7 @@
 // C++ Implementation: karaokelyricsfactory
 
 #include "Util.h"
-#include "FileSystem/File.h"
+#include "filesystem/File.h"
 
 #include "karaokelyricscdg.h"
 #include "karaokelyricstextkar.h"

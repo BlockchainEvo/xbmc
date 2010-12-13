@@ -38,11 +38,8 @@
 #include "dialogs/GUIDialogOK.h"
 #include "settings/Settings.h"
 #include "settings/GUISettings.h"
-#include "FileSystem/File.h"
 #include "FileItem.h"
 #include "guilib/LocalizeStrings.h"
-
-using namespace XFILE;
 
 #define CONTROL_BIG_LIST               52
 #define CONTROL_LABEL_HEADER            2

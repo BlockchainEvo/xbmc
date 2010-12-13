@@ -25,7 +25,7 @@
 
 #include "FileItem.h"
 #include "DVDInputStreamMMS.h"
-#include "FileSystem/IFile.h"
+#include "filesystem/IFile.h"
 #include "settings/GUISettings.h"
 
 #ifndef _WIN32

@@ -24,7 +24,7 @@
 #include "settings/Settings.h"
 #include "settings/AdvancedSettings.h"
 #include "utils/Crc32.h"
-#include "FileSystem/SpecialProtocol.h"
+#include "filesystem/SpecialProtocol.h"
 #include "utils/AutoPtrHandle.h"
 #include "utils/log.h"
 

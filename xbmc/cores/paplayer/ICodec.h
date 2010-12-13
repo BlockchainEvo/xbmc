@@ -23,7 +23,7 @@
 
 #include "ReplayGain.h"
 #include "utils/StdString.h"
-#include "FileSystem/File.h"
+#include "filesystem/File.h"
 
 #define READ_EOF      -1
 #define READ_SUCCESS   0

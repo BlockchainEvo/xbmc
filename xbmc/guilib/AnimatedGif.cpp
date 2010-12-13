@@ -27,7 +27,7 @@
 // ****************************************************************************
 
 #include "AnimatedGif.h"
-#include "FileSystem/SpecialProtocol.h"
+#include "filesystem/SpecialProtocol.h"
 #include "utils/EndianSwap.h"
 
 #ifdef _WIN32

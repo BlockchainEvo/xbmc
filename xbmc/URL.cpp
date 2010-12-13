@@ -23,9 +23,9 @@
 #include "utils/RegExp.h"
 #include "utils/log.h"
 #include "Util.h"
-#include "FileSystem/File.h"
+#include "filesystem/File.h"
 #include "FileItem.h"
-#include "FileSystem/StackDirectory.h"
+#include "filesystem/StackDirectory.h"
 #include "addons/Addon.h"
 #ifndef _LINUX
 #include <sys\types.h>

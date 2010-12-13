@@ -25,9 +25,7 @@
 #include "MusicArtistInfo.h"
 #include "addons/Scraper.h"
 #include "threads/Thread.h"
-#include "FileSystem/FileCurl.h"
-
-namespace XFILE { class CFileCurl; }
+#include "filesystem/FileCurl.h"
 
 namespace MUSIC_GRABBER
 {

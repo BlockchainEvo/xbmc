@@ -22,8 +22,6 @@
  */
 
 #include "GUIMediaWindow.h"
-#include "FileSystem/VirtualDirectory.h"
-#include "FileSystem/DirectoryHistory.h"
 #include "GUIWindowSlideShow.h"
 #include "PictureThumbLoader.h"
 #include "DllImageLib.h"

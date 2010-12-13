@@ -31,8 +31,8 @@
 #include "utils/TimeUtils.h"
 #endif
 #include "Util.h"
-#include "FileSystem/File.h"
-#include "FileSystem/Directory.h"
+#include "filesystem/File.h"
+#include "filesystem/Directory.h"
 #include <assert.h>
 
 using namespace std;

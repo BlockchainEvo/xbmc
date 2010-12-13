@@ -25,7 +25,7 @@
 #include "Application.h"
 #include "utils/Builtins.h"
 #include "input/KeyboardLayoutConfiguration.h"
-#include "FileSystem/Directory.h"
+#include "filesystem/Directory.h"
 #include "Util.h"
 #include "guilib/GUISpinControlEx.h"
 #include "guilib/GUIRadioButtonControl.h"
@@ -79,11 +79,11 @@
 #include "XBMCHelper.h"
 #endif
 #include "network/GUIDialogAccessPoints.h"
-#include "FileSystem/Directory.h"
+#include "filesystem/Directory.h"
 
 #include "FileItem.h"
 #include "guilib/GUIToggleButtonControl.h"
-#include "FileSystem/SpecialProtocol.h"
+#include "filesystem/SpecialProtocol.h"
 
 #include "network/Zeroconf.h"
 

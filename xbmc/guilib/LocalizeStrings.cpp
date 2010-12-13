@@ -23,7 +23,7 @@
 #include "LocalizeStrings.h"
 #include "utils/CharsetConverter.h"
 #include "utils/log.h"
-#include "FileSystem/SpecialProtocol.h"
+#include "filesystem/SpecialProtocol.h"
 #include "utils/XMLUtils.h"
 
 CLocalizeStrings::CLocalizeStrings(void)

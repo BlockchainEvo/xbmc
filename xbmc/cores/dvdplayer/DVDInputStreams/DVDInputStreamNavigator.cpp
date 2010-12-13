@@ -28,7 +28,7 @@
 #include "LangInfo.h"
 #include "utils/log.h"
 #include "guilib/Geometry.h"
-#include "FileSystem/IFile.h"
+#include "filesystem/IFile.h"
 #ifdef __APPLE__
 #include "CocoaInterface.h"
 #endif

@@ -26,11 +26,8 @@
 #include "GUIWindowFileManager.h"
 #include "Application.h"
 #include "Util.h"
-#include "FileSystem/Directory.h"
-#include "FileSystem/ZipManager.h"
-#include "FileSystem/FactoryFileDirectory.h"
-#include "FileSystem/MultiPathDirectory.h"
-#include "FileSystem/SpecialProtocol.h"
+#include "filesystem/Directory.h"
+#include "filesystem/ZipManager.h"
 #include "pictures/Picture.h"
 #include "dialogs/GUIDialogContextMenu.h"
 #include "guilib/GUIListContainer.h"
@@ -48,9 +45,6 @@
 #include "dialogs/GUIDialogYesNo.h"
 #include "dialogs/GUIDialogKeyboard.h"
 #include "dialogs/GUIDialogProgress.h"
-#ifdef HAS_FILESYSTEM_RAR
-#include "FileSystem/RarManager.h"
-#endif
 #include "Favourites.h"
 #include "playlists/PlayList.h"
 #include "utils/AsyncFileCopy.h"

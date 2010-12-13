@@ -20,7 +20,7 @@
  */
 
 #include "TextureCache.h"
-#include "FileSystem/File.h"
+#include "filesystem/File.h"
 #include "threads/SingleLock.h"
 #include "utils/Crc32.h"
 #include "Util.h"

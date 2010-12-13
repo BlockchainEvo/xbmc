@@ -23,12 +23,12 @@
 #include "GUISound.h"
 #include "AudioContext.h"
 #include "settings/Settings.h"
-#include "FileSystem/File.h"
+#include "filesystem/File.h"
 #include "utils/log.h"
 #ifdef HAS_SDL_AUDIO
 #include <SDL/SDL_mixer.h>
-#include "FileSystem/SpecialProtocol.h"
 #endif
+#include "filesystem/SpecialProtocol.h"
 #ifndef HAS_SDL_AUDIO
 
 typedef struct

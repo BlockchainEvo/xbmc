@@ -27,7 +27,6 @@
 #endif
 #include "threads/CriticalSection.h"
 #include "threads/SingleLock.h"
-#include "FileSystem/File.h"
 #include "settings/AdvancedSettings.h"
 #include "threads/Thread.h"
 #include "WindowingFactory.h"

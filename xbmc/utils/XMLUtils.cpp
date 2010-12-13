@@ -21,7 +21,7 @@
 
 #include "XMLUtils.h"
 #include "Util.h"
-#include "FileSystem/SpecialProtocol.h"
+#include "filesystem/SpecialProtocol.h"
 #include "StringUtils.h"
 #ifdef _WIN32
 #include "PlatformDefs.h" //for strcasecmp

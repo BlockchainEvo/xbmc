@@ -21,7 +21,7 @@
 
 #include "ALSADirectSound.h"
 #include "guilib/AudioContext.h"
-#include "FileSystem/SpecialProtocol.h"
+#include "filesystem/SpecialProtocol.h"
 #include "settings/GUISettings.h"
 #include "settings/Settings.h"
 #include "utils/log.h"

@@ -27,7 +27,7 @@
 #include "Util.h"
 #include "guilib/GUIWindowManager.h"
 #include "FileItem.h"
-#include "FileSystem/File.h"
+#include "filesystem/File.h"
 #include "guilib/TextureManager.h"
 #include "../XBPython.h"
 #include "settings/GUISettings.h"

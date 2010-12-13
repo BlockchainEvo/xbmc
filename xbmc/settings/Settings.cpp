@@ -37,12 +37,12 @@
 #include "guilib/GUIAudioManager.h"
 #include "guilib/AudioContext.h"
 #include "utils/GUIInfoManager.h"
-#include "FileSystem/MultiPathDirectory.h"
-#include "FileSystem/SpecialProtocol.h"
+#include "filesystem/MultiPathDirectory.h"
+#include "filesystem/SpecialProtocol.h"
 #include "guilib/GUIBaseContainer.h" // for VIEW_TYPE enum
 #include "guilib/GUIWindowManager.h"
 #include "dialogs/GUIDialogYesNo.h"
-#include "FileSystem/Directory.h"
+#include "filesystem/Directory.h"
 #include "FileItem.h"
 #include "LangInfo.h"
 #include "guilib/LocalizeStrings.h"
@@ -52,7 +52,7 @@
 #include "win32/WIN32Util.h"
 #endif
 #if defined(_LINUX) && defined(HAS_FILESYSTEM_SMB)
-#include "FileSystem/SMBDirectory.h"
+#include "filesystem/SMBDirectory.h"
 #endif
 #include "cores/playercorefactory/PlayerCoreFactory.h"
 #include "utils/FileUtils.h"

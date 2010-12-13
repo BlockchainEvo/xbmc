@@ -29,8 +29,7 @@
 #include "Util.h"
 #ifdef _LINUX
 #include <dlfcn.h>
-#include "FileSystem/SpecialProtocol.h"
-#include "FileSystem/File.h"
+#include "filesystem/SpecialProtocol.h"
 #endif
 
 using namespace std;

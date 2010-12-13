@@ -28,7 +28,7 @@
 #include "utils/StringUtils.h"
 #include "utils/log.h"
 #include "cdioSupport.h"
-#include "FileSystem/iso9660.h"
+#include "filesystem/iso9660.h"
 #include "threads/SingleLock.h"
 #ifdef _LINUX
 #include <sys/types.h>
@@ -46,7 +46,7 @@
 #define USING_CDIO78
 #endif
 #include "guilib/GUIWindowManager.h"
-#include "FileSystem/File.h"
+#include "filesystem/File.h"
 #include "FileItem.h"
 #include "Application.h"
 

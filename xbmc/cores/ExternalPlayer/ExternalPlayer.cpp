@@ -29,7 +29,7 @@
 #include "dialogs/GUIDialogOK.h"
 #include "guilib/GUIWindowManager.h"
 #include "Application.h"
-#include "FileSystem/FileMusicDatabase.h"
+#include "filesystem/FileMusicDatabase.h"
 #include "FileItem.h"
 #include "utils/RegExp.h"
 #include "utils/StringUtils.h"

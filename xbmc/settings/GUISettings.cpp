@@ -29,7 +29,7 @@
 #include "LinuxTimezone.h"
 #endif
 #include "Application.h"
-#include "FileSystem/SpecialProtocol.h"
+#include "filesystem/SpecialProtocol.h"
 #include "AdvancedSettings.h"
 #include "guilib/LocalizeStrings.h"
 #include "utils/StringUtils.h"

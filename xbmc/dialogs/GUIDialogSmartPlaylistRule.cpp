@@ -25,12 +25,12 @@
 #include "video/VideoDatabase.h"
 #include "guilib/GUIWindowManager.h"
 #include "GUIDialogSelect.h"
-#include "FileSystem/Directory.h"
+#include "filesystem/Directory.h"
 #include "FileItem.h"
 #include "guilib/GUIEditControl.h"
 #include "guilib/LocalizeStrings.h"
 #include "settings/Settings.h"
-#include "MediaManager.h"
+#include "storage/MediaManager.h"
 
 #define CONTROL_FIELD           15
 #define CONTROL_OPERATOR        16

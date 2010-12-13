@@ -30,7 +30,7 @@
 #include "GUIPassword.h"
 #include "GUIWindowLoginScreen.h"
 #include "guilib/GUIWindowManager.h"
-#include "FileSystem/Directory.h"
+#include "filesystem/Directory.h"
 #include "FileItem.h"
 #include "Util.h"
 #include "Settings.h"

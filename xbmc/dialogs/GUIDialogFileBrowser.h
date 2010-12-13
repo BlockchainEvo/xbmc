@@ -22,8 +22,8 @@
  */
 
 #include "guilib/GUIDialog.h"
-#include "FileSystem/VirtualDirectory.h"
-#include "FileSystem/DirectoryHistory.h"
+#include "filesystem/VirtualDirectory.h"
+#include "filesystem/DirectoryHistory.h"
 #include "GUIViewControl.h"
 #include "pictures/PictureThumbLoader.h"
 

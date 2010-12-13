@@ -25,9 +25,9 @@
 #include "AddonStatusHandler.h"
 #include "settings/GUIDialogSettings.h"
 #include "Util.h"
-#include "FileSystem/File.h"
-#include "FileSystem/SpecialProtocol.h"
-#include "FileSystem/Directory.h"
+#include "filesystem/File.h"
+#include "filesystem/SpecialProtocol.h"
+#include "filesystem/Directory.h"
 #include "utils/log.h"
 
 using namespace XFILE;

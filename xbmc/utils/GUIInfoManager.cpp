@@ -49,7 +49,7 @@
 #include "music/dialogs/GUIDialogMusicScan.h"
 #include "video/dialogs/GUIDialogVideoScan.h"
 #include "guilib/GUIWindowManager.h"
-#include "FileSystem/File.h"
+#include "filesystem/File.h"
 #include "playlists/PlayList.h"
 #include "TuxBoxUtil.h"
 #include "windowing/WindowingFactory.h"

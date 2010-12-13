@@ -23,7 +23,7 @@
 #include "PlatformInclude.h"
 #include "XFileUtils.h"
 #include "XTimeUtils.h"
-#include "FileSystem/SpecialProtocol.h"
+#include "filesystem/SpecialProtocol.h"
 
 #ifdef _LINUX
 #include "XHandle.h"

@@ -21,7 +21,7 @@
 #include "system.h"
 #include "Util.h"
 #include "URIUtils.h"
-#include "FileSystem/SpecialProtocol.h"
+#include "filesystem/SpecialProtocol.h"
 
 CStdString CURIUtils::GetParentFolderURI(const CStdString& uri, bool preserveFileNameInPath)
 {

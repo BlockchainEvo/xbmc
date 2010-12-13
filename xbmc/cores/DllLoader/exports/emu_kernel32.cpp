@@ -31,7 +31,7 @@
 #endif
 
 #include "../dll_tracker.h"
-#include "FileSystem/SpecialProtocol.h"
+#include "filesystem/SpecialProtocol.h"
 
 #ifdef _LINUX
 #include "../../../linux/PlatformInclude.h"

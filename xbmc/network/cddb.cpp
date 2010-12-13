@@ -37,7 +37,7 @@
 #include "settings/AdvancedSettings.h"
 #include "utils/StringUtils.h"
 #include "Util.h"
-#include "FileSystem/File.h"
+#include "filesystem/File.h"
 #include "utils/GUIInfoManager.h"
 #include "utils/CharsetConverter.h"
 #include "utils/log.h"

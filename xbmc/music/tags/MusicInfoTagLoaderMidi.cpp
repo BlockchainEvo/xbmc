@@ -22,7 +22,6 @@
 #include "MusicInfoTagLoaderMidi.h"
 #include "Util.h"
 #include "MusicInfoTag.h"
-#include "FileSystem/File.h"
 
 using namespace XFILE;
 using namespace MUSIC_INFO;

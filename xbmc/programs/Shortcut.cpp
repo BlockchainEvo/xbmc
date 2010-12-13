@@ -25,7 +25,7 @@
 #include "Shortcut.h"
 #include "Util.h"
 #include "tinyXML/tinyxml.h"
-#include "FileSystem/File.h"
+#include "filesystem/File.h"
 
 using namespace XFILE;
 

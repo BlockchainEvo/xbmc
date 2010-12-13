@@ -22,10 +22,10 @@
  */
 
 #include "guilib/GUIWindow.h"
-#include "FileSystem/VirtualDirectory.h"
-#include "FileSystem/DirectoryHistory.h"
+#include "filesystem/VirtualDirectory.h"
+#include "filesystem/DirectoryHistory.h"
 #include "threads/CriticalSection.h"
-#include "FileSystem/File.h"
+#include "filesystem/File.h"
 #include "utils/Job.h"
 
 class CFileItem;

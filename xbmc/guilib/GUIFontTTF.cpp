@@ -24,7 +24,7 @@
 #include "GUIFontManager.h"
 #include "Texture.h"
 #include "GraphicContext.h"
-#include "FileSystem/SpecialProtocol.h"
+#include "filesystem/SpecialProtocol.h"
 #include "utils/MathUtils.h"
 #include "utils/log.h"
 #include "windowing/WindowingFactory.h"

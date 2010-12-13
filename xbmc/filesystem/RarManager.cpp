@@ -22,13 +22,13 @@
 #include "system.h"
 #include "RarManager.h"
 #ifdef HAS_FILESYSTEM_RAR
-#include "../lib/UnrarXLib/rar.hpp"
+#include "UnrarXLib/rar.hpp"
 #endif
 #include "Util.h"
 #include "utils/CharsetConverter.h"
 #include "threads/SingleLock.h"
-#include "FileSystem/Directory.h"
-#include "FileSystem/SpecialProtocol.h"
+#include "Directory.h"
+#include "SpecialProtocol.h"
 #include "settings/AdvancedSettings.h"
 #include "FileItem.h"
 #include "utils/log.h"

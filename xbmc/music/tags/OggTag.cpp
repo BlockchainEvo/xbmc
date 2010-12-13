@@ -24,7 +24,7 @@
 #endif
 #include "OggTag.h"
 #include "cores/paplayer/OggCallback.h"
-#include "FileSystem/File.h"
+#include "filesystem/File.h"
 #include "Util.h"
 
 using namespace MUSIC_INFO;

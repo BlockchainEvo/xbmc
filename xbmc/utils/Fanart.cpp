@@ -23,9 +23,9 @@
 #include "tinyXML/tinyxml.h"
 #include "Util.h"
 #include "pictures/Picture.h"
-#include "FileSystem/FileCurl.h"
+#include "filesystem/FileCurl.h"
 #include "StringUtils.h"
-#include "FileSystem/File.h"
+#include "filesystem/File.h"
 
 const unsigned int CFanart::max_fanart_colors=3;
 

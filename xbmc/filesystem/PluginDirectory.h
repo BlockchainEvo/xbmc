@@ -20,8 +20,8 @@
  *
  */
 
-#include "FileSystem/IDirectory.h"
-#include "FileSystem/Directory.h"
+#include "IDirectory.h"
+#include "Directory.h"
 #include "utils/StdString.h"
 #include "SortFileItem.h"
 
