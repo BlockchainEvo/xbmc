@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <memory.h>
 #include "interfaces/json-rpc/JSONRPC.h"
-#include "json/json.h"
+#include "jsoncpp/include/json/json.h"
 #include "utils/AnnouncementManager.h"
 #include "utils/log.h"
 #include "utils/Variant.h"

@@ -134,7 +134,7 @@ LIB_DIRS=\
 	lib/cpluff \
 	lib/libmodplug \
 	lib/xbmc-dll-symbols \
-	lib/jsoncpp/jsoncpp/src/lib_json
+	lib/jsoncpp/src/lib_json
 ifeq ($(findstring osx,$(ARCH)), osx)
 LIB_DIRS+=lib/libmicrohttpd
 endif
@@ -333,8 +333,8 @@ lib/libXBMS/libxbms-@ARCH@.a: force
 	$(MAKE) -C lib/libXBMS
 lib/libXDAAP/libxdaap-@ARCH@.a: force
 	$(MAKE) -C lib/libXDAAP
-lib/jsoncpp/jsoncpp/src/lib_json/libjsoncpp.a: force
-	$(MAKE) -C lib/jsoncpp/jsoncpp/src/lib_json
+lib/jsoncpp/src/lib_json/libjsoncpp.a: force
+	$(MAKE) -C lib/jsoncpp/src/lib_json
 xbmc/interfaces/http-api/http-api.a: force
 	$(MAKE) -C xbmc/interfaces/http-api
 xbmc/interfaces/json-rpc/json-rpc.a: force
@@ -474,7 +474,7 @@ xcode_depends: \
 	lib/libXDAAP/libxdaap-@ARCH@.a \
 	xbmc/interfaces/http-api/http-api.a \
 	xbmc/interfaces/json-rpc/json-rpc.a \
-	lib/jsoncpp/jsoncpp/src/lib_json/libjsoncpp.a \
+	lib/jsoncpp/src/lib_json/libjsoncpp.a \
 	lib/libmicrohttpd/src/daemon/.libs/libmicrohttpd.a
 
 # platform independend objects
@@ -525,7 +525,7 @@ OBJSXBMC=	\
 	lib/libUPnP/libupnp-@ARCH@.a \
 	lib/libXDAAP/libxdaap-@ARCH@.a \
 	xbmc/interfaces/json-rpc/json-rpc.a \
-	lib/jsoncpp/jsoncpp/src/lib_json/libjsoncpp.a \
+	lib/jsoncpp/src/lib_json/libjsoncpp.a \
 	xbmc/interfaces/http-api/http-api.a \
 	xbmc/dbwrappers/dbwrappers.a \
 	lib/libsquish/libsquish-@ARCH@.a \
