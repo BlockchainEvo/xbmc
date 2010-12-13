@@ -11,48 +11,48 @@ INCLUDES+=-I../lib/jsoncpp/jsoncpp/include
 INCLUDES+=-Ilib/cpluff/libcpluff
 
 SRCS=Application.cpp \
-     CueDocument.cpp \
-     GUIViewControl.cpp \
-     GUIViewState.cpp \
-     PlayListPlayer.cpp \
+     ApplicationMessenger.cpp \
+     Autorun.cpp \
      AutoSwitch.cpp \
+     BackgroundInfoLoader.cpp \
+     CueDocument.cpp \
      DateTime.cpp \
+     DPMSSupport.cpp \
      DynamicDll.cpp \
+     Favourites.cpp \
      FileItem.cpp \
-     GUIPassword.cpp \
      LangCodeExpander.cpp \
      LangInfo.cpp \
-     NfoFile.cpp \
-     PartyModeManager.cpp \
-     SectionLoader.cpp \
-     SortFileItem.cpp \
-     Temperature.cpp \
-     ThumbnailCache.cpp \
-     URL.cpp \
-     ViewDatabase.cpp \
+     GUILargeTextureManager.cpp \
      GUIMediaWindow.cpp \
+     GUIPassword.cpp \
+     GUIViewControl.cpp \
+     GUIViewState.cpp \
      GUIWindowFileManager.cpp \
      GUIWindowHome.cpp \
      GUIWindowLoginScreen.cpp \
      GUIWindowPointer.cpp \
      GUIWindowScreensaver.cpp \
+     GUIWindowStartup.cpp \
      GUIWindowSystemInfo.cpp \
      GUIWindowWeather.cpp \
-     BackgroundInfoLoader.cpp \
+     MediaSource.cpp \
+     NfoFile.cpp \
+     PlayListPlayer.cpp \
+     PartyModeManager.cpp \
+     SectionLoader.cpp \
+     SortFileItem.cpp \
+     SystemGlobals.cpp \
+     Temperature.cpp \
+     TextureCache.cpp \
+     TextureDatabase.cpp \
      ThumbLoader.cpp \
-     ApplicationMessenger.cpp \
-     Autorun.cpp \
+     ThumbnailCache.cpp \
+     URL.cpp \
+     ViewDatabase.cpp \
      Util.cpp \
      XBApplicationEx.cpp \
      xbmc.cpp \
-     Favourites.cpp \
-     GUIWindowStartup.cpp \
-     GUILargeTextureManager.cpp \
-     MediaSource.cpp \
-     DPMSSupport.cpp \
-     TextureCache.cpp \
-     TextureDatabase.cpp \
-     SystemGlobals.cpp \
 
 LIB=xbmc.a
 
