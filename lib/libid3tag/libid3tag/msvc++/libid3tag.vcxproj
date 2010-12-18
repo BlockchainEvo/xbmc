@@ -335,7 +335,7 @@
     <None Include="..\genre.dat" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\xbmc\lib\cximage-6.0\zlib\zlib.vcxproj">
+    <ProjectReference Include="..\..\..\cximage-6.0\zlib\zlib.vcxproj">
       <Project>{96798038-06ce-4382-bd5b-f9c366724deb}</Project>
     </ProjectReference>
   </ItemGroup>

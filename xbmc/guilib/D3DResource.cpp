@@ -21,7 +21,7 @@
 
 #include "system.h"
 #include "D3DResource.h"
-#include "WindowingFactory.h"
+#include "windowing/WindowingFactory.h"
 #include "utils/log.h"
 
 #ifdef HAS_DX

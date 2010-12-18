@@ -21,7 +21,7 @@
 
 #include "Texture.h"
 #include "GUITextureD3D.h"
-#include "WindowingFactory.h"
+#include "windowing/WindowingFactory.h"
 
 #ifdef HAS_DX
 

@@ -33,7 +33,7 @@
 #include "Setupapi.h"
 #endif
 #include "storage/MediaManager.h"
-#include "WindowingFactory.h"
+#include "windowing/WindowingFactory.h"
 #include "guilib/LocalizeStrings.h"
 #include "log.h"
 #include "StringUtils.h"

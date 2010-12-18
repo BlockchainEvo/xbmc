@@ -22,7 +22,7 @@
 #ifndef WINDOW_SYSTEM_WIN32_H
 #define WINDOW_SYSTEM_WIN32_H
 
-#include "WinSystem.h"
+#include "windowing/WinSystem.h"
 
 struct MONITOR_DETAILS
 {

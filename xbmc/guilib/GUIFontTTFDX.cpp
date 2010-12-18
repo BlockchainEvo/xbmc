@@ -26,7 +26,7 @@
 #include "GUIFontManager.h"
 #include "Texture.h"
 #include "gui3d.h"
-#include "WindowingFactory.h"
+#include "windowing/WindowingFactory.h"
 #include "utils/log.h"
 
 // stuff for freetype

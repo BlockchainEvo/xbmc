@@ -29,7 +29,7 @@
  *
  */
 #include "WinSystemWin32.h"
-#include "RenderSystemGL.h"
+#include "rendering/gl/RenderSystemGL.h"
 
 class CWinSystemWin32GL : public CWinSystemWin32, public CRenderSystemGL
 {

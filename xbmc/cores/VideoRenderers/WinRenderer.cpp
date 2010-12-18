@@ -27,7 +27,7 @@
 #include "settings/Settings.h"
 #include "settings/GUISettings.h"
 #include "guilib/Texture.h"
-#include "WindowingFactory.h"
+#include "windowing/WindowingFactory.h"
 #include "settings/AdvancedSettings.h"
 #include "threads/SingleLock.h"
 #include "utils/log.h"

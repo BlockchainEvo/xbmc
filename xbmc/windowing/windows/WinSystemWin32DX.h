@@ -27,8 +27,8 @@
 #include <d3d9.h>
 #include <d3dx9.h>
 #include <dxdiag.h>
-#include "WinSystemWin32.h"
-#include "RenderSystemDX.h"
+#include "windowing/windows/WinSystemWin32.h"
+#include "rendering/dx/RenderSystemDX.h"
 
 #ifdef HAS_DX
 

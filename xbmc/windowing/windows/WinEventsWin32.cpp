@@ -21,14 +21,14 @@
 
 #include "utils/log.h"
 #include "Windowsx.h"
-#include "WinEvents.h"
+#include "windowing/WinEvents.h"
 #include "WIN32Util.h"
 #include "storage/windows/Win32StorageProvider.h"
 #include "Application.h"
 #include "input/XBMC_vkeys.h"
 #include "input/MouseStat.h"
 #include "storage/MediaManager.h"
-#include "WindowingFactory.h"
+#include "windowing/WindowingFactory.h"
 #include <dbt.h>
 #include "guilib/LocalizeStrings.h"
 #include "input/KeyboardStat.h"

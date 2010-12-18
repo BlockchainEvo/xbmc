@@ -45,7 +45,7 @@
     #define DXGetErrorDescription(hr) DXGetErrorDescription9(hr)
     #pragma comment (lib,"Dxerr9.lib")
   #endif
-  #include "WindowingFactory.h"
+  #include "windowing/WindowingFactory.h"
   #include "settings/AdvancedSettings.h"
 #endif
 

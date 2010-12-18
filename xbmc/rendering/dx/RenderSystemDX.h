@@ -25,7 +25,7 @@
 #pragma once
 
 #include <vector>
-#include "RenderSystem.h"
+#include "rendering/RenderSystem.h"
 #include "threads/CriticalSection.h"
 
 enum PCI_Vendors

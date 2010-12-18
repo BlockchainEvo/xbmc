@@ -35,7 +35,7 @@
 #include "Application.h"
 #include "Util.h"
 #include "win32/WIN32Util.h"
-#include "VideoReferenceClock.h"
+#include "video/VideoReferenceClock.h"
 #if (D3DX_SDK_VERSION >= 42) //aug 2009 sdk and up use dxerr
   #include <Dxerr.h>
 #else

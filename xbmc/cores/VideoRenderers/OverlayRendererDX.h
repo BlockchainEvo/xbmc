@@ -22,7 +22,7 @@
 #pragma once
 #include "OverlayRenderer.h"
 #include "OverlayRendererUtil.h"
-#include "RenderSystemDX.h"
+#include "rendering/dx/RenderSystemDX.h"
 #include "guilib/D3DResource.h"
 
 #ifdef HAS_DX

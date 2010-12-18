@@ -30,7 +30,7 @@
 #include "../DVDCodecUtils.h"
 
 #include "DXVA.h"
-#include "WindowingFactory.h"
+#include "windowing/WindowingFactory.h"
 #include "../../../VideoRenderers/WinRenderer.h"
 #include "settings/Settings.h"
 #include "boost/shared_ptr.hpp"
