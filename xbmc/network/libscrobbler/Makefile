@@ -1,6 +1,6 @@
-INCLUDES=-I. -I../../ -I../../linux -I../../../lib
-
-SRCS=scrobbler.cpp lastfmscrobbler.cpp librefmscrobbler.cpp
+SRCS=lastfmscrobbler.cpp \
+     librefmscrobbler.cpp \
+     scrobbler.cpp \
 
 LIB=scrobbler.a
 
