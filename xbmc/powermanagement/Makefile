@@ -1,5 +1,3 @@
-INCLUDES=-I../ -I../linux -I../../lib
-
 SRCS=PowerManager.cpp
 
 LIB=powermanagement.a
