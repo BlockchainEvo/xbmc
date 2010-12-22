@@ -1,5 +1,3 @@
-INCLUDES=-I. -I../.. -I../../linux 
-
 SRCS=LIRC.cpp
 
 LIB=input_linux.a
