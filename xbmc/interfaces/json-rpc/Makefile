@@ -1,6 +1,15 @@
-INCLUDES=-I. -I../ -I../../ -I../../../ -I../../linux -I../../cores -I../../../lib/jsoncpp/jsoncpp/include -I../../../lib
-
-SRCS=JSONRPC.cpp PlayerOperations.cpp AVPlayerOperations.cpp PicturePlayerOperations.cpp AVPlaylistOperations.cpp PlaylistOperations.cpp FileOperations.cpp AudioLibrary.cpp VideoLibrary.cpp FileItemHandler.cpp SystemOperations.cpp XBMCOperations.cpp
+SRCS=AudioLibrary.cpp \
+     AVPlayerOperations.cpp \
+     AVPlaylistOperations.cpp \
+     FileItemHandler.cpp \
+     FileOperations.cpp \
+     JSONRPC.cpp \
+     PicturePlayerOperations.cpp \
+     PlayerOperations.cpp \
+     PlaylistOperations.cpp \
+     SystemOperations.cpp \
+     VideoLibrary.cpp \
+     XBMCOperations.cpp \
 
 LIB=json-rpc.a
 
