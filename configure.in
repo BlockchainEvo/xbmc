@@ -1034,6 +1034,7 @@ if test "x$use_vdadecoder" != "xno"; then
     HAVE_LIBVDADECODER=1
     AC_DEFINE([HAVE_LIBVDADECODER], [1], [Define to 1 if you have the 'VDADecoder' library.])
     AC_MSG_NOTICE($vdadecoder_enabled)
+    USE_VDA=1
   else
     if test "x$use_vdadecoder" = "xyes"; then
       AC_MSG_ERROR([VDA Decoder not supported on this platform])
@@ -1041,9 +1042,11 @@ if test "x$use_vdadecoder" != "xno"; then
       use_vdadecoder="no"
       AC_MSG_NOTICE($vdadecoder_disabled)
     fi
+    USE_VDA=0
   fi
 else
   AC_MSG_NOTICE($vdadecoder_disabled)
+  USE_VDA=0
 fi
 
 # OpenMax
@@ -1499,6 +1502,7 @@ AC_SUBST(USE_OPENGLES)
 AC_SUBST(USE_VDPAU)
 AC_SUBST(USE_VAAPI)
 AC_SUBST(USE_CRYSTALHD)
+AC_SUBST(USE_VDA)
 
 # pushd and popd are not available in other shells besides bash, so implement
 # our own pushd/popd functions
