@@ -1052,17 +1052,20 @@ fi
 # OpenMax
 if test "$host_vendor" = "apple" ; then
   use_openmax="no"
+  USE_OPENMAX=0
   AC_MSG_NOTICE($openmax_disabled)
 else
   if test "$use_openmax" = "yes"; then
     AC_CHECK_HEADER([OpenMAX/IL/OMX_Types.h],
       AC_DEFINE([HAVE_LIBOPENMAX], [1], [Define to 1 if you have the 'OpenMax' library.]),
-      use_openmax=no;AC_MSG_RESULT($openmax_not_found))
+      use_openmax=no;USE_OPENMAX=0;AC_MSG_RESULT($openmax_not_found))
     if test "$use_openmax" = "yes"; then
       INCLUDES="$INCLUDES -I/usr/include/OpenMAX/IL"
+      USE_OPENMAX=1
     fi
   else
     AC_MSG_NOTICE($openmax_disabled)
+    USE_OPENMAX=0
   fi
 fi
 
@@ -1503,6 +1506,7 @@ AC_SUBST(USE_VDPAU)
 AC_SUBST(USE_VAAPI)
 AC_SUBST(USE_CRYSTALHD)
 AC_SUBST(USE_VDA)
+AC_SUBST(USE_OPENMAX)
 
 # pushd and popd are not available in other shells besides bash, so implement
 # our own pushd/popd functions
