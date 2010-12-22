@@ -1,5 +1,3 @@
-INCLUDES=-I../../ -I. -I.. -I../linux -I../../lib -I../../lib/jsoncpp/jsoncpp/include
-
 INCLUDES+=-I../../lib/libUPnP/Platinum/Source/Core \
           -I../../lib/libUPnP/Platinum/Source/Platinum \
           -I../../lib/libUPnP/Platinum/Source/Devices/MediaServer \
