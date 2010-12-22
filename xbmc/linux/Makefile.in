@@ -1,10 +1,5 @@
 ARCH=@ARCH@
 
-INCLUDES=-I. -I.. -I../cores -I../../lib
-ifeq ($(findstring osx,$(ARCH)), osx)
-	INCLUDES+=-I../osx
-endif
-
 CXXFLAGS+=-fPIC #-DHAS_SDL
 
 SRCS=ConvUtils.cpp \
@@ -28,6 +23,6 @@ SRCS=ConvUtils.cpp \
 
 LIB=linux.a
 
-include ../../Makefile.include
+include @abs_top_srcdir@/Makefile.include
 
 -include $(patsubst %.cpp,%.P,$(patsubst %.c,%.P,$(SRCS)))
