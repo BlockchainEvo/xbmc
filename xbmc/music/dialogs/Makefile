@@ -1,5 +1,3 @@
-INCLUDES=-I../../ -I. -I../../linux/ -I../../../lib/
-
 SRCS=GUIDialogMusicInfo.cpp \
      GUIDialogMusicOSD.cpp \
      GUIDialogMusicOverlay.cpp \
