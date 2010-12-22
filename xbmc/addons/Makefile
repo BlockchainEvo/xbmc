@@ -1,17 +1,15 @@
-INCLUDES+=-I. -I../ -I../linux -I../../lib
-
 SRCS=Addon.cpp \
      AddonDatabase.cpp \
      AddonManager.cpp \
      AddonStatusHandler.cpp \
-     GUIWindowAddonBrowser.cpp \
-     GUIViewStateAddonBrowser.cpp \
      GUIDialogAddonInfo.cpp \
      GUIDialogAddonSettings.cpp \
+     GUIViewStateAddonBrowser.cpp \
+     GUIWindowAddonBrowser.cpp \
      PluginSource.cpp \
      Repository.cpp \
-     ScreenSaver.cpp \
      Scraper.cpp \
+     ScreenSaver.cpp \
      Service.cpp \
      Skin.cpp \
      Visualisation.cpp \
