@@ -969,6 +969,7 @@ if test "x$use_vaapi" != "xno"; then
       use_vaapi="no"
       AC_MSG_NOTICE($vaapi_disabled)
     fi
+    USE_VAAPI=0
   else
     initial_val=$use_vaapi
     AC_CHECK_LIB([va], main, :, use_vaapi=no)
@@ -982,12 +983,15 @@ if test "x$use_vaapi" != "xno"; then
       else
         AC_MSG_RESULT($vaapi_not_found)
       fi
+      USE_VAAPI=0
     else
       AC_DEFINE([HAVE_LIBVA], [1], [Define to 1 if you have the 'vaapi' libraries (-lva AND -lva-glx)])
+      USE_VAAPI=1
     fi
   fi
 else
   AC_MSG_NOTICE($vaapi_disabled)
+  USE_VAAPI=0
 fi
 
 # CrystalHD
@@ -1489,6 +1493,7 @@ AC_SUBST_FILE(XBMC_STANDALONE_SH_PULSE)
 AC_SUBST(USE_OPENGL)
 AC_SUBST(USE_OPENGLES)
 AC_SUBST(USE_VDPAU)
+AC_SUBST(USE_VAAPI)
 
 # pushd and popd are not available in other shells besides bash, so implement
 # our own pushd/popd functions
