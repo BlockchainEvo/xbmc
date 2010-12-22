@@ -1,11 +1,8 @@
 abs_top_srcdir=@abs_top_srcdir@
 
-INCLUDES=-I$(abs_top_srcdir) \
-	 -I$(abs_top_srcdir)/xbmc/cores/dvdplayer/DVDCodecs \
+INCLUDES=-I$(abs_top_srcdir)/xbmc/cores/dvdplayer/DVDCodecs \
 	 -I$(abs_top_srcdir)/xbmc/cores/dvdplayer \
-	 -I$(abs_top_srcdir)/xbmc/linux \
 	 -I$(abs_top_srcdir)/xbmc/cores \
-	 -I$(abs_top_srcdir)/xbmc \
 
 ifneq (@USE_EXTERNAL_FFMPEG@,1)
   INCLUDES+=-I$(abs_top_srcdir)/xbmc/cores/dvdplayer/Codecs/ffmpeg
@@ -14,13 +11,17 @@ endif
 SRCS=	DVDVideoCodecFFmpeg.cpp \
 	DVDVideoCodecLibMpeg2.cpp \
 	DVDVideoPPFFmpeg.cpp \
-	VDPAU.cpp \
 	VAAPI.cpp \
 	DVDVideoCodecVDA.cpp \
 	OpenMax.cpp \
 	DVDVideoCodecOpenMax.cpp \
 	CrystalHD.cpp \
 	DVDVideoCodecCrystalHD.cpp \
+
+ifeq (@USE_VDPAU@,1)
+SRCS+=  VDPAU.cpp \
+
+endif
 
 LIB=Video.a
 
