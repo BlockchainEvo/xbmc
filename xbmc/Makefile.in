@@ -1,15 +1,3 @@
-INCLUDES+=-I../ -I. -Ilinux -Icores -I/usr/include/freetype2 -Icores/dvdplayer -I../lib
-
-ifneq (@USE_EXTERNAL_FFMPEG@,1)
-  INCLUDES+=-Icores/dvdplayer/Codecs/ffmpeg
-endif
-
-INCLUDES+=-Ilib/libcdio/libcdio/include
-
-INCLUDES+=-I../lib/jsoncpp/jsoncpp/include
-
-INCLUDES+=-Ilib/cpluff/libcpluff
-
 SRCS=Application.cpp \
      ApplicationMessenger.cpp \
      Autorun.cpp \
@@ -58,7 +46,7 @@ LIB=xbmc.a
 
 DISTCLEAN_FILES=DllPaths_generated.h
 
-include ../Makefile.include
+include @abs_top_srcdir@/Makefile.include
 -include $(patsubst %.cpp,%.P,$(patsubst %.c,%.P,$(SRCS)))
 
 
