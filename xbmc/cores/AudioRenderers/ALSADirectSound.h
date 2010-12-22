@@ -31,7 +31,6 @@
 
 #include "IAudioRenderer.h"
 #include "cores/IAudioCallback.h"
-#include "../ssrc.h"
 
 #define ALSA_PCM_NEW_HW_PARAMS_API
 #include <alsa/asoundlib.h>

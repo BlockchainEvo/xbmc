@@ -28,7 +28,6 @@
 
 #include "IAudioRenderer.h"
 #include "IAudioCallback.h"
-#include "../ssrc.h"
 
 #include <pulse/pulseaudio.h>
 

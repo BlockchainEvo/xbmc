@@ -4,7 +4,6 @@ ifneq (@USE_EXTERNAL_FFMPEG@,1)
 endif
 
 SRCS=DummyVideoPlayer.cpp \
-     ssrc.cpp \
 
 LIB=cores.a
 

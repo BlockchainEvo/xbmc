@@ -41,6 +41,7 @@ SRCS=AlarmClock.cpp \
      ScraperParser.cpp \
      ScraperUrl.cpp \
      Splash.cpp \
+     ssrc.cpp \
      Stopwatch.cpp \
      StreamDetails.cpp \
      StringUtils.cpp \
