@@ -1,5 +1,3 @@
-INCLUDES=-I. -I../.. -I../../linux
-
 SRCS=ConsoleDeviceKitPowerSyscall.cpp \
      ConsoleUPowerSyscall.cpp \
      HALPowerSyscall.cpp \
