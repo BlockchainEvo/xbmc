@@ -14,8 +14,6 @@ SRCS=	DVDVideoCodecFFmpeg.cpp \
 	DVDVideoCodecVDA.cpp \
 	OpenMax.cpp \
 	DVDVideoCodecOpenMax.cpp \
-	CrystalHD.cpp \
-	DVDVideoCodecCrystalHD.cpp \
 
 ifeq (@USE_VDPAU@,1)
 SRCS+=  VDPAU.cpp \
@@ -23,6 +21,11 @@ SRCS+=  VDPAU.cpp \
 endif
 ifeq (@USE_VAAPI@,1)
 SRCS+=  VAAPI.cpp \
+
+endif
+ifeq (@USE_CRYSTALHD@,1)
+SRCS+=  CrystalHD.cpp \
+        DVDVideoCodecCrystalHD.cpp \
 
 endif
 
