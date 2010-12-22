@@ -1,5 +1,3 @@
-INCLUDES=-I../../ -I. -I../../linux
-
 SRCS=NetworkLinux.cpp \
      ZeroconfAvahi.cpp \
      ZeroconfBrowserAvahi.cpp \
