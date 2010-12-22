@@ -1,5 +1,3 @@
-INCLUDES=-I../../ -I. -I.. -I../linux -I../../lib
-
 SRCS=PlayListB4S.cpp \
      PlayList.cpp \
      PlayListFactory.cpp \
