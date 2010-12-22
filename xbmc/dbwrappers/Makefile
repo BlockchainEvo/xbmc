@@ -1,4 +1,3 @@
-INCLUDES=-I. -I../ -I../linux
 SRCS=Database.cpp \
      dataset.cpp \
      mysqldataset.cpp \
