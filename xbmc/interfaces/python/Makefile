@@ -1,6 +1,7 @@
-INCLUDES=-I../../.. -I. -I../../ -I../../linux -I. -I../../../lib
-
-SRCS=XBPython.cpp XBPythonDll.cpp XBPyThread.cpp XBPythonDllFuncs.S
+SRCS=XBPython.cpp \
+     XBPythonDll.cpp \
+     XBPythonDllFuncs.S \
+     XBPyThread.cpp \
 
 LIB=python.a
 
