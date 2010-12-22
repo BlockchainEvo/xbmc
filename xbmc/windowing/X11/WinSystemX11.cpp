@@ -28,7 +28,7 @@
 #include "settings/Settings.h"
 #include "guilib/Texture.h"
 #include "utils/log.h"
-#include "linux/XRandR.h"
+#include "XRandR.h"
 #include <vector>
 
 using namespace std;

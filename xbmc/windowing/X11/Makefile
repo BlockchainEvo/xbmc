@@ -2,6 +2,7 @@ INCLUDES=-I. -I../.. -I../../linux
 
 SRCS=WinSystemX11.cpp \
      WinSystemX11GL.cpp \
+     XRandR.cpp \
      
 LIB=windowing_X11.a
 

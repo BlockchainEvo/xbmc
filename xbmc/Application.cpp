@@ -236,7 +236,7 @@
 #include "win32util.h"
 #endif
 #ifdef HAS_XRANDR
-#include "XRandR.h"
+#include "windowing/X11/XRandR.h"
 #endif
 #ifdef __APPLE__
 #include "CocoaInterface.h"

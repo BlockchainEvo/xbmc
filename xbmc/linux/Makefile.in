@@ -19,7 +19,6 @@ SRCS=ConvUtils.cpp \
      XSyncUtils.cpp \
      XTimeUtils.cpp \
      XThreadUtils.cpp \
-     XRandR.cpp \
 
 LIB=linux.a
 
