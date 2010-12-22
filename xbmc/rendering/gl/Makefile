@@ -1,5 +1,3 @@
-INCLUDES=-I. -I../.. -I../../linux
-
 SRCS=GUIWindowTestPatternGL.cpp \
      RenderSystemGL.cpp \
      
