@@ -1,13 +1,22 @@
-INCLUDES=-I. -I.. -I../../ -I../linux -I../cores -I../posix -I../../lib/jsoncpp/jsoncpp/include -I../../lib
-
 SRCS=AlarmClock.cpp \
+     AliasShortcutUtils.cpp \
+     AnnouncementManager.cpp \
+     ArabicShaping.cpp \
      Archive.cpp \
+     AsyncFileCopy.cpp \
      AutoPtrHandle.cpp \
+     BitstreamStats.cpp \
      Builtins.cpp \
      CharsetConverter.cpp \
+     CPUInfo.cpp \
      Crc32.cpp \
+     DbusServer.cpp \
      DownloadQueue.cpp \
      DownloadQueueManager.cpp \
+     Fanart.cpp \
+     fastmemcpy.c \
+     FileOperationJob.cpp \
+     FileUtils.cpp \
      fstrcmp.c \
      fft.cpp \
      GUIInfoManager.cpp \
@@ -15,45 +24,34 @@ SRCS=AlarmClock.cpp \
      HTMLUtil.cpp \
      HttpHeader.cpp \
      InfoLoader.cpp \
+     JobManager.cpp \
+     LabelFormatter.cpp \
+     LCD.cpp \
+     LCDFactory.cpp \
      log.cpp \
-     RegExp.cpp \
-     RssReader.cpp \
-     ScraperParser.cpp \
-     Splash.cpp \
-     Stopwatch.cpp \
-     SystemInfo.cpp \
-     TuxBoxUtil.cpp \
-     Weather.cpp \
-     Win32Exception.cpp \
-     CPUInfo.cpp \
+     md5.cpp \
+     PasswordManager.cpp \
      PCMAmplifier.cpp \
      PCMRemap.cpp \
-     LabelFormatter.cpp \
-     BitstreamStats.cpp \
-     PerformanceStats.cpp \
      PerformanceSample.cpp \
-     LCDFactory.cpp \
-     LCD.cpp \
-     Fanart.cpp \
-     ScraperUrl.cpp \
-     md5.cpp \
-     ArabicShaping.cpp \
-     AsyncFileCopy.cpp \
-     DbusServer.cpp \
-     StreamDetails.cpp \
-     TimeUtils.cpp \
-     JobManager.cpp \
-     fastmemcpy.c \
-     PasswordManager.cpp \
-     AliasShortcutUtils.cpp \
-     AnnouncementManager.cpp \
+     PerformanceStats.cpp \
+     RegExp.cpp \
      RingBuffer.cpp \
-     FileOperationJob.cpp \
-     FileUtils.cpp \
-     Variant.cpp \
-     XMLUtils.cpp \
+     RssReader.cpp \
+     ScraperParser.cpp \
+     ScraperUrl.cpp \
+     Splash.cpp \
+     Stopwatch.cpp \
+     StreamDetails.cpp \
      StringUtils.cpp \
+     SystemInfo.cpp \
+     TimeUtils.cpp \
+     TuxBoxUtil.cpp \
      URIUtils.cpp \
+     Variant.cpp \
+     Weather.cpp \
+     Win32Exception.cpp \
+     XMLUtils.cpp \
 
 LIB=utils.a
 
