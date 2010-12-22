@@ -3,6 +3,7 @@ INCLUDES=-I. -I../ -I../linux -I../../lib
 SRCS=GUIDialogBoxBase.cpp \
      GUIDialogBusy.cpp \
      GUIDialogButtonMenu.cpp \
+     GUIDialogCache.cpp \
      GUIDialogContextMenu.cpp \
      GUIDialogFavourites.cpp \
      GUIDialogFileBrowser.cpp \

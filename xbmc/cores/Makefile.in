@@ -5,7 +5,6 @@ endif
 
 SRCS=DummyVideoPlayer.cpp \
      ssrc.cpp \
-     dlgcache.cpp
 
 LIB=cores.a
 

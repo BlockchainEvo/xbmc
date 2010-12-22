@@ -26,11 +26,11 @@
 
 class CGUIDialogProgress;
 
-class CDlgCache : public CThread, public XFILE::IFileCallback
+class CGUIDialogCache : public CThread, public XFILE::IFileCallback
 {
 public:
-  CDlgCache(DWORD dwDelay = 0, const CStdString& strHeader="", const CStdString& strMsg="");
-  virtual ~CDlgCache();
+  CGUIDialogCache(DWORD dwDelay = 0, const CStdString& strHeader="", const CStdString& strMsg="");
+  virtual ~CGUIDialogCache();
   void SetHeader(const CStdString& strHeader);
   void SetHeader(int nHeader);
   void SetMessage(const CStdString& strMessage);

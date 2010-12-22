@@ -19,7 +19,7 @@
  *
  */
  
-#include "dlgcache.h"
+#include "GUIDialogCache.h"
 #include "Application.h"
 #include "guilib/GUIWindowManager.h"
 #include "dialogs/GUIDialogProgress.h"
@@ -28,7 +28,7 @@
 #include "threads/SingleLock.h"
 #include "utils/TimeUtils.h"
 
-CDlgCache::CDlgCache(DWORD dwDelay, const CStdString& strHeader, const CStdString& strMsg)
+CGUIDialogCache::CGUIDialogCache(DWORD dwDelay, const CStdString& strHeader, const CStdString& strMsg)
 {
   m_pDlg = (CGUIDialogProgress*)g_windowManager.GetWindow(WINDOW_DIALOG_PROGRESS);
 
@@ -48,7 +48,7 @@ CDlgCache::CDlgCache(DWORD dwDelay, const CStdString& strHeader, const CStdStrin
   Create(true);
 }
 
-void CDlgCache::Close(bool bForceClose)
+void CGUIDialogCache::Close(bool bForceClose)
 {
   bSentCancel = true;
 
@@ -61,13 +61,13 @@ void CDlgCache::Close(bool bForceClose)
   CThread::m_bStop = true;
 }
 
-CDlgCache::~CDlgCache()
+CGUIDialogCache::~CGUIDialogCache()
 {
   if(m_pDlg->IsDialogRunning())
     m_pDlg->Close();
 }
 
-void CDlgCache::OpenDialog()
+void CGUIDialogCache::OpenDialog()
 {  
   if (m_strHeader.IsEmpty())
     m_pDlg->SetHeading(438);
@@ -79,17 +79,17 @@ void CDlgCache::OpenDialog()
   bSentCancel = false;
 }
 
-void CDlgCache::SetHeader(const CStdString& strHeader)
+void CGUIDialogCache::SetHeader(const CStdString& strHeader)
 {
   m_strHeader = strHeader;
 }
 
-void CDlgCache::SetHeader(int nHeader)
+void CGUIDialogCache::SetHeader(int nHeader)
 {
   SetHeader(g_localizeStrings.Get(nHeader));
 }
 
-void CDlgCache::SetMessage(const CStdString& strMessage)
+void CGUIDialogCache::SetMessage(const CStdString& strMessage)
 {
   m_pDlg->SetLine(0, m_strLinePrev2);
   m_pDlg->SetLine(1, m_strLinePrev);
@@ -98,7 +98,7 @@ void CDlgCache::SetMessage(const CStdString& strMessage)
   m_strLinePrev = strMessage; 
 }
 
-bool CDlgCache::OnFileCallback(void* pContext, int ipercent, float avgSpeed)
+bool CGUIDialogCache::OnFileCallback(void* pContext, int ipercent, float avgSpeed)
 {
   m_pDlg->ShowProgressBar(true);
   m_pDlg->SetPercentage(ipercent); 
@@ -109,7 +109,7 @@ bool CDlgCache::OnFileCallback(void* pContext, int ipercent, float avgSpeed)
     return true;
 }
 
-void CDlgCache::Process()
+void CGUIDialogCache::Process()
 {
   while( true )
   {
@@ -138,7 +138,7 @@ void CDlgCache::Process()
       }
       catch(...)
       {
-        CLog::Log(LOGERROR, "Exception in CDlgCache::Process()");
+        CLog::Log(LOGERROR, "Exception in CGUIDialogCache::Process()");
       }
     }
 
@@ -146,15 +146,15 @@ void CDlgCache::Process()
   }
 }
 
-void CDlgCache::ShowProgressBar(bool bOnOff) 
+void CGUIDialogCache::ShowProgressBar(bool bOnOff) 
 { 
   m_pDlg->ShowProgressBar(bOnOff); 
 }
-void CDlgCache::SetPercentage(int iPercentage) 
+void CGUIDialogCache::SetPercentage(int iPercentage) 
 { 
   m_pDlg->SetPercentage(iPercentage); 
 }
-bool CDlgCache::IsCanceled() const
+bool CGUIDialogCache::IsCanceled() const
 {
   if (m_pDlg->IsDialogRunning())
     return m_pDlg->IsCanceled();
