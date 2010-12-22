@@ -1,5 +1,3 @@
-INCLUDES=-I. -I../.. -I../../linux
-
 SRCS=RenderSystemGLES.cpp \
      
 LIB=rendering_gles.a
