@@ -1,8 +1,3 @@
-INCLUDES=-I. -I../  -I../linux -I/usr/include/freetype2 -I/usr/include/SDL -I../lib/libsquish -I../../lib/
-ifneq (@USE_EXTERNAL_FFMPEG@,1)
-  INCLUDES+=-I../cores/dvdplayer/Codecs/ffmpeg
-endif
-
 SRCS=AnimatedGif.cpp \
      AudioContext.cpp \
      DDSImage.cpp \
@@ -92,7 +87,7 @@ endif
 
 LIB=guilib.a
 
-include ../../Makefile.include
+include @abs_top_srcdir@/Makefile.include
 -include $(patsubst %.cpp,%.P,$(patsubst %.c,%.P,$(SRCS)))
 
 try : try.o TextureBundle.o DirectXGraphics.o GUIFontTTF.o
