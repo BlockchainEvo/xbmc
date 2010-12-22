@@ -37,7 +37,7 @@
 #endif
 #include "../XBPythonDll.h"
 #include "PythonPlayer.h"
-#include "playercorefactory/PlayerCoreFactory.h"
+#include "cores/playercorefactory/PlayerCoreFactory.h"
 #pragma once
 
 #ifdef __cplusplus
