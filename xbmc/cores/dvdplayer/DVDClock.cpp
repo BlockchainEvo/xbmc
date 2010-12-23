@@ -22,7 +22,7 @@
 #include "DVDClock.h"
 #include "video/VideoReferenceClock.h"
 #include <math.h>
-#include "MathUtils.h"
+#include "utils/MathUtils.h"
 #include "threads/SingleLock.h"
 #include "utils/log.h"
 

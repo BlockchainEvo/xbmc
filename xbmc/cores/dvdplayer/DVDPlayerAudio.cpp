@@ -30,7 +30,7 @@
 #include "video/VideoReferenceClock.h"
 #include "utils/log.h"
 #include "utils/TimeUtils.h"
-#include "MathUtils.h"
+#include "utils/MathUtils.h"
 
 #include <sstream>
 #include <iomanip>

@@ -24,7 +24,7 @@
 #include "settings/GUISettings.h"
 #include "settings/Settings.h"
 #include "video/VideoReferenceClock.h"
-#include "MathUtils.h"
+#include "utils/MathUtils.h"
 #include "DVDPlayer.h"
 #include "DVDPlayerVideo.h"
 #include "DVDCodecs/DVDFactoryCodec.h"

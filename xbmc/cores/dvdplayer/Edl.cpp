@@ -20,7 +20,7 @@
  */
 
 #include "Edl.h"
-#include "StringUtils.h"
+#include "utils/StringUtils.h"
 #include "Util.h"
 #include "filesystem/File.h"
 #include "filesystem/MythFile.h"
