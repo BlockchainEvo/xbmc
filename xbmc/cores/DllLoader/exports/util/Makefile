@@ -1,5 +1,3 @@
-INCLUDES=-I. -I../../../../ -I../../../../linux 
-
 SRCS=EmuFileWrapper.cpp
 
 LIB=exports_utils.a
