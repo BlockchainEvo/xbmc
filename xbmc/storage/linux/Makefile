@@ -1,5 +1,3 @@
-INCLUDES=-I. -I../.. -I../../linux
-
 SRCS=DeviceKitDisksProvider.cpp \
      HALProvider.cpp \
      UDisksProvider.cpp \
