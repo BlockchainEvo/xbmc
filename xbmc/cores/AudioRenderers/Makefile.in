@@ -1,7 +1,5 @@
 ARCH=@ARCH@
 
-INCLUDES=-I. -I../../ -I../../linux -I../dvdplayer -I..
-
 ifeq ($(findstring osx,$(ARCH)), osx)
 SRCS = \
 	NullDirectSound.cpp \
@@ -17,5 +15,5 @@ endif
 
 LIB=audiorenderers.a
 
-include ../../../Makefile.include
+include @abs_top_srcdir@/Makefile.include
 -include $(patsubst %.cpp,%.P,$(patsubst %.c,%.P,$(SRCS)))
