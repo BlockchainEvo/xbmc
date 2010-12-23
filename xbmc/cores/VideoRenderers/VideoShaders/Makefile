@@ -1,4 +1,3 @@
-INCLUDES=-I. -I.. -I../../ -I../../../ -I../../../linux
 SRCS=YUV2RGBShader.cpp VideoFilterShader.cpp ConvolutionKernels.cpp
 
 LIB=VideoShaders.a
