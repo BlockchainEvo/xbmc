@@ -1,5 +1,3 @@
-INCLUDES=-I. -I../ -I../linux -I../../lib
-
 SRCS=WinEventsSDL.cpp \
      WinSystem.cpp \
      
