@@ -1,13 +1,11 @@
-INCLUDES=-I../ -I../linux -I../../lib
-
 SRCS=AdvancedSettings.cpp \
      GUIDialogContentSettings.cpp \
      GUIDialogLockSettings.cpp \
      GUIDialogProfileSettings.cpp \
      GUIDialogSettings.cpp \
      GUISettings.cpp \
-     GUIWindowSettingsCategory.cpp \
      GUIWindowSettings.cpp \
+     GUIWindowSettingsCategory.cpp \
      GUIWindowSettingsProfile.cpp \
      GUIWindowSettingsScreenCalibration.cpp \
      GUIWindowTestPattern.cpp \
