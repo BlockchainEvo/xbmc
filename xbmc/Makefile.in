@@ -5,7 +5,6 @@ SRCS=Application.cpp \
      BackgroundInfoLoader.cpp \
      CueDocument.cpp \
      DateTime.cpp \
-     DPMSSupport.cpp \
      DynamicDll.cpp \
      Favourites.cpp \
      FileItem.cpp \

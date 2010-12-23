@@ -82,7 +82,7 @@
 #include "playlists/PlayList.h"
 #include "windowing/WindowingFactory.h"
 #include "powermanagement/PowerManager.h"
-#include "DPMSSupport.h"
+#include "powermanagement/DPMSSupport.h"
 #include "settings/Settings.h"
 #include "settings/AdvancedSettings.h"
 #include "guilib/LocalizeStrings.h"
