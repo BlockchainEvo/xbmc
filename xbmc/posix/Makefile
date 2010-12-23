@@ -1,5 +1,3 @@
-INCLUDES+= -I..
-
 SRCS= \
 	SemaphorePOSIX.cpp
 
