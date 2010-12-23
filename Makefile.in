@@ -94,8 +94,8 @@ XBMCTEX_DIRS= \
 	tools/TexturePacker
 
 DVDPCODECS_DIRS= \
-	xbmc/cores/dvdplayer/Codecs \
-	xbmc/cores/dvdplayer/Codecs/libdvd \
+	lib \
+	lib/libdvd \
 
 ifneq (@USE_EXTERNAL_LIBASS@,1)
 DVDPCODECS_DIRS+=lib/libass/xbmc
@@ -417,8 +417,8 @@ libpython: dllloader
 python: dllloader
 	$(MAKE) -C xbmc/interfaces/python/linux
 dvdpcodecs: dllloader
-	$(MAKE) -C xbmc/cores/dvdplayer/Codecs
-	$(MAKE) -C xbmc/cores/dvdplayer/Codecs/libdvd
+	$(MAKE) -C lib 
+	$(MAKE) -C lib/libdvd
 ifneq (@USE_EXTERNAL_LIBASS@,1)
 	$(MAKE) -C lib/libass/xbmc
 endif

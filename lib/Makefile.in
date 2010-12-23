@@ -3,9 +3,9 @@ CXX=@CXX@
 SHELL=/bin/bash
 LDFLAGS=-shared -fPIC -rdynamic
 ARCH=@ARCH@
-SYSDIR=../../../../system/players/dvdplayer
-WRAPPER=../../DllLoader/exports/wrapper.o
-WRAPPER_OSX=../../../../tools/Mach5/wrapper.rb
+SYSDIR=@abs_top_srcdir@/system/players/dvdplayer
+WRAPPER=@abs_top_srcdir@/xbmc/cores/DllLoader/exports/wrapper.o
+WRAPPER_OSX=@abs_top_srcdir@/tools/Mach5/wrapper.rb
 DIRS=
 ifneq (@USE_EXTERNAL_FFMPEG@,1)
   DIRS+=ffmpeg

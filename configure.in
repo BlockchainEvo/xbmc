@@ -1398,8 +1398,8 @@ OUTPUT_FILES="Makefile \
     xbmc/cores/Makefile \
     xbmc/cores/VideoRenderers/Makefile \
     xbmc/cores/dvdplayer/Makefile \
-    xbmc/cores/dvdplayer/Codecs/Makefile \
-    xbmc/cores/dvdplayer/Codecs/libdvd/Makefile \
+    lib/Makefile \
+    lib/libdvd/Makefile \
     xbmc/cores/dvdplayer/DVDCodecs/Makefile \
     xbmc/cores/dvdplayer/DVDCodecs/Audio/Makefile \
     xbmc/cores/dvdplayer/DVDCodecs/Overlay/Makefile \
@@ -1615,7 +1615,7 @@ XB_CONFIG_MODULE([xbmc/cores/paplayer/FLACCodec/flac-1.2.1], [
   fi
 ], [$HOST_NOT_APPLE])
 
-XB_CONFIG_MODULE([xbmc/cores/dvdplayer/Codecs/ffmpeg], [
+XB_CONFIG_MODULE([lib/ffmpeg], [
   if test "$host_vendor" = "apple" ; then
     ./configure \
       --extra-cflags="$CFLAGS -w -D_DARWIN_C_SOURCE -Dattribute_deprecated=" \
@@ -1685,7 +1685,7 @@ XB_CONFIG_MODULE([xbmc/cores/dvdplayer/Codecs/ffmpeg], [
   fi
 ], [$USE_EXTERNAL_FFMPEG])
 
-XB_CONFIG_MODULE([xbmc/cores/dvdplayer/Codecs/libdts], [
+XB_CONFIG_MODULE([lib/libdts], [
   if test "$host_vendor" = "apple" ; then
     CFLAGS="$CFLAGS -fno-common"
     LDFLAGS="-isysroot /Developer/SDKs/MacOSX10.4u.sdk -mmacosx-version-min=10.4" \
@@ -1707,7 +1707,7 @@ XB_CONFIG_MODULE([xbmc/cores/dvdplayer/Codecs/libdts], [
   fi
 ], [$SKIP_CONFIG_LIBDTS])
 
-XB_CONFIG_MODULE([xbmc/cores/dvdplayer/Codecs/libdvd/libdvdcss], [
+XB_CONFIG_MODULE([lib/libdvd/libdvdcss], [
   if test "$host_vendor" = "apple" ; then
     ./configure MACOSX_DEPLOYMENT_TARGET=10.4 \
     CFLAGS="$CFLAGS -fno-common" \
@@ -1728,7 +1728,7 @@ XB_CONFIG_MODULE([xbmc/cores/dvdplayer/Codecs/libdvd/libdvdcss], [
   fi
 ], [$SKIP_CONFIG_DVDCSS])
 
-XB_CONFIG_MODULE([xbmc/cores/dvdplayer/Codecs/libdvd/libdvdread], [
+XB_CONFIG_MODULE([lib/libdvd/libdvdread], [
   if test "$host_vendor" = "apple" ; then
     ./configure2 MACOSX_DEPLOYMENT_TARGET=10.4 \
       --extra-cflags="$CFLAGS -fno-common $DVDREAD_CFLAGS -D__DARWIN__ -I`pwd`/../libdvdcss/src" \
@@ -1757,7 +1757,7 @@ XB_CONFIG_MODULE([xbmc/cores/dvdplayer/Codecs/libdvd/libdvdread], [
 
 ], [0])
 
-XB_CONFIG_MODULE([xbmc/cores/dvdplayer/Codecs/libdvd/libdvdnav], [
+XB_CONFIG_MODULE([lib/libdvd/libdvdnav], [
   if test "$host_vendor" = "apple" ; then
     ./configure2 MACOSX_DEPLOYMENT_TARGET=10.4 \
       --extra-cflags="$CFLAGS -fno-common $DVDREAD_CFLAGS -I`pwd`/../includes" \
@@ -1780,7 +1780,7 @@ XB_CONFIG_MODULE([xbmc/cores/dvdplayer/Codecs/libdvd/libdvdnav], [
   fi
 ], [0])
 
-XB_CONFIG_MODULE([xbmc/cores/dvdplayer/Codecs/libfaad2], [
+XB_CONFIG_MODULE([lib/libfaad2], [
   if test "$host_vendor" = "apple" ; then
     CFLAGS="$CFLAGS -O3 -fno-common" \
     ./configure MACOSX_DEPLOYMENT_TARGET=10.4 \
@@ -1788,7 +1788,7 @@ XB_CONFIG_MODULE([xbmc/cores/dvdplayer/Codecs/libfaad2], [
   fi
 ], [$HOST_NOT_APPLE])
 
-XB_CONFIG_MODULE([xbmc/cores/dvdplayer/Codecs/liba52], [
+XB_CONFIG_MODULE([lib/liba52], [
   if test "$host_vendor" = "apple" ; then
     CFLAGS="$CFLAGS -fno-common" \
     ./configure MACOSX_DEPLOYMENT_TARGET=10.4 \
@@ -1815,7 +1815,7 @@ XB_CONFIG_MODULE([xbmc/cores/dvdplayer/Codecs/liba52], [
   fi
 ], [$SKIP_CONFIG_LIBA52])
 
-XB_CONFIG_MODULE([xbmc/cores/dvdplayer/Codecs/libmad], [
+XB_CONFIG_MODULE([lib/libmad], [
   if test "$host_vendor" = "apple" ; then
     CFLAGS="$CFLAGS -fno-common" \
     ./configure MACOSX_DEPLOYMENT_TARGET=10.4 \

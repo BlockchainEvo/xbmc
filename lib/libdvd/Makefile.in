@@ -1,12 +1,12 @@
 
 ARCH=@ARCH@
-SYSDIR=../../../../../system/players/dvdplayer
+SYSDIR=@abs_top_srcdir@/system/players/dvdplayer
 SOS= libdvdnav-$(ARCH).so
 DIRS=	libdvdread \
 	libdvdnav
 
-WRAPPER=../../../DllLoader/exports/wrapper.o
-WRAPPER_OSX=../../../../../tools/Mach5/wrapper.rb
+WRAPPER=@abs_top_srcdir@/xbmc/cores/DllLoader/exports/wrapper.o
+WRAPPER_OSX=@abs_top_srcdir@/tools/Mach5/wrapper.rb
 
 LDFLAGS += -shared -fPIC -rdynamic
 ifeq ($(ARCH), powerpc-osx)
@@ -71,5 +71,5 @@ libdvdnav/obj/libdvdnav.a: libdvdnav
 libdvdnav: compile
 	$(MAKE) -C $@
 
-include ../../../../../Makefile.include
+include @abs_top_srcdir@/Makefile.include
 

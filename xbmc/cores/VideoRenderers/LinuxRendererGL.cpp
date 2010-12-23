@@ -36,8 +36,8 @@
 #include "VideoShaders/VideoFilterShader.h"
 #include "windowing/WindowingFactory.h"
 #include "guilib/Texture.h"
-#include "../dvdplayer/Codecs/DllSwScale.h"
-#include "../dvdplayer/Codecs/DllAvCodec.h"
+#include "DllSwScale.h"
+#include "DllAvCodec.h"
 
 #ifdef HAVE_LIBVDPAU
 #include "cores/dvdplayer/DVDCodecs/Video/VDPAU.h"

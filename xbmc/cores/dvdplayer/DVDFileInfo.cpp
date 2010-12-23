@@ -43,9 +43,9 @@
 #include "DVDCodecs/Video/DVDVideoCodec.h"
 #include "DVDCodecs/Video/DVDVideoCodecFFmpeg.h"
 
-#include "Codecs/DllAvFormat.h"
-#include "Codecs/DllAvCodec.h"
-#include "Codecs/DllSwScale.h"
+#include "DllAvFormat.h"
+#include "DllAvCodec.h"
+#include "DllSwScale.h"
 #include "filesystem/File.h"
 
 
