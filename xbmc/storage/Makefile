@@ -1,5 +1,3 @@
-INCLUDES=-I. -I../ -I../linux -I../../lib
-
 SRCS=AutorunMediaJob.cpp \
      cdioSupport.cpp \
      DetectDVDType.cpp \
