@@ -1,5 +1,3 @@
-INCLUDES=-I../../ -I. -I../../linux/ -I../../../lib
-
 SRCS=GUIDialogAudioSubtitleSettings.cpp \
      GUIDialogFileStacking.cpp \
      GUIDialogFullScreenInfo.cpp \
