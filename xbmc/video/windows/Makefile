@@ -1,5 +1,3 @@
-INCLUDES=-I../../ -I. -I../../linux/ -I../../../lib/
-
 SRCS=GUIWindowFullScreen.cpp \
      GUIWindowVideoBase.cpp \
      GUIWindowVideoFiles.cpp \
