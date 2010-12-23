@@ -26,7 +26,6 @@
 #include "input/KeyboardLayoutConfiguration.h"
 #include "Util.h"
 #include "URL.h"
-#include "GUIWindowFileManager.h"
 #include "guilib/GUIFontManager.h"
 #include "LangCodeExpander.h"
 #include "input/ButtonTranslator.h"
@@ -57,6 +56,7 @@
 #include "cores/playercorefactory/PlayerCoreFactory.h"
 #include "utils/FileUtils.h"
 #include "input/MouseStat.h"
+#include "filesystem/File.h"
 
 using namespace std;
 using namespace XFILE;

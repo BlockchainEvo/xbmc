@@ -12,18 +12,9 @@ SRCS=Application.cpp \
      LangCodeExpander.cpp \
      LangInfo.cpp \
      GUILargeTextureManager.cpp \
-     GUIMediaWindow.cpp \
      GUIPassword.cpp \
      GUIViewControl.cpp \
      GUIViewState.cpp \
-     GUIWindowFileManager.cpp \
-     GUIWindowHome.cpp \
-     GUIWindowLoginScreen.cpp \
-     GUIWindowPointer.cpp \
-     GUIWindowScreensaver.cpp \
-     GUIWindowStartup.cpp \
-     GUIWindowSystemInfo.cpp \
-     GUIWindowWeather.cpp \
      MediaSource.cpp \
      NfoFile.cpp \
      PlayListPlayer.cpp \

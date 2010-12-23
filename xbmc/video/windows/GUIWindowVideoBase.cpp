@@ -45,7 +45,7 @@
 #include "filesystem/MultiPathDirectory.h"
 #include "video/dialogs/GUIDialogFileStacking.h"
 #include "dialogs/GUIDialogMediaSource.h"
-#include "GUIWindowFileManager.h"
+#include "windows/GUIWindowFileManager.h"
 #include "filesystem/VideoDatabaseDirectory.h"
 #include "PartyModeManager.h"
 #include "guilib/GUIWindowManager.h"

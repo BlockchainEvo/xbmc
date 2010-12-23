@@ -39,7 +39,7 @@ namespace ADDON
 #include "dialogs/GUIDialogKaiToast.h"
 #include "dialogs/GUIDialogVolumeBar.h"
 #include "dialogs/GUIDialogMuteBug.h"
-#include "GUIWindowPointer.h"   // Mouse pointer
+#include "windows/GUIWindowPointer.h"   // Mouse pointer
 
 #include "cores/IPlayer.h"
 #include "cores/playercorefactory/PlayerCoreFactory.h"

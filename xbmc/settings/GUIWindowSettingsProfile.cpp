@@ -20,7 +20,7 @@
  */
 
 #include "GUIWindowSettingsProfile.h"
-#include "GUIWindowFileManager.h"
+#include "windows/GUIWindowFileManager.h"
 #include "Profile.h"
 #include "Application.h"
 #include "dialogs/GUIDialogContextMenu.h"
@@ -28,7 +28,7 @@
 #include "network/Network.h"
 #include "utils/Weather.h"
 #include "GUIPassword.h"
-#include "GUIWindowLoginScreen.h"
+#include "windows/GUIWindowLoginScreen.h"
 #include "guilib/GUIWindowManager.h"
 #include "filesystem/Directory.h"
 #include "FileItem.h"

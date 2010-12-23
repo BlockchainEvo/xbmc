@@ -21,7 +21,7 @@
 
 #include "ProgramDatabase.h"
 #include "Util.h"
-#include "GUIWindowFileManager.h"
+#include "windows/GUIWindowFileManager.h"
 #include "FileItem.h"
 #include "settings/GUISettings.h"
 #include "settings/Settings.h"
