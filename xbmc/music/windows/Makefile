@@ -1,5 +1,3 @@
-INCLUDES=-I../../ -I. -I../../linux/ -I../../../lib/
-
 SRCS=GUIWindowMusicBase.cpp \
      GUIWindowMusicNav.cpp \
      GUIWindowMusicPlaylist.cpp \
