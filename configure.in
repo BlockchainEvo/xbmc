@@ -722,17 +722,21 @@ if test "x$use_pulse" != "xno"; then
       use_pulse="no"
       AC_MSG_RESULT($pulse_disabled)
     fi
+    USE_PULSE=0
   else
     AC_CHECK_LIB([pulse], [main],,
       [if test "x$use_pulse" = "xyes"; then
         AC_MSG_ERROR($pulse_not_found)
       else
         use_pulse=no
+        USE_PULSE=0
         AC_MSG_RESULT($pulse_not_found)
       fi])
+      USE_PULSE=1
   fi
 else
   AC_MSG_RESULT($pulse_disabled)
+  USE_PULSE=0
 fi
 
 # HAL
@@ -1507,6 +1511,7 @@ AC_SUBST(USE_VAAPI)
 AC_SUBST(USE_CRYSTALHD)
 AC_SUBST(USE_VDA)
 AC_SUBST(USE_OPENMAX)
+AC_SUBST(USE_PULSE)
 
 # pushd and popd are not available in other shells besides bash, so implement
 # our own pushd/popd functions
