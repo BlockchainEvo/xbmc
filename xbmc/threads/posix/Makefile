@@ -1,9 +1,9 @@
 SRCS= \
 	SemaphorePOSIX.cpp
 
-LIB=posix.a
+LIB=threads_posix.a
 
-include ../../Makefile.include
+include ../../../Makefile.include
 -include $(patsubst %.cpp,%.P,$(patsubst %.c,%.P,$(SRCS)))
 
 

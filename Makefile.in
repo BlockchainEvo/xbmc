@@ -69,8 +69,8 @@ BIN_DIRS=	\
         xbmc/input \
 	xbmc/input/linux \
 	xbmc/osx \
-	xbmc/posix \
 	xbmc/threads \
+	xbmc/threads/posix \
 	xbmc/windowing \
 
 ifeq (@USE_OPENGL@,1)
@@ -350,8 +350,10 @@ lib/libsquish/libsquish-@ARCH@.a: force
 	$(MAKE) -C lib/libsquish
 xbmc/linux/linux.a: force
 	$(MAKE) -C xbmc/linux
-xbmc/posix/posix.a: force
-	$(MAKE) -C xbmc/posix
+xbmc/threads/posix/threads_posix.a: force
+	$(MAKE) -C xbmc/threads/posix
+xbmc/threads/darwin/threads_darwin.a: force
+	$(MAKE) -C xbmc/threads/darwin
 xbmc/addons/addons.a: force
 	$(MAKE) -C xbmc/addons
 xbmc/settings/settings.a: force
@@ -568,9 +570,10 @@ OBJSXBMC += \
 	lib/libSDL-OSX/libSDL-@ARCH@.a \
 	lib/libSDL-OSX/libSDL_mixer-@ARCH@.a \
 	lib/libmicrohttpd/src/daemon/.libs/libmicrohttpd.a
+	xbmc/threads/darwin/threads_darwin.a \
 else
 OBJSXBMC += \
-	xbmc/posix/posix.a \
+	xbmc/threads/posix/threads_posix.a \
 	xbmc/input/linux/input_linux.a \
 	xbmc/network/linux/network_linux.a \
 	xbmc/powermanagement/linux/powermanagement_linux.a \

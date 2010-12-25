@@ -22,9 +22,9 @@
 
 #include "Semaphore.hpp"
 #ifdef __linux__
-#include "SemaphorePOSIX.h"
+#include "posix/SemaphorePOSIX.h"
 #elif defined(__APPLE__)
-#include "SemaphoreDarwin.h"
+#include "darwin/SemaphoreDarwin.h"
 #endif
 
 CSemaphore::CSemaphore(uint32_t initialCount/*=1*/)

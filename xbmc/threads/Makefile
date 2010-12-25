@@ -1,5 +1,3 @@
-INCLUDES=-I. -I../ -I../linux -I../posix
-
 SRCS=Atomics.cpp \
      CriticalSection.cpp \
      Event.cpp \
