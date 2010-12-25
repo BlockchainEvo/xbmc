@@ -32,7 +32,7 @@
 #include "input/MouseStat.h"
 #include "GUIWindowManager.h"
 #include "utils/JobManager.h"
-#include "VideoReferenceClock.h"
+#include "video/VideoReferenceClock.h"
 
 using namespace std;
 

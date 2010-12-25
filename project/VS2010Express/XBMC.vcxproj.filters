@@ -387,6 +387,7 @@
       <UniqueIdentifier>{b084bece-821c-445c-951d-0aa4ea804076}</UniqueIdentifier>
 >>>>>>> fixed compile, updated projectfile to match filesystem structure more closely.
     </Filter>
+<<<<<<< HEAD
     <Filter Include="libraries\libhttpapi">
       <UniqueIdentifier>{0ee7becf-1d84-4148-af74-cefe1e4e611b}</UniqueIdentifier>
     </Filter>
@@ -1217,6 +1218,10 @@
   </ItemGroup>
   <ItemGroup>
 >>>>>>> synced some more: various moves
+=======
+  </ItemGroup>
+  <ItemGroup>
+>>>>>>> fixed build. We might want to clean up our include paths too.
     <ClCompile Include="..\..\xbmc\win32\pch.cpp">
       <Filter>win32</Filter>
     </ClCompile>
@@ -1226,6 +1231,7 @@
     <ClCompile Include="..\..\xbmc\win32\Win32DelayedDllLoad.cpp">
       <Filter>win32</Filter>
     </ClCompile>
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -1241,6 +1247,8 @@
 >>>>>>> changed: move storage related files to storage and platform specific implementations to subdirectories
 =======
 >>>>>>> synced some more: various moves
+=======
+>>>>>>> fixed build. We might want to clean up our include paths too.
     <ClCompile Include="..\..\xbmc\win32\WIN32Util.cpp">
       <Filter>win32</Filter>
     </ClCompile>
@@ -1262,6 +1270,7 @@
     <ClCompile Include="..\..\xbmc\win32\XCriticalSection.cpp">
       <Filter>win32</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="..\..\xbmc\cores\dlgcache.cpp">
       <Filter>cores</Filter>
     </ClCompile>
@@ -1271,6 +1280,11 @@
     <ClCompile Include="..\..\xbmc\cores\ssrc.cpp">
       <Filter>cores</Filter>
     </ClCompile>
+=======
+    <ClCompile Include="..\..\xbmc\cores\DummyVideoPlayer.cpp">
+      <Filter>cores</Filter>
+    </ClCompile>
+>>>>>>> fixed build. We might want to clean up our include paths too.
     <ClCompile Include="..\..\xbmc\cores\dvdplayer\DVDAudio.cpp">
       <Filter>cores\dvdplayer</Filter>
     </ClCompile>
@@ -2062,15 +2076,6 @@
     </ClCompile>
     <ClCompile Include="..\..\xbmc\addons\Visualisation.cpp">
       <Filter>addons</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\jsoncpp\jsoncpp\src\lib_json\json_reader.cpp">
-      <Filter>libs\jsoncpp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\jsoncpp\jsoncpp\src\lib_json\json_value.cpp">
-      <Filter>libs\jsoncpp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lib\jsoncpp\jsoncpp\src\lib_json\json_writer.cpp">
-      <Filter>libs\jsoncpp</Filter>
     </ClCompile>
     <ClCompile Include="..\..\xbmc\addons\Repository.cpp">
       <Filter>addons</Filter>
@@ -5533,6 +5538,21 @@
     <ClCompile Include="..\..\xbmc\interfaces\python\xbmcmodule\xbmcplugin.cpp">
       <Filter>interfaces\python\xbmcmodule</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\xbmc\utils\ssrc.cpp">
+      <Filter>cores</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\dialogs\GUIDialogCache.cpp">
+      <Filter>dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\jsoncpp\src\lib_json\json_reader.cpp">
+      <Filter>libs\jsoncpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\jsoncpp\src\lib_json\json_value.cpp">
+      <Filter>libs\jsoncpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lib\jsoncpp\src\lib_json\json_writer.cpp">
+      <Filter>libs\jsoncpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\xbmc\win32\pch.h">
@@ -6216,11 +6236,16 @@
     <ClInclude Include="..\..\xbmc\FileSystem\HDHomeRun.h">
       <Filter>filesystem</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="..\..\xbmc\FileSystem\HTSPDirectory.h">
       <Filter>filesystem</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\FileSystem\HTSPSession.h">
       <Filter>filesystem</Filter>
+=======
+    <ClInclude Include="..\..\xbmc\cores\DummyVideoPlayer.h">
+      <Filter>cores</Filter>
+>>>>>>> fixed build. We might want to clean up our include paths too.
     </ClInclude>
     <ClInclude Include="..\..\xbmc\FileSystem\HTTPDirectory.h">
       <Filter>filesystem</Filter>
@@ -6228,11 +6253,16 @@
     <ClInclude Include="..\..\xbmc\FileSystem\ISO9660Directory.h">
       <Filter>filesystem</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="..\..\xbmc\FileSystem\LastFMDirectory.h">
       <Filter>filesystem</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\FileSystem\MultiPathDirectory.h">
       <Filter>filesystem</Filter>
+=======
+    <ClInclude Include="..\..\xbmc\cores\dvdplayer\dvd_config.h">
+      <Filter>cores\dvdplayer</Filter>
+>>>>>>> fixed build. We might want to clean up our include paths too.
     </ClInclude>
     <ClInclude Include="..\..\xbmc\FileSystem\MultiPathFile.h">
       <Filter>filesystem</Filter>
@@ -10417,6 +10447,12 @@
     </ClInclude>
     <ClInclude Include="..\..\xbmc\interfaces\python\xbmcmodule\winxml.h">
       <Filter>interfaces\python\xbmcmodule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\utils\ssrc.h">
+      <Filter>cores</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\dialogs\GUIDialogCache.h">
+      <Filter>dialogs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

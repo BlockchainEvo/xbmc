@@ -39,6 +39,8 @@
 
 #ifdef _WIN32
 
+#define XBMC_arraysize(array)	(sizeof(array)/sizeof(array[0]))
+
 /* Masks for processing the windows KEYDOWN and KEYUP messages */
 #define REPEATED_KEYMASK  (1<<30)
 #define EXTENDED_KEYMASK  (1<<24)
