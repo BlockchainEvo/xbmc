@@ -49,16 +49,16 @@ OBJS= \
 	utils/getopt.o \
 	timidity_codec.o
 
-SLIB=../../../../system/players/paplayer/timidity-@ARCH@.so
+SLIB=@abs_top_srcdir@/system/players/paplayer/timidity-@ARCH@.so
 
 $(SLIB): $(OBJS) exports.def
 ifeq ($(findstring osx,$(ARCH)), osx)
 	ld -bundle -undefined dynamic_lookup -o $@ $(OBJS) $(BUNDLE1_O)
-	../../../../tools/Mach5/wrapper.rb $@;mv output.so $@
+	@abs_top_srcdir@/tools/Mach5/wrapper.rb $@;mv output.so $@
 	chmod +x $@
 else
-	$(CXX) $(CXXFLAGS) $(LDFLAGS) -shared -o $@ $(OBJS) `cat ../../DllLoader/exports/wrapper.def` ../../DllLoader/exports/wrapper.o -Wl,--version-script=exports.def
+	$(CXX) $(CXXFLAGS) $(LDFLAGS) -shared -o $@ $(OBJS) `cat @abs_top_srcdir@/xbmc/cores/DllLoader/exports/wrapper.def` @abs_top_srcdir@/xbmc/cores/DllLoader/exports/wrapper.o -Wl,--version-script=exports.def
 endif
  
-include ../../../../Makefile.include
+include @abs_top_srcdir@/Makefile.include
 
