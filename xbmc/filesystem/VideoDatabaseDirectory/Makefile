@@ -1,28 +1,26 @@
-INCLUDES=-I. -I../../ -I../../linux -I../../../lib
-
-SRCS=DirectoryNodeActor.cpp \
-     DirectoryNode.cpp \
+SRCS=DirectoryNode.cpp \
+     DirectoryNodeActor.cpp \
+     DirectoryNodeCountry.cpp \
      DirectoryNodeDirector.cpp \
      DirectoryNodeEpisodes.cpp \
      DirectoryNodeGenre.cpp \
-     DirectoryNodeCountry.cpp \
-     DirectoryNodeSets.cpp \
      DirectoryNodeMoviesOverview.cpp \
+     DirectoryNodeMusicVideosOverview.cpp \
      DirectoryNodeOverview.cpp \
+     DirectoryNodeRecentlyAddedEpisodes.cpp \
+     DirectoryNodeRecentlyAddedMovies.cpp \
+     DirectoryNodeRecentlyAddedMusicVideos.cpp \
      DirectoryNodeRoot.cpp \
      DirectoryNodeSeasons.cpp \
+     DirectoryNodeSets.cpp \
+     DirectoryNodeStudio.cpp \
      DirectoryNodeTitleMovies.cpp \
+     DirectoryNodeMusicVideoAlbum.cpp \
+     DirectoryNodeTitleMusicVideos.cpp \
      DirectoryNodeTitleTvShows.cpp \
      DirectoryNodeTvShowsOverview.cpp \
      DirectoryNodeYear.cpp \
      QueryParams.cpp \
-     DirectoryNodeRecentlyAddedMovies.cpp \
-     DirectoryNodeRecentlyAddedEpisodes.cpp \
-     DirectoryNodeStudio.cpp \
-     DirectoryNodeMusicVideosOverview.cpp \
-     DirectoryNodeRecentlyAddedMusicVideos.cpp \
-     DirectoryNodeTitleMusicVideos.cpp \
-     DirectoryNodeMusicVideoAlbum.cpp \
 
 LIB=videodatabasedirectory.a
 
