@@ -26,7 +26,7 @@
 #include <string>
 #include <iostream>
 #include "ITransportLayer.h"
-#include "utils/IAnnouncer.h"
+#include "interfaces/IAnnouncer.h"
 #include "jsoncpp/include/json/json.h"
 
 namespace JSONRPC

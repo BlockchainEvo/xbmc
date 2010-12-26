@@ -19,11 +19,9 @@
  *
  */
 
-#if (defined HAVE_CONFIG_H) && (!defined WIN32)
-  #include "config.h"
-#endif
+#include "system.h"
 #include "Application.h"
-#include "utils/Builtins.h"
+#include "interfaces/Builtins.h"
 #include "utils/Variant.h"
 #include "utils/Splash.h"
 #include "input/KeyboardLayoutConfiguration.h"
@@ -38,7 +36,7 @@
 #include "utils/LCDFactory.h"
 #endif
 #include "guilib/GUIControlProfiler.h"
-#include "LangCodeExpander.h"
+#include "utils/LangCodeExpander.h"
 #include "utils/GUIInfoManager.h"
 #include "playlists/PlayListFactory.h"
 #include "guilib/GUIFontManager.h"
@@ -126,7 +124,7 @@
 #include "network/EventServer.h"
 #endif
 #ifdef HAS_DBUS_SERVER
-#include "utils/DbusServer.h"
+#include "interfaces/DbusServer.h"
 #endif
 #ifdef HAS_HTTPAPI
 #include "interfaces/http-api/XBMChttp.h"
@@ -138,7 +136,7 @@
 #if defined(HAVE_LIBCRYSTALHD)
 #include "cores/dvdplayer/DVDCodecs/Video/CrystalHD.h"
 #endif
-#include "utils/AnnouncementManager.h"
+#include "interfaces/AnnouncementManager.h"
 
 // Windows includes
 #include "guilib/GUIWindowManager.h"

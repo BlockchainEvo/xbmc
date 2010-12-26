@@ -59,7 +59,7 @@
 #ifdef HAS_PYTHON
 #include "interfaces/python/XBPython.h"
 #endif
-#include "utils/Builtins.h"
+#include "interfaces/Builtins.h"
 
 #define CONTROL_BTNVIEWASICONS     2
 #define CONTROL_BTNSORTBY          3

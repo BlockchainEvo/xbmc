@@ -20,7 +20,6 @@
  */
 
 #include "LangInfo.h"
-#include "LangCodeExpander.h"
 #include "settings/AdvancedSettings.h"
 #include "settings/GUISettings.h"
 #include "guilib/LocalizeStrings.h"

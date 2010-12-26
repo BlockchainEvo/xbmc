@@ -31,7 +31,7 @@
 #include "interfaces/python/XBPython.h"
 #endif
 #include "pictures/GUIWindowSlideShow.h"
-#include "utils/Builtins.h"
+#include "interfaces/Builtins.h"
 #include "network/Network.h"
 #include "utils/log.h"
 #include "guilib/GUIWindowManager.h"

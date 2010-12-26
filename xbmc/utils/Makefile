@@ -1,16 +1,13 @@
 SRCS=AlarmClock.cpp \
      AliasShortcutUtils.cpp \
-     AnnouncementManager.cpp \
      ArabicShaping.cpp \
      Archive.cpp \
      AsyncFileCopy.cpp \
      AutoPtrHandle.cpp \
      BitstreamStats.cpp \
-     Builtins.cpp \
      CharsetConverter.cpp \
      CPUInfo.cpp \
      Crc32.cpp \
-     DbusServer.cpp \
      DownloadQueue.cpp \
      DownloadQueueManager.cpp \
      Fanart.cpp \

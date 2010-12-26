@@ -4,7 +4,7 @@
 #include <memory.h>
 #include "interfaces/json-rpc/JSONRPC.h"
 #include "jsoncpp/include/json/json.h"
-#include "utils/AnnouncementManager.h"
+#include "interfaces/AnnouncementManager.h"
 #include "utils/log.h"
 #include "utils/Variant.h"
 #include "threads/SingleLock.h"

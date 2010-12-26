@@ -61,7 +61,6 @@
 #include "utils/StringUtils.h"
 #include "utils/log.h"
 #include "utils/FileUtils.h"
-#include "utils/AnnouncementManager.h"
 
 #include "addons/Skin.h"
 

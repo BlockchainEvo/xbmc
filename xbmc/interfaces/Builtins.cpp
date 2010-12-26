@@ -19,10 +19,8 @@
  *
  */
 
-#if (defined HAVE_CONFIG_H) && (!defined WIN32)
-  #include "config.h"
-#endif
-#include "AlarmClock.h"
+#include "system.h"
+#include "utils/AlarmClock.h"
 #include "Application.h"
 #include "Autorun.h"
 #include "Builtins.h"
@@ -44,13 +42,13 @@
 #include "addons/AddonManager.h"
 #include "addons/PluginSource.h"
 #include "music/LastFmManager.h"
-#include "LCD.h"
-#include "log.h"
+#include "utils/LCD.h"
+#include "utils/log.h"
 #include "storage/MediaManager.h"
-#include "RssReader.h"
+#include "utils/RssReader.h"
 #include "PartyModeManager.h"
 #include "settings/Settings.h"
-#include "StringUtils.h"
+#include "utils/StringUtils.h"
 #include "Util.h"
 
 #include "filesystem/PluginDirectory.h"
@@ -61,7 +59,6 @@
 
 #include "guilib/GUIWindowManager.h"
 #include "guilib/LocalizeStrings.h"
-#include "system.h"
 
 #ifdef HAS_LIRC
 #include "input/linux/LIRC.h"

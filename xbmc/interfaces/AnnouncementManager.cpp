@@ -22,8 +22,8 @@
 #include "AnnouncementManager.h"
 #include "threads/SingleLock.h"
 #include <stdio.h>
-#include "log.h"
-#include "Variant.h"
+#include "utils/log.h"
+#include "utils/Variant.h"
 #include "FileItem.h"
 #include "music/tags/MusicInfoTag.h"
 

@@ -9,7 +9,7 @@
 #endif
 #include <string>
 #include <vector>
-#include "utils/IAnnouncer.h"
+#include "interfaces/IAnnouncer.h"
 #include "interfaces/json-rpc/ITransportLayer.h"
 #include "threads/Thread.h"
 #include "threads/CriticalSection.h"

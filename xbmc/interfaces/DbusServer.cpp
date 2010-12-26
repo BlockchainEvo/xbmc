@@ -30,7 +30,7 @@
 #include "threads/CriticalSection.h"
 #include "Application.h"
 #include "threads/SingleLock.h"
-#include "log.h"
+#include "utils/log.h"
 #include <map>
 #include <queue>
 

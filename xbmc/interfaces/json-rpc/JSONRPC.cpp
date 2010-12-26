@@ -30,7 +30,7 @@
 #include "VideoLibrary.h"
 #include "SystemOperations.h"
 #include "XBMCOperations.h"
-#include "utils/AnnouncementManager.h"
+#include "interfaces/AnnouncementManager.h"
 #include "utils/log.h"
 #include "utils/Variant.h"
 #include <string.h>

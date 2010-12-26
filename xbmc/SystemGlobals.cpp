@@ -38,7 +38,7 @@
 #include "filesystem/DirectoryCache.h"
 #include "GUIPassword.h"
 #include "LangInfo.h"
-#include "LangCodeExpander.h"
+#include "utils/LangCodeExpander.h"
 #include "PartyModeManager.h"
 #include "PlayListPlayer.h"
 #include "guilib/LocalizeStrings.h"

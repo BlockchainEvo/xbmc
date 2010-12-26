@@ -23,7 +23,7 @@
 #ifdef HAS_HAL
 #include "HALManager.h"
 #include "Application.h"
-#include "utils/Builtins.h"
+#include "interfaces/Builtins.h"
 #include <libhal-storage.h>
 #include "threads/SingleLock.h"
 #include "Util.h"

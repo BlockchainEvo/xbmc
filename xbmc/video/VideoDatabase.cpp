@@ -47,7 +47,7 @@
 #include "utils/log.h"
 #include "TextureCache.h"
 #include "addons/GUIWindowAddonBrowser.h"
-#include "utils/AnnouncementManager.h"
+#include "interfaces/AnnouncementManager.h"
 
 using namespace std;
 using namespace dbiplus;
