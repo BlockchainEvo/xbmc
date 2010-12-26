@@ -1,6 +1,25 @@
-INCLUDES=-I. -I../../ -I../../linux -I../../../lib
-
-SRCS=DirectoryNodeAlbumCompilations.cpp DirectoryNodeAlbumCompilationsSongs.cpp DirectoryNodeAlbum.cpp DirectoryNodeAlbumRecentlyAdded.cpp DirectoryNodeAlbumRecentlyAddedSong.cpp DirectoryNodeAlbumRecentlyPlayed.cpp DirectoryNodeAlbumRecentlyPlayedSong.cpp DirectoryNodeAlbumTop100.cpp DirectoryNodeAlbumTop100Song.cpp DirectoryNodeArtist.cpp DirectoryNode.cpp DirectoryNodeGenre.cpp DirectoryNodeOverview.cpp DirectoryNodeRoot.cpp DirectoryNodeSong.cpp DirectoryNodeSongTop100.cpp DirectoryNodeTop100.cpp QueryParams.cpp DirectoryNodeYearAlbum.cpp DirectoryNodeYearSong.cpp DirectoryNodeYear.cpp DirectoryNodeSingles.cpp
+SRCS=DirectoryNode.cpp \
+     DirectoryNodeAlbum.cpp \
+     DirectoryNodeAlbumCompilations.cpp \
+     DirectoryNodeAlbumCompilationsSongs.cpp \
+     DirectoryNodeAlbumRecentlyPlayed.cpp \
+     DirectoryNodeAlbumRecentlyPlayedSong.cpp \
+     DirectoryNodeAlbumRecentlyAdded.cpp \
+     DirectoryNodeAlbumRecentlyAddedSong.cpp \
+     DirectoryNodeAlbumTop100.cpp \
+     DirectoryNodeAlbumTop100Song.cpp \
+     DirectoryNodeArtist.cpp \
+     DirectoryNodeGenre.cpp \
+     DirectoryNodeOverview.cpp \
+     DirectoryNodeRoot.cpp \
+     DirectoryNodeSingles.cpp \
+     DirectoryNodeSong.cpp \
+     DirectoryNodeSongTop100.cpp \
+     DirectoryNodeTop100.cpp \
+     DirectoryNodeYear.cpp \
+     DirectoryNodeYearAlbum.cpp \
+     DirectoryNodeYearSong.cpp \
+     QueryParams.cpp \
 
 LIB=musicdatabasedirectory.a
 
