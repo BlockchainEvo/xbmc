@@ -26,6 +26,7 @@ SRCS=AlarmClock.cpp \
      InfoLoader.cpp \
      JobManager.cpp \
      LabelFormatter.cpp \
+     LangCodeExpander.cpp \
      LCD.cpp \
      LCDFactory.cpp \
      log.cpp \

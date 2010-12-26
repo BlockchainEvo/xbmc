@@ -8,7 +8,6 @@ SRCS=Application.cpp \
      DynamicDll.cpp \
      Favourites.cpp \
      FileItem.cpp \
-     LangCodeExpander.cpp \
      LangInfo.cpp \
      GUILargeTextureManager.cpp \
      GUIPassword.cpp \
