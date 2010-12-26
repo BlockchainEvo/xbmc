@@ -24,7 +24,6 @@
 #include "GUIWindowVideoFiles.h"
 #include "music/windows/GUIWindowMusicNav.h"
 #include "utils/FileUtils.h"
-#include "utils/GUIInfoManager.h"
 #include "Util.h"
 #include "utils/RegExp.h"
 #include "PlayListPlayer.h"

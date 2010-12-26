@@ -40,7 +40,7 @@
 #include "FileItem.h"
 #include "guilib/GUIDialog.h"
 #include "windowing/WindowingFactory.h"
-#include "utils/GUIInfoManager.h"
+#include "GUIInfoManager.h"
 
 #include "powermanagement/PowerManager.h"
 

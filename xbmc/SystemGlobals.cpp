@@ -33,7 +33,7 @@
 #include "utils/CharsetConverter.h"
 #include "utils/AlarmClock.h"
 #include "utils/DownloadQueueManager.h"
-#include "utils/GUIInfoManager.h"
+#include "GUIInfoManager.h"
 #include "filesystem/DllLibCurl.h"
 #include "filesystem/DirectoryCache.h"
 #include "GUIPassword.h"

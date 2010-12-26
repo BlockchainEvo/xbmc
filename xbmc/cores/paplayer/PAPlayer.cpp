@@ -21,7 +21,7 @@
 
 #include "PAPlayer.h"
 #include "CodecFactory.h"
-#include "utils/GUIInfoManager.h"
+#include "GUIInfoManager.h"
 #include "guilib/AudioContext.h"
 #include "Application.h"
 #include "FileItem.h"

@@ -20,7 +20,7 @@
  */
 
 #include "GUIRadioButtonControl.h"
-#include "utils/GUIInfoManager.h"
+#include "GUIInfoManager.h"
 #include "GUIFontManager.h"
 #include "Key.h"
 

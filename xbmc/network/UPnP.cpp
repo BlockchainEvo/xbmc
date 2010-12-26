@@ -51,7 +51,7 @@
 #include "utils/StringUtils.h"
 #include "FileItem.h"
 #include "guilib/GUIWindowManager.h"
-#include "utils/GUIInfoManager.h"
+#include "GUIInfoManager.h"
 #include "utils/TimeUtils.h"
 
 using namespace std;

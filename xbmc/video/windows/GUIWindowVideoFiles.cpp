@@ -22,7 +22,6 @@
 #include "system.h"
 #include "GUIWindowVideoFiles.h"
 #include "Util.h"
-#include "utils/GUIInfoManager.h"
 #include "playlists/PlayListFactory.h"
 #include "Application.h"
 #include "NfoFile.h"

@@ -21,7 +21,7 @@
 
 #include "GUIListContainer.h"
 #include "GUIListItem.h"
-#include "utils/GUIInfoManager.h"
+#include "GUIInfoManager.h"
 #include "Key.h"
 
 CGUIListContainer::CGUIListContainer(int parentID, int controlID, float posX, float posY, float width, float height, ORIENTATION orientation, int scrollTime, int preloadItems)

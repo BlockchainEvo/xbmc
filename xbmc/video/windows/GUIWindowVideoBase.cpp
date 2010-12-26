@@ -24,7 +24,6 @@
 #include "Util.h"
 #include "video/VideoInfoDownloader.h"
 #include "utils/RegExp.h"
-#include "utils/GUIInfoManager.h"
 #include "utils/Variant.h"
 #include "addons/AddonManager.h"
 #include "addons/IAddon.h"

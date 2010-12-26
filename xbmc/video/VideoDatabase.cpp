@@ -23,7 +23,7 @@
 #include "video/windows/GUIWindowVideoBase.h"
 #include "utils/RegExp.h"
 #include "addons/AddonManager.h"
-#include "utils/GUIInfoManager.h"
+#include "GUIInfoManager.h"
 #include "Util.h"
 #include "utils/URIUtils.h"
 #include "utils/XMLUtils.h"

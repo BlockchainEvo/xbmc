@@ -20,7 +20,7 @@
  */
 
 #include "Profile.h"
-#include "utils/GUIInfoManager.h"
+#include "GUIInfoManager.h"
 #include "utils/XMLUtils.h"
 
 CProfile::CLock::CLock(LockType type, const CStdString &password)

@@ -43,7 +43,7 @@
 #include "utils/StringUtils.h"
 #include "utils/log.h"
 #include "threads/SingleLock.h"
-#include "utils/PasswordManager.h"
+#include "PasswordManager.h"
 
 #include <libsmbclient.h>
 

@@ -19,9 +19,7 @@
  *
  */
 
-#if (defined HAVE_CONFIG_H) && (!defined WIN32)
-  #include "config.h"
-#endif
+#include "system.h"
 #if (defined USE_EXTERNAL_PYTHON)
   #if (defined HAVE_LIBPYTHON2_6)
     #include <python2.6/Python.h>
@@ -50,7 +48,7 @@
 #include "interfaces/http-api/HttpApi.h"
 #endif
 #include "pyjsonrpc.h"
-#include "utils/GUIInfoManager.h"
+#include "GUIInfoManager.h"
 #include "guilib/GUIWindowManager.h"
 #include "guilib/GUIAudioManager.h"
 #include "Application.h"

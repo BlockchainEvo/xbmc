@@ -28,7 +28,6 @@
 #include "video/windows/GUIWindowVideoBase.h"
 #include "video/windows/GUIWindowVideoFiles.h"
 #include "dialogs/GUIDialogFileBrowser.h"
-#include "utils/GUIInfoManager.h"
 #include "video/VideoInfoScanner.h"
 #include "Application.h"
 #include "video/VideoInfoTag.h"

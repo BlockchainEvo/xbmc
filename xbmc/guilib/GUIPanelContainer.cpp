@@ -21,7 +21,7 @@
 
 #include "GUIPanelContainer.h"
 #include "GUIListItem.h"
-#include "utils/GUIInfoManager.h"
+#include "GUIInfoManager.h"
 #include "Key.h"
 
 using namespace std;

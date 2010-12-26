@@ -28,7 +28,7 @@
 #include "filesystem/MusicDatabaseDirectory.h"
 #include "filesystem/SpecialProtocol.h"
 #include "music/dialogs/GUIDialogMusicScan.h"
-#include "utils/GUIInfoManager.h"
+#include "GUIInfoManager.h"
 #include "music/tags/MusicInfoTag.h"
 #include "addons/AddonManager.h"
 #include "addons/Scraper.h"

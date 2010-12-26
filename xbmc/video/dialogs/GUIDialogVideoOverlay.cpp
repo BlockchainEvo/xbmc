@@ -20,7 +20,7 @@
  */
 
 #include "GUIDialogVideoOverlay.h"
-#include "utils/GUIInfoManager.h"
+#include "GUIInfoManager.h"
 #include "guilib/GUIWindowManager.h"
 
 #define CONTROL_PLAYTIME     2

@@ -33,7 +33,7 @@
 #endif
 
 #include "addons/Skin.h"
-#include "utils/GUIInfoManager.h"
+#include "GUIInfoManager.h"
 #include "utils/log.h"
 #include "threads/SingleLock.h"
 #include "utils/TimeUtils.h"

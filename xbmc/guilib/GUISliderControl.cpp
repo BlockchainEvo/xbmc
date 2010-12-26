@@ -20,7 +20,7 @@
  */
 
 #include "GUISliderControl.h"
-#include "utils/GUIInfoManager.h"
+#include "GUIInfoManager.h"
 #include "Key.h"
 #include "utils/MathUtils.h"
 

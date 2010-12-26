@@ -25,7 +25,7 @@
 #include "dialogs/GUIDialogOK.h"
 #include "dialogs/GUIDialogKeyboard.h"
 #include "URL.h"
-#include "utils/PasswordManager.h"
+#include "PasswordManager.h"
 
 using namespace XFILE;
 

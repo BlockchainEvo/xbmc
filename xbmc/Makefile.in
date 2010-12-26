@@ -9,12 +9,14 @@ SRCS=Application.cpp \
      Favourites.cpp \
      FileItem.cpp \
      LangInfo.cpp \
+     GUIInfoManager.cpp \
      GUILargeTextureManager.cpp \
      GUIPassword.cpp \
      GUIViewControl.cpp \
      GUIViewState.cpp \
      MediaSource.cpp \
      NfoFile.cpp \
+     PasswordManager.cpp \
      PlayListPlayer.cpp \
      PartyModeManager.cpp \
      SectionLoader.cpp \

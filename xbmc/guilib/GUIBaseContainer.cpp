@@ -23,7 +23,7 @@
 #include "GUIControlFactory.h"
 #include "GUIWindowManager.h"
 #include "utils/CharsetConverter.h"
-#include "utils/GUIInfoManager.h"
+#include "GUIInfoManager.h"
 #include "utils/TimeUtils.h"
 #include "utils/log.h"
 #include "utils/StringUtils.h"

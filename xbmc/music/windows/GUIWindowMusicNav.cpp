@@ -21,7 +21,6 @@
 
 #include "GUIWindowMusicNav.h"
 #include "Util.h"
-#include "utils/GUIInfoManager.h"
 #include "utils/FileUtils.h"
 #include "PlayListPlayer.h"
 #include "GUIPassword.h"

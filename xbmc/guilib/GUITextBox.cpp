@@ -21,7 +21,7 @@
 
 #include "GUITextBox.h"
 #include "utils/CharsetConverter.h"
-#include "utils/GUIInfoManager.h"
+#include "GUIInfoManager.h"
 #include "tinyXML/tinyxml.h"
 
 using namespace std;

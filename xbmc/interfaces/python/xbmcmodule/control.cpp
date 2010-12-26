@@ -21,7 +21,7 @@
 
 #include "control.h"
 #include "pyutil.h"
-#include "utils/GUIInfoManager.h"
+#include "GUIInfoManager.h"
 #include "guilib/GUIControlFactory.h"
 #include "guilib/GUITexture.h"
 #include "utils/StringUtils.h"

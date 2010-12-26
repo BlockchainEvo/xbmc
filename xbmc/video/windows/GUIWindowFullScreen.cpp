@@ -26,7 +26,7 @@
 #ifdef HAS_VIDEO_PLAYBACK
 #include "cores/VideoRenderers/RenderManager.h"
 #endif
-#include "utils/GUIInfoManager.h"
+#include "GUIInfoManager.h"
 #include "guilib/GUIProgressControl.h"
 #include "guilib/GUIAudioManager.h"
 #include "guilib/GUILabelControl.h"

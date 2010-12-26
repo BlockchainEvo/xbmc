@@ -27,7 +27,7 @@
 
 #if defined(HAS_FILESYSTEM_SMB)
 #include "FileSmb.h"
-#include "utils/PasswordManager.h"
+#include "PasswordManager.h"
 #include "SMBDirectory.h"
 #include "Util.h"
 #include <libsmbclient.h>

@@ -23,7 +23,6 @@
 #include "system.h"
 #include "guilib/Texture.h"
 #include "utils/ssrc.h"         // for M_PI
-#include "utils/GUIInfoManager.h"
 #include "settings/AdvancedSettings.h"
 #include "settings/Settings.h"
 #include "settings/GUISettings.h"

@@ -37,7 +37,7 @@
 #endif
 #include "guilib/GUIControlProfiler.h"
 #include "utils/LangCodeExpander.h"
-#include "utils/GUIInfoManager.h"
+#include "GUIInfoManager.h"
 #include "playlists/PlayListFactory.h"
 #include "guilib/GUIFontManager.h"
 #include "guilib/GUIColorManager.h"

@@ -30,7 +30,7 @@
 #include "pictures/Picture.h"
 #include "filesystem/StackDirectory.h"
 #include "VideoInfoDownloader.h"
-#include "utils/GUIInfoManager.h"
+#include "GUIInfoManager.h"
 #include "filesystem/File.h"
 #include "dialogs/GUIDialogProgress.h"
 #include "dialogs/GUIDialogYesNo.h"

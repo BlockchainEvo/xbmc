@@ -24,7 +24,7 @@
 #include "Util.h"
 #include "FileItem.h"
 #include "guilib/LocalizeStrings.h"
-#include "utils/GUIInfoManager.h"
+#include "GUIInfoManager.h"
 #include "guilib/Key.h"
 
 CGUIViewControl::CGUIViewControl(void)

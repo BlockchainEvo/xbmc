@@ -26,7 +26,7 @@
 #else
 #include <sys/utsname.h>
 #endif
-#include "utils/GUIInfoManager.h"
+#include "GUIInfoManager.h"
 #include "filesystem/FileCurl.h"
 #include "network/Network.h"
 #include "Application.h"

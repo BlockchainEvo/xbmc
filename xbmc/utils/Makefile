@@ -16,7 +16,6 @@ SRCS=AlarmClock.cpp \
      FileUtils.cpp \
      fstrcmp.c \
      fft.cpp \
-     GUIInfoManager.cpp \
      HTMLTable.cpp \
      HTMLUtil.cpp \
      HttpHeader.cpp \
@@ -28,7 +27,6 @@ SRCS=AlarmClock.cpp \
      LCDFactory.cpp \
      log.cpp \
      md5.cpp \
-     PasswordManager.cpp \
      PCMAmplifier.cpp \
      PCMRemap.cpp \
      PerformanceSample.cpp \

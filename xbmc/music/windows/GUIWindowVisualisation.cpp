@@ -23,7 +23,7 @@
 #include "Application.h"
 #include "music/dialogs/GUIDialogMusicOSD.h"
 #include "GUIUserMessages.h"
-#include "utils/GUIInfoManager.h"
+#include "GUIInfoManager.h"
 #include "music/dialogs/GUIDialogVisualisationPresetList.h"
 #include "guilib/GUIWindowManager.h"
 #include "settings/Settings.h"

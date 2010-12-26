@@ -21,7 +21,7 @@
 
 #include "GUIIncludes.h"
 #include "addons/Skin.h"
-#include "utils/GUIInfoManager.h"
+#include "GUIInfoManager.h"
 #include "utils/log.h"
 #include "tinyXML/tinyxml.h"
 #include "utils/StringUtils.h"

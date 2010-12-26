@@ -39,7 +39,7 @@
 #include "DVDFileInfo.h"
 
 #include "Util.h"
-#include "utils/GUIInfoManager.h"
+#include "GUIInfoManager.h"
 #include "guilib/GUIWindowManager.h"
 #include "Application.h"
 #include "DVDPerformanceCounter.h"

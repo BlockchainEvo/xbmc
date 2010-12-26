@@ -24,7 +24,7 @@
 #include "LocalizeStrings.h"
 #include "GUIWindowManager.h"
 #include "utils/CharsetConverter.h"
-#include "utils/GUIInfoManager.h"
+#include "GUIInfoManager.h"
 #include "utils/StringUtils.h"
 #include "GUIControlFactory.h"
 #include "tinyXML/tinyxml.h"

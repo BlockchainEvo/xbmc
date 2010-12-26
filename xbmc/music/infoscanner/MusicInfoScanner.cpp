@@ -28,7 +28,7 @@
 #include "filesystem/MusicDatabaseDirectory/DirectoryNode.h"
 #include "Util.h"
 #include "utils/md5.h"
-#include "utils/GUIInfoManager.h"
+#include "GUIInfoManager.h"
 #include "utils/Variant.h"
 #include "NfoFile.h"
 #include "music/tags/MusicInfoTag.h"

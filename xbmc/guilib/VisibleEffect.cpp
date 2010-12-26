@@ -20,7 +20,7 @@
  */
 
 #include "VisibleEffect.h"
-#include "utils/GUIInfoManager.h"
+#include "GUIInfoManager.h"
 #include "utils/log.h"
 #include "addons/Skin.h" // for the effect time adjustments
 #include "utils/StringUtils.h"

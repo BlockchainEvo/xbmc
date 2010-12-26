@@ -21,7 +21,7 @@
 
 #include "GUIControl.h"
 
-#include "utils/GUIInfoManager.h"
+#include "GUIInfoManager.h"
 #include "utils/log.h"
 #include "LocalizeStrings.h"
 #include "GUIWindowManager.h"

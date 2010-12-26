@@ -20,7 +20,7 @@
  */
 
 #include "Application.h"
-#include "utils/GUIInfoManager.h"
+#include "GUIInfoManager.h"
 #include "PlayListPlayer.h"
 #include "player.h"
 #include "pyplaylist.h"
