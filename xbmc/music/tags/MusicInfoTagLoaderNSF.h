@@ -21,7 +21,7 @@
  */
 
 #include "ImusicInfoTagLoader.h"
-#include "cores/paplayer/DllNosefart.h"
+#include "DllNosefart.h"
 
 namespace MUSIC_INFO
 {
