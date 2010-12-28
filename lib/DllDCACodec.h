@@ -28,7 +28,7 @@ extern "C" {
 #if (defined USE_EXTERNAL_LIBDTS)
   #include <dts.h>
 #else
-  #include "../dvdplayer/DVDCodecs/Audio/libdts/dts.h"
+  #include "cores/dvdplayer/DVDCodecs/Audio/libdts/dts.h"
 #endif
 }
 #include "DynamicDll.h"
