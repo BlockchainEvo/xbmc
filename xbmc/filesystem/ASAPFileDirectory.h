@@ -22,7 +22,7 @@
 #pragma once
 
 #include "MusicFileDirectory.h"
-#include "cores/paplayer/DllASAP.h"
+#include "DllASAP.h"
 
 namespace XFILE
 {
