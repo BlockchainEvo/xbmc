@@ -21,7 +21,7 @@
  */
 
 #include "ImusicInfoTagLoader.h"
-#include "cores/paplayer/DllStSound.h"
+#include "DllStSound.h"
 
 namespace MUSIC_INFO
 {
