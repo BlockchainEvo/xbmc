@@ -1414,7 +1414,6 @@ OUTPUT_FILES="Makefile \
     xbmc/cores/AudioRenderers/Makefile \
     xbmc/cores/paplayer/Makefile \
     lib/timidity/Makefile \
-    xbmc/cores/paplayer/AC3Codec/Makefile \
     lib/xbadpcm/Makefile \
     lib/asap/Makefile \
     lib/nosefart/Makefile \
