@@ -22,7 +22,7 @@
 
 
 #include "MusicFileDirectory.h"
-#include "cores/paplayer/DllSidplay2.h"
+#include "DllSidplay2.h"
 
 namespace XFILE
 {

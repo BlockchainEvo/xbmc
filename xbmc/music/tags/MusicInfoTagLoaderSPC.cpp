@@ -21,7 +21,7 @@
 
 
 #include "MusicInfoTagLoaderSPC.h"
-#include "cores/paplayer/spc/Types.h"
+#include "snesapu/Types.h"
 #include "MusicInfoTag.h"
 #include "filesystem/File.h"
 #include "utils/log.h"

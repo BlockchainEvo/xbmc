@@ -1,8 +1,8 @@
 ARCH=@ARCH@
 AS=nasm
 OBJS=SPC700.o APU.o DSP.o SNESAPU.o
-CFLAGS +=-D_LINUX -fPIC -I../..
-CXXFLAGS +=-D_LINUX -fPIC -I../..
+CFLAGS +=-D_LINUX -fPIC -I@abs_top_srcdir@/lib/snesapu
+CXXFLAGS +=-D_LINUX -fPIC -I@abs_top_srcdir@/lib/snesapu
 ifeq ($(findstring osx,$(ARCH)), osx)
 	CFLAGS+=-fno-common
 	CXXFLAGS+=-fno-common
@@ -11,7 +11,7 @@ else
 	ASFLAGS=-Xvc -DLINUX -O1 -f elf
 endif
 
-SYSDIR=../../../../../../system/players/paplayer/
+SYSDIR=@abs_top_srcdir@/system/players/paplayer/
 SO=SNESAPU-$(ARCH).so
 SLIB=$(SYSDIR)/$(SO)
 
@@ -22,14 +22,14 @@ ifeq ($(findstring osx,$(ARCH)), osx)
 		-mmacosx-version-min=10.4 \
 		-read_only_relocs suppress \
 		-o $@ $(OBJS)
-	../../../../../../tools/Mach5/wrapper.rb $@;mv output.so $@
+	@abs_top_srcdir@/tools/Mach5/wrapper.rb $@;mv output.so $@
 	chmod +x $@
 else
 	$(CXX) $(CXXFLAGS) $(LDFLAGS) -shared -o $@ $(OBJS) \
-		`cat ../../../../DllLoader/exports/wrapper.def` ../../../../DllLoader/exports/wrapper.o
+		`cat @abs_top_srcdir@/xbmc/cores/DllLoader/exports/wrapper.def` @abs_top_srcdir@/xbmc/cores/DllLoader/exports/wrapper.o
 endif
 
 %o : %Asm
 	$(AS) $(ASFLAGS) -o $@ $<
 
-include ../../../../../../Makefile.include
+include @abs_top_srcdir@/Makefile.include

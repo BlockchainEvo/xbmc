@@ -43,7 +43,7 @@
 #include "dialogs/GUIDialogKeyboard.h"
 #include "FileItem.h"
 #include "settings/Settings.h"
-#include "utils/GUIInfoManager.h"
+#include "GUIInfoManager.h"
 #include "dialogs/GUIDialogSelect.h"
 
 using namespace std;

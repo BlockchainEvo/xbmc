@@ -21,7 +21,7 @@
 #include "system.h"
 #include "Visualisation.h"
 #include "utils/fft.h"
-#include "utils/GUIInfoManager.h"
+#include "GUIInfoManager.h"
 #include "Application.h"
 #include "music/tags/MusicInfoTag.h"
 #include "settings/Settings.h"
