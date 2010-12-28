@@ -106,7 +106,7 @@ PAPCODECS_DIRS= \
 	xbmc/cores/paplayer/ADPCMCodec \
 	xbmc/cores/paplayer/NSFCodec \
 	lib/timidity \
-	xbmc/cores/paplayer/SIDCodec \
+	lib/libsidplay2 \
 	xbmc/cores/paplayer/YMCodec/StSoundLibrary \
 	xbmc/cores/paplayer/SPCCodec/SNES/SNESAPU \
 	xbmc/cores/paplayer/vgmstream \
@@ -450,7 +450,7 @@ endif
 	$(MAKE) -C xbmc/cores/paplayer/vgmstream
 	$(MAKE) -C lib/timidity
 	$(MAKE) -C xbmc/cores/paplayer/NSFCodec
-	$(MAKE) -C xbmc/cores/paplayer/SIDCodec
+	$(MAKE) -C lib/libsidplay2 
 ifeq (@USE_ASAP_CODEC@,1)
   ifneq ($(findstring osx,$(ARCH)), osx)
 	$(MAKE) -C xbmc/cores/paplayer/asap asap-xbmc
