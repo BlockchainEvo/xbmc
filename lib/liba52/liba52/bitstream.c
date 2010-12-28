@@ -31,13 +31,14 @@
 
 #define BUFFER_SIZE 4096
 
-void a52_bitstream_set_ptr (a52_state_t * state, uint8_t * buf)
+void a52_bitstream_set_ptr (a52_state_t * state, uint8_t * buf, uint32_t bigendian_mode)
 {
     int align;
 
     align = (long)buf & 3;
     state->buffer_start = (uint32_t *) (buf - align);
     state->bits_left = 0;
+    state->bigendian_mode = bigendian_mode;
     bitstream_get (state, align * 8);
 }
 
@@ -46,7 +47,10 @@ static inline void bitstream_fill_current (a52_state_t * state)
     uint32_t tmp;
 
     tmp = *(state->buffer_start++);
-    state->current_word = swab32 (tmp);
+    if (state->bigendian_mode)
+        state->current_word = swab32 (tmp);
+    else
+        state->current_word = swable32 (tmp);
 }
 
 /*

@@ -83,7 +83,7 @@ sample_t * a52_samples (a52_state_t * state)
     return state->samples;
 }
 
-int a52_syncinfo (uint8_t * buf, int * flags,
+int a52_syncinfo (a52_state_t * state, uint8_t * buf, int * flags,
 		  int * sample_rate, int * bit_rate)
 {
     static int rate[] = { 32,  40,  48,  56,  64,  80,  96, 112,
@@ -94,26 +94,44 @@ int a52_syncinfo (uint8_t * buf, int * flags,
     int bitrate;
     int half;
     int acmod;
+    int bigendian_mode = -1;
+    uint32_t buf4;
+    uint32_t buf5;
+    uint32_t buf6;
 
-    if ((buf[0] != 0x0b) || (buf[1] != 0x77))	/* syncword */
-	return 0;
+    if ((buf[0] == 0x0b) && (buf[1] == 0x77))	/* syncword */
+      bigendian_mode = 1;
+    if ((buf[0] == 0x77) && (buf[1] == 0x0b))	/* syncword */
+      bigendian_mode = 0;
 
-    if (buf[5] >= 0x60)		/* bsid >= 12 */
-	return 0;
-    half = halfrate[buf[5] >> 3];
+    if (bigendian_mode == -1)
+	    return 0;
+
+
+    a52_bitstream_set_ptr (state, buf + 2, bigendian_mode);
+    //0,1 were sync bytes
+    //2, 3 unused?
+    bitstream_get(state, 16);
+    buf4 = bitstream_get(state, 8);
+    buf5 = bitstream_get(state, 8);
+    buf6 = bitstream_get(state, 8);
+
+    if (buf5 >= 0x60)		/* bsid >= 12 */
+	    return 0;
+    half = halfrate[buf5 >> 3];
 
     /* acmod, dsurmod and lfeon */
-    acmod = buf[6] >> 5;
-    *flags = ((((buf[6] & 0xf8) == 0x50) ? A52_DOLBY : acmod) |
-	      ((buf[6] & lfeon[acmod]) ? A52_LFE : 0));
+    acmod = buf6 >> 5;
+    *flags = ((((buf6 & 0xf8) == 0x50) ? A52_DOLBY : acmod) |
+	      ((buf6 & lfeon[acmod]) ? A52_LFE : 0));
 
-    frmsizecod = buf[4] & 63;
+    frmsizecod = buf4 & 63;
     if (frmsizecod >= 38)
 	return 0;
     bitrate = rate [frmsizecod >> 1];
     *bit_rate = (bitrate * 1000) >> half;
 
-    switch (buf[4] & 0xc0) {
+    switch (buf4 & 0xc0) {
     case 0:
 	*sample_rate = 48000 >> half;
 	return 4 * bitrate;
@@ -136,12 +154,14 @@ int a52_frame (a52_state_t * state, uint8_t * buf, int * flags,
     int chaninfo;
     int acmod;
 
-    state->fscod = buf[4] >> 6;
-    state->halfrate = halfrate[buf[5] >> 3];
-    state->acmod = acmod = buf[6] >> 5;
+    //0,1 were sync bytes, 2, 3 unused?
+    a52_bitstream_set_ptr (state, buf + 4, state->bigendian_mode);
 
-    a52_bitstream_set_ptr (state, buf + 6);
-    bitstream_get (state, 3);	/* skip acmod we already parsed */
+    state->fscod = bitstream_get(state, 2);
+    bitstream_get(state, 6);
+    state->halfrate = halfrate[bitstream_get(state, 5)];
+    bitstream_get(state, 3);
+    state->acmod = acmod = bitstream_get(state, 3);
 
     if ((acmod == 2) && (bitstream_get (state, 2) == 2))	/* dsurmod */
 	acmod = A52_DOLBY;

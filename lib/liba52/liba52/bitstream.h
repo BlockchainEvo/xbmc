@@ -46,7 +46,20 @@
 #	endif
 #endif
 
-void a52_bitstream_set_ptr (a52_state_t * state, uint8_t * buf);
+#ifdef WORDS_BIGENDIAN
+
+#   define swable32(x)\
+((((uint8_t*)&x)[0] << 16) | (((uint8_t*)&x)[1] << 24) |  \
+ (((uint8_t*)&x)[2])  | (((uint8_t*)&x)[3] << 8))
+
+#else
+
+#   define swable32(x)\
+((((uint16_t*)&x)[0] << 16) | (((uint16_t*)&x)[1]))
+
+#endif
+
+void a52_bitstream_set_ptr (a52_state_t * state, uint8_t * buf, uint32_t bigendian_mode);
 uint32_t a52_bitstream_get_bh (a52_state_t * state, uint32_t num_bits);
 int32_t a52_bitstream_get_bh_2 (a52_state_t * state, uint32_t num_bits);
 

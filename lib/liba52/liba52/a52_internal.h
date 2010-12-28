@@ -70,6 +70,7 @@ struct a52_state_s {
     uint16_t lfsr_state;	/* dither state */
     uint32_t bits_left;
     uint32_t current_word;
+    uint32_t bigendian_mode;
 
     uint8_t csnroffst;		/* coarse SNR offset */
     ba_t cplba;			/* coupling bit allocation parameters */

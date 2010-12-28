@@ -56,7 +56,7 @@ typedef struct a52_state_s a52_state_t;
 
 DllExport a52_state_t * a52_init (uint32_t mm_accel);
 DllExport sample_t * a52_samples (a52_state_t * state);
-DllExport int a52_syncinfo (uint8_t * buf, int * flags,
+DllExport int a52_syncinfo (a52_state_t * state, uint8_t * buf, int * flags,
          int * sample_rate, int * bit_rate);
 DllExport int a52_frame (a52_state_t * state, uint8_t * buf, int * flags,
 	       sample_t * level, sample_t bias);
