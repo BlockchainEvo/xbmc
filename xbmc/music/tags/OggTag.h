@@ -23,7 +23,7 @@
 //------------------------------
 #include "VorbisTag.h"
 #include "cores/paplayer/ReplayGain.h"
-#include "cores/paplayer/DllVorbisfile.h"
+#include "DllVorbisfile.h"
 
 namespace MUSIC_INFO
 {
