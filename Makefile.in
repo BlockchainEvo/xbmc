@@ -123,7 +123,7 @@ endif
 
 ifeq ($(findstring osx,$(ARCH)),osx)
 PAPCODEC_DIRS+= \
-	xbmc/cores/paplayer/FLACCodec
+	lib/libflac
 endif
 
 LIB_DIRS=\
@@ -445,7 +445,7 @@ ifeq (@USE_INTERNAL_LIBA52@,1)
 endif
 	$(MAKE) -C xbmc/cores/paplayer/ADPCMCodec
 ifeq ($(findstring osx,$(ARCH)), osx)
-	$(MAKE) -C xbmc/cores/paplayer/FLACCodec
+	$(MAKE) -C lib/libflac
 endif
 	$(MAKE) -C lib/vgmstream
 	$(MAKE) -C lib/timidity
