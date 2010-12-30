@@ -1,5 +1,8 @@
 /* vc++/config.h - manually adapted from include/config.h.in */
 
+/* Suppress spurious compiler warnings */
+#pragma warning (disable: 4098 4244 4305 4761)
+
 /* maximum supported data alignment */
 /* #undef ATTRIBUTE_ALIGNED_MAX */
 
@@ -118,7 +121,7 @@
 
 /* Define as `__restrict' if that's what the C compiler calls it, or to
    nothing if it is not supported. */
-#define restrict __restrict
+/*#define restrict __restrict*/
 
 /* Define to `unsigned' if <sys/types.h> does not define. */
 /* #undef size_t */

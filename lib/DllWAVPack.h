@@ -27,7 +27,7 @@
 #if (!defined WIN32)
   #include <wavpack/wavpack.h>
 #else
-  #include "WavPackCodec/wavpack.h"
+  #include "wavpack.h"
 #endif
 #include "DynamicDll.h"
 #include "utils/log.h"

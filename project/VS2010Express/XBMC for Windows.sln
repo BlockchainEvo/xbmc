@@ -654,7 +654,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libass_dll", "..\..\lib\lib
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "visMilkdrop", "..\..\xbmc\visualizations\Milkdrop\Plugin.vcxproj", "{5E479372-4F34-426D-AA1E-9879E94C105D}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libfaad2_dll", "..\..\xbmc\cores\dvdplayer\Codecs\libfaad2\libfaad\libfaad2_dll.vcxproj", "{482DA264-EE88-4575-B208-87C4CB80CD08}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libfaad2_dll", "..\..\lib\libfaad2\libfaad\libfaad2_dll.vcxproj", "{482DA264-EE88-4575-B208-87C4CB80CD08}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libcmyth_dll", "..\..\lib\cmyth\Win32\libcmyth.vcxproj", "{F9E6874D-60A8-49BA-9393-A2105E63ABCF}"
 EndProject
@@ -708,33 +708,33 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "visWaveform", "..\..\xbmc\v
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "squish", "..\..\lib\libsquish\vs7\squish\squish_2010.vcxproj", "{6A8518C3-D81A-4428-BD7F-C37933088AC1}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libwavpack_dll", "..\..\xbmc\cores\paplayer\WavPackCodec\wavpackdll.vcxproj", "{CDC43FFE-1BED-44C6-BAB9-5A7E84D6D9FE}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libwavpack_dll", "..\..\lib\win32\libwavpack\wavpackdll.vcxproj", "{CDC43FFE-1BED-44C6-BAB9-5A7E84D6D9FE}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libStSoundLibrary_dll", "..\..\xbmc\cores\paplayer\YMCodec\StSoundLibrary\StSoundLibrary.vcxproj", "{D9885434-4B9D-41FB-B5FC-5E89D41AEFF0}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libStSoundLibrary_dll", "..\..\lib\stsound\StSoundLibrary\StSoundLibrary.vcxproj", "{D9885434-4B9D-41FB-B5FC-5E89D41AEFF0}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "freetype", "..\..\lib\freetype\builds\win32\vs2010\freetype.vcxproj", "{78B079BD-9FC7-4B9E-B4A6-96DA0F00248B}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libdts_dll", "..\..\xbmc\cores\dvdplayer\Codecs\libdts\vc++\libdts.vcxproj", "{F93133AB-EB51-4955-AEDF-639632891042}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libdts_dll", "..\..\lib\libdts\vc++\libdts.vcxproj", "{F93133AB-EB51-4955-AEDF-639632891042}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libAC3Codec_dll", "..\..\xbmc\cores\paplayer\AC3Codec\vc++\AC3Codec.vcxproj", "{3039DB92-836E-4563-9DE0-D0C2AB28F14F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "liba52_dll", "..\..\lib\liba52\vc++\liba52.vcxproj", "{3039DB92-836E-4563-9DE0-D0C2AB28F14F}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libvorbis_static", "..\..\xbmc\cores\paplayer\vorbisfile\libvorbis\win32\VS2010\libvorbis\libvorbis.vcxproj", "{3A214E06-B95E-4D61-A291-1F8DF2EC10FD}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libvorbis_static", "..\..\lib\win32\vorbisfile\libvorbis\win32\VS2010\libvorbis\libvorbis.vcxproj", "{3A214E06-B95E-4D61-A291-1F8DF2EC10FD}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libvorbisfile_dll", "..\..\xbmc\cores\paplayer\vorbisfile\libvorbis\win32\VS2010\libvorbisfile\libvorbisfile.vcxproj", "{CEBDE98B-A6AA-46E6-BC79-FAAF823DB9EC}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libvorbisfile_dll", "..\..\lib\win32\vorbisfile\libvorbis\win32\VS2010\libvorbisfile\libvorbisfile.vcxproj", "{CEBDE98B-A6AA-46E6-BC79-FAAF823DB9EC}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ogg_static", "..\..\xbmc\cores\paplayer\vorbisfile\ogg\win32\ogg_static.vcxproj", "{EFC5D2BF-9DE8-44C8-9A06-C2B3E4C00951}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ogg_static", "..\..\lib\win32\vorbisfile\ogg\win32\ogg_static.vcxproj", "{EFC5D2BF-9DE8-44C8-9A06-C2B3E4C00951}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libmad_dll", "..\..\xbmc\cores\dvdplayer\Codecs\libmad\msvc++\libmad.vcxproj", "{AF6C8945-5DDC-4F62-A48C-86B11B7ED996}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libmad_dll", "..\..\lib\libmad\msvc++\libmad.vcxproj", "{AF6C8945-5DDC-4F62-A48C-86B11B7ED996}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libvgmstream_dll", "..\..\xbmc\cores\paplayer\vgmstream\win32\win32.vcxproj", "{3600E1C5-FECA-468C-83F3-FE467DBE2A66}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libvgmstream_dll", "..\..\lib\vgmstream\win32\win32.vcxproj", "{3600E1C5-FECA-468C-83F3-FE467DBE2A66}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libid3tag_dll", "..\..\lib\libid3tag\libid3tag\msvc++\libid3tag.vcxproj", "{AEABB6CE-8F0F-4507-8DC4-5E3BCE5962DA}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libadpcm_dll", "..\..\xbmc\cores\paplayer\ADPCMCodec\adpcm.vcxproj", "{2A8CBFB5-C226-4BB3-8C03-7C75D511A4A2}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libadpcm_dll", "..\..\lib\xbadpcm\adpcm.vcxproj", "{2A8CBFB5-C226-4BB3-8C03-7C75D511A4A2}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libNoseFartXBMC_dll", "..\..\xbmc\cores\paplayer\NSFCodec\NoseFartXBMC.vcxproj", "{17238C64-04D6-4B51-B205-4A5A84ADB9FA}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libNoseFartXBMC_dll", "..\..\lib\nosefart\NoseFartXBMC.vcxproj", "{17238C64-04D6-4B51-B205-4A5A84ADB9FA}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libsidplay_dll", "..\..\xbmc\cores\paplayer\SIDCodec\libsidplay\win\VC\libsidplay.vcxproj", "{FB3AB83A-C37A-4636-87FD-827F8506A8FC}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libsidplay_dll", "..\..\lib\libsidplay2\libsidplay\win\VC\libsidplay.vcxproj", "{FB3AB83A-C37A-4636-87FD-827F8506A8FC}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cpluff", "..\..\lib\cpluff\libcpluff\win32\cpluff.vcxproj", "{88968763-3D6B-48A8-B495-CC8C187FAC02}"
 EndProject

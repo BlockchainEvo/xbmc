@@ -29,7 +29,7 @@
 #include "AutoPtrHandle.h"
 #include "log.h"
 #include "CharsetConverter.h"
-#include "utils/PasswordManager.h"
+#include "PasswordManager.h"
 
 #ifndef INVALID_FILE_ATTRIBUTES
 #define INVALID_FILE_ATTRIBUTES ((DWORD) -1)

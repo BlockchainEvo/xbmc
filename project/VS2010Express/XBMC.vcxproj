@@ -383,7 +383,7 @@
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <OmitFramePointers>true</OmitFramePointers>
-      <AdditionalIncludeDirectories>..\..\xbmc\cores\dvdplayer;..\..\xbmc\win32;..\..\xbmc\cores\dvdplayer\Codecs\ffmpeg\include;..\..\xbmc\cores\dvdplayer\Codecs\ffmpeg;..\..\xbmc\cores;..\..\xbmc\;..\..\xbmc\utils;..\..\lib\libcurl-mingw32\include;..\..\xbmc\guilib\;..\..\;..\..\lib\libUPnP\Platinum\Source\Devices\MediaRenderer;..\..\lib\libUPnP\Platinum\Source\Devices\MediaConnect;..\..\lib\libUPnP\Platinum\Source\Devices\MediaServer;..\..\lib\libUPnP\Platinum\Source\Platinum;..\..\lib\libUPnP\Platinum\Source\Core;..\..\lib\libUPnP\Neptune\Source\Core;..\..\lib\libUPnP\Neptune\Source\System\Win32;..\..\xbmc\cores\dvdplayer\DVDCodecs\Overlay;..\..\xbmc\FileSystem;..\..\xbmc\lib\libRTMP;..\..\lib\win32\boost;..\..\xbmc\windowing..\..\lib\libSDL-WIN32\include;..\..\lib\Python\PC;..\..\lib\win32\libsamplerate\src;..\..\xbmc\lib;..\..\lib\freetype\include;..\..\lib\win32\libiconv\include;..\..\lib\win32\libcdio\include;..\..\lib;..\..\lib\jsoncpp\jsoncpp\include;..\..\lib\win32\libmicrohttpd_win32\include;..\..\lib\win32\libssh_win32\include;..\..\lib\liblame\include;..\..\lib\win32\libbluray_win32;..\..\lib\win32\sqlite;..\..\xbmc\dialogs;..\..\lib\win32\pcre;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\;..\..\xbmc\;..\..\xbmc\cores;..\..\xbmc\cores\dvdplayer;..\..\xbmc\dialogs;..\..\xbmc\FileSystem;..\..\xbmc\guilib\;..\..\xbmc\utils;..\..\xbmc\win32;..\..\xbmc\windowing;..\..\lib;..\..\lib\ffmpeg;..\..\lib\ffmpeg\include;..\..\lib\freetype\include;..\..\lib\jsoncpp\jsoncpp\include;..\..\lib\libflac\flac-1.2.1\include;..\..\lib\liblame\include;..\..\lib\libUPnP\Platinum\Source\Devices\MediaRenderer;..\..\lib\libUPnP\Platinum\Source\Devices\MediaConnect;..\..\lib\libUPnP\Platinum\Source\Devices\MediaServer;..\..\lib\libUPnP\Platinum\Source\Platinum;..\..\lib\libUPnP\Platinum\Source\Core;..\..\lib\libUPnP\Neptune\Source\Core;..\..\lib\libUPnP\Neptune\Source\System\Win32;..\..\lib\Python\PC;..\..\lib\win32\boost;..\..\lib\win32\libbluray_win32;..\..\lib\win32\libcdio\include;..\..\lib\win32\libiconv\include;..\..\lib\win32\libmicrohttpd_win32\include;..\..\lib\win32\libsamplerate\src;..\..\lib\win32\libssh_win32\include;..\..\lib\win32\libwavpack;..\..\lib\win32\pcre;..\..\lib\win32\sqlite;..\..\lib\win32\vorbisfile\libvorbis\include;..\..\lib\win32\vorbisfile\ogg\include;</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_WINDOWS;_MSVC;WIN32;NDEBUG;_WIN32_WINNT=0x0501;WINVER=0x0500;NOMINMAX;_USE_32BIT_TIME_T;HAS_GL;__STDC_CONSTANT_MACROS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>false</StringPooling>
       <MinimalRebuild>false</MinimalRebuild>
@@ -427,7 +427,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug (DirectX)|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\xbmc\cores\dvdplayer;..\..\xbmc\win32;..\..\xbmc\cores\dvdplayer\Codecs\ffmpeg\include;..\..\xbmc\cores\dvdplayer\Codecs\ffmpeg;..\..\xbmc\cores;..\..\xbmc\;..\..\xbmc\utils;..\..\lib\libcurl-mingw32\include;..\..\xbmc\guilib\;..\..\;..\..\lib\libUPnP\Platinum\Source\Devices\MediaRenderer;..\..\lib\libUPnP\Platinum\Source\Devices\MediaConnect;..\..\lib\libUPnP\Platinum\Source\Devices\MediaServer;..\..\lib\libUPnP\Platinum\Source\Platinum;..\..\lib\libUPnP\Platinum\Source\Core;..\..\lib\libUPnP\Neptune\Source\Core;..\..\lib\libUPnP\Neptune\Source\System\Win32;..\..\xbmc\cores\dvdplayer\DVDCodecs\Overlay;..\..\xbmc\FileSystem;..\..\xbmc\lib\libRTMP;..\..\lib\win32\boost;..\..\xbmc\windowing..\..\lib\libSDL-WIN32\include;..\..\lib\Python\PC;..\..\lib\win32\libsamplerate\src;..\..\xbmc\lib;..\..\lib\freetype\include;..\..\lib\win32\libiconv\include;..\..\lib\win32\libcdio\include;..\..\lib;..\..\lib\jsoncpp\jsoncpp\include;..\..\lib\win32\libmicrohttpd_win32\include;..\..\lib\win32\libssh_win32\include;..\..\lib\liblame\include;..\..\lib\win32\libbluray_win32;..\..\lib\win32\sqlite;..\..\xbmc\dialogs;..\..\lib\win32\pcre;..\..\lib\jsoncpp\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\;..\..\xbmc\;..\..\xbmc\cores;..\..\xbmc\cores\dvdplayer;..\..\xbmc\dialogs;..\..\xbmc\FileSystem;..\..\xbmc\guilib\;..\..\xbmc\utils;..\..\xbmc\win32;..\..\xbmc\windowing;..\..\lib;..\..\lib\ffmpeg;..\..\lib\ffmpeg\include;..\..\lib\freetype\include;..\..\lib\jsoncpp\jsoncpp\include;..\..\lib\libflac\flac-1.2.1\include;..\..\lib\liblame\include;..\..\lib\libUPnP\Platinum\Source\Devices\MediaRenderer;..\..\lib\libUPnP\Platinum\Source\Devices\MediaConnect;..\..\lib\libUPnP\Platinum\Source\Devices\MediaServer;..\..\lib\libUPnP\Platinum\Source\Platinum;..\..\lib\libUPnP\Platinum\Source\Core;..\..\lib\libUPnP\Neptune\Source\Core;..\..\lib\libUPnP\Neptune\Source\System\Win32;..\..\lib\Python\PC;..\..\lib\win32\boost;..\..\lib\win32\libbluray_win32;..\..\lib\win32\libcdio\include;..\..\lib\win32\libiconv\include;..\..\lib\win32\libmicrohttpd_win32\include;..\..\lib\win32\libsamplerate\src;..\..\lib\win32\libssh_win32\include;..\..\lib\win32\libwavpack;..\..\lib\win32\pcre;..\..\lib\win32\sqlite;..\..\lib\win32\vorbisfile\libvorbis\include;..\..\lib\win32\vorbisfile\ogg\include;..\..\lib\jsoncpp\include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_WINDOWS;_MSVC;WIN32;_DEBUG;_WIN32_WINNT=0x0501;WINVER=0x0500;NOMINMAX;_USE_32BIT_TIME_T;HAS_DX;Py_NO_ENABLE_SHARED;D3D_DEBUG_INFO;__STDC_CONSTANT_MACROS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <ExceptionHandling>Async</ExceptionHandling>
@@ -473,7 +473,7 @@
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <OmitFramePointers>true</OmitFramePointers>
-      <AdditionalIncludeDirectories>..\..\xbmc\cores\dvdplayer;..\..\xbmc\win32;..\..\xbmc\cores\dvdplayer\Codecs\ffmpeg\include;..\..\xbmc\cores\dvdplayer\Codecs\ffmpeg;..\..\xbmc\cores;..\..\xbmc\;..\..\xbmc\utils;..\..\lib\libcurl-mingw32\include;..\..\xbmc\guilib\;..\..\;..\..\lib\libUPnP\Platinum\Source\Devices\MediaRenderer;..\..\lib\libUPnP\Platinum\Source\Devices\MediaConnect;..\..\lib\libUPnP\Platinum\Source\Devices\MediaServer;..\..\lib\libUPnP\Platinum\Source\Platinum;..\..\lib\libUPnP\Platinum\Source\Core;..\..\lib\libUPnP\Neptune\Source\Core;..\..\lib\libUPnP\Neptune\Source\System\Win32;..\..\xbmc\cores\dvdplayer\DVDCodecs\Overlay;..\..\xbmc\FileSystem;..\..\xbmc\lib\libRTMP;..\..\lib\win32\boost;..\..\xbmc\windowing..\..\lib\libSDL-WIN32\include;..\..\lib\Python\PC;..\..\lib\win32\libsamplerate\src;..\..\xbmc\lib;..\..\lib\freetype\include;..\..\lib\win32\libiconv\include;..\..\lib\win32\libcdio\include;..\..\lib;..\..\lib\jsoncpp\jsoncpp\include;..\..\lib\win32\libmicrohttpd_win32\include;..\..\lib\win32\libssh_win32\include;..\..\lib\liblame\include;..\..\lib\win32\libbluray_win32;..\..\lib\win32\sqlite;..\..\xbmc\dialogs;..\..\lib\win32\pcre;..\..\lib\jsoncpp\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\;..\..\xbmc\;..\..\xbmc\cores;..\..\xbmc\cores\dvdplayer;..\..\xbmc\dialogs;..\..\xbmc\FileSystem;..\..\xbmc\guilib\;..\..\xbmc\utils;..\..\xbmc\win32;..\..\xbmc\windowing;..\..\lib;..\..\lib\ffmpeg;..\..\lib\ffmpeg\include;..\..\lib\freetype\include;..\..\lib\jsoncpp\jsoncpp\include;..\..\lib\libflac\flac-1.2.1\include;..\..\lib\liblame\include;..\..\lib\libUPnP\Platinum\Source\Devices\MediaRenderer;..\..\lib\libUPnP\Platinum\Source\Devices\MediaConnect;..\..\lib\libUPnP\Platinum\Source\Devices\MediaServer;..\..\lib\libUPnP\Platinum\Source\Platinum;..\..\lib\libUPnP\Platinum\Source\Core;..\..\lib\libUPnP\Neptune\Source\Core;..\..\lib\libUPnP\Neptune\Source\System\Win32;..\..\lib\Python\PC;..\..\lib\win32\boost;..\..\lib\win32\libbluray_win32;..\..\lib\win32\libcdio\include;..\..\lib\win32\libiconv\include;..\..\lib\win32\libmicrohttpd_win32\include;..\..\lib\win32\libsamplerate\src;..\..\lib\win32\libssh_win32\include;..\..\lib\win32\libwavpack;..\..\lib\win32\pcre;..\..\lib\win32\sqlite;..\..\lib\win32\vorbisfile\libvorbis\include;..\..\lib\win32\vorbisfile\ogg\include;..\..\lib\jsoncpp\include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_WINDOWS;_MSVC;WIN32;NDEBUG;_WIN32_WINNT=0x0501;WINVER=0x0500;NOMINMAX;_USE_32BIT_TIME_T;HAS_DX;__STDC_CONSTANT_MACROS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>false</StringPooling>
       <MinimalRebuild>false</MinimalRebuild>
@@ -517,7 +517,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug (OpenGL)|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\xbmc\cores\dvdplayer;..\..\xbmc\win32;..\..\xbmc\cores\dvdplayer\Codecs\ffmpeg\include;..\..\xbmc\cores\dvdplayer\Codecs\ffmpeg;..\..\xbmc\cores;..\..\xbmc\;..\..\xbmc\utils;..\..\lib\libcurl-mingw32\include;..\..\xbmc\guilib\;..\..\;..\..\lib\libUPnP\Platinum\Source\Devices\MediaRenderer;..\..\lib\libUPnP\Platinum\Source\Devices\MediaConnect;..\..\lib\libUPnP\Platinum\Source\Devices\MediaServer;..\..\lib\libUPnP\Platinum\Source\Platinum;..\..\lib\libUPnP\Platinum\Source\Core;..\..\lib\libUPnP\Neptune\Source\Core;..\..\lib\libUPnP\Neptune\Source\System\Win32;..\..\xbmc\cores\dvdplayer\DVDCodecs\Overlay;..\..\xbmc\FileSystem;..\..\xbmc\lib\libRTMP;..\..\lib\win32\boost;..\..\xbmc\windowing..\..\lib\libSDL-WIN32\include;..\..\lib\Python\PC;..\..\lib\win32\libsamplerate\src;..\..\xbmc\lib;..\..\lib\freetype\include;..\..\lib\win32\libiconv\include;..\..\lib\win32\libcdio\include;..\..\lib;..\..\lib\jsoncpp\jsoncpp\include;..\..\lib\win32\libmicrohttpd_win32\include;..\..\lib\win32\libssh_win32\include;..\..\lib\liblame\include;..\..\lib\win32\libbluray_win32;..\..\lib\win32\sqlite;..\..\xbmc\dialogs;..\..\lib\win32\pcre;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\;..\..\xbmc\;..\..\xbmc\cores;..\..\xbmc\cores\dvdplayer;..\..\xbmc\dialogs;..\..\xbmc\FileSystem;..\..\xbmc\guilib\;..\..\xbmc\utils;..\..\xbmc\win32;..\..\xbmc\windowing;..\..\lib;..\..\lib\ffmpeg;..\..\lib\ffmpeg\include;..\..\lib\freetype\include;..\..\lib\jsoncpp\jsoncpp\include;..\..\lib\libflac\flac-1.2.1\include;..\..\lib\liblame\include;..\..\lib\libUPnP\Platinum\Source\Devices\MediaRenderer;..\..\lib\libUPnP\Platinum\Source\Devices\MediaConnect;..\..\lib\libUPnP\Platinum\Source\Devices\MediaServer;..\..\lib\libUPnP\Platinum\Source\Platinum;..\..\lib\libUPnP\Platinum\Source\Core;..\..\lib\libUPnP\Neptune\Source\Core;..\..\lib\libUPnP\Neptune\Source\System\Win32;..\..\lib\Python\PC;..\..\lib\win32\boost;..\..\lib\win32\libbluray_win32;..\..\lib\win32\libcdio\include;..\..\lib\win32\libiconv\include;..\..\lib\win32\libmicrohttpd_win32\include;..\..\lib\win32\libsamplerate\src;..\..\lib\win32\libssh_win32\include;..\..\lib\win32\libwavpack;..\..\lib\win32\pcre;..\..\lib\win32\sqlite;..\..\lib\win32\vorbisfile\libvorbis\include;..\..\lib\win32\vorbisfile\ogg\include;</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_WINDOWS;_MSVC;WIN32;_DEBUG;_WIN32_WINNT=0x0501;WINVER=0x0500;NOMINMAX;_USE_32BIT_TIME_T;HAS_GL;Py_NO_ENABLE_SHARED;__STDC_CONSTANT_MACROS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <ExceptionHandling>Async</ExceptionHandling>
@@ -865,7 +865,6 @@
     <ClCompile Include="..\..\xbmc\dialogs\GUIDialogTextViewer.cpp" />
     <ClCompile Include="..\..\xbmc\dialogs\GUIDialogVolumeBar.cpp" />
     <ClCompile Include="..\..\xbmc\dialogs\GUIDialogYesNo.cpp" />
-    <ClCompile Include="..\..\xbmc\DPMSSupport.cpp" />
     <ClCompile Include="..\..\xbmc\DynamicDll.cpp" />
     <ClCompile Include="..\..\xbmc\Favourites.cpp" />
     <ClCompile Include="..\..\xbmc\FileItem.cpp" />
@@ -873,6 +872,7 @@
     <ClCompile Include="..\..\xbmc\FileSystem\ISO9660Directory.cpp" />
     <ClCompile Include="..\..\xbmc\FileSystem\VideoDatabaseDirectory\DirectoryNodeCountry.cpp" />
     <ClCompile Include="..\..\xbmc\filesystem\ZeroconfDirectory.cpp" />
+    <ClCompile Include="..\..\xbmc\GUIInfoManager.cpp" />
     <ClCompile Include="..\..\xbmc\GUILargeTextureManager.cpp" />
     <ClCompile Include="..\..\xbmc\guilib\AnimatedGif.cpp" />
     <ClCompile Include="..\..\xbmc\guilib\AudioContext.cpp" />
@@ -959,18 +959,9 @@
     <ClCompile Include="..\..\xbmc\guilib\VisibleEffect.cpp" />
     <ClCompile Include="..\..\xbmc\guilib\XBTF.cpp" />
     <ClCompile Include="..\..\xbmc\guilib\XBTFReader.cpp" />
-    <ClCompile Include="..\..\xbmc\GUIMediaWindow.cpp" />
     <ClCompile Include="..\..\xbmc\GUIPassword.cpp" />
     <ClCompile Include="..\..\xbmc\GUIViewControl.cpp" />
     <ClCompile Include="..\..\xbmc\GUIViewState.cpp" />
-    <ClCompile Include="..\..\xbmc\GUIWindowFileManager.cpp" />
-    <ClCompile Include="..\..\xbmc\GUIWindowHome.cpp" />
-    <ClCompile Include="..\..\xbmc\GUIWindowLoginScreen.cpp" />
-    <ClCompile Include="..\..\xbmc\GUIWindowPointer.cpp" />
-    <ClCompile Include="..\..\xbmc\GUIWindowScreensaver.cpp" />
-    <ClCompile Include="..\..\xbmc\GUIWindowStartup.cpp" />
-    <ClCompile Include="..\..\xbmc\GUIWindowSystemInfo.cpp" />
-    <ClCompile Include="..\..\xbmc\GUIWindowWeather.cpp" />
     <ClCompile Include="..\..\xbmc\input\ButtonTranslator.cpp" />
     <ClCompile Include="..\..\xbmc\input\KeyboardLayoutConfiguration.cpp" />
     <ClCompile Include="..\..\xbmc\input\KeyboardStat.cpp" />
@@ -978,6 +969,7 @@
     <ClCompile Include="..\..\xbmc\input\SDLJoystick.cpp" />
     <ClCompile Include="..\..\xbmc\input\windows\IRServerSuite.cpp" />
     <ClCompile Include="..\..\xbmc\input\windows\IrssMessage.cpp" />
+<<<<<<< HEAD
 <<<<<<< HEAD
     <ClCompile Include="..\..\xbmc\lib\libjsonrpc\AudioLibrary.cpp" />
     <ClCompile Include="..\..\xbmc\lib\libPython\xbmcmodule\PythonAddon.cpp" />
@@ -988,6 +980,10 @@
 =======
 =======
 =======
+=======
+    <ClCompile Include="..\..\xbmc\interfaces\AnnouncementManager.cpp" />
+    <ClCompile Include="..\..\xbmc\interfaces\Builtins.cpp" />
+>>>>>>> fixed compile.
     <ClCompile Include="..\..\xbmc\interfaces\http-api\HttpApi.cpp" />
     <ClCompile Include="..\..\xbmc\interfaces\http-api\XBMChttp.cpp" />
     <ClCompile Include="..\..\xbmc\interfaces\json-rpc\AudioLibrary.cpp" />
@@ -1040,12 +1036,15 @@
     <ClCompile Include="..\..\xbmc\interfaces\python\XBPython.cpp" />
     <ClCompile Include="..\..\xbmc\interfaces\python\XBPyThread.cpp" />
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> synced some more: various moves
     <ClCompile Include="..\..\xbmc\MediaSource.cpp" />
     <ClCompile Include="..\..\xbmc\MusicInfoLoader.cpp" />
 >>>>>>> some more linker error fixes. XBMC compiles now on win32
 =======
     <ClCompile Include="..\..\xbmc\LangCodeExpander.cpp" />
+=======
+>>>>>>> fixed compile.
     <ClCompile Include="..\..\xbmc\LangInfo.cpp" />
     <ClCompile Include="..\..\xbmc\MediaSource.cpp" />
     <ClCompile Include="..\..\xbmc\music\Album.cpp" />
@@ -1599,6 +1598,7 @@
     <ClCompile Include="..\..\xbmc\network\ZeroconfBrowser.cpp" />
     <ClCompile Include="..\..\xbmc\NfoFile.cpp" />
     <ClCompile Include="..\..\xbmc\PartyModeManager.cpp" />
+    <ClCompile Include="..\..\xbmc\PasswordManager.cpp" />
     <ClCompile Include="..\..\xbmc\pictures\GUIDialogPictureInfo.cpp" />
     <ClCompile Include="..\..\xbmc\pictures\GUIViewStatePictures.cpp" />
     <ClCompile Include="..\..\xbmc\pictures\GUIWindowPictures.cpp" />
@@ -1620,6 +1620,7 @@
     <ClCompile Include="..\..\xbmc\playlists\PlayListWPL.cpp" />
     <ClCompile Include="..\..\xbmc\playlists\PlayListXML.cpp" />
     <ClCompile Include="..\..\xbmc\playlists\SmartPlayList.cpp" />
+    <ClCompile Include="..\..\xbmc\powermanagement\DPMSSupport.cpp" />
     <ClCompile Include="..\..\xbmc\powermanagement\PowerManager.cpp" />
     <ClCompile Include="..\..\xbmc\powermanagement\windows\Win32PowerSyscall.cpp" />
     <ClCompile Include="..\..\xbmc\programs\GUIViewStatePrograms.cpp" />
@@ -1672,17 +1673,14 @@
     <ClCompile Include="..\..\xbmc\Util.cpp" />
     <ClCompile Include="..\..\xbmc\utils\AlarmClock.cpp" />
     <ClCompile Include="..\..\xbmc\utils\AliasShortcutUtils.cpp" />
-    <ClCompile Include="..\..\xbmc\utils\AnnouncementManager.cpp" />
     <ClCompile Include="..\..\xbmc\utils\ArabicShaping.cpp" />
     <ClCompile Include="..\..\xbmc\utils\Archive.cpp" />
     <ClCompile Include="..\..\xbmc\utils\AsyncFileCopy.cpp" />
     <ClCompile Include="..\..\xbmc\utils\AutoPtrHandle.cpp" />
     <ClCompile Include="..\..\xbmc\utils\BitstreamStats.cpp" />
-    <ClCompile Include="..\..\xbmc\utils\Builtins.cpp" />
     <ClCompile Include="..\..\xbmc\utils\CharsetConverter.cpp" />
     <ClCompile Include="..\..\xbmc\utils\CPUInfo.cpp" />
     <ClCompile Include="..\..\xbmc\utils\Crc32.cpp" />
-    <ClCompile Include="..\..\xbmc\utils\DbusServer.cpp" />
     <ClCompile Include="..\..\xbmc\utils\DownloadQueue.cpp" />
     <ClCompile Include="..\..\xbmc\utils\DownloadQueueManager.cpp" />
     <ClCompile Include="..\..\xbmc\utils\Fanart.cpp" />
@@ -1696,17 +1694,16 @@
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release (OpenGL)|Win32'">CompileAsCpp</CompileAs>
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">CompileAsCpp</CompileAs>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\utils\GUIInfoManager.cpp" />
     <ClCompile Include="..\..\xbmc\utils\HTMLTable.cpp" />
     <ClCompile Include="..\..\xbmc\utils\HTMLUtil.cpp" />
     <ClCompile Include="..\..\xbmc\utils\HttpHeader.cpp" />
     <ClCompile Include="..\..\xbmc\utils\InfoLoader.cpp" />
     <ClCompile Include="..\..\xbmc\utils\JobManager.cpp" />
     <ClCompile Include="..\..\xbmc\utils\LabelFormatter.cpp" />
+    <ClCompile Include="..\..\xbmc\utils\LangCodeExpander.cpp" />
     <ClCompile Include="..\..\xbmc\utils\LCD.cpp" />
     <ClCompile Include="..\..\xbmc\utils\log.cpp" />
     <ClCompile Include="..\..\xbmc\utils\md5.cpp" />
-    <ClCompile Include="..\..\xbmc\utils\PasswordManager.cpp" />
     <ClCompile Include="..\..\xbmc\utils\PCMAmplifier.cpp" />
     <ClCompile Include="..\..\xbmc\utils\PerformanceSample.cpp" />
     <ClCompile Include="..\..\xbmc\utils\PerformanceStats.cpp" />
@@ -2096,6 +2093,15 @@
     <ClCompile Include="..\..\xbmc\windowing\windows\WinSystemWin32GL.cpp" />
     <ClCompile Include="..\..\xbmc\windowing\WinEventsSDL.cpp" />
     <ClCompile Include="..\..\xbmc\windowing\WinSystem.cpp" />
+    <ClCompile Include="..\..\xbmc\windows\GUIMediaWindow.cpp" />
+    <ClCompile Include="..\..\xbmc\windows\GUIWindowFileManager.cpp" />
+    <ClCompile Include="..\..\xbmc\windows\GUIWindowHome.cpp" />
+    <ClCompile Include="..\..\xbmc\windows\GUIWindowLoginScreen.cpp" />
+    <ClCompile Include="..\..\xbmc\windows\GUIWindowPointer.cpp" />
+    <ClCompile Include="..\..\xbmc\windows\GUIWindowScreensaver.cpp" />
+    <ClCompile Include="..\..\xbmc\windows\GUIWindowStartup.cpp" />
+    <ClCompile Include="..\..\xbmc\windows\GUIWindowSystemInfo.cpp" />
+    <ClCompile Include="..\..\xbmc\windows\GUIWindowWeather.cpp" />
     <ClCompile Include="..\..\xbmc\XBApplicationEx.cpp" />
     <ClCompile Include="..\..\xbmc\xbmc.cpp" />
   </ItemGroup>
@@ -2404,7 +2410,6 @@
     <ClInclude Include="..\..\xbmc\dialogs\GUIDialogTextViewer.h" />
     <ClInclude Include="..\..\xbmc\dialogs\GUIDialogVolumeBar.h" />
     <ClInclude Include="..\..\xbmc\dialogs\GUIDialogYesNo.h" />
-    <ClInclude Include="..\..\xbmc\DPMSSupport.h" />
     <ClInclude Include="..\..\xbmc\DynamicDll.h" />
     <ClInclude Include="..\..\xbmc\Favourites.h" />
     <ClInclude Include="..\..\xbmc\FileItem.h" />
@@ -2425,6 +2430,7 @@
     <ClInclude Include="..\..\xbmc\filesystem\VirtualDirectory.h" />
     <ClInclude Include="..\..\xbmc\filesystem\zconf.h" />
     <ClInclude Include="..\..\xbmc\filesystem\ZeroconfDirectory.h" />
+    <ClInclude Include="..\..\xbmc\GUIInfoManager.h" />
     <ClInclude Include="..\..\xbmc\GUILargeTextureManager.h" />
     <ClInclude Include="..\..\xbmc\guilib\AnimatedGif.h" />
     <ClInclude Include="..\..\xbmc\guilib\AudioContext.h" />
@@ -2520,19 +2526,10 @@
     <ClInclude Include="..\..\xbmc\guilib\VisibleEffect.h" />
     <ClInclude Include="..\..\xbmc\guilib\XBTF.h" />
     <ClInclude Include="..\..\xbmc\guilib\XBTFReader.h" />
-    <ClInclude Include="..\..\xbmc\GUIMediaWindow.h" />
     <ClInclude Include="..\..\xbmc\GUIPassword.h" />
     <ClInclude Include="..\..\xbmc\GUIUserMessages.h" />
     <ClInclude Include="..\..\xbmc\GUIViewControl.h" />
     <ClInclude Include="..\..\xbmc\GUIViewState.h" />
-    <ClInclude Include="..\..\xbmc\GUIWindowFileManager.h" />
-    <ClInclude Include="..\..\xbmc\GUIWindowHome.h" />
-    <ClInclude Include="..\..\xbmc\GUIWindowLoginScreen.h" />
-    <ClInclude Include="..\..\xbmc\GUIWindowPointer.h" />
-    <ClInclude Include="..\..\xbmc\GUIWindowScreensaver.h" />
-    <ClInclude Include="..\..\xbmc\GUIWindowStartup.h" />
-    <ClInclude Include="..\..\xbmc\GUIWindowSystemInfo.h" />
-    <ClInclude Include="..\..\xbmc\GUIWindowWeather.h" />
     <ClInclude Include="..\..\xbmc\input\ButtonTranslator.h" />
     <ClInclude Include="..\..\xbmc\input\KeyboardLayoutConfiguration.h" />
     <ClInclude Include="..\..\xbmc\input\KeyboardStat.h" />
@@ -2545,8 +2542,11 @@
     <ClInclude Include="..\..\xbmc\input\XBMC_keysym.h" />
     <ClInclude Include="..\..\xbmc\input\XBMC_mouse.h" />
     <ClInclude Include="..\..\xbmc\input\XBMC_vkeys.h" />
+    <ClInclude Include="..\..\xbmc\interfaces\AnnouncementManager.h" />
+    <ClInclude Include="..\..\xbmc\interfaces\Builtins.h" />
     <ClInclude Include="..\..\xbmc\interfaces\http-api\HttpApi.h" />
     <ClInclude Include="..\..\xbmc\interfaces\http-api\XBMChttp.h" />
+    <ClInclude Include="..\..\xbmc\interfaces\IAnnouncer.h" />
     <ClInclude Include="..\..\xbmc\interfaces\json-rpc\AudioLibrary.h" />
     <ClInclude Include="..\..\xbmc\interfaces\json-rpc\AVPlayerOperations.h" />
     <ClInclude Include="..\..\xbmc\interfaces\json-rpc\AVPlaylistOperations.h" />
@@ -2585,7 +2585,6 @@
     <ClInclude Include="..\..\xbmc\interfaces\python\XBPythonDll.h" />
     <ClInclude Include="..\..\xbmc\interfaces\python\XBPyThread.h" />
     <ClInclude Include="..\..\xbmc\IProgressCallback.h" />
-    <ClInclude Include="..\..\xbmc\LangCodeExpander.h" />
     <ClInclude Include="..\..\xbmc\LangInfo.h" />
     <ClInclude Include="..\..\xbmc\MediaSource.h" />
     <ClInclude Include="..\..\xbmc\music\Album.h" />
@@ -3037,6 +3036,7 @@
     <ClInclude Include="..\..\xbmc\network\ZeroconfBrowser.h" />
     <ClInclude Include="..\..\xbmc\NfoFile.h" />
     <ClInclude Include="..\..\xbmc\PartyModeManager.h" />
+    <ClInclude Include="..\..\xbmc\PasswordManager.h" />
     <ClInclude Include="..\..\xbmc\pictures\DllImageLib.h" />
     <ClInclude Include="..\..\xbmc\pictures\DllLibExif.h" />
     <ClInclude Include="..\..\xbmc\pictures\GUIDialogPictureInfo.h" />
@@ -3060,6 +3060,7 @@
     <ClInclude Include="..\..\xbmc\playlists\PlayListWPL.h" />
     <ClInclude Include="..\..\xbmc\playlists\PlayListXML.h" />
     <ClInclude Include="..\..\xbmc\playlists\SmartPlayList.h" />
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -3327,6 +3328,9 @@
 >>>>>>> changed: move powermanagement related code to a separate dir and move platform specific implementations to subdirs
     <ClInclude Include="..\..\xbmc\RenderSystemGLES.h" />
 =======
+=======
+    <ClInclude Include="..\..\xbmc\powermanagement\DPMSSupport.h" />
+>>>>>>> fixed compile.
     <ClInclude Include="..\..\xbmc\powermanagement\IPowerSyscall.h" />
     <ClInclude Include="..\..\xbmc\powermanagement\PowerManager.h" />
     <ClInclude Include="..\..\xbmc\powermanagement\windows\Win32PowerSyscall.h" />
@@ -3382,17 +3386,14 @@
     <ClInclude Include="..\..\xbmc\Util.h" />
     <ClInclude Include="..\..\xbmc\utils\AlarmClock.h" />
     <ClInclude Include="..\..\xbmc\utils\AliasShortcutUtils.h" />
-    <ClInclude Include="..\..\xbmc\utils\AnnouncementManager.h" />
     <ClInclude Include="..\..\xbmc\utils\ArabicShaping.h" />
     <ClInclude Include="..\..\xbmc\utils\Archive.h" />
     <ClInclude Include="..\..\xbmc\utils\AsyncFileCopy.h" />
     <ClInclude Include="..\..\xbmc\utils\AutoPtrHandle.h" />
     <ClInclude Include="..\..\xbmc\utils\BitstreamStats.h" />
-    <ClInclude Include="..\..\xbmc\utils\Builtins.h" />
     <ClInclude Include="..\..\xbmc\utils\CharsetConverter.h" />
     <ClInclude Include="..\..\xbmc\utils\CPUInfo.h" />
     <ClInclude Include="..\..\xbmc\utils\Crc32.h" />
-    <ClInclude Include="..\..\xbmc\utils\DbusServer.h" />
     <ClInclude Include="..\..\xbmc\utils\DownloadQueue.h" />
     <ClInclude Include="..\..\xbmc\utils\DownloadQueueManager.h" />
     <ClInclude Include="..\..\xbmc\utils\EndianSwap.h" />
@@ -3401,21 +3402,19 @@
     <ClInclude Include="..\..\xbmc\utils\FileOperationJob.h" />
     <ClInclude Include="..\..\xbmc\utils\FileUtils.h" />
     <ClInclude Include="..\..\xbmc\utils\fstrcmp.h" />
-    <ClInclude Include="..\..\xbmc\utils\GUIInfoManager.h" />
     <ClInclude Include="..\..\xbmc\utils\HTMLTable.h" />
     <ClInclude Include="..\..\xbmc\utils\HTMLUtil.h" />
     <ClInclude Include="..\..\xbmc\utils\HttpHeader.h" />
-    <ClInclude Include="..\..\xbmc\utils\IAnnouncer.h" />
     <ClInclude Include="..\..\xbmc\utils\InfoLoader.h" />
     <ClInclude Include="..\..\xbmc\utils\ISerializable.h" />
     <ClInclude Include="..\..\xbmc\utils\Job.h" />
     <ClInclude Include="..\..\xbmc\utils\JobManager.h" />
     <ClInclude Include="..\..\xbmc\utils\LabelFormatter.h" />
+    <ClInclude Include="..\..\xbmc\utils\LangCodeExpander.h" />
     <ClInclude Include="..\..\xbmc\utils\LCD.h" />
     <ClInclude Include="..\..\xbmc\utils\log.h" />
     <ClInclude Include="..\..\xbmc\utils\MathUtils.h" />
     <ClInclude Include="..\..\xbmc\utils\md5.h" />
-    <ClInclude Include="..\..\xbmc\utils\PasswordManager.h" />
     <ClInclude Include="..\..\xbmc\utils\PCMAmplifier.h" />
     <ClInclude Include="..\..\xbmc\utils\PerformanceSample.h" />
     <ClInclude Include="..\..\xbmc\utils\PerformanceStats.h" />
@@ -3806,6 +3805,15 @@
     <ClInclude Include="..\..\xbmc\windowing\WinEventsSDL.h" />
     <ClInclude Include="..\..\xbmc\windowing\WinSystem.h" />
     <ClInclude Include="..\..\xbmc\windowing\XBMC_events.h" />
+    <ClInclude Include="..\..\xbmc\windows\GUIMediaWindow.h" />
+    <ClInclude Include="..\..\xbmc\windows\GUIWindowFileManager.h" />
+    <ClInclude Include="..\..\xbmc\windows\GUIWindowHome.h" />
+    <ClInclude Include="..\..\xbmc\windows\GUIWindowLoginScreen.h" />
+    <ClInclude Include="..\..\xbmc\windows\GUIWindowPointer.h" />
+    <ClInclude Include="..\..\xbmc\windows\GUIWindowScreensaver.h" />
+    <ClInclude Include="..\..\xbmc\windows\GUIWindowStartup.h" />
+    <ClInclude Include="..\..\xbmc\windows\GUIWindowSystemInfo.h" />
+    <ClInclude Include="..\..\xbmc\windows\GUIWindowWeather.h" />
     <ClInclude Include="..\..\xbmc\XBApplicationEx.h" />
   </ItemGroup>
   <ItemGroup>

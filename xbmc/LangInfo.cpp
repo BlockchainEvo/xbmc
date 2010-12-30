@@ -25,6 +25,9 @@
 #include "guilib/LocalizeStrings.h"
 #include "utils/log.h"
 #include "tinyXML/tinyxml.h"
+#ifdef _WIN32
+#include "utils/LangCodeExpander.h"
+#endif
 
 using namespace std;
 

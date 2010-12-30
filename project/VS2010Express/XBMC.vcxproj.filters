@@ -388,6 +388,7 @@
 >>>>>>> fixed compile, updated projectfile to match filesystem structure more closely.
     </Filter>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <Filter Include="libraries\libhttpapi">
       <UniqueIdentifier>{0ee7becf-1d84-4148-af74-cefe1e4e611b}</UniqueIdentifier>
     </Filter>
@@ -1222,6 +1223,13 @@
   </ItemGroup>
   <ItemGroup>
 >>>>>>> fixed build. We might want to clean up our include paths too.
+=======
+    <Filter Include="windows">
+      <UniqueIdentifier>{910f98b6-acfa-4b29-a589-21fd2544d142}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+>>>>>>> fixed compile.
     <ClCompile Include="..\..\xbmc\win32\pch.cpp">
       <Filter>win32</Filter>
     </ClCompile>
@@ -1231,6 +1239,7 @@
     <ClCompile Include="..\..\xbmc\win32\Win32DelayedDllLoad.cpp">
       <Filter>win32</Filter>
     </ClCompile>
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -1249,6 +1258,8 @@
 >>>>>>> synced some more: various moves
 =======
 >>>>>>> fixed build. We might want to clean up our include paths too.
+=======
+>>>>>>> fixed compile.
     <ClCompile Include="..\..\xbmc\win32\WIN32Util.cpp">
       <Filter>win32</Filter>
     </ClCompile>
@@ -1271,6 +1282,7 @@
       <Filter>win32</Filter>
     </ClCompile>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <ClCompile Include="..\..\xbmc\cores\dlgcache.cpp">
       <Filter>cores</Filter>
     </ClCompile>
@@ -1285,6 +1297,11 @@
       <Filter>cores</Filter>
     </ClCompile>
 >>>>>>> fixed build. We might want to clean up our include paths too.
+=======
+    <ClCompile Include="..\..\xbmc\cores\DummyVideoPlayer.cpp">
+      <Filter>cores</Filter>
+    </ClCompile>
+>>>>>>> fixed compile.
     <ClCompile Include="..\..\xbmc\cores\dvdplayer\DVDAudio.cpp">
       <Filter>cores\dvdplayer</Filter>
     </ClCompile>
@@ -4342,24 +4359,13 @@
     <ClCompile Include="..\..\xbmc\BackgroundInfoLoader.cpp" />
     <ClCompile Include="..\..\xbmc\CueDocument.cpp" />
     <ClCompile Include="..\..\xbmc\DateTime.cpp" />
-    <ClCompile Include="..\..\xbmc\DPMSSupport.cpp" />
     <ClCompile Include="..\..\xbmc\DynamicDll.cpp" />
     <ClCompile Include="..\..\xbmc\Favourites.cpp" />
     <ClCompile Include="..\..\xbmc\FileItem.cpp" />
     <ClCompile Include="..\..\xbmc\GUILargeTextureManager.cpp" />
-    <ClCompile Include="..\..\xbmc\GUIMediaWindow.cpp" />
     <ClCompile Include="..\..\xbmc\GUIPassword.cpp" />
     <ClCompile Include="..\..\xbmc\GUIViewControl.cpp" />
     <ClCompile Include="..\..\xbmc\GUIViewState.cpp" />
-    <ClCompile Include="..\..\xbmc\GUIWindowFileManager.cpp" />
-    <ClCompile Include="..\..\xbmc\GUIWindowHome.cpp" />
-    <ClCompile Include="..\..\xbmc\GUIWindowLoginScreen.cpp" />
-    <ClCompile Include="..\..\xbmc\GUIWindowPointer.cpp" />
-    <ClCompile Include="..\..\xbmc\GUIWindowScreensaver.cpp" />
-    <ClCompile Include="..\..\xbmc\GUIWindowStartup.cpp" />
-    <ClCompile Include="..\..\xbmc\GUIWindowSystemInfo.cpp" />
-    <ClCompile Include="..\..\xbmc\GUIWindowWeather.cpp" />
-    <ClCompile Include="..\..\xbmc\LangCodeExpander.cpp" />
     <ClCompile Include="..\..\xbmc\LangInfo.cpp" />
     <ClCompile Include="..\..\xbmc\MediaSource.cpp" />
     <ClCompile Include="..\..\xbmc\NfoFile.cpp" />
@@ -5178,9 +5184,6 @@
     <ClCompile Include="..\..\xbmc\utils\AliasShortcutUtils.cpp">
       <Filter>utils</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\utils\AnnouncementManager.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\xbmc\utils\ArabicShaping.cpp">
       <Filter>utils</Filter>
     </ClCompile>
@@ -5196,9 +5199,6 @@
     <ClCompile Include="..\..\xbmc\utils\BitstreamStats.cpp">
       <Filter>utils</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\utils\Builtins.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\xbmc\utils\CharsetConverter.cpp">
       <Filter>utils</Filter>
     </ClCompile>
@@ -5206,9 +5206,6 @@
       <Filter>utils</Filter>
     </ClCompile>
     <ClCompile Include="..\..\xbmc\utils\Crc32.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\utils\DbusServer.cpp">
       <Filter>utils</Filter>
     </ClCompile>
     <ClCompile Include="..\..\xbmc\utils\DownloadQueue.cpp">
@@ -5230,9 +5227,6 @@
       <Filter>utils</Filter>
     </ClCompile>
     <ClCompile Include="..\..\xbmc\utils\fstrcmp.c">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\utils\GUIInfoManager.cpp">
       <Filter>utils</Filter>
     </ClCompile>
     <ClCompile Include="..\..\xbmc\utils\HTMLTable.cpp">
@@ -5260,9 +5254,6 @@
       <Filter>utils</Filter>
     </ClCompile>
     <ClCompile Include="..\..\xbmc\utils\md5.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\utils\PasswordManager.cpp">
       <Filter>utils</Filter>
     </ClCompile>
     <ClCompile Include="..\..\xbmc\utils\PCMAmplifier.cpp">
@@ -5552,6 +5543,47 @@
     </ClCompile>
     <ClCompile Include="..\..\lib\jsoncpp\src\lib_json\json_writer.cpp">
       <Filter>libs\jsoncpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\interfaces\Builtins.cpp">
+      <Filter>interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\GUIInfoManager.cpp" />
+    <ClCompile Include="..\..\xbmc\interfaces\AnnouncementManager.cpp">
+      <Filter>interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\PasswordManager.cpp" />
+    <ClCompile Include="..\..\xbmc\powermanagement\DPMSSupport.cpp">
+      <Filter>powermanagement</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\windows\GUIMediaWindow.cpp">
+      <Filter>windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\windows\GUIWindowFileManager.cpp">
+      <Filter>windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\windows\GUIWindowHome.cpp">
+      <Filter>windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\windows\GUIWindowLoginScreen.cpp">
+      <Filter>windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\windows\GUIWindowPointer.cpp">
+      <Filter>windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\windows\GUIWindowScreensaver.cpp">
+      <Filter>windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\windows\GUIWindowStartup.cpp">
+      <Filter>windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\windows\GUIWindowSystemInfo.cpp">
+      <Filter>windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\windows\GUIWindowWeather.cpp">
+      <Filter>windows</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\utils\LangCodeExpander.cpp">
+      <Filter>utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -9267,26 +9299,15 @@
     <ClInclude Include="..\..\xbmc\BackgroundInfoLoader.h" />
     <ClInclude Include="..\..\xbmc\CueDocument.h" />
     <ClInclude Include="..\..\xbmc\DateTime.h" />
-    <ClInclude Include="..\..\xbmc\DPMSSupport.h" />
     <ClInclude Include="..\..\xbmc\DynamicDll.h" />
     <ClInclude Include="..\..\xbmc\Favourites.h" />
     <ClInclude Include="..\..\xbmc\FileItem.h" />
     <ClInclude Include="..\..\xbmc\GUILargeTextureManager.h" />
-    <ClInclude Include="..\..\xbmc\GUIMediaWindow.h" />
     <ClInclude Include="..\..\xbmc\GUIPassword.h" />
     <ClInclude Include="..\..\xbmc\GUIUserMessages.h" />
     <ClInclude Include="..\..\xbmc\GUIViewControl.h" />
     <ClInclude Include="..\..\xbmc\GUIViewState.h" />
-    <ClInclude Include="..\..\xbmc\GUIWindowFileManager.h" />
-    <ClInclude Include="..\..\xbmc\GUIWindowHome.h" />
-    <ClInclude Include="..\..\xbmc\GUIWindowLoginScreen.h" />
-    <ClInclude Include="..\..\xbmc\GUIWindowPointer.h" />
-    <ClInclude Include="..\..\xbmc\GUIWindowScreensaver.h" />
-    <ClInclude Include="..\..\xbmc\GUIWindowStartup.h" />
-    <ClInclude Include="..\..\xbmc\GUIWindowSystemInfo.h" />
-    <ClInclude Include="..\..\xbmc\GUIWindowWeather.h" />
     <ClInclude Include="..\..\xbmc\IProgressCallback.h" />
-    <ClInclude Include="..\..\xbmc\LangCodeExpander.h" />
     <ClInclude Include="..\..\xbmc\LangInfo.h" />
     <ClInclude Include="..\..\xbmc\MediaSource.h" />
     <ClInclude Include="..\..\xbmc\NfoFile.h" />
@@ -10109,9 +10130,6 @@
     <ClInclude Include="..\..\xbmc\utils\AliasShortcutUtils.h">
       <Filter>utils</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\xbmc\utils\AnnouncementManager.h">
-      <Filter>utils</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\xbmc\utils\ArabicShaping.h">
       <Filter>utils</Filter>
     </ClInclude>
@@ -10127,9 +10145,6 @@
     <ClInclude Include="..\..\xbmc\utils\BitstreamStats.h">
       <Filter>utils</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\xbmc\utils\Builtins.h">
-      <Filter>utils</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\xbmc\utils\CharsetConverter.h">
       <Filter>utils</Filter>
     </ClInclude>
@@ -10137,9 +10152,6 @@
       <Filter>utils</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\utils\Crc32.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\utils\DbusServer.h">
       <Filter>utils</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\utils\DownloadQueue.h">
@@ -10166,9 +10178,6 @@
     <ClInclude Include="..\..\xbmc\utils\fstrcmp.h">
       <Filter>utils</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\xbmc\utils\GUIInfoManager.h">
-      <Filter>utils</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\xbmc\utils\HTMLTable.h">
       <Filter>utils</Filter>
     </ClInclude>
@@ -10176,9 +10185,6 @@
       <Filter>utils</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\utils\HttpHeader.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\utils\IAnnouncer.h">
       <Filter>utils</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\utils\InfoLoader.h">
@@ -10206,9 +10212,6 @@
       <Filter>utils</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\utils\md5.h">
-      <Filter>utils</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\utils\PasswordManager.h">
       <Filter>utils</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\utils\PCMAmplifier.h">
@@ -10453,6 +10456,50 @@
     </ClInclude>
     <ClInclude Include="..\..\xbmc\dialogs\GUIDialogCache.h">
       <Filter>dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\interfaces\Builtins.h">
+      <Filter>interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\interfaces\IAnnouncer.h">
+      <Filter>interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\GUIInfoManager.h" />
+    <ClInclude Include="..\..\xbmc\interfaces\AnnouncementManager.h">
+      <Filter>interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\PasswordManager.h" />
+    <ClInclude Include="..\..\xbmc\powermanagement\DPMSSupport.h">
+      <Filter>powermanagement</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\windows\GUIMediaWindow.h">
+      <Filter>windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\windows\GUIWindowFileManager.h">
+      <Filter>windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\windows\GUIWindowHome.h">
+      <Filter>windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\windows\GUIWindowLoginScreen.h">
+      <Filter>windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\windows\GUIWindowPointer.h">
+      <Filter>windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\windows\GUIWindowScreensaver.h">
+      <Filter>windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\windows\GUIWindowStartup.h">
+      <Filter>windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\windows\GUIWindowSystemInfo.h">
+      <Filter>windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\windows\GUIWindowWeather.h">
+      <Filter>windows</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\utils\LangCodeExpander.h">
+      <Filter>utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

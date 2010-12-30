@@ -35,8 +35,8 @@
 #include "MathUtils.h"
 #include "cores/dvdplayer/DVDCodecs/Video/DXVA.h"
 #include "VideoShaders/WinVideoFilter.h"
-#include "../dvdplayer/Codecs/DllSwScale.h"
-#include "../dvdplayer/Codecs/DllAvCodec.h"
+#include "DllSwScale.h"
+#include "DllAvCodec.h"
 #include "guilib/LocalizeStrings.h"
 
 typedef struct {
