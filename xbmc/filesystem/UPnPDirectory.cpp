@@ -20,8 +20,8 @@
 * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 */
 
-#include "Util.h"
 #include "UPnPDirectory.h"
+#include "URL.h"
 #include "network/UPnP.h"
 #include "Platinum.h"
 #include "PltSyncMediaBrowser.h"
@@ -155,7 +155,7 @@ bool CUPnPDirectory::GetResource(const CURL& path, CFileItem &item)
     CStdString uuid   = path.GetHostName();
     CStdString object = path.GetFileName();
     object.TrimRight("/");
-    CUtil::URLDecode(object);
+    CURL::Decode(object);
 
     PLT_DeviceDataReference device;
     if(!FindDeviceWait(upnp, uuid.c_str(), device))
@@ -276,7 +276,7 @@ CUPnPDirectory::GetDirectory(const CStdString& strPath, CFileItemList &items)
         object_id.TrimRight("/");
         if (object_id.GetLength()) {
             CStdString tmp = (char*) object_id;
-            CUtil::URLDecode(tmp);
+            CURL::Decode(tmp);
             object_id = tmp;
         }
 
@@ -377,13 +377,13 @@ CUPnPDirectory::GetDirectory(const CStdString& strPath, CFileItemList &items)
             pItem->m_bIsFolder = (*entry)->IsContainer();
 
             CStdString id = (char*) (*entry)->m_ObjectID;
-            CUtil::URLEncode(id);
+            CURL::Encode(id);
             pItem->m_strPath = (const char*) "upnp://" + uuid + "/" + id.c_str() + "/";
 
             // if it's a container, format a string as upnp://uuid/object_id
             if (pItem->m_bIsFolder) {
                 CStdString id = (char*) (*entry)->m_ObjectID;
-                CUtil::URLEncode(id);
+                CURL::Encode(id);
                 pItem->m_strPath += "/";
             } else {
 

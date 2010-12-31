@@ -22,7 +22,6 @@
 #include "guilib/GUIWindowManager.h"
 #include <string.h>
 #include "SAPDirectory.h"
-#include "Util.h"
 #include "FileItem.h"
 #include "threads/SingleLock.h"
 #include "utils/log.h"
@@ -360,7 +359,7 @@ bool CSAPSessions::ParseAnnounce(char* data, int len)
   // add a new session to our buffer
   CStdString path, user;
   user = origin.username;
-  CUtil::URLEncode(user);
+  CURL::Encode(user);
   path.Format("sap://%s/%s/0x%x.sdp", header.origin.c_str(), desc.origin.c_str(), header.msgid);
   CSession session;
   session.path           = path;

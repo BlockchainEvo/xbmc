@@ -20,7 +20,6 @@
  */
 
 #include "GUIWindowMusicNav.h"
-#include "Util.h"
 #include "utils/FileUtils.h"
 #include "utils/URIUtils.h"
 #include "PlayListPlayer.h"
@@ -754,7 +753,7 @@ void CGUIWindowMusicNav::DisplayEmptyDatabaseMessage(bool bDisplay)
 void CGUIWindowMusicNav::OnSearchUpdate()
 {
   CStdString search(GetProperty("search"));
-  CUtil::URLEncode(search);
+  CURL::Encode(search);
   if (!search.IsEmpty())
   {
     CStdString path = "musicsearch://" + search + "/";

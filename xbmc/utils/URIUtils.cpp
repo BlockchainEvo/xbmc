@@ -30,7 +30,6 @@
 #include "network/DNSNameCache.h"
 #include "settings/Settings.h"
 #include "URL.h"
-#include "Util.h"
 
 using namespace std;
 using namespace XFILE;
@@ -844,13 +843,13 @@ void URIUtils::CreateArchivePath(CStdString& strUrlPath,
   if( !strPwd.IsEmpty() )
   {
     strBuffer = strPwd;
-    CUtil::URLEncode(strBuffer);
+    CURL::Encode(strBuffer);
     strUrlPath += strBuffer;
     strUrlPath += "@";
   }
 
   strBuffer = strArchivePath;
-  CUtil::URLEncode(strBuffer);
+  CURL::Encode(strBuffer);
 
   strUrlPath += strBuffer;
 
@@ -863,7 +862,7 @@ void URIUtils::CreateArchivePath(CStdString& strUrlPath,
 
 #if 0 // options are not used
   strBuffer = strCachePath;
-  CUtil::URLEncode(strBuffer);
+  CURL::Encode(strBuffer);
 
   strUrlPath += "?cache=";
   strUrlPath += strBuffer;

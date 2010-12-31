@@ -129,7 +129,7 @@ bool CGUIDialogMusicInfo::OnMessage(CGUIMessage& message)
       else if (iControl == CONTROL_BTN_LASTFM)
       {
         CStdString strArtist = m_album.strArtist;
-        CUtil::URLEncode(strArtist);
+        CURL::Encode(strArtist);
         CStdString strLink;
         strLink.Format("lastfm://artist/%s/similarartists", strArtist.c_str());
         CURL url(strLink);

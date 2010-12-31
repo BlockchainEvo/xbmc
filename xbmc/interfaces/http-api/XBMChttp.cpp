@@ -1089,7 +1089,7 @@ int CXbmcHttp::xbmcAddToPlayList(int numParas, CStdString paras[])
         recursive=(paras[3]=="1");
     }
     strFileName=paras[0] ;
-    CUtil::URLDecode(strFileName);
+    CURL::Decode(strFileName);
     CFileItemPtr pItem(new CFileItem(strFileName));
     pItem->m_strPath=strFileName.c_str();
     if (pItem->IsPlayList())
@@ -1366,7 +1366,7 @@ int CXbmcHttp::xbmcGetCurrentlyPlaying(int numParas, CStdString paras[])
   {
     CURL url(fileItem.m_strPath);
     CStdString strPath(url.GetWithoutUserDetails());
-    CUtil::URLDecode(strPath);
+    CURL::Decode(strPath);
     output = openTag + "Filename:" + strPath;  // currently playing item filename
     if (g_application.IsPlaying())
       if (!g_application.m_pPlayer->IsPaused())

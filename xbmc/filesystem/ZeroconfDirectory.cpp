@@ -23,7 +23,6 @@
 #include <stdexcept>
 
 #include "URL.h"
-#include "Util.h"
 #include "utils/URIUtils.h"
 #include "FileItem.h"
 #include "network/ZeroconfBrowser.h"
@@ -90,7 +89,7 @@ bool CZeroconfDirectory::GetDirectory(const CStdString& strPath, CFileItemList &
         CURL url;
         url.SetProtocol("zeroconf");
         CStdString service_path = CZeroconfBrowser::ZeroconfService::toPath(*it);
-        CUtil::URLEncode(service_path);
+        CURL::Encode(service_path);
         url.SetFileName(service_path);
         item->m_strPath = url.Get();
 
@@ -108,7 +107,7 @@ bool CZeroconfDirectory::GetDirectory(const CStdString& strPath, CFileItemList &
   {
     //decode the path first
     CStdString decoded = path;
-    CUtil::URLDecode(decoded);
+    CURL::Decode(decoded);
     try
     {
       CZeroconfBrowser::ZeroconfService zeroconf_service = CZeroconfBrowser::ZeroconfService::fromPath(decoded);

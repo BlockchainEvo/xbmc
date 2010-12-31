@@ -20,7 +20,7 @@
  */
 
 #include "MusicInfoScraper.h"
-#include "Util.h"
+#include "URL.h"
 #include "utils/CharsetConverter.h"
 #include "utils/log.h"
 
@@ -98,8 +98,8 @@ void CMusicInfoScraper::FindAlbumInfo()
   extras.push_back(m_strArtist);
   g_charsetConverter.utf8To(m_scraper->GetParser().GetSearchStringEncoding(), strAlbum, extras[0]);
   g_charsetConverter.utf8To(m_scraper->GetParser().GetSearchStringEncoding(), m_strArtist, extras[1]);
-  CUtil::URLEncode(extras[0]);
-  CUtil::URLEncode(extras[1]);
+  CURL::Encode(extras[0]);
+  CURL::Encode(extras[1]);
 
   CScraperUrl scrURL;
   vector<CStdString> url = m_scraper->Run("CreateAlbumSearchUrl",scrURL,m_http,&extras);
@@ -183,7 +183,7 @@ void CMusicInfoScraper::FindArtistInfo()
   vector<CStdString> extras;
   extras.push_back(m_strArtist);
   g_charsetConverter.utf8To(m_scraper->GetParser().GetSearchStringEncoding(), m_strArtist, extras[0]);
-  CUtil::URLEncode(extras[0]);
+  CURL::Encode(extras[0]);
   
   CLog::Log(LOGDEBUG, "%s: Searching for '%s' using %s scraper (file: '%s', content: '%s', version: '%s')",
     __FUNCTION__, m_strArtist.c_str(), m_scraper->Name().c_str(), m_scraper->Path().c_str(),

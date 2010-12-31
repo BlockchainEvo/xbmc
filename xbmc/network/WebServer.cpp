@@ -25,7 +25,7 @@
 #include "interfaces/json-rpc/JSONRPC.h"
 #include "filesystem/File.h"
 #include "filesystem/Directory.h"
-#include "Util.h"
+#include "URL.h"
 #include "utils/log.h"
 #include "utils/URIUtils.h"
 #include "threads/SingleLock.h"
@@ -142,7 +142,7 @@ int CWebServer::AnswerToConnection(void *cls, struct MHD_Connection *connection,
   if (strURL.Left(4).Equals("/vfs"))
   {
     strURL = strURL.Right(strURL.length() - 5);
-    CUtil::URLDecode(strURL);
+    CURL::Decode(strURL);
     return CreateFileDownloadResponse(connection, strURL);
   }
 

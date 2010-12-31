@@ -23,7 +23,6 @@
 #include "filesystem/File.h"
 #include "threads/SingleLock.h"
 #include "utils/Crc32.h"
-#include "Util.h"
 #include "settings/Settings.h"
 #include "settings/AdvancedSettings.h"
 #include "utils/log.h"
@@ -69,7 +68,7 @@ CStdString CTextureCache::CCacheJob::CacheImage(const CStdString &url, const CSt
   {
     fullSize = false;
     image = CURL(url).GetHostName();
-    CUtil::URLDecode(image);
+    CURL::Decode(image);
   }
 
   // generate the hash
@@ -173,7 +172,7 @@ CStdString CTextureCache::GetCachedImage(const CStdString &url)
 CStdString CTextureCache::GetWrappedThumbURL(const CStdString &image)
 {
   CStdString url(image);
-  CUtil::URLEncode(url);
+  CURL::Encode(url);
   return URIUtils::AddFileToFolder("thumb://" + url, URIUtils::GetFileName(image));
 }
 

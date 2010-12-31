@@ -76,8 +76,6 @@ public:
   static bool ExcludeFileOrFolder(const CStdString& strFileOrFolder, const CStdStringArray& regexps);
   static void GetFileAndProtocol(const CStdString& strURL, CStdString& strDir);
   static int GetDVDIfoTitle(const CStdString& strPathFile);
-  static void URLDecode(CStdString& strURLData);
-  static void URLEncode(CStdString& strURLData);
 
   static bool IsPicture(const CStdString& strFile);
 

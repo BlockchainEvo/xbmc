@@ -28,7 +28,6 @@
 #include "filesystem/FileCurl.h"
 #include "filesystem/FileZip.h"
 #include "pictures/Picture.h"
-#include "Util.h"
 #include "URIUtils.h"
 
 #include <cstring>
@@ -319,7 +318,7 @@ CStdString CScraperUrl::GetThumbURL(const CScraperUrl::SUrlEntry &entry)
   if (entry.m_spoof.IsEmpty())
     return entry.m_url;
   CStdString spoof = entry.m_spoof;
-  CUtil::URLEncode(spoof);
+  CURL::Encode(spoof);
   return entry.m_url + "|Referer=" + spoof;
 }
 

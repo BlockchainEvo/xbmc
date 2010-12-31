@@ -421,7 +421,7 @@ CStdString CSMBDirectory::MountShare(const CStdString &smbPath, const CStdString
 
 #ifdef __APPLE__
   // Create the directory.
-  CUtil::URLDecode(strMountPoint);
+  CURL::Decode(strMountPoint);
   CreateDirectory(strMountPoint, NULL);
 
   // Massage the path.
@@ -472,7 +472,7 @@ void CSMBDirectory::UnMountShare(const CStdString &strType, const CStdString &st
 #ifdef __APPLE__
   // Decode the path.
   CStdString strMountPoint = GetMountPoint(strType, strName);
-  CUtil::URLDecode(strMountPoint);
+  CURL::Decode(strMountPoint);
 
   // Make the unmount command.
   CStdStringArray args;
@@ -490,7 +490,7 @@ void CSMBDirectory::UnMountShare(const CStdString &strType, const CStdString &st
 CStdString CSMBDirectory::GetMountPoint(const CStdString &strType, const CStdString &strName)
 {
   CStdString strPath = strType + strName;
-  CUtil::URLEncode(strPath);
+  CURL::Encode(strPath);
 
 #ifdef __APPLE__
   CStdString str = getenv("HOME");

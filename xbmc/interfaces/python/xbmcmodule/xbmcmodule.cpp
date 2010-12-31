@@ -319,7 +319,7 @@ namespace PYXBMC
     else //no parameters
       execute = cmd;
 
-    CUtil::URLDecode(parameter);
+    CURL::Decode(parameter);
     return PyString_FromString(CHttpApi::MethodCall(execute, parameter).c_str());
   }
 #endif

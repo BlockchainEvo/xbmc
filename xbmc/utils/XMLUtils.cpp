@@ -20,7 +20,7 @@
  */
 
 #include "XMLUtils.h"
-#include "Util.h"
+#include "URL.h"
 #include "filesystem/SpecialProtocol.h"
 #include "StringUtils.h"
 #ifdef _WIN32
@@ -125,7 +125,7 @@ bool XMLUtils::GetString(const TiXmlNode* pRootNode, const char* strTag, CStdStr
   {
     strStringValue = pNode->Value();
     if (encoded && strcasecmp(encoded,"yes") == 0)
-      CUtil::URLDecode(strStringValue);
+      CURL::Decode(strStringValue);
     return true;
   }
   strStringValue.Empty();
@@ -201,7 +201,7 @@ bool XMLUtils::GetPath(const TiXmlNode* pRootNode, const char* strTag, CStdStrin
   {
     strStringValue = pNode->Value();
     if (encoded && strcasecmp(encoded,"yes") == 0)
-      CUtil::URLDecode(strStringValue);
+      CURL::Decode(strStringValue);
     strStringValue = CSpecialProtocol::ReplaceOldPath(strStringValue, pathVersion);
     return true;
   }

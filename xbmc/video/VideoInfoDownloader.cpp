@@ -381,7 +381,7 @@ void CVideoInfoDownloader::GetURL(const CStdString &movieFile,
   vector<CStdString> extras;
   extras.push_back(movieName);
   g_charsetConverter.utf8To(m_info->GetParser().GetSearchStringEncoding(), movieName, extras[0]);
-  CUtil::URLEncode(extras[0]);
+  CURL::Encode(extras[0]);
   if (!movieYear.IsEmpty())
     extras.push_back(movieYear);
 

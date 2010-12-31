@@ -21,7 +21,6 @@
 
 #include "LastFMDirectory.h"
 #include "DirectoryCache.h"
-#include "Util.h"
 #include "music/tags/MusicInfoTag.h"
 #include "URL.h"
 #include "guilib/GUIWindowManager.h"
@@ -428,8 +427,8 @@ bool CLastFMDirectory::SearchSimilarArtists(CFileItemList &items)
     return false;
 
   m_objname = m_encodedobjname = strSearchTerm;
-  CUtil::URLEncode(m_encodedobjname);
-  CUtil::URLDecode(m_objname);
+  CURL::Encode(m_encodedobjname);
+  CURL::Decode(m_objname);
 
   AddEntry(15267, "lastfm://artist/%name%/similarartists", "", false, items);
   return ParseArtistList(BuildURLFromInfo(), items);
@@ -443,8 +442,8 @@ bool CLastFMDirectory::SearchSimilarTags(CFileItemList &items)
     return false;
 
   m_objname = m_encodedobjname = strSearchTerm;
-  CUtil::URLEncode(m_encodedobjname);
-  CUtil::URLDecode(m_objname);
+  CURL::Encode(m_encodedobjname);
+  CURL::Decode(m_objname);
 
   return ParseTagList(BuildURLFromInfo(), items);
 }
@@ -582,8 +581,8 @@ bool CLastFMDirectory::GetDirectory(const CStdString& strPath, CFileItemList &it
   case 4:
     m_objname = vecURLParts[2];
     m_encodedobjname = vecURLParts[2];
-    CUtil::URLEncode(m_encodedobjname);
-    CUtil::URLDecode(m_objname);
+    CURL::Encode(m_encodedobjname);
+    CURL::Decode(m_objname);
   case 3:
     m_objtype = vecURLParts[1];
   case 2:
@@ -608,7 +607,7 @@ bool CLastFMDirectory::GetDirectory(const CStdString& strPath, CFileItemList &it
     if (g_guiSettings.GetString("scrobbler.lastfmusername") != "")
     {
       m_encodedobjname = m_objname = g_guiSettings.GetString("scrobbler.lastfmusername");
-      CUtil::URLDecode(m_encodedobjname);
+      CURL::Decode(m_encodedobjname);
       AddEntry(15255, "lastfm://xbmc/user/%name%/", "", true, items);
     }
     return true;

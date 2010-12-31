@@ -21,7 +21,6 @@
 
 #include "DAVDirectory.h"
 #include "URL.h"
-#include "Util.h"
 #include "FileCurl.h"
 #include "FileItem.h"
 #include "utils/RegExp.h"
@@ -241,7 +240,7 @@ bool CDAVDirectory::GetDirectory(const CStdString& strPath, CFileItemList &items
           {
             CStdString name(item.m_strPath);
             URIUtils::RemoveSlashAtEnd(name);
-            CUtil::URLDecode(name);
+            CURL::Decode(name);
             item.SetLabel(URIUtils::GetFileName(name));
           }
 

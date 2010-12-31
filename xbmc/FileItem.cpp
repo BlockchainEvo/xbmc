@@ -2205,7 +2205,7 @@ void CFileItemList::Stack()
         // the label is converted from utf8, but the filename is not)
         if (!g_guiSettings.GetBool("filelists.showextensions"))
           URIUtils::RemoveExtension(stackName);
-        CUtil::URLDecode(stackName);
+        CURL::Decode(stackName);
         item1->SetLabel(stackName);
         item1->m_dwSize = size;
         break;
@@ -2634,7 +2634,7 @@ CStdString CFileItem::GetMovieName(bool bUseFolderNames /* = false */) const
 
   URIUtils::RemoveSlashAtEnd(strMovieName);
   strMovieName = URIUtils::GetFileName(strMovieName);
-  CUtil::URLDecode(strMovieName);
+  CURL::Decode(strMovieName);
 
   return strMovieName;
 }
