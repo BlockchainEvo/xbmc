@@ -1010,7 +1010,8 @@ bool CGUIWindowVideoNav::OnContextButton(int itemNumber, CONTEXT_BUTTON button)
       CStdString strPath;
       CFileItemList items;
       URIUtils::AddFileToFolder(g_advancedSettings.m_cachePath,"imdbthumbs",strPath);
-      CUtil::WipeDir(strPath);
+      CFileItemPtr cacheItem(new CFileItem(strPath,true));
+      CFileUtils::DeleteItem(cacheItem,true);
       XFILE::CDirectory::Create(strPath);
       CFileItemPtr noneitem(new CFileItem("thumb://None", false));
       CStdString cachedThumb = m_vecItems->Get(itemNumber)->GetCachedSeasonThumb();

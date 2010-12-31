@@ -1958,65 +1958,6 @@ void CUtil::GetSkinThemes(vector<CStdString>& vecTheme)
   sort(vecTheme.begin(), vecTheme.end(), sortstringbyname());
 }
 
-void CUtil::WipeDir(const CStdString& strPath) // DANGEROUS!!!!
-{
-  if (!CDirectory::Exists(strPath)) return;
-
-  CFileItemList items;
-  GetRecursiveListing(strPath,items,"");
-  for (int i=0;i<items.Size();++i)
-  {
-    if (!items[i]->m_bIsFolder)
-      CFile::Delete(items[i]->m_strPath);
-  }
-  items.Clear();
-  GetRecursiveDirsListing(strPath,items);
-  for (int i=items.Size()-1;i>-1;--i) // need to wipe them backwards
-  {
-    CStdString strDir = items[i]->m_strPath;
-    URIUtils::AddSlashAtEnd(strDir);
-    CDirectory::Remove(strDir);
-  }
-
-  if (!URIUtils::HasSlashAtEnd(strPath))
-  {
-    CStdString tmpPath = strPath;
-    URIUtils::AddSlashAtEnd(tmpPath);
-    CDirectory::Remove(tmpPath);
-  }
-}
-
-void CUtil::CopyDirRecursive(const CStdString& strSrcPath, const CStdString& strDstPath)
-{
-  if (!CDirectory::Exists(strSrcPath)) return;
-
-  // create root first
-  CStdString destPath;
-
-  destPath = strDstPath;
-  URIUtils::AddSlashAtEnd(destPath);
-  CDirectory::Create(destPath);
-
-  CFileItemList items;
-  CUtil::GetRecursiveDirsListing(strSrcPath,items);
-  for (int i=0;i<items.Size();++i)
-  {
-    destPath = items[i]->m_strPath;
-    destPath.Replace(strSrcPath,"");
-    destPath = URIUtils::AddFileToFolder(strDstPath, destPath);
-    CDirectory::Create(destPath);
-  }
-  items.Clear();
-  CUtil::GetRecursiveListing(strSrcPath,items,"");
-  for (int i=0;i<items.Size();i++)
-  {
-    destPath = items[i]->m_strPath;
-    destPath.Replace(strSrcPath,"");
-    destPath = URIUtils::AddFileToFolder(strDstPath, destPath);
-    CFile::Cache(items[i]->m_strPath, destPath);
-  }
-}
-
 void CUtil::InitRandomSeed()
 {
   // Init random seed
