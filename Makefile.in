@@ -51,7 +51,7 @@ BIN_DIRS=	\
 	lib/libhts \
 	xbmc/interfaces \
 	xbmc/interfaces/http-api \
-	xbmc/interfaces/json-rcp \
+	xbmc/interfaces/json-rpc \
 	xbmc/interfaces/python \
 	xbmc/interfaces/python/xbmcmodule \
 	lib/libRTV \
