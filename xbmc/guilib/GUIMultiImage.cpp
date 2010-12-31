@@ -22,7 +22,7 @@
 #include "GUIMultiImage.h"
 #include "TextureManager.h"
 #include "filesystem/Directory.h"
-#include "Util.h"
+#include "utils/URIUtils.h"
 #include "FileItem.h"
 #include "Key.h"
 
@@ -226,7 +226,7 @@ void CGUIMultiImage::LoadDirectory()
     if (realPath.IsEmpty() && m_files.empty())
       return;
 
-    CUtil::AddSlashAtEnd(realPath);
+    URIUtils::AddSlashAtEnd(realPath);
     CFileItemList items;
     CDirectory::GetDirectory(realPath, items);
     for (int i=0; i < items.Size(); i++)

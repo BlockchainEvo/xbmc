@@ -19,11 +19,11 @@
  *
  */
 
-#include "Util.h"
 #include "MusicFileDirectory.h"
 #include "FileItem.h"
 #include "URL.h"
 #include "guilib/LocalizeStrings.h"
+#include "utils/URIUtils.h"
 
 using namespace MUSIC_INFO;
 using namespace XFILE;
@@ -42,12 +42,12 @@ bool CMusicFileDirectory::GetDirectory(const CStdString& strPath1, CFileItemList
   CURL url(strPath);
 
   CStdString strFileName;
-  strFileName = CUtil::GetFileName(strPath);
-  CUtil::RemoveExtension(strFileName);
+  strFileName = URIUtils::GetFileName(strPath);
+  URIUtils::RemoveExtension(strFileName);
 
   int iStreams = GetTrackCount(strPath1);
 
-  CUtil::AddSlashAtEnd(strPath);
+  URIUtils::AddSlashAtEnd(strPath);
 
   for (int i=0; i<iStreams; ++i)
   {

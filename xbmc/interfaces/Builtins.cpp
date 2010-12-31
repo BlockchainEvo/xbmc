@@ -49,6 +49,7 @@
 #include "PartyModeManager.h"
 #include "settings/Settings.h"
 #include "utils/StringUtils.h"
+#include "utils/URIUtils.h"
 #include "Util.h"
 
 #include "filesystem/PluginDirectory.h"
@@ -348,7 +349,7 @@ int CBuiltins::Execute(const CStdString& execString)
   else if (execute.Equals("runscript") && params.size())
   {
 #if defined(__APPLE__)
-    if (CUtil::GetExtension(strParameterCaseIntact) == ".applescript")
+    if (URIUtils::GetExtension(strParameterCaseIntact) == ".applescript")
     {
       CStdString osxPath = CSpecialProtocol::TranslatePath(strParameterCaseIntact);
       Cocoa_DoAppleScriptFile(osxPath.c_str());
@@ -410,16 +411,16 @@ int CBuiltins::Execute(const CStdString& execString)
     // Detects if file is zip or zip then extracts
     CStdString strDestDirect = "";
     if (params.size() < 2)
-      CUtil::GetDirectory(params[0],strDestDirect);
+      URIUtils::GetDirectory(params[0],strDestDirect);
     else
       strDestDirect = params[1];
 
-    CUtil::AddSlashAtEnd(strDestDirect);
+    URIUtils::AddSlashAtEnd(strDestDirect);
 
-    if (CUtil::IsZIP(params[0]))
+    if (URIUtils::IsZIP(params[0]))
       g_ZipManager.ExtractArchive(params[0],strDestDirect);
 #ifdef HAS_FILESYSTEM_RAR
-    else if (CUtil::IsRAR(params[0]))
+    else if (URIUtils::IsRAR(params[0]))
       g_RarManager.ExtractArchive(params[0],strDestDirect);
 #endif
     else
@@ -914,7 +915,7 @@ int CBuiltins::Execute(const CStdString& execString)
       for (unsigned int i=0;i<vecTheme.size();++i)
       {
         CStdString strTmpTheme(g_guiSettings.GetString("lookandfeel.skintheme"));
-        CUtil::RemoveExtension(strTmpTheme);
+        URIUtils::RemoveExtension(strTmpTheme);
         if (vecTheme[i].Equals(strTmpTheme))
         {
           iTheme=i;
@@ -939,7 +940,7 @@ int CBuiltins::Execute(const CStdString& execString)
       g_guiSettings.SetString("lookandfeel.skintheme",strSkinTheme);
 
     // also set the default color theme
-    g_guiSettings.SetString("lookandfeel.skincolors", CUtil::ReplaceExtension(strSkinTheme, ".xml"));
+    g_guiSettings.SetString("lookandfeel.skincolors", URIUtils::ReplaceExtension(strSkinTheme, ".xml"));
 
     g_application.ReloadSkin();
   }
@@ -1010,7 +1011,7 @@ int CBuiltins::Execute(const CStdString& execString)
         if (CGUIDialogFileBrowser::ShowAndGetFile(url.Get(), strMask, TranslateType(type, true), replace, true, true, true))
         {
           if (replace.Mid(0,9).Equals("addons://"))
-            g_settings.SetSkinString(string, CUtil::GetFileName(replace));
+            g_settings.SetSkinString(string, URIUtils::GetFileName(replace));
           else
             g_settings.SetSkinString(string, replace);
         }
@@ -1020,7 +1021,7 @@ int CBuiltins::Execute(const CStdString& execString)
         if (params.size() > 2)
         {
           value = params[2];
-          CUtil::AddSlashAtEnd(value);
+          URIUtils::AddSlashAtEnd(value);
           bool bIsSource;
           if (CUtil::GetMatchingSource(value,localShares,bIsSource) < 0) // path is outside shares - add it as a separate one
           {
@@ -1238,8 +1239,8 @@ int CBuiltins::Execute(const CStdString& execString)
       }
       else
       {
-        if (CUtil::HasSlashAtEnd(path))
-          CUtil::AddFileToFolder(path, "musicdb.xml", path);
+        if (URIUtils::HasSlashAtEnd(path))
+          URIUtils::AddFileToFolder(path, "musicdb.xml", path);
         CMusicDatabase musicdatabase;
         musicdatabase.Open();
         musicdatabase.ExportToXML(path, singleFile, thumbs, overwrite);

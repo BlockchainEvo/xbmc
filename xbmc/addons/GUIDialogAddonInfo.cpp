@@ -33,6 +33,7 @@
 #include "URL.h"
 #include "utils/JobManager.h"
 #include "utils/FileOperationJob.h"
+#include "utils/URIUtils.h"
 
 #define CONTROL_BTN_INSTALL          6
 #define CONTROL_BTN_ENABLE           7
@@ -284,7 +285,7 @@ void CGUIDialogAddonInfo::OnJobComplete(unsigned int jobID, bool success,
   {
     CFile file;
     if (file.Open("special://temp/"+
-      CUtil::GetFileName(((CFileOperationJob*)job)->GetItems()[0]->m_strPath)))
+      URIUtils::GetFileName(((CFileOperationJob*)job)->GetItems()[0]->m_strPath)))
     {
       char* temp = new char[(size_t)file.GetLength()+1];
       file.Read(temp,file.GetLength());

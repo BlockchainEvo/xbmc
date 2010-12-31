@@ -33,7 +33,7 @@
 #define BYTE char
 #include "utils/log.h"
 #include "threads/CriticalSection.h"
-#include "Util.h"
+#include "utils/URIUtils.h"
 #include "MediaSource.h"
 #include "settings/GUISettings.h"
 
@@ -90,8 +90,8 @@ public:
     else
     {
       share->strName = MountPoint;
-      CUtil::RemoveSlashAtEnd(share->strName);
-      share->strName = CUtil::GetFileName(share->strName);
+      URIUtils::RemoveSlashAtEnd(share->strName);
+      share->strName = URIUtils::GetFileName(share->strName);
     }
 
     share->m_ignore = true;

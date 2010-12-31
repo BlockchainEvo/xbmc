@@ -25,9 +25,9 @@
 #include "FileItem.h"
 #include "filesystem/File.h"
 #include "filesystem/FileCurl.h"
-#include "Util.h"
 #include "DllImageLib.h"
 #include "utils/log.h"
+#include "utils/URIUtils.h"
 
 using namespace XFILE;
 
@@ -49,13 +49,13 @@ bool CPicture::CacheImage(const CStdString& sourceUrl, const CStdString& destFil
     DllImageLib dll;
     if (!dll.Load()) return false;
 
-    if (CUtil::IsInternetStream(sourceUrl, true))
+    if (URIUtils::IsInternetStream(sourceUrl, true))
     {
       CFileCurl http;
       CStdString data;
       if (http.Get(sourceUrl, data))
       {
-        if (!dll.CreateThumbnailFromMemory((BYTE *)data.c_str(), data.GetLength(), CUtil::GetExtension(sourceUrl).c_str(), destFile.c_str(), width, height))
+        if (!dll.CreateThumbnailFromMemory((BYTE *)data.c_str(), data.GetLength(), URIUtils::GetExtension(sourceUrl).c_str(), destFile.c_str(), width, height))
         {
           CLog::Log(LOGERROR, "%s Unable to create new image %s from image %s", __FUNCTION__, destFile.c_str(), sourceUrl.c_str());
           return false;

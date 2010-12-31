@@ -30,7 +30,7 @@
 #include "guilib/GUIWindowManager.h"
 #include "GUIUserMessages.h"
 #include "settings/GUISettings.h"
-#include "Util.h"
+#include "utils/URIUtils.h"
 #include "settings/Settings.h"
 
 using namespace XFILE;
@@ -76,7 +76,7 @@ bool CPictureThumbLoader::LoadItem(CFileItem* pItem)
     else
     {
       CStdString strPath, strFileName;
-      CUtil::Split(thumb, strPath, strFileName);
+      URIUtils::Split(thumb, strPath, strFileName);
 
       thumb = strPath + "auto-" + strFileName;
 
@@ -137,7 +137,7 @@ void CPictureThumbLoader::ProcessFoldersAndArchives(CFileItem *pItem)
   db.Open();
   if (pItem->IsCBR() || pItem->IsCBZ())
   {
-    CStdString strTBN(CUtil::ReplaceExtension(pItem->m_strPath,".tbn"));
+    CStdString strTBN(URIUtils::ReplaceExtension(pItem->m_strPath,".tbn"));
     if (CFile::Exists(strTBN))
     {
       db.SetTextureForPath(pItem->m_strPath, strTBN);
@@ -152,17 +152,17 @@ void CPictureThumbLoader::ProcessFoldersAndArchives(CFileItem *pItem)
     CStdString strPath = pItem->m_strPath;
     if (pItem->IsCBR())
     {
-      CUtil::CreateArchivePath(strPath,"rar",pItem->m_strPath,"");
+      URIUtils::CreateArchivePath(strPath,"rar",pItem->m_strPath,"");
       thumb = "cover.jpg";
     }
     if (pItem->IsCBZ())
     {
-      CUtil::CreateArchivePath(strPath,"zip",pItem->m_strPath,"");
+      URIUtils::CreateArchivePath(strPath,"zip",pItem->m_strPath,"");
       thumb = "cover.jpg";
     }
     if (pItem->IsMultiPath())
       strPath = CMultiPathDirectory::GetFirstPath(pItem->m_strPath);
-    thumb = CUtil::AddFileToFolder(strPath, thumb);
+    thumb = URIUtils::AddFileToFolder(strPath, thumb);
     if (CFile::Exists(thumb))
     {
       db.SetTextureForPath(pItem->m_strPath, thumb);

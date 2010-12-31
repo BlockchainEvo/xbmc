@@ -23,6 +23,8 @@
 
 #pragma once
 
+#include "utils/StdString.h"
+
 /* forward declarations */
 class PLT_UPnP;
 class PLT_SyncMediaBrowser;

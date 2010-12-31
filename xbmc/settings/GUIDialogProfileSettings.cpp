@@ -30,6 +30,7 @@
 #include "guilib/GUIWindowManager.h"
 #include "storage/MediaManager.h"
 #include "Util.h"
+#include "utils/URIUtils.h"
 #include "GUIPassword.h"
 #include "dialogs/GUIDialogYesNo.h"
 #include "filesystem/Directory.h"
@@ -232,7 +233,7 @@ bool CGUIDialogProfileSettings::OnProfilePath(CStdString &dir, bool isDefault)
   if (dir.IsEmpty())
     strDirectory = share.strPath;
   else
-    strDirectory = CUtil::AddFileToFolder("special://masterprofile/", dir);
+    strDirectory = URIUtils::AddFileToFolder("special://masterprofile/", dir);
   if (CGUIDialogFileBrowser::ShowAndGetDirectory(shares,g_localizeStrings.Get(657),strDirectory,true))
   {
     dir = strDirectory;
@@ -278,15 +279,15 @@ bool CGUIDialogProfileSettings::ShowForProfile(unsigned int iProfile, bool first
     if (!CGUIDialogKeyboard::ShowAndGetInput(dialog->m_strName,g_localizeStrings.Get(20093),false) || dialog->m_strName.IsEmpty())
       return false;
     // create a default path
-    CStdString defaultDir = CUtil::AddFileToFolder("profiles",CUtil::MakeLegalFileName(dialog->m_strName));
-    CUtil::AddSlashAtEnd(defaultDir);
-    CDirectory::Create(CUtil::AddFileToFolder("special://masterprofile/", defaultDir));
+    CStdString defaultDir = URIUtils::AddFileToFolder("profiles",CUtil::MakeLegalFileName(dialog->m_strName));
+    URIUtils::AddSlashAtEnd(defaultDir);
+    CDirectory::Create(URIUtils::AddFileToFolder("special://masterprofile/", defaultDir));
     // prompt for the user to change it if they want
     CStdString userDir = defaultDir;
     if (dialog->OnProfilePath(userDir, false)) // can't be the master user
     {
       if (userDir.Left(defaultDir.GetLength()) != defaultDir) // user chose a different folder
-        CDirectory::Remove(CUtil::AddFileToFolder("special://masterprofile/", defaultDir));
+        CDirectory::Remove(URIUtils::AddFileToFolder("special://masterprofile/", defaultDir));
     }
     dialog->m_strDirectory = userDir;
     dialog->m_bNeedSave = true;
@@ -316,14 +317,14 @@ bool CGUIDialogProfileSettings::ShowForProfile(unsigned int iProfile, bool first
       strLabel.Format(g_localizeStrings.Get(20047),dialog->m_strName);
       if (!CGUIDialogYesNo::ShowAndGetInput(g_localizeStrings.Get(20058),strLabel,dialog->m_strDirectory,""))
       {
-        CDirectory::Remove(CUtil::AddFileToFolder(g_settings.GetUserDataFolder(), dialog->m_strDirectory));
+        CDirectory::Remove(URIUtils::AddFileToFolder(g_settings.GetUserDataFolder(), dialog->m_strDirectory));
         return false;
       }*/
 
       // check for old profile settings
       CProfile profile;
       g_settings.AddProfile(profile);
-      bool bExists = CFile::Exists(CUtil::AddFileToFolder("special://masterprofile/",
+      bool bExists = CFile::Exists(URIUtils::AddFileToFolder("special://masterprofile/",
                                                           dialog->m_strDirectory+"/guisettings.xml"));
 
       if (bExists)
@@ -335,8 +336,8 @@ bool CGUIDialogProfileSettings::ShowForProfile(unsigned int iProfile, bool first
         // save new profile guisettings
         if (CGUIDialogYesNo::ShowAndGetInput(20058,20048,20102,20022,20044,20064))
         {
-          CFile::Cache(CUtil::AddFileToFolder("special://masterprofile/","guisettings.xml"),
-                       CUtil::AddFileToFolder("special://masterprofile/",
+          CFile::Cache(URIUtils::AddFileToFolder("special://masterprofile/","guisettings.xml"),
+                       URIUtils::AddFileToFolder("special://masterprofile/",
                                               dialog->m_strDirectory+"/guisettings.xml"));
         }
         else
@@ -344,15 +345,15 @@ bool CGUIDialogProfileSettings::ShowForProfile(unsigned int iProfile, bool first
           // create some new settings
           CGUISettings localSettings;
           localSettings.Initialize();
-          CStdString path = CUtil::AddFileToFolder("special://masterprofile/", dialog->m_strDirectory);
-          path = CUtil::AddFileToFolder(path, "guisettings.xml");
+          CStdString path = URIUtils::AddFileToFolder("special://masterprofile/", dialog->m_strDirectory);
+          path = URIUtils::AddFileToFolder(path, "guisettings.xml");
           CSettings settings;
           settings.Initialize();
           settings.SaveSettings(path, &localSettings);
         }
       }
 
-      bExists = CFile::Exists(CUtil::AddFileToFolder("special://masterprofile/",
+      bExists = CFile::Exists(URIUtils::AddFileToFolder("special://masterprofile/",
                                                      dialog->m_strDirectory+"/sources.xml"));
       if (bExists)
         if (!CGUIDialogYesNo::ShowAndGetInput(20058,20106,20105,20022))
@@ -363,8 +364,8 @@ bool CGUIDialogProfileSettings::ShowForProfile(unsigned int iProfile, bool first
         if ((dialog->m_iSourcesMode & 2) == 2)
           if (CGUIDialogYesNo::ShowAndGetInput(20058,20071,20102,20022,20044,20064))
           {
-            CFile::Cache(CUtil::AddFileToFolder("special://masterprofile/","sources.xml"),
-                         CUtil::AddFileToFolder("special://masterprofile/",
+            CFile::Cache(URIUtils::AddFileToFolder("special://masterprofile/","sources.xml"),
+                         URIUtils::AddFileToFolder("special://masterprofile/",
                          dialog->m_strDirectory+"/sources.xml"));
           }
       }

@@ -30,6 +30,7 @@
 #include "addons/PluginSource.h"
 #include "guilib/TextureManager.h"
 #include "File.h"
+#include "utils/URIUtils.h"
 
 using namespace ADDON;
 
@@ -48,7 +49,7 @@ CAddonsDirectory::~CAddonsDirectory(void)
 bool CAddonsDirectory::GetDirectory(const CStdString& strPath, CFileItemList &items)
 {
   CStdString path1(strPath);
-  CUtil::RemoveSlashAtEnd(path1);
+  URIUtils::RemoveSlashAtEnd(path1);
   CURL path(path1);
   items.ClearProperties();
 
@@ -116,7 +117,7 @@ bool CAddonsDirectory::GetDirectory(const CStdString& strPath, CFileItemList &it
           if (addons[j]->IsType((TYPE)i))
           {
             CFileItemPtr item(new CFileItem(TranslateType((TYPE)i,true)));
-            item->m_strPath = CUtil::AddFileToFolder(strPath,TranslateType((TYPE)i,false));
+            item->m_strPath = URIUtils::AddFileToFolder(strPath,TranslateType((TYPE)i,false));
             item->m_bIsFolder = true;
             CStdString thumb = GetIcon((TYPE)i);
             if (!thumb.IsEmpty() && g_TextureManager.HasTexture(thumb))
@@ -208,7 +209,7 @@ CFileItemPtr CAddonsDirectory::FileItemFromAddon(AddonPtr &addon, const CStdStri
   url.SetFileName(addon->ID());
   CStdString path(url.Get());
   if (folder)
-    CUtil::AddSlashAtEnd(path);
+    URIUtils::AddSlashAtEnd(path);
 
   CFileItemPtr item(new CFileItem(path, folder));
   item->SetLabel(addon->Name());
@@ -218,7 +219,7 @@ CFileItemPtr CAddonsDirectory::FileItemFromAddon(AddonPtr &addon, const CStdStri
   item->SetLabelPreformated(true);
   item->SetIconImage("DefaultAddon.png");
   if (!addon->FanArt().IsEmpty() && 
-      (CUtil::IsInternetStream(addon->FanArt()) || 
+      (URIUtils::IsInternetStream(addon->FanArt()) || 
        CFile::Exists(addon->FanArt())))
   {
     item->SetProperty("fanart_image", addon->FanArt());

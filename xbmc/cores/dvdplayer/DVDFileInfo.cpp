@@ -24,10 +24,10 @@
 #include "settings/AdvancedSettings.h"
 #include "pictures/Picture.h"
 #include "video/VideoInfoTag.h"
-#include "Util.h"
 #include "filesystem/StackDirectory.h"
 #include "utils/log.h"
 #include "utils/TimeUtils.h"
+#include "utils/URIUtils.h"
 
 #include "DVDClock.h"
 #include "DVDStreamInfo.h"
@@ -342,7 +342,7 @@ bool CDVDFileInfo::GetFileStreamDetails(CFileItem *pItem)
     return false;
 
   CStdString playablePath = strFileNameAndPath;
-  if (CUtil::IsStack(playablePath))
+  if (URIUtils::IsStack(playablePath))
     playablePath = XFILE::CStackDirectory::GetFirstStackedFile(playablePath);
 
   CDVDInputStream *pInputStream = CDVDFactoryInputStream::CreateInputStream(NULL, playablePath, "");
@@ -391,7 +391,7 @@ bool CDVDFileInfo::DemuxerToStreamDetails(CDVDInputStream *pInputStream, CDVDDem
       p->m_iDuration = pDemux->GetStreamLength();
 
       // stack handling
-      if (CUtil::IsStack(path))
+      if (URIUtils::IsStack(path))
       {
         CFileItemList files;
         XFILE::CStackDirectory stack;

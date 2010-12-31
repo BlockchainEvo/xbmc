@@ -23,9 +23,9 @@
 
 #include <math.h>
 
-#include "Util.h"
 #include "filesystem/File.h"
 #include "utils/log.h"
+#include "utils/URIUtils.h"
 
 #include "karaokelyricstextustar.h"
 
@@ -159,7 +159,7 @@ bool CKaraokeLyricsTextUStar::Load()
     else if ( key == "VIDEO" )
     {
       CStdString videopath;
-      CUtil::GetDirectory( m_lyricsFile, videopath );
+      URIUtils::GetDirectory( m_lyricsFile, videopath );
       m_videoFile = videopath + value;
 
       if ( !XFILE::CFile::Exists( m_videoFile ) )

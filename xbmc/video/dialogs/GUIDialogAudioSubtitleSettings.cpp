@@ -24,6 +24,7 @@
 #include "dialogs/GUIDialogFileBrowser.h"
 #include "GUIPassword.h"
 #include "Util.h"
+#include "utils/URIUtils.h"
 #include "Application.h"
 #include "video/VideoDatabase.h"
 #include "dialogs/GUIDialogYesNo.h"
@@ -277,7 +278,7 @@ void CGUIDialogAudioSubtitleSettings::OnSettingChanged(SettingInfo &setting)
   else if (setting.id == SUBTITLE_SETTINGS_BROWSER)
   {
     CStdString strPath;
-    if (CUtil::IsInRAR(g_application.CurrentFileItem().m_strPath) || CUtil::IsInZIP(g_application.CurrentFileItem().m_strPath))
+    if (URIUtils::IsInRAR(g_application.CurrentFileItem().m_strPath) || URIUtils::IsInZIP(g_application.CurrentFileItem().m_strPath))
     {
       CURL url(g_application.CurrentFileItem().m_strPath);
       strPath = url.GetHostName();
@@ -294,20 +295,20 @@ void CGUIDialogAudioSubtitleSettings::OnSettingChanged(SettingInfo &setting)
       CMediaSource share;
       std::vector<CStdString> paths;
       CStdString strPath1;
-      CUtil::GetDirectory(strPath,strPath1);
+      URIUtils::GetDirectory(strPath,strPath1);
       paths.push_back(strPath1);
       strPath1 = g_guiSettings.GetString("subtitles.custompath");
       paths.push_back(g_guiSettings.GetString("subtitles.custompath"));
       share.FromNameAndPaths("video",g_localizeStrings.Get(21367),paths);
       shares.push_back(share);
       strPath = share.strPath;
-      CUtil::AddSlashAtEnd(strPath);
+      URIUtils::AddSlashAtEnd(strPath);
     }
     if (CGUIDialogFileBrowser::ShowAndGetFile(shares,strMask,g_localizeStrings.Get(293),strPath,false,true)) // "subtitles"
     {
-      if ( CUtil::GetExtension(strPath) == ".sub" )
-        if ( CFile::Exists(CUtil::ReplaceExtension(strPath, ".idx")) )
-          strPath = CUtil::ReplaceExtension(strPath, ".idx");
+      if (URIUtils::GetExtension(strPath) == ".sub")
+        if (URIUtils::Exists(CUtil::ReplaceExtension(strPath, ".idx")))
+          strPath = URIUtils::ReplaceExtension(strPath, ".idx");
       
       int id = g_application.m_pPlayer->AddSubtitle(strPath);
       if(id >= 0)

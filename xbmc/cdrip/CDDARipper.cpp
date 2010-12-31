@@ -47,6 +47,7 @@
 #include "guilib/LocalizeStrings.h"
 #include "utils/log.h"
 #include "utils/TimeUtils.h"
+#include "utils/URIUtils.h"
 
 using namespace std;
 using namespace XFILE;
@@ -253,7 +254,7 @@ bool CCDDARipper::RipTrack(CFileItem* pItem)
 {
   // don't rip non cdda items
   CStdString strExt;
-  CUtil::GetExtension(pItem->m_strPath, strExt);
+  URIUtils::GetExtension(pItem->m_strPath, strExt);
   if (strExt.CompareNoCase(".cdda") != 0) 
   {
     CLog::Log(LOGDEBUG, "cddaripper: file is not a cdda track");
@@ -266,7 +267,7 @@ bool CCDDARipper::RipTrack(CFileItem* pItem)
   if (!CreateAlbumDir(*pItem->GetMusicInfoTag(), strDirectory, legalType))
     return false;
 
-  CStdString strFile = CUtil::MakeLegalPath(CUtil::AddFileToFolder(strDirectory, GetTrackName(pItem)), legalType);
+  CStdString strFile = CUtil::MakeLegalPath(URIUtils::AddFileToFolder(strDirectory, GetTrackName(pItem)), legalType);
 
   return Rip(pItem->m_strPath, strFile.c_str(), *pItem->GetMusicInfoTag());
 }
@@ -313,7 +314,7 @@ bool CCDDARipper::RipCD()
     CStdString track(GetTrackName(item.get()));
 
     // construct filename
-    CStdString strFile = CUtil::MakeLegalPath(CUtil::AddFileToFolder(strDirectory, track), legalType);
+    CStdString strFile = CUtil::MakeLegalPath(URIUtils::AddFileToFolder(strDirectory, track), legalType);
 
     unsigned int tick = CTimeUtils::GetTimeMS();
 
@@ -344,7 +345,7 @@ const char* CCDDARipper::GetExtension(int iEncoder)
 bool CCDDARipper::CreateAlbumDir(const MUSIC_INFO::CMusicInfoTag& infoTag, CStdString& strDirectory, int& legalType)
 {
   strDirectory = g_guiSettings.GetString("audiocds.recordingpath");
-  CUtil::AddSlashAtEnd(strDirectory);
+  URIUtils::AddSlashAtEnd(strDirectory);
 
   if (strDirectory.size() < 3)
   {
@@ -369,8 +370,8 @@ bool CCDDARipper::CreateAlbumDir(const MUSIC_INFO::CMusicInfoTag& infoTag, CStdS
 
   if (!strAlbumDir.IsEmpty())
   {
-    CUtil::AddFileToFolder(strDirectory, strAlbumDir, strDirectory);
-    CUtil::AddSlashAtEnd(strDirectory);
+    URIUtils::AddFileToFolder(strDirectory, strAlbumDir, strDirectory);
+    URIUtils::AddSlashAtEnd(strDirectory);
   }
 
   CUtil::MakeLegalPath(strDirectory, legalType);

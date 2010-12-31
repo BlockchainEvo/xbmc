@@ -26,7 +26,7 @@
 #include "interfaces/Builtins.h"
 #include <libhal-storage.h>
 #include "threads/SingleLock.h"
-#include "Util.h"
+#include "utils/URIUtils.h"
 #include "guilib/LocalizeStrings.h"
 #include "powermanagement/PowerManager.h"
 #include "settings/AdvancedSettings.h"
@@ -290,7 +290,7 @@ bool CHALManager::DeviceFromVolumeUdi(const char *udi, CStorageDevice *device)
       device->Mounted     = (bool)libhal_volume_is_mounted(tempVolume);
       device->MountPoint  = libhal_volume_get_mount_point(tempVolume);
       if (device->Mounted)
-        CUtil::AddSlashAtEnd(device->MountPoint);
+        URIUtils::AddSlashAtEnd(device->MountPoint);
       device->Label       = libhal_volume_get_label(tempVolume);
       device->UUID        = libhal_volume_get_uuid(tempVolume);
       device->FileSystem  = libhal_volume_get_fstype(tempVolume);

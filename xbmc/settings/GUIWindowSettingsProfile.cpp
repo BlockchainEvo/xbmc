@@ -26,6 +26,7 @@
 #include "dialogs/GUIDialogContextMenu.h"
 #include "GUIDialogProfileSettings.h"
 #include "network/Network.h"
+#include "utils/URIUtils.h"
 #include "utils/Weather.h"
 #include "GUIPassword.h"
 #include "windows/GUIWindowLoginScreen.h"
@@ -159,7 +160,7 @@ bool CGUIWindowSettingsProfile::OnMessage(CGUIMessage& message)
           }
           else if (iItem > (int)g_settings.GetNumProfiles() - 1)
           {
-            CDirectory::Create(CUtil::AddFileToFolder(g_settings.GetUserDataFolder(),"profiles"));
+            CDirectory::Create(URIUtils::AddFileToFolder(g_settings.GetUserDataFolder(),"profiles"));
             if (CGUIDialogProfileSettings::ShowForProfile(g_settings.GetNumProfiles()))
             {
               LoadList();

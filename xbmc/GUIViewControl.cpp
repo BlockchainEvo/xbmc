@@ -21,7 +21,7 @@
 
 #include "GUIViewControl.h"
 #include "guilib/GUIWindowManager.h"
-#include "Util.h"
+#include "utils/URIUtils.h"
 #include "FileItem.h"
 #include "guilib/LocalizeStrings.h"
 #include "GUIInfoManager.h"
@@ -191,13 +191,13 @@ void CGUIViewControl::SetSelectedItem(const CStdString &itemPath)
     return;
 
   CStdString comparePath(itemPath);
-  CUtil::RemoveSlashAtEnd(comparePath);
+  URIUtils::RemoveSlashAtEnd(comparePath);
 
   int item = -1;
   for (int i = 0; i < m_fileItems->Size(); ++i)
   {
     CStdString strPath =(*m_fileItems)[i]->m_strPath;
-    CUtil::RemoveSlashAtEnd(strPath);
+    URIUtils::RemoveSlashAtEnd(strPath);
     if (strPath.CompareNoCase(comparePath) == 0)
     {
       item = i;

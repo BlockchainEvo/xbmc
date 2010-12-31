@@ -42,6 +42,7 @@
 #include "settings/AdvancedSettings.h"
 #include "utils/StringUtils.h"
 #include "utils/log.h"
+#include "utils/URIUtils.h"
 #include "threads/SingleLock.h"
 #include "PasswordManager.h"
 
@@ -97,8 +98,8 @@ bool CSMBDirectory::GetDirectory(const CStdString& strPath, CFileItemList &items
   if (fd < 0)
     return false;
 
-  CUtil::AddSlashAtEnd(strRoot);
-  CUtil::AddSlashAtEnd(strAuth);
+  URIUtils::AddSlashAtEnd(strRoot);
+  URIUtils::AddSlashAtEnd(strAuth);
 
   CStdString strFile;
 
@@ -212,7 +213,7 @@ bool CSMBDirectory::GetDirectory(const CStdString& strPath, CFileItemList &items
           pItem->m_strPath = smb.URLEncode(rooturl);
         }
         pItem->m_strPath += aDir.name;
-        CUtil::AddSlashAtEnd(pItem->m_strPath);
+        URIUtils::AddSlashAtEnd(pItem->m_strPath);
         pItem->m_bIsFolder = true;
         pItem->m_dateTime=localTime;
         if (hidden)

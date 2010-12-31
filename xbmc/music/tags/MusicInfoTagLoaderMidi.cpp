@@ -20,7 +20,7 @@
  */
 
 #include "MusicInfoTagLoaderMidi.h"
-#include "Util.h"
+#include "utils/URIUtils.h"
 #include "MusicInfoTag.h"
 
 using namespace XFILE;
@@ -49,16 +49,16 @@ bool CMusicInfoTagLoaderMidi::Load(const CStdString & strFileName, CMusicInfoTag
   tag.SetURL(strFileName);
 
   CStdString path, title;
-  CUtil::Split( strFileName, path, title);
-  CUtil::RemoveExtension( title );
+  URIUtils::Split( strFileName, path, title);
+  URIUtils::RemoveExtension( title );
 
   tag.SetTitle( title );
 
-  CUtil::RemoveSlashAtEnd(path );
+  URIUtils::RemoveSlashAtEnd(path );
 
   if ( !path.IsEmpty() )
   {
-    CStdString artist = CUtil::GetFileName( path );
+    CStdString artist = URIUtils::GetFileName( path );
     if ( !artist.IsEmpty() )
       tag.SetArtist( artist );
   }

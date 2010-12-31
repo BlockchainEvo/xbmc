@@ -21,7 +21,7 @@
 
 #include "FileZip.h"
 #include "URL.h"
-#include "Util.h"
+#include "utils/URIUtils.h"
 
 #include <sys/stat.h>
 
@@ -72,14 +72,14 @@ bool CFileZip::Open(const CURL&url)
 
   if (mZipItem.method != 0 && mZipItem.usize > ZIP_CACHE_LIMIT && strOpts != "?cache=no")
   {
-    if (!CFile::Exists("special://temp/" + CUtil::GetFileName(strPath)))
+    if (!CFile::Exists("special://temp/" + URIUtils::GetFileName(strPath)))
     {
       url2.SetOptions("?cache=no");
-      if (!CFile::Cache(url2.Get(), "special://temp/" + CUtil::GetFileName(strPath)))
+      if (!CFile::Cache(url2.Get(), "special://temp/" + URIUtils::GetFileName(strPath)))
         return false;
     }
     m_bCached = true;
-    return mFile.Open("special://temp/" + CUtil::GetFileName(strPath));
+    return mFile.Open("special://temp/" + URIUtils::GetFileName(strPath));
   }
 
   if (!mFile.Open(url.GetHostName())) // this is the zip-file, always open binary

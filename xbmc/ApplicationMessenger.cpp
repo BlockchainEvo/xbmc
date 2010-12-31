@@ -34,6 +34,7 @@
 #include "interfaces/Builtins.h"
 #include "network/Network.h"
 #include "utils/log.h"
+#include "utils/URIUtils.h"
 #include "guilib/GUIWindowManager.h"
 #include "settings/Settings.h"
 #include "settings/GUISettings.h"
@@ -349,14 +350,14 @@ case TMSG_POWERDOWN:
         pSlideShow->Reset();
         if (g_windowManager.GetActiveWindow() != WINDOW_SLIDESHOW)
           g_windowManager.ActivateWindow(WINDOW_SLIDESHOW);
-        if (CUtil::IsZIP(pMsg->strParam) || CUtil::IsRAR(pMsg->strParam)) // actually a cbz/cbr
+        if (URIUtils::IsZIP(pMsg->strParam) || URIUtils::IsRAR(pMsg->strParam)) // actually a cbz/cbr
         {
           CFileItemList items;
           CStdString strPath;
-          if (CUtil::IsZIP(pMsg->strParam))
-            CUtil::CreateArchivePath(strPath, "zip", pMsg->strParam.c_str(), "");
+          if (URIUtils::IsZIP(pMsg->strParam))
+            URIUtils::CreateArchivePath(strPath, "zip", pMsg->strParam.c_str(), "");
           else
-            CUtil::CreateArchivePath(strPath, "rar", pMsg->strParam.c_str(), "");
+            URIUtils::CreateArchivePath(strPath, "rar", pMsg->strParam.c_str(), "");
 
           CUtil::GetRecursiveListing(strPath, items, g_settings.m_pictureExtensions);
           if (items.Size() > 0)

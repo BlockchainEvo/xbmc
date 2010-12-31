@@ -20,10 +20,10 @@
  */
 #include "DeviceKitDisksProvider.h"
 #ifdef HAS_DBUS
-#include "Util.h"
 #include "settings/AdvancedSettings.h"
 #include "guilib/LocalizeStrings.h"
 #include "utils/log.h"
+#include "utils/URIUtils.h"
 
 void CDeviceKitDiskDeviceOldAPI::Update()
 {
@@ -251,7 +251,7 @@ bool CDeviceKitDisksProvider::Eject(CStdString mountpath)
 {
   DeviceMap::iterator itr;
   CStdString path(mountpath);
-  CUtil::RemoveSlashAtEnd(path);
+  URIUtils::RemoveSlashAtEnd(path);
 
   for (itr = m_AvailableDevices.begin(); itr != m_AvailableDevices.end(); ++itr)
   {

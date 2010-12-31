@@ -24,7 +24,7 @@
 #include "threads/Atomics.h"
 #include "settings/GUISettings.h"
 #include "settings/Settings.h"
-#include "Util.h"
+#include "utils/URIUtils.h"
 #include "guilib/LocalizeStrings.h"
 
 long CLibrefmScrobbler::m_instanceLock = 0;
@@ -72,7 +72,7 @@ void CLibrefmScrobbler::LoadCredentials()
 CStdString CLibrefmScrobbler::GetJournalFileName()
 {
   CStdString strFileName = g_settings.GetProfileUserDataFolder();
-  return CUtil::AddFileToFolder(strFileName, "LibrefmScrobbler.xml");
+  return URIUtils::AddFileToFolder(strFileName, "LibrefmScrobbler.xml");
 }
 
 void CLibrefmScrobbler::NotifyUser(int error)

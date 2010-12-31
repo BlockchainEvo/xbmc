@@ -33,6 +33,7 @@
 #include "guilib/GUIWindowManager.h"
 #include "guilib/LocalizeStrings.h"
 #include "utils/log.h"
+#include "utils/URIUtils.h"
 
 using namespace HTML;
 using namespace std;
@@ -85,7 +86,7 @@ int CVideoInfoDownloader::InternalFindMovie(const CStdString &strMovie,
       return 0;
 
     CScraperUrl scrURL("filenamescrape");
-    CUtil::RemoveExtension(strName);
+    URIUtils::RemoveExtension(strName);
     scrURL.strTitle = strName;
     movielist.push_back(scrURL);
     return 1;
@@ -612,7 +613,7 @@ bool CVideoInfoDownloader::ScrapeFilename(const CStdString& strFileName,
   CScraperUrl url;
   vector<CStdString> extras;
   extras.push_back(strFileName);
-  CUtil::RemoveExtension(extras[0]);
+  URIUtils::RemoveExtension(extras[0]);
   extras[0].Replace("_"," ");
   vector<CStdString> result = m_info->Run("FileNameScrape",url,m_http,&extras);
   if (!result.empty())

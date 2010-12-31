@@ -22,9 +22,9 @@
 #include "Texture.h"
 #include "windowing/WindowingFactory.h"
 #include "utils/log.h"
+#include "utils/URIUtils.h"
 #include "pictures/DllImageLib.h"
 #include "DDSImage.h"
-#include "Util.h"
 
 /************************************************************************/
 /*                                                                      */
@@ -153,7 +153,7 @@ void CBaseTexture::ClampToEdge()
 bool CBaseTexture::LoadFromFile(const CStdString& texturePath, unsigned int maxWidth, unsigned int maxHeight,
                                 bool autoRotate, unsigned int *originalWidth, unsigned int *originalHeight)
 {
-  if (CUtil::GetExtension(texturePath).Equals(".dds"))
+  if (URIUtils::GetExtension(texturePath).Equals(".dds"))
   { // special case for DDS images
     CDDSImage image;
     if (image.ReadFile(texturePath))

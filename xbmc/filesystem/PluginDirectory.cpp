@@ -22,7 +22,7 @@
 
 #include "system.h"
 #include "PluginDirectory.h"
-#include "Util.h"
+#include "utils/URIUtils.h"
 #include "addons/AddonManager.h"
 #include "addons/IAddon.h"
 #ifdef HAS_PYTHON
@@ -86,7 +86,7 @@ bool CPluginDirectory::StartScript(const CStdString& strPath, bool retrievingDir
 
   // get options
   CStdString options = url.GetOptions();
-  CUtil::RemoveSlashAtEnd(options); // This MAY kill some scripts (eg though with a URL ending with a slash), but
+  URIUtils::RemoveSlashAtEnd(options); // This MAY kill some scripts (eg though with a URL ending with a slash), but
                                     // is needed for all others, as XBMC adds slashes to "folders"
   url.SetOptions(""); // do this because we can then use the url to generate the basepath
                       // which is passed to the plugin (and represents the share)
@@ -415,7 +415,7 @@ bool CPluginDirectory::RunScriptWithParams(const CStdString& strPath)
 
   // options
   CStdString options = url.GetOptions();
-  CUtil::RemoveSlashAtEnd(options); // This MAY kill some scripts (eg though with a URL ending with a slash), but
+  URIUtils::RemoveSlashAtEnd(options); // This MAY kill some scripts (eg though with a URL ending with a slash), but
                                     // is needed for all others, as XBMC adds slashes to "folders"
   url.SetOptions(""); // do this because we can then use the url to generate the basepath
                       // which is passed to the plugin (and represents the share)

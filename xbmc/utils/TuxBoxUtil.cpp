@@ -24,7 +24,7 @@
 //
 
 #include "TuxBoxUtil.h"
-#include "Util.h"
+#include "URIUtils.h"
 #include "filesystem/FileCurl.h"
 #include "dialogs/GUIDialogContextMenu.h"
 #include "Application.h"
@@ -98,7 +98,7 @@ void CTuxBoxService::Process()
   while(!CThread::m_bStop && g_application.IsPlaying())
   {
     strURL = g_application.CurrentFileItem().m_strPath;
-    if(!CUtil::IsTuxBox(strURL))
+    if(!URIUtils::IsTuxBox(strURL))
       break;
 
     int iRequestTimer = g_advancedSettings.m_iTuxBoxEpgRequestTime *1000; //seconds

@@ -54,6 +54,7 @@
 #endif
 #include "cores/playercorefactory/PlayerCoreFactory.h"
 #include "utils/FileUtils.h"
+#include "utils/URIUtils.h"
 #include "input/MouseStat.h"
 #include "filesystem/File.h"
 
@@ -284,7 +285,7 @@ bool CSettings::GetSource(const CStdString &category, const TiXmlNode *source, C
       strPath = CSpecialProtocol::ReplaceOldPath(strPath, pathVersion);
       // make sure there are no virtualpaths or stack paths defined in xboxmediacenter.xml
       //CLog::Log(LOGDEBUG,"    Found path: %s", strPath.c_str());
-      if (!CUtil::IsVirtualPath(strPath) && !CUtil::IsStack(strPath))
+      if (!URIUtils::IsVirtualPath(strPath) && !URIUtils::IsStack(strPath))
       {
         // translate special tags
         if (!strPath.IsEmpty() && strPath.at(0) == '$')
@@ -302,7 +303,7 @@ bool CSettings::GetSource(const CStdString &category, const TiXmlNode *source, C
             continue;
           }
         }
-        CUtil::AddSlashAtEnd(strPath);
+        URIUtils::AddSlashAtEnd(strPath);
         vecPaths.push_back(strPath);
       }
       else
@@ -364,7 +365,7 @@ bool CSettings::GetSource(const CStdString &category, const TiXmlNode *source, C
 
 /*    CLog::Log(LOGDEBUG,"      Adding source:");
     CLog::Log(LOGDEBUG,"        Name: %s", share.strName.c_str());
-    if (CUtil::IsVirtualPath(share.strPath) || CUtil::IsMultiPath(share.strPath))
+    if (URIUtils::IsVirtualPath(share.strPath) || URIUtils::IsMultiPath(share.strPath))
     {
       for (int i = 0; i < (int)share.vecPaths.size(); ++i)
         CLog::Log(LOGDEBUG,"        Path (%02i): %s", i+1, share.vecPaths.at(i).c_str());
@@ -943,7 +944,7 @@ bool CSettings::LoadProfile(unsigned int index)
     if (m_currentProfile != 0)
     {
       TiXmlDocument doc;
-      if (doc.LoadFile(CUtil::AddFileToFolder(GetUserDataFolder(),"guisettings.xml")))
+      if (doc.LoadFile(URIUtils::AddFileToFolder(GetUserDataFolder(),"guisettings.xml")))
         g_guiSettings.LoadMasterLock(doc.RootElement());
     }
 
@@ -997,8 +998,8 @@ bool CSettings::DeleteProfile(unsigned int index)
         Save();
       }
 
-      CFileItemPtr item = CFileItemPtr(new CFileItem(CUtil::AddFileToFolder(GetUserDataFolder(), strDirectory)));
-      item->m_strPath = CUtil::AddFileToFolder(GetUserDataFolder(), strDirectory + "\\");
+      CFileItemPtr item = CFileItemPtr(new CFileItem(URIUtils::AddFileToFolder(GetUserDataFolder(), strDirectory)));
+      item->m_strPath = URIUtils::AddFileToFolder(GetUserDataFolder(), strDirectory + "\\");
       item->m_bIsFolder = true;
       item->Select(true);
       CFileUtils::DeleteItem(item);
@@ -1170,7 +1171,7 @@ bool CSettings::UpdateSource(const CStdString &strType, const CStdString strOldN
   if (!pShares) return false;
 
   // disallow virtual paths
-  if (strUpdateElement.Equals("path") && CUtil::IsVirtualPath(strUpdateText))
+  if (strUpdateElement.Equals("path") && URIUtils::IsVirtualPath(strUpdateText))
     return false;
 
   for (IVECSOURCES it = pShares->begin(); it != pShares->end(); it++)
@@ -1593,9 +1594,9 @@ void CSettings::LoadUserFolderLayout()
     g_guiSettings.SetString("system.playlistspath",strDir.c_str());
   }
   CDirectory::Create(strDir);
-  CDirectory::Create(CUtil::AddFileToFolder(strDir,"music"));
-  CDirectory::Create(CUtil::AddFileToFolder(strDir,"video"));
-  CDirectory::Create(CUtil::AddFileToFolder(strDir,"mixed"));
+  CDirectory::Create(URIUtils::AddFileToFolder(strDir,"music"));
+  CDirectory::Create(URIUtils::AddFileToFolder(strDir,"video"));
+  CDirectory::Create(URIUtils::AddFileToFolder(strDir,"mixed"));
 }
 
 CStdString CSettings::GetProfileUserDataFolder() const
@@ -1604,7 +1605,7 @@ CStdString CSettings::GetProfileUserDataFolder() const
   if (m_currentProfile == 0)
     return GetUserDataFolder();
 
-  CUtil::AddFileToFolder(GetUserDataFolder(),GetCurrentProfile().getDirectory(),folder);
+  URIUtils::AddFileToFolder(GetUserDataFolder(),GetCurrentProfile().getDirectory(),folder);
 
   return folder;
 }
@@ -1616,7 +1617,7 @@ CStdString CSettings::GetUserDataItem(const CStdString& strFile) const
   //check if item exists in the profile
   //(either for folder or for a file (depending on slashAtEnd of strFile)
   //otherwise return path to masterprofile
-  if ( (CUtil::HasSlashAtEnd(folder) && !CDirectory::Exists(folder)) || !CFile::Exists(folder))
+  if ( (URIUtils::HasSlashAtEnd(folder) && !CDirectory::Exists(folder)) || !CFile::Exists(folder))
     folder = "special://masterprofile/"+strFile;
   return folder;
 }
@@ -1630,9 +1631,9 @@ CStdString CSettings::GetDatabaseFolder() const
 {
   CStdString folder;
   if (GetCurrentProfile().hasDatabases())
-    CUtil::AddFileToFolder(GetProfileUserDataFolder(), "Database", folder);
+    URIUtils::AddFileToFolder(GetProfileUserDataFolder(), "Database", folder);
   else
-    CUtil::AddFileToFolder(GetUserDataFolder(), "Database", folder);
+    URIUtils::AddFileToFolder(GetUserDataFolder(), "Database", folder);
 
   return folder;
 }
@@ -1641,9 +1642,9 @@ CStdString CSettings::GetCDDBFolder() const
 {
   CStdString folder;
   if (GetCurrentProfile().hasDatabases())
-    CUtil::AddFileToFolder(GetProfileUserDataFolder(), "Database/CDDB", folder);
+    URIUtils::AddFileToFolder(GetProfileUserDataFolder(), "Database/CDDB", folder);
   else
-    CUtil::AddFileToFolder(GetUserDataFolder(), "Database/CDDB", folder);
+    URIUtils::AddFileToFolder(GetUserDataFolder(), "Database/CDDB", folder);
 
   return folder;
 }
@@ -1652,9 +1653,9 @@ CStdString CSettings::GetThumbnailsFolder() const
 {
   CStdString folder;
   if (GetCurrentProfile().hasDatabases())
-    CUtil::AddFileToFolder(GetProfileUserDataFolder(), "Thumbnails", folder);
+    URIUtils::AddFileToFolder(GetProfileUserDataFolder(), "Thumbnails", folder);
   else
-    CUtil::AddFileToFolder(GetUserDataFolder(), "Thumbnails", folder);
+    URIUtils::AddFileToFolder(GetUserDataFolder(), "Thumbnails", folder);
 
   return folder;
 }
@@ -1663,9 +1664,9 @@ CStdString CSettings::GetMusicThumbFolder() const
 {
   CStdString folder;
   if (GetCurrentProfile().hasDatabases())
-    CUtil::AddFileToFolder(GetProfileUserDataFolder(), "Thumbnails/Music", folder);
+    URIUtils::AddFileToFolder(GetProfileUserDataFolder(), "Thumbnails/Music", folder);
   else
-    CUtil::AddFileToFolder(GetUserDataFolder(), "Thumbnails/Music", folder);
+    URIUtils::AddFileToFolder(GetUserDataFolder(), "Thumbnails/Music", folder);
 
   return folder;
 }
@@ -1674,9 +1675,9 @@ CStdString CSettings::GetLastFMThumbFolder() const
 {
   CStdString folder;
   if (GetCurrentProfile().hasDatabases())
-    CUtil::AddFileToFolder(GetProfileUserDataFolder(), "Thumbnails/Music/LastFM", folder);
+    URIUtils::AddFileToFolder(GetProfileUserDataFolder(), "Thumbnails/Music/LastFM", folder);
   else
-    CUtil::AddFileToFolder(GetUserDataFolder(), "Thumbnails/Music/LastFM", folder);
+    URIUtils::AddFileToFolder(GetUserDataFolder(), "Thumbnails/Music/LastFM", folder);
 
   return folder;
 }
@@ -1685,9 +1686,9 @@ CStdString CSettings::GetMusicArtistThumbFolder() const
 {
   CStdString folder;
   if (GetCurrentProfile().hasDatabases())
-    CUtil::AddFileToFolder(GetProfileUserDataFolder(), "Thumbnails/Music/Artists", folder);
+    URIUtils::AddFileToFolder(GetProfileUserDataFolder(), "Thumbnails/Music/Artists", folder);
   else
-    CUtil::AddFileToFolder(GetUserDataFolder(), "Thumbnails/Music/Artists", folder);
+    URIUtils::AddFileToFolder(GetUserDataFolder(), "Thumbnails/Music/Artists", folder);
 
   return folder;
 }
@@ -1696,9 +1697,9 @@ CStdString CSettings::GetVideoThumbFolder() const
 {
   CStdString folder;
   if (GetCurrentProfile().hasDatabases())
-    CUtil::AddFileToFolder(GetProfileUserDataFolder(), "Thumbnails/Video", folder);
+    URIUtils::AddFileToFolder(GetProfileUserDataFolder(), "Thumbnails/Video", folder);
   else
-    CUtil::AddFileToFolder(GetUserDataFolder(), "Thumbnails/Video", folder);
+    URIUtils::AddFileToFolder(GetUserDataFolder(), "Thumbnails/Video", folder);
 
   return folder;
 }
@@ -1707,9 +1708,9 @@ CStdString CSettings::GetVideoFanartFolder() const
 {
   CStdString folder;
   if (GetCurrentProfile().hasDatabases())
-    CUtil::AddFileToFolder(GetProfileUserDataFolder(), "Thumbnails/Video/Fanart", folder);
+    URIUtils::AddFileToFolder(GetProfileUserDataFolder(), "Thumbnails/Video/Fanart", folder);
   else
-    CUtil::AddFileToFolder(GetUserDataFolder(), "Thumbnails/Video/Fanart", folder);
+    URIUtils::AddFileToFolder(GetUserDataFolder(), "Thumbnails/Video/Fanart", folder);
 
   return folder;
 }
@@ -1718,9 +1719,9 @@ CStdString CSettings::GetMusicFanartFolder() const
 {
   CStdString folder;
   if (GetCurrentProfile().hasDatabases())
-    CUtil::AddFileToFolder(GetProfileUserDataFolder(), "Thumbnails/Music/Fanart", folder);
+    URIUtils::AddFileToFolder(GetProfileUserDataFolder(), "Thumbnails/Music/Fanart", folder);
   else
-    CUtil::AddFileToFolder(GetUserDataFolder(), "Thumbnails/Music/Fanart", folder);
+    URIUtils::AddFileToFolder(GetUserDataFolder(), "Thumbnails/Music/Fanart", folder);
 
   return folder;
 }
@@ -1729,9 +1730,9 @@ CStdString CSettings::GetBookmarksThumbFolder() const
 {
   CStdString folder;
   if (GetCurrentProfile().hasDatabases())
-    CUtil::AddFileToFolder(GetProfileUserDataFolder(), "Thumbnails/Video/Bookmarks", folder);
+    URIUtils::AddFileToFolder(GetProfileUserDataFolder(), "Thumbnails/Video/Bookmarks", folder);
   else
-    CUtil::AddFileToFolder(GetUserDataFolder(), "Thumbnails/Video/Bookmarks", folder);
+    URIUtils::AddFileToFolder(GetUserDataFolder(), "Thumbnails/Video/Bookmarks", folder);
 
   return folder;
 }
@@ -1740,9 +1741,9 @@ CStdString CSettings::GetSourcesFile() const
 {
   CStdString folder;
   if (GetCurrentProfile().hasSources())
-    CUtil::AddFileToFolder(GetProfileUserDataFolder(),"sources.xml",folder);
+    URIUtils::AddFileToFolder(GetProfileUserDataFolder(),"sources.xml",folder);
   else
-    CUtil::AddFileToFolder(GetUserDataFolder(),"sources.xml",folder);
+    URIUtils::AddFileToFolder(GetUserDataFolder(),"sources.xml",folder);
 
   return folder;
 }
@@ -1830,17 +1831,17 @@ void CSettings::CreateProfileFolders()
   CDirectory::Create(GetVideoFanartFolder());
   CDirectory::Create(GetMusicFanartFolder());
   CDirectory::Create(GetBookmarksThumbFolder());
-  CStdString generatedThumbsFolder = CUtil::AddFileToFolder(GetThumbnailsFolder(), "generated");
+  CStdString generatedThumbsFolder = URIUtils::AddFileToFolder(GetThumbnailsFolder(), "generated");
   CDirectory::Create(generatedThumbsFolder);
   CLog::Log(LOGINFO, "thumbnails folder: %s", GetThumbnailsFolder().c_str());
   for (unsigned int hex=0; hex < 16; hex++)
   {
     CStdString strHex;
     strHex.Format("%x",hex);
-    CDirectory::Create(CUtil::AddFileToFolder(GetMusicThumbFolder(), strHex));
-    CDirectory::Create(CUtil::AddFileToFolder(GetVideoThumbFolder(), strHex));
-    CDirectory::Create(CUtil::AddFileToFolder(GetThumbnailsFolder(), strHex));
-    CDirectory::Create(CUtil::AddFileToFolder(generatedThumbsFolder, strHex));
+    CDirectory::Create(URIUtils::AddFileToFolder(GetMusicThumbFolder(), strHex));
+    CDirectory::Create(URIUtils::AddFileToFolder(GetVideoThumbFolder(), strHex));
+    CDirectory::Create(URIUtils::AddFileToFolder(GetThumbnailsFolder(), strHex));
+    CDirectory::Create(URIUtils::AddFileToFolder(generatedThumbsFolder, strHex));
   }
   CDirectory::Create("special://profile/addon_data");
   CDirectory::Create("special://profile/keymaps");

@@ -21,7 +21,6 @@
 
 #include "HTTPDirectory.h"
 #include "URL.h"
-#include "Util.h"
 #include "FileCurl.h"
 #include "FileItem.h"
 #include "utils/RegExp.h"
@@ -29,6 +28,7 @@
 #include "utils/StringUtils.h"
 #include "utils/CharsetConverter.h"
 #include "utils/log.h"
+#include "utils/URIUtils.h"
 
 using namespace XFILE;
 
@@ -69,20 +69,20 @@ bool CHTTPDirectory::GetDirectory(const CStdString& strPath, CFileItemList &item
 
       CStdString strNameTemp = strName.Trim();
       CStdString strLinkTemp = strLink;
-      CUtil::RemoveSlashAtEnd(strLinkTemp);
-      CUtil::RemoveSlashAtEnd(strNameTemp);
+      URIUtils::RemoveSlashAtEnd(strLinkTemp);
+      URIUtils::RemoveSlashAtEnd(strNameTemp);
       CUtil::URLDecode(strLinkTemp);
 
       if (strNameTemp == strLinkTemp)
       {
         g_charsetConverter.unknownToUTF8(strName);
-        CUtil::RemoveSlashAtEnd(strName);
+        URIUtils::RemoveSlashAtEnd(strName);
 
         CFileItemPtr pItem(new CFileItem(strName));
         pItem->m_strPath = strBasePath + strLink;
         pItem->SetProperty("IsHTTPDirectory", true);
 
-        if(CUtil::HasSlashAtEnd(pItem->m_strPath))
+        if(URIUtils::HasSlashAtEnd(pItem->m_strPath))
           pItem->m_bIsFolder = true;
 
         url.SetFileName(pItem->m_strPath);

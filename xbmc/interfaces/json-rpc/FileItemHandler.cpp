@@ -24,7 +24,7 @@
 #include "AudioLibrary.h"
 #include "VideoLibrary.h"
 #include "FileOperations.h"
-#include "../Util.h"
+#include "utils/URIUtils.h"
 #include "utils/ISerializable.h"
 #include "utils/Variant.h"
 
@@ -163,7 +163,7 @@ bool CFileItemHandler::FillFileItemList(const Value &parameterObject, CFileItemL
   if (param["file"].isString())
   {
     CStdString file = param["file"].asString();
-    CFileItemPtr item = CFileItemPtr(new CFileItem(file, CUtil::HasSlashAtEnd(file)));
+    CFileItemPtr item = CFileItemPtr(new CFileItem(file, URIUtils::HasSlashAtEnd(file)));
     list.Add(item);
   }
 

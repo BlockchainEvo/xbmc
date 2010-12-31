@@ -35,7 +35,7 @@
 #include "guilib/GUIWindowManager.h"
 #include "dialogs/GUIDialogBusy.h"
 #include "threads/SingleLock.h"
-#include "Util.h"
+#include "utils/URIUtils.h"
 
 using namespace std;
 using namespace XFILE;
@@ -146,7 +146,7 @@ bool CDirectory::GetDirectory(const CStdString& strPath, CFileItemList &items, C
       bool result = false;
       while (!result)
       {
-        if (g_application.IsCurrentThread() && allowThreads && !CUtil::IsSpecial(strPath))
+        if (g_application.IsCurrentThread() && allowThreads && !URIUtils::IsSpecial(strPath))
         {
           CSingleExit ex(g_graphicsContext);
 

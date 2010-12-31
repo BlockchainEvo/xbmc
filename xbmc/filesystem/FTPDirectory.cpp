@@ -22,7 +22,7 @@
 #include "FTPDirectory.h"
 #include "FTPParse.h"
 #include "URL.h"
-#include "Util.h"
+#include "utils/URIUtils.h"
 #include "FileCurl.h"
 #include "FileItem.h"
 #include "utils/StringUtils.h"
@@ -82,7 +82,7 @@ bool CFTPDirectory::GetDirectory(const CStdString& strPath, CFileItemList &items
       pItem->m_strPath = path + name;
       pItem->m_bIsFolder = (bool)(parse.getFlagtrycwd() != 0);
       if (pItem->m_bIsFolder)
-        CUtil::AddSlashAtEnd(pItem->m_strPath);
+        URIUtils::AddSlashAtEnd(pItem->m_strPath);
 
       /* qualify the url with host and all */
       url.SetFileName(pItem->m_strPath);

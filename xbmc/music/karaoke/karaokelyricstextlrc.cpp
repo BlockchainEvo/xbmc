@@ -23,11 +23,11 @@
 
 #include <math.h>
 
-#include "Util.h"
 #include "filesystem/File.h"
 #include "settings/AdvancedSettings.h"
 #include "utils/MathUtils.h"
 #include "utils/log.h"
+#include "utils/URIUtils.h"
 
 #include "karaokelyricstextlrc.h"
 
@@ -92,7 +92,7 @@ bool CKaraokeLyricsTextLRC::Load()
   unsigned int offset = 0;
 
   CStdString ext, songfilename = getSongFile();
-  CUtil::GetExtension( songfilename, ext );
+  URIUtils::GetExtension( songfilename, ext );
 
   // Skip windoze UTF8 file prefix, if any, and reject UTF16 files
   if ( lyricSize > 3 )

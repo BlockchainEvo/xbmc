@@ -26,7 +26,7 @@
 #include "DateTime.h"
 #include "FileItem.h"
 #include "URL.h"
-#include "Util.h"
+#include "utils/URIUtils.h"
 #include "utils/StringUtils.h"
 #include "threads/SingleLock.h"
 #include "utils/log.h"
@@ -234,7 +234,7 @@ void CMythSession::SetFileItemMetaData(CFileItem &item, cmyth_proginfo_t program
     CStdString chanicon = GetValue(m_dll->proginfo_chanicon(program));
     if (!chanicon.IsEmpty())
     {
-      url.SetFileName("files/channels/" + CUtil::GetFileName(chanicon)); // e.g. files/channels/tv3.jpg
+      url.SetFileName("files/channels/" + URIUtils::GetFileName(chanicon)); // e.g. files/channels/tv3.jpg
       item.SetThumbnailImage(url.Get());
     }
   }
@@ -245,7 +245,7 @@ void CMythSession::SetFileItemMetaData(CFileItem &item, cmyth_proginfo_t program
      */
     if (m_dll->proginfo_rec_status(program) == RS_RECORDED)
     {
-      url.SetFileName("files/" + CUtil::GetFileName(GetValue(m_dll->proginfo_pathname(program))) + ".png");
+      url.SetFileName("files/" + URIUtils::GetFileName(GetValue(m_dll->proginfo_pathname(program))) + ".png");
       item.SetThumbnailImage(url.Get());
     }
   }

@@ -30,6 +30,7 @@
 #include "Autorun.h"
 #include "GUIPassword.h"
 #include "Util.h"
+#include "utils/URIUtils.h"
 #include "settings/GUISettings.h"
 #include "GUIDialogMediaSource.h"
 #include "settings/GUIDialogLockSettings.h"
@@ -453,7 +454,7 @@ bool CGUIDialogContextMenu::OnContextButton(const CStdString &type, const CFileI
         if (type == "music")
         {
           cachedThumb = item->m_strPath;
-          CUtil::RemoveSlashAtEnd(cachedThumb);
+          URIUtils::RemoveSlashAtEnd(cachedThumb);
           cachedThumb = CUtil::GetCachedMusicThumb(cachedThumb);
         }
         else if (type == "video")
@@ -463,7 +464,7 @@ bool CGUIDialogContextMenu::OnContextButton(const CStdString &type, const CFileI
           CTextureDatabase db;
           if (db.Open())
           {
-            cachedThumb = CTextureCache::GetUniqueImage(item->m_strPath, CUtil::GetExtension(strThumb));
+            cachedThumb = CTextureCache::GetUniqueImage(item->m_strPath, URIUtils::GetExtension(strThumb));
             db.SetTextureForPath(item->m_strPath, cachedThumb);
           }
         }
@@ -571,7 +572,7 @@ CMediaSource *CGUIDialogContextMenu::GetShare(const CStdString &type, const CFil
   for (unsigned int i = 0; i < shares->size(); i++)
   {
     CMediaSource &testShare = shares->at(i);
-    if (CUtil::IsDVD(testShare.strPath))
+    if (URIUtils::IsDVD(testShare.strPath))
     {
       if (!item->IsDVD())
         continue;

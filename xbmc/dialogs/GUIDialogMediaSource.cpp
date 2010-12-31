@@ -26,6 +26,7 @@
 #include "video/dialogs/GUIDialogVideoScan.h"
 #include "guilib/GUIWindowManager.h"
 #include "Util.h"
+#include "utils/URIUtils.h"
 #include "filesystem/Directory.h"
 #include "GUIDialogYesNo.h"
 #include "FileItem.h"
@@ -336,7 +337,7 @@ void CGUIDialogMediaSource::OnPathBrowse(int item)
     {
       CURL url(path);
       m_name = url.GetWithoutUserDetails();
-      CUtil::RemoveSlashAtEnd(m_name);
+      URIUtils::RemoveSlashAtEnd(m_name);
       m_name = CUtil::GetTitleFromPath(m_name);
     }
     UpdateButtons();
@@ -351,13 +352,13 @@ void CGUIDialogMediaSource::OnPath(int item)
     m_bNameChanged=true;
 
   CGUIDialogKeyboard::ShowAndGetInput(m_paths->Get(item)->m_strPath, g_localizeStrings.Get(1021), false);
-  CUtil::AddSlashAtEnd(m_paths->Get(item)->m_strPath);
+  URIUtils::AddSlashAtEnd(m_paths->Get(item)->m_strPath);
 
   if (!m_bNameChanged || m_name.IsEmpty())
   {
     CURL url(m_paths->Get(item)->m_strPath);
     m_name = url.GetWithoutUserDetails();
-    CUtil::RemoveSlashAtEnd(m_name);
+    URIUtils::RemoveSlashAtEnd(m_name);
     m_name = CUtil::GetTitleFromPath(m_name);
   }
   UpdateButtons();
@@ -378,7 +379,7 @@ void CGUIDialogMediaSource::OnOK()
   {
     m_confirmed = true;
     Close();
-    if (m_type == "video" && !CUtil::IsLiveTV(share.strPath) && 
+    if (m_type == "video" && !URIUtils::IsLiveTV(share.strPath) && 
         !share.strPath.Left(6).Equals("rss://"))
     {
       CGUIWindowVideoFiles::OnAssignContent(share.strPath, 0, m_info, m_settings);

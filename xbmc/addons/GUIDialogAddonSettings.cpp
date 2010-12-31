@@ -28,7 +28,7 @@
 #include "dialogs/GUIDialogOK.h"
 #include "guilib/GUIControlGroupList.h"
 #include "guilib/GUISettingsSliderControl.h"
-#include "Util.h"
+#include "utils/URIUtils.h"
 #include "utils/StringUtils.h"
 #include "storage/MediaManager.h"
 #include "guilib/GUILabelControl.h"
@@ -804,7 +804,7 @@ vector<CStdString> CGUIDialogAddonSettings::GetFileEnumValues(const CStdString &
   if (fullPath.Find("$PROFILE") >= 0)
     fullPath.Replace("$PROFILE", m_addon->Profile());
   else
-    fullPath = CUtil::AddFileToFolder(m_addon->Path(), path);
+    fullPath = URIUtils::AddFileToFolder(m_addon->Path(), path);
 
   bool hideExtensions = (options.CompareNoCase("hideext") == 0);
   // fetch directory

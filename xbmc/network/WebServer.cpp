@@ -27,6 +27,7 @@
 #include "filesystem/Directory.h"
 #include "Util.h"
 #include "utils/log.h"
+#include "utils/URIUtils.h"
 #include "threads/SingleLock.h"
 #include "DateTime.h"
 #include "addons/AddonManager.h"
@@ -191,8 +192,7 @@ int CWebServer::AnswerToConnection(void *cls, struct MHD_Connection *connection,
   }
 
   if (addon)
-    strURL = CUtil::AddFileToFolder(addonPath,strURL);
-
+    strURL = URIUtils::AddFileToFolder(addon->Path(),strURL);
   if (CDirectory::Exists(strURL))
   {
     if (strURL.Right(1).Equals("/"))
@@ -307,7 +307,7 @@ int CWebServer::CreateFileDownloadResponse(struct MHD_Connection *connection, co
                                                    &CWebServer::ContentReaderCallback, file,
                                                    &CWebServer::ContentReaderFreeCallback); 
 
-    CStdString ext = CUtil::GetExtension(strURL);
+    CStdString ext = URIUtils::GetExtension(strURL);
     ext = ext.ToLower();
     const char *mime = CreateMimeTypeFromExtension(ext.c_str());
     if (mime)

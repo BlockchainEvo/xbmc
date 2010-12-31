@@ -22,6 +22,7 @@
 #include "ZipDirectory.h"
 #include "utils/log.h"
 #include "utils/CharsetConverter.h"
+#include "utils/URIUtils.h"
 #include "Util.h"
 #include "URL.h"
 #include "ZipManager.h"
@@ -46,7 +47,7 @@ namespace XFILE
 
     /* if this isn't a proper archive path, assume it's the path to a archive file */
     if( !strPathOrig.Left(6).Equals("zip://") )
-      CUtil::CreateArchivePath(strPath, "zip", strPathOrig, "");
+      URIUtils::CreateArchivePath(strPath, "zip", strPathOrig, "");
     else
       strPath = strPathOrig;
 
@@ -64,7 +65,7 @@ namespace XFILE
     CStdString strBuffer;
 
     // the RAR code depends on things having a "/" at the end of the path
-    CUtil::AddSlashAtEnd(strSlashPath);
+    URIUtils::AddSlashAtEnd(strSlashPath);
 
     vector<SZipEntry> entries;
     // turn on fast lookups
@@ -134,7 +135,7 @@ namespace XFILE
       pFileItem->m_bIsFolder = bIsFolder;
       pFileItem->m_idepth = ze->method;
       if (bIsFolder)
-        CUtil::AddSlashAtEnd(pFileItem->m_strPath);
+        URIUtils::AddSlashAtEnd(pFileItem->m_strPath);
       items.Add(pFileItem);
     }
     items.SetFastLookup(bWasFast);

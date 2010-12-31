@@ -33,7 +33,7 @@
 #include "addons/AddonManager.h"
 #include "addons/Scraper.h"
 #include "addons/Addon.h"
-#include "Util.h"
+#include "utils/URIUtils.h"
 #include "Artist.h"
 #include "Album.h"
 #include "Song.h"
@@ -211,8 +211,7 @@ void CMusicDatabase::AddSong(CSong& song, bool bCheck)
       return;
 
     CStdString strPath, strFileName;
-    CUtil::Split(song.strFileName, strPath, strFileName);
-    ASSERT(CUtil::HasSlashAtEnd(strPath));
+    URIUtils::Split(song.strFileName, strPath, strFileName);
 
     if (NULL == m_pDB.get()) return ;
     if (NULL == m_pDS.get()) return ;
@@ -630,7 +629,7 @@ int CMusicDatabase::AddPath(const CStdString& strPath)
   CStdString strSQL;
   try
   {
-    ASSERT(CUtil::HasSlashAtEnd(strPath));
+    ASSERT(URIUtils::HasSlashAtEnd(strPath));
 
     if (NULL == m_pDB.get()) return -1;
     if (NULL == m_pDS.get()) return -1;
@@ -706,11 +705,11 @@ CSong CMusicDatabase::GetSongFromDataset(bool bWithMusicDbPath/*=false*/)
     song.strThumb.Empty();
   // Get filename with full path
   if (!bWithMusicDbPath)
-    CUtil::AddFileToFolder(m_pDS->fv(song_strPath).get_asString(), m_pDS->fv(song_strFileName).get_asString(), song.strFileName);
+    URIUtils::AddFileToFolder(m_pDS->fv(song_strPath).get_asString(), m_pDS->fv(song_strFileName).get_asString(), song.strFileName);
   else
   {
     CStdString strFileName=m_pDS->fv(song_strFileName).get_asString();
-    CStdString strExt=CUtil::GetExtension(strFileName);
+    CStdString strExt=URIUtils::GetExtension(strFileName);
     song.strFileName.Format("musicdb://3/%ld/%ld%s", m_pDS->fv(song_idAlbum).get_asInt(), m_pDS->fv(song_idSong).get_asInt(), strExt.c_str());
   }
 
@@ -748,7 +747,7 @@ void CMusicDatabase::GetFileItemFromDataset(CFileItem* item, const CStdString& s
   item->GetMusicInfoTag()->SetRating(m_pDS->fv(song_rating).get_asChar());
   item->GetMusicInfoTag()->SetComment(m_pDS->fv(song_comment).get_asString());
   CStdString strRealPath;
-  CUtil::AddFileToFolder(m_pDS->fv(song_strPath).get_asString(), m_pDS->fv(song_strFileName).get_asString(), strRealPath);
+  URIUtils::AddFileToFolder(m_pDS->fv(song_strPath).get_asString(), m_pDS->fv(song_strFileName).get_asString(), strRealPath);
   item->GetMusicInfoTag()->SetURL(strRealPath);
   item->GetMusicInfoTag()->SetLoaded(true);
   CStdString strThumb=m_pDS->fv(song_strThumb).get_asString();
@@ -762,7 +761,7 @@ void CMusicDatabase::GetFileItemFromDataset(CFileItem* item, const CStdString& s
   else
   {
     CStdString strFileName=m_pDS->fv(song_strFileName).get_asString();
-    CStdString strExt=CUtil::GetExtension(strFileName);
+    CStdString strExt=URIUtils::GetExtension(strFileName);
     item->m_strPath.Format("%s%ld%s", strMusicDBbasePath.c_str(), m_pDS->fv(song_idSong).get_asInt(), strExt.c_str());
   }
 }
@@ -833,14 +832,14 @@ bool CMusicDatabase::GetSongByFileName(const CStdString& strFileName, CSong& son
 
     if (url.GetProtocol()=="musicdb")
     {
-      CStdString strFile = CUtil::GetFileName(strFileName);
-      CUtil::RemoveExtension(strFile);
+      CStdString strFile = URIUtils::GetFileName(strFileName);
+      URIUtils::RemoveExtension(strFile);
       return GetSongById(atol(strFile.c_str()), song);
     }
 
     CStdString strPath;
-    CUtil::GetDirectory(strFileName, strPath);
-    CUtil::AddSlashAtEnd(strPath);
+    URIUtils::GetDirectory(strFileName, strPath);
+    URIUtils::AddSlashAtEnd(strPath);
 
     if (NULL == m_pDB.get()) return false;
     if (NULL == m_pDS.get()) return false;
@@ -1546,7 +1545,7 @@ bool CMusicDatabase::GetSongsByPath(const CStdString& strPath, CSongMap& songs, 
 {
   try
   {
-    ASSERT(CUtil::HasSlashAtEnd(strPath));
+    ASSERT(URIUtils::HasSlashAtEnd(strPath));
 
     if (!bAppendToMap)
       songs.Clear();
@@ -1842,18 +1841,18 @@ bool CMusicDatabase::CleanupSongsByIds(const CStdString &strSongIds)
     while (!m_pDS->eof())
     { // get the full song path
       CStdString strFileName;
-      CUtil::AddFileToFolder(m_pDS->fv("path.strPath").get_asString(), m_pDS->fv("song.strFileName").get_asString(), strFileName);
+      URIUtils::AddFileToFolder(m_pDS->fv("path.strPath").get_asString(), m_pDS->fv("song.strFileName").get_asString(), strFileName);
 
       //  Special case for streams inside an ogg file. (oggstream)
       //  The last dir in the path is the ogg file that
       //  contains the stream, so test if its there
-      CStdString strExtension=CUtil::GetExtension(strFileName);
+      CStdString strExtension=URIUtils::GetExtension(strFileName);
       if (strExtension==".oggstream" || strExtension==".nsfstream")
       {
         CStdString strFileAndPath=strFileName;
-        CUtil::GetDirectory(strFileAndPath, strFileName);
+        URIUtils::GetDirectory(strFileAndPath, strFileName);
         // we are dropping back to a file, so remove the slash at end
-        CUtil::RemoveSlashAtEnd(strFileName);
+        URIUtils::RemoveSlashAtEnd(strFileName);
       }
 
       if (!CFile::Exists(strFileName))
@@ -2044,7 +2043,7 @@ bool CMusicDatabase::CleanupThumbs()
       m_pDS->next();
     }
     // clear the thumb cache
-    //CUtil::ThumbCacheClear();
+    //URIUtils::ThumbCacheClear();
     //g_directoryCache.ClearMusicThumbCache();
     // now we can delete
     m_pDS->close();
@@ -2311,7 +2310,7 @@ bool CMusicDatabase::LookupCDDBInfo(bool bRequery/*=false*/)
   {
     CStdString strFile;
     strFile.Format("%x.cddb", pCdInfo->GetCddbDiscId());
-    CFile::Delete(CUtil::AddFileToFolder(g_settings.GetCDDBFolder(), strFile));
+    CFile::Delete(URIUtils::AddFileToFolder(g_settings.GetCDDBFolder(), strFile));
   }
 
   // Prepare cddb
@@ -2421,7 +2420,7 @@ void CMusicDatabase::DeleteCDDBInfo()
       if (items[i]->m_bIsFolder)
         continue;
 
-      CStdString strFile = CUtil::GetFileName(items[i]->m_strPath);
+      CStdString strFile = URIUtils::GetFileName(items[i]->m_strPath);
       strFile.Delete(strFile.size() - 5, 5);
       ULONG lDiscId = strtoul(strFile.c_str(), NULL, 16);
       Xcddb cddb;
@@ -2463,7 +2462,7 @@ void CMusicDatabase::DeleteCDDBInfo()
       {
         CStdString strFile;
         strFile.Format("%x.cddb", it->first);
-        CFile::Delete(CUtil::AddFileToFolder(g_settings.GetCDDBFolder(), strFile));
+        CFile::Delete(URIUtils::AddFileToFolder(g_settings.GetCDDBFolder(), strFile));
         break;
       }
     }
@@ -2806,7 +2805,7 @@ bool CMusicDatabase::GetAlbumFromSong(const CSong &song, CAlbum &album)
     if (song.idSong != -1) return GetAlbumFromSong(song.idSong, album);
 
     CStdString path, file;
-    CUtil::Split(song.strFileName, path, file);
+    URIUtils::Split(song.strFileName, path, file);
 
     CStdString strSQL = PrepareSQL("select albumview.* from song join albumview on song.idAlbum = albumview.idAlbum join path on song.idPath = path.idPath where song.strFileName like '%s' and path.strPath like '%s'", file.c_str(), path.c_str());
     if (!m_pDS->query(strSQL.c_str())) return false;
@@ -3350,7 +3349,7 @@ bool CMusicDatabase::GetArtistPath(int idArtist, CStdString &basePath)
     // special case for single path - assume that we're in an artist/album/songs filesystem
     if (iRowsFound == 1)
     {
-      CUtil::GetParentPath(m_pDS2->fv("strPath").get_asString(), basePath);
+      URIUtils::GetParentPath(m_pDS2->fv("strPath").get_asString(), basePath);
       m_pDS2->close();
       return true;
     }
@@ -3363,7 +3362,7 @@ bool CMusicDatabase::GetArtistPath(int idArtist, CStdString &basePath)
       if (basePath.IsEmpty())
         basePath = path;
       else
-        CUtil::GetCommonPath(basePath,path);
+        URIUtils::GetCommonPath(basePath,path);
 
       m_pDS2->next();
     }
@@ -3772,7 +3771,7 @@ bool CMusicDatabase::RemoveSongsFromPath(const CStdString &path, CSongMap &songs
   // does miss archived songs.
   try
   {
-    if (!CUtil::HasSlashAtEnd(path))
+    if (!URIUtils::HasSlashAtEnd(path))
       CLog::Log(LOGWARNING,"%s: called on path without a trailing slash [%s]",__FUNCTION__,path.c_str());
 
     if (NULL == m_pDB.get()) return false;
@@ -3883,8 +3882,8 @@ int CMusicDatabase::GetSongIDFromPath(const CStdString &filePath)
   CURL url(filePath);
   if (url.GetProtocol()=="musicdb")
   {
-    CStdString strFile=CUtil::GetFileName(filePath);
-    CUtil::RemoveExtension(strFile);
+    CStdString strFile=URIUtils::GetFileName(filePath);
+    URIUtils::RemoveExtension(strFile);
     return atol(strFile.c_str());
   }
   // hit the db
@@ -3893,8 +3892,8 @@ int CMusicDatabase::GetSongIDFromPath(const CStdString &filePath)
     if (NULL == m_pDB.get()) return -1;
     if (NULL == m_pDS.get()) return -1;
     CStdString strPath;
-    CUtil::GetDirectory(filePath, strPath);
-    CUtil::AddSlashAtEnd(strPath);
+    URIUtils::GetDirectory(filePath, strPath);
+    URIUtils::AddSlashAtEnd(strPath);
 
     DWORD crc = ComputeCRC(filePath);
 
@@ -4122,7 +4121,7 @@ void CMusicDatabase::ExportToXML(const CStdString &xmlFile, bool singleFiles, bo
         else
         {
           CStdString nfoFile;
-          CUtil::AddFileToFolder(strPath, "album.nfo", nfoFile);
+          URIUtils::AddFileToFolder(strPath, "album.nfo", nfoFile);
           if (overwrite || !CFile::Exists(nfoFile))
           {
             if (!xmlDoc.SaveFile(nfoFile))
@@ -4132,8 +4131,8 @@ void CMusicDatabase::ExportToXML(const CStdString &xmlFile, bool singleFiles, bo
           if (images)
           {
             CStdString strThumb;
-            if (GetAlbumThumb(album.idAlbum,strThumb) && (overwrite || !CFile::Exists(CUtil::AddFileToFolder(strPath,"folder.jpg"))))
-              CFile::Cache(strThumb,CUtil::AddFileToFolder(strPath,"folder.jpg"));
+            if (GetAlbumThumb(album.idAlbum,strThumb) && (overwrite || !CFile::Exists(URIUtils::AddFileToFolder(strPath,"folder.jpg"))))
+              CFile::Cache(strThumb,URIUtils::AddFileToFolder(strPath,"folder.jpg"));
           }
           xmlDoc.Clear();
           TiXmlDeclaration decl("1.0", "UTF-8", "yes");
@@ -4191,7 +4190,7 @@ void CMusicDatabase::ExportToXML(const CStdString &xmlFile, bool singleFiles, bo
         else
         {
           CStdString nfoFile;
-          CUtil::AddFileToFolder(strPath, "artist.nfo", nfoFile);
+          URIUtils::AddFileToFolder(strPath, "artist.nfo", nfoFile);
           if (overwrite || !CFile::Exists(nfoFile))
           {
             if (!xmlDoc.SaveFile(nfoFile))
@@ -4201,10 +4200,10 @@ void CMusicDatabase::ExportToXML(const CStdString &xmlFile, bool singleFiles, bo
           if (images)
           {
             CFileItem item(artist);
-            if (CFile::Exists(item.GetCachedArtistThumb()) && (overwrite || !CFile::Exists(CUtil::AddFileToFolder(strPath,"folder.jpg"))))
-              CFile::Cache(item.GetCachedArtistThumb(),CUtil::AddFileToFolder(strPath,"folder.jpg"));
-            if (CFile::Exists(item.GetCachedFanart()) && (overwrite || !CFile::Exists(CUtil::AddFileToFolder(strPath,"fanart.jpg"))))
-              CFile::Cache(item.GetCachedFanart(),CUtil::AddFileToFolder(strPath,"fanart.jpg"));
+            if (CFile::Exists(item.GetCachedArtistThumb()) && (overwrite || !CFile::Exists(URIUtils::AddFileToFolder(strPath,"folder.jpg"))))
+              CFile::Cache(item.GetCachedArtistThumb(),URIUtils::AddFileToFolder(strPath,"folder.jpg"));
+            if (CFile::Exists(item.GetCachedFanart()) && (overwrite || !CFile::Exists(URIUtils::AddFileToFolder(strPath,"fanart.jpg"))))
+              CFile::Cache(item.GetCachedFanart(),URIUtils::AddFileToFolder(strPath,"fanart.jpg"));
           }
           xmlDoc.Clear();
           TiXmlDeclaration decl("1.0", "UTF-8", "yes");

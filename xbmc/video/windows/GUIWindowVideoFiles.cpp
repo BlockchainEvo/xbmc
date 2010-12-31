@@ -40,6 +40,7 @@
 #include "settings/Settings.h"
 #include "settings/GUISettings.h"
 #include "utils/log.h"
+#include "utils/URIUtils.h"
 
 using namespace std;
 using namespace XFILE;
@@ -227,7 +228,7 @@ void CGUIWindowVideoFiles::OnPrepareFileItems(CFileItemList &items)
     for (int i = 0; i < (int)items.Size(); ++i)
     {
       CFileItemPtr item = items[i];
-      if ((item->m_bIsFolder && !CUtil::IsInArchive(item->m_strPath)) || m_cleaningAvailable)
+      if ((item->m_bIsFolder && !URIUtils::IsInArchive(item->m_strPath)) || m_cleaningAvailable)
         item->CleanString();
     }
   }
@@ -451,7 +452,7 @@ void CGUIWindowVideoFiles::GetContextButtons(int itemNumber, CContextButtons &bu
             if (!info)
             { // scraper not set - allow movie information or set content
               CStdString strPath(item->m_strPath);
-              CUtil::AddSlashAtEnd(strPath);
+              URIUtils::AddSlashAtEnd(strPath);
               if (m_database.HasMovieInfo(strPath) || m_database.HasTvShowInfo(strPath))
                 buttons.Add(CONTEXT_BUTTON_INFO, infoString);
             }

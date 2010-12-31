@@ -25,6 +25,7 @@
 #include "pictures/Picture.h"
 #include "guilib/GUIImage.h"
 #include "utils/StringUtils.h"
+#include "utils/URIUtils.h"
 #include "video/windows/GUIWindowVideoBase.h"
 #include "video/windows/GUIWindowVideoFiles.h"
 #include "dialogs/GUIDialogFileBrowser.h"
@@ -309,7 +310,7 @@ void CGUIDialogVideoInfo::SetMovie(const CFileItem *item)
       // local trailers should always override non-local, so check 
       // for a local one if the registered trailer is online
       if (m_movieItem->GetVideoInfoTag()->m_strTrailer.IsEmpty() ||
-          CUtil::IsInternetStream(m_movieItem->GetVideoInfoTag()->m_strTrailer))
+          URIUtils::IsInternetStream(m_movieItem->GetVideoInfoTag()->m_strTrailer))
       {
         CStdString localTrailer = m_movieItem->FindTrailer();
         if (!localTrailer.IsEmpty())

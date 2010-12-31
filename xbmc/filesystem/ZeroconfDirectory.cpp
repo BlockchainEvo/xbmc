@@ -24,6 +24,7 @@
 
 #include "URL.h"
 #include "Util.h"
+#include "utils/URIUtils.h"
 #include "FileItem.h"
 #include "network/ZeroconfBrowser.h"
 #include "Directory.h"
@@ -75,7 +76,7 @@ bool CZeroconfDirectory::GetDirectory(const CStdString& strPath, CFileItemList &
 {
   assert(strPath.substr(0, 11) == "zeroconf://");
   CStdString path = strPath.substr(11, strPath.length());
-  CUtil::RemoveSlashAtEnd(path);
+  URIUtils::RemoveSlashAtEnd(path);
   if(path.empty())
   {
     std::vector<CZeroconfBrowser::ZeroconfService> found_services = CZeroconfBrowser::GetInstance()->GetFoundServices();

@@ -20,11 +20,11 @@
  */
 
 #include "DirectoryCache.h"
-#include "Util.h"
 #include "settings/Settings.h"
 #include "FileItem.h"
 #include "threads/SingleLock.h"
 #include "utils/log.h"
+#include "utils/URIUtils.h"
 
 using namespace std;
 using namespace XFILE;
@@ -67,7 +67,7 @@ bool CDirectoryCache::GetDirectory(const CStdString& strPath, CFileItemList &ite
   CSingleLock lock (m_cs);
 
   CStdString storedPath = strPath;
-  CUtil::RemoveSlashAtEnd(storedPath);
+  URIUtils::RemoveSlashAtEnd(storedPath);
 
   ciCache i = m_cache.find(storedPath);
   if (i != m_cache.end())
@@ -106,7 +106,7 @@ void CDirectoryCache::SetDirectory(const CStdString& strPath, const CFileItemLis
   CSingleLock lock (m_cs);
 
   CStdString storedPath = strPath;
-  CUtil::RemoveSlashAtEnd(storedPath);
+  URIUtils::RemoveSlashAtEnd(storedPath);
 
   ClearDirectory(storedPath);
 
@@ -121,7 +121,7 @@ void CDirectoryCache::SetDirectory(const CStdString& strPath, const CFileItemLis
 void CDirectoryCache::ClearFile(const CStdString& strFile)
 {
   CStdString strPath;
-  CUtil::GetDirectory(strFile, strPath);
+  URIUtils::GetDirectory(strFile, strPath);
   ClearDirectory(strPath);
 }
 
@@ -130,7 +130,7 @@ void CDirectoryCache::ClearDirectory(const CStdString& strPath)
   CSingleLock lock (m_cs);
 
   CStdString storedPath = strPath;
-  CUtil::RemoveSlashAtEnd(storedPath);
+  URIUtils::RemoveSlashAtEnd(storedPath);
 
   iCache i = m_cache.find(storedPath);
   if (i != m_cache.end())
@@ -142,7 +142,7 @@ void CDirectoryCache::ClearSubPaths(const CStdString& strPath)
   CSingleLock lock (m_cs);
 
   CStdString storedPath = strPath;
-  CUtil::RemoveSlashAtEnd(storedPath);
+  URIUtils::RemoveSlashAtEnd(storedPath);
 
   iCache i = m_cache.begin();
   while (i != m_cache.end())
@@ -160,8 +160,8 @@ void CDirectoryCache::AddFile(const CStdString& strFile)
   CSingleLock lock (m_cs);
 
   CStdString strPath;
-  CUtil::GetDirectory(strFile, strPath);
-  CUtil::RemoveSlashAtEnd(strPath);
+  URIUtils::GetDirectory(strFile, strPath);
+  URIUtils::RemoveSlashAtEnd(strPath);
 
   ciCache i = m_cache.find(strPath);
   if (i != m_cache.end())
@@ -179,8 +179,8 @@ bool CDirectoryCache::FileExists(const CStdString& strFile, bool& bInCache)
   bInCache = false;
 
   CStdString strPath;
-  CUtil::GetDirectory(strFile, strPath);
-  CUtil::RemoveSlashAtEnd(strPath);
+  URIUtils::GetDirectory(strFile, strPath);
+  URIUtils::RemoveSlashAtEnd(strPath);
 
   ciCache i = m_cache.find(strPath);
   if (i != m_cache.end())
@@ -308,7 +308,7 @@ void CDirectoryCache::InitMusicThumbCache()
     {
       CStdString hex, folder;
       hex.Format("%x", i);
-      CUtil::AddFileToFolder(g_settings.GetMusicThumbFolder(), hex, folder);
+      URIUtils::AddFileToFolder(g_settings.GetMusicThumbFolder(), hex, folder);
       m_musicThumbDirs.insert(folder);
     }
   }

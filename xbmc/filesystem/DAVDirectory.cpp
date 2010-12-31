@@ -28,6 +28,7 @@
 #include "utils/StringUtils.h"
 #include "utils/CharsetConverter.h"
 #include "utils/log.h"
+#include "utils/URIUtils.h"
 
 using namespace XFILE;
 
@@ -111,7 +112,7 @@ void CDAVDirectory::ParseResponse(const TiXmlElement *pElement, CFileItem &item)
     if (ValueWithoutNamespace(pResponseChild, "href"))
     {
       item.m_strPath = pResponseChild->ToElement()->GetText();
-      CUtil::RemoveSlashAtEnd(item.m_strPath);
+      URIUtils::RemoveSlashAtEnd(item.m_strPath);
     }
     else 
     if (ValueWithoutNamespace(pResponseChild, "propstat"))
@@ -234,18 +235,18 @@ bool CDAVDirectory::GetDirectory(const CStdString& strPath, CFileItemList &items
           CURL url2(strPath);
           CURL url3(item.m_strPath);
 
-          CUtil::AddFileToFolder(url2.GetWithoutFilename(), url3.GetFileName(), item.m_strPath);
+          URIUtils::AddFileToFolder(url2.GetWithoutFilename(), url3.GetFileName(), item.m_strPath);
 
           if (item.GetLabel().IsEmpty())
           {
             CStdString name(item.m_strPath);
-            CUtil::RemoveSlashAtEnd(name);
+            URIUtils::RemoveSlashAtEnd(name);
             CUtil::URLDecode(name);
-            item.SetLabel(CUtil::GetFileName(name));
+            item.SetLabel(URIUtils::GetFileName(name));
           }
 
           if (item.m_bIsFolder)
-            CUtil::AddSlashAtEnd(item.m_strPath);
+            URIUtils::AddSlashAtEnd(item.m_strPath);
 
           // Add back protocol options
           if (!url2.GetProtocolOptions().IsEmpty())

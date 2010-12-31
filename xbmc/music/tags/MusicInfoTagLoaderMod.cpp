@@ -20,7 +20,7 @@
  */
 
 #include "MusicInfoTagLoaderMod.h"
-#include "Util.h"
+#include "utils/URIUtils.h"
 #include "MusicInfoTag.h"
 #include "filesystem/File.h"
 #include "filesystem/SpecialProtocol.h"
@@ -44,7 +44,7 @@ bool CMusicInfoTagLoaderMod::Load(const CStdString& strFileName, CMusicInfoTag& 
 {
   tag.SetURL(strFileName);
   // first, does the module have a .mdz?
-  CStdString strMDZ(CUtil::ReplaceExtension(strFileName,".mdz"));
+  CStdString strMDZ(URIUtils::ReplaceExtension(strFileName,".mdz"));
   if (CFile::Exists(strMDZ))
   {
     if (!getFile(strMDZ,strMDZ))
@@ -96,7 +96,7 @@ bool CMusicInfoTagLoaderMod::Load(const CStdString& strFileName, CMusicInfoTag& 
 
 bool CMusicInfoTagLoaderMod::getFile(CStdString& strFile, const CStdString& strSource)
 {
-  if (!CUtil::IsHD(strSource))
+  if (!URIUtils::IsHD(strSource))
   {
     if (!CFile::Cache(strSource.c_str(), "special://temp/cachedmod", NULL, NULL))
     {

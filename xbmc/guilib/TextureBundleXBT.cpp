@@ -27,9 +27,9 @@
 #include "utils/log.h"
 #include "addons/Skin.h"
 #include "settings/GUISettings.h"
-#include "Util.h"
 #include "filesystem/SpecialProtocol.h"
 #include "utils/EndianSwap.h"
+#include "utils/URIUtils.h"
 #include "XBTF.h"
 #ifndef _LINUX
 #include "lib/win32/liblzo/LZO1X.H"
@@ -65,9 +65,9 @@ bool CTextureBundleXBT::OpenBundle()
     CStdString theme = g_guiSettings.GetString("lookandfeel.skintheme");
     if (!theme.IsEmpty() && theme.CompareNoCase("SKINDEFAULT"))
     {
-      CStdString themeXBT(CUtil::ReplaceExtension(theme, ".xbt"));
-      strPath = CUtil::AddFileToFolder(g_graphicsContext.GetMediaDir(), "media");
-      strPath = CUtil::AddFileToFolder(strPath, themeXBT);
+      CStdString themeXBT(URIUtils::ReplaceExtension(theme, ".xbt"));
+      strPath = URIUtils::AddFileToFolder(g_graphicsContext.GetMediaDir(), "media");
+      strPath = URIUtils::AddFileToFolder(strPath, themeXBT);
     }
     else
     {
@@ -76,7 +76,7 @@ bool CTextureBundleXBT::OpenBundle()
   }
   else
   {
-    strPath = CUtil::AddFileToFolder(g_graphicsContext.GetMediaDir(), "media/Textures.xbt");
+    strPath = URIUtils::AddFileToFolder(g_graphicsContext.GetMediaDir(), "media/Textures.xbt");
   }
 
   strPath = PTH_IC(strPath);
@@ -122,7 +122,7 @@ void CTextureBundleXBT::GetTexturesFromPath(const CStdString &path, std::vector<
     return;
 
   CStdString testPath = Normalize(path);
-  CUtil::AddSlashAtEnd(testPath);
+  URIUtils::AddSlashAtEnd(testPath);
   int testLength = testPath.GetLength();
 
   std::vector<CXBTFFile>& files = m_XBTFReader.GetFiles();

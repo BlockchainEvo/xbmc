@@ -21,9 +21,9 @@
 
 #include "FileMusicDatabase.h"
 #include "music/MusicDatabase.h"
-#include "Util.h"
 #include "URL.h"
 #include "utils/StringUtils.h"
+#include "utils/URIUtils.h"
 
 #include <sys/stat.h>
 
@@ -44,10 +44,10 @@ CStdString CFileMusicDatabase::TranslateUrl(const CURL& url)
   if (!musicDatabase.Open())
     return "";
 
-  CStdString strFileName=CUtil::GetFileName(url.Get());
+  CStdString strFileName=URIUtils::GetFileName(url.Get());
   CStdString strExtension;
-  CUtil::GetExtension(strFileName, strExtension);
-  CUtil::RemoveExtension(strFileName);
+  URIUtils::GetExtension(strFileName, strExtension);
+  URIUtils::RemoveExtension(strFileName);
 
   if (!StringUtils::IsNaturalNumber(strFileName))
     return "";
@@ -59,7 +59,7 @@ CStdString CFileMusicDatabase::TranslateUrl(const CURL& url)
     return "";
 
   CStdString strExtensionFromDb;
-  CUtil::GetExtension(song.strFileName, strExtensionFromDb);
+  URIUtils::GetExtension(song.strFileName, strExtensionFromDb);
 
   if (!strExtensionFromDb.Equals(strExtension))
     return "";

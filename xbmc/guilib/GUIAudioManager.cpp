@@ -27,7 +27,7 @@
 #include "settings/GUISettings.h"
 #include "input/ButtonTranslator.h"
 #include "threads/SingleLock.h"
-#include "Util.h"
+#include "utils/URIUtils.h"
 #include "tinyXML/tinyxml.h"
 #include "addons/Skin.h"
 #ifdef HAS_SDL_AUDIO
@@ -188,7 +188,7 @@ void CGUIAudioManager::PlayActionSound(const CAction& action)
   }
 
   m_actionSound=new CGUISound();
-  if (!m_actionSound->Load(CUtil::AddFileToFolder(m_strMediaDir, it->second)))
+  if (!m_actionSound->Load(URIUtils::AddFileToFolder(m_strMediaDir, it->second)))
   {
     delete m_actionSound;
     m_actionSound=NULL;
@@ -239,7 +239,7 @@ void CGUIAudioManager::PlayWindowSound(int id, WINDOW_SOUND event)
   }
 
   CGUISound* sound=new CGUISound();
-  if (!sound->Load(CUtil::AddFileToFolder(m_strMediaDir, strFile)))
+  if (!sound->Load(URIUtils::AddFileToFolder(m_strMediaDir, strFile)))
   {
     delete sound;
     return;
@@ -300,12 +300,12 @@ bool CGUIAudioManager::Load()
 
   if (g_guiSettings.GetString("lookandfeel.soundskin")=="SKINDEFAULT")
   {
-    m_strMediaDir = CUtil::AddFileToFolder(g_SkinInfo->Path(), "sounds");
+    m_strMediaDir = URIUtils::AddFileToFolder(g_SkinInfo->Path(), "sounds");
   }
   else
-    m_strMediaDir = CUtil::AddFileToFolder("special://xbmc/sounds", g_guiSettings.GetString("lookandfeel.soundskin"));
+    m_strMediaDir = URIUtils::AddFileToFolder("special://xbmc/sounds", g_guiSettings.GetString("lookandfeel.soundskin"));
 
-  CStdString strSoundsXml = CUtil::AddFileToFolder(m_strMediaDir, "sounds.xml");
+  CStdString strSoundsXml = URIUtils::AddFileToFolder(m_strMediaDir, "sounds.xml");
 
   //  Load our xml file
   TiXmlDocument xmlDoc;

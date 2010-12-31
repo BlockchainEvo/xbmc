@@ -26,11 +26,11 @@
 #include "threads/SingleLock.h"
 #include "utils/CharsetConverter.h"
 #include "utils/log.h"
+#include "utils/URIUtils.h"
 #include "addons/Skin.h"
 #ifdef _DEBUG
 #include "utils/TimeUtils.h"
 #endif
-#include "Util.h"
 #include "filesystem/File.h"
 #include "filesystem/Directory.h"
 #include <assert.h>
@@ -250,7 +250,7 @@ bool CGUITextureManager::CanLoad(const CStdString &texturePath) const
     return true;  // assume we have it
 
   // we can't (or shouldn't) be loading from remote paths, so check these
-  return CUtil::IsHD(texturePath);
+  return URIUtils::IsHD(texturePath);
 }
 
 bool CGUITextureManager::HasTexture(const CStdString &textureName, CStdString *path, int *bundle, int *size)
@@ -554,8 +554,8 @@ CStdString CGUITextureManager::GetTexturePath(const CStdString &textureName, boo
   { // texture doesn't include the full path, so check all fallbacks
     for (vector<CStdString>::iterator it = m_texturePaths.begin(); it != m_texturePaths.end(); ++it)
     {
-      CStdString path = CUtil::AddFileToFolder(it->c_str(), "media");
-      path = CUtil::AddFileToFolder(path, textureName);
+      CStdString path = URIUtils::AddFileToFolder(it->c_str(), "media");
+      path = URIUtils::AddFileToFolder(path, textureName);
       if (directory)
       {
         if (XFILE::CDirectory::Exists(path))

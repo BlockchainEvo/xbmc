@@ -28,6 +28,7 @@
 #include "Application.h"
 #include "Util.h"
 #include "network/libscrobbler/lastfmscrobbler.h"
+#include "utils/URIUtils.h"
 #include "utils/Weather.h"
 #include "PartyModeManager.h"
 #include "addons/Visualisation.h"
@@ -1035,8 +1036,8 @@ CStdString CGUIInfoManager::GetLabel(int info, int contextWindow)
     strLabel = g_weatherManager.GetInfo(WEATHER_LABEL_LOCATION);
     break;
   case WEATHER_FANART_CODE:
-    strLabel = CUtil::GetFileName(g_weatherManager.GetInfo(WEATHER_IMAGE_CURRENT_ICON));
-    CUtil::RemoveExtension(strLabel);
+    strLabel = URIUtils::GetFileName(g_weatherManager.GetInfo(WEATHER_IMAGE_CURRENT_ICON));
+    URIUtils::RemoveExtension(strLabel);
     break;
   case WEATHER_PLUGIN:
     strLabel = g_guiSettings.GetString("weather.script");
@@ -1101,9 +1102,9 @@ CStdString CGUIInfoManager::GetLabel(int info, int contextWindow)
     {
       // do this twice since we want the path outside the archive if this
       // is to be of use.
-      if (CUtil::IsInArchive(strLabel))
-        strLabel = CUtil::GetParentPath(strLabel);
-      strLabel = CUtil::GetParentPath(strLabel);
+      if (URIUtils::IsInArchive(strLabel))
+        strLabel = URIUtils::GetParentPath(strLabel);
+      strLabel = URIUtils::GetParentPath(strLabel);
     }
     break;
   case MUSICPLAYER_TITLE:
@@ -1281,8 +1282,8 @@ CStdString CGUIInfoManager::GetLabel(int info, int contextWindow)
         strLabel = CURL(((CGUIMediaWindow*)window)->CurrentDirectory().m_strPath).GetWithoutUserDetails();
         if (info==CONTAINER_FOLDERNAME)
         {
-          CUtil::RemoveSlashAtEnd(strLabel);
-          strLabel=CUtil::GetFileName(strLabel);
+          URIUtils::RemoveSlashAtEnd(strLabel);
+          strLabel=URIUtils::GetFileName(strLabel);
         }
       }
       break;
@@ -1296,7 +1297,7 @@ CStdString CGUIInfoManager::GetLabel(int info, int contextWindow)
         if (url.GetProtocol().Equals("plugin"))
         {
           strLabel = url.GetFileName();
-          CUtil::RemoveSlashAtEnd(strLabel);
+          URIUtils::RemoveSlashAtEnd(strLabel);
         }
       }
       break;
@@ -1557,7 +1558,7 @@ CStdString CGUIInfoManager::GetLabel(int info, int contextWindow)
         if (viz)
         {
           strLabel = viz->GetPresetName();
-          CUtil::RemoveExtension(strLabel);
+          URIUtils::RemoveExtension(strLabel);
         }
       }
     }
@@ -1791,7 +1792,7 @@ bool CGUIInfoManager::GetBool(int condition1, int contextWindow, const CGUIListI
     // the and the comparison string)
     CStdString theme = g_guiSettings.GetString("lookandfeel.skintheme");
     theme.ToLower();
-    CUtil::RemoveExtension(theme);
+    URIUtils::RemoveExtension(theme);
     bReturn = theme.Equals(m_stringParameters[condition - SKIN_HAS_THEME_START]);
   }
   else if (condition >= MULTI_INFO_START && condition <= MULTI_INFO_END)
@@ -2231,7 +2232,7 @@ bool CGUIInfoManager::GetMultiInfoBool(const GUIInfo &info, int contextWindow, c
         else
         {
           CGUIWindow *window = g_windowManager.GetWindow(m_nextWindowID);
-          if (window && CUtil::GetFileName(window->GetProperty("xmlfile")).Equals(m_stringParameters[info.GetData2()]))
+          if (window && URIUtils::GetFileName(window->GetProperty("xmlfile")).Equals(m_stringParameters[info.GetData2()]))
             bReturn = true;
         }
         break;
@@ -2241,7 +2242,7 @@ bool CGUIInfoManager::GetMultiInfoBool(const GUIInfo &info, int contextWindow, c
         else
         {
           CGUIWindow *window = g_windowManager.GetWindow(m_prevWindowID);
-          if (window && CUtil::GetFileName(window->GetProperty("xmlfile")).Equals(m_stringParameters[info.GetData2()]))
+          if (window && URIUtils::GetFileName(window->GetProperty("xmlfile")).Equals(m_stringParameters[info.GetData2()]))
             bReturn = true;
         }
         break;
@@ -3346,7 +3347,7 @@ void CGUIInfoManager::SetCurrentMovie(CFileItem &item)
   if (!item.HasThumbnail())
   {
     CStdString strPath, strFileName;
-    CUtil::Split(item.GetCachedVideoThumb(), strPath, strFileName);
+    URIUtils::Split(item.GetCachedVideoThumb(), strPath, strFileName);
 
     // create unique thumb for auto generated thumbs
     CStdString cachedThumb = strPath + "auto-" + strFileName;
@@ -3776,10 +3777,10 @@ CStdString CGUIInfoManager::GetItemLabel(const CFileItem *item, int info) const
     break;
   case LISTITEM_FILENAME:
     if (item->IsMusicDb() && item->HasMusicInfoTag())
-      return CUtil::GetFileName(item->GetMusicInfoTag()->GetURL());
+      return URIUtils::GetFileName(item->GetMusicInfoTag()->GetURL());
     if (item->IsVideoDb() && item->HasVideoInfoTag())
-      return CUtil::GetFileName(item->GetVideoInfoTag()->m_strFileNameAndPath);
-    return CUtil::GetFileName(item->m_strPath);
+      return URIUtils::GetFileName(item->GetVideoInfoTag()->m_strFileNameAndPath);
+    return URIUtils::GetFileName(item->m_strPath);
   case LISTITEM_DATE:
     if (item->m_dateTime.IsValid())
       return item->m_dateTime.GetAsLocalizedDate();
@@ -3900,21 +3901,21 @@ CStdString CGUIInfoManager::GetItemLabel(const CFileItem *item, int info) const
     {
       CStdString path;
       if (item->IsMusicDb() && item->HasMusicInfoTag())
-        CUtil::GetDirectory(item->GetMusicInfoTag()->GetURL(), path);
+        URIUtils::GetDirectory(item->GetMusicInfoTag()->GetURL(), path);
       else if (item->IsVideoDb() && item->HasVideoInfoTag())
       {
         if( item->m_bIsFolder )
 	  path = item->GetVideoInfoTag()->m_strPath;
         else
-          CUtil::GetParentPath(item->GetVideoInfoTag()->m_strFileNameAndPath, path);
+          URIUtils::GetParentPath(item->GetVideoInfoTag()->m_strFileNameAndPath, path);
       }
       else
-        CUtil::GetParentPath(item->m_strPath, path);
+        URIUtils::GetParentPath(item->m_strPath, path);
       path = CURL(path).GetWithoutUserDetails();
       if (info==CONTAINER_FOLDERNAME)
       {
-        CUtil::RemoveSlashAtEnd(path);
-        path=CUtil::GetFileName(path);
+        URIUtils::RemoveSlashAtEnd(path);
+        path=URIUtils::GetFileName(path);
       }
       CUtil::URLDecode(path);
       return path;
@@ -4193,7 +4194,7 @@ CStdString CGUIInfoManager::GetPictureLabel(int info) const
   else if (info == SLIDE_FILE_PATH)
   {
     CStdString path;
-    CUtil::GetDirectory(m_currentSlide->m_strPath, path);
+    URIUtils::GetDirectory(m_currentSlide->m_strPath, path);
     return CURL(path).GetWithoutUserDetails();
   }
   else if (info == SLIDE_FILE_SIZE)

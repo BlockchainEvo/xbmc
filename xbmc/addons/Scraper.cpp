@@ -29,6 +29,7 @@
 #include "utils/log.h"
 #include "settings/AdvancedSettings.h"
 #include "FileItem.h"
+#include "utils/URIUtils.h"
 #include "utils/XMLUtils.h"
 #include "music/MusicDatabase.h"
 #include "video/VideoDatabase.h"
@@ -189,14 +190,14 @@ CStdString CScraper::GetPathSettings()
 
 void CScraper::ClearCache()
 {
-  CStdString strCachePath = CUtil::AddFileToFolder(g_advancedSettings.m_cachePath, "scrapers");
+  CStdString strCachePath = URIUtils::AddFileToFolder(g_advancedSettings.m_cachePath, "scrapers");
 
   // create scraper cache dir if needed
   if (!CDirectory::Exists(strCachePath))
     CDirectory::Create(strCachePath);
 
-  strCachePath = CUtil::AddFileToFolder(strCachePath, ID());
-  CUtil::AddSlashAtEnd(strCachePath);
+  strCachePath = URIUtils::AddFileToFolder(strCachePath, ID());
+  URIUtils::AddSlashAtEnd(strCachePath);
 
   if (CDirectory::Exists(strCachePath))
   {

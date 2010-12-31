@@ -20,7 +20,7 @@
  */
 
 #include "VideoDatabaseDirectory.h"
-#include "Util.h"
+#include "utils/URIUtils.h"
 #include "VideoDatabaseDirectory/QueryParams.h"
 #include "video/VideoDatabase.h"
 #include "guilib/TextureManager.h"
@@ -114,7 +114,7 @@ bool CVideoDatabaseDirectory::GetQueryParams(const CStdString& strPath, CQueryPa
 void CVideoDatabaseDirectory::ClearDirectoryCache(const CStdString& strDirectory)
 {
   CFileItem directory(strDirectory, true);
-  CUtil::RemoveSlashAtEnd(directory.m_strPath);
+  URIUtils::RemoveSlashAtEnd(directory.m_strPath);
 
   Crc32 crc;
   crc.ComputeFromLowerCase(directory.m_strPath);

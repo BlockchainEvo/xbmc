@@ -25,6 +25,7 @@
 #include "FactoryDirectory.h"
 #include "settings/Settings.h"
 #include "Util.h"
+#include "utils/URIUtils.h"
 #include "Directory.h"
 #include "DirectoryCache.h"
 #include "storage/MediaManager.h"
@@ -159,7 +160,7 @@ bool CVirtualDirectory::IsSource(const CStdString& strPath) const
   // just to make sure there's no mixed slashing in share/default defines
   // ie. f:/video and f:\video was not be recognised as the same directory,
   // resulting in navigation to a lower directory then the share.
-  if(CUtil::IsDOSPath(strPathCpy))
+  if(URIUtils::IsDOSPath(strPathCpy))
     strPathCpy.Replace("/", "\\");
 
   VECSOURCES shares;
@@ -170,7 +171,7 @@ bool CVirtualDirectory::IsSource(const CStdString& strPath) const
     CStdString strShare = share.strPath;
     strShare.TrimRight("/");
     strShare.TrimRight("\\");
-    if(CUtil::IsDOSPath(strShare))
+    if(URIUtils::IsDOSPath(strShare))
       strShare.Replace("/", "\\");
     if (strShare == strPathCpy) return true;
   }
@@ -190,13 +191,13 @@ bool CVirtualDirectory::IsInSource(const CStdString &path) const
   VECSOURCES shares;
   GetSources(shares);
   int iShare = CUtil::GetMatchingSource(path, shares, isSourceName);
-  if (CUtil::IsOnDVD(path))
+  if (URIUtils::IsOnDVD(path))
   { // check to see if our share path is still available and of the same type, as it changes during autodetect
     // and GetMatchingSource() is too naive at it's matching
     for (unsigned int i = 0; i < shares.size(); i++)
     {
       CMediaSource &share = shares[i];
-      if (CUtil::IsOnDVD(share.strPath) && share.strPath.Equals(path.Left(share.strPath.GetLength())))
+      if (URIUtils::IsOnDVD(share.strPath) && share.strPath.Equals(path.Left(share.strPath.GetLength())))
         return true;
     }
     return false;

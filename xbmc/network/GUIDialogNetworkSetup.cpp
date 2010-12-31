@@ -26,7 +26,7 @@
 #include "dialogs/GUIDialogFileBrowser.h"
 #include "guilib/GUIWindowManager.h"
 #include "guilib/GUIEditControl.h"
-#include "Util.h"
+#include "utils/URIUtils.h"
 #include "URL.h"
 #include "guilib/LocalizeStrings.h"
 
@@ -156,7 +156,7 @@ void CGUIDialogNetworkSetup::OnServerBrowse()
   CMediaSource share;
   CStdString basePath = path;
   CStdString tempPath;
-  while (CUtil::GetParentPath(basePath, tempPath))
+  while (URIUtils::GetParentPath(basePath, tempPath))
     basePath = tempPath;
   share.strPath = basePath;
   // don't include the user details in the share name

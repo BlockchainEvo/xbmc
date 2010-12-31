@@ -23,6 +23,7 @@
 #include "Directory.h"
 #include "settings/Settings.h"
 #include "Util.h"
+#include "utils/URIUtils.h"
 #include "URL.h"
 #include "guilib/GUIWindowManager.h"
 #include "dialogs/GUIDialogProgress.h"
@@ -142,7 +143,7 @@ bool CVirtualPathDirectory::GetTypeAndSource(const CStdString& strPath, CStdStri
 {
   // format: virtualpath://type/sourcename
   CStdString strTemp = strPath;
-  CUtil::RemoveSlashAtEnd(strTemp);
+  URIUtils::RemoveSlashAtEnd(strTemp);
   CStdString strTest = "virtualpath://";
   if (strTemp.Left(strTest.length()).Equals(strTest))
   {

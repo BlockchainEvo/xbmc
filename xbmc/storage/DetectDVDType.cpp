@@ -40,7 +40,7 @@
 #endif
 #include "settings/AdvancedSettings.h"
 #include "GUIUserMessages.h"
-#include "Util.h"
+#include "utils/URIUtils.h"
 #include "pictures/Picture.h"
 #if defined (LIBCDIO_VERSION_NUM) && (LIBCDIO_VERSION_NUM > 77) || defined (__APPLE__)
 #define USING_CDIO78
@@ -328,7 +328,7 @@ void CDetectDVDMedia::SetNewDVDShareUrl( const CStdString& strNewUrl, bool bCDDA
     StringUtils::SplitString(g_advancedSettings.m_dvdThumbs, "|", thumbs);
     for (unsigned int i = 0; i < thumbs.size(); ++i)
     {
-      CUtil::AddFileToFolder(m_diskPath, thumbs[i], strThumb);
+      URIUtils::AddFileToFolder(m_diskPath, thumbs[i], strThumb);
       CLog::Log(LOGDEBUG,"%s: looking for disc thumb:[%s]", __FUNCTION__, strThumb.c_str());
       if (CFile::Exists(strThumb))
       {

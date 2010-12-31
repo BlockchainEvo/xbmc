@@ -20,11 +20,9 @@
  */
 
 
-#if (defined HAVE_CONFIG_H) && (!defined WIN32)
-  #include "config.h"
-#endif
 #include "system.h"
 #include "Util.h"
+#include "utils/URIUtils.h"
 #include "FactoryFileDirectory.h"
 #ifdef HAS_FILESYSTEM
 #include "OGGFileDirectory.h"
@@ -61,7 +59,7 @@ CFactoryFileDirectory::~CFactoryFileDirectory(void)
 // return NULL + set pItem->m_bIsFolder to remove it completely from list.
 IFileDirectory* CFactoryFileDirectory::Create(const CStdString& strPath, CFileItem* pItem, const CStdString& strMask)
 {
-  CStdString strExtension=CUtil::GetExtension(strPath);
+  CStdString strExtension=URIUtils::GetExtension(strPath);
   strExtension.MakeLower();
 
 #ifdef HAS_FILESYSTEM
@@ -117,7 +115,7 @@ IFileDirectory* CFactoryFileDirectory::Create(const CStdString& strPath, CFileIt
   if (strExtension.Equals(".zip"))
   {
     CStdString strUrl;
-    CUtil::CreateArchivePath(strUrl, "zip", strPath, "");
+    URIUtils::CreateArchivePath(strUrl, "zip", strPath, "");
 
     CFileItemList items;
     CDirectory::GetDirectory(strUrl, items, strMask);
@@ -138,7 +136,7 @@ IFileDirectory* CFactoryFileDirectory::Create(const CStdString& strPath, CFileIt
   if (strExtension.Equals(".rar") || strExtension.Equals(".001"))
   {
     CStdString strUrl;
-    CUtil::CreateArchivePath(strUrl, "rar", strPath, "");
+    URIUtils::CreateArchivePath(strUrl, "rar", strPath, "");
 
     vector<CStdString> tokens;
     CUtil::Tokenize(strPath,tokens,".");

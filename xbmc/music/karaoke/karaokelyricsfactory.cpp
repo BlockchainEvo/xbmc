@@ -21,7 +21,7 @@
 
 // C++ Implementation: karaokelyricsfactory
 
-#include "Util.h"
+#include "utils/URIUtils.h"
 #include "filesystem/File.h"
 
 #include "karaokelyricscdg.h"
@@ -35,8 +35,8 @@
 bool CheckAndCreateLyrics( const CStdString & songName, CKaraokeLyrics ** lyricptr )
 {
   CStdString ext, filename = songName;
-  CUtil::RemoveExtension( filename );
-  CUtil::GetExtension( songName, ext );
+  URIUtils::RemoveExtension( filename );
+  URIUtils::GetExtension( songName, ext );
 
   // LRC lyrics have .lrc extension
   if ( XFILE::CFile::Exists( filename + ".lrc" ) )

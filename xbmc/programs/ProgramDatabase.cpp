@@ -26,6 +26,7 @@
 #include "settings/GUISettings.h"
 #include "settings/Settings.h"
 #include "utils/log.h"
+#include "utils/URIUtils.h"
 
 using namespace XFILE;
 
@@ -198,7 +199,7 @@ uint32_t CProgramDatabase::GetProgramInfo(CFileItem *item)
       if (item->m_dwSize == -1)
       {
         CStdString strPath;
-        CUtil::GetDirectory(item->m_strPath,strPath);
+        URIUtils::GetDirectory(item->m_strPath,strPath);
         int64_t iSize = CGUIWindowFileManager::CalculateFolderSize(strPath);
         CStdString strSQL=PrepareSQL("update files set iSize=%I64u where strFileName like '%s'",iSize,item->m_strPath.c_str());
         m_pDS->exec(strSQL.c_str());
@@ -234,7 +235,7 @@ bool CProgramDatabase::AddProgramInfo(CFileItem *item, unsigned int titleID)
     lastAccessed.u.HighPart = time.dwHighDateTime;
 
     CStdString strPath;
-    CUtil::GetDirectory(item->m_strPath,strPath);
+    URIUtils::GetDirectory(item->m_strPath,strPath);
     // special case - programs in root of sources
     bool bIsShare=false;
     CUtil::GetMatchingSource(strPath,g_settings.m_programSources,bIsShare);

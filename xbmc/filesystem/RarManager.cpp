@@ -26,6 +26,7 @@
 #endif
 #include "Util.h"
 #include "utils/CharsetConverter.h"
+#include "utils/URIUtils.h"
 #include "threads/SingleLock.h"
 #include "Directory.h"
 #include "SpecialProtocol.h"
@@ -107,7 +108,7 @@ bool CRarManager::CacheRarredFile(CStdString& strPathInCache, const CStdString& 
     {
       pDialog->SetHeading(120);
       pDialog->SetLine(0, 645);
-      pDialog->SetLine(1, CUtil::GetFileName(strPathInRar));
+      pDialog->SetLine(1, URIUtils::GetFileName(strPathInRar));
       pDialog->SetLine(2, "");
       pDialog->DoModal();
       if (!pDialog->IsConfirmed())
@@ -143,7 +144,7 @@ bool CRarManager::CacheRarredFile(CStdString& strPathInCache, const CStdString& 
 #endif
   //g_charsetConverter.unknownToUTF8(strPath);
   CStdString strCachedPath;
-  CUtil::AddFileToFolder(strDir + "rarfolder%04d", CUtil::GetFileName(strPathInRar), strCachedPath);
+  URIUtils::AddFileToFolder(strDir + "rarfolder%04d", URIUtils::GetFileName(strPathInRar), strCachedPath);
   strCachedPath = CUtil::GetNextPathname(strCachedPath, 9999);
   if (strCachedPath.IsEmpty())
   {
@@ -152,7 +153,7 @@ bool CRarManager::CacheRarredFile(CStdString& strPathInCache, const CStdString& 
   }
   strCachedPath = CUtil::MakeLegalPath(strCachedPath);
   CStdString strCachedDir;
-  CUtil::GetDirectory(strCachedPath, strCachedDir);
+  URIUtils::GetDirectory(strCachedPath, strCachedDir);
   int64_t iOffset = -1;
   if (iRes != 2)
   {
@@ -186,7 +187,7 @@ bool CRarManager::CacheRarredFile(CStdString& strPathInCache, const CStdString& 
       bShowProgress=true;
 
     CStdString strDir2(strCachedDir);
-    CUtil::RemoveSlashAtEnd(strDir2);
+    URIUtils::RemoveSlashAtEnd(strDir2);
     if (!CDirectory::Exists(strDir2))
       CDirectory::Create(strDir2);
     iRes = urarlib_get(const_cast<char*>(strRarPath.c_str()), const_cast<char*>(strDir2.c_str()),
@@ -262,7 +263,7 @@ bool CRarManager::GetFilesInRar(CFileItemList& vecpItems, const CStdString& strR
 
   ArchiveList_struct* pIterator;
   CStdString strCompare = strPathInRar;
-  if (!CUtil::HasSlashAtEnd(strCompare) && !strCompare.IsEmpty())
+  if (!URIUtils::HasSlashAtEnd(strCompare) && !strCompare.IsEmpty())
     strCompare += '/';
   for( pIterator = pFileList; pIterator  ; pIterator ? pIterator = pIterator->next : NULL)
   {
@@ -444,7 +445,7 @@ void CRarManager::ExtractArchive(const CStdString& strArchive, const CStdString&
 {
 #ifdef HAS_FILESYSTEM_RAR
   CStdString strPath2(strPath);
-  CUtil::RemoveSlashAtEnd(strPath2);
+  URIUtils::RemoveSlashAtEnd(strPath2);
   if (!urarlib_get(const_cast<char*>(strArchive.c_str()), const_cast<char*>(strPath2.c_str()),NULL))
   {
     CLog::Log(LOGERROR,"rarmanager::extractarchive error while extracting %s", strArchive.c_str());

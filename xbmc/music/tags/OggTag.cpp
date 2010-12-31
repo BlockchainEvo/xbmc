@@ -19,13 +19,10 @@
  *
  */
 
-#if (defined HAVE_CONFIG_H) && (!defined WIN32)
-  #include "config.h"
-#endif
 #include "OggTag.h"
 #include "cores/paplayer/OggCallback.h"
 #include "filesystem/File.h"
-#include "Util.h"
+#include "utils/URIUtils.h"
 
 using namespace MUSIC_INFO;
 using namespace XFILE;
@@ -52,15 +49,15 @@ bool COggTag::Read(const CStdString& strFile1)
   m_musicInfoTag.SetURL(strFile);
 
   CStdString strExtension;
-  CUtil::GetExtension(strFile, strExtension);
+  URIUtils::GetExtension(strFile, strExtension);
   if (strExtension==".oggstream")
   {
-    CStdString strFileName=CUtil::GetFileName(strFile);
+    CStdString strFileName=URIUtils::GetFileName(strFile);
     int iStart=strFileName.ReverseFind("-")+1;
     currentStream = atoi(strFileName.substr(iStart, strFileName.size()-iStart-10).c_str())-1;
     CStdString strPath=strFile;
-    CUtil::GetDirectory(strPath, strFile);
-    CUtil::RemoveSlashAtEnd(strFile);   // we want the filename
+    URIUtils::GetDirectory(strPath, strFile);
+    URIUtils::RemoveSlashAtEnd(strFile);   // we want the filename
   }
 
   CFile file;

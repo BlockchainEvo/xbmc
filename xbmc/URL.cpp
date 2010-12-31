@@ -22,6 +22,7 @@
 #include "URL.h"
 #include "utils/RegExp.h"
 #include "utils/log.h"
+#include "utils/URIUtils.h"
 #include "Util.h"
 #include "filesystem/File.h"
 #include "FileItem.h"
@@ -466,12 +467,12 @@ const CStdString CURL::GetFileNameWithoutPath() const
 {
   // *.zip and *.rar store the actual zip/rar path in the hostname of the url
   if ((m_strProtocol == "rar" || m_strProtocol == "zip") && m_strFileName.IsEmpty())
-    return CUtil::GetFileName(m_strHostName);
+    return URIUtils::GetFileName(m_strHostName);
 
   // otherwise, we've already got the filepath, so just grab the filename portion
   CStdString file(m_strFileName);
-  CUtil::RemoveSlashAtEnd(file);
-  return CUtil::GetFileName(file);
+  URIUtils::RemoveSlashAtEnd(file);
+  return URIUtils::GetFileName(file);
 }
 
 char CURL::GetDirectorySeparator() const

@@ -31,7 +31,7 @@
 #include "dialogs/GUIDialogFileBrowser.h"
 #include "GUIUserMessages.h"
 #include "guilib/GUIWindowManager.h"
-#include "Util.h"
+#include "utils/URIUtils.h"
 #include "URL.h"
 #include "FileItem.h"
 #include "filesystem/File.h"
@@ -299,7 +299,7 @@ bool CGUIWindowAddonBrowser::CheckHash(const CStdString& zipFile,
 {
   if (hash.IsEmpty())
     return true;
-  CStdString package = CUtil::AddFileToFolder("special://home/addons/packages/", zipFile);
+  CStdString package = URIUtils::AddFileToFolder("special://home/addons/packages/", zipFile);
   CStdString md5 = CUtil::GetFileMD5(package);
   if (!md5.Equals(hash))
   {
@@ -324,26 +324,26 @@ void CGUIWindowAddonBrowser::OnJobComplete(unsigned int jobID,
       {
         CStdString strFolder = job->GetItems()[i]->m_strPath;
         // zip is downloaded - now extract it
-        if (CUtil::IsZIP(strFolder))
+        if (URIUtils::IsZIP(strFolder))
         {
           CSingleLock lock(m_critSection);
           JobMap::iterator i = find_if(m_downloadJobs.begin(), m_downloadJobs.end(), bind2nd(find_map(), jobID));
-          if (i != m_downloadJobs.end() && !CheckHash(CUtil::GetFileName(strFolder), i->second.hash))
+          if (i != m_downloadJobs.end() && !CheckHash(URIUtils::GetFileName(strFolder), i->second.hash))
             break;
           AddJob(strFolder);
         }
         else
         {
           // zip extraction job is done
-          CUtil::RemoveSlashAtEnd(strFolder);
-          strFolder = CUtil::AddFileToFolder("special://home/addons/",
-                                             CUtil::GetFileName(strFolder));
+          URIUtils::RemoveSlashAtEnd(strFolder);
+          strFolder = URIUtils::AddFileToFolder("special://home/addons/",
+                                              URIUtils::GetFileName(strFolder));
           AddonPtr addon;
           bool update=false;
           if (CAddonMgr::Get().LoadAddonDescription(strFolder, addon))
           {
             CStdString strFolder2;
-            CUtil::GetDirectory(strFolder,strFolder2);
+            URIUtils::GetDirectory(strFolder,strFolder2);
             AddonPtr addon2;
             update = CAddonMgr::Get().GetAddon(addon->ID(),addon2);
             CAddonMgr::Get().FindAddons();
@@ -385,7 +385,7 @@ void CGUIWindowAddonBrowser::OnJobComplete(unsigned int jobID,
           }
           else
           {
-            CStdString addonID = CUtil::GetFileName(strFolder);
+            CStdString addonID = URIUtils::GetFileName(strFolder);
             ReportInstallError(addonID, addonID);
             CLog::Log(LOGERROR,"Could not read addon description of %s", addonID.c_str());
             CFileItemList list;
@@ -415,9 +415,9 @@ unsigned int CGUIWindowAddonBrowser::AddJob(const CStdString& path)
 {
   CFileItemList list;
   CStdString dest="special://home/addons/packages/";
-  CStdString package = CUtil::AddFileToFolder("special://home/addons/packages/",
-                                              CUtil::GetFileName(path));
-  if (CUtil::HasSlashAtEnd(path))
+  CStdString package = URIUtils::AddFileToFolder("special://home/addons/packages/",
+                                                 URIUtils::GetFileName(path));
+  if (URIUtils::HasSlashAtEnd(path))
   {
     dest = "special://home/addons/";
     list.Add(CFileItemPtr(new CFileItem(path,true)));
@@ -428,7 +428,7 @@ unsigned int CGUIWindowAddonBrowser::AddJob(const CStdString& path)
     if (CFile::Exists(package))
     {
       CStdString archive;
-      CUtil::CreateArchivePath(archive,"zip",package,"");
+      URIUtils::CreateArchivePath(archive,"zip",package,"");
 
       CFileItemList archivedFiles;
       CDirectory::GetDirectory(archive, archivedFiles);
@@ -436,15 +436,15 @@ unsigned int CGUIWindowAddonBrowser::AddJob(const CStdString& path)
       if (archivedFiles.Size() != 1 || !archivedFiles[0]->m_bIsFolder)
       {
         CFile::Delete(package);
-        ReportInstallErrorZip(CUtil::GetFileName(path));
-        CLog::Log(LOGERROR, "Package %s is not a valid addon", CUtil::GetFileName(path).c_str());
+        ReportInstallErrorZip(URIUtils::GetFileName(path));
+        CLog::Log(LOGERROR, "Package %s is not a valid addon", URIUtils::GetFileName(path).c_str());
         return false;
       }
       list.Add(CFileItemPtr(new CFileItem(archivedFiles[0]->m_strPath,true)));
       // check whether this is an active skin - we need to unload it if so
       CURL url(archivedFiles[0]->m_strPath);
       CStdString addon = url.GetFileName();
-      CUtil::RemoveSlashAtEnd(addon);
+      URIUtils::RemoveSlashAtEnd(addon);
       if (g_guiSettings.GetString("lookandfeel.skin") == addon)
       { // we're updating the current skin - we have to unload it first
         CSingleLock lock(m_critSection);
@@ -670,7 +670,7 @@ void CGUIWindowAddonBrowser::InstallAddon(const CStdString &addonID, bool force 
     if (!window)
       return;
     CStdString path(addon->Path());
-    if (!referer.IsEmpty() && CUtil::IsInternetStream(path))
+    if (!referer.IsEmpty() && URIUtils::IsInternetStream(path))
     {
       CURL url(path);
       url.SetProtocolOptions(referer);

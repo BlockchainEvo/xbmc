@@ -35,6 +35,7 @@
 #include "settings/GUISettings.h"
 #include "guilib/LocalizeStrings.h"
 #include "utils/log.h"
+#include "utils/URIUtils.h"
 
 using namespace PLAYLIST;
 
@@ -371,10 +372,10 @@ void CGUIWindowVideoPlaylist::SavePlayList()
   {
     // need 2 rename it
     CStdString strPath, strFolder;
-    CUtil::AddFileToFolder(g_guiSettings.GetString("system.playlistspath"), "video", strFolder);
+    URIUtils::AddFileToFolder(g_guiSettings.GetString("system.playlistspath"), "video", strFolder);
     strNewFileName = CUtil::MakeLegalFileName(strNewFileName);
     strNewFileName += ".m3u";
-    CUtil::AddFileToFolder(strFolder, strNewFileName, strPath);
+    URIUtils::AddFileToFolder(strFolder, strNewFileName, strPath);
 
     CPlayListM3U playlist;
     playlist.Add(*m_vecItems);

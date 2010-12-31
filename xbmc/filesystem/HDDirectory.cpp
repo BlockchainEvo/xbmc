@@ -27,6 +27,7 @@
 #include "FileItem.h"
 #include "utils/AutoPtrHandle.h"
 #include "utils/AliasShortcutUtils.h"
+#include "utils/URIUtils.h"
 
 #ifndef _LINUX
 #include "utils/CharsetConverter.h"
@@ -68,14 +69,14 @@ bool CHDDirectory::GetDirectory(const CStdString& strPath1, CFileItemList &items
   CURL url(strPath);
 
   memset(&wfd, 0, sizeof(wfd));
-  if (!CUtil::HasSlashAtEnd(strPath) )
+  if (!URIUtils::HasSlashAtEnd(strPath) )
 #ifndef _LINUX
     strRoot += "\\";
   strRoot.Replace("/", "\\");
 #else
     strRoot += "/";
 #endif
-  if (CUtil::IsDVD(strRoot) && m_isoReader.IsScanned())
+  if (URIUtils::IsDVD(strRoot) && m_isoReader.IsScanned())
   {
     // Reset iso reader and remount or
     // we can't access the dvd-rom
@@ -120,7 +121,7 @@ bool CHDDirectory::GetDirectory(const CStdString& strPath1, CFileItemList &items
             pItem->m_strPath = strRoot;
             pItem->m_strPath += strLabel;
             pItem->m_bIsFolder = true;
-            CUtil::AddSlashAtEnd(pItem->m_strPath);
+            URIUtils::AddSlashAtEnd(pItem->m_strPath);
             FileTimeToLocalFileTime(&wfd.ftLastWriteTime, &localTime);
             pItem->m_dateTime=localTime;
 
@@ -154,7 +155,7 @@ bool CHDDirectory::GetDirectory(const CStdString& strPath1, CFileItemList &items
 bool CHDDirectory::Create(const char* strPath)
 {
   CStdString strPath1 = strPath;
-  if (!CUtil::HasSlashAtEnd(strPath1))
+  if (!URIUtils::HasSlashAtEnd(strPath1))
 #ifndef _LINUX
     strPath1 += '\\';
 #else
@@ -196,7 +197,7 @@ bool CHDDirectory::Exists(const char* strPath)
 #ifndef _LINUX
   CStdStringW strWReplaced;
   strReplaced.Replace("/","\\");
-  if (!CUtil::HasSlashAtEnd(strReplaced))
+  if (!URIUtils::HasSlashAtEnd(strReplaced))
     strReplaced += '\\';
   g_charsetConverter.utf8ToW(strReplaced, strWReplaced, false);
   DWORD attributes = GetFileAttributesW(strWReplaced);

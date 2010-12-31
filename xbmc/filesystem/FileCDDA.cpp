@@ -29,6 +29,7 @@
 #include "URL.h"
 #include "storage/MediaManager.h"
 #include "utils/log.h"
+#include "utils/URIUtils.h"
 
 using namespace MEDIA_DETECT;
 using namespace XFILE;
@@ -197,7 +198,7 @@ bool CFileCDDA::IsValidFile(const CURL& url)
 {
   // Only .cdda files are supported
   CStdString strExtension;
-  CUtil::GetExtension(url.Get(), strExtension);
+  URIUtils::GetExtension(url.Get(), strExtension);
   strExtension.MakeLower();
 
   return (strExtension == ".cdda");

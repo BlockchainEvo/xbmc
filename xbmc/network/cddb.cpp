@@ -36,7 +36,7 @@
 #include "music/tags/Id3Tag.h"
 #include "settings/AdvancedSettings.h"
 #include "utils/StringUtils.h"
-#include "Util.h"
+#include "utils/URIUtils.h"
 #include "filesystem/File.h"
 #include "GUIInfoManager.h"
 #include "utils/CharsetConverter.h"
@@ -1096,7 +1096,7 @@ CStdString Xcddb::GetCacheFile(unsigned int disc_id) const
 {
   CStdString strFileName;
   strFileName.Format("%x.cddb", disc_id);
-  return CUtil::AddFileToFolder(cCacheDir, strFileName);
+  return URIUtils::AddFileToFolder(cCacheDir, strFileName);
 }
 
 CStdString Xcddb::TrimToUTF8(const CStdString &untrimmedText)

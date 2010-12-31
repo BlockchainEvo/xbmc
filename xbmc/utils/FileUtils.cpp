@@ -6,7 +6,7 @@
 #include "guilib/LocalizeStrings.h"
 #include "JobManager.h"
 #include "FileOperationJob.h"
-#include "Util.h"
+#include "URIUtils.h"
 #include "filesystem/MultiPathDirectory.h"
 #include <vector>
 
@@ -23,7 +23,7 @@ bool CFileUtils::DeleteItem(const CFileItemPtr &item)
   {
     pDialog->SetHeading(122);
     pDialog->SetLine(0, 125);
-    pDialog->SetLine(1, CUtil::GetFileName(item->m_strPath));
+    pDialog->SetLine(1, URIUtils::GetFileName(item->m_strPath));
     pDialog->SetLine(2, "");
     pDialog->DoModal();
     if (!pDialog->IsConfirmed()) return false;
@@ -45,14 +45,14 @@ bool CFileUtils::DeleteItem(const CFileItemPtr &item)
 bool CFileUtils::RenameFile(const CStdString &strFile)
 {
   CStdString strFileAndPath(strFile);
-  CUtil::RemoveSlashAtEnd(strFileAndPath);
-  CStdString strFileName = CUtil::GetFileName(strFileAndPath);
+  URIUtils::RemoveSlashAtEnd(strFileAndPath);
+  CStdString strFileName = URIUtils::GetFileName(strFileAndPath);
   CStdString strPath = strFile.Left(strFileAndPath.size() - strFileName.size());
   if (CGUIDialogKeyboard::ShowAndGetInput(strFileName, g_localizeStrings.Get(16013), false))
   {
     strPath += strFileName;
     CLog::Log(LOGINFO,"FileUtils: rename %s->%s\n", strFileAndPath.c_str(), strPath.c_str());
-    if (CUtil::IsMultiPath(strFileAndPath))
+    if (URIUtils::IsMultiPath(strFileAndPath))
     { // special case for multipath renames - rename all the paths.
       vector<CStdString> paths;
       CMultiPathDirectory::GetPaths(strFileAndPath, paths);
@@ -60,9 +60,9 @@ bool CFileUtils::RenameFile(const CStdString &strFile)
       for (unsigned int i = 0; i < paths.size(); ++i)
       {
         CStdString filePath(paths[i]);
-        CUtil::RemoveSlashAtEnd(filePath);
-        CUtil::GetDirectory(filePath, filePath);
-        CUtil::AddFileToFolder(filePath, strFileName, filePath);
+        URIUtils::RemoveSlashAtEnd(filePath);
+        URIUtils::GetDirectory(filePath, filePath);
+        URIUtils::AddFileToFolder(filePath, strFileName, filePath);
         if (CFile::Rename(paths[i], filePath))
           success = true;
       }

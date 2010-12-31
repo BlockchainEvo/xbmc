@@ -20,9 +20,7 @@
  */
 
 // python.h should always be included first before any other includes
-#if (defined HAVE_CONFIG_H) && (!defined WIN32)
-  #include "config.h"
-#endif
+#include "system.h"
 #if (defined USE_EXTERNAL_PYTHON)
   #if (defined HAVE_LIBPYTHON2_6)
     #include <python2.6/Python.h>
@@ -47,7 +45,7 @@
 #include "guilib/LocalizeStrings.h"
 #include "utils/log.h"
 #include "threads/SingleLock.h"
-#include "Util.h"
+#include "utils/URIUtils.h"
 #include "addons/AddonManager.h"
 
 #include "XBPyThread.h"
@@ -164,8 +162,8 @@ void XBPyThread::Process()
   // get path from script file name and add python path's
   // this is used for python so it will search modules from script path first
   CStdString scriptDir;
-  CUtil::GetDirectory(_P(m_source), scriptDir);
-  CUtil::RemoveSlashAtEnd(scriptDir);
+  URIUtils::GetDirectory(_P(m_source), scriptDir);
+  URIUtils::RemoveSlashAtEnd(scriptDir);
   CStdString path = scriptDir;
 
   // add on any addon modules the user has installed
@@ -318,12 +316,12 @@ void XBPyThread::Process()
         CStdString desc;
         CStdString path;
         CStdString script;
-        CUtil::Split(m_source, path, script);
+        URIUtils::Split(m_source, path, script);
         if (script.Equals("default.py"))
         {
           CStdString path2;
-          CUtil::RemoveSlashAtEnd(path);
-          CUtil::Split(path, path2, script);
+          URIUtils::RemoveSlashAtEnd(path);
+          URIUtils::Split(path, path2, script);
         }
 
         desc.Format(g_localizeStrings.Get(2100), script);

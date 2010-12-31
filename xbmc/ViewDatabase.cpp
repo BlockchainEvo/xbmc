@@ -20,7 +20,7 @@
  */
 
 #include "ViewDatabase.h"
-#include "Util.h"
+#include "utils/URIUtils.h"
 #include "settings/Settings.h"
 #include "ViewState.h"
 #include "utils/log.h"
@@ -81,7 +81,7 @@ bool CViewDatabase::GetViewState(const CStdString &path, int window, CViewState 
     if (NULL == m_pDS.get()) return false;
 
     CStdString path1(path);
-    CUtil::AddSlashAtEnd(path1);
+    URIUtils::AddSlashAtEnd(path1);
     if (path1.IsEmpty()) path1 = "root://";
 
     CStdString sql = PrepareSQL("select * from view where window = %i and path like '%s'", window, path1.c_str());
@@ -112,7 +112,7 @@ bool CViewDatabase::SetViewState(const CStdString &path, int window, const CView
     if (NULL == m_pDS.get()) return false;
 
     CStdString path1(path);
-    CUtil::AddSlashAtEnd(path1);
+    URIUtils::AddSlashAtEnd(path1);
     if (path1.IsEmpty()) path1 = "root://";
 
     CStdString sql = PrepareSQL("select idView from view where window = %i and path like '%s'", window, path1.c_str());

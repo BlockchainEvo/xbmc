@@ -25,6 +25,7 @@
 #include "filesystem/SmartPlaylistDirectory.h"
 #include "filesystem/File.h"
 #include "utils/CharsetConverter.h"
+#include "utils/URIUtils.h"
 #include "utils/XMLUtils.h"
 #include "video/VideoDatabase.h"
 #include "Util.h"
@@ -782,8 +783,8 @@ TiXmlElement *CSmartPlaylist::OpenAndReadName(const CStdString &path)
   else
   {
     m_playlistName = CUtil::GetTitleFromPath(path);
-    if (CUtil::GetExtension(m_playlistName) == ".xsp")
-      CUtil::RemoveExtension(m_playlistName);
+    if (URIUtils::GetExtension(m_playlistName) == ".xsp")
+      URIUtils::RemoveExtension(m_playlistName);
   }
   return root;
 }

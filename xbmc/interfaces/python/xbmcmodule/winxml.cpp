@@ -19,9 +19,7 @@
  *
  */
 
-#if (defined HAVE_CONFIG_H) && (!defined WIN32)
-  #include "config.h"
-#endif
+#include "system.h"
 #include "winxml.h"
 #if (defined USE_EXTERNAL_PYTHON)
   #if (defined HAVE_LIBPYTHON2_6)
@@ -40,7 +38,7 @@
 #include "pyutil.h"
 #include "GUIPythonWindowXML.h"
 #include "addons/Skin.h"
-#include "Util.h"
+#include "utils/URIUtils.h"
 #include "filesystem/File.h"
 
 using namespace std;
@@ -96,9 +94,9 @@ namespace PYXBMC
     if (!XFILE::CFile::Exists(strSkinPath))
     {
       // Check for the matching folder for the skin in the fallback skins folder
-      CStdString fallbackPath = CUtil::AddFileToFolder(strFallbackPath, "resources");
-      fallbackPath = CUtil::AddFileToFolder(fallbackPath, "skins");
-      CStdString basePath = CUtil::AddFileToFolder(fallbackPath, g_SkinInfo->ID());
+      CStdString fallbackPath = URIUtils::AddFileToFolder(strFallbackPath, "resources");
+      fallbackPath = URIUtils::AddFileToFolder(fallbackPath, "skins");
+      CStdString basePath = URIUtils::AddFileToFolder(fallbackPath, g_SkinInfo->ID());
       strSkinPath = g_SkinInfo->GetSkinPath(strXMLname, &res, basePath);
       if (!XFILE::CFile::Exists(strSkinPath))
       {
@@ -106,7 +104,7 @@ namespace PYXBMC
         CStdString str("none");
         AddonProps props(str, ADDON_SKIN, str);
         CSkinInfo skinInfo(props, CSkinInfo::TranslateResolution(resolution, RES_HDTV_720p));
-        basePath = CUtil::AddFileToFolder(fallbackPath, strDefault);
+        basePath = URIUtils::AddFileToFolder(fallbackPath, strDefault);
         
         skinInfo.Start(basePath);
         strSkinPath = skinInfo.GetSkinPath(strXMLname, &res, basePath);

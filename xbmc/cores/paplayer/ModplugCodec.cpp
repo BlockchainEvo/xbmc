@@ -20,7 +20,7 @@
  */
 
 #include "ModplugCodec.h"
-#include "Util.h"
+#include "utils/URIUtils.h"
 #include "filesystem/File.h"
 #include "utils/log.h"
 
@@ -48,7 +48,7 @@ bool ModplugCodec::Init(const CStdString &strFile, unsigned int filecache)
     return false;
 
   // set correct codec name
-  CUtil::GetExtension(strFile,m_CodecName);
+  URIUtils::GetExtension(strFile,m_CodecName);
   m_CodecName.erase(0,1);
   m_CodecName.ToUpper();
 

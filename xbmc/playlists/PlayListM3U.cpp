@@ -26,6 +26,7 @@
 #include "utils/CharsetConverter.h"
 #include "utils/RegExp.h"
 #include "utils/log.h"
+#include "utils/URIUtils.h"
 #ifndef _LINUX
 #include "cores/dllloader/exports/emu_msvcrt.h"
 #endif
@@ -69,8 +70,8 @@ bool CPlayListM3U::Load(const CStdString& strFileName)
 
   Clear();
 
-  m_strPlayListName = CUtil::GetFileName(strFileName);
-  CUtil::GetParentPath(strFileName, m_strBasePath);
+  m_strPlayListName = URIUtils::GetFileName(strFileName);
+  URIUtils::GetParentPath(strFileName, m_strBasePath);
 
   CFile file;
   if (!file.Open(strFileName) )
@@ -105,7 +106,7 @@ bool CPlayListM3U::Load(const CStdString& strFileName)
       CStdString strFileName = strLine;
 
       // Skip self - do not load playlist recursively
-      if (CUtil::GetFileName(strFileName).Equals(m_strPlayListName))
+      if (URIUtils::GetFileName(strFileName).Equals(m_strPlayListName))
         continue;
 
       if (strFileName.length() > 0)
@@ -115,11 +116,11 @@ bool CPlayListM3U::Load(const CStdString& strFileName)
         // If no info was read from from the extended tag information, use the file name
         if (strInfo.length() == 0)
         {
-          strInfo = CUtil::GetFileName(strFileName);
+          strInfo = URIUtils::GetFileName(strFileName);
         }
 
         // should substitition occur befor or after charset conversion??
-        if (CUtil::IsRemote(m_strBasePath) && g_advancedSettings.m_pathSubstitutions.size() > 0)
+        if (URIUtils::IsRemote(m_strBasePath) && g_advancedSettings.m_pathSubstitutions.size() > 0)
           strFileName = CUtil::SubstitutePath(strFileName);
 
         // Get the full path file name and add it to the the play list

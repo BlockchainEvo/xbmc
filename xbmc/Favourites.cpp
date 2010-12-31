@@ -27,6 +27,7 @@
 #include "FileItem.h"
 #include "tinyXML/tinyxml.h"
 #include "utils/log.h"
+#include "utils/URIUtils.h"
 #include "settings/AdvancedSettings.h"
 
 bool CFavourites::Load(CFileItemList &items)
@@ -39,7 +40,7 @@ bool CFavourites::Load(CFileItemList &items)
     CFavourites::LoadFavourites(favourites, items);
   else
     CLog::Log(LOGDEBUG, "CFavourites::Load - no system favourites found, skipping");
-  CUtil::AddFileToFolder(g_settings.GetProfileUserDataFolder(), "favourites.xml", favourites);
+  URIUtils::AddFileToFolder(g_settings.GetProfileUserDataFolder(), "favourites.xml", favourites);
   if(XFILE::CFile::Exists(favourites))
     CFavourites::LoadFavourites(favourites, items);
   else
@@ -107,7 +108,7 @@ bool CFavourites::Save(const CFileItemList &items)
     rootNode->InsertEndChild(favNode);
   }
 
-  CUtil::AddFileToFolder(g_settings.GetProfileUserDataFolder(), "favourites.xml", favourites);
+  URIUtils::AddFileToFolder(g_settings.GetProfileUserDataFolder(), "favourites.xml", favourites);
   return doc.SaveFile(favourites);
 }
 

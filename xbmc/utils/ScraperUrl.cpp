@@ -29,6 +29,7 @@
 #include "filesystem/FileZip.h"
 #include "pictures/Picture.h"
 #include "Util.h"
+#include "URIUtils.h"
 
 #include <cstring>
 #include <sstream>
@@ -185,9 +186,9 @@ bool CScraperUrl::Get(const SUrlEntry& scrURL, std::string& strHTML, XFILE::CFil
 
   if (!scrURL.m_cache.IsEmpty())
   {
-    CUtil::AddFileToFolder(g_advancedSettings.m_cachePath,
-                           "scrapers/"+cacheContext+"/"+scrURL.m_cache,
-                           strCachePath);
+    URIUtils::AddFileToFolder(g_advancedSettings.m_cachePath,
+                              "scrapers/"+cacheContext+"/"+scrURL.m_cache,
+                              strCachePath);
     if (XFILE::CFile::Exists(strCachePath))
     {
       XFILE::CFile file;
@@ -233,9 +234,9 @@ bool CScraperUrl::Get(const SUrlEntry& scrURL, std::string& strHTML, XFILE::CFil
   if (!scrURL.m_cache.IsEmpty())
   {
     CStdString strCachePath;
-    CUtil::AddFileToFolder(g_advancedSettings.m_cachePath,
-                           "scrapers/"+cacheContext+"/"+scrURL.m_cache,
-                           strCachePath);
+    URIUtils::AddFileToFolder(g_advancedSettings.m_cachePath,
+                              "scrapers/"+cacheContext+"/"+scrURL.m_cache,
+                              strCachePath);
     XFILE::CFile file;
     if (file.OpenForWrite(strCachePath,true))
       file.Write(strHTML.data(),strHTML.size());
@@ -270,7 +271,7 @@ bool CScraperUrl::DownloadThumbnail(const CStdString &thumb, const CScraperUrl::
   {
     try
     {
-      return CPicture::CreateThumbnailFromMemory((const BYTE *)thumbData.c_str(), thumbData.size(), CUtil::GetExtension(entry.m_url), thumb);
+      return CPicture::CreateThumbnailFromMemory((const BYTE *)thumbData.c_str(), thumbData.size(), URIUtils::GetExtension(entry.m_url), thumb);
     }
     catch (...)
     {

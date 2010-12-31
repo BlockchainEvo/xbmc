@@ -21,7 +21,7 @@
 
 #include "MultiPathFile.h"
 #include "MultiPathDirectory.h"
-#include "Util.h"
+#include "utils/URIUtils.h"
 #include "URL.h"
 
 using namespace XFILE;
@@ -41,7 +41,7 @@ bool CMultiPathFile::Open(const CURL& url)
 {
   // grab the filename off the url
   CStdString path, fileName;
-  CUtil::Split(url.Get(), path, fileName);
+  URIUtils::Split(url.Get(), path, fileName);
   vector<CStdString> vecPaths;
   if (!CMultiPathDirectory::GetPaths(path, vecPaths))
     return false;
@@ -49,7 +49,7 @@ bool CMultiPathFile::Open(const CURL& url)
   for (unsigned int i = 0; i < vecPaths.size(); i++)
   {
     CStdString filePath = vecPaths[i];
-    filePath = CUtil::AddFileToFolder(filePath, fileName);
+    filePath = URIUtils::AddFileToFolder(filePath, fileName);
     if (m_file.Open(filePath))
       return true;
   }
@@ -60,7 +60,7 @@ bool CMultiPathFile::Exists(const CURL& url)
 {
   // grab the filename off the url
   CStdString path, fileName;
-  CUtil::Split(url.Get(), path, fileName);
+  URIUtils::Split(url.Get(), path, fileName);
   vector<CStdString> vecPaths;
   if (!CMultiPathDirectory::GetPaths(path, vecPaths))
     return false;
@@ -68,7 +68,7 @@ bool CMultiPathFile::Exists(const CURL& url)
   for (unsigned int i = 0; i < vecPaths.size(); i++)
   {
     CStdString filePath = vecPaths[i];
-    filePath = CUtil::AddFileToFolder(filePath, fileName);
+    filePath = URIUtils::AddFileToFolder(filePath, fileName);
     if (CFile::Exists(filePath))
       return true;
   }
@@ -79,7 +79,7 @@ int CMultiPathFile::Stat(const CURL& url, struct __stat64* buffer)
 {
   // grab the filename off the url
   CStdString path, fileName;
-  CUtil::Split(url.Get(), path, fileName);
+  URIUtils::Split(url.Get(), path, fileName);
   vector<CStdString> vecPaths;
   if (!CMultiPathDirectory::GetPaths(path, vecPaths))
     return false;
@@ -87,7 +87,7 @@ int CMultiPathFile::Stat(const CURL& url, struct __stat64* buffer)
   for (unsigned int i = 0; i < vecPaths.size(); i++)
   {
     CStdString filePath = vecPaths[i];
-    filePath = CUtil::AddFileToFolder(filePath, fileName);
+    filePath = URIUtils::AddFileToFolder(filePath, fileName);
     int ret = CFile::Stat(filePath, buffer);
     if (ret == 0)
       return ret;

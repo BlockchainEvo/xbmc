@@ -22,7 +22,7 @@
 #include "system.h"
 #include "interfaces/Builtins.h"
 #include "ButtonTranslator.h"
-#include "Util.h"
+#include "utils/URIUtils.h"
 #include "settings/Settings.h"
 #include "guilib/Key.h"
 #include "filesystem/File.h"
@@ -341,7 +341,7 @@ bool CButtonTranslator::Load()
 #define REMOTEMAP "IRSSmap.xml"
 #endif
   CStdString lircmapPath;
-  CUtil::AddFileToFolder("special://xbmc/system/", REMOTEMAP, lircmapPath);
+  URIUtils::AddFileToFolder("special://xbmc/system/", REMOTEMAP, lircmapPath);
   lircRemotesMap.clear();
   if(CFile::Exists(lircmapPath))
     success |= LoadLircMap(lircmapPath);

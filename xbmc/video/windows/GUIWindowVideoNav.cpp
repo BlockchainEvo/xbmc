@@ -49,6 +49,7 @@
 #include "guilib/LocalizeStrings.h"
 #include "storage/MediaManager.h"
 #include "utils/log.h"
+#include "utils/URIUtils.h"
 #include "TextureCache.h"
 
 using namespace XFILE;
@@ -332,7 +333,7 @@ bool CGUIWindowVideoNav::GetDirectory(const CStdString &strDirectory, CFileItemL
           strLabel.Format(g_localizeStrings.Get(20358), params.GetSeason());
 
         CFileItem item(strLabel);
-        CUtil::GetParentPath(items.m_strPath,item.m_strPath);
+        URIUtils::GetParentPath(items.m_strPath,item.m_strPath);
         item.m_bIsFolder = true;
         item.SetCachedSeasonThumb();
         if (item.HasThumbnail())
@@ -350,7 +351,7 @@ bool CGUIWindowVideoNav::GetDirectory(const CStdString &strDirectory, CFileItemL
             CQueryParams params2;
             dir.GetQueryParams(items[0]->m_strPath,params2);
             strLabel.Format(g_localizeStrings.Get(20358), params2.GetSeason());
-            CUtil::GetParentPath(items.m_strPath,strPath);
+            URIUtils::GetParentPath(items.m_strPath,strPath);
           }
           else
           {
@@ -447,7 +448,7 @@ void CGUIWindowVideoNav::UpdateButtons()
   {
     // get playlist name from path
     CStdString strDummy;
-    CUtil::Split(m_vecItems->m_strPath, strDummy, strLabel);
+    URIUtils::Split(m_vecItems->m_strPath, strDummy, strLabel);
   }
   // everything else is from a videodb:// path
   else
@@ -569,7 +570,7 @@ void CGUIWindowVideoNav::OnInfo(CFileItem* pItem, ADDON::ScraperPtr& scraper)
   else
   {
     CStdString strPath,strFile;
-    CUtil::Split(pItem->m_strPath,strPath,strFile);
+    URIUtils::Split(pItem->m_strPath,strPath,strFile);
     scraper = m_database.GetScraperForPath(strPath);
   }
   m_database.Close();
@@ -635,16 +636,16 @@ void CGUIWindowVideoNav::OnDeleteItem(CFileItemPtr pItem)
     else
       strDeletePath=pItem->GetVideoInfoTag()->m_strFileNameAndPath;
 
-    if (CUtil::GetFileName(strDeletePath).Equals("VIDEO_TS.IFO"))
+    if (URIUtils::GetFileName(strDeletePath).Equals("VIDEO_TS.IFO"))
     {
-      CUtil::GetDirectory(strDeletePath.Mid(0),strDeletePath);
+      URIUtils::GetDirectory(strDeletePath.Mid(0),strDeletePath);
       if (strDeletePath.Right(9).Equals("VIDEO_TS/"))
       {
-        CUtil::RemoveSlashAtEnd(strDeletePath);
-        CUtil::GetDirectory(strDeletePath.Mid(0),strDeletePath);
+        URIUtils::RemoveSlashAtEnd(strDeletePath);
+        URIUtils::GetDirectory(strDeletePath.Mid(0),strDeletePath);
       }
     }
-    if (CUtil::HasSlashAtEnd(strDeletePath))
+    if (URIUtils::HasSlashAtEnd(strDeletePath))
       pItem->m_bIsFolder=true;
 
     if (g_guiSettings.GetBool("filelists.allowfiledeletion") &&
@@ -734,7 +735,7 @@ bool CGUIWindowVideoNav::DeleteItem(CFileItem* pItem, bool bUnavailable /* = fal
   else
   {
     CStdString strDirectory;
-    CUtil::GetDirectory(path,strDirectory);
+    URIUtils::GetDirectory(path,strDirectory);
     database.SetPathHash(strDirectory,"");
   }
 
@@ -1008,7 +1009,7 @@ bool CGUIWindowVideoNav::OnContextButton(int itemNumber, CONTEXT_BUTTON button)
       // Grab the thumbnails from the web
       CStdString strPath;
       CFileItemList items;
-      CUtil::AddFileToFolder(g_advancedSettings.m_cachePath,"imdbthumbs",strPath);
+      URIUtils::AddFileToFolder(g_advancedSettings.m_cachePath,"imdbthumbs",strPath);
       CUtil::WipeDir(strPath);
       XFILE::CDirectory::Create(strPath);
       CFileItemPtr noneitem(new CFileItem("thumb://None", false));
@@ -1063,7 +1064,7 @@ bool CGUIWindowVideoNav::OnContextButton(int itemNumber, CONTEXT_BUTTON button)
         CStdString picturePath;
 
         CStdString strPath = m_vecItems->Get(itemNumber)->m_strPath;
-        CUtil::RemoveSlashAtEnd(strPath);
+        URIUtils::RemoveSlashAtEnd(strPath);
 
         int nPos=strPath.ReverseFind("/");
         if (nPos>-1)
@@ -1077,7 +1078,7 @@ bool CGUIWindowVideoNav::OnContextButton(int itemNumber, CONTEXT_BUTTON button)
         }
 
         CStdString strThumb;
-        CUtil::AddFileToFolder(picturePath,"folder.jpg",strThumb);
+        URIUtils::AddFileToFolder(picturePath,"folder.jpg",strThumb);
         if (XFILE::CFile::Exists(strThumb))
         {
           CFileItemPtr pItem(new CFileItem(strThumb,false));
@@ -1094,7 +1095,7 @@ bool CGUIWindowVideoNav::OnContextButton(int itemNumber, CONTEXT_BUTTON button)
       {
         CStdString picturePath;
         CStdString strThumb;
-        CUtil::AddFileToFolder(picturePath,"folder.jpg",strThumb);
+        URIUtils::AddFileToFolder(picturePath,"folder.jpg",strThumb);
         if (XFILE::CFile::Exists(strThumb))
         {
           CFileItemPtr pItem(new CFileItem(strThumb,false));

@@ -19,7 +19,7 @@
 */
 
 #include "FileXBMSP.h"
-#include "Util.h"
+#include "utils/URIUtils.h"
 #include "Directory.h"
 #include "SectionLoader.h"
 #include "URL.h"
@@ -118,7 +118,7 @@ bool CFileXBMSP::Open(const CURL& urlUtf8)
                                             strPassword);
   }
 
-  CStdString strFile = CUtil::GetFileName(strFileName);
+  CStdString strFile = URIUtils::GetFileName(strFileName);
 
   char szPath[1024];
   strcpy(szPath, "");

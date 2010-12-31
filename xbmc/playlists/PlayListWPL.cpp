@@ -25,6 +25,7 @@
 #include "settings/AdvancedSettings.h"
 #include "filesystem/File.h"
 #include "utils/log.h"
+#include "utils/URIUtils.h"
 
 using namespace XFILE;
 using namespace PLAYLIST;
@@ -92,10 +93,10 @@ bool CPlayListWPL::LoadData(istream& stream)
     CStdString strFileName = pMediaElement->Attribute("src");
     if (strFileName.size())
     {
-      if (CUtil::IsRemote(m_strBasePath) && g_advancedSettings.m_pathSubstitutions.size() > 0)
+      if (URIUtils::IsRemote(m_strBasePath) && g_advancedSettings.m_pathSubstitutions.size() > 0)
         strFileName = CUtil::SubstitutePath(strFileName);
       CUtil::GetQualifiedFilename(m_strBasePath, strFileName);
-      CStdString strDescription = CUtil::GetFileName(strFileName);
+      CStdString strDescription = URIUtils::GetFileName(strFileName);
       CFileItemPtr newItem(new CFileItem(strDescription));
       newItem->m_strPath = strFileName;
       Add(newItem);

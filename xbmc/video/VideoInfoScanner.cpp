@@ -42,6 +42,7 @@
 #include "guilib/LocalizeStrings.h"
 #include "utils/TimeUtils.h"
 #include "utils/log.h"
+#include "utils/URIUtils.h"
 #include "utils/Variant.h"
 
 using namespace std;
@@ -279,11 +280,11 @@ namespace VIDEO
       }
       else
       {
-        CFileItemPtr item(new CFileItem(CUtil::GetFileName(strDirectory)));
+        CFileItemPtr item(new CFileItem(URIUtils::GetFileName(strDirectory)));
         item->m_strPath = strDirectory;
         item->m_bIsFolder = true;
         items.Add(item);
-        CUtil::GetParentPath(item->m_strPath, items.m_strPath);
+        URIUtils::GetParentPath(item->m_strPath, items.m_strPath);
       }
     }
 
@@ -422,7 +423,7 @@ namespace VIDEO
     else
     {
       CStdString strPath;
-      CUtil::GetDirectory(pItem->m_strPath,strPath);
+      URIUtils::GetDirectory(pItem->m_strPath,strPath);
       idTvShow = m_database.GetTvShowId(strPath);
     }
     if (idTvShow > -1 && (fetchEpisodes || !pItem->m_bIsFolder))
@@ -706,7 +707,7 @@ namespace VIDEO
 
 
       CStdString strPathX, strFileX;
-      CUtil::Split(items[x]->m_strPath, strPathX, strFileX);
+      URIUtils::Split(items[x]->m_strPath, strPathX, strFileX);
       //CLog::Log(LOGDEBUG,"%i:%s:%s", x, strPathX.c_str(), strFileX.c_str());
 
       int y = x + 1;
@@ -715,7 +716,7 @@ namespace VIDEO
         while (y < items.Size())
         {
           CStdString strPathY, strFileY;
-          CUtil::Split(items[y]->m_strPath, strPathY, strFileY);
+          URIUtils::Split(items[y]->m_strPath, strPathY, strFileY);
           //CLog::Log(LOGDEBUG," %i:%s:%s", y, strPathY.c_str(), strFileY.c_str());
 
           if (strPathY.Equals(strPathX))
@@ -742,10 +743,10 @@ namespace VIDEO
       if (items[i]->m_bIsFolder)
         continue;
       CStdString strPath;
-      CUtil::GetDirectory(items[i]->m_strPath, strPath);
-      CUtil::RemoveSlashAtEnd(strPath); // want no slash for the test that follows
+      URIUtils::GetDirectory(items[i]->m_strPath, strPath);
+      URIUtils::RemoveSlashAtEnd(strPath); // want no slash for the test that follows
 
-      if (CUtil::GetFileName(strPath).Equals("sample"))
+      if (URIUtils::GetFileName(strPath).Equals("sample"))
         continue;
 
       // Discard all exclude files defined by regExExcludes
@@ -1121,7 +1122,7 @@ namespace VIDEO
       if (bApplyToDir && localThumb.IsEmpty())
       {
         CStdString strParent;
-        CUtil::GetParentPath(pItem->m_strPath, strParent);
+        URIUtils::GetParentPath(pItem->m_strPath, strParent);
         CFileItem item(*pItem);
         item.m_strPath = strParent;
         item.m_bIsFolder = true;
@@ -1144,8 +1145,8 @@ namespace VIDEO
             onlineThumb.Find("\\") < 0)
         {
           CStdString strPath;
-          CUtil::GetDirectory(pItem->m_strPath, strPath);
-          onlineThumb = CUtil::AddFileToFolder(strPath, onlineThumb);
+          URIUtils::GetDirectory(pItem->m_strPath, strPath);
+          onlineThumb = URIUtils::AddFileToFolder(strPath, onlineThumb);
         }
         DownloadImage(onlineThumb, cachedThumb, true, pDialog);
       }
@@ -1352,25 +1353,25 @@ namespace VIDEO
     {
       // file
       CStdString strExtension;
-      CUtil::GetExtension(item->m_strPath, strExtension);
+      URIUtils::GetExtension(item->m_strPath, strExtension);
 
-      if (CUtil::IsInRAR(item->m_strPath)) // we have a rarred item - we want to check outside the rars
+      if (URIUtils::IsInRAR(item->m_strPath)) // we have a rarred item - we want to check outside the rars
       {
         CFileItem item2(*item);
         CURL url(item->m_strPath);
         CStdString strPath;
-        CUtil::GetDirectory(url.GetHostName(), strPath);
-        CUtil::AddFileToFolder(strPath, CUtil::GetFileName(item->m_strPath),item2.m_strPath);
+        URIUtils::GetDirectory(url.GetHostName(), strPath);
+        URIUtils::AddFileToFolder(strPath, URIUtils::GetFileName(item->m_strPath),item2.m_strPath);
         return GetnfoFile(&item2, bGrabAny);
       }
 
       // grab the folder path
       CStdString strPath;
-      CUtil::GetDirectory(item->m_strPath, strPath);
+      URIUtils::GetDirectory(item->m_strPath, strPath);
 
       if (bGrabAny)
       { // looking up by folder name - movie.nfo takes priority
-        nfoFile = CUtil::AddFileToFolder(strPath, "movie.nfo");
+        nfoFile = URIUtils::AddFileToFolder(strPath, "movie.nfo");
         if (CFile::Exists(nfoFile))
           return nfoFile;
       }
@@ -1399,7 +1400,7 @@ namespace VIDEO
           nfoFile = item->m_strPath;
         // no, create .nfo file
         else
-          nfoFile = CUtil::ReplaceExtension(item->m_strPath, ".nfo");
+          nfoFile = URIUtils::ReplaceExtension(item->m_strPath, ".nfo");
       }
 
       // test file existence
@@ -1408,24 +1409,24 @@ namespace VIDEO
 
       if (nfoFile.IsEmpty()) // final attempt - strip off any cd1 folders
       {
-        CUtil::RemoveSlashAtEnd(strPath); // need no slash for the check that follows
+        URIUtils::RemoveSlashAtEnd(strPath); // need no slash for the check that follows
         CFileItem item2;
         if (strPath.Mid(strPath.size()-3).Equals("cd1"))
         {
           strPath = strPath.Mid(0,strPath.size()-3);
-          CUtil::AddFileToFolder(strPath, CUtil::GetFileName(item->m_strPath),item2.m_strPath);
+          URIUtils::AddFileToFolder(strPath, URIUtils::GetFileName(item->m_strPath),item2.m_strPath);
           return GetnfoFile(&item2, bGrabAny);
         }
       }
 
       if (!nfoFile.IsEmpty() && item->IsOpticalMediaFile())
       {
-        CStdString parent(CUtil::GetParentPath(item->m_strPath));
+        CStdString parent(URIUtils::GetParentPath(item->m_strPath));
         CStdString parentFolder(parent);
-        CUtil::RemoveSlashAtEnd(parentFolder);
+        URIUtils::RemoveSlashAtEnd(parentFolder);
         if (parentFolder == "VIDEO_TS" || parentFolder == "BDMV")
         { // check for movie.nfo in the parent folder
-          parent = CUtil::GetParentPath(parent);
+          parent = URIUtils::GetParentPath(parent);
           CFileItem parentDirectory(parent, true);
           nfoFile = GetnfoFile(&parentDirectory, true);
         }
@@ -1439,7 +1440,7 @@ namespace VIDEO
       CDirectory dir;
       CStdString strPath = item->m_strPath;
       if (!item->m_bIsFolder)
-        CUtil::GetDirectory(item->m_strPath, strPath);
+        URIUtils::GetDirectory(item->m_strPath, strPath);
       if (dir.GetDirectory(strPath, items, ".nfo") && items.Size())
       {
         int numNFO = -1;
@@ -1591,7 +1592,7 @@ namespace VIDEO
         {
           for (int j=0;j<tbnItems.Size();++j)
           {
-            CStdString strCheck = CUtil::GetFileName(tbnItems[j]->m_strPath);
+            CStdString strCheck = URIUtils::GetFileName(tbnItems[j]->m_strPath);
             strCheck.ToLower();
             if (reg.RegFind(strCheck.c_str()) > -1)
             {
@@ -1620,7 +1621,7 @@ namespace VIDEO
         CStdString thumbFile = actors[i].strName;
         thumbFile.Replace(" ","_");
         thumbFile += ".tbn";
-        CStdString strLocal = CUtil::AddFileToFolder(CUtil::AddFileToFolder(strPath, ".actors"), thumbFile);
+        CStdString strLocal = URIUtils::AddFileToFolder(URIUtils::AddFileToFolder(strPath, ".actors"), thumbFile);
         if (CFile::Exists(strLocal))
           CPicture::CreateThumbnail(strLocal, strThumb);
         else if (!actors[i].thumbUrl.GetFirstThumb().m_url.IsEmpty())
@@ -1636,7 +1637,7 @@ namespace VIDEO
         || (info->Content() == CONTENT_TVSHOWS && !pItem->m_bIsFolder))
       strNfoFile = GetnfoFile(pItem, bGrabAny);
     if (info->Content() == CONTENT_TVSHOWS && pItem->m_bIsFolder)
-      CUtil::AddFileToFolder(pItem->m_strPath, "tvshow.nfo", strNfoFile);
+      URIUtils::AddFileToFolder(pItem->m_strPath, "tvshow.nfo", strNfoFile);
 
     CNfoFile::NFOResult result=CNfoFile::NO_NFO;
     if (!strNfoFile.IsEmpty() && CFile::Exists(strNfoFile))
@@ -1740,18 +1741,18 @@ namespace VIDEO
       strCheck = CStackDirectory::GetFirstStackedFile(item.m_strPath);
 
     CStdString strDirectory;
-    CUtil::GetDirectory(strCheck, strDirectory);
-    if (CUtil::IsInRAR(strCheck))
+    URIUtils::GetDirectory(strCheck, strDirectory);
+    if (URIUtils::IsInRAR(strCheck))
     {
       CStdString strPath=strDirectory;
-      CUtil::GetParentPath(strPath, strDirectory);
+      URIUtils::GetParentPath(strPath, strDirectory);
     }
     if (item.IsStack())
     {
       strCheck = strDirectory;
-      CUtil::RemoveSlashAtEnd(strCheck);
-      if (CUtil::GetFileName(strCheck).size() == 3 && CUtil::GetFileName(strCheck).Left(2).Equals("cd"))
-        CUtil::GetDirectory(strCheck, strDirectory);
+      URIUtils::RemoveSlashAtEnd(strCheck);
+      if (URIUtils::GetFileName(strCheck).size() == 3 && URIUtils::GetFileName(strCheck).Left(2).Equals("cd"))
+        URIUtils::GetDirectory(strCheck, strDirectory);
     }
     return strDirectory;
   }

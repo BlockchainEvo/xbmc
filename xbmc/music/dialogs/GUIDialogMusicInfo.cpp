@@ -39,6 +39,7 @@
 #include "settings/GUISettings.h"
 #include "guilib/LocalizeStrings.h"
 #include "utils/log.h"
+#include "utils/URIUtils.h"
 #include "TextureCache.h"
 
 using namespace std;
@@ -404,7 +405,7 @@ void CGUIDialogMusicInfo::OnGetThumb()
     database.Open();
     CStdString strArtistPath;
     if (database.GetArtistPath(m_artist.idArtist,strArtistPath))
-      CUtil::AddFileToFolder(strArtistPath,"folder.jpg",localThumb);
+      URIUtils::AddFileToFolder(strArtistPath,"folder.jpg",localThumb);
   }
   else
     localThumb = m_albumItem->GetUserMusicThumb();

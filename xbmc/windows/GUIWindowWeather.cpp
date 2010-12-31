@@ -27,7 +27,7 @@
 #include "utils/Weather.h"
 #include "settings/GUISettings.h"
 #include "guilib/GUIWindowManager.h"
-#include "Util.h"
+#include "utils/URIUtils.h"
 #ifdef HAS_PYTHON
 #include "interfaces/python/XBPython.h"
 #endif
@@ -282,8 +282,8 @@ void CGUIWindowWeather::SetProperties()
   SetProperty("Current.DewPoint", g_weatherManager.GetInfo(WEATHER_LABEL_CURRENT_DEWP));
   SetProperty("Current.Humidity", g_weatherManager.GetInfo(WEATHER_LABEL_CURRENT_HUMI));
   // we use the icons code number for fanart as it's the safest way
-  CStdString fanartcode = CUtil::GetFileName(g_weatherManager.GetInfo(WEATHER_IMAGE_CURRENT_ICON));
-  CUtil::RemoveExtension(fanartcode);
+  CStdString fanartcode = URIUtils::GetFileName(g_weatherManager.GetInfo(WEATHER_IMAGE_CURRENT_ICON));
+  URIUtils::RemoveExtension(fanartcode);
   SetProperty("Current.FanartCode", fanartcode);
 
   // Future weather
@@ -296,8 +296,8 @@ void CGUIWindowWeather::SetProperties()
     SetProperty(day + "LowTemp", g_weatherManager.GetForecast(i).m_low);
     SetProperty(day + "Outlook", g_weatherManager.GetForecast(i).m_overview);
     SetProperty(day + "OutlookIcon", g_weatherManager.GetForecast(i).m_icon);
-    fanartcode = CUtil::GetFileName(g_weatherManager.GetForecast(i).m_icon);
-    CUtil::RemoveExtension(fanartcode);
+    fanartcode = URIUtils::GetFileName(g_weatherManager.GetForecast(i).m_icon);
+    URIUtils::RemoveExtension(fanartcode);
     SetProperty(day + "FanartCode", fanartcode);
   }
 }

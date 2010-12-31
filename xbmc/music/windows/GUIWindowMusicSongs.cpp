@@ -36,6 +36,7 @@
 #include "settings/GUISettings.h"
 #include "guilib/LocalizeStrings.h"
 #include "utils/log.h"
+#include "utils/URIUtils.h"
 
 #define CONTROL_BTNVIEWASICONS     2
 #define CONTROL_BTNSORTBY          3
@@ -92,7 +93,7 @@ bool CGUIWindowMusicSongs::OnMessage(CGUIMessage& message)
       if (directory.IsHD())
       {
         CStdString strParent;
-        CUtil::GetParentPath(directory.m_strPath, strParent);
+        URIUtils::GetParentPath(directory.m_strPath, strParent);
         if (directory.m_strPath == m_vecItems->m_strPath || strParent == m_vecItems->m_strPath)
         {
           Update(m_vecItems->m_strPath);

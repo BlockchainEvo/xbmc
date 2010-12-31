@@ -28,11 +28,11 @@
 #include "filesystem/File.h"
 #include "utils/LangCodeExpander.h"
 #include "LangInfo.h"
-#include "Util.h"
 #include "settings/GUISettings.h"
 #include "settings/Settings.h"
 #include "utils/StringUtils.h"
 #include "utils/SystemInfo.h"
+#include "utils/URIUtils.h"
 #include "utils/XMLUtils.h"
 #include "utils/log.h"
 
@@ -704,7 +704,7 @@ bool CAdvancedSettings::Load()
   // TODO: Should cache path be given in terms of our predefined paths??
   //       Are we even going to have predefined paths??
   CSettings::GetPath(pRootElement, "cachepath", m_cachePath);
-  CUtil::AddSlashAtEnd(m_cachePath);
+  URIUtils::AddSlashAtEnd(m_cachePath);
 
   g_LangCodeExpander.LoadUserCodes(pRootElement->FirstChildElement("languagecodes"));
 

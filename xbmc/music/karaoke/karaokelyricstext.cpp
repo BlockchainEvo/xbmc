@@ -29,7 +29,7 @@
 #include "guilib/GUITextLayout.h"
 #include "guilib/GUIFont.h"
 #include "karaokelyricstext.h"
-#include "Util.h"
+#include "utils/URIUtils.h"
 #include "filesystem/File.h"
 #include "guilib/GUIFontManager.h"
 #include "addons/Skin.h"
@@ -577,8 +577,8 @@ void CKaraokeLyricsText::rescanLyrics()
   // Prepare a new first lyric entry with song name and artist.
   if ( m_songName.IsEmpty() )
   {
-    m_songName = CUtil::GetFileName( getSongFile() );
-    CUtil::RemoveExtension( m_songName );
+    m_songName = URIUtils::GetFileName( getSongFile() );
+    URIUtils::RemoveExtension( m_songName );
   }
 
   // Split the lyrics into per-character array

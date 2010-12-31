@@ -60,6 +60,7 @@
 #include "utils/StringUtils.h"
 #include "utils/log.h"
 #include "utils/FileUtils.h"
+#include "utils/URIUtils.h"
 
 #include "addons/Skin.h"
 
@@ -399,7 +400,7 @@ bool CGUIWindowVideoBase::ShowIMDB(CFileItem *item, const ScraperPtr &info2)
           //       database.  Possible solutions are to store the paths in the db separately and rely on the show
           //       stacking stuff, or to modify GetTvShowId to do support multipath:// shares
           CStdString strParentDirectory;
-          CUtil::GetParentPath(item->m_strPath, strParentDirectory);
+          URIUtils::GetParentPath(item->m_strPath, strParentDirectory);
           if (m_database.GetTvShowId(strParentDirectory) < 0)
           {
             CLog::Log(LOGERROR,"%s: could not add episode [%s]. tvshow does not exist yet..", __FUNCTION__, item->m_strPath.c_str());
@@ -596,9 +597,9 @@ bool CGUIWindowVideoBase::ShowIMDB(CFileItem *item, const ScraperPtr &info2)
       }
 
       if (item->m_bIsFolder)
-        CUtil::GetParentPath(strPath,list.m_strPath);
+        URIUtils::GetParentPath(strPath,list.m_strPath);
       else
-        CUtil::GetDirectory(strPath,list.m_strPath);
+        URIUtils::GetDirectory(strPath,list.m_strPath);
 
       int iString=198;
       if (info->Content() == CONTENT_TVSHOWS)
@@ -741,7 +742,7 @@ void CGUIWindowVideoBase::AddItemToPlayList(const CFileItemPtr &pItem, CFileItem
       if (items[i]->m_bIsFolder)
       {
         CStdString strPath = items[i]->m_strPath;
-        CUtil::RemoveSlashAtEnd(strPath);
+        URIUtils::RemoveSlashAtEnd(strPath);
         strPath.ToLower();
         if (strPath.size() > 6)
         {
@@ -931,7 +932,7 @@ bool CGUIWindowVideoBase::OnInfo(int iItem)
       strDir = item->GetVideoInfoTag()->m_strPath;
     }
     else
-      CUtil::GetDirectory(item->m_strPath,strDir);
+      URIUtils::GetDirectory(item->m_strPath,strDir);
 
     SScanSettings settings;
     bool foundDirectly = false;
@@ -1050,7 +1051,7 @@ void CGUIWindowVideoBase::GetContextButtons(int itemNumber, CContextButtons &but
 
       if (!item->IsPlugin() && !item->IsAddonsPath() && !item->IsLiveTV())
       {
-        if (CUtil::IsStack(path))
+        if (URIUtils::IsStack(path))
         {
           vector<int> times;
           if (m_database.GetStackTimes(path,times))
@@ -1836,7 +1837,7 @@ void CGUIWindowVideoBase::OnSearchItemFound(const CFileItem* pSelItem)
   {
     CStdString strPath = pSelItem->m_strPath;
     CStdString strParentPath;
-    CUtil::GetParentPath(strPath, strParentPath);
+    URIUtils::GetParentPath(strPath, strParentPath);
 
     Update(strParentPath);
 
@@ -1847,7 +1848,7 @@ void CGUIWindowVideoBase::OnSearchItemFound(const CFileItem* pSelItem)
 
     strPath = pSelItem->m_strPath;
     CURL url(strPath);
-    if (pSelItem->IsSmb() && !CUtil::HasSlashAtEnd(strPath))
+    if (pSelItem->IsSmb() && !URIUtils::HasSlashAtEnd(strPath))
       strPath += "/";
 
     for (int i = 0; i < m_vecItems->Size(); i++)
@@ -1863,7 +1864,7 @@ void CGUIWindowVideoBase::OnSearchItemFound(const CFileItem* pSelItem)
   else
   {
     CStdString strPath;
-    CUtil::GetDirectory(pSelItem->m_strPath, strPath);
+    URIUtils::GetDirectory(pSelItem->m_strPath, strPath);
 
     Update(strPath);
 

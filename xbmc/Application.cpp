@@ -415,11 +415,11 @@ extern "C" void __stdcall update_emu_environ();
 //
 static void CopyUserDataIfNeeded(const CStdString &strPath, const CStdString &file)
 {
-  CStdString destPath = CUtil::AddFileToFolder(strPath, file);
+  CStdString destPath = URIUtils::AddFileToFolder(strPath, file);
   if (!CFile::Exists(destPath))
   {
     // need to copy it across
-    CStdString srcPath = CUtil::AddFileToFolder("special://xbmc/userdata/", file);
+    CStdString srcPath = URIUtils::AddFileToFolder("special://xbmc/userdata/", file);
     CFile::Cache(srcPath, destPath);
   }
 }
@@ -511,7 +511,7 @@ bool CApplication::Create()
   CUtil::GetHomePath(strExecutablePath);
 
   // if we are running from DVD our UserData location will be TDATA
-  if (CUtil::IsDVD(strExecutablePath))
+  if (URIUtils::IsDVD(strExecutablePath))
   {
     // TODO: Should we copy over any UserData folder from the DVD?
     if (!CFile::Exists("special://masterprofile/guisettings.xml")) // first run - cache userdata folder
@@ -519,7 +519,7 @@ bool CApplication::Create()
       CFileItemList items;
       CUtil::GetRecursiveListing("special://xbmc/userdata",items,"");
       for (int i=0;i<items.Size();++i)
-          CFile::Cache(items[i]->m_strPath,"special://masterprofile/"+CUtil::GetFileName(items[i]->m_strPath));
+          CFile::Cache(items[i]->m_strPath,"special://masterprofile/"+URIUtils::GetFileName(items[i]->m_strPath));
     }
     g_settings.m_logFolder = "special://masterprofile/";
   }
@@ -772,11 +772,11 @@ bool CApplication::InitDirectoriesLinux()
     xbmcPath = INSTALL_PATH;
     /* Check if xbmc binaries and arch independent data files are being kept in
      * separate locations. */
-    if (!CFile::Exists(CUtil::AddFileToFolder(xbmcPath, "language")))
+    if (!CFile::Exists(URIUtils::AddFileToFolder(xbmcPath, "language")))
     {
       /* Attempt to locate arch independent data files. */
       CUtil::GetHomePath(xbmcPath);
-      if (!CFile::Exists(CUtil::AddFileToFolder(xbmcPath, "language")))
+      if (!CFile::Exists(URIUtils::AddFileToFolder(xbmcPath, "language")))
       {
         fprintf(stderr, "Unable to find path to XBMC data files!\n");
         exit(1);
@@ -796,10 +796,10 @@ bool CApplication::InitDirectoriesLinux()
     CSpecialProtocol::SetHomePath(userHome + "/.xbmc");
     CSpecialProtocol::SetMasterProfilePath(userHome + "/.xbmc/userdata");
 
-    CStdString strTempPath = CUtil::AddFileToFolder(userHome, ".xbmc/temp");
+    CStdString strTempPath = URIUtils::AddFileToFolder(userHome, ".xbmc/temp");
     CSpecialProtocol::SetTempPath(strTempPath);
 
-    CUtil::AddSlashAtEnd(strTempPath);
+    URIUtils::AddSlashAtEnd(strTempPath);
     g_settings.m_logFolder = strTempPath;
 
     CreateUserDirs();
@@ -807,19 +807,19 @@ bool CApplication::InitDirectoriesLinux()
   }
   else
   {
-    CUtil::AddSlashAtEnd(xbmcPath);
+    URIUtils::AddSlashAtEnd(xbmcPath);
     g_settings.m_logFolder = xbmcPath;
 
     CSpecialProtocol::SetXBMCBinPath(xbmcBinPath);
     CSpecialProtocol::SetXBMCPath(xbmcPath);
-    CSpecialProtocol::SetHomePath(CUtil::AddFileToFolder(xbmcPath, "portable_data"));
-    CSpecialProtocol::SetMasterProfilePath(CUtil::AddFileToFolder(xbmcPath, "portable_data/userdata"));
+    CSpecialProtocol::SetHomePath(URIUtils::AddFileToFolder(xbmcPath, "portable_data"));
+    CSpecialProtocol::SetMasterProfilePath(URIUtils::AddFileToFolder(xbmcPath, "portable_data/userdata"));
 
-    CStdString strTempPath = CUtil::AddFileToFolder(xbmcPath, "portable_data/temp");
+    CStdString strTempPath = URIUtils::AddFileToFolder(xbmcPath, "portable_data/temp");
     CSpecialProtocol::SetTempPath(strTempPath);
     CreateUserDirs();
 
-    CUtil::AddSlashAtEnd(strTempPath);
+    URIUtils::AddSlashAtEnd(strTempPath);
     g_settings.m_logFolder = strTempPath;
   }
 
@@ -858,35 +858,35 @@ bool CApplication::InitDirectoriesOSX()
     CSpecialProtocol::SetMasterProfilePath(userHome + "/Library/Application Support/XBMC/userdata");
 
 #ifdef __APPLE__
-    CStdString strTempPath = CUtil::AddFileToFolder(userHome, ".xbmc/");
+    CStdString strTempPath = URIUtils::AddFileToFolder(userHome, ".xbmc/");
     CDirectory::Create(strTempPath);
 #endif
 
-    strTempPath = CUtil::AddFileToFolder(userHome, ".xbmc/temp");
+    strTempPath = URIUtils::AddFileToFolder(userHome, ".xbmc/temp");
     CSpecialProtocol::SetTempPath(strTempPath);
 
 #ifdef __APPLE__
     strTempPath = userHome + "/Library/Logs";
 #endif
-    CUtil::AddSlashAtEnd(strTempPath);
+    URIUtils::AddSlashAtEnd(strTempPath);
     g_settings.m_logFolder = strTempPath;
 
     CreateUserDirs();
   }
   else
   {
-    CUtil::AddSlashAtEnd(xbmcPath);
+    URIUtils::AddSlashAtEnd(xbmcPath);
     g_settings.m_logFolder = xbmcPath;
 
     CSpecialProtocol::SetXBMCBinPath(xbmcPath);
     CSpecialProtocol::SetXBMCPath(xbmcPath);
-    CSpecialProtocol::SetHomePath(CUtil::AddFileToFolder(xbmcPath, "portable_data"));
-    CSpecialProtocol::SetMasterProfilePath(CUtil::AddFileToFolder(xbmcPath, "portable_data/userdata"));
+    CSpecialProtocol::SetHomePath(URIUtils::AddFileToFolder(xbmcPath, "portable_data"));
+    CSpecialProtocol::SetMasterProfilePath(URIUtils::AddFileToFolder(xbmcPath, "portable_data/userdata"));
 
-    CStdString strTempPath = CUtil::AddFileToFolder(xbmcPath, "portable_data/temp");
+    CStdString strTempPath = URIUtils::AddFileToFolder(xbmcPath, "portable_data/temp");
     CSpecialProtocol::SetTempPath(strTempPath);
 
-    CUtil::AddSlashAtEnd(strTempPath);
+    URIUtils::AddSlashAtEnd(strTempPath);
     g_settings.m_logFolder = strTempPath;
   }
 
@@ -912,33 +912,33 @@ bool CApplication::InitDirectoriesWin32()
     CStdString strWin32UserFolder = CWIN32Util::GetProfilePath();
 
     // create user/app data/XBMC
-    CStdString homePath = CUtil::AddFileToFolder(strWin32UserFolder, "XBMC");
+    CStdString homePath = URIUtils::AddFileToFolder(strWin32UserFolder, "XBMC");
 
     // move log to platform dirs
     g_settings.m_logFolder = homePath;
-    CUtil::AddSlashAtEnd(g_settings.m_logFolder);
+    URIUtils::AddSlashAtEnd(g_settings.m_logFolder);
 
     // map our special drives
     CSpecialProtocol::SetXBMCBinPath(xbmcPath);
     CSpecialProtocol::SetXBMCPath(xbmcPath);
     CSpecialProtocol::SetHomePath(homePath);
-    CSpecialProtocol::SetMasterProfilePath(CUtil::AddFileToFolder(homePath, "userdata"));
+    CSpecialProtocol::SetMasterProfilePath(URIUtils::AddFileToFolder(homePath, "userdata"));
     SetEnvironmentVariable("XBMC_PROFILE_USERDATA",_P("special://masterprofile").c_str());
 
-    CSpecialProtocol::SetTempPath(CUtil::AddFileToFolder(homePath,"cache"));
+    CSpecialProtocol::SetTempPath(URIUtils::AddFileToFolder(homePath,"cache"));
 
     CreateUserDirs();
 
   }
   else
   {
-    CUtil::AddSlashAtEnd(xbmcPath);
+    URIUtils::AddSlashAtEnd(xbmcPath);
     g_settings.m_logFolder = xbmcPath;
 
-    CSpecialProtocol::SetHomePath(CUtil::AddFileToFolder(xbmcPath, "portable_data"));
-    CSpecialProtocol::SetMasterProfilePath(CUtil::AddFileToFolder(xbmcPath, "portable_data/userdata"));
+    CSpecialProtocol::SetHomePath(URIUtils::AddFileToFolder(xbmcPath, "portable_data"));
+    CSpecialProtocol::SetMasterProfilePath(URIUtils::AddFileToFolder(xbmcPath, "portable_data/userdata"));
 
-    CStdString strTempPath = CUtil::AddFileToFolder(xbmcPath, "portable_data/temp");
+    CStdString strTempPath = URIUtils::AddFileToFolder(xbmcPath, "portable_data/temp");
     CSpecialProtocol::SetTempPath(strTempPath);
 
     CreateUserDirs();
@@ -1558,13 +1558,13 @@ void CApplication::LoadSkin(const SkinPtr& skin)
 
   // load in the skin strings
   CStdString langPath, skinEnglishPath;
-  CUtil::AddFileToFolder(skin->Path(), "language", langPath);
-  CUtil::AddFileToFolder(langPath, g_guiSettings.GetString("locale.language"), langPath);
-  CUtil::AddFileToFolder(langPath, "strings.xml", langPath);
+  URIUtils::AddFileToFolder(skin->Path(), "language", langPath);
+  URIUtils::AddFileToFolder(langPath, g_guiSettings.GetString("locale.language"), langPath);
+  URIUtils::AddFileToFolder(langPath, "strings.xml", langPath);
 
-  CUtil::AddFileToFolder(skin->Path(), "language", skinEnglishPath);
-  CUtil::AddFileToFolder(skinEnglishPath, "English", skinEnglishPath);
-  CUtil::AddFileToFolder(skinEnglishPath, "strings.xml", skinEnglishPath);
+  URIUtils::AddFileToFolder(skin->Path(), "language", skinEnglishPath);
+  URIUtils::AddFileToFolder(skinEnglishPath, "English", skinEnglishPath);
+  URIUtils::AddFileToFolder(skinEnglishPath, "strings.xml", skinEnglishPath);
 
   g_localizeStrings.LoadSkinStrings(langPath, skinEnglishPath);
 
@@ -1687,7 +1687,7 @@ bool CApplication::LoadUserWindows()
       {
         if (items[i]->m_bIsFolder)
           continue;
-        CStdString skinFile = CUtil::GetFileName(items[i]->m_strPath);
+        CStdString skinFile = URIUtils::GetFileName(items[i]->m_strPath);
         if (skinFile.Left(6).CompareNoCase("custom") == 0)
         {
           TiXmlDocument xmlDoc;
@@ -3513,7 +3513,7 @@ bool CApplication::PlayFile(const CFileItem& item, bool bRestart)
     return false;
   }
 
-  if (CUtil::IsUPnP(item.m_strPath))
+  if (URIUtils::IsUPnP(item.m_strPath))
   {
     CFileItem item_new(item);
     if (XFILE::CUPnPDirectory::GetResource(item.m_strPath, item_new))

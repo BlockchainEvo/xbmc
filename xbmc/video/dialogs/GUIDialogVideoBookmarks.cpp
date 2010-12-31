@@ -23,7 +23,6 @@
 #include "GUIDialogVideoBookmarks.h"
 #include "video/VideoDatabase.h"
 #include "Application.h"
-#include "Util.h"
 #ifdef HAS_VIDEO_PLAYBACK
 #include "cores/VideoRenderers/RenderManager.h"
 #endif
@@ -37,6 +36,7 @@
 #include "utils/Crc32.h"
 #include "guilib/LocalizeStrings.h"
 #include "utils/StringUtils.h"
+#include "utils/URIUtils.h"
 #include "threads/SingleLock.h"
 
 using namespace std;
@@ -257,7 +257,7 @@ void CGUIDialogVideoBookmarks::AddBookmark(CVideoInfoTag* tag)
     Crc32 crc;
     crc.ComputeFromLowerCase(g_application.CurrentFile());
     bookmark.thumbNailImage.Format("%08x_%i.jpg", (unsigned __int32) crc, m_vecItems->Size() + 1);
-    bookmark.thumbNailImage = CUtil::AddFileToFolder(g_settings.GetBookmarksThumbFolder(), bookmark.thumbNailImage);
+    bookmark.thumbNailImage = URIUtils::AddFileToFolder(g_settings.GetBookmarksThumbFolder(), bookmark.thumbNailImage);
     if (!CPicture::CreateThumbnailFromSurface(texture.GetPixels(), width, height, texture.GetPitch(),
                                         bookmark.thumbNailImage))
       bookmark.thumbNailImage.Empty();

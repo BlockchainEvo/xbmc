@@ -53,6 +53,7 @@
 #include "guilib/GUIAudioManager.h"
 #include "Application.h"
 #include "utils/Crc32.h"
+#include "utils/URIUtils.h"
 #include "Util.h"
 #include "filesystem/File.h"
 #include "filesystem/SpecialProtocol.h"
@@ -740,7 +741,7 @@ namespace PYXBMC
     if (!PyXBMCGetUnicodeString(strText, pObjectText, 1)) return NULL;
 
     CStdString strPath;
-    if (CUtil::IsDOSPath(strText))
+    if (URIUtils::IsDOSPath(strText))
       strText = CSpecialProtocol::ReplaceOldPath(strText, 0);
 
     strPath = CSpecialProtocol::TranslatePath(strText);

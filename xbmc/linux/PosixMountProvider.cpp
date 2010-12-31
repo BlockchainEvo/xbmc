@@ -21,7 +21,7 @@
 #include "PosixMountProvider.h"
 #include "utils/RegExp.h"
 #include "utils/StdString.h"
-#include "Util.h"
+#include "utils/URIUtils.h"
 #include "utils/log.h"
 
 CPosixMountProvider::CPosixMountProvider()
@@ -85,7 +85,7 @@ void CPosixMountProvider::GetDrives(VECSOURCES &drives)
   {
     CMediaSource share;
     share.strPath = result[i];
-    share.strName = CUtil::GetFileName(result[i]);
+    share.strName = URIUtils::GetFileName(result[i]);
     share.m_ignore = true;
     drives.push_back(share);
   }

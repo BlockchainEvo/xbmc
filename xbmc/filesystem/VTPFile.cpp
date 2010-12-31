@@ -22,7 +22,7 @@
 #include "system.h" // WIN32INCLUDES - this is for SD_BOTH primarily, and must be included prior to VTPFile.h for some reason
 #include "VTPFile.h"
 #include "VTPSession.h"
-#include "Util.h"
+#include "utils/URIUtils.h"
 #include "URL.h"
 #include "utils/log.h"
 
@@ -72,12 +72,12 @@ bool CVTPFile::Open(const CURL& url2)
   {
 
     CStdString channel = path.Mid(9);
-    if(!CUtil::GetExtension(channel).Equals(".ts"))
+    if(!URIUtils::GetExtension(channel).Equals(".ts"))
     {
       CLog::Log(LOGERROR, "%s - invalid channel url %s", __FUNCTION__, channel.c_str());
       return false;
     }
-    CUtil::RemoveExtension(channel);
+    URIUtils::RemoveExtension(channel);
 
     if(!m_session->Open(url.GetHostName(), url.GetPort()))
       return false;

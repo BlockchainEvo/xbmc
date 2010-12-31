@@ -23,7 +23,7 @@
 #include "FileItem.h"
 #include "FileCurl.h"
 #include "settings/Settings.h"
-#include "Util.h"
+#include "utils/URIUtils.h"
 #include "tinyXML/tinyxml.h"
 #include "utils/HTMLUtil.h"
 #include "utils/StringUtils.h"
@@ -85,7 +85,7 @@ bool CRSSDirectory::ContainsFiles(const CStdString& strPath)
 static bool IsPathToMedia(const CStdString& strPath )
 {
   CStdString extension;
-  CUtil::GetExtension(strPath, extension);
+  URIUtils::GetExtension(strPath, extension);
 
   if (extension.IsEmpty())
     return false;
@@ -109,7 +109,7 @@ static bool IsPathToThumbnail(const CStdString& strPath )
   // Currently just check if this is an image, maybe we will add some
   // other checks later
   CStdString extension;
-  CUtil::GetExtension(strPath, extension);
+  URIUtils::GetExtension(strPath, extension);
 
   if (extension.IsEmpty())
     return false;
@@ -583,7 +583,7 @@ static void ParseItem(CFileItem* item, TiXmlElement* root, const CStdString& pat
 bool CRSSDirectory::GetDirectory(const CStdString& path, CFileItemList &items)
 {
   CStdString strPath(path);
-  CUtil::RemoveSlashAtEnd(strPath);
+  URIUtils::RemoveSlashAtEnd(strPath);
 
   /* check cache */
   if(m_path == strPath)

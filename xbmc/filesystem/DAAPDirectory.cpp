@@ -20,11 +20,11 @@
 
 #include "FileDAAP.h"
 #include "DAAPDirectory.h"
-#include "Util.h"
 #include "music/tags/MusicInfoTag.h"
 #include "FileItem.h"
 #include "SectionLoader.h"
 #include "utils/log.h"
+#include "utils/URIUtils.h"
 
 namespace XFILE
 {
@@ -63,7 +63,7 @@ bool CDAAPDirectory::GetDirectory(const CStdString& strPath, CFileItemList &item
   CURL url(strPath);
 
   CStdString strRoot = strPath;
-  CUtil::AddSlashAtEnd(strRoot);
+  URIUtils::AddSlashAtEnd(strRoot);
 
   CStdString host = url.GetHostName();
   if (url.HasPort())
@@ -410,7 +410,7 @@ int CDAAPDirectory::GetCurrLevel(CStdString strPath)
   else
     strJustPath = strPath;
 
-  CUtil::RemoveSlashAtEnd(strJustPath);
+  URIUtils::RemoveSlashAtEnd(strJustPath);
 
   intLevel = -1;
   intSPos = strPath.length();

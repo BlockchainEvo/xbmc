@@ -21,7 +21,7 @@
 
 #include "filesystem/StackDirectory.h"
 #include "ThumbLoader.h"
-#include "Util.h"
+#include "utils/URIUtils.h"
 #include "URL.h"
 #include "pictures/Picture.h"
 #include "filesystem/File.h"
@@ -99,7 +99,7 @@ CThumbExtractor::CThumbExtractor(const CFileItem& item, const CStdString& listpa
   if (item.IsVideoDb() && item.HasVideoInfoTag())
     m_path = item.GetVideoInfoTag()->m_strFileNameAndPath;
 
-  if (CUtil::IsStack(m_path))
+  if (URIUtils::IsStack(m_path))
     m_path = CStackDirectory::GetFirstStackedFile(m_path);
 }
 
@@ -120,9 +120,9 @@ bool CThumbExtractor::operator==(const CJob* job) const
 
 bool CThumbExtractor::DoWork()
 {
-  if (CUtil::IsLiveTV(m_path)
-  ||  CUtil::IsUPnP(m_path)
-  ||  CUtil::IsDAAP(m_path)
+  if (URIUtils::IsLiveTV(m_path)
+  ||  URIUtils::IsUPnP(m_path)
+  ||  URIUtils::IsDAAP(m_path)
   ||  m_item.IsDVD()
   ||  m_item.IsDVDImage()
   ||  m_item.IsDVDFile(false, true)
@@ -130,7 +130,7 @@ bool CThumbExtractor::DoWork()
   ||  m_item.IsPlayList())
     return false;
 
-  if (CUtil::IsRemote(m_path) && !CUtil::IsOnLAN(m_path))
+  if (URIUtils::IsRemote(m_path) && !URIUtils::IsOnLAN(m_path))
     return false;
 
   bool result=false;
@@ -218,7 +218,7 @@ bool CVideoThumbLoader::LoadItem(CFileItem* pItem)
     else
     {
       CStdString strPath, strFileName;
-      CUtil::Split(cachedThumb, strPath, strFileName);
+      URIUtils::Split(cachedThumb, strPath, strFileName);
 
       // create unique thumb for auto generated thumbs
       cachedThumb = strPath + "auto-" + strFileName;

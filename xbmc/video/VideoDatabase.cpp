@@ -349,10 +349,10 @@ int CVideoDatabase::GetPathId(const CStdString& strPath)
     if (NULL == m_pDS.get()) return -1;
 
     CStdString strPath1(strPath);
-    if (CUtil::IsStack(strPath) || strPath.Mid(0,6).Equals("rar://") || strPath.Mid(0,6).Equals("zip://"))
-      CUtil::GetParentPath(strPath,strPath1);
+    if (URIUtils::IsStack(strPath) || strPath.Mid(0,6).Equals("rar://") || strPath.Mid(0,6).Equals("zip://"))
+      URIUtils::GetParentPath(strPath,strPath1);
 
-    CUtil::AddSlashAtEnd(strPath1);
+    URIUtils::AddSlashAtEnd(strPath1);
 
     strSQL=PrepareSQL("select idPath from path where strPath like '%s'",strPath1.c_str());
     m_pDS->query(strSQL.c_str());
@@ -473,10 +473,10 @@ int CVideoDatabase::AddPath(const CStdString& strPath)
     if (NULL == m_pDS.get()) return -1;
 
     CStdString strPath1(strPath);
-    if (CUtil::IsStack(strPath) || strPath.Mid(0,6).Equals("rar://") || strPath.Mid(0,6).Equals("zip://"))
-      CUtil::GetParentPath(strPath,strPath1);
+    if (URIUtils::IsStack(strPath) || strPath.Mid(0,6).Equals("rar://") || strPath.Mid(0,6).Equals("zip://"))
+      URIUtils::GetParentPath(strPath,strPath1);
 
-    CUtil::AddSlashAtEnd(strPath1);
+    URIUtils::AddSlashAtEnd(strPath1);
 
     strSQL=PrepareSQL("insert into path (idPath, strPath, strContent, strScraper) values (NULL,'%s','','')", strPath1.c_str());
     m_pDS->exec(strSQL.c_str());
@@ -781,7 +781,7 @@ int CVideoDatabase::GetTvShowId(const CStdString& strPath)
     if (!m_pDS->eof())
       iFound = 1;
 
-    while (iFound == 0 && CUtil::GetParentPath(strPath1, strParent))
+    while (iFound == 0 && URIUtils::GetParentPath(strPath1, strParent))
     {
       strSQL=PrepareSQL("select idShow from path,tvshowlinkpath where tvshowlinkpath.idPath=path.idPath and strPath like '%s'",strParent.c_str());
       m_pDS->query(strSQL.c_str());
@@ -2902,7 +2902,7 @@ bool CVideoDatabase::GetVideoSettings(const CStdString &strFilenameAndPath, CVid
     if (NULL == m_pDB.get()) return false;
     if (NULL == m_pDS.get()) return false;
     CStdString strPath, strFileName;
-    CUtil::Split(strFilenameAndPath, strPath, strFileName);
+    URIUtils::Split(strFilenameAndPath, strPath, strFileName);
     CStdString strSQL=PrepareSQL("select * from settings, files, path where settings.idFile=files.idFile and path.idPath=files.idPath and path.strPath like '%s' and files.strFileName like '%s'", strPath.c_str() , strFileName.c_str());
 #else
     int idFile = GetFileId(strFilenameAndPath);
@@ -3077,7 +3077,7 @@ void CVideoDatabase::SetStackTimes(const CStdString& filePath, vector<int> &time
 
 void CVideoDatabase::RemoveContentForPath(const CStdString& strPath, CGUIDialogProgress *progress /* = NULL */)
 {
-  if(CUtil::IsMultiPath(strPath))
+  if(URIUtils::IsMultiPath(strPath))
   {
     vector<CStdString> paths;
     CMultiPathDirectory::GetPaths(strPath, paths);
@@ -3165,7 +3165,7 @@ void CVideoDatabase::RemoveContentForPath(const CStdString& strPath, CGUIDialogP
 void CVideoDatabase::SetScraperForPath(const CStdString& filePath, const ScraperPtr& scraper, const VIDEO::SScanSettings& settings)
 {
   // if we have a multipath, set scraper for all contained paths too
-  if(CUtil::IsMultiPath(filePath))
+  if(URIUtils::IsMultiPath(filePath))
   {
     vector<CStdString> paths;
     CMultiPathDirectory::GetPaths(filePath, paths);
@@ -4789,8 +4789,8 @@ bool CVideoDatabase::GetEpisodesNav(const CStdString& strBaseDir, CFileItemList&
 
   // we always append show, season + episode in GetEpisodesByWhere
   CStdString parent, grandParent;
-  CUtil::GetParentPath(strBaseDir,parent);
-  CUtil::GetParentPath(parent,grandParent);
+  URIUtils::GetParentPath(strBaseDir,parent);
+  URIUtils::GetParentPath(parent,grandParent);
 
   bool ret = GetEpisodesByWhere(grandParent, where, items);
 
@@ -5114,10 +5114,10 @@ ScraperPtr CVideoDatabase::GetScraperForPath(const CStdString& strPath, SScanSet
     CStdString strPath1;
     CStdString strPath2(strPath);
 
-    if (CUtil::IsMultiPath(strPath))
+    if (URIUtils::IsMultiPath(strPath))
       strPath2 = CMultiPathDirectory::GetFirstPath(strPath);
 
-    CUtil::GetDirectory(strPath2,strPath1);
+    URIUtils::GetDirectory(strPath2,strPath1);
     int idPath = GetPathId(strPath1);
 
     if (idPath > -1)
@@ -5168,7 +5168,7 @@ ScraperPtr CVideoDatabase::GetScraperForPath(const CStdString& strPath, SScanSet
     { // this path is not saved in db
       // we must drill up until a scraper is configured
       CStdString strParent;
-      while (CUtil::GetParentPath(strPath1, strParent))
+      while (URIUtils::GetParentPath(strPath1, strParent))
       {
         iFound++;
 
@@ -6263,7 +6263,7 @@ void CVideoDatabase::CleanDatabase(IVideoInfoScannerObserver* pObserver, const v
       ConstructPath(fullPath,path,fileName);
 
       // get the first stacked file
-      if (CUtil::IsStack(fullPath))
+      if (URIUtils::IsStack(fullPath))
         fullPath = CStackDirectory::GetFirstStackedFile(fullPath);
 
       // check for deletion
@@ -6271,7 +6271,7 @@ void CVideoDatabase::CleanDatabase(IVideoInfoScannerObserver* pObserver, const v
       VECSOURCES *pShares = g_settings.GetSourcesFromType("video");
 
       // check if we have a internet related file that is part of a media source
-      if (CUtil::IsInternetStream(fullPath, true) && CUtil::GetMatchingSource(fullPath, *pShares, bIsSource) > -1)
+      if (URIUtils::IsInternetStream(fullPath, true) && CUtil::GetMatchingSource(fullPath, *pShares, bIsSource) > -1)
       {
         if (!CFile::Exists(fullPath, false))
           filesToDelete += m_pDS->fv("files.idFile").get_asString() + ",";
@@ -6280,7 +6280,7 @@ void CVideoDatabase::CleanDatabase(IVideoInfoScannerObserver* pObserver, const v
       {
         // remove optical, internet related and non-existing files
         // note: this will also remove entries from previously existing media sources
-        if (CUtil::IsOnDVD(fullPath) || CUtil::IsInternetStream(fullPath, true) || !CFile::Exists(fullPath, false))
+        if (URIUtils::IsOnDVD(fullPath) || URIUtils::IsInternetStream(fullPath, true) || !CFile::Exists(fullPath, false))
           filesToDelete += m_pDS->fv("files.idFile").get_asString() + ",";
       }
 
@@ -6592,7 +6592,7 @@ void CVideoDatabase::DumpToDummyFiles(const CStdString &path)
     // create a folder in this directory
     CStdString showName = CUtil::MakeLegalFileName(items[i]->GetVideoInfoTag()->m_strShowTitle);
     CStdString TVFolder;
-    CUtil::AddFileToFolder(path, showName, TVFolder);
+    URIUtils::AddFileToFolder(path, showName, TVFolder);
     if (CDirectory::Create(TVFolder))
     { // right - grab the episodes and dump them as well
       CFileItemList episodes;
@@ -6605,7 +6605,7 @@ void CVideoDatabase::DumpToDummyFiles(const CStdString &path)
         episode.Format("%s.s%02de%02d.avi", showName.c_str(), tag->m_iSeason, tag->m_iEpisode);
         // and make a file
         CStdString episodePath;
-        CUtil::AddFileToFolder(TVFolder, episode, episodePath);
+        URIUtils::AddFileToFolder(TVFolder, episode, episodePath);
         CFile file;
         if (file.OpenForWrite(episodePath))
           file.Close();
@@ -6633,12 +6633,12 @@ void CVideoDatabase::ExportToXML(const CStdString &path, bool singleFiles /* = f
     if (NULL == pDS2.get()) return;
 
     // if we're exporting to a single folder, we export thumbs as well
-    CStdString exportRoot = CUtil::AddFileToFolder(path, "xbmc_videodb_" + CDateTime::GetCurrentDateTime().GetAsDBDate());
-    CStdString xmlFile = CUtil::AddFileToFolder(exportRoot, "videodb.xml");
-    CStdString actorsDir = CUtil::AddFileToFolder(exportRoot, "actors");
-    CStdString moviesDir = CUtil::AddFileToFolder(exportRoot, "movies");
-    CStdString musicvideosDir = CUtil::AddFileToFolder(exportRoot, "musicvideos");
-    CStdString tvshowsDir = CUtil::AddFileToFolder(exportRoot, "tvshows");
+    CStdString exportRoot = URIUtils::AddFileToFolder(path, "xbmc_videodb_" + CDateTime::GetCurrentDateTime().GetAsDBDate());
+    CStdString xmlFile = URIUtils::AddFileToFolder(exportRoot, "videodb.xml");
+    CStdString actorsDir = URIUtils::AddFileToFolder(exportRoot, "actors");
+    CStdString moviesDir = URIUtils::AddFileToFolder(exportRoot, "movies");
+    CStdString musicvideosDir = URIUtils::AddFileToFolder(exportRoot, "musicvideos");
+    CStdString tvshowsDir = URIUtils::AddFileToFolder(exportRoot, "tvshows");
     if (!singleFiles)
     {
       images = true;
@@ -6722,11 +6722,11 @@ void CVideoDatabase::ExportToXML(const CStdString &path, bool singleFiles /* = f
         }
         else
         {
-          CStdString nfoFile(CUtil::ReplaceExtension(item.GetTBNFile(), ".nfo"));
+          CStdString nfoFile(URIUtils::ReplaceExtension(item.GetTBNFile(), ".nfo"));
 
           if (item.IsOpticalMediaFile())
           {
-            nfoFile = CURIUtils::GetParentFolderURI(nfoFile, true);
+            nfoFile = URIUtils::GetParentFolderURI(nfoFile, true);
           }
 
           if (overwrite || !CFile::Exists(nfoFile, false))
@@ -6762,7 +6762,7 @@ void CVideoDatabase::ExportToXML(const CStdString &path, bool singleFiles /* = f
             CLog::Log(LOGERROR, "%s: Movie thumb export failed! ('%s' -> '%s')", __FUNCTION__, cachedThumb.c_str(), savedThumb.c_str());
         
         CStdString cachedFanart(item.GetCachedFanart());
-        CStdString savedFanart(CUtil::ReplaceExtension(savedThumb, "-fanart.jpg"));
+        CStdString savedFanart(URIUtils::ReplaceExtension(savedThumb, "-fanart.jpg"));
         
         if (CFile::Exists(cachedFanart, false) && (overwrite || !CFile::Exists(savedFanart, false)))
           if (!CFile::Cache(cachedFanart, savedFanart))
@@ -6818,7 +6818,7 @@ void CVideoDatabase::ExportToXML(const CStdString &path, bool singleFiles /* = f
         }
         else
         {
-          CStdString nfoFile(CUtil::ReplaceExtension(item.GetTBNFile(), ".nfo"));
+          CStdString nfoFile(URIUtils::ReplaceExtension(item.GetTBNFile(), ".nfo"));
 
           if (overwrite || !CFile::Exists(nfoFile, false))
           {
@@ -6899,7 +6899,7 @@ void CVideoDatabase::ExportToXML(const CStdString &path, bool singleFiles /* = f
         else
         {
           CStdString nfoFile;
-          CUtil::AddFileToFolder(tvshow.m_strPath, "tvshow.nfo", nfoFile);
+          URIUtils::AddFileToFolder(tvshow.m_strPath, "tvshow.nfo", nfoFile);
 
           if (overwrite || !CFile::Exists(nfoFile, false))
           {
@@ -7026,7 +7026,7 @@ void CVideoDatabase::ExportToXML(const CStdString &path, bool singleFiles /* = f
         {
           CStdString epName;
           epName.Format("s%02ie%02i.avi", episode.m_iSeason, episode.m_iEpisode);
-          saveItem = CFileItem(CUtil::AddFileToFolder(showDir, epName), false);
+          saveItem = CFileItem(URIUtils::AddFileToFolder(showDir, epName), false);
         }
         if (singleFiles)
         {
@@ -7037,7 +7037,7 @@ void CVideoDatabase::ExportToXML(const CStdString &path, bool singleFiles /* = f
           }
           else
           {
-            CStdString nfoFile(CUtil::ReplaceExtension(item.GetTBNFile(), ".nfo"));
+            CStdString nfoFile(URIUtils::ReplaceExtension(item.GetTBNFile(), ".nfo"));
 
             if (overwrite || !CFile::Exists(nfoFile, false))
             {
@@ -7127,7 +7127,7 @@ void CVideoDatabase::ExportActorThumbs(const CStdString &strDir, const CVideoInf
   CStdString strPath(strDir);
   if (singleFiles)
   {
-    strPath = CUtil::AddFileToFolder(tag.m_strPath, ".actors");
+    strPath = URIUtils::AddFileToFolder(tag.m_strPath, ".actors");
     if (!CDirectory::Exists(strPath))
     {
       CDirectory::Create(strPath);
@@ -7156,7 +7156,7 @@ CStdString CVideoDatabase::GetCachedThumb(const CFileItem& item) const
   if (!CFile::Exists(cachedThumb) && g_advancedSettings.m_bVideoLibraryExportAutoThumbs)
   {
     CStdString strPath, strFileName;
-    CUtil::Split(cachedThumb, strPath, strFileName);
+    URIUtils::Split(cachedThumb, strPath, strFileName);
     cachedThumb = strPath + "auto-" + strFileName;
   }
 
@@ -7169,7 +7169,7 @@ CStdString CVideoDatabase::GetCachedThumb(const CFileItem& item) const
 bool CVideoDatabase::ExportSkipEntry(const CStdString &nfoFile)
 {
   CStdString strParent;
-  CUtil::GetParentPath(nfoFile,strParent);
+  URIUtils::GetParentPath(nfoFile,strParent);
   CLog::Log(LOGERROR, "%s: Unable to write to '%s'!", __FUNCTION__, strParent.c_str());
 
   bool bSkip = CGUIDialogYesNo::ShowAndGetInput(g_localizeStrings.Get(647), g_localizeStrings.Get(20302), strParent.c_str(), g_localizeStrings.Get(20303));
@@ -7191,7 +7191,7 @@ void CVideoDatabase::ImportFromXML(const CStdString &path)
     if (NULL == m_pDS.get()) return;
 
     TiXmlDocument xmlDoc;
-    if (!xmlDoc.LoadFile(CUtil::AddFileToFolder(path, "videodb.xml")))
+    if (!xmlDoc.LoadFile(URIUtils::AddFileToFolder(path, "videodb.xml")))
       return;
 
     TiXmlElement *root = xmlDoc.RootElement();
@@ -7222,10 +7222,10 @@ void CVideoDatabase::ImportFromXML(const CStdString &path)
       movie = movie->NextSiblingElement();
     }
 
-    CStdString actorsDir(CUtil::AddFileToFolder(path, "actors"));
-    CStdString moviesDir(CUtil::AddFileToFolder(path, "movies"));
-    CStdString musicvideosDir(CUtil::AddFileToFolder(path, "musicvideos"));
-    CStdString tvshowsDir(CUtil::AddFileToFolder(path, "tvshows"));
+    CStdString actorsDir(URIUtils::AddFileToFolder(path, "actors"));
+    CStdString moviesDir(URIUtils::AddFileToFolder(path, "movies"));
+    CStdString musicvideosDir(URIUtils::AddFileToFolder(path, "musicvideos"));
+    CStdString tvshowsDir(URIUtils::AddFileToFolder(path, "tvshows"));
     CVideoInfoScanner scanner;
     set<CStdString> actors;
     movie = root->FirstChildElement();
@@ -7260,14 +7260,14 @@ void CVideoDatabase::ImportFromXML(const CStdString &path)
         // load the TV show in.  NOTE: This deletes all episodes under the TV Show, which may not be
         // what we desire.  It may make better sense to only delete (or even better, update) the show information
         info.Load(movie);
-        CUtil::AddSlashAtEnd(info.m_strPath);
+        URIUtils::AddSlashAtEnd(info.m_strPath);
         DeleteTvShow(info.m_strPath);
         CFileItem item(info);
         int showID = scanner.AddVideo(&item,CONTENT_TVSHOWS);
         current++;
         CStdString showDir(GetSafeFile(tvshowsDir, info.m_strTitle));
-        CFile::Cache(CUtil::AddFileToFolder(showDir, "folder.jpg"), item.GetCachedVideoThumb());
-        CFile::Cache(CUtil::AddFileToFolder(showDir, "fanart.jpg"), item.GetCachedFanart());
+        CFile::Cache(URIUtils::AddFileToFolder(showDir, "folder.jpg"), item.GetCachedVideoThumb());
+        CFile::Cache(URIUtils::AddFileToFolder(showDir, "fanart.jpg"), item.GetCachedFanart());
         for (CVideoInfoTag::iCast i = info.m_cast.begin(); i != info.m_cast.end(); ++i)
           actors.insert(i->strName);
         // now load the episodes
@@ -7282,7 +7282,7 @@ void CVideoDatabase::ImportFromXML(const CStdString &path)
           SetPlayCount(item, info.m_playCount, info.m_lastPlayed);
           CStdString file;
           file.Format("s%02ie%02i.tbn", info.m_iSeason, info.m_iEpisode);
-          CFile::Cache(CUtil::AddFileToFolder(showDir, file), item.GetCachedVideoThumb());
+          CFile::Cache(URIUtils::AddFileToFolder(showDir, file), item.GetCachedVideoThumb());
           for (CVideoInfoTag::iCast i = info.m_cast.begin(); i != info.m_cast.end(); ++i)
             actors.insert(i->strName);
           episode = episode->NextSiblingElement("episodedetails");
@@ -7307,7 +7307,7 @@ void CVideoDatabase::ImportFromXML(const CStdString &path)
             if (!XMLUtils::GetString(path,"scraperID",uuid))
             { // support pre addons exports
               XMLUtils::GetString(path, "scraperpath", uuid);
-              uuid = CUtil::GetFileName(uuid);
+              uuid = URIUtils::GetFileName(uuid);
             }
 
             if (CAddonMgr::Get().GetAddon(uuid, addon))
@@ -7422,21 +7422,21 @@ bool CVideoDatabase::ArbitraryExec(const CStdString& strExec)
 
 void CVideoDatabase::ConstructPath(CStdString& strDest, const CStdString& strPath, const CStdString& strFileName)
 {
-  if (CUtil::IsStack(strFileName) || CUtil::IsInArchive(strFileName))
+  if (URIUtils::IsStack(strFileName) || URIUtils::IsInArchive(strFileName))
     strDest = strFileName;
   else
-    CUtil::AddFileToFolder(strPath, strFileName, strDest);
+    URIUtils::AddFileToFolder(strPath, strFileName, strDest);
 }
 
 void CVideoDatabase::SplitPath(const CStdString& strFileNameAndPath, CStdString& strPath, CStdString& strFileName)
 {
-  if (CUtil::IsStack(strFileNameAndPath) || strFileNameAndPath.Mid(0,6).Equals("rar://") || strFileNameAndPath.Mid(0,6).Equals("zip://"))
+  if (URIUtils::IsStack(strFileNameAndPath) || strFileNameAndPath.Mid(0,6).Equals("rar://") || strFileNameAndPath.Mid(0,6).Equals("zip://"))
   {
-    CUtil::GetParentPath(strFileNameAndPath,strPath);
+    URIUtils::GetParentPath(strFileNameAndPath,strPath);
     strFileName = strFileNameAndPath;
   }
   else
-    CUtil::Split(strFileNameAndPath,strPath, strFileName);
+    URIUtils::Split(strFileNameAndPath,strPath, strFileName);
 }
 
 void CVideoDatabase::InvalidatePathHash(const CStdString& strPath)
@@ -7452,7 +7452,7 @@ void CVideoDatabase::InvalidatePathHash(const CStdString& strPath)
     if (info->Content() == CONTENT_TVSHOWS || settings.parent_name_root)
     {
       CStdString strParent;
-      CUtil::GetParentPath(strPath,strParent);
+      URIUtils::GetParentPath(strPath,strParent);
       SetPathHash(strParent,"");
     }
   }
@@ -7535,7 +7535,7 @@ CStdString CVideoDatabase::GetSafeFile(const CStdString &dir, const CStdString &
 {
   CStdString safeThumb(name);
   safeThumb.Replace(' ', '_');
-  return CUtil::AddFileToFolder(dir, CUtil::MakeLegalFileName(safeThumb));
+  return URIUtils::AddFileToFolder(dir, CUtil::MakeLegalFileName(safeThumb));
 }
 
 void CVideoDatabase::AnnounceRemove(std::string content, int id)

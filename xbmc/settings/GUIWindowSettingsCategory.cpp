@@ -97,6 +97,7 @@
 #include "guilib/LocalizeStrings.h"
 #include "LangInfo.h"
 #include "utils/StringUtils.h"
+#include "utils/URIUtils.h"
 #include "windowing/WindowingFactory.h"
 
 #if defined(HAVE_LIBCRYSTALHD)
@@ -1198,12 +1199,12 @@ void CGUIWindowSettingsCategory::OnSettingChanged(CBaseSettingControl *pSettingC
 
         if ( retVal == 1 )
         {
-          CUtil::AddFileToFolder(path, "karaoke.html", path);
+          URIUtils::AddFileToFolder(path, "karaoke.html", path);
           musicdatabase.ExportKaraokeInfo( path, true );
         }
         else
         {
-          CUtil::AddFileToFolder(path, "karaoke.csv", path);
+          URIUtils::AddFileToFolder(path, "karaoke.csv", path);
           musicdatabase.ExportKaraokeInfo( path, false );
         }
         musicdatabase.Close();
@@ -1540,7 +1541,7 @@ void CGUIWindowSettingsCategory::OnSettingChanged(CBaseSettingControl *pSettingC
     {
       g_guiSettings.SetString("lookandfeel.skintheme", strSkinTheme);
       // also set the default color theme
-      CStdString colorTheme(CUtil::ReplaceExtension(strSkinTheme, ".xml"));
+      CStdString colorTheme(URIUtils::ReplaceExtension(strSkinTheme, ".xml"));
       if (colorTheme.Equals("Textures.xml"))
         colorTheme = "defaults.xml";
       g_guiSettings.SetString("lookandfeel.skincolors", colorTheme);
@@ -2109,7 +2110,7 @@ void CGUIWindowSettingsCategory::FillInSubtitleFonts(CSetting *pSetting)
         if (!pItem->m_bIsFolder)
         {
 
-          if ( !CUtil::GetExtension(pItem->GetLabel()).Equals(".ttf") ) continue;
+          if ( !URIUtils::GetExtension(pItem->GetLabel()).Equals(".ttf") ) continue;
           if (pItem->GetLabel().Equals(pSettingString->GetData(), false))
             iCurrentFont = iFont;
 
@@ -2584,7 +2585,7 @@ void CGUIWindowSettingsCategory::FillInSkinThemes(CSetting *pSetting)
   CUtil::GetSkinThemes(vecTheme);
 
   // Remove the extension from the current Theme (backward compat)
-  CUtil::RemoveExtension(strSettingString);
+  URIUtils::RemoveExtension(strSettingString);
 
   // Sort the Themes for GUI and list them
   int iCurrentTheme = 0;
@@ -2618,7 +2619,7 @@ void CGUIWindowSettingsCategory::FillInSkinColors(CSetting *pSetting)
   vector<CStdString> vecColors;
 
   CStdString strPath;
-  CUtil::AddFileToFolder(g_SkinInfo->Path(),"colors",strPath);
+  URIUtils::AddFileToFolder(g_SkinInfo->Path(),"colors",strPath);
 
   CFileItemList items;
   CDirectory::GetDirectory(PTH_IC(strPath), items, ".xml");
@@ -2635,8 +2636,8 @@ void CGUIWindowSettingsCategory::FillInSkinColors(CSetting *pSetting)
   sort(vecColors.begin(), vecColors.end(), sortstringbyname());
 
   // Remove the .xml extension from the Themes
-  if (CUtil::GetExtension(strSettingString) == ".xml")
-    CUtil::RemoveExtension(strSettingString);
+  if (URIUtils::GetExtension(strSettingString) == ".xml")
+    URIUtils::RemoveExtension(strSettingString);
 
   int iCurrentColor = 0;
   for (int i = 0; i < (int) vecColors.size(); ++i)

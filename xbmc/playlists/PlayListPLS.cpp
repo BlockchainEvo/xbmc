@@ -28,6 +28,7 @@
 #include "music/tags/MusicInfoTag.h"
 #include "utils/CharsetConverter.h"
 #include "utils/log.h"
+#include "utils/URIUtils.h"
 #include "tinyXML/tinyxml.h"
 
 using namespace std;
@@ -59,7 +60,7 @@ bool CPlayListPLS::Load(const CStdString &strFile)
 {
   //read it from the file
   CStdString strFileName(strFile);
-  m_strPlayListName = CUtil::GetFileName(strFileName);
+  m_strPlayListName = URIUtils::GetFileName(strFileName);
 
   Clear();
 
@@ -72,7 +73,7 @@ bool CPlayListPLS::Load(const CStdString &strFile)
     bShoutCast = true;
   }
   else
-    CUtil::GetParentPath(strFileName, m_strBasePath);
+    URIUtils::GetParentPath(strFileName, m_strBasePath);
 
   CFile file;
   if (!file.Open(strFileName) )
@@ -139,16 +140,16 @@ bool CPlayListPLS::Load(const CStdString &strFile)
         }
 
         // Skip self - do not load playlist recursively
-        if (CUtil::GetFileName(strValue).Equals(CUtil::GetFileName(strFileName)))
+        if (URIUtils::GetFileName(strValue).Equals(URIUtils::GetFileName(strFileName)))
           continue;
 
         if (m_vecItems[idx - 1]->GetLabel().empty())
-          m_vecItems[idx - 1]->SetLabel(CUtil::GetFileName(strValue));
+          m_vecItems[idx - 1]->SetLabel(URIUtils::GetFileName(strValue));
         CFileItem item(strValue, false);
         if (bShoutCast && !item.IsAudio())
           strValue.Replace("http:", "shout:");
 
-        if (CUtil::IsRemote(m_strBasePath) && g_advancedSettings.m_pathSubstitutions.size() > 0)
+        if (URIUtils::IsRemote(m_strBasePath) && g_advancedSettings.m_pathSubstitutions.size() > 0)
           strValue = CUtil::SubstitutePath(strValue);
         CUtil::GetQualifiedFilename(m_strBasePath, strValue);
         g_charsetConverter.unknownToUTF8(strValue);
@@ -186,7 +187,7 @@ bool CPlayListPLS::Load(const CStdString &strFile)
 
   if (bFailed)
   {
-    CLog::Log(LOGERROR, "File %s is not a valid PLS playlist. Location of first file,title or length is not permitted (eg. File0 should be File1)", CUtil::GetFileName(strFileName).c_str());
+    CLog::Log(LOGERROR, "File %s is not a valid PLS playlist. Location of first file,title or length is not permitted (eg. File0 should be File1)", URIUtils::GetFileName(strFileName).c_str());
     return false;
   }
 

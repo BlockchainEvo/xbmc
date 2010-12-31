@@ -37,6 +37,7 @@
 #include "settings/GUISettings.h"
 #include "utils/TimeUtils.h"
 #include "utils/log.h"
+#include "utils/URIUtils.h"
 
 #define CONTROL_BTNVIEWASICONS      2
 #define CONTROL_BTNSORTBY           3
@@ -257,9 +258,9 @@ bool CGUIWindowPictures::OnClick(int iItem)
   {
     CStdString strComicPath;
     if (pItem->IsCBZ())
-      CUtil::CreateArchivePath(strComicPath, "zip", pItem->m_strPath, "");
+      URIUtils::CreateArchivePath(strComicPath, "zip", pItem->m_strPath, "");
     else
-      CUtil::CreateArchivePath(strComicPath, "rar", pItem->m_strPath, "");
+      URIUtils::CreateArchivePath(strComicPath, "rar", pItem->m_strPath, "");
 
     OnShowPictureRecursive(strComicPath);
     return true;
@@ -302,7 +303,7 @@ bool CGUIWindowPictures::ShowPicture(int iItem, bool startSlideShow)
   for (int i = 0; i < (int)m_vecItems->Size();++i)
   {
     CFileItemPtr pItem = m_vecItems->Get(i);
-    if (!pItem->m_bIsFolder && !(CUtil::IsRAR(pItem->m_strPath) || CUtil::IsZIP(pItem->m_strPath)) && pItem->IsPicture())
+    if (!pItem->m_bIsFolder && !(URIUtils::IsRAR(pItem->m_strPath) || URIUtils::IsZIP(pItem->m_strPath)) && pItem->IsPicture())
     {
       pSlideShow->Add(pItem.get());
     }

@@ -22,6 +22,7 @@
 #include "GUIWindowMusicNav.h"
 #include "Util.h"
 #include "utils/FileUtils.h"
+#include "utils/URIUtils.h"
 #include "PlayListPlayer.h"
 #include "GUIPassword.h"
 #include "dialogs/GUIDialogFileBrowser.h"
@@ -362,7 +363,7 @@ void CGUIWindowMusicNav::UpdateButtons()
   {
     // get playlist name from path
     CStdString strDummy;
-    CUtil::Split(m_vecItems->m_strPath, strDummy, strLabel);
+    URIUtils::Split(m_vecItems->m_strPath, strDummy, strLabel);
   }
   // everything else is from a musicdb:// path
   else
@@ -522,7 +523,7 @@ void CGUIWindowMusicNav::GetContextButtons(int itemNumber, CContextButtons &butt
         buttons.Add(CONTEXT_BUTTON_DELETE, 646);
       }
     }
-    if (inPlaylists && !CUtil::GetFileName(item->m_strPath).Equals("PartyMode.xsp")
+    if (inPlaylists && !URIUtils::GetFileName(item->m_strPath).Equals("PartyMode.xsp")
                     && (item->IsPlayList() || item->IsSmartPlayList()))
       buttons.Add(CONTEXT_BUTTON_DELETE, 117);
 

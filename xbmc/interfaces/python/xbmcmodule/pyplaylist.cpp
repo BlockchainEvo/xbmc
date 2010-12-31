@@ -19,11 +19,9 @@
  *
  */
 
-#if (defined HAVE_CONFIG_H) && (!defined WIN32)
-  #include "config.h"
-#endif
+#include "system.h"
 #include "PlayListPlayer.h"
-#include "Util.h"
+#include "utils/URIUtils.h"
 #include "pyplaylist.h"
 #if (defined USE_EXTERNAL_PYTHON)
   #if (defined HAVE_LIBPYTHON2_6)
@@ -259,7 +257,7 @@ namespace PYXBMC
         {
           CFileItemPtr playListItem =(*pPlayList)[i];
           if (playListItem->GetLabel().IsEmpty())
-            playListItem->SetLabel(CUtil::GetFileName(playListItem->m_strPath));
+            playListItem->SetLabel(URIUtils::GetFileName(playListItem->m_strPath));
 
           self->pPlayList->Add(playListItem);
         }

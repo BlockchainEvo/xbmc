@@ -27,10 +27,10 @@
 #include "GUIFont.h"
 #include "utils/XMLUtils.h"
 #include "GUIControlFactory.h"
-#include "Util.h"
 #include "filesystem/File.h"
 #include "filesystem/SpecialProtocol.h"
 #include "utils/log.h"
+#include "utils/URIUtils.h"
 #include "windowing/WindowingFactory.h"
 
 using namespace std;
@@ -94,8 +94,8 @@ CGUIFont* GUIFontManager::LoadTTF(const CStdString& strFontName, const CStdStrin
   CStdString strPath;
   if (!CURL::IsFullPath(strFilename))
   {
-    strPath = CUtil::AddFileToFolder(g_graphicsContext.GetMediaDir(), "fonts");
-    strPath = CUtil::AddFileToFolder(strPath, strFilename);
+    strPath = URIUtils::AddFileToFolder(g_graphicsContext.GetMediaDir(), "fonts");
+    strPath = URIUtils::AddFileToFolder(strPath, strFilename);
   }
   else
     strPath = strFilename;
@@ -107,7 +107,7 @@ CGUIFont* GUIFontManager::LoadTTF(const CStdString& strFontName, const CStdStrin
   // Check if the file exists, otherwise try loading it from the global media dir
   if (!XFILE::CFile::Exists(strPath))
   {
-    strPath = CUtil::AddFileToFolder("special://xbmc/media/Fonts", CUtil::GetFileName(strFilename));
+    strPath = URIUtils::AddFileToFolder("special://xbmc/media/Fonts", URIUtils::GetFileName(strFilename));
 #ifdef _LINUX
     strPath = PTH_IC(strPath);
 #endif

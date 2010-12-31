@@ -22,7 +22,7 @@
 #include "VTPDirectory.h"
 #include "VTPSession.h"
 #include "URL.h"
-#include "Util.h"
+#include "utils/URIUtils.h"
 #include "FileItem.h"
 
 
@@ -69,7 +69,7 @@ bool CVTPDirectory::GetDirectory(const CStdString& strPath, CFileItemList &items
     url.SetHostName("localhost");
 
   CStdString base = url.Get();
-  CUtil::RemoveSlashAtEnd(base);
+  URIUtils::RemoveSlashAtEnd(base);
 
   // add port after, it changes the structure
   // and breaks CUtil::GetMatchingSource

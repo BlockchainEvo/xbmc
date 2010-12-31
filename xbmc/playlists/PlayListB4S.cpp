@@ -26,6 +26,7 @@
 #include "music/tags/MusicInfoTag.h"
 #include "filesystem/File.h"
 #include "utils/log.h"
+#include "utils/URIUtils.h"
 
 using namespace XFILE;
 using namespace PLAYLIST;
@@ -97,7 +98,7 @@ bool CPlayListB4S::LoadData(istream& stream)
       if (pNodeInfo)
       {
         CStdString strInfo = pNodeInfo->FirstChild()->Value();
-        if (CUtil::IsRemote(m_strBasePath) && g_advancedSettings.m_pathSubstitutions.size() > 0)
+        if (URIUtils::IsRemote(m_strBasePath) && g_advancedSettings.m_pathSubstitutions.size() > 0)
           strFileName = CUtil::SubstitutePath(strFileName);
         CUtil::GetQualifiedFilename(m_strBasePath, strFileName);
         CFileItemPtr newItem(new CFileItem(strInfo));
