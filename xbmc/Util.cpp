@@ -540,11 +540,6 @@ void CUtil::GetHomePath(CStdString& strPath, const CStdString& strTarget)
 #endif
 }
 
-bool CUtil::IsWritable(const CStdString& strFile)
-{
-  return ( URIUtils::IsHD(strFile) || URIUtils::IsSmb(strFile) ) && !URIUtils::IsDVD(strFile);
-}
-
 bool CUtil::IsPicture(const CStdString& strFile)
 {
   CStdString extension = URIUtils::GetExtension(strFile);

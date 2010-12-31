@@ -6713,7 +6713,7 @@ void CVideoDatabase::ExportToXML(const CStdString &path, bool singleFiles /* = f
       CFileItem saveItem(item);
       if (!singleFiles)
         saveItem = CFileItem(GetSafeFile(moviesDir, movie.m_strTitle) + ".avi", false);
-      if (singleFiles && CUtil::IsWritable(movie.m_strFileNameAndPath))
+      if (singleFiles && CUtil::SupportsFileOperations(movie.m_strFileNameAndPath))
       {
         if (!item.Exists(false))
         {
@@ -6809,7 +6809,7 @@ void CVideoDatabase::ExportToXML(const CStdString &path, bool singleFiles /* = f
       CFileItem saveItem(item);
       if (!singleFiles)
         saveItem = CFileItem(GetSafeFile(musicvideosDir, movie.m_strArtist + "." + movie.m_strTitle) + ".avi", false);
-      if (CUtil::IsWritable(movie.m_strFileNameAndPath) && singleFiles)
+      if (CUtil::SupportsFileOperations(movie.m_strFileNameAndPath) && singleFiles)
       {
         if (!item.Exists(false))
         {
@@ -6889,7 +6889,7 @@ void CVideoDatabase::ExportToXML(const CStdString &path, bool singleFiles /* = f
       CFileItem saveItem(item);
       if (!singleFiles)
         saveItem = CFileItem(GetSafeFile(tvshowsDir, tvshow.m_strShowTitle), true);
-      if (singleFiles && CUtil::IsWritable(tvshow.m_strPath))
+      if (singleFiles && CUtil::SupportsFileOperations(tvshow.m_strPath))
       {
         if (!item.Exists(false))
         {
