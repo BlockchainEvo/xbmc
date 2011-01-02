@@ -21,7 +21,8 @@
 
 #include "WIN32Util.h"
 #include "settings/GUISettings.h"
-#include "../Util.h"
+#include "Util.h"
+#include "utils/URIUtils.h"
 #include "storage/cdioSupport.h"
 #include "PowrProf.h"
 #include "WindowHelper.h"
@@ -849,7 +850,7 @@ bool CWIN32Util::IsAudioCD(const CStdString& strPath)
   CStdString strDrive = strPath;
   char cVolumenName[256];
   char cFSName[256];
-  CUtil::AddSlashAtEnd(strDrive);
+  URIUtils::AddSlashAtEnd(strDrive);
   if(GetVolumeInformation(strDrive.c_str(), cVolumenName, 255, NULL, NULL, NULL, cFSName, 255)==0)
     return false;
   return (strncmp(cFSName,"CDFS",4)==0 && strncmp(cVolumenName,"Audio CD",4)==0);
@@ -860,7 +861,7 @@ CStdString CWIN32Util::GetDiskLabel(const CStdString& strPath)
   CStdString strDrive = strPath;
   char cVolumenName[128];
   char cFSName[128];
-  CUtil::AddSlashAtEnd(strDrive);
+  URIUtils::AddSlashAtEnd(strDrive);
   if(GetVolumeInformation(strDrive.c_str(), cVolumenName, 127, NULL, NULL, NULL, cFSName, 127)==0)
     return "";
   return CStdString(cVolumenName).TrimRight(" ");
@@ -1334,7 +1335,7 @@ bool CWIN32Util::GetCrystalHDLibraryPath(CStdString &strPath)
     char *pcPath= NULL;
     if( CWIN32Util::UtilRegGetValue( hKey, BC_REG_INST_PATH, &dwType, &pcPath, NULL, sizeof( pcPath ) ) == ERROR_SUCCESS )
     {
-      strPath = CUtil::AddFileToFolder(pcPath, BC_BCM_DLL);
+      strPath = URIUtils::AddFileToFolder(pcPath, BC_BCM_DLL);
       CLog::Log(LOGDEBUG, "CrystalHD: got CrystalHD installation path (%s)", strPath.c_str());
       return true;
     }

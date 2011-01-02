@@ -33,6 +33,7 @@
 #else
 #include <io.h>
 #include "utils/CharsetConverter.h"
+#include "utils/URIUtils.h"
 #endif
 #include "utils/log.h"
 
@@ -151,11 +152,11 @@ int CFileHD::Stat(const CURL& url, struct __stat64* buffer)
   CStdStringW strWFile;
   // win32 can only stat root drives with a slash at the end
   if(strFile.length() == 2 && strFile[1] ==':')
-    CUtil::AddSlashAtEnd(strFile);
+    URIUtils::AddSlashAtEnd(strFile);
   /* _wstat64 calls FindFirstFileEx. According to MSDN, the path should not end in a trailing backslash.
     Remove it before calling _wstat64 */
-  if (strFile.length() > 3 && CUtil::HasSlashAtEnd(strFile))
-    CUtil::RemoveSlashAtEnd(strFile);
+  if (strFile.length() > 3 && URIUtils::HasSlashAtEnd(strFile))
+    URIUtils::RemoveSlashAtEnd(strFile);
   g_charsetConverter.utf8ToW(strFile, strWFile, false);
   return _wstat64(strWFile.c_str(), buffer);
 #else

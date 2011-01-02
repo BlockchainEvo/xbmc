@@ -60,6 +60,7 @@
 #include "utils/log.h"
 #ifndef _LINUX
 #include "utils/CharsetConverter.h"
+#include "utils/URIUtils.h"
 #endif
 
 using namespace std;
@@ -792,7 +793,7 @@ extern "C"
     }
     else if (url.GetFileName().Find("*.") != string::npos)
     {
-      CUtil::GetExtension(url.GetFileName(),strMask);
+      URIUtils::GetExtension(url.GetFileName(),strMask);
       url.SetFileName(url.GetFileName().Left(url.GetFileName().Find("*.")));
     }
     int iDirSlot=0; // locate next free directory

@@ -1228,7 +1228,7 @@ CStdString CUtil::ValidatePath(const CStdString &path, bool bFixDoubleSlashes /*
 
   // check the path for incorrect slashes
 #ifdef _WIN32
-  if (CUtil::IsDOSPath(path))
+  if (URIUtils::IsDOSPath(path))
   {
     result.Replace('/', '\\');
     /* The double slash correction should only be used when *absolutely*

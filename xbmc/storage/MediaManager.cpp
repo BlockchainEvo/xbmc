@@ -27,6 +27,7 @@
 #include "Util.h"
 #ifdef _WIN32
 #include "WIN32Util.h"
+#include "utils/URIUtils.h"
 #endif
 #include "guilib/GUIWindowManager.h"
 #ifdef HAS_DVD_DRIVE
@@ -278,7 +279,7 @@ CStdString CMediaManager::TranslateDevicePath(const CStdString& devicePath, bool
   else if(!strDevice.empty() && strDevice[1]==':')
     strDevice.Format("\\\\.\\%c:", strDevice[0]);
 
-  CUtil::RemoveSlashAtEnd(strDevice);
+  URIUtils::RemoveSlashAtEnd(strDevice);
 #endif
   return strDevice;
 }
@@ -422,7 +423,7 @@ CStdString CMediaManager::GetDiskLabel(const CStdString& devicePath)
   CStdString strDevice = TranslateDevicePath(devicePath);
   char cVolumenName[128];
   char cFSName[128];
-  CUtil::AddSlashAtEnd(strDevice);
+  URIUtils::AddSlashAtEnd(strDevice);
   if(GetVolumeInformation(strDevice.c_str(), cVolumenName, 127, NULL, NULL, NULL, cFSName, 127)==0)
     return "";
   return CStdString(cVolumenName).TrimRight(" ");
