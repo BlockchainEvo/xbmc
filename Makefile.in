@@ -574,7 +574,7 @@ OBJSXBMC += \
 	xbmc/windowing/osx/windowing_osx.a \
 	lib/darwin/libSDL-OSX/libSDL-@ARCH@.a \
 	lib/darwin/libSDL-OSX/libSDL_mixer-@ARCH@.a \
-	lib/libmicrohttpd/src/daemon/.libs/libmicrohttpd.a
+	lib/libmicrohttpd/src/daemon/.libs/libmicrohttpd.a \
 	xbmc/threads/darwin/threads_darwin.a \
 
 else
