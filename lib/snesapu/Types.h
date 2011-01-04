@@ -54,6 +54,10 @@ typedef __int64 s64;
 typedef	long long int s64;
 #endif
 
+typedef float f32;
+typedef double f64;
+typedef long double f80;
+
 typedef struct DSPVoice
 {
 	s8	volL;									//Volume Left
