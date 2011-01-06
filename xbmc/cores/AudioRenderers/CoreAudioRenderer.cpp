@@ -24,7 +24,7 @@
 #include "AudioContext.h"
 #include "GUISettings.h"
 #include "Settings.h"
-#include "utils/Atomics.h"
+#include "threads/Atomics.h"
 #include "utils/log.h"
 #include "utils/TimeUtils.h"
 

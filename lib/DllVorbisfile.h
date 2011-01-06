@@ -28,7 +28,7 @@
   #include <vorbis/vorbisfile.h>
   #include "utils/log.h"
 #else
-  #include "ogg/vorbisfile.h"
+  #include "cdrip/oggvorbis/vorbisfile.h"
 #endif
 #include "DynamicDll.h"
 

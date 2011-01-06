@@ -27,7 +27,7 @@
 #if defined(_LINUX) && !defined(__APPLE__) || defined(WIN32)
   #include <FLAC/stream_decoder.h>
 #else
-  #include "FLACCodec/flac-1.2.1/include/FLAC/stream_decoder.h"
+  #include "libflac/flac-1.2.1/include/FLAC/stream_decoder.h"
 #endif
 #include "DynamicDll.h"
 #include "utils/log.h"
