@@ -22,7 +22,7 @@
 #ifndef WINDOW_SYSTEM_OSX_H
 #define WINDOW_SYSTEM_OSX_H
 
-#include "WinSystem.h"
+#include "windowing/WinSystem.h"
 #include <SDL/SDL_video.h>
 
 class CWinSystemOSX : public CWinSystemBase

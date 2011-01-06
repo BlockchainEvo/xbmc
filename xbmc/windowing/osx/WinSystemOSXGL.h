@@ -24,7 +24,7 @@
  *
  */
 #include "WinSystemOSX.h"
-#include "RenderSystemGL.h"
+#include "rendering/gl/RenderSystemGL.h"
 
 class CWinSystemOSXGL : public CWinSystemOSX, public CRenderSystemGL
 {
