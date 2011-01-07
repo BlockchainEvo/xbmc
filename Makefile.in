@@ -144,15 +144,21 @@ endif
 SS_DIRS=\
 	xbmc/screensavers/rsxs-0.9/xbmc
 
-VIS_DIRS=\
+VIS_DIRS=
+ifeq (@USE_OPENGL@,1)
+VIS_DIRS+=\
 	xbmc/visualizations/OpenGLSpectrum \
 	xbmc/visualizations/WaveForm \
-	xbmc/visualizations/XBMCProjectM
+	xbmc/visualizations/XBMCProjectM \
+
+endif
 ifeq ($(findstring osx,$(ARCH)), osx)
-VIS_DIRS+=xbmc/visualizations/iTunes
+VIS_DIRS+=xbmc/visualizations/iTunes \
+
 endif
 ifneq (@BUILD_GOOM@,1)
-VIS_DIRS+=xbmc/visualizations/Goom
+VIS_DIRS+=xbmc/visualizations/Goom \
+
 endif
 
 CONFLUENCE_MEDIA=addons/skin.confluence/media
