@@ -365,6 +365,10 @@
 		43248C4E0FBE224000B88866 /* LockFree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83A72B950FBC8E3B00171871 /* LockFree.cpp */; };
 		43248C510FBE224C00B88866 /* CoreAudio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83A72B920FBC8DFF00171871 /* CoreAudio.cpp */; };
 		43248C520FBE224E00B88866 /* CoreAudioRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83A72B8E0FBC8DB000171871 /* CoreAudioRenderer.cpp */; };
+		432D7CE412D86DA500CE4C49 /* NetworkLinux.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 432D7CE312D86DA500CE4C49 /* NetworkLinux.cpp */; };
+		432D7CE512D86DA500CE4C49 /* NetworkLinux.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 432D7CE312D86DA500CE4C49 /* NetworkLinux.cpp */; };
+		432D7CF712D870E800CE4C49 /* TCPServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 432D7CF612D870E800CE4C49 /* TCPServer.cpp */; };
+		432D7CF812D870E800CE4C49 /* TCPServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 432D7CF612D870E800CE4C49 /* TCPServer.cpp */; };
 		43348AA3107747CD00F859CF /* Edl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43348AA1107747CD00F859CF /* Edl.cpp */; };
 		43348AA4107747CD00F859CF /* Edl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43348AA1107747CD00F859CF /* Edl.cpp */; };
 		43348AAC1077486D00F859CF /* PlayerCoreFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43348AA81077486D00F859CF /* PlayerCoreFactory.cpp */; };
@@ -2248,6 +2252,10 @@
 		4313777F12D648E900680C15 /* DllLibid3tag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DllLibid3tag.h; sourceTree = "<group>"; };
 		431AE5D7109C1A63007428C3 /* OverlayRendererUtil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OverlayRendererUtil.cpp; sourceTree = "<group>"; };
 		431AE5D8109C1A63007428C3 /* OverlayRendererUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OverlayRendererUtil.h; sourceTree = "<group>"; };
+		432D7CE212D86D8B00CE4C49 /* NetworkLinux.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkLinux.h; sourceTree = "<group>"; };
+		432D7CE312D86DA500CE4C49 /* NetworkLinux.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NetworkLinux.cpp; sourceTree = "<group>"; };
+		432D7CF512D870D600CE4C49 /* TCPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPServer.h; sourceTree = "<group>"; };
+		432D7CF612D870E800CE4C49 /* TCPServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TCPServer.cpp; sourceTree = "<group>"; };
 		43348AA1107747CD00F859CF /* Edl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Edl.cpp; sourceTree = "<group>"; };
 		43348AA2107747CD00F859CF /* Edl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Edl.h; sourceTree = "<group>"; };
 		43348AA71077486D00F859CF /* PlayerCoreConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayerCoreConfig.h; path = playercorefactory/PlayerCoreConfig.h; sourceTree = "<group>"; };
@@ -3798,7 +3806,7 @@
 		F5ACB5370FC3DF3D00AAA056 /* eprintf.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = eprintf.cpp; sourceTree = "<group>"; };
 		F5AD1EA60F488A1A0065EB5D /* GUIWindowKaraokeLyrics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUIWindowKaraokeLyrics.h; sourceTree = "<group>"; };
 		F5AD1EA70F488A1A0065EB5D /* GUIWindowKaraokeLyrics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GUIWindowKaraokeLyrics.cpp; sourceTree = "<group>"; };
-		F5B413131065900C0035D105 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = config.h; path = xbmc/config.h; sourceTree = "<group>"; };
+		F5B413131065900C0035D105 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
 		F5BDB80A120202F400F0B710 /* DVDSubtitleTagSami.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVDSubtitleTagSami.h; sourceTree = "<group>"; };
 		F5BDB80B120202F400F0B710 /* DVDSubtitleTagSami.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DVDSubtitleTagSami.cpp; sourceTree = "<group>"; };
 		F5BDB8181202032400F0B710 /* DVDSubtitleTagMicroDVD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVDSubtitleTagMicroDVD.h; sourceTree = "<group>"; };
@@ -4013,7 +4021,6 @@
 			isa = PBXGroup;
 			children = (
 				6E2FACD20E26E92800DF79EA /* Info.plist */,
-				F5B413131065900C0035D105 /* config.h */,
 				08FB7795FE84155DC02AAC07 /* Source */,
 				C6859E96029091FE04C91782 /* Documentation */,
 				08FB779DFE84155DC02AAC07 /* External Frameworks and Libraries */,
@@ -4649,8 +4656,9 @@
 		431376F212D6449100680C15 /* network */ = {
 			isa = PBXGroup;
 			children = (
-				4313772312D646E300680C15 /* osx */,
 				4313772B12D6474F00680C15 /* libscrobbler */,
+				432D7CE112D86D4900CE4C49 /* linux */,
+				4313772312D646E300680C15 /* osx */,
 				E38E16890D25F9FA00618676 /* DNSNameCache.cpp */,
 				E38E168A0D25F9FA00618676 /* DNSNameCache.h */,
 				E3E920010D8C622A002BF43D /* EventClient.cpp */,
@@ -4666,6 +4674,8 @@
 				E38E1E6C0D25F9FD00618676 /* Network.h */,
 				E3E91FFC0D8C61DF002BF43D /* Socket.cpp */,
 				6E97BDC40DA2B620003A2A89 /* Socket.h */,
+				432D7CF612D870E800CE4C49 /* TCPServer.cpp */,
+				432D7CF512D870D600CE4C49 /* TCPServer.h */,
 				E38E1E1C0D25F9FD00618676 /* UPnP.cpp */,
 				E38E1E1D0D25F9FD00618676 /* UPnP.h */,
 				E38E1E8B0D25F9FD00618676 /* UdpClient.cpp */,
@@ -4722,6 +4732,15 @@
 				E38E1CE30D25F9FC00618676 /* sqlitedataset.h */,
 			);
 			path = dbwrappers;
+			sourceTree = "<group>";
+		};
+		432D7CE112D86D4900CE4C49 /* linux */ = {
+			isa = PBXGroup;
+			children = (
+				432D7CE312D86DA500CE4C49 /* NetworkLinux.cpp */,
+				432D7CE212D86D8B00CE4C49 /* NetworkLinux.h */,
+			);
+			path = linux;
 			sourceTree = "<group>";
 		};
 		4367217312D6640E002508E6 /* interfaces */ = {
@@ -5020,6 +5039,7 @@
 				43FAC85D12D62F4300F67914 /* video */,
 				43FAC8C812D63C4400F67914 /* windowing */,
 				43D82FF512D64C8600B38489 /* windows */,
+				F5B413131065900C0035D105 /* config.h */,
 				C8D0B2AE1265A9A800F0C0AC /* SystemGlobals.cpp */,
 				7C779E24104A57E500F444C4 /* ViewState.h */,
 				E38E14640D25F9F900618676 /* Application.cpp */,
@@ -7228,6 +7248,7 @@
 			isa = PBXProject;
 			buildConfigurationList = 1DEB924B08733DCA0010E9CD /* Build configuration list for PBXProject "XBMC" */;
 			compatibilityVersion = "Xcode 2.4";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				English,
@@ -8211,6 +8232,8 @@
 				18B7CA1812944A8E009E7A26 /* tinyxml.cpp in Sources */,
 				18B7CA1B12944A8E009E7A26 /* tinyxmlerror.cpp in Sources */,
 				18B7CA1E12944A8E009E7A26 /* tinyxmlparser.cpp in Sources */,
+				432D7CE412D86DA500CE4C49 /* NetworkLinux.cpp in Sources */,
+				432D7CF712D870E800CE4C49 /* TCPServer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -9085,6 +9108,8 @@
 				18B7CA2612944A8E009E7A26 /* tinyxml.cpp in Sources */,
 				18B7CA2912944A8E009E7A26 /* tinyxmlerror.cpp in Sources */,
 				18B7CA2C12944A8E009E7A26 /* tinyxmlparser.cpp in Sources */,
+				432D7CE512D86DA500CE4C49 /* NetworkLinux.cpp in Sources */,
+				432D7CF812D870E800CE4C49 /* TCPServer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -9133,55 +9158,41 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GENERATE_PROFILING_CODE = NO;
 				HEADER_SEARCH_PATHS = (
-					lib/tinyXML,
-					lib,
-					$SRCROOT,
-					guilib,
-					xbmc,
 					xbmc/osx,
+					$SRCROOT,
+					lib,
+					xbmc,
+					lib/ffmpeg,
 					xbmc/linux,
-					xbmc/cores,
 					xbmc/cores/dvdplayer,
-					xbmc/utils,
-					xbmc/lib,
-					xbmc/lib/libPython/Python/Include,
-					lib/jsoncpp/jsoncpp/include,
-					lib/cpluff/libcpluff,
-					lib/libmicrohttpd/src/include,
-					"lib/libcurl-OSX/include",
+					"lib/darwin/libcurl-OSX/include",
 				);
 				INFOPLIST_FILE = $SRCROOT/xbmc/osx/Info.plist;
 				INSTALL_PATH = /usr/local/bin;
 				LIBRARY_SEARCH_PATHS = (
-					lib/tinyXML,
-					lib,
-					xbmc/lib/libRTV,
-					xbmc/lib/libXDAAP,
-					xbmc/lib/libXBMS,
-					xbmc/lib/cmyth/libcmyth,
-					xbmc/lib/cmyth/librefmem,
-					xbmc/lib/libapetag/.libs,
-					xbmc/lib/libsquish,
-					xbmc/lib/libjsonrpc,
-					xbmc/lib/libhttpapi,
-					"lib/libSDL-OSX",
-					lib/jsoncpp/jsoncpp/src/lib_json,
+					lib/libRTV,
+					lib/libXBMS,
+					lib/libXDAAP,
+					lib/cmyth/libcmyth,
+					lib/cmyth/librefmem,
+					lib/libapetag/.libs,
+					lib/libsquish,
+					"lib/darwin/libSDL-OSX",
+					lib/jsoncpp/src/lib_json,
 					lib/libmicrohttpd/src/daemon/.libs,
+					"xbmc/interfaces/http-api",
+					"xbmc/interfaces/json-rpc",
 					/opt/local/lib,
 					/opt/local/lib/mysql5/mysql,
 					/opt/local/lib/samba3,
-					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
-					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_2)",
 				);
-				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/xbmc/guilib\"";
-				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(SRCROOT)/lib/tinyXML\"";
 				LINK_WITH_STANDARD_LIBRARIES = YES;
 				OTHER_LDFLAGS = (
 					"-headerpad_max_install_names",
 					"-all_load",
 				);
 				PRODUCT_NAME = XBMC;
-				USER_HEADER_SEARCH_PATHS = ". lib/ffmpeg /opt/local/include /opt/local/include/freetype2 /opt/local/include/mysql5 /opt/local/include/glib-2.0 /opt/local/lib/glib-2.0/include /usr/X11R6/include";
+				USER_HEADER_SEARCH_PATHS = ". /opt/local/include /opt/local/include/freetype2 /opt/local/include/mysql5 /opt/local/include/glib-2.0 /opt/local/lib/glib-2.0/include /usr/X11R6/include";
 				ZERO_LINK = NO;
 			};
 			name = Debug;
@@ -9218,55 +9229,41 @@
 				GCC_UNROLL_LOOPS = YES;
 				GCC_VERSION = 4.0;
 				HEADER_SEARCH_PATHS = (
-					lib/tinyXML,
-					lib,
-					$SRCROOT,
-					guilib,
-					xbmc,
 					xbmc/osx,
+					$SRCROOT,
+					lib,
+					xbmc,
+					lib/ffmpeg,
 					xbmc/linux,
-					xbmc/cores,
 					xbmc/cores/dvdplayer,
-					xbmc/utils,
-					xbmc/lib,
-					xbmc/lib/libPython/Python/Include,
-					lib/jsoncpp/jsoncpp/include,
-					lib/cpluff/libcpluff,
-					lib/libmicrohttpd/src/include,
-					"lib/libcurl-OSX/include",
+					"lib/darwin/libcurl-OSX/include",
 				);
 				INFOPLIST_FILE = $SRCROOT/xbmc/osx/Info.plist;
 				INSTALL_PATH = /usr/local/bin;
 				LIBRARY_SEARCH_PATHS = (
-					lib/tinyXML,
-					lib,
-					xbmc/lib/libRTV,
-					xbmc/lib/libXDAAP,
-					xbmc/lib/libXBMS,
-					xbmc/lib/cmyth/libcmyth,
-					xbmc/lib/cmyth/librefmem,
-					xbmc/lib/libapetag/.libs,
-					xbmc/lib/libsquish,
-					xbmc/lib/libjsonrpc,
-					xbmc/lib/libhttpapi,
-					"lib/libSDL-OSX",
-					lib/jsoncpp/jsoncpp/src/lib_json,
+					lib/libRTV,
+					lib/libXBMS,
+					lib/libXDAAP,
+					lib/cmyth/libcmyth,
+					lib/cmyth/librefmem,
+					lib/libapetag/.libs,
+					lib/libsquish,
+					"lib/darwin/libSDL-OSX",
+					lib/jsoncpp/src/lib_json,
 					lib/libmicrohttpd/src/daemon/.libs,
+					"xbmc/interfaces/http-api",
+					"xbmc/interfaces/json-rpc",
 					/opt/local/lib,
 					/opt/local/lib/mysql5/mysql,
 					/opt/local/lib/samba3,
-					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
-					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_2)",
 				);
-				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/xbmc/guilib\"";
-				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(SRCROOT)/lib/tinyXML\"";
 				LINK_WITH_STANDARD_LIBRARIES = YES;
 				OTHER_LDFLAGS = (
 					"-headerpad_max_install_names",
 					"-all_load",
 				);
 				PRODUCT_NAME = XBMC;
-				USER_HEADER_SEARCH_PATHS = ". lib/ffmpeg /opt/local/include /opt/local/include/freetype2 /opt/local/include/mysql5 /opt/local/include/glib-2.0 /opt/local/lib/glib-2.0/include /usr/X11R6/include";
+				USER_HEADER_SEARCH_PATHS = ". /opt/local/include /opt/local/include/freetype2 /opt/local/include/mysql5 /opt/local/include/glib-2.0 /opt/local/lib/glib-2.0/include /usr/X11R6/include";
 				ZERO_LINK = NO;
 			};
 			name = Release;
@@ -9285,7 +9282,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				PREBINDING = NO;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
-				USER_HEADER_SEARCH_PATHS = ". lib/ffmpeg";
+				USER_HEADER_SEARCH_PATHS = .;
 				VALID_ARCHS = "ppc i386";
 			};
 			name = Debug;
@@ -9303,7 +9300,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				PREBINDING = NO;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
-				USER_HEADER_SEARCH_PATHS = ". lib/ffmpeg";
+				USER_HEADER_SEARCH_PATHS = .;
 				VALID_ARCHS = "ppc i386";
 			};
 			name = Release;
@@ -9360,52 +9357,41 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GENERATE_PROFILING_CODE = NO;
 				HEADER_SEARCH_PATHS = (
-					$SRCROOT,
-					guilib,
-					xbmc,
 					xbmc/osx,
+					$SRCROOT,
+					lib,
+					xbmc,
+					lib/ffmpeg,
 					xbmc/linux,
-					xbmc/cores,
 					xbmc/cores/dvdplayer,
-					xbmc/utils,
-					xbmc/lib,
-					xbmc/lib/libPython/Python/Include,
-					lib/jsoncpp/jsoncpp/include,
-					lib/cpluff/libcpluff,
-					lib/libmicrohttpd/src/include,
-					"lib/libcurl-OSX/include",
+					"lib/darwin/libcurl-OSX/include",
 				);
 				INFOPLIST_FILE = "/Users/Shared/xbmc/xbmc_svn/xbmc/osx/Info copy.plist";
 				INSTALL_PATH = /usr/local/bin;
 				LIBRARY_SEARCH_PATHS = (
-					xbmc/lib/libRTV,
-					xbmc/lib/libcdio,
-					xbmc/lib/libXDAAP,
-					xbmc/lib/libXBMS,
-					xbmc/lib/cmyth/libcmyth,
-					xbmc/lib/cmyth/librefmem,
-					xbmc/lib/libapetag/.libs,
-					xbmc/lib/libsquish,
-					xbmc/lib/libjsonrpc,
-					xbmc/lib/libhttpapi,
-					"lib/libSDL-OSX",
-					lib/jsoncpp/jsoncpp/src/lib_json,
+					lib/libRTV,
+					lib/libXBMS,
+					lib/libXDAAP,
+					lib/cmyth/libcmyth,
+					lib/cmyth/librefmem,
+					lib/libapetag/.libs,
+					lib/libsquish,
+					"lib/darwin/libSDL-OSX",
+					lib/jsoncpp/src/lib_json,
 					lib/libmicrohttpd/src/daemon/.libs,
+					"xbmc/interfaces/http-api",
+					"xbmc/interfaces/json-rpc",
 					/opt/local/lib,
 					/opt/local/lib/mysql5/mysql,
 					/opt/local/lib/samba3,
-					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
-					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_2)",
 				);
-				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/xbmc/guilib\"";
-				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(SRCROOT)/lib/tinyXML\"";
 				LINK_WITH_STANDARD_LIBRARIES = YES;
 				OTHER_LDFLAGS = (
 					"-headerpad_max_install_names",
 					"-all_load",
 				);
 				PRODUCT_NAME = XBMC;
-				USER_HEADER_SEARCH_PATHS = ". lib/ffmpeg /opt/local/include /opt/local/include/freetype2 /opt/local/include/mysql5 /opt/local/include/glib-2.0 /opt/local/lib/glib-2.0/include /usr/X11R6/include";
+				USER_HEADER_SEARCH_PATHS = ". /opt/local/include /opt/local/include/freetype2 /opt/local/include/mysql5 /opt/local/include/glib-2.0 /opt/local/lib/glib-2.0/include /usr/X11R6/include";
 				VALID_ARCHS = ppc;
 				ZERO_LINK = NO;
 			};
@@ -9443,52 +9429,41 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_UNROLL_LOOPS = YES;
 				HEADER_SEARCH_PATHS = (
-					$SRCROOT,
-					guilib,
-					xbmc,
 					xbmc/osx,
+					$SRCROOT,
+					lib,
+					xbmc,
+					lib/ffmpeg,
 					xbmc/linux,
-					xbmc/cores,
 					xbmc/cores/dvdplayer,
-					xbmc/utils,
-					xbmc/lib,
-					xbmc/lib/libPython/Python/Include,
-					lib/jsoncpp/jsoncpp/include,
-					lib/cpluff/libcpluff,
-					lib/libmicrohttpd/src/include,
-					"lib/libcurl-OSX/include",
+					"lib/darwin/libcurl-OSX/include",
 				);
 				INFOPLIST_FILE = "/Users/Shared/xbmc/xbmc_svn/xbmc/osx/Info copy.plist";
 				INSTALL_PATH = /usr/local/bin;
 				LIBRARY_SEARCH_PATHS = (
-					xbmc/lib/libRTV,
-					xbmc/lib/libcdio,
-					xbmc/lib/libXDAAP,
-					xbmc/lib/libXBMS,
-					xbmc/lib/cmyth/libcmyth,
-					xbmc/lib/cmyth/librefmem,
-					xbmc/lib/libapetag/.libs,
-					xbmc/lib/libsquish,
-					xbmc/lib/libjsonrpc,
-					xbmc/lib/libhttpapi,
-					"lib/libSDL-OSX",
-					lib/jsoncpp/jsoncpp/src/lib_json,
+					lib/libRTV,
+					lib/libXBMS,
+					lib/libXDAAP,
+					lib/cmyth/libcmyth,
+					lib/cmyth/librefmem,
+					lib/libapetag/.libs,
+					lib/libsquish,
+					"lib/darwin/libSDL-OSX",
+					lib/jsoncpp/src/lib_json,
 					lib/libmicrohttpd/src/daemon/.libs,
+					"xbmc/interfaces/http-api",
+					"xbmc/interfaces/json-rpc",
 					/opt/local/lib,
 					/opt/local/lib/mysql5/mysql,
 					/opt/local/lib/samba3,
-					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
-					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_2)",
 				);
-				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/xbmc/guilib\"";
-				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(SRCROOT)/lib/tinyXML\"";
 				LINK_WITH_STANDARD_LIBRARIES = YES;
 				OTHER_LDFLAGS = (
 					"-headerpad_max_install_names",
 					"-all_load",
 				);
 				PRODUCT_NAME = XBMC;
-				USER_HEADER_SEARCH_PATHS = ". lib/ffmpeg /opt/local/include /opt/local/include/freetype2 /opt/local/include/mysql5 /opt/local/include/glib-2.0 /opt/local/lib/glib-2.0/include /usr/X11R6/include";
+				USER_HEADER_SEARCH_PATHS = ". /opt/local/include /opt/local/include/freetype2 /opt/local/include/mysql5 /opt/local/include/glib-2.0 /opt/local/lib/glib-2.0/include /usr/X11R6/include";
 				VALID_ARCHS = ppc;
 				ZERO_LINK = NO;
 			};
