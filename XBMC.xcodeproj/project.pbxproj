@@ -3136,9 +3136,6 @@
 		E38E18590D25F9FA00618676 /* LangInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LangInfo.h; sourceTree = "<group>"; };
 		E38E185A0D25F9FA00618676 /* LastFmManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LastFmManager.cpp; sourceTree = "<group>"; };
 		E38E185B0D25F9FA00618676 /* LastFmManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LastFmManager.h; sourceTree = "<group>"; };
-		E38E187D0D25F9FA00618676 /* CDRip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDRip.h; sourceTree = "<group>"; };
-		E38E18800D25F9FA00618676 /* cdripxlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cdripxlib.h; sourceTree = "<group>"; };
-		E38E18810D25F9FA00618676 /* ICDAudioCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICDAudioCallback.h; sourceTree = "<group>"; };
 		E38E18830D25F9FA00618676 /* libexif.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libexif.h; sourceTree = "<group>"; };
 		E38E196E0D25F9FB00618676 /* hdhomerun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hdhomerun.h; sourceTree = "<group>"; };
 		E38E196F0D25F9FB00618676 /* hdhomerun_channelscan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hdhomerun_channelscan.h; sourceTree = "<group>"; };
@@ -3276,7 +3273,6 @@
 		E38E1CD80D25F9FC00618676 /* dataset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dataset.h; sourceTree = "<group>"; };
 		E38E1CDF0D25F9FC00618676 /* qry_dat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = qry_dat.cpp; sourceTree = "<group>"; };
 		E38E1CE00D25F9FC00618676 /* qry_dat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = qry_dat.h; sourceTree = "<group>"; };
-		E38E1CE10D25F9FC00618676 /* sqlite3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sqlite3.h; sourceTree = "<group>"; };
 		E38E1CE20D25F9FC00618676 /* sqlitedataset.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sqlitedataset.cpp; sourceTree = "<group>"; };
 		E38E1CE30D25F9FC00618676 /* sqlitedataset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sqlitedataset.h; sourceTree = "<group>"; };
 		E38E1CE60D25F9FC00618676 /* archive.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = archive.cpp; sourceTree = "<group>"; };
@@ -3385,8 +3381,6 @@
 		E38E1D5D0D25F9FC00618676 /* version.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = version.hpp; sourceTree = "<group>"; };
 		E38E1D5E0D25F9FC00618676 /* volume.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = volume.cpp; sourceTree = "<group>"; };
 		E38E1D5F0D25F9FC00618676 /* volume.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = volume.hpp; sourceTree = "<group>"; };
-		E38E1D660D25F9FD00618676 /* zconf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zconf.h; sourceTree = "<group>"; };
-		E38E1D670D25F9FD00618676 /* zlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zlib.h; sourceTree = "<group>"; };
 		E38E1D6A0D25F9FD00618676 /* ConvUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ConvUtils.cpp; sourceTree = "<group>"; };
 		E38E1D6B0D25F9FD00618676 /* ConvUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConvUtils.h; sourceTree = "<group>"; };
 		E38E1D700D25F9FD00618676 /* LinuxResourceCounter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LinuxResourceCounter.cpp; sourceTree = "<group>"; };
@@ -5962,7 +5956,6 @@
 				E38E15FE0D25F9FA00618676 /* DllVorbisfile.h */,
 				E38E15FF0D25F9FA00618676 /* DllWAVPack.h */,
 				18B7CA0212944A8E009E7A26 /* tinyXML */,
-				E38E187C0D25F9FA00618676 /* libCDRip */,
 				E38E18820D25F9FA00618676 /* libexif */,
 				E38E196D0D25F9FB00618676 /* libhdhomerun */,
 				F551106A0F5C424700955236 /* libhts */,
@@ -5972,21 +5965,9 @@
 				E38E1A550D25F9FB00618676 /* libUPnP */,
 				E38E1C780D25F9FC00618676 /* libXBMS */,
 				E38E1C840D25F9FC00618676 /* libXDAAP */,
-				E38E1CD60D25F9FC00618676 /* sqLite */,
 				E38E1CE40D25F9FC00618676 /* UnrarXLib */,
-				E38E1D650D25F9FC00618676 /* zlib */,
 			);
 			path = lib;
-			sourceTree = "<group>";
-		};
-		E38E187C0D25F9FA00618676 /* libCDRip */ = {
-			isa = PBXGroup;
-			children = (
-				E38E187D0D25F9FA00618676 /* CDRip.h */,
-				E38E18800D25F9FA00618676 /* cdripxlib.h */,
-				E38E18810D25F9FA00618676 /* ICDAudioCallback.h */,
-			);
-			path = libCDRip;
 			sourceTree = "<group>";
 		};
 		E38E18820D25F9FA00618676 /* libexif */ = {
@@ -6641,14 +6622,6 @@
 			path = libXDAAP;
 			sourceTree = "<group>";
 		};
-		E38E1CD60D25F9FC00618676 /* sqLite */ = {
-			isa = PBXGroup;
-			children = (
-				E38E1CE10D25F9FC00618676 /* sqlite3.h */,
-			);
-			path = sqLite;
-			sourceTree = "<group>";
-		};
 		E38E1CE40D25F9FC00618676 /* UnrarXLib */ = {
 			isa = PBXGroup;
 			children = (
@@ -6762,15 +6735,6 @@
 				E38E1D5F0D25F9FC00618676 /* volume.hpp */,
 			);
 			path = UnrarXLib;
-			sourceTree = "<group>";
-		};
-		E38E1D650D25F9FC00618676 /* zlib */ = {
-			isa = PBXGroup;
-			children = (
-				E38E1D660D25F9FD00618676 /* zconf.h */,
-				E38E1D670D25F9FD00618676 /* zlib.h */,
-			);
-			path = zlib;
 			sourceTree = "<group>";
 		};
 		E38E1D690D25F9FD00618676 /* linux */ = {
