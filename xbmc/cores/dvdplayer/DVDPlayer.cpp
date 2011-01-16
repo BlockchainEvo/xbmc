@@ -479,7 +479,7 @@ retry:
     {
       CLog::Log(LOGERROR, "test subs Amet [%s]", filenames[i].c_str());
       // if vobsub subtitle:		
-      if ( CUtil::GetExtension(filenames[i]) == ".idx" ) 
+      if (URIUtils::GetExtension(filenames[i]) == ".idx")
       {
         CStdString strSubFile;
         if ( CUtil::FindVobSubPair( filenames, filenames[i], strSubFile ) )
@@ -3402,7 +3402,7 @@ int CDVDPlayer::AddSubtitleFile(const std::string& filename, const std::string& 
   if(ext == ".idx")
   {
     if (vobsubfile.empty())
-      vobsubfile = CUtil::ReplaceExtension(filename, ".sub");
+      vobsubfile = URIUtils::ReplaceExtension(filename, ".sub");
    
     CDVDDemuxVobsub v;
     if(!v.Open(filename, vobsubfile))

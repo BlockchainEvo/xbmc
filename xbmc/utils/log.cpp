@@ -29,7 +29,7 @@
 #include "threads/SingleLock.h"
 #include "settings/AdvancedSettings.h"
 #include "threads/Thread.h"
-#include "WindowingFactory.h"
+#include "windowing/WindowingFactory.h"
 
 FILE*       CLog::m_file            = NULL;
 int         CLog::m_repeatCount     = 0;

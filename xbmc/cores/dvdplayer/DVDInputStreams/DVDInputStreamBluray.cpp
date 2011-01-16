@@ -190,7 +190,7 @@ static BD_FILE_H *file_open(const char* filename, const char *mode)
 
     if(is_udf_iso_path(filename))
     {
-      CUtil::URLEncode(strFilename);
+      CURL::Encode(strFilename);
       strFilename.Format("udf://%s", strFilename);
       CLog::Log(LOGDEBUG, "CDVDInputStreamBluray - Opening file udf iso file %s... (%p)", strFilename.c_str(), file);
     }
@@ -264,7 +264,7 @@ static BD_DIR_H *dir_open(const char* dirname)
     CStdString strDirname(dirname);
     if(is_udf_iso_path(dirname))
     {
-      CUtil::URLEncode(strDirname);
+      CURL::Encode(strDirname);
       strDirname.Format("udf://%s", strDirname);
       CLog::Log(LOGDEBUG, "CDVDInputStreamBluray - Opening udf dir %s...", strDirname.c_str());
     }

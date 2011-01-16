@@ -29,7 +29,7 @@
 #include "infotagmusic.h"
 #include "listitem.h"
 #include "FileItem.h"
-#include "LangCodeExpander.h"
+#include "utils/LangCodeExpander.h"
 #include "settings/Settings.h"
 
 using namespace MUSIC_INFO;

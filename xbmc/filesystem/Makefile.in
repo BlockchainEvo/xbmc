@@ -72,9 +72,9 @@ SRCS=AddonsDirectory.cpp \
      SpecialProtocol.cpp \
      SpecialProtocolDirectory.cpp \
      StackDirectory.cpp \
-     UPnPDirectory.cpp \
      udf25.cpp \
      UDFDirectory.cpp \
+     UPnPDirectory.cpp \
      VideoDatabaseDirectory.cpp \
      VirtualDirectory.cpp \
      VirtualPathDirectory.cpp \

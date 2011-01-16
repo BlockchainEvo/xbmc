@@ -23,7 +23,7 @@
  *
  */
 
-#include "GUIWindowTestPattern.h"
+#include "settings/GUIWindowTestPattern.h"
 
 class CGUIWindowTestPatternGL : public CGUIWindowTestPattern
 {

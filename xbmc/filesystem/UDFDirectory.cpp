@@ -24,6 +24,7 @@
 #include "Util.h"
 #include "URL.h"
 #include "FileItem.h"
+#include "utils/URIUtils.h"
 
 using namespace XFILE;
 
@@ -39,12 +40,12 @@ bool CUDFDirectory::GetDirectory(const CStdString& strPath,
                                  CFileItemList &items)
 {
   CStdString strRoot = strPath;
-  CUtil::AddSlashAtEnd(strRoot);
+  URIUtils::AddSlashAtEnd(strRoot);
 
   CURL url(strPath);
 
   CStdString strDirectory = url.GetHostName();
-  CUtil::URLDecode(strDirectory);
+  CURL::Decode(strDirectory);
 
   udf25 udfIsoReader;
   udf_dir_t *dirp = udfIsoReader.OpenDir(strDirectory);
@@ -64,7 +65,7 @@ bool CUDFDirectory::GetDirectory(const CStdString& strPath,
         pItem->m_strPath = strRoot;
         pItem->m_strPath += (char*)dp->d_name;
         pItem->m_bIsFolder = true;
-        CUtil::AddSlashAtEnd(pItem->m_strPath);
+        URIUtils::AddSlashAtEnd(pItem->m_strPath);
 
         items.Add(pItem);
       }

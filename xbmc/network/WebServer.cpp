@@ -169,7 +169,7 @@ int CWebServer::AnswerToConnection(void *cls, struct MHD_Connection *connection,
         useDefaultWebInterface = false;
         addonPath = addon->Path();
         if (addon->Type() != ADDON_WEB_INTERFACE) // No need to append /htdocs for web interfaces
-          addonPath = CUtil::AddFileToFolder(addonPath, "/htdocs/");
+          addonPath = URIUtils::AddFileToFolder(addonPath, "/htdocs/");
       }
     }
     else
