@@ -31,9 +31,6 @@
 #include "interfaces/AnnouncementManager.h"
 #include "guilib/LocalizeStrings.h"
 
-#if defined(HAVE_LIBCRYSTALHD)
-#include "cores/dvdplayer/DVDCodecs/Video/CrystalHD.h"
-#endif
 #ifdef HAS_LCD
 #include "utils/LCDFactory.h"
 #endif
