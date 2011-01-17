@@ -369,6 +369,12 @@
 		432D7CE512D86DA500CE4C49 /* NetworkLinux.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 432D7CE312D86DA500CE4C49 /* NetworkLinux.cpp */; };
 		432D7CF712D870E800CE4C49 /* TCPServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 432D7CF612D870E800CE4C49 /* TCPServer.cpp */; };
 		432D7CF812D870E800CE4C49 /* TCPServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 432D7CF612D870E800CE4C49 /* TCPServer.cpp */; };
+		433219D712E4C6A500CD7486 /* FileUDF.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 433219D112E4C6A500CD7486 /* FileUDF.cpp */; };
+		433219D812E4C6A500CD7486 /* udf25.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 433219D312E4C6A500CD7486 /* udf25.cpp */; };
+		433219D912E4C6A500CD7486 /* UDFDirectory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 433219D512E4C6A500CD7486 /* UDFDirectory.cpp */; };
+		433219DA12E4C6A500CD7486 /* FileUDF.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 433219D112E4C6A500CD7486 /* FileUDF.cpp */; };
+		433219DB12E4C6A500CD7486 /* udf25.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 433219D312E4C6A500CD7486 /* udf25.cpp */; };
+		433219DC12E4C6A500CD7486 /* UDFDirectory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 433219D512E4C6A500CD7486 /* UDFDirectory.cpp */; };
 		43348AA3107747CD00F859CF /* Edl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43348AA1107747CD00F859CF /* Edl.cpp */; };
 		43348AA4107747CD00F859CF /* Edl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43348AA1107747CD00F859CF /* Edl.cpp */; };
 		43348AAC1077486D00F859CF /* PlayerCoreFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43348AA81077486D00F859CF /* PlayerCoreFactory.cpp */; };
@@ -2248,6 +2254,12 @@
 		432D7CE312D86DA500CE4C49 /* NetworkLinux.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NetworkLinux.cpp; sourceTree = "<group>"; };
 		432D7CF512D870D600CE4C49 /* TCPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPServer.h; sourceTree = "<group>"; };
 		432D7CF612D870E800CE4C49 /* TCPServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TCPServer.cpp; sourceTree = "<group>"; };
+		433219D112E4C6A500CD7486 /* FileUDF.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FileUDF.cpp; sourceTree = "<group>"; };
+		433219D212E4C6A500CD7486 /* FileUDF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileUDF.h; sourceTree = "<group>"; };
+		433219D312E4C6A500CD7486 /* udf25.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = udf25.cpp; sourceTree = "<group>"; };
+		433219D412E4C6A500CD7486 /* udf25.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = udf25.h; sourceTree = "<group>"; };
+		433219D512E4C6A500CD7486 /* UDFDirectory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UDFDirectory.cpp; sourceTree = "<group>"; };
+		433219D612E4C6A500CD7486 /* UDFDirectory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDFDirectory.h; sourceTree = "<group>"; };
 		43348AA1107747CD00F859CF /* Edl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Edl.cpp; sourceTree = "<group>"; };
 		43348AA2107747CD00F859CF /* Edl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Edl.h; sourceTree = "<group>"; };
 		43348AA71077486D00F859CF /* PlayerCoreConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayerCoreConfig.h; path = playercorefactory/PlayerCoreConfig.h; sourceTree = "<group>"; };
@@ -5699,6 +5711,8 @@
 				F584E1280F257BD800DB26A5 /* FileSpecialProtocol.h */,
 				E38E16DE0D25F9FA00618676 /* FileTuxBox.cpp */,
 				E38E16DF0D25F9FA00618676 /* FileTuxBox.h */,
+				433219D112E4C6A500CD7486 /* FileUDF.cpp */,
+				433219D212E4C6A500CD7486 /* FileUDF.h */,
 				F5DC880E110A4A0B00EE1B15 /* FileXBMSP.cpp */,
 				F5DC880D110A4A0B00EE1B15 /* FileXBMSP.h */,
 				E38E16E20D25F9FA00618676 /* FileZip.cpp */,
@@ -5766,6 +5780,10 @@
 				E38E17560D25F9FA00618676 /* SMBDirectory.h */,
 				E38E17590D25F9FA00618676 /* StackDirectory.cpp */,
 				E38E175A0D25F9FA00618676 /* StackDirectory.h */,
+				433219D312E4C6A500CD7486 /* udf25.cpp */,
+				433219D412E4C6A500CD7486 /* udf25.h */,
+				433219D512E4C6A500CD7486 /* UDFDirectory.cpp */,
+				433219D612E4C6A500CD7486 /* UDFDirectory.h */,
 				E38E175B0D25F9FA00618676 /* UPnPDirectory.cpp */,
 				E38E175C0D25F9FA00618676 /* UPnPDirectory.h */,
 				F5FAB0750EFABE2C00BAD4AE /* VTPDirectory.cpp */,
@@ -7217,7 +7235,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Update version in Info.plist with SVN revision\nSVN_REVISION=\"Unknown\"\nBUNDLE_NAME=\"XBMC\"\n\nSVN_REVISION=\"SVN-\"$(cat svn_revision.h | sed -n 's/\\(.*\\)\\\"\\(.*\\)\\\"\\(.*\\)/\\2/p')\nperl -p -i -e \"s/r####/$SVN_REVISION/\" \"$TARGET_BUILD_DIR/$BUNDLE_NAME.app/Contents/Info.plist\"\n";
+			shellScript = "# Update version in Info.plist with Git revision\nGIT_REVISION=\"Unknown\"\nBUNDLE_NAME=\"XBMC\"\n\nGIT_REVISION=\"Git-\"$(cat git_revision.h | sed -n 's/\\(.*\\)\\\"\\(.*\\)\\\"\\(.*\\)/\\2/p')\nperl -p -i -e \"s/r####/$GIT_REVISION/\" \"$TARGET_BUILD_DIR/$BUNDLE_NAME.app/Contents/Info.plist\"\n";
 		};
 		F5A1CBDE0F6B0B4700A96ABD /* copy root files */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -7260,7 +7278,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Update version in Info.plist with SVN revision\nSVN_REVISION=\"Unknown\"\nBUNDLE_NAME=\"XBMC\"\n\nSVN_REVISION=\"SVN-\"$(cat svn_revision.h | sed -n 's/\\(.*\\)\\\"\\(.*\\)\\\"\\(.*\\)/\\2/p')\nperl -p -i -e \"s/r####/$SVN_REVISION/\" \"$TARGET_BUILD_DIR/$BUNDLE_NAME.app/Contents/Info.plist\"\n";
+			shellScript = "# Update version in Info.plist with Git revision\nGIT_REVISION=\"Unknown\"\nBUNDLE_NAME=\"XBMC\"\n\nGIT_REVISION=\"Git-\"$(cat git_revision.h | sed -n 's/\\(.*\\)\\\"\\(.*\\)\\\"\\(.*\\)/\\2/p')\nperl -p -i -e \"s/r####/$GIT_REVISION/\" \"$TARGET_BUILD_DIR/$BUNDLE_NAME.app/Contents/Info.plist\"\n";
 		};
 		F5DEC3580E6DEBB2005A4E24 /* copy root files */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -8152,6 +8170,9 @@
 				18B7CA1E12944A8E009E7A26 /* tinyxmlparser.cpp in Sources */,
 				432D7CE412D86DA500CE4C49 /* NetworkLinux.cpp in Sources */,
 				432D7CF712D870E800CE4C49 /* TCPServer.cpp in Sources */,
+				433219D712E4C6A500CD7486 /* FileUDF.cpp in Sources */,
+				433219D812E4C6A500CD7486 /* udf25.cpp in Sources */,
+				433219D912E4C6A500CD7486 /* UDFDirectory.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -9025,6 +9046,9 @@
 				18B7CA2C12944A8E009E7A26 /* tinyxmlparser.cpp in Sources */,
 				432D7CE512D86DA500CE4C49 /* NetworkLinux.cpp in Sources */,
 				432D7CF812D870E800CE4C49 /* TCPServer.cpp in Sources */,
+				433219DA12E4C6A500CD7486 /* FileUDF.cpp in Sources */,
+				433219DB12E4C6A500CD7486 /* udf25.cpp in Sources */,
+				433219DC12E4C6A500CD7486 /* UDFDirectory.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
