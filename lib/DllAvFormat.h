@@ -43,7 +43,7 @@ extern "C" {
     #include <ffmpeg/avformat.h>
   #endif
   /* libavformat/riff.h is not a public header, so include it here */
-  #include <xbmc/cores/dvdplayer/Codecs/ffmpeg/libavformat/riff.h>
+  #include "ffmpeg/libavformat/riff.h"
   /* av_read_frame_flush() is defined for us in lib/xbmc-dll-symbols/DllAvFormat.c */
   void av_read_frame_flush(AVFormatContext *s);
 #else
