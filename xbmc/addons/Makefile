@@ -13,6 +13,7 @@ SRCS=Addon.cpp \
      Service.cpp \
      Skin.cpp \
      Visualisation.cpp \
+		 AddonInstaller.cpp \
 
 LIB=addons.a
 

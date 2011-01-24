@@ -278,7 +278,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\lib\jsoncpp\src\lib_json\json_reader.cpp" />
-    <ClCompile Include="..\..\lib\jsoncpp\src\lib_json\json_value.cpp" />
+    <ClCompile Include="..\..\xbmc\addons\AddonInstaller.cpp" />
     <ClCompile Include="..\..\lib\jsoncpp\src\lib_json\json_writer.cpp" />
     <ClCompile Include="..\..\lib\tinyXML\tinystr.cpp" />
     <ClCompile Include="..\..\lib\tinyXML\tinyxml.cpp" />
@@ -1083,7 +1083,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\lib\tinyXML\tinystr.h" />
-    <ClInclude Include="..\..\lib\tinyXML\tinyxml.h" />
+    <ClInclude Include="..\..\xbmc\addons\AddonInstaller.h" />
     <ClInclude Include="..\..\lib\win32\sqlite\sqlite3.h" />
     <ClInclude Include="..\..\xbmc\addons\AddonDatabase.h" />
     <ClInclude Include="..\..\xbmc\addons\DllLibCPluff.h" />

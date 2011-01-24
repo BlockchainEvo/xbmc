@@ -486,6 +486,8 @@
 		7C2D6AE40F35453E00DD2E85 /* SpecialProtocol.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C2D6AE20F35453E00DD2E85 /* SpecialProtocol.cpp */; };
 		7C45DBE910F325C400D4BBF3 /* DAVDirectory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C45DBE710F325C400D4BBF3 /* DAVDirectory.cpp */; };
 		7C45DBEA10F325C400D4BBF3 /* DAVDirectory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C45DBE710F325C400D4BBF3 /* DAVDirectory.cpp */; };
+		7C47057E12EC223300369E51 /* AddonInstaller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C47057C12EC223300369E51 /* AddonInstaller.cpp */; };
+		7C47057F12EC223300369E51 /* AddonInstaller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C47057C12EC223300369E51 /* AddonInstaller.cpp */; };
 		7C5608C70F1754930056433A /* ExternalPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C5608C40F1754930056433A /* ExternalPlayer.cpp */; };
 		7C62F24210505BC7002AD2C1 /* Bookmark.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C62F24010505BC7002AD2C1 /* Bookmark.cpp */; };
 		7C62F24310505BC7002AD2C1 /* Bookmark.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C62F24010505BC7002AD2C1 /* Bookmark.cpp */; };
@@ -2388,6 +2390,8 @@
 		7C2D6AE30F35453E00DD2E85 /* SpecialProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecialProtocol.h; sourceTree = "<group>"; };
 		7C45DBE710F325C400D4BBF3 /* DAVDirectory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DAVDirectory.cpp; sourceTree = "<group>"; };
 		7C45DBE810F325C400D4BBF3 /* DAVDirectory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAVDirectory.h; sourceTree = "<group>"; };
+		7C47057C12EC223300369E51 /* AddonInstaller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AddonInstaller.cpp; path = addons/AddonInstaller.cpp; sourceTree = "<group>"; };
+		7C47057D12EC223300369E51 /* AddonInstaller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddonInstaller.h; path = addons/AddonInstaller.h; sourceTree = "<group>"; };
 		7C5608C40F1754930056433A /* ExternalPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ExternalPlayer.cpp; sourceTree = "<group>"; };
 		7C5608C50F1754930056433A /* ExternalPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExternalPlayer.h; sourceTree = "<group>"; };
 		7C62F24010505BC7002AD2C1 /* Bookmark.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bookmark.cpp; sourceTree = "<group>"; };
@@ -4054,6 +4058,8 @@
 				18B49FF11152BFA5001AF8A6 /* Addon.cpp */,
 				18B49FF21152BFA5001AF8A6 /* Addon.h */,
 				18B49FF31152BFA5001AF8A6 /* AddonDll.h */,
+				7C47057C12EC223300369E51 /* AddonInstaller.cpp */,
+				7C47057D12EC223300369E51 /* AddonInstaller.h */,
 				18B49FF41152BFA5001AF8A6 /* AddonManager.cpp */,
 				18B49FF51152BFA5001AF8A6 /* AddonManager.h */,
 				F52BFFDA115D5574004B1D66 /* AddonStatusHandler.cpp */,
@@ -8019,7 +8025,7 @@
 				18B7C3841294203F009E7A26 /* AddonDatabase.cpp in Sources */,
 				18B7C38A12942090009E7A26 /* GUIDialogAddonInfo.cpp in Sources */,
 				18B7C38B12942090009E7A26 /* GUIViewStateAddonBrowser.cpp in Sources */,
-				18B7C392129420E5009E7A26 /* Settings.cpp in Sources */,
+				7C47057E12EC223300369E51 /* AddonInstaller.cpp in Sources */,
 				18B7C393129420E5009E7A26 /* SettingsControls.cpp in Sources */,
 				18B7C39E12942114009E7A26 /* GUIWindowSettings.cpp in Sources */,
 				18B7C39F12942114009E7A26 /* GUIWindowSettingsCategory.cpp in Sources */,
@@ -8895,7 +8901,7 @@
 				18B7C3851294203F009E7A26 /* AddonDatabase.cpp in Sources */,
 				18B7C38C12942090009E7A26 /* GUIDialogAddonInfo.cpp in Sources */,
 				18B7C38D12942090009E7A26 /* GUIViewStateAddonBrowser.cpp in Sources */,
-				18B7C394129420E5009E7A26 /* Settings.cpp in Sources */,
+				7C47057F12EC223300369E51 /* AddonInstaller.cpp in Sources */,
 				18B7C395129420E5009E7A26 /* SettingsControls.cpp in Sources */,
 				18B7C3A212942114009E7A26 /* GUIWindowSettings.cpp in Sources */,
 				18B7C3A312942114009E7A26 /* GUIWindowSettingsCategory.cpp in Sources */,
