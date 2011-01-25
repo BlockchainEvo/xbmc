@@ -359,10 +359,6 @@ bool CAddonInstallJob::Install(const CStdString &installFrom)
     return false;
   }
 
-  // TODO: Do we need to call FindAddons()/GetAddon() here, or is everything we need already available from LoadAddonDescription?
-  CAddonMgr::Get().FindAddons();
-  CAddonMgr::Get().GetAddon(addon->ID(), addon);
-
   // resolve dependencies
   ADDONDEPS deps = addon->GetDeps();
   CStdString referer;
