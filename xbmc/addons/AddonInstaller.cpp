@@ -147,10 +147,10 @@ bool CAddonInstaller::Cancel(const CStdString &addonID)
 void CAddonInstaller::Install(const CStdString &addonID, bool force, const CStdString &referer, bool background)
 {
   AddonPtr addon;
-  if (!force && CAddonMgr::Get().GetAddon(addonID, addon))
+  bool addonInstalled = CAddonMgr::Get().GetAddon(addonID, addon);
+  if (addonInstalled && !force)
     return;
 
-  bool update = addon != NULL;
   // check whether we have it available in a repository
   CAddonDatabase database;
   database.Open();
@@ -172,14 +172,14 @@ void CAddonInstaller::Install(const CStdString &addonID, bool force, const CStdS
 
     if (background)
     {
-      unsigned int jobID = CJobManager::GetInstance().AddJob(new CAddonInstallJob(addon, hash, update, referer), this);
+      unsigned int jobID = CJobManager::GetInstance().AddJob(new CAddonInstallJob(addon, hash, addonInstalled, referer), this);
       m_downloadJobs.insert(make_pair(addon->ID(), CDownloadJob(jobID)));
     }
     else
     {
       m_downloadJobs.insert(make_pair(addon->ID(), CDownloadJob(0)));
       lock.Leave();
-      CAddonInstallJob job(addon, hash, update, referer);
+      CAddonInstallJob job(addon, hash, addonInstalled, referer);
       if (!job.DoWork())
       { // TODO: dump something to debug log?
       }
