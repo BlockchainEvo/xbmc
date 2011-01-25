@@ -274,7 +274,7 @@ bool CGUIWindowAddonBrowser::GetDirectory(const CStdString& strDirectory,
   else
     result = CGUIMediaWindow::GetDirectory(strDirectory,items);
 
-  if (strDirectory.IsEmpty() && !CAddonInstaller::Get().IsDownloading())
+  if (strDirectory.IsEmpty() && CAddonInstaller::Get().IsDownloading())
   {
     CFileItemPtr item(new CFileItem("addons://downloading/",true));
     item->SetLabel(g_localizeStrings.Get(24067));
