@@ -7,8 +7,7 @@ SUBDIRS = \
         openssl libssh2 curl \
         libogg libvorbis libflac libmad fribidi libwavpack libmpeg2 \
         libass libcdio libsamplerate \
-        libmicrohttpd libmodplug \
-	samba \
+        libmicrohttpd libmodplug jasper samba \
         #python26 mysqlclient boost \
 
 # problem libs -> librtmp libbluray
