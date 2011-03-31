@@ -8,10 +8,10 @@ SUBDIRS = \
         libogg libvorbis libflac libmad fribidi libwavpack libmpeg2 \
         libass libcdio libsamplerate \
         libmicrohttpd libmodplug \
+	samba \
+        #python26 mysqlclient boost \
 
-        #samba python26 mysqlclient boost \
-
-# problem libs -> tiff librtmp libbluray
+# problem libs -> librtmp libbluray
 
 .PHONY: $(BUILDTOOLS) $(SUBDIRS)
 
