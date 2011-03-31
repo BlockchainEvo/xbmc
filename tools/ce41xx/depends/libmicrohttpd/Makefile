@@ -14,7 +14,7 @@ ARCHIVE_TOOL=tar
 ARCHIVE_TOOL_FLAGS=xf
 
 # configuration settings
-CONFIGURE=./configure --prefix=$(PREFIX) --host=$(HOST)
+CONFIGURE=./configure --prefix=$(PREFIX) --host=$(HOST) --disable-https
 
 LIBDYLIB=$(SOURCE)/.libs/$(LIBNAME).so
 
