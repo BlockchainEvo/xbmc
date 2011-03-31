@@ -1,17 +1,12 @@
+include ../../Makefile.include
+
 APPNAME=yasm
 VERSION=1.1.0
 SOURCE=$(APPNAME)-$(VERSION)
-# download location and format
-BASE_URL=http://mirrors.xbmc.org/build-deps/darwin-libs
 ARCHIVE=$(SOURCE).tar.gz
-TARBALLS_LOCATION=../tarballs
-RETRIEVE_TOOL=/usr/bin/curl
-RETRIEVE_TOOL_FLAGS=-Ls --create-dirs --output $(TARBALLS_LOCATION)/$(ARCHIVE)
-ARCHIVE_TOOL=tar
-ARCHIVE_TOOL_FLAGS=xf
 
 # configuration settings
-PREFIX:=/opt/xbmc-ce41xx
+PREFIX:=$(XBMCPREFIX)/local
 export PATH:=$(PREFIX)/bin:$(PATH)
 CONFIGURE=./configure --prefix=$(PREFIX) --host=$(HOST)
 

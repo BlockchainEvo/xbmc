@@ -1,17 +1,11 @@
+include ../../Makefile.include
 include ../intel-sdk.mk
 
 # lib name, version
 LIBNAME=libblueray
 VERSION=20110213.20739ed
 SOURCE=$(LIBNAME)-$(VERSION)
-# download location and format
-BASE_URL=http://mirrors.xbmc.org/build-deps/darwin-libs
 ARCHIVE=$(SOURCE).tgz
-TARBALLS_LOCATION=../tarballs
-RETRIEVE_TOOL=/usr/bin/curl
-RETRIEVE_TOOL_FLAGS=-Ls --create-dirs --output $(TARBALLS_LOCATION)/$(ARCHIVE)
-ARCHIVE_TOOL=tar
-ARCHIVE_TOOL_FLAGS=xf
 
 # configuration settings
 CONFIGURE=./configure --prefix=$(PREFIX) --exec-prefix=$(PREFIX) --host=$(HOST)

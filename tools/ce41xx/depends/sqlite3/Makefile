@@ -1,18 +1,11 @@
+include ../../Makefile.include
 include ../intel-sdk.mk
 
 # lib name, version
 LIBNAME=sqlite
 VERSION=3.6.11
 SOURCE=$(LIBNAME)-$(VERSION)
-# download location and format
-#BASE_URL=http://mirrors.xbmc.org/build-deps/darwin-libs
-BASE_URL=http://www.sqlite.org
 ARCHIVE=$(SOURCE).tar.gz
-TARBALLS_LOCATION=../tarballs
-RETRIEVE_TOOL=/usr/bin/curl
-RETRIEVE_TOOL_FLAGS=-Ls --create-dirs --output $(TARBALLS_LOCATION)/$(ARCHIVE)
-ARCHIVE_TOOL=tar
-ARCHIVE_TOOL_FLAGS=xf
 
 # configuration settings
 export CXXFLAGS+=-DSQLITE_ENABLE_COLUMN_METADATA=1

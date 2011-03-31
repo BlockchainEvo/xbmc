@@ -1,10 +1,22 @@
-sudo mkdir -p /opt/xbmc-ce41xx
-sudo chmod 777 /opt/xbmc-ce41xx
-mkdir -p /opt/xbmc-ce41xx/local/lib
-mkdir -p /opt/xbmc-ce41xx/local/include
-ln -sf $HOME/IntelCE-20.0.11052.243197/build_i686/staging_dir /opt/xbmc-ce41xx/IntelCE
-ln -sf $HOME/IntelCE-20.0.11052.243197/build_i686/staging_dir/bin /opt/xbmc-ce41xx/toolchains
-ln -sf $HOME/IntelCE-20.0.11052.243197/project_build_i686/IntelCE/root /opt/xbmc-ce41xx/targetfs
-#  hide config.h in Intel's SDK
-mv /opt/xbmc-ce41xx/IntelCE/include/config.h /opt/xbmc-ce41xx/IntelCE/include/config.h.orig
+#!/bin/bash
 
+BUILDROOT=${INTELCE_BUILDROOT:-$HOME/IntelCE-20.0.11052.243197}
+XBMCPREFIX=${INTELCE_XBMCPREFIX:-/opt/xbmc-ce41xx}
+
+sudo mkdir -p $XBMCPREFIX
+sudo chmod 777 $XBMCPREFIX
+mkdir -p $XBMCPREFIX/local/lib
+mkdir -p $XBMCPREFIX/local/include
+ln -sf $BUILDROOT/build_i686/staging_dir $XBMCPREFIX/IntelCE
+ln -sf $BUILDROOT/build_i686/staging_dir/bin $XBMCPREFIX/toolchains
+ln -sf $BUILDROOT/project_build_i686/IntelCE/root $XBMCPREFIX/targetfs
+#  hide config.h in Intel's SDK
+mv $XBMCPREFIX/IntelCE/include/config.h $XBMCPREFIX/IntelCE/include/config.h.orig
+
+echo "XBMCPREFIX=$XBMCPREFIX"                                          >  Makefile.include
+echo "BASE_URL=http://mirrors.xbmc.org/build-deps/darwin-libs"         >> Makefile.include
+echo "TARBALLS_LOCATION=$XBMCPREFIX/tarballs"                          >> Makefile.include
+echo "RETRIEVE_TOOL=/usr/bin/curl"                                     >> Makefile.include
+echo "RETRIEVE_TOOL_FLAGS=-Ls --create-dirs --output \$(TARBALLS_LOCATION)/\$(ARCHIVE)" >> Makefile.include
+echo "ARCHIVE_TOOL=tar"                                                >> Makefile.include
+echo "ARCHIVE_TOOL_FLAGS=xf"                                           >> Makefile.include

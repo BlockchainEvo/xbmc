@@ -1,5 +1,7 @@
+include ../Makefile.include
+
+BUILDTOOL = yasm cmake
 SUBDIRS = \
-        yasm cmake \
         pcre expat gettext readline sqlite3 \
         liblzo2 freetype2 fontconfig \
         openssl libssh2 curl \
@@ -11,16 +13,21 @@ SUBDIRS = \
 
 # problem libs -> tiff librtmp libbluray
 
-.PHONY: $(SUBDIRS)
+.PHONY: $(BUILDTOOLS) $(SUBDIRS)
 
-all: $(SUBDIRS)
+all: $(BUILDTOOLS) $(SUBDIRS)
+
+$(BUILDTOOLS):
+	$(MAKE) -C $@
 
 $(SUBDIRS):
 	$(MAKE) -C $@
 
 clean:
+        for d in $(BUILDTOOLS); do $(MAKE) -C $$d clean; done
 	for d in $(SUBDIRS); do $(MAKE) -C $$d clean; done
 
 distclean::
+        for d in $(BUILDTOOLS); do $(MAKE) -C $$d distclean; done
 	for d in $(SUBDIRS); do $(MAKE) -C $$d distclean; done
-        #rm -rf $(BUILDDIR)
+	rm -rf $(XBMCPREFIX)/local
