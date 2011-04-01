@@ -9,7 +9,17 @@ ARCHIVE=$(SOURCE).tar.gz
 # configuration settings
 CONFIGURE=./configure --prefix=$(PREFIX) --host=$(HOST) --enable-shared \
   --enable-thread-safe-client -with-extra-charsets=complex \
-  --without-readline --without-server --without-bench --without-docs --without-man
+  --with-readline=$(PREFIX) --without-readline \
+  --without-server --without-bench --without-docs --without-man \
+  ac_cv_sys_restartable_syscalls=yes \
+  ac_cv_path_PS=/bin/ps \
+  ac_cv_FIND_PROC="/bin/ps p \$\$PID | grep -v grep | grep mysqld > /dev/null" \
+  ac_cv_have_decl_HAVE_IB_ATOMIC_PTHREAD_T_GCC=yes \
+  ac_cv_have_decl_HAVE_IB_ATOMIC_PTHREAD_T_SOLARIS=no \
+  ac_cv_have_decl_HAVE_IB_GCC_ATOMIC_BUILTINS=yes \
+
+  tmp =mysql_cv_new_rl_interface=yes \
+
 
 LIBDYLIB=$(SOURCE)/libmysql/.libs/$(LIBNAME).so
 
@@ -24,6 +34,9 @@ $(SOURCE): $(TARBALLS_LOCATION)/$(ARCHIVE)
 	-rm -rf $(SOURCE)
 	$(ARCHIVE_TOOL) $(ARCHIVE_TOOL_FLAGS) $(TARBALLS_LOCATION)/$(ARCHIVE)
 	echo $(SOURCE) > .gitignore
+	cd $(SOURCE); patch -p1 <../ac_cache_check.patch
+	cd $(SOURCE); patch -p1 <../configure-ps-cache-check.patch
+	cd $(SOURCE); patch -p1 <../use-new-readline-iface.patch
 	cd $(SOURCE); $(CONFIGURE)
 
 $(LIBDYLIB): $(SOURCE)
