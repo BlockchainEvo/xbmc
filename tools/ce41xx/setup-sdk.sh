@@ -18,5 +18,5 @@ echo "BASE_URL=http://mirrors.xbmc.org/build-deps/darwin-libs"         >> Makefi
 echo "TARBALLS_LOCATION=$XBMCPREFIX/tarballs"                          >> Makefile.include
 echo "RETRIEVE_TOOL=/usr/bin/curl"                                     >> Makefile.include
 echo "RETRIEVE_TOOL_FLAGS=-Ls --create-dirs --output \$(TARBALLS_LOCATION)/\$(ARCHIVE)" >> Makefile.include
-echo "ARCHIVE_TOOL=tar"                                                >> Makefile.include
+echo "ARCHIVE_TOOL=/bin/tar"                                           >> Makefile.include
 echo "ARCHIVE_TOOL_FLAGS=xf"                                           >> Makefile.include
