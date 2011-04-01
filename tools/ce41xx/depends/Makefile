@@ -8,7 +8,7 @@ SUBDIRS = \
 		tiff jasper \
 		libogg libvorbis libflac libmad fribidi libwavpack libmpeg2 \
 		libass libcdio libsamplerate \
-		libmicrohttpd libmodplug libsdl \
+		libmicrohttpd libmodplug libsdl librtmp \
 		samba python26 \
 
 		#mysqlclient boost \
