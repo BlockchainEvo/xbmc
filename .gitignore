@@ -50,6 +50,11 @@ config.log
 /tools/osx/ios-depends/**/.installed
 /tools/osx/ios-depends/**/.compiled
 
+# ce41xx specifics
+/tools/ce41xx/Makefile.include
+/tools/ce41xx/depends/**/.gitignore
+/tools/ce41xx/depends/**/.installed
+
 .libs/
 .deps/
 
