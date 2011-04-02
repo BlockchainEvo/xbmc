@@ -1,17 +1,19 @@
 include ../Makefile.include
 
-BUILDTOOL = yasm cmake
-SUBDIRS = \
-		pcre expat gettext readline sqlite3 \
-		liblzo2 freetype2 fontconfig \
-		openssl libssh2 curl \
-		tiff jasper \
-		libogg libvorbis libflac libmad fribidi libwavpack libmpeg2 \
-		libass libcdio libsamplerate \
-		libmicrohttpd libmodplug libsdl librtmp \
-		samba python26 mysqlclient boost \
+BUILDTOOLS = help2man autoconf automake libtool pg-config yasm cmake
 
-		# problem libs -> libbluray
+SUBDIRS = \
+	pcre expat gettext readline sqlite3 \
+	bzip2 liblzo2 freetype2 fontconfig \
+	openssl libssh2 curl \
+	libpng jpeg tiff jasper \
+	libogg libvorbis libflac libmad fribidi libwavpack libmpeg2 \
+	libass libcdio libsamplerate \
+	libmicrohttpd libmodplug librtmp \
+	libsdl libsdl_mixer \
+	samba python26 mysqlclient boost \
+
+	# problem libs -> libbluray
 
 .PHONY: $(BUILDTOOLS) $(SUBDIRS)
 

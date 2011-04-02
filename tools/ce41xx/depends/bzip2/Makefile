@@ -1,20 +1,20 @@
 include ../../Makefile.include
+include ../intel-sdk.mk
 
-APPNAME=cmake
-VERSION=2.8.4
-SOURCE=$(APPNAME)-$(VERSION)
+# lib name, version
+LIBNAME=bzip2
+VERSION=1.0.6
+SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
 
 # configuration settings
-PREFIX:=$(XBMCPREFIX)/local
-export PATH:=$(PREFIX)/bin:$(PATH)
-CONFIGURE=./bootstrap --prefix=$(PREFIX)
+CONFIGURE=./configure --prefix=$(PREFIX) --host=$(HOST)
 
-APP=$(SOURCE)/$(APPNAME)
+LIBDYLIB=$(SOURCE)/.libs/(LIBNAME).so
 
 CLEAN_FILES=$(ARCHIVE) $(SOURCE)
 
-all: $(APP) .installed
+all: $(LIBDYLIB) .installed
 
 $(TARBALLS_LOCATION)/$(ARCHIVE):
 	$(RETRIEVE_TOOL) $(RETRIEVE_TOOL_FLAGS) $(BASE_URL)/$(ARCHIVE)
@@ -23,13 +23,13 @@ $(SOURCE): $(TARBALLS_LOCATION)/$(ARCHIVE)
 	-rm -rf $(SOURCE)
 	$(ARCHIVE_TOOL) $(ARCHIVE_TOOL_FLAGS) $(TARBALLS_LOCATION)/$(ARCHIVE)
 	echo $(SOURCE) > .gitignore
-	cd $(SOURCE); $(CONFIGURE)
+	cd $(SOURCE); patch -p1 <../Makefile.patch
 
-$(APP): $(SOURCE)
+$(LIBDYLIB): $(SOURCE)
 	make -C $(SOURCE)
 
 .installed:
-	make -C $(SOURCE) install
+	make -C $(SOURCE) install PREFIX=$(PREFIX)
 	touch $@
 
 clean:
@@ -38,4 +38,3 @@ clean:
 
 distclean::
 	rm -rf $(SOURCE) .installed
-

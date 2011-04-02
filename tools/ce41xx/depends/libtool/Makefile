@@ -1,20 +1,21 @@
 include ../../Makefile.include
 
-APPNAME=cmake
-VERSION=2.8.4
-SOURCE=$(APPNAME)-$(VERSION)
-ARCHIVE=$(SOURCE).tar.gz
+# lib name, version
+LIBNAME=libtool
+VERSION=2.2.6
+SOURCE=$(LIBNAME)-$(VERSION)
+ARCHIVE=$(SOURCE)a.tar.gz
 
 # configuration settings
-PREFIX:=$(XBMCPREFIX)/local
+export PREFIX=$(XBMCPREFIX)/local
 export PATH:=$(PREFIX)/bin:$(PATH)
-CONFIGURE=./bootstrap --prefix=$(PREFIX)
+CONFIGURE=./configure --prefix=$(PREFIX)
 
-APP=$(SOURCE)/$(APPNAME)
+LIBDYLIB=$(SOURCE)/bin/libtool
 
 CLEAN_FILES=$(ARCHIVE) $(SOURCE)
 
-all: $(APP) .installed
+all: $(LIBDYLIB) .installed
 
 $(TARBALLS_LOCATION)/$(ARCHIVE):
 	$(RETRIEVE_TOOL) $(RETRIEVE_TOOL_FLAGS) $(BASE_URL)/$(ARCHIVE)
@@ -25,7 +26,7 @@ $(SOURCE): $(TARBALLS_LOCATION)/$(ARCHIVE)
 	echo $(SOURCE) > .gitignore
 	cd $(SOURCE); $(CONFIGURE)
 
-$(APP): $(SOURCE)
+$(LIBDYLIB): $(SOURCE)
 	make -C $(SOURCE)
 
 .installed:
@@ -38,4 +39,3 @@ clean:
 
 distclean::
 	rm -rf $(SOURCE) .installed
-

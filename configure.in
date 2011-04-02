@@ -1,4 +1,4 @@
-#                                               -*- Autoconf -*-
+                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.59)
@@ -19,7 +19,9 @@ AC_DEFUN([XB_FIND_SONAME],
 [
   if [[ "$host_vendor" != "apple" ]]; then
     AC_MSG_CHECKING([for lib$2 soname])
-    $1_SONAME=$( $CC -print-file-name=lib$2.so | \
+    search_lib_path="$prefix/lib:$LIBRARY_PATH"
+    echo $search_lib_path
+    $1_SONAME=$( LIBRARY_PATH=$search_lib_path gcc -print-file-name=lib$2.so | \
       while read output; do objdump -p $output | \
         grep "SONAME" | \
         sed -e 's/  *SONAME  *//'; done 2> /dev/null )
@@ -331,6 +333,10 @@ MAKE="${MAKE:-make}"
 
 # host detection and setup
 case $host in
+  i686-cm-linux*)
+     AC_SUBST(ARCH_DEFINES, "-DTARGET_CE41XX")
+     ARCH="i686-linux"
+     ;;
   i*86*-linux-gnu*)
      ARCH="i486-linux"
      ;;
@@ -634,12 +640,10 @@ if test "$host_vendor" = "apple" ; then
   fi
 else
   AC_CHECK_LIB([ass],        [main],, AC_MSG_ERROR($missing_library))
-  AC_CHECK_LIB([SDL_mixer],  [main],, AC_MSG_ERROR($missing_library))
   AC_CHECK_LIB([dl],         [main],, AC_MSG_ERROR($missing_library))
   AC_CHECK_LIB([resolv],     [main],, AC_MSG_ERROR($missing_library))
   AC_CHECK_LIB([jasper],     [main],, AC_MSG_ERROR($missing_library)) # check for cximage
   AC_CHECK_LIB([rt],         [clock_gettime],, AC_MSG_ERROR($missing_library))
-  AC_CHECK_LIB([SDL_image],  [main],, AC_MSG_ERROR($missing_library))
   AC_CHECK_LIB([modplug],    [main],, AC_MSG_ERROR($missing_library))
   AC_CHECK_LIB([wavpack],    [main],, AC_MSG_ERROR($missing_library))
   AC_CHECK_LIB([mpeg2],       [main],, AC_MSG_ERROR($missing_library))
@@ -648,9 +652,9 @@ else
   PKG_CHECK_MODULES([ALSA],  [alsa],
     [INCLUDES="$INCLUDES $ALSA_CFLAGS"; LIBS="$LIBS $ALSA_LIBS"],
     AC_MSG_ERROR($missing_library))
-  PKG_CHECK_MODULES([ENCA],  [enca],
-    [INCLUDES="$INCLUDES $ENCA_CFLAGS"; LIBS="$LIBS $ENCA_LIBS"],
-    AC_MSG_ERROR($missing_library))
+  #PKG_CHECK_MODULES([ENCA],  [enca],
+  #  [INCLUDES="$INCLUDES $ENCA_CFLAGS"; LIBS="$LIBS $ENCA_LIBS"],
+  #  AC_MSG_ERROR($missing_library))
   PKG_CHECK_MODULES([XT],    [xt],
     [INCLUDES="$INCLUDES $XT_CFLAGS"; LIBS="$LIBS $XT_LIBS"],
     AC_MSG_ERROR($missing_library))
@@ -660,12 +664,9 @@ else
   PKG_CHECK_MODULES([XMU],   [xmu],
     [INCLUDES="$INCLUDES $XMU_CFLAGS"; LIBS="$LIBS $XMU_LIBS"],
     AC_MSG_ERROR($missing_library))
-  PKG_CHECK_MODULES([DBUS],  [dbus-1],
-    [INCLUDES="$INCLUDES $DBUS_CFLAGS"; LIBS="$LIBS $DBUS_LIBS"],
-    AC_MSG_ERROR($missing_library))
-  PKG_CHECK_MODULES([SDL],   [sdl],
-    [INCLUDES="$INCLUDES $SDL_CFLAGS"; LIBS="$LIBS $SDL_LIBS"],
-    AC_MSG_ERROR($missing_library))
+  #PKG_CHECK_MODULES([DBUS],  [dbus-1],
+  #  [INCLUDES="$INCLUDES $DBUS_CFLAGS"; LIBS="$LIBS $DBUS_LIBS"],
+  #  AC_MSG_ERROR($missing_library))
   PKG_CHECK_MODULES([MAD],   [mad],
     [INCLUDES="$INCLUDES $MAD_CFLAGS"; LIBS="$LIBS $MAD_LIBS"],
     AC_MSG_ERROR($missing_library))
@@ -678,6 +679,12 @@ else
   PKG_CHECK_MODULES([VORBISENC],[vorbisenc],
     [INCLUDES="$INCLUDES $VORBISENC_CFLAGS"; LIBS="$LIBS $VORBISENC_LIBS"],
     AC_MSG_ERROR($missing_library))
+
+  PKG_CHECK_MODULES([SDL],   [sdl],
+    [INCLUDES="$INCLUDES $SDL_CFLAGS"; LIBS="$LIBS $SDL_LIBS"],
+    AC_MSG_ERROR($missing_library))
+  AC_CHECK_LIB([SDL_image],  [main],, AC_MSG_ERROR($missing_library))
+  AC_CHECK_LIB([SDL_mixer],  [main],, AC_MSG_ERROR($missing_library))
 fi
 
 # This is used to skip some submodule configuration on non-Apple hardware

@@ -8,7 +8,7 @@ ARCHIVE=$(SOURCE).tar.gz
 # configuration settings
 PREFIX:=$(XBMCPREFIX)/local
 export PATH:=$(PREFIX)/bin:$(PATH)
-CONFIGURE=./configure --prefix=$(PREFIX) --host=$(HOST)
+CONFIGURE=./configure --prefix=$(PREFIX)
 
 APP=$(SOURCE)/$(APPNAME)
 

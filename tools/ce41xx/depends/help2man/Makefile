@@ -1,20 +1,20 @@
 include ../../Makefile.include
 
-APPNAME=cmake
-VERSION=2.8.4
-SOURCE=$(APPNAME)-$(VERSION)
+# lib name, version
+LIBNAME=help2man
+VERSION=1.38.2
+SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
 
 # configuration settings
-PREFIX:=$(XBMCPREFIX)/local
-export PATH:=$(PREFIX)/bin:$(PATH)
-CONFIGURE=./bootstrap --prefix=$(PREFIX)
-
-APP=$(SOURCE)/$(APPNAME)
+export PREFIX=$(XBMCPREFIX)/local
+CONFIGURE=./configure --prefix=$(PREFIX)
 
 CLEAN_FILES=$(ARCHIVE) $(SOURCE)
 
-all: $(APP) .installed
+LIBDYLIB=$(SOURCE)/help2man
+
+all: $(LIBDYLIB) .installed
 
 $(TARBALLS_LOCATION)/$(ARCHIVE):
 	$(RETRIEVE_TOOL) $(RETRIEVE_TOOL_FLAGS) $(BASE_URL)/$(ARCHIVE)
@@ -25,7 +25,7 @@ $(SOURCE): $(TARBALLS_LOCATION)/$(ARCHIVE)
 	echo $(SOURCE) > .gitignore
 	cd $(SOURCE); $(CONFIGURE)
 
-$(APP): $(SOURCE)
+$(LIBDYLIB): $(SOURCE)
 	make -C $(SOURCE)
 
 .installed:
@@ -38,4 +38,3 @@ clean:
 
 distclean::
 	rm -rf $(SOURCE) .installed
-
