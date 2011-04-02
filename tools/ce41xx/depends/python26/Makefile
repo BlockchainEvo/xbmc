@@ -9,8 +9,8 @@ ARCHIVE=$(SOURCE).tar.bz2
 
 # configuration settings
 export EXTRA_CFLAGS=$(CFLAGS)
-CONFIGURE_NATIVE= CFLAGS="" CXXFLAGS="" LDFLAGS="" CPPFLAGS="" \
-  CPP="cpp -E" CC=gcc CXX=g++ LD=ld ./configure
+NATIVE_ENV=CFLAGS="" CXXFLAGS="" LDFLAGS="" CPPFLAGS="" EXTRA_CFLAGS="" LIBS="" CPP="cpp -E" CC=gcc CXX=g++ LD=ld AR=ar RANLIB=ranlib
+CONFIGURE_NATIVE=$(NATIVE_ENV) ./configure
 CONFIGURE=./configure --prefix=$(PREFIX) --host=$(HOST) \
   --disable-toolbox-glue --enable-unicode=ucs4
 
@@ -28,7 +28,7 @@ $(LIBDYLIB): $(TARBALLS_LOCATION)/$(ARCHIVE)
 	$(ARCHIVE_TOOL) $(ARCHIVE_TOOL_FLAGS) $(TARBALLS_LOCATION)/$(ARCHIVE)
 	echo $(SOURCE) > .gitignore
 	cd $(SOURCE); $(CONFIGURE_NATIVE)
-	cd $(SOURCE); make python Parser/pgen
+	cd $(SOURCE); make EXTRA_CFLAGS="" python Parser/pgen
 	cd $(SOURCE); mv python hostpython
 	cd $(SOURCE); mv Parser/pgen Parser/hostpgen
 	cd $(SOURCE); make distclean
