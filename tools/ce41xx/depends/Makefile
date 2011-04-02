@@ -1,6 +1,6 @@
 include ../Makefile.include
 
-BUILDTOOLS = help2man autoconf automake libtool pg-config yasm cmake
+BUILDTOOLS = help2man autoconf automake libtool pkg-config yasm cmake
 
 SUBDIRS = \
 	pcre expat gettext readline sqlite3 \
