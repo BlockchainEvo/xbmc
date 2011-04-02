@@ -10,7 +10,7 @@ SUBDIRS = \
 	libogg libvorbis libflac libmad fribidi libwavpack libmpeg2 \
 	libass libcdio libsamplerate \
 	libmicrohttpd libmodplug librtmp \
-	libsdl libsdl_mixer \
+	libsdl libsdl_mixer libsdl_image \
 	samba python26 mysqlclient boost \
 
 	# problem libs -> libbluray
