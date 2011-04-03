@@ -1557,6 +1557,7 @@ XB_CONFIG_MODULE([lib/python], [
       --without-pymalloc \
       --prefix=`pwd`/../../xbmc/interfaces/python/linux/python-lib CFLAGS="$CFLAGS" \
       CC="$CC" \
+	  LIBS="" \
       CXX="$CXX" &&
     sed -i -e "s/define HAVE_GETC_UNLOCKED 1/undef HAVE_GETC_UNLOCKED/" pyconfig.h &&
     sed -i -e "s/define _POSIX_C_SOURCE 200112L/undef _POSIX_C_SOURCE/" pyconfig.h &&
@@ -1743,6 +1744,7 @@ XB_CONFIG_MODULE([lib/libid3tag/libid3tag],[
       CXX="$CXX" \
       CFLAGS="$CFLAGS" \ 
       CXXFLAGS="$CXXFLAGS" \
+	  LIBS="" \
       --prefix="${prefix}" --includedir="${includedir}" --libdir="${libdir}" --datadir="${datadir}" \
       --host=$host_alias \
       --build=$build_alias \
@@ -1841,7 +1843,7 @@ XB_CONFIG_MODULE([lib/libapetag], [
     ./configure \
       --host=$host_alias \
       --build=$build_alias \
-      --target=$target_alias CFLAGS="$CFLAGS" CC="$CC" CXX="$CXX"
+      --target=$target_alias CFLAGS="$CFLAGS" CC="$CC" CXX="$CXX" LIBS=""
   fi
 ], [0])
 
@@ -1855,7 +1857,7 @@ XB_CONFIG_MODULE([lib/cpluff], [
     ./configure --disable-nls \
       --host=$host_alias \
       --build=$build_alias \
-      --target=$target_alias CFLAGS="$CFLAGS" CC="$CC" CXX="$CXX"
+      --target=$target_alias CFLAGS="$CFLAGS" CC="$CC" CXX="$CXX" LIBS=""
   fi
 ], [0])
 
