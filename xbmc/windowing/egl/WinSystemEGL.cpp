@@ -362,7 +362,7 @@ bool CWinSystemEGL::RefreshEGLContext()
     return false;
   }
 
-  if ((m_eglWindow == info.info.x11.window) && m_eglSurface && m_eglContext)
+/*  if ((m_eglWindow == info.info.x11.window) && m_eglSurface && m_eglContext)
   {
     CLog::Log(LOGWARNING, "EGL: Same window as before, refreshing context");
     eglMakeCurrent(m_eglDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
@@ -372,7 +372,7 @@ bool CWinSystemEGL::RefreshEGLContext()
 
   m_eglWindow = info.info.x11.window;
   m_wmWindow  = info.info.x11.wmwindow;
-
+*/
   EGLConfig eglConfig = NULL;
   EGLint num;
 
