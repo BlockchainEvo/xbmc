@@ -2,7 +2,6 @@ export PREFIX=${XBMCPREFIX}/local
 export CFLAGS=-I${PREFIX}/include -I${XBMCPREFIX}/IntelCE/include -I${XBMCPREFIX}/IntelCE/usr/include -I${XBMCPREFIX}/IntelCE/usr/local/include
 export CXXFLAGS=${CFLAGS}
 export CPPFLAGS=${CFLAGS}
-export LIBS=-L${PREFIX}/lib -L${XBMCPREFIX}/IntelCE/lib -L${XBMCPREFIX}/IntelCE/usr/lib
 export LDFLAGS=-L${PREFIX}/lib -L${XBMCPREFIX}/IntelCE/lib -L${XBMCPREFIX}/IntelCE/usr/lib
 export CROSSBIN=${XBMCPREFIX}/toolchains/i686-cm-linux-
 export CC=${CROSSBIN}gcc
