@@ -127,8 +127,9 @@
 #define HAS_AVAHI
 #endif
 #define HAS_LCD
-#define HAS_DBUS
-#define HAS_DBUS_SERVER
+//temporarily disable DBUS to get us building on ce41xx
+#undef HAS_DBUS
+#undef HAS_DBUS_SERVER
 #define HAS_GL
 #define HAS_GLX
 #define HAS_LINUX_NETWORK
