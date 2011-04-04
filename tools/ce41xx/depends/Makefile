@@ -9,7 +9,7 @@ SUBDIRS = \
 	libpng jpeg tiff jasper \
 	libogg libvorbis libflac libmad fribidi libwavpack libmpeg2 \
 	libass libcdio libsamplerate \
-	libmicrohttpd libmodplug librtmp \
+	libgpg-error libgcrypt libmicrohttpd libmodplug librtmp \
 	libsdl libsdl_mixer libsdl_image \
 	samba python26 mysqlclient boost \
 

@@ -7,6 +7,4 @@ The following workarounds have been put in place in order to get xbmc compiled m
 -troublesome code commented in WinSystemEGL.cpp. This file will be reworked anyway.
 -removed --disable-jpg-shared --disable-tif-shared --disable-png-shared from libsdl_image. These can be
   reinstated once path problems have been fixed.
--Blanked LIBS for several subprojects. Need to investigate if we can avoid this export.
--https disabled for libmicrohttpd
 
