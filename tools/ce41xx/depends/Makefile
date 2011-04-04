@@ -11,7 +11,7 @@ SUBDIRS = \
 	libass libcdio libsamplerate \
 	libgpg-error libgcrypt libmicrohttpd libmodplug librtmp \
 	libsdl libsdl_mixer libsdl_image \
-	samba python26 mysqlclient boost \
+	samba dbus python26 mysqlclient boost \
 
 	# problem libs -> libbluray
 
