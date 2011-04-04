@@ -3,13 +3,13 @@ include ../Makefile.include
 BUILDTOOLS = help2man autoconf automake libtool pkg-config yasm cmake
 
 SUBDIRS = \
-	pcre expat gettext readline sqlite3 \
+	pcre expat gettext readline sqlite3 libgpg-error libgcrypt \
 	bzip2 liblzo2 freetype2 fontconfig \
 	openssl libssh2 curl \
 	libpng jpeg tiff jasper \
 	libogg libvorbis libflac libmad fribidi libwavpack libmpeg2 \
 	libass libcdio libsamplerate \
-	libgpg-error libgcrypt libmicrohttpd libmodplug librtmp \
+	libmicrohttpd libmodplug librtmp \
 	libsdl libsdl_mixer libsdl_image \
 	samba dbus python26 mysqlclient boost \
 
