@@ -639,7 +639,6 @@ if test "$host_vendor" = "apple" ; then
     AC_CHECK_LIB([SDL],      [main],, AC_MSG_ERROR($missing_library))
   fi
 else
-  AC_CHECK_LIB([ass],        [main],, AC_MSG_ERROR($missing_library))
   AC_CHECK_LIB([dl],         [main],, AC_MSG_ERROR($missing_library))
   AC_CHECK_LIB([resolv],     [main],, AC_MSG_ERROR($missing_library))
   AC_CHECK_LIB([jasper],     [main],, AC_MSG_ERROR($missing_library)) # check for cximage
@@ -652,9 +651,9 @@ else
   PKG_CHECK_MODULES([ALSA],  [alsa],
     [INCLUDES="$INCLUDES $ALSA_CFLAGS"; LIBS="$LIBS $ALSA_LIBS"],
     AC_MSG_ERROR($missing_library))
-  #PKG_CHECK_MODULES([ENCA],  [enca],
-  #  [INCLUDES="$INCLUDES $ENCA_CFLAGS"; LIBS="$LIBS $ENCA_LIBS"],
-  #  AC_MSG_ERROR($missing_library))
+  PKG_CHECK_MODULES([ENCA],  [enca],
+    [INCLUDES="$INCLUDES $ENCA_CFLAGS"; LIBS="$LIBS $ENCA_LIBS"],
+    AC_MSG_ERROR($missing_library))
   PKG_CHECK_MODULES([XT],    [xt],
     [INCLUDES="$INCLUDES $XT_CFLAGS"; LIBS="$LIBS $XT_LIBS"],
     AC_MSG_ERROR($missing_library))
@@ -685,6 +684,7 @@ else
     AC_MSG_ERROR($missing_library))
   AC_CHECK_LIB([SDL_image],  [main],, AC_MSG_ERROR($missing_library))
   AC_CHECK_LIB([SDL_mixer],  [main],, AC_MSG_ERROR($missing_library))
+  AC_CHECK_LIB([ass],        [main],, AC_MSG_ERROR($missing_library))
 fi
 
 # This is used to skip some submodule configuration on non-Apple hardware
