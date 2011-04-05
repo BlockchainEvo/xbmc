@@ -25,10 +25,10 @@ $(SOURCE): $(TARBALLS_LOCATION)/$(ARCHIVE)
 	cd $(SOURCE)/librtmp; patch -p0 < ../../prefix.patch
 
 $(LIBDYLIB): $(SOURCE)
-	make -C $(SOURCE) CROSS_COMPILE=$(CROSSBIN) PREFIX=$(PREFIX)
+	make -C $(SOURCE)/librtmp CROSS_COMPILE=$(CROSSBIN) PREFIX=$(PREFIX)
 
 .installed:
-	make -C $(SOURCE) install
+	make -C $(SOURCE)/librtmp install
 	touch $@
 
 clean:
