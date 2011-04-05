@@ -11,7 +11,7 @@ SUBDIRS = \
 	libass libcdio libsamplerate \
 	libmicrohttpd libmodplug librtmp libxml2 libbluray \
 	libsdl libsdl_mixer libsdl_image \
-	samba dbus python26 mysqlclient boost \
+	samba dbus python26 mysqlclient boost xbmc \
 
 .PHONY: $(BUILDTOOLS) $(SUBDIRS)
 

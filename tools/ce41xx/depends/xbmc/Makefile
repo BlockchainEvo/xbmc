@@ -13,5 +13,5 @@ all: configure
 configure:
 	cd $(SOURCE); ./bootstrap
 	cd $(SOURCE); $(CONFIGURE)
-	#cd $(SOURCE); make xcode_depends
+	cd $(SOURCE); make
 
