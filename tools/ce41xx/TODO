@@ -1,9 +1,6 @@
 The following workarounds have been put in place in order to get xbmc compiled more quickly:
 
--Python does not build fully
--DESTDIR and PREFIX need to be reworked
--rsxs and projectm screensavers disabled
--troublesome code commented in WinSystemEGL.cpp. This file will be reworked anyway.
--removed --disable-jpg-shared --disable-tif-shared --disable-png-shared from libsdl_image. These can be
-  reinstated once path problems have been fixed.
-
+- Python does not build fully
+- rsxs and projectm screensavers disabled
+- troublesome code commented in WinSystemEGL.cpp. This file will be reworked anyway.
+- added rpath to TexturePacker so it can find and use SDL and friends, this will need to get refactored before trunk inclusion
