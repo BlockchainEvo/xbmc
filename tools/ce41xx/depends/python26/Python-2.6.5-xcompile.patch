@@ -209,15 +209,6 @@ diff -uN Python-2.6.2/Makefile.pre.in Python-2.6.2POld/Makefile.pre.in
 diff -uN Python-2.6.2/setup.py Python-2.6.2POld/setup.py
 --- Python-2.6.2/setup.py	2009-04-01 04:20:48.000000000 +1000
 +++ Python-2.6.2POld/setup.py	2009-08-17 12:19:15.000000000 +1000
-@@ -17,7 +17,7 @@
- from distutils.command.install_lib import install_lib
- 
- # This global variable is used to hold the list of modules to be disabled.
--disabled_module_list = []
-+disabled_module_list = ['_ctypes']
- 
- def add_dir_to_list(dirlist, dir):
-     """Add the directory 'dir' to the list 'dirlist' (at the front) if
 @@ -267,33 +267,40 @@
              self.announce('WARNING: skipping import check for Cygwin-based "%s"'
                  % ext.name)
