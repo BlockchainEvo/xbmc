@@ -9,6 +9,7 @@ ARCHIVE=$(SOURCE).tar.gz
 
 # configuration settings
 CONFIGURE=./configure --prefix=$(PREFIX) --host=$(HOST) \
+  --without-python
 
 LIBDYLIB=$(SOURCE)/$(LIBNAME)/.libs/$(LIBNAME).so
 
