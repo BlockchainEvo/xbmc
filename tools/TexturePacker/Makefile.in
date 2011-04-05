@@ -21,4 +21,4 @@ all: $(TARGET)
 include @abs_top_srcdir@/Makefile.include
 
 $(TARGET): $(OBJS)
-	$(CXX) $(CXXFLAGS) $(OBJS) $(LDFLAGS) $(LIBS) -o $(TARGET)
+	$(CXX) $(CXXFLAGS) $(OBJS) $(LDFLAGS) $(LIBS) -Wl,--rpath -Wl,$(prefix)/lib -o $(TARGET)
