@@ -1639,6 +1639,8 @@ XB_CONFIG_MODULE([lib/ffmpeg], [
       --custom-libname-with-major="\$(FULLNAME)-\$(LIBMAJOR)-${ARCH}\$(SLIBSUF)" \
       `case $host_cpu in i?86*) echo --disable-pic ;; *) echo --enable-pic ;; esac` \
       --cc="$CC" &&
+      sed -i -e "s#YASM=yasm#YASM=${prefix}/bin/yasm#" config.mak &&
+      sed -i -e "s#YASMDEP=yasm#YASMDEP=${prefix}/bin/yasm#" config.mak &&
       sed -i -e "s#define HAVE_SYMVER 1#define HAVE_SYMVER 0#" config.h &&
       sed -i -e "s#define HAVE_SYMVER_GNU_ASM 1#define HAVE_SYMVER_GNU_ASM 0#" config.h
   fi
