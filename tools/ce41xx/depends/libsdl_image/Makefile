@@ -10,8 +10,7 @@ ARCHIVE=$(SOURCE).tar.gz
 # configuration settings
 CONFIGURE=./configure --prefix=$(PREFIX) --host=$(HOST) \
    --disable-sdltest \
-#   --disable-jpg-shared --disable-png-shared --disable-tif-shared \
-#   Disabled util our libjpg and libtiff can be found
+   --disable-jpg-shared --disable-png-shared --disable-tif-shared \
 
 LIBDYLIB=$(SOURCE)/.libs/$(LIBNAME).a
 
