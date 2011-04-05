@@ -19,7 +19,7 @@ $(LIBDYLIB): $(TARBALLS_LOCATION)/$(ARCHIVE)
 	echo $(SOURCE) > .gitignore
 	cat user-config.jam-ce41xx.in > $(SOURCE)/tools/build/v2/user-config.jam
 	cd $(SOURCE); ./bootstrap.sh --prefix=$(PREFIX) --with-libraries=thread
-	cd $(SOURCE); ./bjam --prefix=$(PREFIX) toolset=gcc --toolset-root=$(XBMCPREFIX)/toolchains --architecture=x86 address-model=32  install
+	cd $(SOURCE); ./bjam --prefix=$(PREFIX) toolset=gcc --toolset-root=$(XBMCSTAGE)/toolchains --architecture=x86 address-model=32  install
 
 clean:
 	cd $(SOURCE); ./bjam --clean

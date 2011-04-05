@@ -6,7 +6,7 @@ SOURCE=$(APPNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
 
 # configuration settings
-PREFIX:=$(XBMCPREFIX)/local
+PREFIX:=$(XBMCSTAGE)/usr/local
 export PATH:=$(PREFIX)/bin:$(PATH)
 CONFIGURE=./configure --prefix=$(PREFIX)
 

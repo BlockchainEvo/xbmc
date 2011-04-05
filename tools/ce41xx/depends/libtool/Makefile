@@ -7,7 +7,7 @@ SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE)a.tar.gz
 
 # configuration settings
-export PREFIX=$(XBMCPREFIX)/local
+export PREFIX=$(XBMCSTAGE)/usr/local
 export PATH:=$(PREFIX)/bin:$(PATH)
 CONFIGURE=./configure --prefix=$(PREFIX)
 

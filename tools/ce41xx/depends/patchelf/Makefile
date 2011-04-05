@@ -1,16 +1,17 @@
 include ../../Makefile.include
-include ../intel-sdk.mk
 
 # lib name, version
-LIBNAME=libmicrohttpd
-VERSION=0.4.6
+LIBNAME=patchelf
+VERSION=0.6pre25969
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
 
 # configuration settings
-CONFIGURE=./configure --prefix=$(PREFIX) --host=$(HOST)
+export PREFIX=$(XBMCSTAGE)/usr/local
+export PATH:=$(PREFIX)/bin:$(PATH)
+CONFIGURE=./configure --prefix=$(PREFIX)
 
-LIBDYLIB=$(SOURCE)/.libs/$(LIBNAME).so
+LIBDYLIB=$(SOURCE)/src/patchelf
 
 CLEAN_FILES=$(ARCHIVE) $(SOURCE)
 
@@ -20,7 +21,7 @@ $(TARBALLS_LOCATION)/$(ARCHIVE):
 	$(RETRIEVE_TOOL) $(RETRIEVE_TOOL_FLAGS) $(BASE_URL)/$(ARCHIVE)
 
 $(SOURCE): $(TARBALLS_LOCATION)/$(ARCHIVE)
-	rm -rf $(SOURCE)
+	-rm -rf $(SOURCE)
 	$(ARCHIVE_TOOL) $(ARCHIVE_TOOL_FLAGS) $(TARBALLS_LOCATION)/$(ARCHIVE)
 	echo $(SOURCE) > .gitignore
 	cd $(SOURCE); $(CONFIGURE)
@@ -38,4 +39,3 @@ clean:
 
 distclean::
 	rm -rf $(SOURCE) .installed
-

@@ -36,7 +36,6 @@ $(LIBDYLIB): $(TARBALLS_LOCATION)/$(ARCHIVE)
 	cd $(SOURCE); $(CONFIGURE)
 	cd $(SOURCE); make HOSTPYTHON=./hostpython HOSTPGEN=./Parser/hostpgen BLDSHARED="i686-cm-linux-gcc -shared" CROSS_COMPILE="i686-cm-linux-" CROSS_COMPILE_TARGET=yes
 	cd $(SOURCE); make HOSTPYTHON=./hostpython HOSTPGEN=./Parser/hostpgen BLDSHARED="i686-cm-linux-gcc -shared" CROSS_COMPILE="i686-cm-linux-" CROSS_COMPILE_TARGET=yes libpython2.6.so
-	cd $(SOURCE); make -n install HOSTPYTHON=./hostpython BLDSHARED="i686-cm-linux-gcc -shared" CROSS_COMPILE="i686-cm-linux-" CROSS_COMPILE_TARGET=yes prefix=$(PREFIX)
 
 .installed:
 	cd $(SOURCE); make -n install HOSTPYTHON=./hostpython BLDSHARED="i686-cm-linux-gcc -shared" CROSS_COMPILE="i686-cm-linux-" CROSS_COMPILE_TARGET=yes prefix=$(PREFIX)

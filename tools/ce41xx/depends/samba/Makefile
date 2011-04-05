@@ -47,7 +47,7 @@ $(LIBDYLIB): $(TARBALLS_LOCATION)/$(ARCHIVE)
 	touch $@
 
 clean:
-	make -C $(SOURCE)/source3 clean
+	make -C $(SOURCE)/source clean
 	rm -f .installed
 
 distclean::

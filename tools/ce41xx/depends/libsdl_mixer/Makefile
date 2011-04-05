@@ -11,7 +11,8 @@ ARCHIVE=$(SOURCE).tar.gz
 CONFIGURE=./configure --prefix=$(PREFIX) --host=$(HOST) \
   --with-sdl-prefix=$(PREFIX) \
   --disable-music-ogg --disable-music-mp3 \
-  --disable-music-mod --disable-music-midi --disable-smpegtest --disable-sdltest
+  --disable-music-mod --disable-music-midi \
+  --disable-smpegtest --disable-sdltest
 
 LIBDYLIB=$(SOURCE)/.libs/$(LIBNAME).a
 
@@ -23,7 +24,7 @@ $(TARBALLS_LOCATION)/$(ARCHIVE):
 	$(RETRIEVE_TOOL) $(RETRIEVE_TOOL_FLAGS) $(BASE_URL)/$(ARCHIVE)
 
 $(SOURCE): $(TARBALLS_LOCATION)/$(ARCHIVE)
-	-rm -rf $(SOURCE)
+	rm -rf $(SOURCE)
 	$(ARCHIVE_TOOL) $(ARCHIVE_TOOL_FLAGS) $(TARBALLS_LOCATION)/$(ARCHIVE)
 	echo $(SOURCE) > .gitignore
 	cd $(SOURCE); $(CONFIGURE)

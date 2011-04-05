@@ -1,6 +1,6 @@
 include ../Makefile.include
 
-BUILDTOOLS = help2man autoconf automake libtool pkg-config yasm cmake
+BUILDTOOLS = help2man autoconf automake libtool pkg-config yasm cmake patchelf
 
 SUBDIRS = \
 	pcre expat gettext readline sqlite3 libgpg-error libgcrypt \
@@ -9,11 +9,9 @@ SUBDIRS = \
 	libpng jpeg tiff jasper \
 	libogg libvorbis libflac libmad fribidi libwavpack libmpeg2 \
 	libass libcdio libsamplerate \
-	libmicrohttpd libmodplug librtmp \
+	libmicrohttpd libmodplug librtmp libbluray \
 	libsdl libsdl_mixer libsdl_image \
 	samba dbus python26 mysqlclient boost \
-
-	# problem libs -> libbluray
 
 .PHONY: $(BUILDTOOLS) $(SUBDIRS)
 
@@ -32,4 +30,4 @@ clean:
 distclean::
 	for d in $(BUILDTOOLS); do $(MAKE) -C $$d distclean; done
 	for d in $(SUBDIRS); do $(MAKE) -C $$d distclean; done
-	rm -rf $(XBMCPREFIX)/local
+	rm -rf $(XBMCSTAGE)/usr/local

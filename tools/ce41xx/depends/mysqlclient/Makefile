@@ -10,7 +10,7 @@ ARCHIVE=$(SOURCE).tar.gz
 CONFIGURE=./configure --prefix=$(PREFIX) --host=$(HOST) --enable-shared \
   --enable-thread-safe-client -with-extra-charsets=complex \
   --with-readline=$(PREFIX) --without-readline \
-  --without-server --without-bench --without-docs --without-man \
+  --without-server --without-docs --without-man \
   ac_cv_sys_restartable_syscalls=yes \
   ac_cv_path_PS=/bin/ps \
   ac_cv_FIND_PROC="/bin/ps p \$\$PID | grep -v grep | grep mysqld > /dev/null" \
