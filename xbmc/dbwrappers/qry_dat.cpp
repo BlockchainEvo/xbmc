@@ -30,6 +30,7 @@
  *              on string values that are 1 or 0
  **********************************************************************/
 
+#include <stdio.h>
 #include "qry_dat.h"
 #include "system.h" // for PRId64
 
