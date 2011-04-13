@@ -25,7 +25,7 @@
 
 #include "XHandle.h"
 #include "XThreadUtils.h"
-#include "../utils/log.h"
+#include "utils/log.h"
 
 int CXHandle::m_objectTracker[10] = {0};
 

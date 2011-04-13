@@ -41,8 +41,8 @@
 
 using namespace std;
 
-#include "../utils/log.h"
-#include "../utils/TimeUtils.h"
+#include "utils/log.h"
+#include "utils/TimeUtils.h"
 
 static SDL_mutex *g_mutex = SDL_CreateMutex();
 
