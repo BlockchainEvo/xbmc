@@ -20,7 +20,7 @@
  */
 #include "system.h"
 
-#ifdef HAS_EGL
+#if defined(HAS_EGL) && !defined(HAS_GDL)
 
 #include "WinSystemEGL.h"
 #include "utils/log.h"

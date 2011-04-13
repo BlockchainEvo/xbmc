@@ -117,7 +117,7 @@
  * Linux Specific
  *****************/
 
-#if defined(_LINUX) && !defined(__APPLE__)
+#if defined(_LINUX) && !defined(__APPLE__) && !defined(TARGET_CE41XX)
 #ifndef HAS_SDL_OPENGL
 #define HAS_SDL_OPENGL
 #endif
@@ -141,6 +141,40 @@
 #ifdef HAVE_LIBXRANDR
 #define HAS_XRANDR
 #endif
+#endif
+
+/********************
+ * Intel CE41XX     *
+ ********************/
+#if defined(TARGET_CE41XX)
+#undef HAS_SDL
+#undef HAS_SDL_WIN_EVENTS
+#undef HAS_SDL_AUDIO
+#undef HAS_SDL_OPENGL
+#undef HAS_LIRC
+
+#define HAS_EGL
+#define HAS_GLES 2
+#define HAS_GDL
+#define HAS_XBMC_MUTEX
+#define HAS_LINUX_NETWORK
+#define HAS_LINUX_EVENTS
+#define HAS_INTEL_SMD
+#define HAS_INTEL_SMD_DD_DECODER
+#define HAS_INTEL_SMD_DDPLUS_DECODER
+#define HAS_INTEL_SMD_TRUEHD_DECODER
+#define HAS_AUDIO_HDMI
+#define HAS_INTELCE
+//#undef HAS_REMOTECONTROL
+#define HAS_LIRC
+#undef HAS_DVD_DRIVE
+#undef HAS_ZEROCONF
+#undef HAS_AVAHI
+#undef HAS_SDL_JOYSTICK
+#undef HAS_DBUS
+#undef HAS_DBUS_SERVER
+#undef HAS_CDDA_RIPPER
+#undef HAS_RTORRENT
 #endif
 
 #ifdef HAVE_LIBSSH

@@ -44,8 +44,12 @@
 #include "X11/WinSystemX11GL.h"
 #endif
 
-#if defined(HAS_EGL) && !defined(__APPLE__)
+#if defined(HAS_EGL) && !defined(__APPLE__) && !defined(HAS_GDL)
 #include "egl/WinSystemEGL.h"
+#endif
+
+#if defined(HAS_GDL) && defined(HAS_EGL)
+#include "gdl/WinSystemGDLGLES.h"
 #endif
 
 #endif // WINDOWING_FACTORY_H

@@ -68,6 +68,15 @@
 #define VIDEO_SHOW_UNWATCHED 1
 #define VIDEO_SHOW_WATCHED 2
 
+typedef enum { OVERSCAN_NONE, OVERSCAN_3_0, OVERSCAN_4_0, OVERSCAN_5_0, OVERSCAN_6_0, OVERSCAN_CUSTOM } OverscanType;
+static const float OverscanValues[] = { 0.0f, 0.03f, 0.04f, 0.05f, 0.06f };
+
+typedef enum { SCREEN_FORMAT_4_3, SCREEN_FORMAT_16_9, SCREEN_FORMAT_16_10, SCREEN_FORMAT_21_9, SCREEN_FORMAT_CUSTOM } ScreenFormatType;
+static const float ScreenFormatValues[] = { (16.0f / 9.0f) / (4.0f / 3.0f), (16.0f / 9.0f) / (16.0f / 9.0f), (16.0f / 9.0f) / (16.0f / 10.0f), (16.0f / 9.0f) / (21.0f / 9.0f) };
+
+typedef enum { BLACK_LEVEL_PC, BLACK_LEVEL_VIDEO, NUM_OF_BLACK_LEVEL, BLACK_LEVEL_ERROR } BlackLevelType;
+static const std::string blackLevelValues[] = { "[0..255]", "[16..235]" };
+
 /* FIXME: eventually the profile should dictate where special://masterprofile/ is but for now it
    makes sense to leave all the profile settings in a user writeable location
    like special://masterprofile/ */
