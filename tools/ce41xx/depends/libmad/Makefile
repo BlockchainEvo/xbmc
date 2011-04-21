@@ -24,7 +24,7 @@ $(SOURCE): $(TARBALLS_LOCATION)/$(ARCHIVE)
 	$(ARCHIVE_TOOL) $(ARCHIVE_TOOL_FLAGS) $(TARBALLS_LOCATION)/$(ARCHIVE)
 	echo $(SOURCE) > .gitignore
 	cd $(SOURCE); patch -p1 < ../01-libmad-pkgconfig.patch
-	cd $(SOURCE); $(CONFIGURE)
+	cd $(SOURCE); sed -i '/-fforce-mem/d' configure; $(CONFIGURE)
 
 $(LIBDYLIB): $(SOURCE)
 	make -C $(SOURCE)
