@@ -1,5 +1,5 @@
 export PREFIX=${XBMCSTAGE}/usr/local
-export CFLAGS=-I${PREFIX}/include -I${XBMCSTAGE}/IntelCE/include -I${XBMCSTAGE}/IntelCE/usr/include -I${XBMCSTAGE}/IntelCE/usr/local/include
+export CFLAGS=-isystem${PREFIX}/include -isystem${XBMCSTAGE}/IntelCE/include -isystem${XBMCSTAGE}/IntelCE/usr/include -isystem${XBMCSTAGE}/IntelCE/usr/local/include
 export CXXFLAGS=${CFLAGS}
 export CPPFLAGS=${CFLAGS}
 export LDFLAGS=-L${PREFIX}/lib -L${XBMCSTAGE}/IntelCE/lib -L${XBMCSTAGE}/IntelCE/usr/lib
