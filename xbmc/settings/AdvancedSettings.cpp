@@ -277,6 +277,9 @@ void CAdvancedSettings::Initialize()
 
   m_jsonOutputCompact = true;
   m_jsonTcpPort = 9090;
+
+  m_guiVisualizeDirtyRegions = false;
+  m_guiAlgorithmDirtyRegions = 0;
 }
 
 bool CAdvancedSettings::Load()
@@ -873,6 +876,13 @@ bool CAdvancedSettings::Load()
     XMLUtils::GetString(pDatabase, "user", m_databaseMusic.user);
     XMLUtils::GetString(pDatabase, "pass", m_databaseMusic.pass);
     XMLUtils::GetString(pDatabase, "name", m_databaseMusic.name);
+  }
+
+  pElement = pRootElement->FirstChildElement("gui");
+  if (pElement)
+  {
+    XMLUtils::GetBoolean(pElement, "visualizedirtyregions", m_guiVisualizeDirtyRegions);
+    XMLUtils::GetInt(pElement, "algorithmdirtyregions",     m_guiAlgorithmDirtyRegions);
   }
 
   // load in the GUISettings overrides:
