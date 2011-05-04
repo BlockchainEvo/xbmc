@@ -219,6 +219,7 @@
 #include "guilib/GUIControlFactory.h"
 #include "dialogs/GUIDialogCache.h"
 #include "dialogs/GUIDialogPlayEject.h"
+#include "utils/XMLUtils.h"
 #include "addons/AddonInstaller.h"
 
 #ifdef HAS_PERFORMANCE_SAMPLE
@@ -1195,7 +1196,7 @@ bool CApplication::Initialize()
   return true;
 }
 
-void CApplication::StartWebServer()
+bool CApplication::StartWebServer()
 {
 #ifdef HAS_WEB_SERVER
   if (g_guiSettings.GetBool("services.webserver") && m_network.IsAvailable())
@@ -1206,12 +1207,14 @@ void CApplication::StartWebServer()
     if (webPort < 1024 && geteuid() != 0)
     {
         CLog::Log(LOGERROR, "Cannot start Web Server as port is smaller than 1024 and user is not root");
-        return;
+        return false;
     }
 #endif
 
+    bool started = false;
     if (m_WebServer.Start(webPort, g_guiSettings.GetString("services.webserverusername"), g_guiSettings.GetString("services.webserverpassword")))
     {
+      started = true;
       // publish web frontend and API services
 #ifdef HAS_WEB_INTERFACE
       CZeroconf::GetInstance()->PublishService("servers.webserver", "_http._tcp", "XBMC Web Server", webPort);
@@ -1227,8 +1230,12 @@ void CApplication::StartWebServer()
     if (g_settings.m_HttpApiBroadcastLevel >= 1)
       getApplicationMessenger().HttpApi("broadcastlevel; StartUp;1");
 #endif
+
+    return started;
   }
 #endif
+
+  return true;
 }
 
 void CApplication::StopWebServer()
@@ -1250,7 +1257,7 @@ void CApplication::StopWebServer()
 #endif
 }
 
-void CApplication::StartJSONRPCServer()
+bool CApplication::StartJSONRPCServer()
 {
 #ifdef HAS_JSONRPC
   if (g_guiSettings.GetBool("services.esenabled"))
@@ -1258,9 +1265,16 @@ void CApplication::StartJSONRPCServer()
     CJSONRPC::Initialize();
 
     if (CTCPServer::StartServer(g_advancedSettings.m_jsonTcpPort, g_guiSettings.GetBool("services.esallinterfaces")))
+    {
       CZeroconf::GetInstance()->PublishService("servers.jsonrpc", "_xbmc-jsonrpc._tcp", "XBMC JSONRPC", g_advancedSettings.m_jsonTcpPort);
+      return true;
+    }
+    else
+      return false;
   }
 #endif
+
+  return true;
 }
 
 void CApplication::StopJSONRPCServer(bool bWait)
@@ -1290,21 +1304,23 @@ void CApplication::StopUPnP(bool bWait)
 #endif
 }
 
-void CApplication::StartEventServer()
+bool CApplication::StartEventServer()
 {
 #ifdef HAS_EVENT_SERVER
   CEventServer* server = CEventServer::GetInstance();
   if (!server)
   {
     CLog::Log(LOGERROR, "ES: Out of memory");
-    return;
+    return false;
   }
   if (g_guiSettings.GetBool("services.esenabled"))
   {
     CLog::Log(LOGNOTICE, "ES: Starting event server");
     server->StartServer();
+    return true;
   }
 #endif
+  return true;
 }
 
 bool CApplication::StopEventServer(bool bWait, bool promptuser)
@@ -1850,7 +1866,7 @@ void CApplication::RenderNoPresent()
     m_guiPointer.Render();
 
   // reset image scaling and effect states
-  g_graphicsContext.SetRenderingResolution(g_graphicsContext.GetVideoResolution(), false);
+  g_graphicsContext.SetRenderingResolution(g_graphicsContext.GetResInfo(), false);
 
   RenderMemoryStatus();
   RenderScreenSaver();
@@ -2112,7 +2128,7 @@ void CApplication::RenderMemoryStatus()
 
   // reset the window scaling and fade status
   RESOLUTION res = g_graphicsContext.GetVideoResolution();
-  g_graphicsContext.SetRenderingResolution(res, false);
+  g_graphicsContext.SetRenderingResolution(g_graphicsContext.GetResInfo(), false);
 
   static int yShift = 20;
   static int xShift = 40;
@@ -2178,7 +2194,7 @@ void CApplication::RenderMemoryStatus()
       g_graphicsContext.SetScalingResolution(window->GetCoordsRes(), true);
       point.x *= g_graphicsContext.GetGUIScaleX();
       point.y *= g_graphicsContext.GetGUIScaleY();
-      g_graphicsContext.SetRenderingResolution(res, false);
+      g_graphicsContext.SetRenderingResolution(g_graphicsContext.GetResInfo(), false);
     }
     info.AppendFormat("Mouse: (%d,%d)  ", (int)point.x, (int)point.y);
     if (window)
@@ -3556,28 +3572,15 @@ bool CApplication::PlayFile(const CFileItem& item, bool bRestart)
       CUtil::ClearSubtitles();
   }
 
-#ifdef HAS_DVD_DRIVE
   if (item.IsDiscStub())
   {
-    // Figure out Line 1 of the dialog
-    CStdString strLine1;
-    if (item.GetVideoInfoTag())
-    {
-      strLine1 = item.GetVideoInfoTag()->m_strTitle;
-    }
-    else
-    {
-      strLine1 = URIUtils::GetFileName(item.m_strPath);
-      URIUtils::RemoveExtension(strLine1);
-    }
-
+#ifdef HAS_DVD_DRIVE
     // Display the Play Eject dialog
-    if (CGUIDialogPlayEject::ShowAndGetInput(219, 429, strLine1, NULL))
-      MEDIA_DETECT::CAutorun::PlayDisc();
-
+    if (CGUIDialogPlayEject::ShowAndGetInput(item))
+      return MEDIA_DETECT::CAutorun::PlayDisc();
+#endif
     return true;
   }
-#endif
 
   if (item.IsPlayList())
     return false;
@@ -3663,7 +3666,10 @@ bool CApplication::PlayFile(const CFileItem& item, bool bRestart)
       {
         options.starttime = 0.0f;
         CBookmark bookmark;
-        if(dbs.GetResumeBookMark(item.m_strPath, bookmark))
+        CStdString path = item.m_strPath;
+        if (item.IsDVD()) 
+          path = item.GetVideoInfoTag()->m_strFileNameAndPath;
+        if(dbs.GetResumeBookMark(path, bookmark))
         {
           options.starttime = bookmark.timeInSeconds;
           options.state = bookmark.playerState;
@@ -3853,7 +3859,7 @@ void CApplication::OnPlayBackEnded()
     getApplicationMessenger().HttpApi("broadcastlevel; OnPlayBackEnded;1");
 #endif
 
-  CAnnouncementManager::Announce(Playback, "xbmc", "PlaybackEnded");
+  CAnnouncementManager::Announce(Player, "xbmc", "PlaybackEnded");
 
   if (IsPlayingAudio())
   {
@@ -3882,7 +3888,7 @@ void CApplication::OnPlayBackStarted()
     getApplicationMessenger().HttpApi("broadcastlevel; OnPlayBackStarted;1");
 #endif
 
-  CAnnouncementManager::Announce(Playback, "xbmc", "PlaybackStarted", m_itemCurrentFile);
+  CAnnouncementManager::Announce(Player, "xbmc", "PlaybackStarted", m_itemCurrentFile);
 
   CGUIMessage msg(GUI_MSG_PLAYBACK_STARTED, 0, 0);
   g_windowManager.SendThreadMessage(msg);
@@ -3902,7 +3908,7 @@ void CApplication::OnQueueNextItem()
     getApplicationMessenger().HttpApi("broadcastlevel; OnQueueNextItem;1");
 #endif
 
-  CAnnouncementManager::Announce(Playback, "xbmc", "QueueNextItem");
+  CAnnouncementManager::Announce(Player, "xbmc", "QueueNextItem");
 
   if(IsPlayingAudio())
   {
@@ -3931,7 +3937,7 @@ void CApplication::OnPlayBackStopped()
     getApplicationMessenger().HttpApi("broadcastlevel; OnPlayBackStopped;1");
 #endif
 
-  CAnnouncementManager::Announce(Playback, "xbmc", "PlaybackStopped", m_itemCurrentFile);
+  CAnnouncementManager::Announce(Player, "xbmc", "PlaybackStopped", m_itemCurrentFile);
 
   CLastfmScrobbler::GetInstance()->SubmitQueue();
   CLibrefmScrobbler::GetInstance()->SubmitQueue();
@@ -3952,7 +3958,7 @@ void CApplication::OnPlayBackPaused()
     getApplicationMessenger().HttpApi("broadcastlevel; OnPlayBackPaused;1");
 #endif
 
-  CAnnouncementManager::Announce(Playback, "xbmc", "PlaybackPaused", m_itemCurrentFile);
+  CAnnouncementManager::Announce(Player, "xbmc", "PlaybackPaused", m_itemCurrentFile);
 }
 
 void CApplication::OnPlayBackResumed()
@@ -3967,7 +3973,7 @@ void CApplication::OnPlayBackResumed()
     getApplicationMessenger().HttpApi("broadcastlevel; OnPlayBackResumed;1");
 #endif
 
-  CAnnouncementManager::Announce(Playback, "xbmc", "PlaybackResumed", m_itemCurrentFile);
+  CAnnouncementManager::Announce(Player, "xbmc", "PlaybackResumed", m_itemCurrentFile);
 }
 
 void CApplication::OnPlayBackSpeedChanged(int iSpeed)
@@ -3988,7 +3994,7 @@ void CApplication::OnPlayBackSpeedChanged(int iSpeed)
 
   CVariant param;
   param["speed"] = iSpeed;
-  CAnnouncementManager::Announce(Playback, "xbmc", "PlaybackSpeedChanged", m_itemCurrentFile, param);
+  CAnnouncementManager::Announce(Player, "xbmc", "PlaybackSpeedChanged", m_itemCurrentFile, param);
 }
 
 void CApplication::OnPlayBackSeek(int iTime, int seekOffset)
@@ -4010,7 +4016,7 @@ void CApplication::OnPlayBackSeek(int iTime, int seekOffset)
   CVariant param;
   param["time"] = iTime;
   param["seekoffset"] = seekOffset;
-  CAnnouncementManager::Announce(Playback, "xbmc", "PlaybackSeek", param);
+  CAnnouncementManager::Announce(Player, "xbmc", "PlaybackSeek", param);
   g_infoManager.SetDisplayAfterSeek(2500, seekOffset/1000);
 }
 
@@ -4032,7 +4038,7 @@ void CApplication::OnPlayBackSeekChapter(int iChapter)
 
   CVariant param;
   param["chapter"] = iChapter;
-  CAnnouncementManager::Announce(Playback, "xbmc", "PlaybackSeekChapter", param);
+  CAnnouncementManager::Announce(Player, "xbmc", "PlaybackSeekChapter", param);
 }
 
 bool CApplication::IsPlaying() const
@@ -4663,7 +4669,7 @@ bool CApplication::ExecuteXBMCAction(std::string actionStr)
 #ifdef HAS_PYTHON
         if (item.IsPythonScript())
         { // a python script
-          g_pythonParser.evalFile(item.m_strPath.c_str());
+          g_pythonParser.evalFile(item.m_strPath.c_str(),ADDON::AddonPtr());
         }
         else
 #endif

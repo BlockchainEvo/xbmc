@@ -30,6 +30,7 @@
 #include "utils/Variant.h"
 #include "video/VideoInfoTag.h"
 #include "music/tags/MusicInfoTag.h"
+#include "video/VideoDatabase.h"
 
 
 using namespace MUSIC_INFO;
@@ -124,7 +125,7 @@ void CFileItemHandler::HandleFileItemList(const char *ID, bool allowFile, const 
   }
 }
 
-void CFileItemHandler::HandleFileItem(const char *ID, bool allowFile, const char *resultname, CFileItemPtr item, const Json::Value &parameterObject, const Json::Value &validFields, Json::Value &result)
+void CFileItemHandler::HandleFileItem(const char *ID, bool allowFile, const char *resultname, CFileItemPtr item, const Json::Value &parameterObject, const Json::Value &validFields, Json::Value &result, bool append /* = true */)
 {
   Value object;
   bool hasFileField = false;
@@ -159,6 +160,32 @@ void CFileItemHandler::HandleFileItem(const char *ID, bool allowFile, const char
       object[ID] = (int)item->GetMusicInfoTag()->GetDatabaseId();
     else if (item->HasVideoInfoTag() && item->GetVideoInfoTag()->m_iDbId > 0)
       object[ID] = item->GetVideoInfoTag()->m_iDbId;
+
+    if (stricmp(ID, "id") == 0)
+    {
+      if (item->HasMusicInfoTag())
+        object["type"] = "song";
+      else if (item->HasVideoInfoTag())
+      {
+        switch (item->GetVideoContentType())
+        {
+          case VIDEODB_CONTENT_EPISODES:
+            object["type"] = "episode";
+            break;
+
+          case VIDEODB_CONTENT_MUSICVIDEOS:
+            object["type"] = "musicvideo";
+            break;
+
+          case VIDEODB_CONTENT_MOVIES:
+            object["type"] = "movie";
+            break;
+        }
+      }
+
+      if (!object.isMember("type"))
+        object["type"] = "unknown";
+    }
   }
 
   if (hasThumbnailField && !item->GetThumbnailImage().IsEmpty())
@@ -172,7 +199,12 @@ void CFileItemHandler::HandleFileItem(const char *ID, bool allowFile, const char
   object["label"] = item->GetLabel().c_str();
 
   if (resultname)
-    result[resultname].append(object);
+  {
+    if (append)
+      result[resultname].append(object);
+    else
+      result[resultname] = object;
+  }
 }
 
 bool CFileItemHandler::FillFileItemList(const Value &parameterObject, CFileItemList &list)

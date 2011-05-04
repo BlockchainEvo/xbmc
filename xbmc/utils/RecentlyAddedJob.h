@@ -1,7 +1,6 @@
 #pragma once
-
 /*
- *      Copyright (C) 2005-2008 Team XBMC
+ *      Copyright (C) 2005-2011 Team XBMC
  *      http://www.xbmc.org
  *
  *  This Program is free software; you can redistribute it and/or modify
@@ -21,24 +20,23 @@
  *
  */
 
-#include "CachingCodec.h"
+#include "Job.h"
 
-class AIFFCodec : public CachingCodec
+enum ERecentlyAddedFlag
+{
+  Audio = 0x1,
+  Video = 0x2,
+  Totals = 0x4
+};
+
+class CRecentlyAddedJob : public CJob
 {
 public:
-  AIFFCodec();
-  virtual ~AIFFCodec();
-
-  virtual bool Init(const CStdString &strFile, unsigned int filecache);
-  virtual void DeInit();
-  virtual __int64 Seek(__int64 iSeekTime);
-  virtual int ReadPCM(BYTE *pBuffer, int size, int *actualsize);
-  virtual bool CanInit();
-
+  CRecentlyAddedJob(int flag);
+  bool UpdateVideo();
+  bool UpdateMusic();
+  bool UpdateTotal();
+  virtual bool DoWork();
 private:
-  int ConvertSampleRate(unsigned char *rate);
-
-  long m_iDataStart;
-  long m_iDataLen;
-  long m_NumSamples;
+  int m_flag;
 };
