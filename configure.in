@@ -334,6 +334,7 @@ MAKE="${MAKE:-make}"
 case $host in
   i686-cm-linux*)
      target_platform=target_ce41xx
+     use_texturepacker_native=yes
      AC_SUBST(ARCH_DEFINES, "-DTARGET_CE41XX")
      ARCH="i686-linux"
      ;;
