@@ -285,23 +285,17 @@ typedef enum {
 	XBMCK_EURO		= 321,		/* Some european keyboards */
 	XBMCK_UNDO		= 322,		/* Atari keyboard has Undo */
 
-	/* Media keys */
-        XBMCK_MUTE              = 330,
-        XBMCK_VOLUME_UP         = 331,
-        XBMCK_VOLUME_DOWN       = 332,
-        XBMCK_EJECT             = 333,
-        XBMCK_NEXT              = 334,
-        XBMCK_PLAYPAUSE         = 335,
-        XBMCK_PREVIOUS          = 336,
-        XBMCK_STOP              = 337,
-        XBMCK_RECORD            = 338,
-        XBMCK_REWIND            = 339,
-        XBMCK_PHONE             = 340,
-        XBMCK_PLAY              = 341,
-        XBMCK_SHUFFLE           = 342,
-        XBMCK_FASTFORWARD       = 343,
-
 	/* Add any other keys here */
+
+	/* Media keys */
+  XBMCK_EJECT             = 333,
+  XBMCK_STOP              = 337,
+  XBMCK_RECORD            = 338,
+  XBMCK_REWIND            = 339,
+  XBMCK_PHONE             = 340,
+  XBMCK_PLAY              = 341,
+  XBMCK_SHUFFLE           = 342,
+  XBMCK_FASTFORWARD       = 343,
 
 	XBMCK_LAST
 } XBMCKey;
