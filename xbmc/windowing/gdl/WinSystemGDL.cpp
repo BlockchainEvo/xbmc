@@ -278,8 +278,8 @@ bool CWinSystemGDL::CreateNewWindow(const CStdString& name, bool fullScreen, RES
   di.bg_color     = 0;
   di.color_space  = GDL_COLOR_SPACE_RGB;
   di.gamma        = GDL_GAMMA_LINEAR;
-  di.tvmode.width      = res.iWidth;
-  di.tvmode.height     = res.iHeight;
+  di.tvmode.width      = 1920;
+  di.tvmode.height     = 1080;
   di.tvmode.refresh    = refresh;
   di.tvmode.interlaced = (res.dwFlags & D3DPRESENTFLAG_INTERLACED ? GDL_TRUE : GDL_FALSE);
   di.tvmode.stereo_type= GDL_STEREO_NONE;
@@ -325,13 +325,13 @@ bool CWinSystemGDL::CreateNewWindow(const CStdString& name, bool fullScreen, RES
 
   dstRect.origin.x = 0;
   dstRect.origin.y = 0;
-  dstRect.width = res.iWidth;
-  dstRect.height = res.iHeight;
+  dstRect.width = 1920;
+  dstRect.height = 1080;
 
   srcRect.origin.x = 0;
   srcRect.origin.y = 0;
-  srcRect.width = res.iWidth;
-  srcRect.height = res.iHeight;
+  srcRect.width = 1280;
+  srcRect.height = 720;
 
   if(blackLevel == BLACK_LEVEL_PC)
     EnableHDMIClamp(false);
@@ -378,7 +378,7 @@ bool CWinSystemGDL::CreateNewWindow(const CStdString& name, bool fullScreen, RES
 
   if(GDL_SUCCESS == rc)
   {
-    gdl_boolean_t scalineEnabled = GDL_FALSE;
+    gdl_boolean_t scalineEnabled = GDL_TRUE;
     rc = gdl_plane_set_attr(GDL_PLANE_SCALE, &scalineEnabled);
   }
 
