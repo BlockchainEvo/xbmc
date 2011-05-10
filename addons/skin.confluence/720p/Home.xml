@@ -531,7 +531,7 @@
 					<item id="6">
 						<label>8</label>
 						<onclick>ActivateWindow(Weather)</onclick>
-						<icon>special://skin/backgrounds/weather.jpg</icon>
+						<icon>special://skin/backgrounds/weather.bmp</icon>
 						<thumb>$INFO[Skin.String(Home_Custom_Back_Weather_Folder)]</thumb>
 						<visible>!Skin.HasSetting(HomeMenuNoWeatherButton)</visible>
 						<visible>!Skin.HasSetting(ShowWeatherFanart) | IsEmpty(Skin.String(WeatherFanartDir))</visible>
@@ -539,7 +539,7 @@
 					<item id="6">
 						<label>8</label>
 						<onclick>ActivateWindow(Weather)</onclick>
-						<icon>special://skin/backgrounds/weather.jpg</icon>
+						<icon>special://skin/backgrounds/weather.bmp</icon>
 						<thumb>$INFO[Skin.String(WeatherFanartDir)]$INFO[Weather.FanartCode]</thumb>
 						<visible>!Skin.HasSetting(HomeMenuNoWeatherButton)</visible>
 						<visible>Skin.HasSetting(ShowWeatherFanart) + !IsEmpty(Skin.String(WeatherFanartDir))</visible>
@@ -547,56 +547,56 @@
 					<item id="1">
 						<label>0</label>
 						<onclick>ActivateWindow(Programs,Addons,return)</onclick>
-						<icon>special://skin/backgrounds/programs.jpg</icon>
+						<icon>special://skin/backgrounds/programs.bmp</icon>
 						<thumb>$INFO[Skin.String(Home_Custom_Back_Programs_Folder)]</thumb>
 						<visible>!Skin.HasSetting(HomeMenuNoProgramsButton)</visible>
 					</item>
 					<item id="4">
 						<label>1</label>
 						<onclick>ActivateWindow(Pictures)</onclick>
-						<icon>special://skin/backgrounds/pictures.jpg</icon>
+						<icon>special://skin/backgrounds/pictures.bmp</icon>
 						<thumb>$INFO[Skin.String(Home_Custom_Back_Pictures_Folder)]</thumb>
 						<visible>!Skin.HasSetting(HomeMenuNoPicturesButton)</visible>
 					</item>
 					<item id="2">
 						<label>3</label>
 						<onclick>ActivateWindow(Videos)</onclick>
-						<icon>special://skin/backgrounds/videos.jpg</icon>
+						<icon>special://skin/backgrounds/videos.bmp</icon>
 						<thumb>$INFO[Skin.String(Home_Custom_Back_Video_Folder)]</thumb>
 						<visible>!Skin.HasSetting(HomeMenuNoVideosButton) + ![Skin.HasSetting(HomeMenuNoMoviesButton) + Skin.HasSetting(HomeMenuNoTVShowsButton)]</visible>
 					</item>
 					<item id="2">
 						<label>3</label>
 						<onclick>ActivateWindow(Videos,Files,return)</onclick>
-						<icon>special://skin/backgrounds/videos.jpg</icon>
+						<icon>special://skin/backgrounds/videos.bmp</icon>
 						<thumb>$INFO[Skin.String(Home_Custom_Back_Video_Folder)]</thumb>
 						<visible>!Skin.HasSetting(HomeMenuNoVideosButton) + [Skin.HasSetting(HomeMenuNoMoviesButton) + Skin.HasSetting(HomeMenuNoTVShowsButton)]</visible>
 					</item>
 					<item id="10">
 						<label>20342</label>
 						<onclick>ActivateWindow(Videos,MovieTitles,return)</onclick>
-						<icon>special://skin/backgrounds/videos.jpg</icon>
+						<icon>special://skin/backgrounds/videos.bmp</icon>
 						<thumb>$INFO[Skin.String(Home_Custom_Back_Movies_Folder)]</thumb>
 						<visible>Skin.HasSetting(HomeMenuNoMoviesButton) + Library.HasContent(Movies)</visible>
 					</item>
 					<item id="11">
 						<label>20343</label>
 						<onclick>ActivateWindow(Videos,TVShowTitles,return)</onclick>
-						<icon>special://skin/backgrounds/videos.jpg</icon>
+						<icon>special://skin/backgrounds/videos.bmp</icon>
 						<thumb>$INFO[Skin.String(Home_Custom_Back_TVShow_Folder)]</thumb>
 						<visible>Skin.HasSetting(HomeMenuNoTVShowsButton) + Library.HasContent(TVShows)</visible>
 					</item>
 					<item id="3">
 						<label>2</label>
 						<onclick>ActivateWindow(Music)</onclick>
-						<icon>special://skin/backgrounds/music.jpg</icon>
+						<icon>special://skin/backgrounds/music.bmp</icon>
 						<thumb>$INFO[Skin.String(Home_Custom_Back_Music_Folder)]</thumb>
 						<visible>!Skin.HasSetting(HomeMenuNoMusicButton)</visible>
 					</item>
 					<item id="5">
 						<label>13000</label>
 						<onclick>ActivateWindow(Settings)</onclick>
-						<icon>special://skin/backgrounds/settings.jpg</icon>
+						<icon>special://skin/backgrounds/settings.bmp</icon>
 						<thumb>$INFO[Skin.String(Home_Custom_Back_Settings_Folder)]</thumb>
 					</item>
 				</content>

@@ -705,57 +705,57 @@
 							<item id="1">
 								<label>3</label>
 								<onclick>-</onclick>
-								<icon>special://skin/backgrounds/videos.jpg</icon>
+								<icon>special://skin/backgrounds/videos.bmp</icon>
 								<thumb>$INFO[Skin.String(Home_Custom_Back_Video_Folder)]</thumb>
 							</item>
 							<item id="10">
 								<label>20342</label>
 								<onclick>-</onclick>
-								<icon>special://skin/backgrounds/videos.jpg</icon>
+								<icon>special://skin/backgrounds/videos.bmp</icon>
 								<thumb>$INFO[Skin.String(Home_Custom_Back_Movies_Folder)]</thumb>
 								<visible>Skin.HasSetting(HomeMenuNoMoviesButton) + Library.HasContent(Movies)</visible>
 							</item>
 							<item id="11">
 								<label>20343</label>
 								<onclick>-</onclick>
-								<icon>special://skin/backgrounds/videos.jpg</icon>
+								<icon>special://skin/backgrounds/videos.bmp</icon>
 								<thumb>$INFO[Skin.String(Home_Custom_Back_TVShow_Folder)]</thumb>
 								<visible>Skin.HasSetting(HomeMenuNoTVShowsButton) + Library.HasContent(TVShows)</visible>
 							</item>
 							<item id="2">
 								<label>2</label>
 								<onclick>-</onclick>
-								<icon>special://skin/backgrounds/music.jpg</icon>
+								<icon>special://skin/backgrounds/music.bmp</icon>
 								<thumb>$INFO[Skin.String(Home_Custom_Back_Music_Folder)]</thumb>
 							</item>
 							<item id="3">
 								<label>1</label>
 								<onclick>-</onclick>
-								<icon>special://skin/backgrounds/pictures.jpg</icon>
+								<icon>special://skin/backgrounds/pictures.bmp</icon>
 								<thumb>$INFO[Skin.String(Home_Custom_Back_Pictures_Folder)]</thumb>
 							</item>
 							<item id="4">
 								<label>0</label>
 								<onclick>-</onclick>
-								<icon>special://skin/backgrounds/programs.jpg</icon>
+								<icon>special://skin/backgrounds/programs.bmp</icon>
 								<thumb>$INFO[Skin.String(Home_Custom_Back_Programs_Folder)]</thumb>
 							</item>
 							<item id="5">
 								<label>8</label>
 								<onclick>-</onclick>
-								<icon>special://skin/backgrounds/weather.jpg</icon>
+								<icon>special://skin/backgrounds/weather.bmp</icon>
 								<thumb>$INFO[Skin.String(Home_Custom_Back_Weather_Folder)]</thumb>
 							</item>
 							<item id="7">
 								<label>13000</label>
 								<onclick>-</onclick>
-								<icon>special://skin/backgrounds/settings.jpg</icon>
+								<icon>special://skin/backgrounds/settings.bmp</icon>
 								<thumb>$INFO[Skin.String(Home_Custom_Back_Settings_Folder)]</thumb>
 							</item>
 							<item id="8">
 								<label>24001</label>
 								<onclick>-</onclick>
-								<icon>special://skin/backgrounds/Addons.jpg</icon>
+								<icon>special://skin/backgrounds/Addons.bmp</icon>
 								<thumb>$INFO[Skin.String(Home_Custom_Back_Addons_Folder)]</thumb>
 							</item>
 						</content>
