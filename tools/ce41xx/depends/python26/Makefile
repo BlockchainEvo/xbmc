@@ -35,8 +35,8 @@ $(LIBDYLIB): $(TARBALLS_LOCATION)/$(ARCHIVE)
 	cd $(SOURCE); mv Parser/pgen Parser/hostpgen
 	cd $(SOURCE); make distclean
 	cd $(SOURCE); $(CONFIGURE)
-	cd $(SOURCE); make HOSTPYTHON=./hostpython HOSTPGEN=./Parser/hostpgen BLDSHARED="i686-cm-linux-gcc -shared" CROSS_COMPILE="i686-cm-linux-" CROSS_COMPILE_TARGET=yes PYTHON_DISABLE_MODULES=$(DISABLE_MODS)
-	cd $(SOURCE); make HOSTPYTHON=./hostpython HOSTPGEN=./Parser/hostpgen BLDSHARED="i686-cm-linux-gcc -shared" CROSS_COMPILE="i686-cm-linux-" CROSS_COMPILE_TARGET=yes PYTHON_DISABLE_MODULES=$(DISABLE_MODS) libpython2.6.so
+	cd $(SOURCE); make -j $(JOBS) HOSTPYTHON=./hostpython HOSTPGEN=./Parser/hostpgen BLDSHARED="i686-cm-linux-gcc -shared" CROSS_COMPILE="i686-cm-linux-" CROSS_COMPILE_TARGET=yes PYTHON_DISABLE_MODULES=$(DISABLE_MODS)
+	cd $(SOURCE); make -j $(JOBS) HOSTPYTHON=./hostpython HOSTPGEN=./Parser/hostpgen BLDSHARED="i686-cm-linux-gcc -shared" CROSS_COMPILE="i686-cm-linux-" CROSS_COMPILE_TARGET=yes PYTHON_DISABLE_MODULES=$(DISABLE_MODS) libpython2.6.so
 
 .installed:
 	cd $(SOURCE); make install HOSTPYTHON=./hostpython BLDSHARED="i686-cm-linux-gcc -shared" CROSS_COMPILE="i686-cm-linux-" CROSS_COMPILE_TARGET=yes prefix=$(PREFIX)

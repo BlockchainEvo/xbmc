@@ -26,7 +26,7 @@ $(SOURCE): $(TARBALLS_LOCATION)/$(ARCHIVE)
 	cd $(SOURCE); patch -p1 <../Makefile.patch
 
 $(LIBDYLIB): $(SOURCE)
-	make -C $(SOURCE) PREFIX=$(PREFIX)
+	make -j $(JOBS) -C $(SOURCE) PREFIX=$(PREFIX)
 
 .installed:
 	make -C $(SOURCE) install PREFIX=$(PREFIX)

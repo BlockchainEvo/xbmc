@@ -25,7 +25,7 @@ $(SOURCE): $(TARBALLS_LOCATION)/$(ARCHIVE)
 	cd $(SOURCE)/librtmp; patch -p0 < ../../prefix.patch
 
 $(LIBDYLIB): $(SOURCE)
-	make -C $(SOURCE)/librtmp CROSS_COMPILE=$(CROSSBIN) PREFIX=$(PREFIX)
+	make -j $(JOBS) -C $(SOURCE)/librtmp CROSS_COMPILE=$(CROSSBIN) PREFIX=$(PREFIX)
 
 .installed:
 	make -C $(SOURCE)/librtmp install

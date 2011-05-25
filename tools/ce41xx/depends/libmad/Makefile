@@ -27,7 +27,7 @@ $(SOURCE): $(TARBALLS_LOCATION)/$(ARCHIVE)
 	cd $(SOURCE); sed -i '/-fforce-mem/d' configure; $(CONFIGURE)
 
 $(LIBDYLIB): $(SOURCE)
-	make -C $(SOURCE)
+	make -j $(JOBS) -C $(SOURCE)
 
 .installed:
 	make -C $(SOURCE) install

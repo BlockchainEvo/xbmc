@@ -28,7 +28,7 @@ $(SOURCE): $(TARBALLS_LOCATION)/$(ARCHIVE)
 $(LIBDYLIB): $(SOURCE)
 	#ln -s is hardcoded on install but it breaks reinstall. Add -f to be sure we succeed.
 	sed -i "s/LN_S = ln -s/LN_S = ln -sf/" $(SOURCE)/Makefile $(SOURCE)/lib/Makefile $(SOURCE)/src/Makefile
-	make -C $(SOURCE)
+	make -j $(JOBS) -C $(SOURCE)
 
 .installed:
 	make -C $(SOURCE) install

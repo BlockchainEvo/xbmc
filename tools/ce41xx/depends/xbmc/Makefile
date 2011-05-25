@@ -13,6 +13,6 @@ all: configure
 configure:
 	cd $(SOURCE); ./bootstrap
 	cd $(SOURCE); $(CONFIGURE)
-	cd $(SOURCE); make
+	cd $(SOURCE); make -j $(JOBS)
 	cd $(SOURCE); make install
 

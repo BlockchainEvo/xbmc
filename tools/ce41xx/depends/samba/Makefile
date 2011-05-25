@@ -40,7 +40,7 @@ $(LIBDYLIB): $(TARBALLS_LOCATION)/$(ARCHIVE)
 	cd $(SOURCE)/source; ./autogen.sh
 	cd $(SOURCE)/source; $(CONFIGURE)
 	cd $(SOURCE)/source; mkdir bin
-	cd $(SOURCE)/source; make bin/libsmbclient.a
+	cd $(SOURCE)/source; make -j 1 bin/libsmbclient.a
 
 .installed:
 	cd $(SOURCE)/source; make installclientlib

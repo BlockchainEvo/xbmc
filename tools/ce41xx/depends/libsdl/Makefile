@@ -32,7 +32,7 @@ $(SOURCE): $(TARBALLS_LOCATION)/$(ARCHIVE)
 	cd $(SOURCE); DIRECTFBCONFIG=${DIRECTFBCONFIG} $(CONFIGURE)
 
 $(LIBDYLIB): $(SOURCE)
-	make -C $(SOURCE)
+	make -j $(JOBS) -C $(SOURCE)
 
 .installed:
 	make -C $(SOURCE) install
