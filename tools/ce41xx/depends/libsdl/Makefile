@@ -8,7 +8,7 @@ SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
 
 # configuration settings
-DIRECTFBCONFIG:=$(XBMCSTAGE)/IntelCE/usr/local/bin/directfb-config
+DIRECTFBCONFIG:=$(SDKSTAGE)/usr/local/bin/directfb-config
 CONFIGURE= ./configure --prefix=$(PREFIX) --host=$(HOST) \
   --disable-audio --disable-cdrom --disable-video-x11 --disable-video-photon \
   --disable-video-cocoa --disable-video-fbcon --enable-video-directfb \

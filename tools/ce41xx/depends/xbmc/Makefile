@@ -11,8 +11,8 @@ CONFIGURE=./configure --prefix=$(PREFIX) --host=$(HOST) \
 all: configure
 
 configure:
-	cd $(SOURCE); ./bootstrap
-	cd $(SOURCE); $(CONFIGURE)
+	#cd $(SOURCE); ./bootstrap
+	#cd $(SOURCE); $(CONFIGURE)
 	cd $(SOURCE); make -j $(JOBS)
-	cd $(SOURCE); make install
+	#cd $(SOURCE); make install
 
