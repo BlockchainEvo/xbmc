@@ -224,7 +224,8 @@ bool CWinSystemGDL::CreateNewWindow(const CStdString& name, bool fullScreen, RES
   gdl_rectangle_t    dstRect;
   gdl_ret_t          rc = GDL_SUCCESS;
   gdl_boolean_t      hdcpControlEnabled = GDL_FALSE;
-
+  gdl_boolean_t      scalineEnabled = GDL_FALSE;
+  BlackLevelType     blackLevel;
   //bool bUsingHDMI = g_IntelSMDGlobals.GetAudioOutputAdded(AUDIO_DIGITAL_HDMI);
   //sdd CSingleLock lock(CIntelSMDAudioRenderer::m_SMDAudioLock);
 
@@ -237,10 +238,6 @@ bool CWinSystemGDL::CreateNewWindow(const CStdString& name, bool fullScreen, RES
   int bottom = res.Overscan.bottom;
 
   CLog::Log(LOGNONE, "WinSystemGDL overscan values left %d top %d right %d bottom %d", left, top, right, bottom);
-
-  m_gdlPlane = GDL_GRAPHICS_PLANE;
-//sdd  BlackLevelType blackLevel = g_settings.GetBlackLevelAsEnum(g_guiSettings.GetString("videoscreen.blacklevel"));
-  BlackLevelType blackLevel = BLACK_LEVEL_VIDEO;
 
   gdl_refresh_t refresh;
   if (res.fRefreshRate < 23.99f && res.fRefreshRate > 23.97)
@@ -269,6 +266,12 @@ bool CWinSystemGDL::CreateNewWindow(const CStdString& name, bool fullScreen, RES
     goto fail;
   }
 
+  // Since HDMI audio signals are carried within the video signals, 
+  // resetting the state of the HDMI port driver with active audio
+  // can result in an audio pipeline stall. To avoid this, stop HDMI audio
+  // prior to changing the display mode and reconfigure/restart HDMI audio afterwards
+  //sdd g_IntelSMDGlobals.DisableAudioOutput();
+
   // Default values of optional args
   memset(&di, 0, sizeof (gdl_display_info_t));
   di.id                = GDL_DISPLAY_ID_0;
@@ -281,12 +284,6 @@ bool CWinSystemGDL::CreateNewWindow(const CStdString& name, bool fullScreen, RES
   di.tvmode.refresh    = refresh;
   di.tvmode.interlaced = (res.dwFlags & D3DPRESENTFLAG_INTERLACED ? GDL_TRUE : GDL_FALSE);
   di.tvmode.stereo_type= GDL_STEREO_NONE;
-
-  // Since HDMI audio signals are carried within the video signals, 
-  // resetting the state of the HDMI port driver with active audio
-  // can result in an audio pipeline stall. To avoid this, stop HDMI audio
-  // prior to changing the display mode and reconfigure/restart HDMI audio afterwards
-  //sdd g_IntelSMDGlobals.DisableAudioOutput();
 
   rc = gdl_set_display_info(&di);
   if ( rc != GDL_SUCCESS)
@@ -309,6 +306,8 @@ bool CWinSystemGDL::CreateNewWindow(const CStdString& name, bool fullScreen, RES
   srcRect.width  = res.iWidth;
   srcRect.height = res.iHeight;
 
+//sdd  blackLevel = g_settings.GetBlackLevelAsEnum(g_guiSettings.GetString("videoscreen.blacklevel"));
+  blackLevel = BLACK_LEVEL_VIDEO;
   if(blackLevel == BLACK_LEVEL_PC)
     EnableHDMIClamp(false);
   else if(blackLevel == BLACK_LEVEL_VIDEO)
@@ -317,56 +316,37 @@ bool CWinSystemGDL::CreateNewWindow(const CStdString& name, bool fullScreen, RES
     CLog::Log(LOGNONE, "CWinSystemGDL::CreateNewWindow Could not HDMI black levels");
 
   if (gdl_port_set_attr(GDL_PD_ID_HDMI, GDL_PD_ATTR_ID_HDCP, &hdcpControlEnabled) != GDL_SUCCESS)
-  {
     CLog::Log(LOGNONE, "Could not enable HDCP control");
-  }
+
+  m_gdlPlane = GDL_GRAPHICS_PLANE;
 
   if (GDL_SUCCESS == rc)
-  {
     rc = gdl_plane_config_begin(m_gdlPlane);
-  }
 
   rc = gdl_plane_reset(m_gdlPlane);
+
   if (GDL_SUCCESS == rc)
-  {
     rc = gdl_plane_config_begin(m_gdlPlane);
-  }
 
   if (GDL_SUCCESS == rc)
-  {
     rc = gdl_plane_set_attr(GDL_PLANE_SRC_COLOR_SPACE, &colorSpace);
-  }
 
   if (GDL_SUCCESS == rc)
-  {
     rc = gdl_plane_set_attr(GDL_PLANE_PIXEL_FORMAT, &pixelFormat);
-  }
 
   if (GDL_SUCCESS == rc)
-  {
     rc = gdl_plane_set_attr(GDL_PLANE_DST_RECT, &dstRect);
-  }
 
   if (GDL_SUCCESS == rc)
-  {
     rc = gdl_plane_set_attr(GDL_PLANE_SRC_RECT, &srcRect);
-  }
 
   if(GDL_SUCCESS == rc)
-  {
-    //gdl_boolean_t scalineEnabled = GDL_TRUE;
-    gdl_boolean_t scalineEnabled = GDL_FALSE;
     rc = gdl_plane_set_attr(GDL_PLANE_SCALE, &scalineEnabled);
-  }
 
   if (GDL_SUCCESS == rc)
-  {
     rc = gdl_plane_config_end(GDL_FALSE);
-  }
   else
-  {
     gdl_plane_config_end(GDL_TRUE);
-  }
 
   if (GDL_SUCCESS != rc)
   {
@@ -377,9 +357,7 @@ bool CWinSystemGDL::CreateNewWindow(const CStdString& name, bool fullScreen, RES
   CLog::Log(LOGNONE, "GDL plane setup complete");
 
   if (!m_eglBinding.CreateWindow(EGL_DEFAULT_DISPLAY, (NativeWindowType) m_gdlPlane))
-  {
     goto fail;
-  }
 
   CLog::Log(LOGNONE, "GDL plane attach to EGL complete");
 
@@ -397,9 +375,7 @@ bool CWinSystemGDL::CreateNewWindow(const CStdString& name, bool fullScreen, RES
 bool CWinSystemGDL::DestroyWindow()
 {
   if (!m_eglBinding.DestroyWindow())
-  {
     return false;
-  }
 
   return true;
 }
@@ -471,7 +447,7 @@ void CWinSystemGDL::UpdateResolutions()
           {
             ignored = false;
           }
-          
+
           CLog::Log(LOGNONE, "Resolution: %dx%d%c%s - %s\n",
               m.width,
               m.height,
