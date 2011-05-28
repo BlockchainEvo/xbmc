@@ -56,16 +56,13 @@ public:
   virtual bool Hide();
   virtual bool Show(bool raise = true);
   
-  bool EnableHardwareScaler(bool bEnable, CRect src, CRect dst, gdl_plane_id_t plane = GDL_GRAPHICS_PLANE);
-  bool IsHardwareScalerEnabled(gdl_plane_id_t plane = GDL_GRAPHICS_PLANE);
-  bool GetPlaneRect(gdl_plane_id_t plane, CRect& rect, gdl_plane_attr_t attrib);
   bool EnableHDMIClamp(bool enable);
   bool EnableHDCP(bool enable);
 
 protected:  
   void GetNativeDisplayResolution(std::vector<RESOLUTION_INFO>& resolutions);
   bool ReadEDID(unsigned char** edid_data, int* len);
-  int GetEDIDBlockType(unsigned char* block);
+  int  GetEDIDBlockType(unsigned char* block);
   bool GetNativeResolutionFromEDID(unsigned char* edid_data, int edid_len, std::vector<RESOLUTION_INFO>& resolutions);
 
   CWinBindingEGL m_eglBinding;

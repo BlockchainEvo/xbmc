@@ -217,26 +217,23 @@ bool CWinSystemGDL::EnableHDCP(bool enable)
 
 bool CWinSystemGDL::CreateNewWindow(const CStdString& name, bool fullScreen, RESOLUTION_INFO& res, PHANDLE_EVENT_FUNC userFunction)
 {
-  gdl_display_info_t  di;
-  //bool bUsingHDMI = g_IntelSMDGlobals.GetAudioOutputAdded(AUDIO_DIGITAL_HDMI);
-
-  //sdd CSingleLock lock(CIntelSMDAudioRenderer::m_SMDAudioLock);
-
+  gdl_display_info_t di;
   gdl_pixel_format_t pixelFormat = GDL_PF_ARGB_32;
-  gdl_color_space_t colorSpace = GDL_COLOR_SPACE_RGB;
-  gdl_rectangle_t srcRect;
-  gdl_rectangle_t dstRect;
-  gdl_ret_t rc = GDL_SUCCESS;
-  gdl_boolean_t hdcpControlEnabled = GDL_FALSE;
+  gdl_color_space_t  colorSpace  = GDL_COLOR_SPACE_RGB;
+  gdl_rectangle_t    srcRect;
+  gdl_rectangle_t    dstRect;
+  gdl_ret_t          rc = GDL_SUCCESS;
+  gdl_boolean_t      hdcpControlEnabled = GDL_FALSE;
 
-  memset(&di, 0, sizeof (gdl_display_info_t));
+  //bool bUsingHDMI = g_IntelSMDGlobals.GetAudioOutputAdded(AUDIO_DIGITAL_HDMI);
+  //sdd CSingleLock lock(CIntelSMDAudioRenderer::m_SMDAudioLock);
 
   CLog::Log(LOGNONE, "WinSystemGDL creating new window: Width = %d  Height = %d", res.iWidth, res.iHeight);
 
   // print overscan values
-  int left = res.Overscan.left;
-  int top = res.Overscan.top;
-  int right = res.Overscan.right;
+  int left   = res.Overscan.left;
+  int top    = res.Overscan.top;
+  int right  = res.Overscan.right;
   int bottom = res.Overscan.bottom;
 
   CLog::Log(LOGNONE, "WinSystemGDL overscan values left %d top %d right %d bottom %d", left, top, right, bottom);
@@ -273,13 +270,14 @@ bool CWinSystemGDL::CreateNewWindow(const CStdString& name, bool fullScreen, RES
   }
 
   // Default values of optional args
-  di.id           = GDL_DISPLAY_ID_0;
-  di.flags        = 0;
-  di.bg_color     = 0;
-  di.color_space  = GDL_COLOR_SPACE_RGB;
-  di.gamma        = GDL_GAMMA_LINEAR;
-  di.tvmode.width      = 1920;
-  di.tvmode.height     = 1080;
+  memset(&di, 0, sizeof (gdl_display_info_t));
+  di.id                = GDL_DISPLAY_ID_0;
+  di.flags             = 0;
+  di.bg_color          = 0;
+  di.color_space       = GDL_COLOR_SPACE_RGB;
+  di.gamma             = GDL_GAMMA_LINEAR;
+  di.tvmode.width      = res.iWidth;
+  di.tvmode.height     = res.iHeight;
   di.tvmode.refresh    = refresh;
   di.tvmode.interlaced = (res.dwFlags & D3DPRESENTFLAG_INTERLACED ? GDL_TRUE : GDL_FALSE);
   di.tvmode.stereo_type= GDL_STEREO_NONE;
@@ -297,41 +295,19 @@ bool CWinSystemGDL::CreateNewWindow(const CStdString& name, bool fullScreen, RES
     goto fail;
   }
 
-/*
-  // Setup composite output to NTSC. In order to support PAL we need to use 720x576i50.
-  di.id           = GDL_DISPLAY_ID_1;
-  di.flags        = 0;
-  di.bg_color     = 0;
-  di.color_space  = GDL_COLOR_SPACE_RGB;
-  di.gamma        = GDL_GAMMA_LINEAR;
-  di.tvmode.width      = 720;
-  di.tvmode.height     = 480;
-  di.tvmode.refresh    = GDL_REFRESH_59_94;
-  di.tvmode.interlaced = GDL_TRUE;
-
-  rc = gdl_set_display_info(&di);
-
-  query_generic_info(GDL_PD_ID_HDMI);
-  query_hdcp_info(GDL_PD_ID_HDMI);
-
-  if(rc != GDL_SUCCESS)
-  {
-    CLog::Log(LOGNONE, "Could not set display mode for display 1");
-  }
-*/
-  m_nWidth = res.iWidth;
+  m_nWidth  = res.iWidth;
   m_nHeight = res.iHeight;
   m_bFullScreen = fullScreen;
 
   dstRect.origin.x = 0;
   dstRect.origin.y = 0;
-  dstRect.width = 1920;
-  dstRect.height = 1080;
+  dstRect.width  = res.iWidth;
+  dstRect.height = res.iHeight;
 
   srcRect.origin.x = 0;
   srcRect.origin.y = 0;
-  srcRect.width = 1280;
-  srcRect.height = 720;
+  srcRect.width  = res.iWidth;
+  srcRect.height = res.iHeight;
 
   if(blackLevel == BLACK_LEVEL_PC)
     EnableHDMIClamp(false);
@@ -378,7 +354,8 @@ bool CWinSystemGDL::CreateNewWindow(const CStdString& name, bool fullScreen, RES
 
   if(GDL_SUCCESS == rc)
   {
-    gdl_boolean_t scalineEnabled = GDL_TRUE;
+    //gdl_boolean_t scalineEnabled = GDL_TRUE;
+    gdl_boolean_t scalineEnabled = GDL_FALSE;
     rc = gdl_plane_set_attr(GDL_PLANE_SCALE, &scalineEnabled);
   }
 
@@ -406,7 +383,6 @@ bool CWinSystemGDL::CreateNewWindow(const CStdString& name, bool fullScreen, RES
 
   CLog::Log(LOGNONE, "GDL plane attach to EGL complete");
 
-  //sdd g_graphicsContext.UpdateGraphicsRects();
   //sdd g_IntelSMDGlobals.EnableAudioOutput();
 
   return true;
@@ -435,7 +411,7 @@ bool CWinSystemGDL::ResizeWindow(int newWidth, int newHeight, int newLeft, int n
 
 bool CWinSystemGDL::SetFullScreen(bool fullScreen, RESOLUTION_INFO& res, bool blankOtherDisplays)
 {
-  m_nWidth = res.iWidth;
+  m_nWidth  = res.iWidth;
   m_nHeight = res.iHeight;
   m_bFullScreen = fullScreen;
 
@@ -457,135 +433,6 @@ bool CWinSystemGDL::EnableHDMIClamp(bool bEnable)
 
   gdl_pd_attribute_t test;
   gdl_port_get_attr(GDL_PD_ID_HDMI, GDL_PD_ATTR_ID_OUTPUT_CLAMP, &test);
-
-  if(test.content._bool.value == GDL_TRUE)
-    printf("HDMI Clamp enabled\n");
-  else
-    printf("HDMI Clamp disabled\n");
-
-  return true;
-}
-
-bool CWinSystemGDL::EnableHardwareScaler(bool bEnable, CRect srcRect, CRect dstRect, gdl_plane_id_t plane)
-{
-  gdl_ret_t rc;
-  gdl_boolean_t scaleEnabled;
-  gdl_rectangle_t rect;
-
-  //printf("CWinSystemGDL::EnableHardwareScaler plane %d set to %d\n", plane, bEnable);
-
-  if(g_graphicsContext.GetHeight() <= 720 && bEnable)
-  {
-    /*
-    printf("CWinSystemGDL::EnableHardwareScaler: screen height %d <= 720. Ignoring\n",
-        g_graphicsContext.GetHeight());
-        */
-    return true;
-  }
-
-  if(srcRect.Width() > 1280 && bEnable)
-  {
-    //printf("CWinSystemGDL::EnableHardwareScaler: src width %d > 1280. Ignoring\n", srcRect.Width());
-    return true;
-  }
-
-  /*
-  printf("CWinSystemGDL::EnableHardwareScaler src %.0f %.0f %.0f %.0f  dst %.0f %.0f %.0f %.0f\n",
-      srcRect.x1, srcRect.y1, srcRect.x2, srcRect.y2,
-      dstRect.x1, dstRect.y1, dstRect.x2, dstRect.y2);
-      */
-
-  if (bEnable)
-  {
-    // reset any leftovers from plance C which is used for the browser
-    gdl_rectangle_t rect;
-    gdl_boolean_t scale = GDL_FALSE;
-    rect.origin.x = rect.origin.y = 0;
-    rect.width=1280;
-    rect.height=720;
-    gdl_plane_config_begin(GDL_PLANE_ID_UPP_C);
-    gdl_plane_set_attr(GDL_PLANE_SCALE, &scale);
-    gdl_plane_set_rect(GDL_PLANE_DST_RECT, &rect);
-    gdl_plane_set_rect(GDL_PLANE_SRC_RECT, &rect);
-    gdl_plane_config_end(GDL_FALSE);
-  }
-
-  rc = gdl_plane_config_begin(plane);
-
-  rect.origin.x = (gdl_int32)srcRect.x1;
-  rect.origin.y = (gdl_int32)srcRect.y1;
-  rect.width = (gdl_int32)(srcRect.x2 - srcRect.x1);
-  rect.height = (gdl_int32)(srcRect.y2 - srcRect.y1);
-
-  if (GDL_SUCCESS == rc)
-    rc = gdl_plane_set_attr(GDL_PLANE_SRC_RECT, &rect);
-
-
-  rect.origin.x = (gdl_int32)dstRect.x1;
-  rect.origin.y = (gdl_int32)dstRect.y1;
-  rect.width = (gdl_int32)(dstRect.x2 - dstRect.x1);
-  rect.height = (gdl_int32)(dstRect.y2 - dstRect.y1);
-
-  if(GDL_SUCCESS == rc)
-    rc = gdl_plane_set_attr(GDL_PLANE_DST_RECT, &rect);
-
-  if(GDL_SUCCESS == rc)
-  {
-    scaleEnabled = (gdl_boolean_t)bEnable;
-    rc = gdl_plane_set_attr(GDL_PLANE_SCALE, &scaleEnabled);
-  }
-
-  if (GDL_SUCCESS == rc)
-    gdl_plane_config_end(GDL_FALSE);
-  else
-    gdl_plane_config_end(GDL_TRUE);
-
-  if (GDL_SUCCESS != rc)
-  {
-    CLog::Log(LOGERROR, "CWinSystemGDL::EnableHardwareScaler failed. GDL error code is 0x%x\n", rc);
-    return false;
-  }
-
-  return true;
-}
-
-bool CWinSystemGDL::IsHardwareScalerEnabled(gdl_plane_id_t plane)
-{
-  gdl_ret_t rc;
-  gdl_boolean_t scaleEnabled;
-
-  rc = gdl_plane_get_attr(plane, GDL_PLANE_SCALE, &scaleEnabled);
-  if(rc != GDL_SUCCESS)
-  {
-    CLog::Log(LOGERROR, "CWinSystemGDL::IsHardwareScalerEnabled failed. GDL error code is 0x%x\n", rc);
-    return false;
-  }
-
-  //printf("CWinSystemGDL::IsHardwareScalerEnabled %d\n", (bool)scalineEnabled);
-
-  return (bool)scaleEnabled;
-}
-
-bool CWinSystemGDL::GetPlaneRect(gdl_plane_id_t plane, CRect& myRect, gdl_plane_attr_t attrib)
-{
-  gdl_ret_t rc;
-  //sdd gdl_boolean_t scalineEnabled;
-  gdl_rectangle_t rect;
-
-  if(attrib != GDL_PLANE_DST_RECT && attrib != GDL_PLANE_SRC_RECT)
-    return false;
-
-  rc = gdl_plane_get_attr(plane, attrib, &rect);
-  if(rc != GDL_SUCCESS)
-  {
-    CLog::Log(LOGERROR, "CWinSystemGDL::GetPlaneDstRect failed. GDL error code is 0x%x\n", rc);
-    return false;
-  }
-
-  myRect.x1 = (float)(rect.origin.x);
-  myRect.y1 = (float)(rect.origin.y);
-  myRect.x2 = (float)(rect.origin.x + rect.width);
-  myRect.y2 = (float)(rect.origin.y + rect.height);
 
   return true;
 }
@@ -624,7 +471,7 @@ void CWinSystemGDL::UpdateResolutions()
           {
             ignored = false;
           }
-
+          
           CLog::Log(LOGNONE, "Resolution: %dx%d%c%s - %s\n",
               m.width,
               m.height,
@@ -638,17 +485,17 @@ void CWinSystemGDL::UpdateResolutions()
           float refresh;
           switch (m.refresh)
           {
-          case GDL_REFRESH_23_98: refresh = 23.98; break;
-          case GDL_REFRESH_24:    refresh = 24.00; break;
-          case GDL_REFRESH_25:    refresh = 25.00; break;
-          case GDL_REFRESH_29_97: refresh = 29.97; break;
-          case GDL_REFRESH_30:    refresh = 30.00; break;
-          case GDL_REFRESH_50:    refresh = 50.00; break;
-          case GDL_REFRESH_59_94: refresh = 59.94; break;
-          case GDL_REFRESH_60:    refresh = 60.00; break;
-          case GDL_REFRESH_48:    refresh = 48.00; break;
-          case GDL_REFRESH_47_96: refresh = 47.96; break;
-          default:                refresh = 0.0;   break;
+            case GDL_REFRESH_23_98: refresh = 23.98; break;
+            case GDL_REFRESH_24:    refresh = 24.00; break;
+            case GDL_REFRESH_25:    refresh = 25.00; break;
+            case GDL_REFRESH_29_97: refresh = 29.97; break;
+            case GDL_REFRESH_30:    refresh = 30.00; break;
+            case GDL_REFRESH_50:    refresh = 50.00; break;
+            case GDL_REFRESH_59_94: refresh = 59.94; break;
+            case GDL_REFRESH_60:    refresh = 60.00; break;
+            case GDL_REFRESH_48:    refresh = 48.00; break;
+            case GDL_REFRESH_47_96: refresh = 47.96; break;
+            default:                refresh = 0.0;   break;
           }
 
           if (g_settings.m_ResInfo.size() <= boxeeResolution)
@@ -657,15 +504,20 @@ void CWinSystemGDL::UpdateResolutions()
             g_settings.m_ResInfo.push_back(res);
           }
 
-          UpdateDesktopResolution(g_settings.m_ResInfo[boxeeResolution], 0, m.width, m.height, refresh, m.interlaced);
+          uint32_t dwFlags;
+          if (m.interlaced)
+            dwFlags = D3DPRESENTFLAG_INTERLACED;
+          else
+            dwFlags = D3DPRESENTFLAG_PROGRESSIVE;
+          UpdateDesktopResolution(g_settings.m_ResInfo[boxeeResolution], 0, m.width, m.height, refresh, dwFlags);
 
           // Update default overscan
           if (DEFAULT_OVERSCAN > 0)
           {
-            g_settings.m_ResInfo[boxeeResolution].Overscan.left = (int) ((float) m.width * DEFAULT_OVERSCAN);
-            g_settings.m_ResInfo[boxeeResolution].Overscan.top = (int) ((float) m.height * DEFAULT_OVERSCAN);
-            g_settings.m_ResInfo[boxeeResolution].Overscan.right = m.width - (int) ((float) m.width * DEFAULT_OVERSCAN);
-            g_settings.m_ResInfo[boxeeResolution].Overscan.bottom =  m.height - (int) ((float) m.height * DEFAULT_OVERSCAN);
+            g_settings.m_ResInfo[boxeeResolution].Overscan.left = (int) ((float) m.width  * DEFAULT_OVERSCAN);
+            g_settings.m_ResInfo[boxeeResolution].Overscan.top  = (int) ((float) m.height * DEFAULT_OVERSCAN);
+            g_settings.m_ResInfo[boxeeResolution].Overscan.right  = m.width  - (int) ((float) m.width  * DEFAULT_OVERSCAN);
+            g_settings.m_ResInfo[boxeeResolution].Overscan.bottom = m.height - (int) ((float) m.height * DEFAULT_OVERSCAN);
           }
 
           if(m.width == 1280 && m.height == 720 && !m.interlaced && m.refresh == GDL_REFRESH_59_94)
@@ -695,56 +547,6 @@ void CWinSystemGDL::UpdateResolutions()
   {
     CLog::Log(LOGNONE, "Warning: 720p not supported, desktop not changed");
   }
-
-  /*
-  std::vector<RESOLUTION_INFO> nativeResolutions;
-  GetNativeDisplayResolution(nativeResolutions);
-
-  CLog::Log(LOGNONE, "Native resolutions (from EDID):");
-  for (size_t i = 0; i < nativeResolutions.size(); i++)
-  {
-    CLog::Log(LOGNONE, "%dx%d%s%.2f", nativeResolutions[i].iWidth, nativeResolutions[i].iHeight,
-      (nativeResolutions[i].dwFlags & D3DPRESENTFLAG_INTERLACED)? "i" : "p", nativeResolutions[i].fRefreshRate);
-  }
-
-  // Go over all resolutions and put the native resolution (if found) in the desktop
-  RESOLUTION swapped = RES_INVALID;
-
-  for (size_t n = 0; n < nativeResolutions.size(); n++)
-  {
-    RESOLUTION_INFO& native = nativeResolutions[n];
-
-    for (RESOLUTION i = RES_DESKTOP; i < (RESOLUTION) g_settings.m_ResInfo.size(); i = (RESOLUTION) (((int) i) + 1))
-    {
-      RESOLUTION_INFO& res = g_settings.m_ResInfo[i];
-
-      if (res.iWidth == native.iWidth && res.iHeight == native.iHeight &&
-          (res.dwFlags & D3DPRESENTFLAG_INTERLACED) == (native.dwFlags & D3DPRESENTFLAG_INTERLACED) &&
-          res.fRefreshRate - 0.5 < native.fRefreshRate && res.fRefreshRate + 0.5 > native.fRefreshRate)
-      {
-        CLog::Log(LOGNONE, "Matched native resolution to: %dx%d%s%.2f", res.iWidth, res.iHeight,
-              (res.dwFlags & D3DPRESENTFLAG_INTERLACED)? "i" : "p", res.fRefreshRate);
-        swapped = i;
-      }
-    }
-
-    if (swapped != RES_INVALID)
-    {
-      break;
-    }
-  }
-
-  if (swapped != RES_INVALID)
-  {
-    RESOLUTION_INFO desktop = g_settings.m_ResInfo[RES_DESKTOP];
-    g_settings.m_ResInfo[RES_DESKTOP] = g_settings.m_ResInfo[swapped];
-    g_settings.m_ResInfo[swapped] = desktop;
-  }
-  else
-  {
-    g_settings.m_ResInfo[RES_DESKTOP] = g_settings.m_ResInfo[RES_HDTV_720p];
-  }
-  */
 }
 
 #define LOWER_NIBBLE( x ) \
@@ -801,7 +603,7 @@ void CWinSystemGDL::GetNativeDisplayResolution(std::vector<RESOLUTION_INFO>& res
   if (resolutions.size() == 0)
   {
     RESOLUTION_INFO fallthrough;
-    fallthrough.iWidth = 1280;
+    fallthrough.iWidth  = 1280;
     fallthrough.iHeight = 720;
     fallthrough.fRefreshRate = 59.94f;
     resolutions.push_back(fallthrough);
