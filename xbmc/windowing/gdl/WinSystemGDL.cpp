@@ -229,7 +229,11 @@ bool CWinSystemGDL::CreateNewWindow(const CStdString& name, bool fullScreen, RES
   //bool bUsingHDMI = g_IntelSMDGlobals.GetAudioOutputAdded(AUDIO_DIGITAL_HDMI);
   //sdd CSingleLock lock(CIntelSMDAudioRenderer::m_SMDAudioLock);
 
-  CLog::Log(LOGNONE, "WinSystemGDL creating new window: Width = %d  Height = %d", res.iWidth, res.iHeight);
+  // see CWinSystemGDL::UpdateResolutions.
+  if ((res.iScreenWidth > res.iWidth) && (res.iScreenHeight > res.iHeight))
+    scalineEnabled = GDL_TRUE;
+
+  CLog::Log(LOGNONE, "WinSystemGDL creating new window: Width = %d  Height = %d", res.iScreenWidth, res.iScreenHeight);
 
   // print overscan values
   int left   = res.Overscan.left;
@@ -279,8 +283,8 @@ bool CWinSystemGDL::CreateNewWindow(const CStdString& name, bool fullScreen, RES
   di.bg_color          = 0;
   di.color_space       = GDL_COLOR_SPACE_RGB;
   di.gamma             = GDL_GAMMA_LINEAR;
-  di.tvmode.width      = res.iWidth;
-  di.tvmode.height     = res.iHeight;
+  di.tvmode.width      = res.iScreenWidth;
+  di.tvmode.height     = res.iScreenHeight;
   di.tvmode.refresh    = refresh;
   di.tvmode.interlaced = (res.dwFlags & D3DPRESENTFLAG_INTERLACED ? GDL_TRUE : GDL_FALSE);
   di.tvmode.stereo_type= GDL_STEREO_NONE;
@@ -298,8 +302,8 @@ bool CWinSystemGDL::CreateNewWindow(const CStdString& name, bool fullScreen, RES
 
   dstRect.origin.x = 0;
   dstRect.origin.y = 0;
-  dstRect.width  = res.iWidth;
-  dstRect.height = res.iHeight;
+  dstRect.width  = res.iScreenWidth;
+  dstRect.height = res.iScreenHeight;
 
   srcRect.origin.x = 0;
   srcRect.origin.y = 0;
@@ -350,7 +354,7 @@ bool CWinSystemGDL::CreateNewWindow(const CStdString& name, bool fullScreen, RES
 
   if (GDL_SUCCESS != rc)
   {
-    CLog::Log(LOGNONE, "GDL configuration failed! GDL error code is 0x%x\n", rc);
+    CLog::Log(LOGNONE, "GDL configuration failed! GDL error code is 0x%x", rc);
     goto fail;
   }
 
@@ -387,6 +391,7 @@ bool CWinSystemGDL::ResizeWindow(int newWidth, int newHeight, int newLeft, int n
 
 bool CWinSystemGDL::SetFullScreen(bool fullScreen, RESOLUTION_INFO& res, bool blankOtherDisplays)
 {
+  CLog::Log(LOGNONE, "CWinSystemGDL::SetFullScreen");
   m_nWidth  = res.iWidth;
   m_nHeight = res.iHeight;
   m_bFullScreen = fullScreen;
@@ -421,8 +426,8 @@ void CWinSystemGDL::UpdateResolutions()
   gdl_ret_t          rc;
   gdl_tvmode_t       m;
   int                i = 0;
-  RESOLUTION         boxeeResolution = RES_DESKTOP;
   RESOLUTION         Res720p = RES_INVALID;
+  RESOLUTION         res_index = RES_DESKTOP;
 
   CLog::Log(LOGNONE, "Display <%d> supports the following modes:", display_id);
 
@@ -441,9 +446,8 @@ void CWinSystemGDL::UpdateResolutions()
         // Check if given mode is supported on given display
         if (gdl_check_tvmode(display_id, &m) == GDL_SUCCESS)
         {
-          // We only care about 23.98, 59.94 or 50 Hz resolutions
-          if (m.refresh == GDL_REFRESH_23_98 || m.refresh == GDL_REFRESH_59_94 ||
-              m.refresh == GDL_REFRESH_50)
+          // We only care about progressive 59.94 or 50 Hz resolutions
+          if (!m.interlaced && (m.refresh == GDL_REFRESH_59_94 || m.refresh == GDL_REFRESH_50))
           {
             ignored = false;
           }
@@ -474,32 +478,59 @@ void CWinSystemGDL::UpdateResolutions()
             default:                refresh = 0.0;   break;
           }
 
-          if (g_settings.m_ResInfo.size() <= boxeeResolution)
+          // if this is a new setting,
+          // create a new empty setting to fill in.
+          if (g_settings.m_ResInfo.size() <= res_index)
           {
             RESOLUTION_INFO res;
             g_settings.m_ResInfo.push_back(res);
           }
 
-          uint32_t dwFlags;
-          if (m.interlaced)
-            dwFlags = D3DPRESENTFLAG_INTERLACED;
-          else
-            dwFlags = D3DPRESENTFLAG_PROGRESSIVE;
-          UpdateDesktopResolution(g_settings.m_ResInfo[boxeeResolution], 0, m.width, m.height, refresh, dwFlags);
-
-          // Update default overscan
+          int gui_width  = m.width;
+          int gui_height = m.height;
+          if (!m.interlaced && m.width == 1920 && m.height == 1080)
+          {
+            // CE41xx can not render GUI fast enough in 1080p.
+            // So we will use hw scaler to render GUI at 720p
+            // and hw scale that to 1080p display.
+            gui_width  = 1280;
+            gui_height = 720;
+          }
+          
           if (DEFAULT_OVERSCAN > 0)
           {
-            g_settings.m_ResInfo[boxeeResolution].Overscan.left = (int) ((float) m.width  * DEFAULT_OVERSCAN);
-            g_settings.m_ResInfo[boxeeResolution].Overscan.top  = (int) ((float) m.height * DEFAULT_OVERSCAN);
-            g_settings.m_ResInfo[boxeeResolution].Overscan.right  = m.width  - (int) ((float) m.width  * DEFAULT_OVERSCAN);
-            g_settings.m_ResInfo[boxeeResolution].Overscan.bottom = m.height - (int) ((float) m.height * DEFAULT_OVERSCAN);
+            g_settings.m_ResInfo[res_index].Overscan.left = (int) ((float) gui_width  * DEFAULT_OVERSCAN);
+            g_settings.m_ResInfo[res_index].Overscan.top  = (int) ((float) gui_height * DEFAULT_OVERSCAN);
+            g_settings.m_ResInfo[res_index].Overscan.right  = gui_width  - (int) ((float) gui_width  * DEFAULT_OVERSCAN);
+            g_settings.m_ResInfo[res_index].Overscan.bottom = gui_height - (int) ((float) gui_height * DEFAULT_OVERSCAN);
           }
+          else
+          {
+            g_settings.m_ResInfo[res_index].Overscan.left = 0;
+            g_settings.m_ResInfo[res_index].Overscan.top  = 0;
+            g_settings.m_ResInfo[res_index].Overscan.right  = gui_width;
+            g_settings.m_ResInfo[res_index].Overscan.bottom = gui_height;
+          }
+          g_settings.m_ResInfo[res_index].iScreen     = 0;
+          g_settings.m_ResInfo[res_index].bFullScreen = true;
+          g_settings.m_ResInfo[res_index].iSubtitles  = (int)(0.965 * gui_height);
+          if (m.interlaced)
+            g_settings.m_ResInfo[res_index].dwFlags = D3DPRESENTFLAG_INTERLACED;
+          else
+            g_settings.m_ResInfo[res_index].dwFlags = D3DPRESENTFLAG_PROGRESSIVE;
+          g_settings.m_ResInfo[res_index].fRefreshRate = refresh;
+          g_settings.m_ResInfo[res_index].fPixelRatio  = 1.0f;
+          g_settings.m_ResInfo[res_index].iWidth  = gui_width;
+          g_settings.m_ResInfo[res_index].iHeight = gui_height;
+          g_settings.m_ResInfo[res_index].iScreenWidth  = m.width;
+          g_settings.m_ResInfo[res_index].iScreenHeight = m.height;
+          g_settings.m_ResInfo[res_index].strMode.Format("%dx%d @ %.2f%s - Full Screen",
+            m.width, m.height, refresh, m.interlaced ? "i" : "");
 
-          if(m.width == 1280 && m.height == 720 && !m.interlaced && m.refresh == GDL_REFRESH_59_94)
-            Res720p = boxeeResolution;
+          if (!m.interlaced && (m.width == 1280) && (m.height == 720) && (m.refresh == GDL_REFRESH_59_94))
+            Res720p = res_index;
 
-          boxeeResolution = (RESOLUTION) (((int) boxeeResolution) + 1);
+          res_index = (RESOLUTION) (((int) res_index) + 1);
         }
       }
 
@@ -510,10 +541,10 @@ void CWinSystemGDL::UpdateResolutions()
     pd_id = (gdl_pd_id_t) (((int) pd_id) + 1);
   }
 
-  // swap desktop for 720p if available
-  if(Res720p != RES_INVALID)
+  // swap desktop index for 720p if available
+  if (Res720p != RES_INVALID)
   {
-    CLog::Log(LOGNONE, "Found 720p at %d, setting to desktop", (int)Res720p);
+    CLog::Log(LOGNONE, "Found 720p at %d, setting to RES_DESKTOP at %d", (int)Res720p, (int)RES_DESKTOP);
 
     RESOLUTION_INFO desktop = g_settings.m_ResInfo[RES_DESKTOP];
     g_settings.m_ResInfo[RES_DESKTOP] = g_settings.m_ResInfo[Res720p];
