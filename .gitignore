@@ -43,6 +43,7 @@ config.log
 
 # osx specifics
 /build/
+._*
 .DS_Store
 *.dSYM
 /tools/darwin/depends/config.site
