@@ -9,6 +9,7 @@ ARCHIVE=$(SOURCE).tar.bz2
 
 # configuration settings
 #NATIVE_ENV=CFLAGS="" CXXFLAGS="" LDFLAGS="" CPPFLAGS="" EXTRA_CFLAGS="" LIBS="" CPP="cpp -E" CC=gcc CXX=g++ LD=ld AR=ar RANLIB=ranlib
+export EXTRA_CFLAGS=$(CFLAGS)
 DISABLE_MODS="_ctypes readline _curses _curses_panel _tkinter nis gdbm bsddb _codecs_kr _codecs_jp _codecs_cn _codecs_tw _codecs_hk"
 CONFIGURE_NATIVE=$(NATIVE_ENV) ./configure
 CONFIGURE=./configure --prefix=$(PREFIX) --host=$(HOST) \
