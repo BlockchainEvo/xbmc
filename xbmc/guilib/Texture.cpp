@@ -23,6 +23,7 @@
 #include "windowing/WindowingFactory.h"
 #include "utils/log.h"
 #include "utils/URIUtils.h"
+#include "utils/fastmemcpy.h"
 #include "pictures/DllImageLib.h"
 #include "DDSImage.h"
 #include "filesystem/SpecialProtocol.h"
@@ -107,14 +108,14 @@ void CBaseTexture::Update(unsigned int width, unsigned int height, unsigned int 
     unsigned int dstRows = GetRows(m_textureHeight);
 
     if (srcPitch == dstPitch)
-      memcpy(m_pixels, pixels, srcPitch * std::min(srcRows, dstRows));
+      fast_memcpy(m_pixels, pixels, srcPitch * std::min(srcRows, dstRows));
     else
     {
       const unsigned char *src = pixels;
       unsigned char* dst = m_pixels;
       for (unsigned int y = 0; y < srcRows && y < dstRows; y++)
       {
-        memcpy(dst, src, std::min(srcPitch, dstPitch));
+        fast_memcpy(dst, src, std::min(srcPitch, dstPitch));
         src += srcPitch;
         dst += dstPitch;
       }
@@ -140,7 +141,7 @@ void CBaseTexture::ClampToEdge()
     for (unsigned int y = 0; y < imageRows; y++)
     {
       for (unsigned int x = imagePitch; x < texturePitch; x += blockSize)
-        memcpy(dst + x, src, blockSize);
+        fast_memcpy(dst + x, src, blockSize);
       dst += texturePitch;
     }
   }
@@ -150,7 +151,7 @@ void CBaseTexture::ClampToEdge()
     unsigned char *dst = m_pixels + imageRows * texturePitch;
     for (unsigned int y = imageRows; y < textureRows; y++)
     {
-      memcpy(dst, dst - texturePitch, texturePitch);
+      fast_memcpy(dst, dst - texturePitch, texturePitch);
       dst += texturePitch;
     }
   }
@@ -325,17 +326,36 @@ bool CBaseTexture::LoadFromFile(const CStdString& texturePath, unsigned int maxW
   unsigned int destPitch = GetPitch();
   unsigned int srcPitch = ((image.width + 1)* 3 / 4) * 4; // bitmap row length is aligned to 4 bytes
 
-  for (unsigned int y = 0; y < m_imageHeight; y++)
+  if (image.alpha)
   {
-    unsigned char *dst = m_pixels + y * destPitch;
-    unsigned char *src = image.texture + (m_imageHeight - 1 - y) * srcPitch;
-    unsigned char *alpha = image.alpha + (m_imageHeight - 1 - y) * m_imageWidth;
-    for (unsigned int x = 0; x < m_imageWidth; x++)
+    for (unsigned int y = 0; y < m_imageHeight; y++)
     {
-      *dst++ = *src++;
-      *dst++ = *src++;
-      *dst++ = *src++;
-      *dst++ = (image.alpha) ? *alpha++ : 0xff;
+      unsigned char *dst = m_pixels + y * destPitch;
+      unsigned char *src = image.texture + (m_imageHeight - 1 - y) * srcPitch;
+      unsigned char *alpha = image.alpha + (m_imageHeight - 1 - y) * m_imageWidth;
+      for (unsigned int x = 0; x < m_imageWidth; x++)
+      {
+        *dst++ = *src++;
+        *dst++ = *src++;
+        *dst++ = *src++;
+        *dst++ = *alpha++;
+      }
+    }
+  }
+  else
+  {
+    for (unsigned int y = 0; y < m_imageHeight; y++)
+    {
+      unsigned char *dst = m_pixels + y * destPitch;
+      unsigned char *src = image.texture + (m_imageHeight - 1 - y) * srcPitch;
+      unsigned char *alpha = image.alpha + (m_imageHeight - 1 - y) * m_imageWidth;
+      for (unsigned int x = 0; x < m_imageWidth; x++)
+      {
+        *dst++ = *src++;
+        *dst++ = *src++;
+        *dst++ = *src++;
+        *dst++ = 0xff;
+      }
     }
   }
 
