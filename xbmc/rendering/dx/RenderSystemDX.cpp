@@ -914,6 +914,24 @@ void CRenderSystemDX::SetViewPort(CRect& viewPort)
   m_pD3DDevice->SetViewport(&newviewport);
 }
 
+void CRenderSystemDX::SetScissors(const CRect& rect)
+{
+  if (!m_bRenderCreated)
+    return;
+
+  RECT scissor;
+  scissor.left = (int)rect.x1;
+  scissor.top = (int)rect.y1;
+  scissor.right = (int)rect.x2;
+  scissor.bottom = (int)rect.y2;
+  m_pD3DDevice->SetScissorRect(&scissor);
+}
+
+void CRenderSystemDX::ResetScissors()
+{
+  SetScissors(CRect(0, 0, m_nBackBufferWidth, m_nBackBufferHeight));
+}
+
 void CRenderSystemDX::Register(ID3DResource *resource)
 {
   CSingleLock lock(m_resourceSection);

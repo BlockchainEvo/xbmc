@@ -493,6 +493,18 @@ void CRenderSystemGLES::SetViewPort(CRect& viewPort)
   glViewport((GLint) viewPort.x1, (GLint) (m_height - viewPort.y1 - viewPort.Height()), (GLsizei) viewPort.Width(), (GLsizei) viewPort.Height());
 }
 
+void CRenderSystemGLES::SetScissors(const CRect &rect)
+{
+  if (!m_bRenderCreated)
+    return;
+  glScissor((GLint) rect.x1, (GLint) (m_height - rect.y2), (GLsizei) rect.Width(), (GLsizei) rect.Height());
+}
+
+void CRenderSystemGLES::ResetScissors()
+{
+  SetScissors(CRect(0, 0, (float)m_width, (float)m_height));
+}
+
 void CRenderSystemGLES::InitialiseGUIShader()
 {
   if (!m_pGUIshader)
