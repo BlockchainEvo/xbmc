@@ -924,12 +924,22 @@ void CRenderSystemDX::SetScissors(const CRect& rect)
   scissor.top = (int)rect.y1;
   scissor.right = (int)rect.x2;
   scissor.bottom = (int)rect.y2;
+  m_pD3DDevice->SetRenderState(D3DRS_SCISSORTESTENABLE, TRUE);
   m_pD3DDevice->SetScissorRect(&scissor);
 }
 
 void CRenderSystemDX::ResetScissors()
 {
-  SetScissors(CRect(0, 0, m_nBackBufferWidth, m_nBackBufferHeight));
+  if (!m_bRenderCreated)
+    return;
+
+  RECT scissor;
+  scissor.left = 0;
+  scissor.top = 0;
+  scissor.right = m_nBackBufferWidth;
+  scissor.bottom = m_nBackBufferHeight;
+  m_pD3DDevice->SetScissorRect(&scissor);
+  m_pD3DDevice->SetRenderState(D3DRS_SCISSORTESTENABLE, FALSE);
 }
 
 void CRenderSystemDX::Register(ID3DResource *resource)
