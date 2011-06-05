@@ -16,5 +16,5 @@ export HOST=i686-cm-linux
 export BUILD=i686-linux
 export CXXCPP=${CXX} -E
 export PKG_CONFIG_LIBDIR=${PREFIX}/lib/pkgconfig:${SDKSTAGE}/lib/pkgconfig:${SDKSTAGE}/usr/lib/pkgconfig
-export TARGETFS=${SDKSTAGE}/targetfs
+export TARGETFS=${BUILDROOT}/project_build_i686/IntelCE/root/
 export PATH:=${PREFIX}/bin:${TOOLCHAIN}:$(PATH)

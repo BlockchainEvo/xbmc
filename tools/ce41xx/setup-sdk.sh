@@ -25,6 +25,7 @@ echo "SDKSTAGE=$SDKSTAGE"                                              >  $SCRIP
 echo "XBMCPREFIX=$XBMCPREFIX"                                          >> $SCRIPT_PATH/Makefile.include
 echo "TARGETFS=$TARGETFS"                                              >> $SCRIPT_PATH/Makefile.include
 echo "TOOLCHAIN=$TOOLCHAIN"                                            >> $SCRIPT_PATH/Makefile.include
+echo "BUILDROOT=$BUILDROOT"                                            >> $SCRIPT_PATH/Makefile.include
 echo "BASE_URL=http://mirrors.xbmc.org/build-deps/darwin-libs"         >> $SCRIPT_PATH/Makefile.include
 echo "TARBALLS_LOCATION=$TARBALLS"                                     >> $SCRIPT_PATH/Makefile.include
 echo "RETRIEVE_TOOL=/usr/bin/curl"                                     >> $SCRIPT_PATH/Makefile.include

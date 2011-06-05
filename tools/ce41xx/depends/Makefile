@@ -13,6 +13,8 @@ SUBDIRS = \
 	libsdl libsdl_mixer libsdl_image \
 	samba dbus python26 mysqlclient boost xbmc \
 
+IMAGENAME = xbmc-selectv
+
 .PHONY: $(BUILDTOOLS) $(SUBDIRS)
 
 all: $(BUILDTOOLS) $(SUBDIRS)
@@ -31,3 +33,10 @@ distclean::
 	for d in $(BUILDTOOLS); do $(MAKE) -C $$d distclean; done
 	for d in $(SUBDIRS); do $(MAKE) -C $$d distclean; done
 	rm -rf $(XBMCPREFIX)
+
+image:
+	make -C $(BUILDROOT) tarroot IMAGE=$(CURDIR)/$(IMAGENAME) TAR_COMPRESSOR=
+	echo "S111xbmc S110rc.local" | cat $(TARGETFS)/etc/init.d/rc.deps - > $(CURDIR)/packaging/etc/init.d/rc.deps
+	cd packaging; tar -uf $(CURDIR)/$(IMAGENAME).tar *
+	tar -uf $(CURDIR)/$(IMAGENAME).tar $(XBMCPREFIX) 
+	gzip $(IMAGENAME).tar
