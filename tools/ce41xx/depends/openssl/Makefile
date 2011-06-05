@@ -3,7 +3,7 @@ include ../intel-sdk.mk
 
 # lib name, version
 LIBNAME=openssl
-VERSION=0.9.8r
+VERSION=1.0.0a
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
 
