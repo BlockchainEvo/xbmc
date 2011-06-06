@@ -13,7 +13,7 @@ SUBDIRS = \
 	libsdl libsdl_mixer libsdl_image \
 	samba dbus python26 mysqlclient boost xbmc \
 
-IMAGENAME = xbmc-selectv
+IMAGENAME = xbmc-selectv-`date +'%y%m%d'`
 
 .PHONY: $(BUILDTOOLS) $(SUBDIRS)
 
