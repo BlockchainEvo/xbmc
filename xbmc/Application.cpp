@@ -167,6 +167,7 @@
 #include "windows/GUIWindowLoginScreen.h"
 #include "addons/GUIWindowAddonBrowser.h"
 #include "music/windows/GUIWindowVisualisation.h"
+#include "windows/GUIWindowPointer.h"
 #include "windows/GUIWindowSystemInfo.h"
 #include "windows/GUIWindowScreensaver.h"
 #include "pictures/GUIWindowSlideShow.h"
@@ -1055,6 +1056,7 @@ bool CApplication::Initialize()
   g_windowManager.Add(new CGUIWindowLoginScreen);            // window id = 29
   g_windowManager.Add(new CGUIWindowSettingsProfile);          // window id = 34
   g_windowManager.Add(new CGUIWindowAddonBrowser);          // window id = 40
+  g_windowManager.Add(new CGUIWindowPointer);            // window id = 99
   g_windowManager.Add(new CGUIDialogYesNo);              // window id = 100
   g_windowManager.Add(new CGUIDialogProgress);           // window id = 101
   g_windowManager.Add(new CGUIDialogKeyboard);           // window id = 103
@@ -1647,7 +1649,6 @@ void CApplication::LoadSkin(const SkinPtr& skin)
   CLog::Log(LOGDEBUG,"Load Skin XML: %.2fms", 1000.f * (end - start) / freq);
 
   CLog::Log(LOGINFO, "  initialize new skin...");
-  m_guiPointer.AllocResources(true);
   m_guiDialogVolumeBar.AllocResources(true);
   m_guiDialogSeekBar.AllocResources(true);
   m_guiDialogKaiToast.AllocResources(true);
@@ -1703,9 +1704,6 @@ void CApplication::UnloadSkin(bool forReload /* = false */)
 
   //These windows are not handled by the windowmanager (why not?) so we should unload them manually
   CGUIMessage msg(GUI_MSG_WINDOW_DEINIT, 0, 0);
-  m_guiPointer.OnMessage(msg);
-  m_guiPointer.ResetControlStates();
-  m_guiPointer.FreeResources(true);
   m_guiDialogMuteBug.OnMessage(msg);
   m_guiDialogMuteBug.ResetControlStates();
   m_guiDialogMuteBug.FreeResources(true);
@@ -1861,10 +1859,6 @@ void CApplication::RenderNoPresent()
     }
   }
 
-  // Render the mouse pointer
-  if (g_Mouse.IsActive())
-    m_guiPointer.Render();
-
   // reset image scaling and effect states
   g_graphicsContext.SetRenderingResolution(g_graphicsContext.GetResInfo(), false);
 
@@ -1914,7 +1908,9 @@ void CApplication::RenderScreenSaver()
   if (draw)
   {
     color_t color = ((color_t)(screenSaverFadeAmount * amount * 2.55f) & 0xff) << 24;
-    CGUITexture::DrawQuad(CRect(0, 0, (float)g_graphicsContext.GetWidth(), (float)g_graphicsContext.GetHeight()), color);
+    CRect rect(0, 0, (float)g_graphicsContext.GetWidth(), (float)g_graphicsContext.GetHeight());
+    g_windowManager.MarkDirty(rect);
+    CGUITexture::DrawQuad(rect, color);
   }
 }
 
@@ -2408,7 +2404,9 @@ bool CApplication::OnAction(const CAction &action)
   if (action.IsMouse())
   {
     g_Mouse.SetActive(true);
-    m_guiPointer.SetPosition(action.GetAmount(0), action.GetAmount(1));
+    CGUIWindowPointer *mouse = (CGUIWindowPointer *)g_windowManager.GetWindow(WINDOW_DIALOG_POINTER);
+    if (mouse)
+      mouse->SetPosition(action.GetAmount(0), action.GetAmount(1));
   }
 
   // The action PLAYPAUSE behaves as ACTION_PAUSE if we are currently
@@ -2767,17 +2765,9 @@ void CApplication::FrameMove()
   ProcessGamepad(frameTime);
   ProcessEventServer(frameTime);
 
-  // Process events and animate controls before rendering
+  // Process events and animate controls
   if (!m_bStop)
-  {
-    unsigned int currentTime = CTimeUtils::GetFrameTime();
-    g_windowManager.Process(currentTime);
-    if (g_Mouse.IsActive())
-    {
-      CDirtyRegionList dirtyregions;
-      m_guiPointer.DoProcess(currentTime, dirtyregions);
-    }
-  }
+    g_windowManager.Process(CTimeUtils::GetFrameTime());
   g_windowManager.FrameMove();
 }
 
