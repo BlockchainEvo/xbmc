@@ -185,6 +185,9 @@ int CLinuxRendererGLES::NextYV12Texture()
 
 int CLinuxRendererGLES::GetImage(YV12Image *image, int source, bool readonly)
 {
+  if (m_renderMethod & RENDER_BYPASS)
+    return 0;
+
   if (!image) return -1;
   if (!m_bValidated) return -1;
 
@@ -370,6 +373,9 @@ void CLinuxRendererGLES::LoadPlane( YUVPLANE& plane, int type, unsigned flipinde
 
 void CLinuxRendererGLES::Reset()
 {
+  if (m_renderMethod & RENDER_BYPASS)
+    return;
+
   for(int i=0; i<m_NumYV12Buffers; i++)
   {
     /* reset all image flags, this will cleanup textures later */
@@ -382,6 +388,10 @@ void CLinuxRendererGLES::Reset()
 void CLinuxRendererGLES::Update(bool bPauseDrawing)
 {
   if (!m_bConfigured) return;
+
+  if (m_renderMethod & RENDER_BYPASS)
+    return;
+
   ManageDisplay();
   ManageTextures();
 }
@@ -389,6 +399,9 @@ void CLinuxRendererGLES::Update(bool bPauseDrawing)
 void CLinuxRendererGLES::RenderUpdate(bool clear, DWORD flags, DWORD alpha)
 {
   if (!m_bConfigured) return;
+
+  if (m_renderMethod & RENDER_BYPASS)
+    return;
 
   // if its first pass, just init textures and return
   if (ValidateRenderTarget())
@@ -463,6 +476,9 @@ void CLinuxRendererGLES::RenderUpdate(bool clear, DWORD flags, DWORD alpha)
 
 void CLinuxRendererGLES::FlipPage(int source)
 {
+  if (m_renderMethod & RENDER_BYPASS)
+    return;
+
   if( source >= 0 && source < m_NumYV12Buffers )
     m_iYV12RenderBuffer = source;
   else
@@ -638,6 +654,12 @@ void CLinuxRendererGLES::LoadShaders(int field)
         m_renderMethod = RENDER_OMXEGL;
         break;
       }
+      else if (CONF_FLAGS_FORMAT_MASK(m_iFlags) == CONF_FLAGS_FORMAT_BYPASS)
+      {
+        CLog::Log(LOGNOTICE, "GL: Using BYPASS render method");
+        m_renderMethod = RENDER_BYPASS;
+        break;
+      }
       else if (CONF_FLAGS_FORMAT_MASK(m_iFlags) == CONF_FLAGS_FORMAT_CVBREF)
       {
         CLog::Log(LOGNOTICE, "GL: Using CoreVideoRef RGBA render method");
@@ -700,6 +722,12 @@ void CLinuxRendererGLES::LoadShaders(int field)
     m_textureCreate = &CLinuxRendererGLES::CreateCVRefTexture;
     m_textureDelete = &CLinuxRendererGLES::DeleteCVRefTexture;
   }
+  else if (CONF_FLAGS_FORMAT_MASK(m_iFlags) == CONF_FLAGS_FORMAT_BYPASS)
+  {
+    m_textureUpload = &CLinuxRendererGLES::UploadBYPASSTexture;
+    m_textureCreate = &CLinuxRendererGLES::CreateBYPASSTexture;
+    m_textureDelete = &CLinuxRendererGLES::DeleteBYPASSTexture;
+  }
   else
   {
     // default to YV12 texture handlers
@@ -739,6 +767,10 @@ void CLinuxRendererGLES::UnInit()
 
 void CLinuxRendererGLES::Render(DWORD flags, int index)
 {
+  // If rendered directly by the hardware
+  if (m_renderMethod & RENDER_BYPASS)
+    return;
+
   // obtain current field, if interlaced
   if( flags & RENDER_FLAG_TOP)
     m_currentField = FIELD_TOP;
@@ -1745,6 +1777,22 @@ bool CLinuxRendererGLES::CreateCVRefTexture(int index)
 
   SetEvent(m_eventTexturesDone[index]);
 #endif
+  return true;
+}
+
+//********************************************************************************************************
+// BYPASS creation, deletion, copying + clearing
+//********************************************************************************************************
+void CLinuxRendererGLES::UploadBYPASSTexture(int index)
+{
+  SetEvent(m_eventTexturesDone[index]);
+}
+void CLinuxRendererGLES::DeleteBYPASSTexture(int index)
+{
+}
+bool CLinuxRendererGLES::CreateBYPASSTexture(int index)
+{
+  SetEvent(m_eventTexturesDone[index]);
   return true;
 }
 
