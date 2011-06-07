@@ -24,6 +24,9 @@
 #include "cores/IPlayer.h"
 #include "PlayerCoreFactory.h"
 #include "cores/dvdplayer/DVDPlayer.h"
+#if defined (HAVE_LIBGSTREAMER)
+#include "cores/gstplayer/GSTPlayer.h"
+#endif
 #include "cores/paplayer/PAPlayer.h"
 #include "cores/ExternalPlayer/ExternalPlayer.h"
 #include "utils/log.h"
@@ -71,9 +74,16 @@ public:
     switch(m_eCore)
     {
       case EPC_MPLAYER:
-      case EPC_DVDPLAYER: pPlayer = new CDVDPlayer(callback); break;
-      case EPC_PAPLAYER: pPlayer = new PAPlayer(callback); break;
-      case EPC_EXTPLAYER: pPlayer = new CExternalPlayer(callback); break;
+#if defined (HAVE_LIBGSTREAMER)
+      case EPC_DVDPLAYER: pPlayer = new CGSTPlayer(callback);       break;
+#else
+      case EPC_DVDPLAYER: pPlayer = new CDVDPlayer(callback);       break;
+#endif
+      case EPC_PAPLAYER:  pPlayer = new PAPlayer(callback);         break;
+      case EPC_EXTPLAYER: pPlayer = new CExternalPlayer(callback);  break;
+#if defined (HAVE_LIBGSTREAMER)
+      case EPC_GSTPLAYER: pPlayer = new CGSTPlayer(callback);       break;
+#endif
       default: return NULL;
     }
 

@@ -240,6 +240,9 @@ int CLinuxRendererGLES::GetImage(YV12Image *image, int source, bool readonly)
 
 void CLinuxRendererGLES::ReleaseImage(int source, bool preserve)
 {
+  if (m_renderMethod & RENDER_BYPASS)
+    return;
+
   YV12Image &im = m_buffers[source].image;
 
   if( im.flags & IMAGE_FLAG_WRITING )
@@ -325,13 +328,13 @@ void CLinuxRendererGLES::LoadPlane( YUVPLANE& plane, int type, unsigned flipinde
   char *pixelVector = NULL;
 
   // OpenGL ES does not support strided texture input. Make a copy without stride
-  if(stride != width)
+  if(stride != (int)width)
   {
     pixelVector = (char *)malloc(width * height * width);
     
     const char *src = (const char *)data;
     char *dst = pixelVector;
-    for (int y = 0;y < height;++y)
+    for (int y = 0;y < (int)height;++y)
     {
       memcpy(dst, src, width);
       src += stride;
@@ -473,6 +476,9 @@ void CLinuxRendererGLES::FlipPage(int source)
 
 unsigned int CLinuxRendererGLES::DrawSlice(unsigned char *src[], int stride[], int w, int h, int x, int y)
 {
+  if (m_renderMethod & RENDER_BYPASS)
+    return 0;
+
   BYTE *s;
   BYTE *d;
   int i, p;

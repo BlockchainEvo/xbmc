@@ -514,6 +514,7 @@ lib/cmyth/Makefile
 /xbmc/cores/VideoRenderers/Makefile
 
 /xbmc/cores/dvdplayer/Makefile
+/xbmc/cores/gstplayer/Makefile
 
 # /lib/ffmpeg/
 /lib/ffmpeg/config.h
