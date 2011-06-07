@@ -225,7 +225,6 @@ TODO need gts version check for >= ??
     case GST_MESSAGE_STEP_START:
       printf("GStreamer: Message STEP_START\n");
       break;
-*/
 /*
 TODO need gts version check for >= 0.10.29
       0.10.29

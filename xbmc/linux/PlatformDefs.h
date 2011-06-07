@@ -134,8 +134,12 @@
 #endif
 
 #define CONST   const
+#ifndef	FALSE
 #define FALSE   0
+#endif
+#ifndef	TRUE
 #define TRUE    1
+#endif
 
 #define _fdopen fdopen
 #define _vsnprintf vsnprintf
@@ -148,7 +152,7 @@
 #define ZeroMemory(dst,size) memset(dst, 0, size)
 
 #define VOID    void
-#define byte    unsigned char
+typedef unsigned char byte;
 #define __int8    char
 #define __int16   short
 #define __int32   int
