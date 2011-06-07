@@ -422,6 +422,12 @@ bool CGUIControl::OnMessage(CGUIMessage& message)
       return true;
     }
   }
+  if (message.GetMessage() == GUI_MSG_NOTIFY_ALL && message.GetParam1() == GUI_MSG_WINDOW_RESIZE)
+  {
+    // invalidate controls to get them to recalculate sizing information
+    SetInvalid();
+    return true;
+  }
   return false;
 }
 

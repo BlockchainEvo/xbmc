@@ -646,16 +646,6 @@ void CGUIControlGroup::GetContainers(vector<CGUIControl *> &containers) const
   }
 }
 
-void CGUIControlGroup::SetInvalid()
-{
-  if (!m_bInvalidated)
-  {
-    for (iControls it = m_children.begin(); it != m_children.end(); ++it)
-      (*it)->SetInvalid();
-    CGUIControl::SetInvalid();
-  }
-}
-
 #ifdef _DEBUG
 void CGUIControlGroup::DumpTextureUse()
 {
