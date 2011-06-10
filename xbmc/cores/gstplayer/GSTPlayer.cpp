@@ -217,21 +217,19 @@ gboolean CGSTPlayerBusCallback(GstBus *bus, GstMessage *msg, gpointer data)
     case GST_MESSAGE_ASYNC_DONE:
       printf("GStreamer: Message ASYNC_DONE\n");
       break;
-/*
-TODO need gts version check for >= ??
+#if (GST_VERSION_MICRO >= 26)
     case GST_MESSAGE_REQUEST_STATE:
       printf("GStreamer: Message REQUEST_STATE\n");
       break;
     case GST_MESSAGE_STEP_START:
       printf("GStreamer: Message STEP_START\n");
       break;
-/*
-TODO need gts version check for >= 0.10.29
-      0.10.29
+#endif
+#if (GST_VERSION_MICRO >= 29)
     case GST_MESSAGE_QOS:
       printf("GStreamer: Message QOS\n");
       break;
-*/
+#endif
     default:
       printf("GStreamer: Unknown message %i\n", GST_MESSAGE_TYPE(msg));
       break;
@@ -339,6 +337,7 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
       m_url = "file://";
       m_url.append(m_item.m_strPath.c_str());
     }
+    CLog::Log(LOGNOTICE, "CGSTPlayer: Opening: URL=%s", m_url.c_str());
     if (!gst_uri_is_valid(m_url.c_str()))
       return false;
 
