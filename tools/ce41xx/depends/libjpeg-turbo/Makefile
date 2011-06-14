@@ -30,8 +30,8 @@ $(LIBDYLIB): $(SOURCE)
 	make -j $(JOBS) -C $(SOURCE)
 
 .installed:
-	#make -C $(SOURCE) install
-	#touch $@
+	make -C $(SOURCE) install
+	touch $@
 
 clean:
 	make -C $(SOURCE) clean
