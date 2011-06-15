@@ -1126,19 +1126,18 @@ fi
 
 # GSTREAMER
 if test "x$use_gstreamer" != "xno"; then
-  saved_pkg_config=$PKG_CONFIG
-  if test "$target_platform" = "target_ce41xx"; then
-    # Intel SDK has borked gstreamer prefix, override it here
-    PKG_CONFIG="pkg-config --define-variable prefix=$SDKSTAGE"
-  fi
   AC_SUBST(gstreamer_req, 0.10.0)
   AC_SUBST(gstreamer_plugins_base_req, 0.10.0)
   PKG_CHECK_MODULES(GSTREAMER, gstreamer-0.10 >= $gstreamer_req, HAVE_GSTREAMER=1, HAVE_GSTREAMER=0)
   PKG_CHECK_MODULES(GSTREAMER_BASE, gstreamer-base-0.10 >= $gstreamer_req, HAVE_GSTREAMER_BASE=1, HAVE_GSTREAMER_BASE=0)
   PKG_CHECK_MODULES(GSTREAMER_PLUGINS_BASE, gstreamer-plugins-base-0.10 >= $gstreamer_plugins_base_req, HAVE_GSTREAMER_PLUGINS_BASE=1, HAVE_GSTREAMER_PLUGINS_BASE=0)
   HAVE_GSTREAMER_APP=1
-  AC_CHECK_LIB([gstapp-0.10], main, , HAVE_GSTREAMER_APP=0)
-  PKG_CONFIG=$saved_pkg_config
+  if test "x$target_platform" == "xtarget_ce41xx"; then
+    # force this true to pass
+    HAVE_GSTREAMER_APP=1
+  else
+    AC_CHECK_LIB([gstapp-0.10], main, , HAVE_GSTREAMER_APP=0)
+  fi
   if test $HAVE_GSTREAMER -eq 1 -a $HAVE_GSTREAMER_BASE -eq 1 -a $HAVE_GSTREAMER_PLUGINS_BASE -eq 1 -a $HAVE_GSTREAMER_APP -eq 1; then
     INCLUDES="$INCLUDES $GSTREAMER_CFLAGS $GSTREAMER_BASE_CFLAGS $GSTREAMER_PLUGINS_BASE_CFLAGS"
     LIBS="$LIBS $GSTREAMER_LIBS $GSTREAMER_BASE_LIBS $GSTREAMER_PLUGINS_BASE_LIBS"

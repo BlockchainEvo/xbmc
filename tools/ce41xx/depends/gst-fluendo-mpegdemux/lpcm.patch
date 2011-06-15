@@ -1,0 +1,14 @@
+Index: src/gstmpegdemux.c
+===================================================================
+--- src/gstmpegdemux.c	(revision 1657)
++++ src/gstmpegdemux.c	(working copy)
+@@ -1856,7 +1856,8 @@
+           /* Now, if it's a subpicture stream - no more, otherwise
+            * take the first byte too, since it's the frame count in audio
+            * streams and our backwards compat convention is to strip it off */
+-          if (stream_type != ST_PS_DVD_SUBPICTURE) {
++          if (stream_type != ST_PS_DVD_SUBPICTURE &&
++              stream_type != ST_PS_AUDIO_LPCM) { /* Intel CanMore LPCM patch */
+             /* Number of audio frames in this packet */
+             nframes = data[offset++];
+             datalen--;

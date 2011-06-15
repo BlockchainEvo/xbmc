@@ -10,6 +10,10 @@ SUBDIRS = \
 	libogg libvorbis libflac libmad fribidi libwavpack libmpeg2 \
 	enca libass libcdio libsamplerate \
 	libmicrohttpd libmodplug librtmp libxml2 libbluray \
+	liboil libxml2 glib-2.0 gstreamer \
+	gstreamer-plugins-base gstreamer-plugins-good \
+	gstreamer-plugins-bad gstreamer-plugin-ugly \
+	gst-fluendo-gdlsink gst-fluendo-mpegdemux gst-fluendo-gdlsink \
 	samba dbus python26 mysqlclient boost xbmc \
 
 IMAGENAME = xbmc-selectv-`date +'%y%m%d'`
