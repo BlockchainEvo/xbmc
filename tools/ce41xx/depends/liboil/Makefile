@@ -11,7 +11,7 @@ BASE_URL=http://liboil.freedesktop.org/download
 
 # configuration settings
 export PKG_CONFIG=pkg-config --define-variable prefix=$(SDKSTAGE)
-CONFIGURE=./configure --prefix=$(PREFIX)
+CONFIGURE=./configure --prefix=$(PREFIX) --host=$(HOST)
 
 LIBDYLIB=$(SOURCE)/.libs/liboil-0.3.dylib
 
