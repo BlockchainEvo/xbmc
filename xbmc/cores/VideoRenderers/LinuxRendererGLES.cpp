@@ -175,6 +175,7 @@ bool CLinuxRendererGLES::Configure(unsigned int width, unsigned int height, unsi
     m_buffers[i].image.flags = 0;
 
   m_iLastRenderBuffer = -1;
+  m_BYPASS_RenderUpdated = false;
   return true;
 }
 
@@ -373,9 +374,6 @@ void CLinuxRendererGLES::LoadPlane( YUVPLANE& plane, int type, unsigned flipinde
 
 void CLinuxRendererGLES::Reset()
 {
-  if (m_renderMethod & RENDER_BYPASS)
-    return;
-
   for(int i=0; i<m_NumYV12Buffers; i++)
   {
     /* reset all image flags, this will cleanup textures later */
@@ -389,9 +387,6 @@ void CLinuxRendererGLES::Update(bool bPauseDrawing)
 {
   if (!m_bConfigured) return;
 
-  if (m_renderMethod & RENDER_BYPASS)
-    return;
-
   ManageDisplay();
   ManageTextures();
 }
@@ -400,12 +395,22 @@ void CLinuxRendererGLES::RenderUpdate(bool clear, DWORD flags, DWORD alpha)
 {
   if (!m_bConfigured) return;
 
-  if (m_renderMethod & RENDER_BYPASS)
-    return;
-
   // if its first pass, just init textures and return
   if (ValidateRenderTarget())
     return;
+
+  if (m_renderMethod & RENDER_BYPASS)
+  {
+    //if (!m_BYPASS_RenderUpdated)
+    {
+      g_graphicsContext.BeginPaint();
+      g_graphicsContext.Clear();
+      g_graphicsContext.EndPaint();
+      glFinish();
+    }
+    m_BYPASS_RenderUpdated = true;
+    return;
+  }
 
   // this needs to be checked after texture validation
   if (!m_bImageReady) return;
@@ -476,9 +481,6 @@ void CLinuxRendererGLES::RenderUpdate(bool clear, DWORD flags, DWORD alpha)
 
 void CLinuxRendererGLES::FlipPage(int source)
 {
-  if (m_renderMethod & RENDER_BYPASS)
-    return;
-
   if( source >= 0 && source < m_NumYV12Buffers )
     m_iYV12RenderBuffer = source;
   else
