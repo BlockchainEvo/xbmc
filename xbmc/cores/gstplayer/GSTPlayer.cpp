@@ -369,6 +369,7 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
     GstBus *bus = gst_pipeline_get_bus(GST_PIPELINE(m_gstvars->player));
     gst_bus_add_watch(bus, (GstBusFunc)CGSTPlayerBusCallback, this);
     gst_object_unref(bus);
+    
     // create video sink
     m_gstvars->videosink = gst_element_factory_make(m_videosink.c_str(), NULL);
     if (m_gstvars->videosink)
@@ -392,6 +393,7 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
       }
     }
     g_object_set(m_gstvars->player, "video-sink", m_gstvars->videosink, NULL);
+    
     // create audio sink
     m_gstvars->audiosink = gst_element_factory_make(m_audiosink.c_str(), NULL);
     if (m_gstvars->audiosink)
