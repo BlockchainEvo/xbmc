@@ -13,7 +13,7 @@ SUBDIRS = \
 	liboil libxml2 glib-2.0 gstreamer \
 	gstreamer-plugins-base gstreamer-plugins-good \
 	gstreamer-plugins-bad gstreamer-plugin-ugly \
-	gst-fluendo-gdlsink gst-fluendo-mpegdemux gst-fluendo-gdlsink \
+	gst-fluendo-gdlsink gst-fluendo-mpegdemux gst-fluendo-ismd \
 	samba dbus python26 mysqlclient boost xbmc \
 
 IMAGENAME = xbmc-selectv-`date +'%y%m%d'`
