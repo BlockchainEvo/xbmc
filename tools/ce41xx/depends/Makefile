@@ -39,7 +39,7 @@ distclean::
 
 image:
 	make -C $(BUILDROOT) tarroot IMAGE=$(CURDIR)/$(IMAGENAME) TAR_COMPRESSOR=
-	echo "S111xbmc S110rc.local" | cat $(TARGETFS)/etc/init.d/rc.deps - > $(CURDIR)/packaging/etc/init.d/rc.deps
+	echo "S111xbmc S102init_pic_uart" | cat $(TARGETFS)/etc/init.d/rc.deps - > $(CURDIR)/packaging/etc/init.d/rc.deps
 	cd packaging; tar -uf $(CURDIR)/$(IMAGENAME).tar *
 	tar -uf $(CURDIR)/$(IMAGENAME).tar $(XBMCPREFIX) 
 	gzip $(IMAGENAME).tar
