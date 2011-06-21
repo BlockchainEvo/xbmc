@@ -10,7 +10,7 @@ ARCHIVE=$(SOURCE).tar.gz
 BASE_URL=http://core.fluendo.com/gstreamer/src/gst-fluendo-gdlsink
 
 # configuration settings
-CONFIGURE=./configure --prefix=$(PREFIX) --host=$(HOST)
+CONFIGURE=./configure --prefix=$(PREFIX) --host=$(HOST) --with-gdl-path=${SDKSTAGE}
 
 LIBDYLIB=$(SOURCE)/src/.libs/libgstfluismd.so
 
