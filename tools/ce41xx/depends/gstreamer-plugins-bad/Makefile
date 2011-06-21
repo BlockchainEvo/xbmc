@@ -10,12 +10,11 @@ ARCHIVE=$(SOURCE).tar.gz
 BASE_URL=http://gstreamer.freedesktop.org/src/gst-plugins-bad
 
 # configuration settings
-export ALSA_CFLAGS=-I$(SDKSTAGE)/usr/include/alsa
-export ALSA_LIBS=-L$(SDKSTAGE)/usr/lib
 
 CONFIGURE=./autogen.sh --prefix=$(PREFIX) --host=$(HOST) \
  --disable-docbook  \
  --disable-gtk-doc  \
+ --disable-alsa
 
 LIBDYLIB=$(SOURCE)/ext/assrender/.libs/libgstassrender.so
 

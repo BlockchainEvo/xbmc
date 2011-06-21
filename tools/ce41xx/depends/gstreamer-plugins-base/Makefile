@@ -10,8 +10,6 @@ ARCHIVE=$(SOURCE).tar.gz
 BASE_URL=http://gstreamer.freedesktop.org/src/gst-plugins-base
 
 # configuration settings
-export ALSA_CFLAGS=-I$(SDKSTAGE)/usr/include/alsa
-export ALSA_LIBS=-L$(SDKSTAGE)/usr/lib
 CONFIGURE=./autogen.sh --prefix=$(PREFIX) --host=$(HOST) \
   --disable-docbook  \
   --disable-gtk-doc  \
@@ -21,7 +19,8 @@ CONFIGURE=./autogen.sh --prefix=$(PREFIX) --host=$(HOST) \
   --disable-xshm \
   --disable-examples \
   --disable-gnome_vfs \
-  --disable-cdparanoia
+  --disable-cdparanoia \
+  --disable-alsa
 
 LIBDYLIB=$(SOURCE)/gst-libs/gst/video/.libs/libgstvideo-0.10.dylib
 
