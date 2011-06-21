@@ -383,12 +383,14 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
       m_gstvars->videosink = gst_element_factory_make("autovideosink", NULL);
       if (m_gstvars->videosink)
       {
-        g_object_set(m_gstvars->videosink, "embed", true, NULL);
+        #if defined(__APPLE__)
         // When the NSView to be embedded is created an element #GstMessage with a
         //  name of 'have-ns-view' will be created and posted on the bus.
         //  The pointer to the NSView to embed will be in the 'nsview' field of that
         //  message. The application MUST handle this message and embed the view
         //  appropriately.
+        g_object_set(m_gstvars->videosink, "embed", true, NULL);
+        #endif
         g_object_set(m_gstvars->videosink, "message-forward", true, NULL);
       }
     }
@@ -409,7 +411,9 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
         g_object_set(m_gstvars->audiosink, "message-forward", true, NULL);
     }
     g_object_set(m_gstvars->player, "audio-sink", m_gstvars->audiosink, NULL);
-    //
+
+
+    // set the player url and change state to paused (from null)
     g_object_set(m_gstvars->player, "uri", m_url.c_str(), NULL);
     gst_element_set_state(m_gstvars->player, GST_STATE_PAUSED);
     m_gstvars->inited = true;
@@ -646,7 +650,7 @@ int CGSTPlayer::GetAudioStreamCount()
     gint audio_count = 0;
     g_object_get(m_gstvars->player, "n-audio", &audio_count, NULL);
     if (audio_count)
-      g_object_set(m_gstvars->player, "current-audio", audio_index, NULL);
+      g_object_get(m_gstvars->player, "current-audio", audio_index, NULL);
     m_audio_index = audio_index;
     m_audio_count = audio_count;
   }
@@ -679,7 +683,7 @@ int CGSTPlayer::GetSubtitleCount()
   {
     g_object_get(m_gstvars->player, "n-text", &m_subtitle_count, NULL);
     if (m_subtitle_count)
-      g_object_set(m_gstvars->player, "current-text", m_subtitle_index, NULL);
+      g_object_get(m_gstvars->player, "current-text", m_subtitle_index, NULL);
   }
 	return m_subtitle_count;
 }
@@ -816,7 +820,7 @@ __int64 CGSTPlayer::GetTime()
 
   if (m_gstvars->inited)
   {
-    gint64 elapsed_ns;
+    gint64 elapsed_ns = 0;
     GstFormat fmt = GST_FORMAT_TIME;
     if (gst_element_query_position(m_gstvars->player, &fmt, &elapsed_ns))
       m_elapsed_ms = elapsed_ns / GST_MSECOND;
@@ -894,10 +898,6 @@ int CGSTPlayer::GetPictureWidth()
   //CLog::Log(LOGDEBUG, "CGSTPlayer::GetPictureWidth");
   if (m_gstvars->inited)
   {
-    GstPad *videopad = NULL;
-    g_signal_emit_by_name(m_gstvars->player, "get-video-pad", 0, &videopad);
-
-
     GstPad *pad = gst_element_get_static_pad(m_gstvars->videosink, "src");
     GstCaps *caps = gst_pad_get_negotiated_caps(pad);
     if (caps)
