@@ -6,7 +6,9 @@ LIBNAME=a52dec
 VERSION=0.7.4
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
+
 BASE_URL=http://liba52.sourceforge.net/files/
+
 # configuration settings
 CONFIGURE=./configure --prefix=$(PREFIX) --host=$(HOST)
 
