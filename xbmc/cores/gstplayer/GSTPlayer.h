@@ -135,7 +135,11 @@ protected:
   virtual void  OnStartup();
   virtual void  OnExit();
   virtual void  Process();
-  
+
+  bool          WaitForGSTPaused( int timeout_ms);
+  bool          WaitForGSTPlaying(int timeout_ms);
+  bool          WaitForWindowFullScreenVideo(int timeout_ms);
+
 private:
   int                     m_speed;
   bool                    m_paused;
@@ -168,7 +172,6 @@ private:
   int                     m_video_width;
   int                     m_video_height;
   
-  std::string             m_url;
   INT_GST_VARS            *m_gstvars;
   CCriticalSection        m_gst_csection;
   CStdString              m_audiosink;

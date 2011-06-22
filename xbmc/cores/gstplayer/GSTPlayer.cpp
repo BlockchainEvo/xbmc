@@ -26,6 +26,7 @@
 #include "Application.h"
 #include "FileItem.h"
 #include "cores/VideoRenderers/RenderManager.h"
+#include "filesystem/File.h"
 #include "filesystem/SpecialProtocol.h"
 #include "guilib/GUIWindowManager.h"
 #include "settings/AdvancedSettings.h"
@@ -50,6 +51,11 @@ struct INT_GST_VARS
   GstElement  *audiosink;
   bool        video_uses_ismd;
   bool        audio_uses_ismd;
+  
+  std::string url;
+  bool        use_appsrc;
+  GstElement  *appsrc;
+  XFILE::CFile *cfile;
 };
 
 void stream_foreach(gpointer data, gpointer user_data)
@@ -79,9 +85,7 @@ gboolean CGSTPlayerBusCallback(GstBus *bus, GstMessage *msg, gpointer data)
   CGSTPlayer    *player  = (CGSTPlayer*)data;
   INT_GST_VARS  *gstvars = player->GetGSTVars();
   gchar  *str     = NULL;
-  GError *info    = NULL;
   GError *error   = NULL;
-  GError *warning = NULL;
 
   switch (GST_MESSAGE_TYPE(msg))
   {
@@ -103,65 +107,81 @@ gboolean CGSTPlayerBusCallback(GstBus *bus, GstMessage *msg, gpointer data)
       break;
 
     case GST_MESSAGE_WARNING:
-      gst_message_parse_error(msg, &warning, &str);
+      gst_message_parse_warning(msg, &error, &str);
       g_free(str);
-      if (warning)
+      if (error)
       {
-        g_printerr("GStreamer: Warning - %s %s\n", str, warning->message);
-        g_error_free(warning);
+        g_printerr("GStreamer: Warning - %s %s\n", str, error->message);
+        g_error_free(error);
       }
       break;
 
     case GST_MESSAGE_INFO:
-      gst_message_parse_error(msg, &info, &str);
+      gst_message_parse_info(msg, &error, &str);
       g_free(str);
-      if (info)
+      if (error)
       {
-        g_printerr("GStreamer: Info - %s %s\n", str, info->message);
-        g_error_free(info);
+        g_printerr("GStreamer: Info - %s %s\n", str, error->message);
+        g_error_free(error);
       }
       break;
 
     case GST_MESSAGE_TAG:
-      printf("GStreamer: Message TAG\n");
+      {
+        //printf("GStreamer: Message TAG\n");
+        GstTagList *tag_list;
+        gchar *title;
+
+        gst_message_parse_tag(msg, &tag_list);
+        //gst_tag_list_foreach(tag_list, tag_list_hook, data);
+        //gst_tag_list_free(tag_list);
+
+        if (gst_tag_list_get_string(tag_list, GST_TAG_TITLE, &title))
+          g_print("GStreamer: Tag: %s\n", title);
+        // message (prepare-gdl-plane) to let the application configure the GDL plane
+      }
       break;
     case GST_MESSAGE_BUFFERING:
-      printf("GStreamer: Message BUFFERING\n");
+      //printf("GStreamer: Message BUFFERING\n");
       break;
     case GST_MESSAGE_STATE_CHANGED:
-      printf("GStreamer: Message STATE_CHANGED\n");
-      GstState old_state, new_state;
-
-      gst_message_parse_state_changed(msg, &old_state, &new_state, NULL);
-      printf("GStreamer: Element %s changed state from %s to %s.\n",
-          GST_OBJECT_NAME (msg->src),
-          gst_element_state_get_name(old_state),
-          gst_element_state_get_name(new_state));
-      /*
-      if (old_state == GST_STATE_READY && new_state == GST_STATE_PAUSED)
+      //printf("GStreamer: Message STATE_CHANGED\n");
+      // Ignore state changes from internal elements
+      if (GST_MESSAGE_SRC(msg) == reinterpret_cast<GstObject*>(gstvars->player))
       {
-        // Get stream info
-        GList *streaminfo = NULL;
-        g_object_get(gstvars->player, "stream-info", &streaminfo, NULL);
-        g_list_foreach(streaminfo, stream_foreach, NULL);
-        g_list_free(streaminfo);
+        GstState old_state, new_state;
 
-        GstPad* pad = gst_element_get_static_pad(gstvars->videosink, "sink");
-
-        gint width, height;
-        gst_video_get_size(pad, &width, &height);
-
-        const GValue *framerate;
-        framerate = gst_video_frame_rate(pad);
-        if (framerate && GST_VALUE_HOLDS_FRACTION(framerate))
+        gst_message_parse_state_changed(msg, &old_state, &new_state, NULL);
+        printf("GStreamer: Element %s changed state from %s to %s.\n",
+            GST_OBJECT_NAME (msg->src),
+            gst_element_state_get_name(old_state),
+            gst_element_state_get_name(new_state));
+        /*
+        if (old_state == GST_STATE_READY && new_state == GST_STATE_PAUSED)
         {
-          int fps_n = gst_value_get_fraction_numerator(framerate);
-          int fps_d = gst_value_get_fraction_denominator(framerate);
-          float fFramerate = (float)fps_n/(float)fps_d;
+          // Get stream info
+          GList *streaminfo = NULL;
+          g_object_get(gstvars->player, "stream-info", &streaminfo, NULL);
+          g_list_foreach(streaminfo, stream_foreach, NULL);
+          g_list_free(streaminfo);
+
+          GstPad* pad = gst_element_get_static_pad(gstvars->videosink, "sink");
+
+          gint width, height;
+          gst_video_get_size(pad, &width, &height);
+
+          const GValue *framerate;
+          framerate = gst_video_frame_rate(pad);
+          if (framerate && GST_VALUE_HOLDS_FRACTION(framerate))
+          {
+            int fps_n = gst_value_get_fraction_numerator(framerate);
+            int fps_d = gst_value_get_fraction_denominator(framerate);
+            float fFramerate = (float)fps_n/(float)fps_d;
+          }
+          gst_object_unref(GST_OBJECT(pad));
         }
-        gst_object_unref(GST_OBJECT(pad));
+        */
       }
-      */
      break;
     case GST_MESSAGE_STATE_DIRTY:
       printf("GStreamer: Message STATE_DIRTY\n");
@@ -182,12 +202,13 @@ gboolean CGSTPlayerBusCallback(GstBus *bus, GstMessage *msg, gpointer data)
       printf("GStreamer: Message STRUCTURE_CHANGE\n");
       break;
     case GST_MESSAGE_STREAM_STATUS:
-      printf("GStreamer: Message STREAM_STATUS\n");
+      //printf("GStreamer: Message STREAM_STATUS\n");
       break;
     case GST_MESSAGE_APPLICATION:
       printf("GStreamer: Message APPLICATION\n");
       break;
     case GST_MESSAGE_ELEMENT:
+      g_print("GStreamer: Element %s\n", gst_structure_get_name(msg->structure));
       if (gst_structure_has_name(msg->structure, "have-ns-view"))
       {
         //NSView *nsview = NULL;
@@ -197,7 +218,6 @@ gboolean CGSTPlayerBusCallback(GstBus *bus, GstMessage *msg, gpointer data)
         // object is an NSView
         return GST_BUS_PASS;
       }
-      printf("GStreamer: Message ELEMENT\n");
       break;
     case GST_MESSAGE_SEGMENT_START:
       printf("GStreamer: Message SEGMENT_START\n");
@@ -237,6 +257,84 @@ gboolean CGSTPlayerBusCallback(GstBus *bus, GstMessage *msg, gpointer data)
 
   return true;
 }
+
+static void CGSTPlayerFeedData(GstElement *appsrc, guint size, CGSTPlayer *ctx)
+{
+  // This push method is called by the need-data signal callback,
+  //  we feed data into the appsrc with an arbitrary size.
+  INT_GST_VARS  *gstvars = ctx->GetGSTVars();
+  unsigned int  readSize;
+  GstBuffer     *buffer;
+  GstFlowReturn ret;
+
+  buffer   = gst_buffer_new_and_alloc(size);
+  readSize = gstvars->cfile->Read(buffer->data, size);
+  if (readSize > 0)
+  {
+    GST_BUFFER_SIZE(buffer) = readSize;
+
+    g_signal_emit_by_name(gstvars->appsrc, "push-buffer", buffer, &ret);
+		// this takes ownership of the buffer; don't unref
+		//gst_app_src_push_buffer(appsrc, buffer);
+  }
+  else
+  {
+    // we are EOS, send end-of-stream
+    g_signal_emit_by_name(gstvars->appsrc, "end-of-stream", &ret);
+    //gst_app_src_end_of_stream(appsrc);
+  }
+  gst_buffer_unref(buffer);
+
+  return;
+}
+
+static gboolean CGSTPlayerSeekData(GstElement *appsrc, guint64 position, CGSTPlayer *ctx)
+{
+  // called when appsrc wants us to return data from a new position
+  // with the next call to push-buffer (FeedData).
+  position = ctx->GetGSTVars()->cfile->Seek(position, SEEK_SET);
+  if (position >= 0)
+    return TRUE;
+  else
+    return FALSE;
+}
+
+static void CGSTPlayerFoundSource(GObject *object, GObject *orig, GParamSpec *pspec, CGSTPlayer *ctx)
+{
+  INT_GST_VARS  *gstvars = ctx->GetGSTVars();
+  // called when playbin2 has constructed a source object to read
+  //  from. Since we provided the appsrc:// uri to playbin2, 
+  //  this will be the appsrc that we must handle. 
+  // we set up some signals to push data into appsrc and one to perform a seek.
+
+  // get a handle to the appsrc
+  g_object_get(orig, pspec->name, &gstvars->appsrc, NULL);
+
+  unsigned int flags = READ_TRUNCATED;
+  gstvars->cfile = new XFILE::CFile();
+  if (CFileItem(gstvars->url, false).IsInternetStream())
+    flags |= READ_CACHED;
+  // open file in binary mode
+  if (!gstvars->cfile->Open(gstvars->url, flags))
+    return;
+
+  // we can set the length in appsrc. This allows some elements to estimate the
+  // total duration of the stream. It's a good idea to set the property when you
+  // can but it's not required.
+  int64_t filelength = gstvars->cfile->GetLength();
+  if (filelength > 0)
+    g_object_set(gstvars->appsrc, "size", (gint64)filelength, NULL);
+  // we are seekable in push mode, this means that the element usually pushes
+  // out buffers of an undefined size and that seeks happen only occasionally
+  // and only by request of the user.
+  if (filelength > 0)
+    gst_util_set_object_arg(G_OBJECT(gstvars->appsrc), "stream-type", "seekable");
+
+  // configure the appsrc, we will push a buffer to appsrc when it needs more data
+  g_signal_connect(gstvars->appsrc, "need-data", G_CALLBACK(CGSTPlayerFeedData), ctx);
+  g_signal_connect(gstvars->appsrc, "seek-data", G_CALLBACK(CGSTPlayerSeekData), ctx);
+}
+
 
 CGSTPlayer::CGSTPlayer(IPlayerCallback &callback) 
   : IPlayer(callback),
@@ -304,43 +402,39 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
     m_item = file;
     m_options = options;
 
+    m_gstvars->cfile = NULL;
+    m_gstvars->appsrc = NULL;
+    m_gstvars->use_appsrc = false;
     if (m_item.m_strPath.Left(6).Equals("udp://"))
     {
       // protocol goes to gstreamer as is
-      m_url = m_item.m_strPath;
+      m_gstvars->url = m_item.m_strPath;
+      if (!gst_uri_is_valid(m_gstvars->url.c_str()))
+        return false;
     }
     else if (m_item.m_strPath.Left(7).Equals("rtsp://"))
     {
       // protocol goes to gstreamer as is
-      m_url = m_item.m_strPath;
+      m_gstvars->url = m_item.m_strPath;
+      if (!gst_uri_is_valid(m_gstvars->url.c_str()))
+        return false;
     }
     else if (m_item.m_strPath.Left(7).Equals("http://"))
     {
       // strip user agent that we append
-      m_url = m_item.m_strPath;
-      m_url = m_url.erase(m_url.rfind('|'), m_url.size());
-    }
-    /*
-    else if (m_item.m_strPath.Left(10).Equals("musicdb://"))
-    {
-      m_url = "file://";
-      m_url.append(CFileMusicDatabase::TranslateUrl(m_item));
-    }
-    */
-    if (m_item.m_strPath.Left(6).Equals("smb://"))
-    {
-      // can't handle this yet.
-      m_url = m_item.m_strPath;
+      m_gstvars->url = m_item.m_strPath;
+      m_gstvars->url = m_gstvars->url.erase(m_gstvars->url.rfind('|'), m_gstvars->url.size());
+      if (!gst_uri_is_valid(m_gstvars->url.c_str()))
+        return false;
     }
     else
     {
-      m_url = "file://";
-      m_url.append(m_item.m_strPath.c_str());
+      m_gstvars->use_appsrc = true;
+      m_gstvars->url = m_item.m_strPath;
     }
-    CLog::Log(LOGNOTICE, "CGSTPlayer: Opening: URL=%s", m_url.c_str());
-    if (!gst_uri_is_valid(m_url.c_str()))
-      return false;
 
+    CLog::Log(LOGNOTICE, "CGSTPlayer: Opening: URL=%s", m_gstvars->url.c_str());
+    
     m_elapsed_ms  =  0;
     m_duration_ms =  0;
     m_audio_index = -1;
@@ -412,11 +506,20 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
     }
     g_object_set(m_gstvars->player, "audio-sink", m_gstvars->audiosink, NULL);
 
-
     // set the player url and change state to paused (from null)
-    g_object_set(m_gstvars->player, "uri", m_url.c_str(), NULL);
-    gst_element_set_state(m_gstvars->player, GST_STATE_PAUSED);
+    if (m_gstvars->use_appsrc)
+    {
+      g_object_set(m_gstvars->player, "uri", "appsrc://", NULL);
+      g_signal_connect(m_gstvars->player, "deep-notify::source",
+        (GCallback)CGSTPlayerFoundSource, this);
+    }
+    else
+    {
+      g_object_set(m_gstvars->player, "uri", m_gstvars->url.c_str(), NULL);
+    }
+
     m_gstvars->inited = true;
+    gst_element_set_state(m_gstvars->player, GST_STATE_PAUSED);
 
     m_ready.Reset();
     Create();
@@ -463,6 +566,13 @@ bool CGSTPlayer::CloseFile()
   // since this main thread cleans up all other resources and threads
   // we are done after the StopThread call
   StopThread();
+
+  if (m_gstvars->cfile)
+  {
+    m_gstvars->cfile->Close();
+    delete m_gstvars->cfile;
+    m_gstvars->cfile = NULL;
+  }
 
   CLog::Log(LOGDEBUG, "CGSTPlayer: finished waiting");
   g_renderManager.UnInit();
@@ -1000,31 +1110,94 @@ void CGSTPlayer::Process()
   //CLog::Log(LOGDEBUG, "CGSTPlayer: Thread started");
   try
   {
-    // big fake out here, we do not know the video width, height yet
-    // so setup renderer to full display size and tell it we are doing
-    // bypass. This tell it to get out of the way as amp will be doing
-    // the actual video rendering in a video plane that is under the GUI
-    // layer.
-    int width = g_graphicsContext.GetWidth();
-    int height= g_graphicsContext.GetHeight();
-    int displayWidth  = width;
-    int displayHeight = height;
-    double fFrameRate = 24;
-    unsigned int flags = 0;
+    if (WaitForGSTPaused(2000))
+    {
+      // starttime has units of seconds
+      if (m_options.starttime > 0)
+      {
+        SeekTime(m_options.starttime * 1000);
+        gst_element_get_state(m_gstvars->player, NULL, NULL, 1000 * GST_MSECOND);
+      }
 
-    flags |= CONF_FLAGS_FORMAT_BYPASS;
-    flags |= CONF_FLAGS_FULLSCREEN;
-    CStdString formatstr = "BYPASS";
-    CLog::Log(LOGDEBUG,"%s - change configuration. %dx%d. framerate: %4.2f. format: %s",
-      __FUNCTION__, width, height, fFrameRate, formatstr.c_str());
-    g_renderManager.IsConfigured();
-    if(!g_renderManager.Configure(width, height, displayWidth, displayHeight, fFrameRate, flags))
-      CLog::Log(LOGERROR, "%s - failed to configure renderer", __FUNCTION__);
-    if (!g_renderManager.IsStarted())
-      CLog::Log(LOGERROR, "%s - renderer not started", __FUNCTION__);
+      // start the playback
+      gst_element_set_state(m_gstvars->player, GST_STATE_PLAYING);
+    }
+    else
+    {
+      CLog::Log(LOGDEBUG, "CGSTPlayer::Process:WaitForGSTPaused timeout");
+      throw;
+    }
 
-    // start the playback
-    gst_element_set_state(m_gstvars->player, GST_STATE_PLAYING);
+    // hide the gui layer so we can get stream info first
+    // without having video playback blended into it.
+    g_Windowing.Hide();
+
+    if (WaitForGSTPlaying(2000))
+    {
+      // we are done initializing now, set the readyevent which will
+      // drop CGUIDialogBusy, and release the hold in OpenFile
+      m_ready.Set();
+
+      m_video_index = 0;
+      g_object_get(m_gstvars->player, "n-video", &m_video_count, NULL);
+      if (m_video_count)
+        g_object_set(m_gstvars->player, "current-video", m_video_index, NULL);
+
+      m_audio_index = 0;
+      g_object_get(m_gstvars->player, "n-audio", &m_audio_count, NULL);
+      if (m_audio_count)
+        g_object_set(m_gstvars->player, "current-audio", m_audio_index, NULL);
+
+      // turn on/off subs
+      SetSubtitleVisible(g_settings.m_currentVideoSettings.m_SubtitleOn);
+
+      // big fake out here, we do not know the video width, height yet
+      // so setup renderer to full display size and tell it we are doing
+      // bypass. This tell it to get out of the way as amp will be doing
+      // the actual video rendering in a video plane that is under the GUI
+      // layer.
+      int width = g_graphicsContext.GetWidth();
+      int height= g_graphicsContext.GetHeight();
+      int displayWidth  = width;
+      int displayHeight = height;
+      double fFrameRate = 24;
+      unsigned int flags = 0;
+
+      flags |= CONF_FLAGS_FORMAT_BYPASS;
+      flags |= CONF_FLAGS_FULLSCREEN;
+      CStdString formatstr = "BYPASS";
+      CLog::Log(LOGDEBUG,"%s - change configuration. %dx%d. framerate: %4.2f. format: %s",
+        __FUNCTION__, width, height, fFrameRate, formatstr.c_str());
+      g_renderManager.IsConfigured();
+      if(!g_renderManager.Configure(width, height, displayWidth, displayHeight, fFrameRate, flags))
+        CLog::Log(LOGERROR, "%s - failed to configure renderer", __FUNCTION__);
+      if (!g_renderManager.IsStarted())
+        CLog::Log(LOGERROR, "%s - renderer not started", __FUNCTION__);
+    }
+    else
+    {
+      m_ready.Set();
+      m_StopPlaying = true;
+      CLog::Log(LOGERROR, "CGSTPlayer::Process: WaitForGSTPlaying() failed");
+      throw;
+    }
+
+    m_callback.OnPlayBackStarted();
+    WaitForWindowFullScreenVideo(2000);
+    // show gui layer again.
+    g_Windowing.Show();
+
+    /*
+    while (!m_bStop && !m_StopPlaying)
+    {
+      if (g_main_context_pending(NULL))
+        g_main_context_iteration(NULL, false);
+      else
+        usleep(50*1000);
+    }
+    */
+    g_main_loop_run(m_gstvars->loop);
+    m_callback.OnPlayBackEnded();
   }
   catch(...)
   {
@@ -1032,38 +1205,97 @@ void CGSTPlayer::Process()
     return;
   }
 
-  m_video_index = 0;
-  g_object_get(m_gstvars->player, "n-video", &m_video_count, NULL);
-  if (m_video_count)
-    g_object_set(m_gstvars->player, "current-video", m_video_index, NULL);
-
-  m_audio_index = 0;
-  g_object_get(m_gstvars->player, "n-audio", &m_audio_count, NULL);
-  if (m_audio_count)
-    g_object_set(m_gstvars->player, "current-audio", m_audio_index, NULL);
-
-  // we are done initializing now, set the readyevent which will
-  // drop CGUIDialogBusy, and release the hold in OpenFile
-  m_ready.Set();
-
-  // wait for playback to start with 2 second timeout
-  // get our initial status.
-
-  // once playback starts, we can turn on/off subs
-  SetSubtitleVisible(g_settings.m_currentVideoSettings.m_SubtitleOn);
-
-  m_callback.OnPlayBackStarted();
-  /*
-  while (!m_bStop && !m_StopPlaying)
-  {
-    if (g_main_context_pending(NULL))
-      g_main_context_iteration(NULL, false);
-    else
-      usleep(50*1000);
-  }
-  */
-  g_main_loop_run(m_gstvars->loop);
-  m_callback.OnPlayBackEnded();
-
 }
+
+bool CGSTPlayer::WaitForGSTPaused(int timeout_ms)
+{
+  bool rtn = false;
+  GstState state, pending;
+
+  while (!m_bStop && (timeout_ms > 0))
+  {
+    gst_element_get_state(m_gstvars->player, &state, &pending, 100 * GST_MSECOND);
+    if (state == GST_STATE_PAUSED)
+    {
+      rtn = true;
+      break;
+    }
+    timeout_ms -= 100;
+  }
+
+  return rtn;
+}
+
+bool CGSTPlayer::WaitForGSTPlaying(int timeout_ms)
+{
+  bool rtn = false;
+  GstState state, pending;
+
+  while (!m_bStop && (timeout_ms > 0))
+  {
+    gst_element_get_state(m_gstvars->player, &state, &pending, 100 * GST_MSECOND);
+    if (state == GST_STATE_PLAYING)
+    {
+      rtn = true;
+      break;
+    }
+    timeout_ms -= 100;
+  }
+
+  return rtn;
+}
+
+bool CGSTPlayer::WaitForWindowFullScreenVideo(int timeout_ms)
+{
+  bool rtn = false;
+
+  double present_time;
+  // we do a two step check.
+  // 1st, wait for switch to fullscreen video rendering in gui
+  while (!m_bStop && (timeout_ms > 0))
+  {
+    if (g_graphicsContext.IsFullScreenVideo())
+      break;
+
+    timeout_ms -= 100;
+    Sleep(100);
+  }
+  // 2nd, wait for renderer to flip at least once.
+  present_time = g_renderManager.GetPresentTime();
+  while (!m_bStop && (timeout_ms > 0))
+  {
+    if (present_time < g_renderManager.GetPresentTime())
+    {
+      rtn = true;
+      break;
+    }
+    timeout_ms -= 100;
+    Sleep(100);
+  }
+  // BUGFIX: why don't we know when gui has truly transitioned?
+  // sleep another 1/2 seconds to be sure.
+  Sleep(500);
+
+  return rtn;
+}
+/*
+		// Stop the stream
+		GstStateChangeReturn ret = gst_element_set_state(gstPipeline, GST_STATE_PAUSED);
+		if(ret == GST_STATE_CHANGE_ASYNC)
+		{
+			Playing = false;
+			// Wait for the state change before requesting a seek
+			const GstMessageType types = GST_MESSAGE_ERROR | GST_MESSAGE_ASYNC_DONE;
+			GstMessage *msg;
+			if((msg=gst_bus_timed_pop_filtered(bus, GST_CLOCK_TIME_NONE, types)) != NULL)
+			{
+				if(GST_MESSAGE_TYPE(msg) == GST_MESSAGE_ERROR)
+					PrintErrMsg("Stop Error", msg);
+				else if(GST_MESSAGE_TYPE(msg) == GST_MESSAGE_ASYNC_DONE)
+					ret = GST_STATE_CHANGE_SUCCESS;
+				gst_message_unref(msg);
+			}
+		}
+
+*/
 #endif
