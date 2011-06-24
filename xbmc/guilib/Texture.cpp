@@ -40,7 +40,7 @@ CBaseTexture::CBaseTexture(unsigned int width, unsigned int height, unsigned int
  : m_hasAlpha( true )
 {
 #ifndef HAS_DX 
-  m_texture = 0; 
+  m_texture = NULL; 
 #endif
   m_pixels = NULL;
   m_loadedToGPU = false;
@@ -348,6 +348,7 @@ bool CBaseTexture::LoadFromFile(const CStdString& texturePath, unsigned int maxW
     {
       unsigned char *dst = m_pixels + y * destPitch;
       unsigned char *src = image.texture + (m_imageHeight - 1 - y) * srcPitch;
+      unsigned char *alpha = image.alpha + (m_imageHeight - 1 - y) * m_imageWidth;
       for (unsigned int x = 0; x < m_imageWidth; x++)
       {
         *dst++ = *src++;
