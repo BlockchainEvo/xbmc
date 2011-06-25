@@ -2,20 +2,17 @@ include ../../Makefile.include
 include ../intel-sdk.mk
 
 # lib name, version
-LIBNAME=gst-fluendo-ismd
-VERSION=0.10.22
-#VERSION=r2125
+LIBNAME=libdca
+VERSION=0.0.5
 SOURCE=$(LIBNAME)-$(VERSION)
-ARCHIVE=$(SOURCE).tar.gz
+ARCHIVE=$(SOURCE).tar.bz2
 
-BASE_URL=http://core.fluendo.com/gstreamer/src/gst-fluendo-ismd
+BASE_URL=http://download.videolan.org/pub/videolan/libdca/0.0.5
 
 # configuration settings
-export CFLAGS+=-isystem$(SDKSTAGE)/include/linux_user
-CONFIGURE=./configure --prefix=$(PREFIX) --host=$(HOST) \
-  --disable-maintainer-mode --enable-cpu-tune-atom
+CONFIGURE=./configure --prefix=$(PREFIX) --host=$(HOST)
 
-LIBDYLIB=$(SOURCE)/src/.libs/libgstfluismd.so
+LIBDYLIB=$(SOURCE)/$(LIBNAME)/.libs/$(LIBNAME).so
 
 CLEAN_FILES=$(ARCHIVE) $(SOURCE)
 
@@ -28,11 +25,10 @@ $(SOURCE): $(TARBALLS_LOCATION)/$(ARCHIVE)
 	rm -rf $(SOURCE)
 	$(ARCHIVE_TOOL) $(ARCHIVE_TOOL_FLAGS) $(TARBALLS_LOCATION)/$(ARCHIVE)
 	echo $(SOURCE) > .gitignore
-	cd $(SOURCE); autoreconf -vif
 	cd $(SOURCE); $(CONFIGURE)
 
 $(LIBDYLIB): $(SOURCE)
-	make -j 1 -C $(SOURCE)
+	make -j $(JOBS) -C $(SOURCE)
 
 .installed:
 	make -C $(SOURCE) install
@@ -44,3 +40,4 @@ clean:
 
 distclean::
 	rm -rf $(SOURCE) .installed
+

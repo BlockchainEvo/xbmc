@@ -17,3 +17,8 @@ configure:
 	cd $(SOURCE); make -j $(JOBS)
 	#cd $(SOURCE); make install
 
+clean:
+	cd $(SOURCE); make clean
+
+distclean:
+	cd $(SOURCE); make clean

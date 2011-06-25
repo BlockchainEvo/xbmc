@@ -10,7 +10,7 @@ SUBDIRS = \
 	libogg libvorbis libflac libmad fribidi libwavpack libmpeg2 \
 	enca libass libcdio libsamplerate \
 	libmicrohttpd libmodplug librtmp libxml2 libbluray \
-	liboil libxml2 glib-2.0 liba52 gstreamer \
+	liboil libxml2 glib-2.0 liba52 libdca gstreamer \
 	gstreamer-plugins-base gstreamer-plugins-good \
 	gstreamer-plugins-bad gstreamer-plugin-ugly \
 	gst-fluendo-gdlsink gst-fluendo-mpegdemux gst-fluendo-ismd \
@@ -35,7 +35,7 @@ clean:
 distclean::
 	for d in $(BUILDTOOLS); do $(MAKE) -C $$d distclean; done
 	for d in $(SUBDIRS); do $(MAKE) -C $$d distclean; done
-	rm -rf $(XBMCPREFIX)
+	rm -rf $(XBMCPREFIX)/*
 
 image:
 	make -C $(BUILDROOT) tarroot IMAGE=$(CURDIR)/$(IMAGENAME) TAR_COMPRESSOR=

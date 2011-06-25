@@ -4,6 +4,7 @@ include ../intel-sdk.mk
 # lib name, version
 LIBNAME=gst-fluendo-mpegdemux
 VERSION=0.10.64
+#VERSION=r2125
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
 
@@ -27,6 +28,7 @@ $(SOURCE): $(TARBALLS_LOCATION)/$(ARCHIVE)
 	rm -rf $(SOURCE)
 	$(ARCHIVE_TOOL) $(ARCHIVE_TOOL_FLAGS) $(TARBALLS_LOCATION)/$(ARCHIVE)
 	echo $(SOURCE) > .gitignore
+	cd $(SOURCE); patch -p0 <../lpcm.patch
 	cd $(SOURCE); $(CONFIGURE)
 
 $(LIBDYLIB): $(SOURCE)
