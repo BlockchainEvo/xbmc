@@ -1133,8 +1133,14 @@ if test "x$use_gstreamer" != "xno"; then
   PKG_CHECK_MODULES(GSTREAMER_PLUGINS_BASE, gstreamer-plugins-base-0.10 >= $gstreamer_plugins_base_req, HAVE_GSTREAMER_PLUGINS_BASE=1, HAVE_GSTREAMER_PLUGINS_BASE=0)
   HAVE_GSTREAMER_APP=1
   if test "x$target_platform" == "xtarget_ce41xx"; then
-    # force this true to pass
-    HAVE_GSTREAMER_APP=1
+    PKG_CHECK_MODULES(GSTREAMER_VIDEO, gstreamer-video-0.10  >= $gstreamer_req, HAVE_GSTREAMER_VIDEO=1, HAVE_GSTREAMER_VIDEO=0)
+    PKG_CHECK_MODULES(GSTREAMER_PBUTILS, gstreamer-pbutils-0.10  >= $gstreamer_req, HAVE_GSTREAMER_PBUTILS=1, HAVE_GSTREAMER_PBUTILS=0)
+    if test $HAVE_GSTREAMER_VIDEO -eq 1 -a $HAVE_GSTREAMER_PBUTILS -eq 1; then
+      # force this true to pass
+      HAVE_GSTREAMER_APP=1
+      INCLUDES="$INCLUDES $GSTREAMER_VIDEO_CFLAGS $GSTREAMER_PBUTILS_CFLAGS"
+      LIBS="$LIBS $GSTREAMER_VIDEO_LIBS $GSTREAMER_PBUTILS_LIBS"
+    fi
   else
     AC_CHECK_LIB([gstapp-0.10], main, , HAVE_GSTREAMER_APP=0)
   fi
