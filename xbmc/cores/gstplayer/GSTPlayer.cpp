@@ -41,10 +41,30 @@
 
 #include <gst/gst.h>
 #include <gst/video/video.h>
+#include <gst/pbutils/missing-plugins.h>
+
+// GstPlayFlags flags from playbin2. It is the policy of GStreamer to
+// not publicly expose element-specific enums. That's why this
+// GstPlayFlags enum has been copied here.
+typedef enum {
+    GST_PLAY_FLAG_VIDEO         = 0x00000001,
+    GST_PLAY_FLAG_AUDIO         = 0x00000002,
+    GST_PLAY_FLAG_TEXT          = 0x00000004,
+    GST_PLAY_FLAG_VIS           = 0x00000008,
+    GST_PLAY_FLAG_SOFT_VOLUME   = 0x00000010,
+    GST_PLAY_FLAG_NATIVE_AUDIO  = 0x00000020,
+    GST_PLAY_FLAG_NATIVE_VIDEO  = 0x00000040,
+    GST_PLAY_FLAG_DOWNLOAD      = 0x00000080,
+    GST_PLAY_FLAG_BUFFERING     = 0x000000100
+} GstPlayFlags;
+
 
 struct INT_GST_VARS
 {
   bool        inited;
+  bool        ready;
+  gdouble     rate;
+  GstBus      *bus;
   GMainLoop   *loop;
   GstElement  *player;
   GstElement  *videosink;
@@ -58,34 +78,12 @@ struct INT_GST_VARS
   XFILE::CFile *cfile;
 };
 
-void stream_foreach(gpointer data, gpointer user_data)
-{
-  gint streamtype;
-  g_object_get(G_OBJECT(data), "type", &streamtype, NULL);
-  if  (streamtype == 2)
-  {
-    gint width = 0;
-    gint height = 0;
-    GstCaps *gcaps;
-    const GstStructure *gstr;
-
-    g_object_get(G_OBJECT(data), "caps", &gcaps, NULL);
-    if  (gcaps != NULL)
-    {
-      gstr = gst_caps_get_structure(gcaps, 0);
-      gst_structure_get_int(gstr, "width", &width);
-      gst_structure_get_int(gstr, "height", &height);
-    }
-  }
-  g_object_unref(data);
-}
-
 gboolean CGSTPlayerBusCallback(GstBus *bus, GstMessage *msg, gpointer data)
 {
   CGSTPlayer    *player  = (CGSTPlayer*)data;
   INT_GST_VARS  *gstvars = player->GetGSTVars();
-  gchar  *str     = NULL;
-  GError *error   = NULL;
+  GError *error    = NULL;
+  gchar  *dbg_info = NULL;
 
   switch (GST_MESSAGE_TYPE(msg))
   {
@@ -96,33 +94,36 @@ gboolean CGSTPlayerBusCallback(GstBus *bus, GstMessage *msg, gpointer data)
       break;
 
     case GST_MESSAGE_ERROR:
-      gst_message_parse_error(msg, &error, &str);
-      g_free(str);
+      gst_message_parse_error(msg, &error, &dbg_info);
       if (error)
       {
-        g_printerr("GStreamer: Error - %s %s\n", str, error->message);
+        g_printerr("GStreamer: Error - %s, %s\n", 
+          GST_OBJECT_NAME(msg->src), error->message);
         g_error_free(error);
       }
+      g_free(dbg_info);
       g_main_loop_quit(gstvars->loop);
       break;
 
     case GST_MESSAGE_WARNING:
-      gst_message_parse_warning(msg, &error, &str);
-      g_free(str);
+      gst_message_parse_warning(msg, &error, &dbg_info);
       if (error)
       {
-        g_printerr("GStreamer: Warning - %s %s\n", str, error->message);
+        g_printerr("GStreamer: Warning - %s, %s\n",
+          GST_OBJECT_NAME(msg->src), error->message);
         g_error_free(error);
       }
+      g_free(dbg_info);
       break;
 
     case GST_MESSAGE_INFO:
-      gst_message_parse_info(msg, &error, &str);
-      g_free(str);
+      gst_message_parse_info(msg, &error, &dbg_info);
       if (error)
       {
-        g_printerr("GStreamer: Info - %s %s\n", str, error->message);
+        g_printerr("GStreamer: Info - %s, %s\n",
+          GST_OBJECT_NAME(msg->src), error->message);
         g_error_free(error);
+      g_free(dbg_info);
       }
       break;
 
@@ -133,12 +134,8 @@ gboolean CGSTPlayerBusCallback(GstBus *bus, GstMessage *msg, gpointer data)
         gchar *title;
 
         gst_message_parse_tag(msg, &tag_list);
-        //gst_tag_list_foreach(tag_list, tag_list_hook, data);
-        //gst_tag_list_free(tag_list);
-
         if (gst_tag_list_get_string(tag_list, GST_TAG_TITLE, &title))
           g_print("GStreamer: Tag: %s\n", title);
-        // message (prepare-gdl-plane) to let the application configure the GDL plane
       }
       break;
     case GST_MESSAGE_BUFFERING:
@@ -157,14 +154,8 @@ gboolean CGSTPlayerBusCallback(GstBus *bus, GstMessage *msg, gpointer data)
             gst_element_state_get_name(old_state),
             gst_element_state_get_name(new_state));
         /*
-        if (old_state == GST_STATE_READY && new_state == GST_STATE_PAUSED)
+        if (old_state == GST_STATE_PAUSED && new_state == GST_STATE_PLAYING)
         {
-          // Get stream info
-          GList *streaminfo = NULL;
-          g_object_get(gstvars->player, "stream-info", &streaminfo, NULL);
-          g_list_foreach(streaminfo, stream_foreach, NULL);
-          g_list_free(streaminfo);
-
           GstPad* pad = gst_element_get_static_pad(gstvars->videosink, "sink");
 
           gint width, height;
@@ -179,6 +170,8 @@ gboolean CGSTPlayerBusCallback(GstBus *bus, GstMessage *msg, gpointer data)
             float fFramerate = (float)fps_n/(float)fps_d;
           }
           gst_object_unref(GST_OBJECT(pad));
+          printf("GStreamer: Changed framerate(%f), width(%d), height(%d)\n",
+            framerate, width, height);
         }
         */
       }
@@ -208,15 +201,42 @@ gboolean CGSTPlayerBusCallback(GstBus *bus, GstMessage *msg, gpointer data)
       printf("GStreamer: Message APPLICATION\n");
       break;
     case GST_MESSAGE_ELEMENT:
-      g_print("GStreamer: Element %s\n", gst_structure_get_name(msg->structure));
-      if (gst_structure_has_name(msg->structure, "have-ns-view"))
+      if ( gst_is_missing_plugin_message(msg) )
+      {
+        gchar *description = gst_missing_plugin_message_get_description(msg);
+        if (description)
+        {
+          printf("GStreamer: plugin %s not available!\n", description);
+          g_free(description);
+        }
+      }
+      else if (gst_structure_has_name(msg->structure, "have-ns-view"))
       {
         //NSView *nsview = NULL;
         void *nsview = NULL;
         nsview = g_value_get_pointer(gst_structure_get_value(msg->structure, "nsview"));
-        // passes a GstGLView object to the callback
-        // object is an NSView
+        // passes a GstGLView object to the callback, the object is an NSView
         return GST_BUS_PASS;
+      }
+      else if (gst_structure_has_name(msg->structure, "prepare-gdl-plane"))
+      {
+        gint bgcolor;
+        g_object_get(gstvars->videosink, "bgcolor", &bgcolor, NULL);
+        printf("GStreamer: Element bgcolor(%d)\n", bgcolor);
+        
+        gchar *rectangle = NULL;
+        g_object_get(gstvars->videosink, "rectangle", &rectangle, NULL);
+        printf("GStreamer: Element rectangle(%s)\n", rectangle);
+        g_free(rectangle);
+
+        gint gdl_plane;
+        g_object_get(gstvars->videosink, "gdl-plane", &gdl_plane, NULL);
+        printf("GStreamer: Element gdl-plane(%d)\n", gdl_plane);
+        return GST_BUS_PASS;
+      }
+      else
+      {
+        g_print("GStreamer: Element %s\n", gst_structure_get_name(msg->structure));
       }
       break;
     case GST_MESSAGE_SEGMENT_START:
@@ -347,6 +367,7 @@ CGSTPlayer::CGSTPlayer(IPlayerCallback &callback)
 
   m_gstvars = (INT_GST_VARS*)new INT_GST_VARS;
   m_gstvars->inited = false;
+  m_gstvars->ready  = false;
   m_gstvars->loop   = NULL;
   m_gstvars->player = NULL;
   m_gstvars->videosink = NULL;
@@ -460,15 +481,18 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
     if (m_gstvars->loop == NULL)
       return false;
     //
-    GstBus *bus = gst_pipeline_get_bus(GST_PIPELINE(m_gstvars->player));
-    gst_bus_add_watch(bus, (GstBusFunc)CGSTPlayerBusCallback, this);
-    gst_object_unref(bus);
+    m_gstvars->bus = gst_pipeline_get_bus(GST_PIPELINE(m_gstvars->player));
+    gst_bus_add_watch(m_gstvars->bus, (GstBusFunc)CGSTPlayerBusCallback, this);
     
     // create video sink
     m_gstvars->videosink = gst_element_factory_make(m_videosink.c_str(), NULL);
     if (m_gstvars->videosink)
     {
       m_gstvars->video_uses_ismd = true;
+      g_object_set(m_gstvars->videosink, "bgcolor", 0, NULL);
+      g_object_set(m_gstvars->videosink, "rectangle", "0,0,0,0", NULL);
+      g_object_set(m_gstvars->videosink, "gdl-plane", GDL_VIDEO_PLANE, NULL);
+      //g_object_set(m_gstvars->videosink, "flush-repeat-frame", FALSE, NULL);
     }
     else
     {
@@ -518,6 +542,11 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
       g_object_set(m_gstvars->player, "uri", m_gstvars->url.c_str(), NULL);
     }
 
+    // disable subtitles until we can figure out how to hook them.
+    GstPlayFlags flags;
+    g_object_get(m_gstvars->player, "flags", &flags, NULL);
+    g_object_set(m_gstvars->player, "flags", (flags & ~GST_PLAY_FLAG_TEXT), NULL);
+
     m_gstvars->inited = true;
     gst_element_set_state(m_gstvars->player, GST_STATE_PAUSED);
 
@@ -553,9 +582,15 @@ bool CGSTPlayer::CloseFile()
 
   if (m_gstvars->inited)
   {
-    gst_element_set_state(m_gstvars->player, GST_STATE_READY);
-    g_main_loop_quit(m_gstvars->loop);
+    m_gstvars->ready  = false;
     m_gstvars->inited = false;
+
+    gst_element_set_state(m_gstvars->player, GST_STATE_NULL);
+    gst_element_get_state(m_gstvars->player, NULL, NULL, 100 * GST_MSECOND);
+    g_main_loop_quit(m_gstvars->loop);
+    g_main_loop_unref(m_gstvars->loop);
+    gst_object_unref(m_gstvars->bus);
+    gst_object_unref(m_gstvars->player);
   }
 
   m_bStop = true;
@@ -594,14 +629,20 @@ void CGSTPlayer::Pause()
 
   if (m_paused == true)
   {
-    if (m_gstvars->inited)
+    if (m_gstvars->ready)
+    {
       gst_element_set_state(m_gstvars->player, GST_STATE_PLAYING);
+      gst_element_get_state(m_gstvars->player, NULL, NULL, 100 * GST_MSECOND);
+    }
     m_callback.OnPlayBackResumed();
   }
   else
   {
-    if (m_gstvars->inited)
+    if (m_gstvars->ready)
+    {
       gst_element_set_state(m_gstvars->player, GST_STATE_PAUSED);
+      gst_element_get_state(m_gstvars->player, NULL, NULL, 100 * GST_MSECOND);
+    }
     m_callback.OnPlayBackPaused();
   }
   m_paused = !m_paused;
@@ -754,7 +795,7 @@ void CGSTPlayer::GetGeneralInfo(CStdString& strGeneralInfo)
 int CGSTPlayer::GetAudioStreamCount()
 {
   //CLog::Log(LOGDEBUG, "CGSTPlayer::GetAudioStreamCount");
-  if (m_gstvars->inited)
+  if (m_gstvars->ready)
   {
     gint audio_index = 0;
     gint audio_count = 0;
@@ -789,7 +830,7 @@ void CGSTPlayer::SetAudioStream(int SetAudioStream)
 int CGSTPlayer::GetSubtitleCount()
 {
   //CLog::Log(LOGDEBUG, "CGSTPlayer::GetSubtitleCount");
-  if (m_gstvars->inited)
+  if (m_gstvars->ready)
   {
     g_object_get(m_gstvars->player, "n-text", &m_subtitle_count, NULL);
     if (m_subtitle_count)
@@ -912,23 +953,48 @@ float CGSTPlayer::GetActualFPS()
 
 void CGSTPlayer::SeekTime(__int64 seek_ms)
 {
+  g_print("CGSTPlayer::SeekTime(%lld)\n", seek_ms);
   CSingleLock lock(m_gst_csection);
 
-  if (m_gstvars->inited)
+  if (m_gstvars->ready)
   {
+    // stop the playback
+		GstStateChangeReturn ret = gst_element_set_state(m_gstvars->player, GST_STATE_PAUSED);
+		if(ret == GST_STATE_CHANGE_ASYNC)
+		{
+			// Wait for the state change before requesting a seek
+			const GstMessageType types = (GstMessageType)(GST_MESSAGE_ERROR | GST_MESSAGE_ASYNC_DONE);
+      GstMessage *msg = gst_bus_timed_pop_filtered(m_gstvars->bus, GST_CLOCK_TIME_NONE, types);
+			if(msg != NULL)
+			{
+				if(GST_MESSAGE_TYPE(msg) == GST_MESSAGE_ERROR)
+					g_print("Stop Error\n");
+				else if(GST_MESSAGE_TYPE(msg) == GST_MESSAGE_ASYNC_DONE)
+					ret = GST_STATE_CHANGE_SUCCESS;
+				gst_message_unref(msg);
+			}
+		}
     // gst time units are nanoseconds.
     gint64 seek_ns = seek_ms * GST_MSECOND;
-    gst_element_seek_simple(m_gstvars->player,
-      GST_FORMAT_TIME, GST_SEEK_FLAG_FLUSH, seek_ns);
+    gst_element_seek(m_gstvars->player, 
+			m_gstvars->rate, GST_FORMAT_TIME, 
+      (GstSeekFlags)(GST_SEEK_FLAG_FLUSH | GST_SEEK_FLAG_ACCURATE),
+			GST_SEEK_TYPE_SET,  seek_ns,               // start
+      GST_SEEK_TYPE_NONE, GST_CLOCK_TIME_NONE);  // end
+    // wait for seek to complete
+    gst_element_get_state(m_gstvars->player, NULL, NULL, 100 * GST_MSECOND);
+    // restart the playback
+    gst_element_set_state(m_gstvars->player, GST_STATE_PLAYING);
   }
   m_callback.OnPlayBackSeek((int)seek_ms, (int)(seek_ms - m_elapsed_ms));
 }
 
 __int64 CGSTPlayer::GetTime()
 {
+  //g_print("CGSTPlayer::GetTime\n");
   CSingleLock lock(m_gst_csection);
 
-  if (m_gstvars->inited)
+  if (m_gstvars->ready)
   {
     gint64 elapsed_ns = 0;
     GstFormat fmt = GST_FORMAT_TIME;
@@ -940,9 +1006,10 @@ __int64 CGSTPlayer::GetTime()
 
 int CGSTPlayer::GetTotalTime()
 {
+  //g_print("CGSTPlayer::GetTotalTime\n");
   CSingleLock lock(m_gst_csection);
 
-  if (m_gstvars->inited)
+  if (m_gstvars->ready)
   {
     gint64 duration_ns = 0;
     GstFormat fmt = GST_FORMAT_TIME;
@@ -1005,39 +1072,56 @@ CStdString CGSTPlayer::GetVideoCodecName()
 
 int CGSTPlayer::GetPictureWidth()
 {
-  //CLog::Log(LOGDEBUG, "CGSTPlayer::GetPictureWidth");
-  if (m_gstvars->inited)
+/* TODO: fix this crap
+  if (m_gstvars->ready)
   {
-    GstPad *pad = gst_element_get_static_pad(m_gstvars->videosink, "src");
-    GstCaps *caps = gst_pad_get_negotiated_caps(pad);
+    GstPad *pad = gst_element_get_pad(m_gstvars->videosink, "sink");
+    //GstPad *pad = gst_element_get_static_pad(m_gstvars->videosink, "sink");
+    GstPad *peerpad = gst_pad_get_peer(pad);
+    GstCaps *caps = gst_pad_get_negotiated_caps(peerpad);
     if (caps)
     {
-      int width, height;
+      gint width, height;
+      gint rate1, rate2;
+
       const GstStructure *structure = gst_caps_get_structure(caps, 0);
       gst_structure_get_int(structure, "width",  &width);
       gst_structure_get_int(structure, "height", &height);
+      gst_structure_get_fraction(structure, "framerate", &rate1, &rate2);
       m_video_width = width;
+      gst_caps_unref(caps);
     }
+    gst_object_unref(pad);
   }
+  g_print("CGSTPlayer::GetPictureWidth(%d)\n", m_video_width);
+  CLog::Log(LOGDEBUG, "CGSTPlayer::GetPictureWidth(%d)", m_video_width);
+*/
   return m_video_width;
 }
 
 int CGSTPlayer::GetPictureHeight()
 {
-  //CLog::Log(LOGDEBUG, "CGSTPlayer::GetPictureHeight");
-  if (m_gstvars->inited)
+/* TODO: fix this crap
+  if (m_gstvars->ready)
   {
-    GstPad *pad = gst_element_get_static_pad(m_gstvars->videosink, "src");
-    GstCaps *caps = gst_pad_get_negotiated_caps(pad);
+    GstPad *pad = gst_element_get_pad(m_gstvars->videosink, "sink");
+    GstPad *peerpad = gst_pad_get_peer(pad);
+    GstCaps *caps = gst_pad_get_negotiated_caps(peerpad);
     if (caps)
     {
-      int width, height;
+      gint width, height;
+
       const GstStructure *structure = gst_caps_get_structure(caps, 0);
       gst_structure_get_int(structure, "width",  &width);
       gst_structure_get_int(structure, "height", &height);
       m_video_height = height;
+      gst_caps_unref(caps);
     }
+    gst_object_unref(pad);
   }
+  g_print("CGSTPlayer::GetPictureHeight(%d)\n", m_video_height);
+  CLog::Log(LOGDEBUG, "CGSTPlayer::GetPictureHeight(%d)", m_video_height);
+*/
   return m_video_height;
 }
 
@@ -1052,6 +1136,7 @@ void CGSTPlayer::ToFFRW(int iSpeed)
   if (m_StopPlaying)
     return;
 
+  CSingleLock lock(m_gst_csection);
   if (m_speed != iSpeed)
   {
     // recover power of two value
@@ -1059,26 +1144,30 @@ void CGSTPlayer::ToFFRW(int iSpeed)
     int ispeed = abs(iSpeed);
     while (ispeed >>= 1) ipower++;
 
+    GstSeekFlags flags;
     switch(ipower)
     {
       // regular playback
       case  0:
-        //cmd.cmd = LPBCmd_PLAY;
-        //cmd.param2.speed = 1 * 1024;
+        m_gstvars->rate = 1.0;
+        flags = GST_SEEK_FLAG_NONE;
       break;
       default:
+        flags = (GstSeekFlags)(GST_SEEK_FLAG_FLUSH | GST_SEEK_FLAG_KEY_UNIT | GST_SEEK_FLAG_SKIP);
         // N x fast forward/rewind (I-frames)
-        /*
         if (iSpeed > 0)
-          cmd.cmd = LPBCmd_FAST_FORWARD;
+          m_gstvars->rate = ipower *  1.0;
         else
-          cmd.cmd = LPBCmd_SCAN_BACKWARD;
-        cmd.param2.speed = ipower * 1024;
-        */
+          m_gstvars->rate = ipower * -1.0;
       break;
     }
 
-    CSingleLock lock(m_gst_csection);
+    gst_element_seek(m_gstvars->player, 
+			m_gstvars->rate, GST_FORMAT_TIME, flags,
+			GST_SEEK_TYPE_NONE, GST_CLOCK_TIME_NONE,     // start
+      GST_SEEK_TYPE_NONE, GST_CLOCK_TIME_NONE);    // end
+    // wait for rate change to complete
+    gst_element_get_state(m_gstvars->player, NULL, NULL, 100 * GST_MSECOND);
 
     m_speed = iSpeed;
   }
@@ -1110,27 +1199,28 @@ void CGSTPlayer::Process()
   //CLog::Log(LOGDEBUG, "CGSTPlayer: Thread started");
   try
   {
+    // hide the gui layer so we can get stream info first
+    // without having video playback blended into it.
+    g_Windowing.Hide();
+
     if (WaitForGSTPaused(2000))
     {
-      // starttime has units of seconds
-      if (m_options.starttime > 0)
-      {
-        SeekTime(m_options.starttime * 1000);
-        gst_element_get_state(m_gstvars->player, NULL, NULL, 1000 * GST_MSECOND);
-      }
+      m_gstvars->rate  = 1.0;
+      m_gstvars->ready = true;
 
-      // start the playback
-      gst_element_set_state(m_gstvars->player, GST_STATE_PLAYING);
+      // starttime has units of seconds (SeekTime will start playback)
+      /*
+      if (m_options.starttime > 0)
+        SeekTime(m_options.starttime * 1000);
+      else
+      */
+        gst_element_set_state(m_gstvars->player, GST_STATE_PLAYING);
     }
     else
     {
       CLog::Log(LOGDEBUG, "CGSTPlayer::Process:WaitForGSTPaused timeout");
       throw;
     }
-
-    // hide the gui layer so we can get stream info first
-    // without having video playback blended into it.
-    g_Windowing.Hide();
 
     if (WaitForGSTPlaying(2000))
     {
@@ -1201,6 +1291,9 @@ void CGSTPlayer::Process()
   }
   catch(...)
   {
+    m_ready.Set();
+    m_StopPlaying = true;
+    g_Windowing.Show();
     CLog::Log(LOGERROR, "CGSTPlayer::Process: Exception thrown");
     return;
   }
@@ -1278,24 +1371,5 @@ bool CGSTPlayer::WaitForWindowFullScreenVideo(int timeout_ms)
 
   return rtn;
 }
-/*
-		// Stop the stream
-		GstStateChangeReturn ret = gst_element_set_state(gstPipeline, GST_STATE_PAUSED);
-		if(ret == GST_STATE_CHANGE_ASYNC)
-		{
-			Playing = false;
-			// Wait for the state change before requesting a seek
-			const GstMessageType types = GST_MESSAGE_ERROR | GST_MESSAGE_ASYNC_DONE;
-			GstMessage *msg;
-			if((msg=gst_bus_timed_pop_filtered(bus, GST_CLOCK_TIME_NONE, types)) != NULL)
-			{
-				if(GST_MESSAGE_TYPE(msg) == GST_MESSAGE_ERROR)
-					PrintErrMsg("Stop Error", msg);
-				else if(GST_MESSAGE_TYPE(msg) == GST_MESSAGE_ASYNC_DONE)
-					ret = GST_STATE_CHANGE_SUCCESS;
-				gst_message_unref(msg);
-			}
-		}
 
-*/
 #endif
