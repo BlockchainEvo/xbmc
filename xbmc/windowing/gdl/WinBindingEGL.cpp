@@ -181,6 +181,20 @@ bool CWinBindingEGL::CreateWindow(EGLNativeDisplayType nativeDisplay, EGLNativeW
 
   eglSwapInterval(m_display, 0);
 
+  // For EGL backend, it needs to clear all the back buffers of the window
+  // surface before drawing anything, otherwise the image will be blinking
+  // heavily.  The default eglWindowSurface has 3 gdl surfaces as the back
+  // buffer, that's why glClear should be called 3 times.
+  glClearColor (0.0f, 0.0f, 0.0f, 0.0f);
+  glClear (GL_COLOR_BUFFER_BIT);
+  eglSwapBuffers(m_display, m_surface);
+
+  glClear (GL_COLOR_BUFFER_BIT);
+  eglSwapBuffers(m_display, m_surface);
+
+  glClear (GL_COLOR_BUFFER_BIT);
+  eglSwapBuffers(m_display, m_surface);
+
   CLog::Log(LOGINFO, "EGL window and context creation complete");
 
   return true;
