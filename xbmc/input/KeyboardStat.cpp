@@ -170,7 +170,7 @@ void CKeyboardStat::Initialize()
  * but in some x11 specific WinEvents file  *
  * but for some reason the code to map keys *
  * to specific xbmc vkeys is here           */
-#if defined(_LINUX) && !defined(__APPLE__) && !defined(TARGET_CE41XX)
+#if defined(_LINUX) && !defined(__APPLE__)
   Display* dpy = XOpenDisplay(NULL);
   if (!dpy)
     return;
