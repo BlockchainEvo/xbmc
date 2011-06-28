@@ -735,7 +735,7 @@ void CGSTPlayer::Pause()
 {
   CSingleLock lock(m_gst_csection);
 
-  if (!m_StopPlaying)
+  if (m_StopPlaying)
     return;
 
   if (m_paused == true)
@@ -1203,41 +1203,32 @@ void CGSTPlayer::ToFFRW(int iSpeed)
   CSingleLock lock(m_gst_csection);
   if (m_speed != iSpeed)
   {
-    // recover power of two value
-    int ipower = 0;
-    int ispeed = abs(iSpeed);
-    while (ispeed >>= 1) ipower++;
+/*
+    // TODO: figure out why FF/RW are not working.
+    g_print("CGSTPlayer::ToFFRW: iSpeed(%d)\n", iSpeed);
 
-    GstSeekFlags flags;
-    switch(ipower)
+    if (m_gstvars->ready)
     {
-      // regular playback
-      case  0:
-        m_gstvars->rate = 1.0;
+      gint64 elapsed_ns = 0;
+      GstFormat fmt = GST_FORMAT_TIME;
+      if (gst_element_query_position(m_gstvars->player, &fmt, &elapsed_ns))
+        m_elapsed_ms = elapsed_ns / GST_MSECOND;
+
+      GstSeekFlags flags;
+      if (iSpeed == 1)
         flags = GST_SEEK_FLAG_NONE;
-      break;
-      default:
-        flags = (GstSeekFlags)(GST_SEEK_FLAG_FLUSH | GST_SEEK_FLAG_KEY_UNIT | GST_SEEK_FLAG_SKIP);
-        // N x fast forward/rewind (I-frames)
-        if (iSpeed > 0)
-          m_gstvars->rate = ipower *  1.0;
-        else
-          m_gstvars->rate = ipower * -1.0;
-      break;
+      else
+        flags = GST_SEEK_FLAG_SKIP;
+      
+      m_gstvars->rate = iSpeed;
+      gst_element_seek(m_gstvars->player,
+        m_gstvars->rate, GST_FORMAT_TIME, flags,
+        GST_SEEK_TYPE_SET,  elapsed_ns,           // start
+        GST_SEEK_TYPE_NONE, GST_CLOCK_TIME_NONE); // end
+      // wait for rate change to complete
+      gst_element_get_state(m_gstvars->player, NULL, NULL, 100 * GST_MSECOND);
     }
-
-    gint64 elapsed_ns = 0;
-    GstFormat fmt = GST_FORMAT_TIME;
-    if (gst_element_query_position(m_gstvars->player, &fmt, &elapsed_ns))
-      m_elapsed_ms = elapsed_ns / GST_MSECOND;
-
-    gst_element_seek(m_gstvars->player,
-			m_gstvars->rate, GST_FORMAT_TIME, flags,
-			GST_SEEK_TYPE_SET,  elapsed_ns,           // start
-      GST_SEEK_TYPE_NONE, GST_CLOCK_TIME_NONE); // end
-    // wait for rate change to complete
-    gst_element_get_state(m_gstvars->player, NULL, NULL, 100 * GST_MSECOND);
-
+*/
     m_speed = iSpeed;
   }
 }
