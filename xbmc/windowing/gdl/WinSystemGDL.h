@@ -30,9 +30,10 @@
 #include <vector>
 #include <libgdl.h>
 
-#define GDL_VIDEO_PLANE           GDL_PLANE_ID_UPP_B  // bottom
-#define GDL_GRAPHICS_PLANE        GDL_PLANE_ID_UPP_D  // on top for overlays
-#define GDL_FLASH_GRAPHICS_PLANE  GDL_PLANE_ID_UPP_C  // middle for pages with embedded video
+#define GDL_VIDEO_PLANE           GDL_PLANE_ID_UPP_A  // bottom for video
+#define GDL_SUBTITLE_PLANE        GDL_PLANE_ID_UPP_B  // subtitles
+#define GDL_FLASH_GRAPHICS_PLANE  GDL_PLANE_ID_UPP_C  // pages with embedded video
+#define GDL_GRAPHICS_PLANE        GDL_PLANE_ID_UPP_D  // top for overlays
 
 class CWinSystemGDL : public CWinSystemBase
 {

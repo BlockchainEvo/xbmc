@@ -187,6 +187,7 @@ bool CWinSystemGDL::InitWindowSystem()
     CLog::Log(LOGNONE, "CWinSystemGDL::InitWindowSystem gdl_init failed");
     return false;
   }
+  gdl_plane_reset_all();
 
   if (!CWinSystemBase::InitWindowSystem())
     return false;
@@ -739,11 +740,21 @@ bool CWinSystemGDL::Restore()
 
 bool CWinSystemGDL::Hide()
 {
+  gdl_boolean_t mute = GDL_TRUE;
+
+  gdl_plane_config_begin(GDL_GRAPHICS_PLANE);
+  gdl_plane_set_attr(GDL_PLANE_VID_MUTE, &mute);
+  gdl_plane_config_end(GDL_FALSE);
   return true;
 }
 
 bool CWinSystemGDL::Show(bool raise)
 {
+  gdl_boolean_t mute = GDL_FALSE;
+
+  gdl_plane_config_begin(GDL_GRAPHICS_PLANE);
+  gdl_plane_set_attr(GDL_PLANE_VID_MUTE, &mute);
+  gdl_plane_config_end(GDL_FALSE);
   return true;
 }
 
