@@ -136,6 +136,7 @@ protected:
   virtual void  OnExit();
   virtual void  Process();
 
+  void          ProbeStreams();
   bool          WaitForGSTPaused( int timeout_ms);
   bool          WaitForGSTPlaying(int timeout_ms);
   bool          WaitForWindowFullScreenVideo(int timeout_ms);
@@ -153,7 +154,9 @@ private:
   int                     m_audio_index;
   int                     m_audio_count;
   CStdString              m_audio_info;
+  uint32_t                m_audio_bits;
   uint32_t                m_audio_channels;
+  uint32_t                m_audio_samplerate;
   int                     m_video_index;
   int                     m_video_count;
   CStdString              m_video_info;
@@ -174,6 +177,7 @@ private:
   
   INT_GST_VARS            *m_gstvars;
   CCriticalSection        m_gst_csection;
-  CStdString              m_audiosink;
-  CStdString              m_videosink;
+  CStdString              m_audiosink_name;
+  CStdString              m_videosink_name;
+  CStdString              m_subtitlesink_name;
 };
