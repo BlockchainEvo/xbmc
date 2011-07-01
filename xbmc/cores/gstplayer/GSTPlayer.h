@@ -177,7 +177,7 @@ private:
   
   INT_GST_VARS            *m_gstvars;
   CCriticalSection        m_gst_csection;
+  CStdString              m_textsink_name;
   CStdString              m_audiosink_name;
   CStdString              m_videosink_name;
-  CStdString              m_subtitlesink_name;
 };
