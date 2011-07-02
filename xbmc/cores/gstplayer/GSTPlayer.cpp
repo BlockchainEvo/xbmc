@@ -40,7 +40,7 @@
 #include "utils/XMLUtils.h"
 
 #include <gst/gst.h>
-#include <gst/video/video.h>
+#include <gst/tag/tag.h>
 #include <gst/pbutils/missing-plugins.h>
 
 // GstPlayFlags flags from playbin2. It is the policy of GStreamer to
@@ -62,20 +62,20 @@ typedef enum {
 
 struct INT_GST_VARS
 {
-  bool        inited;
-  bool        ready;
-  gdouble     rate;
-  GstBus      *bus;
-  GMainLoop   *loop;
-  GstElement  *player;
-  GstElement  *textsink;
-  GstElement  *videosink;
-  GstElement  *audiosink;
+  bool                    inited;
+  bool                    ready;
+  gdouble                 rate;
+  GstBus                  *bus;
+  GMainLoop               *loop;
+  GstElement              *player;
+  GstElement              *textsink;
+  GstElement              *videosink;
+  GstElement              *audiosink;
 
-  std::string url;
-  bool        use_appsrc;
-  GstElement  *appsrc;
-  XFILE::CFile *cfile;
+  std::string             url;
+  bool                    use_appsrc;
+  GstElement              *appsrc;
+  XFILE::CFile            *cfile;
 
   std::vector<CStdString> acodec_name;
   std::vector<CStdString> vcodec_name;
@@ -84,6 +84,12 @@ struct INT_GST_VARS
   std::vector<CStdString> acodec_language;
   std::vector<CStdString> vcodec_language;
   std::vector<CStdString> tcodec_language;
+
+  unsigned int            subtitle_end;
+  CStdString              subtitle_text;
+  CStdString              video_title;
+
+  CCriticalSection        csection;
 };
 
 static bool testName(const CStdString codec, const char *name)
@@ -136,24 +142,7 @@ static const char *gstTagNameToVideoName(const char *gst_name)
   return text;
 }
 
-static const char *gstTagNameToLanguage(const char *gst_name)
-{
-  const char *text = NULL;
-  CStdString codec = gst_name;
-  codec.ToUpper();
-
-  if (testName(codec, "EN") || testName(codec, "ENG"))
-    text = "english";
-  else if (testName(codec, "RO"))
-    text = "romanian";
-  else if (testName(codec, "FR"))
-    text = "french";
-  else if (testName(codec, "NL"))
-    text = "dutch";
-
-  return text;
-}
-
+// ****************************************************************
 gboolean CGSTPlayerBusCallback(GstBus *bus, GstMessage *msg, CGSTPlayer *gstplayer)
 {
   INT_GST_VARS  *gstvars = gstplayer->GetGSTVars();
@@ -212,8 +201,11 @@ gboolean CGSTPlayerBusCallback(GstBus *bus, GstMessage *msg, CGSTPlayer *gstplay
           g_print("GStreamer: Message TAG from %s, containter format:%s\n",
             GST_MESSAGE_SRC_NAME(msg), tag);
         else if (gst_tag_list_get_string(tags, GST_TAG_TITLE, &tag))
+        {
+          gstvars->video_title = tag;
           g_print("GStreamer: Message TAG from %s, show name:%s\n",
             GST_MESSAGE_SRC_NAME(msg), tag);
+        }
         else
           g_print("GStreamer: Message TAG from %s\n", GST_MESSAGE_SRC_NAME(msg));
       }
@@ -285,10 +277,6 @@ gboolean CGSTPlayerBusCallback(GstBus *bus, GstMessage *msg, CGSTPlayer *gstplay
         gchar *rectangle = NULL;
         g_object_get(gstvars->videosink, "rectangle", &rectangle, NULL);
         g_object_get(gstvars->videosink, "gdl-plane", &gdl_plane, NULL);
-
-        g_print("GStreamer: Element %s prepare-gdl-plane: rectangle(%s), gdl-plane(%d)\n", 
-          GST_OBJECT_NAME(msg->src), rectangle, gdl_plane);
-
         g_free(rectangle);
       }
       else if (gst_structure_has_name(msg->structure, "playbin2-stream-changed"))
@@ -339,6 +327,7 @@ gboolean CGSTPlayerBusCallback(GstBus *bus, GstMessage *msg, CGSTPlayer *gstplay
   return true;
 }
 
+// ****************************************************************
 static void CGSTPlayerFeedData(GstElement *appsrc, guint size, CGSTPlayer *ctx)
 {
   // This push method is called by the need-data signal callback,
@@ -416,42 +405,36 @@ static void CGSTPlayerFoundSource(GObject *object, GObject *orig, GParamSpec *ps
   g_signal_connect(gstvars->appsrc, "seek-data", G_CALLBACK(CGSTPlayerSeekData), ctx);
 }
 
+// ****************************************************************
 static void CGSTPlayerSubsOnNewBuffer(GstElement *subs_sink, CGSTPlayer *ctx)
 {
-  g_print("GStreamer: CGSTPlayerSubsOnNewBuffer\n");
-  //INT_GST_VARS  *gstvars = ctx->GetGSTVars();
+  INT_GST_VARS  *gstvars = ctx->GetGSTVars();
   GstBuffer *buffer = NULL;
 
-  // get the text buffer
+  // get the text buffer, note that it is not null terminated
   g_signal_emit_by_name(subs_sink, "pull-buffer", &buffer);
   if (buffer)
   {
-    guint     size;
-    guint8    *data;
-    GstFormat format;
-    gint64    position;
-    GstClock  *clock;
-    GstClockTime base_time, running_time;
+    CSingleLock lock(gstvars->csection);
 
-    format = GST_FORMAT_TIME;
-    gst_element_query_position(subs_sink, &format, &position);
+    // use timestamps instead of gst_element_query_position
+    // as gstreamer sometimes does not update its internal 
+    // position as rapidly as we want the values.
+    gstvars->subtitle_end = CTimeUtils::GetTimeMS() + 4000;
 
-    clock = gst_element_get_clock(subs_sink);
-    base_time = gst_element_get_base_time(subs_sink);
-    running_time = gst_clock_get_time(clock) - base_time;
-    gst_object_unref(clock);
+    guint8 *data = GST_BUFFER_DATA(buffer);
+    guint   size = GST_BUFFER_SIZE(buffer);
 
-    data = GST_BUFFER_DATA(buffer);
-    size = GST_BUFFER_SIZE(buffer);
-
-    g_print("CGSTPlayerSubsOnNewBuffer: received a subtitle(%d)\n", size);
-
-    if (size > 1024)
-      size = 1024;
-    gst_util_dump_mem(data, size);
+    // sanity clamp the incoming text block
+    if (data && size < 4096)
+      gstvars->subtitle_text = std::string((char*)data, size);
+    else
+      gstvars->subtitle_text = "";
   }
 }
 
+// ****************************************************************
+// ****************************************************************
 CGSTPlayer::CGSTPlayer(IPlayerCallback &callback) 
   : IPlayer(callback),
   CThread(),
@@ -469,6 +452,7 @@ CGSTPlayer::CGSTPlayer(IPlayerCallback &callback)
   m_gstvars->textsink  = NULL;
   m_gstvars->videosink = NULL;
   m_gstvars->audiosink = NULL;
+  m_gstvars->subtitle_end = 0;
 
   gst_init(NULL, NULL);
 }
@@ -560,14 +544,12 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
 
     m_audio_index = -1;
     m_audio_count =  0;
-    m_audio_info  =  "none";
     m_audio_bits  =  0;
     m_audio_channels = 0;
     m_audio_samplerate = 0;
 
     m_video_index = -1;
     m_video_count =  0;
-    m_video_info  =  "none";
     m_video_fps   =  0.0;
     m_video_width =  0;
     m_video_height=  0;
@@ -616,7 +598,6 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
         //  appropriately.
         g_object_set(m_gstvars->videosink, "embed", true, NULL);
         #endif
-        g_object_set(m_gstvars->videosink, "message-forward", true, NULL);
       }
     }
     g_object_set(m_gstvars->player, "video-sink", m_gstvars->videosink, NULL);
@@ -628,7 +609,6 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
     {
       CLog::Log(LOGDEBUG, "CGSTPlayer::OpenFile: using default autoaudiosink");
       m_gstvars->audiosink = gst_element_factory_make("autoaudiosink", NULL);
-      g_object_set(m_gstvars->audiosink, "message-forward", true, NULL);
     }
     g_object_set(m_gstvars->player, "audio-sink", m_gstvars->audiosink, NULL);
 
@@ -749,7 +729,7 @@ bool CGSTPlayer::IsPlaying() const
 
 void CGSTPlayer::Pause()
 {
-  CSingleLock lock(m_gst_csection);
+  CSingleLock lock(m_csection);
 
   if (m_StopPlaying)
     return;
@@ -758,6 +738,7 @@ void CGSTPlayer::Pause()
   {
     if (m_gstvars->ready)
     {
+      CSingleLock lock(m_gstvars->csection);
       gst_element_set_state(m_gstvars->player, GST_STATE_PLAYING);
       gst_element_get_state(m_gstvars->player, NULL, NULL, 100 * GST_MSECOND);
     }
@@ -767,6 +748,7 @@ void CGSTPlayer::Pause()
   {
     if (m_gstvars->ready)
     {
+      CSingleLock lock(m_gstvars->csection);
       gst_element_set_state(m_gstvars->player, GST_STATE_PAUSED);
       gst_element_get_state(m_gstvars->player, NULL, NULL, 100 * GST_MSECOND);
     }
@@ -872,7 +854,11 @@ bool CGSTPlayer::SeekScene(bool bPlus)
 
 void CGSTPlayer::SeekPercentage(float fPercent)
 {
-  CSingleLock lock(m_gst_csection);
+  fPercent /= 100.0f;
+  fPercent += (float)m_elapsed_ms/(float)m_duration_ms;
+  // convert to milliseconds
+  int64_t seek_ms = m_duration_ms * fPercent;
+  SeekTime(seek_ms);
 }
 
 float CGSTPlayer::GetPercentage()
@@ -887,7 +873,7 @@ float CGSTPlayer::GetPercentage()
 void CGSTPlayer::SetVolume(long nVolume)
 {
   // nVolume is a milliBels from -6000 (-60dB or mute) to 0 (0dB or full volume)
-  CSingleLock lock(m_gst_csection);
+  CSingleLock lock(m_csection);
 
   float volume;
   if (nVolume == -6000) {
@@ -898,11 +884,16 @@ void CGSTPlayer::SetVolume(long nVolume)
     // Convert what XBMC gives into 0.0 -> 1.0 scale playbin2 uses
     volume = ((1 - volume) - 0.4f) * 1.6666f;
   }
-  g_object_set(m_gstvars->player, "volume", volume, NULL);
+  if (m_gstvars->ready)
+  {
+    CSingleLock lock(m_gstvars->csection);
+    g_object_set(m_gstvars->player, "volume", volume, NULL);
+  }
 }
 
 void CGSTPlayer::GetAudioInfo(CStdString &strAudioInfo)
 {
+  CSingleLock lock(m_gstvars->csection);
   m_audio_info.Format("Audio stream (%d) [%s-%s]",
     m_audio_index, m_gstvars->acodec_name[m_audio_index], m_gstvars->acodec_language[m_audio_index]);
   strAudioInfo = m_audio_info;
@@ -910,6 +901,7 @@ void CGSTPlayer::GetAudioInfo(CStdString &strAudioInfo)
 
 void CGSTPlayer::GetVideoInfo(CStdString &strVideoInfo)
 {
+  CSingleLock lock(m_gstvars->csection);
   m_video_info.Format("Video stream (%d) [%s-%s]",
     m_video_index, m_gstvars->vcodec_name[m_video_index], m_gstvars->vcodec_language[m_video_index]);
   strVideoInfo = m_video_info;
@@ -932,21 +924,18 @@ int CGSTPlayer::GetAudioStream()
 
 void CGSTPlayer::GetAudioStreamName(int iStream, CStdString &strStreamName)
 {
-  CSingleLock lock(m_gst_csection);
+  CSingleLock lock(m_gstvars->csection);
   
   strStreamName = m_gstvars->acodec_name[iStream];
-  g_print("CGSTPlayer::GetAudioStreamName iStream(%d), strStreamName(%s)\n",
-    iStream, strStreamName.c_str());
 }
  
 void CGSTPlayer::SetAudioStream(int SetAudioStream)
 {
   if (m_gstvars->ready)
   {
-    CSingleLock lock(m_gst_csection);
-
     if (m_audio_count)
     {
+      CSingleLock lock(m_gstvars->csection);
       m_audio_index = SetAudioStream;
       g_object_set(m_gstvars->player, "current-audio", m_audio_index, NULL);
     }
@@ -965,7 +954,7 @@ int CGSTPlayer::GetSubtitle()
 
 void CGSTPlayer::GetSubtitleName(int iStream, CStdString &strStreamName)
 {
-  CSingleLock lock(m_gst_csection);
+  CSingleLock lock(m_gstvars->csection);
   strStreamName = m_gstvars->tcodec_language[iStream];
 }
 
@@ -973,10 +962,9 @@ void CGSTPlayer::SetSubtitle(int iStream)
 {
   if (m_gstvars->ready)
   {
-    CSingleLock lock(m_gst_csection);
-
     if (m_subtitle_count)
     {
+      CSingleLock lock(m_gstvars->csection);
       m_subtitle_index = iStream;
       g_object_set(m_gstvars->player, "current-text", m_subtitle_index, NULL);
     }
@@ -990,17 +978,17 @@ bool CGSTPlayer::GetSubtitleVisible()
 
 void CGSTPlayer::SetSubtitleVisible(bool bVisible)
 {
-  CSingleLock lock(m_gst_csection);
-
   m_subtitle_show = bVisible;
   g_settings.m_currentVideoSettings.m_SubtitleOn = bVisible;
 
   if (m_gstvars->ready)
   {
     if (m_subtitle_count)
+    {
+      CSingleLock lock(m_gstvars->csection);
       g_object_set(m_gstvars->player, "current-text", m_subtitle_index, NULL);
+    }
   }
-  g_print("CGSTPlayer::SetSubtitleVisible(%d)\n", bVisible);
 }
 
 int CGSTPlayer::AddSubtitle(const CStdString& strSubPath)
@@ -1086,11 +1074,9 @@ float CGSTPlayer::GetActualFPS()
 
 void CGSTPlayer::SeekTime(__int64 seek_ms)
 {
-  g_print("CGSTPlayer::SeekTime(%lld)\n", seek_ms);
-
   if (m_gstvars->ready)
   {
-    CSingleLock lock(m_gst_csection);
+    CSingleLock lock(m_gstvars->csection);
 
     GstState state;
     gst_element_get_state(m_gstvars->player, &state, NULL, 100 * GST_MSECOND);
@@ -1114,7 +1100,7 @@ void CGSTPlayer::SeekTime(__int64 seek_ms)
       }
     }
     // gst time units are nanoseconds.
-    gint64 seek_ns = seek_ms * GST_MSECOND;
+    gint64 seek_ns = seek_ms * 1e6;
     gst_element_seek(m_gstvars->player,
 			m_gstvars->rate, GST_FORMAT_TIME, 
       (GstSeekFlags)(GST_SEEK_FLAG_FLUSH | GST_SEEK_FLAG_ACCURATE),
@@ -1124,6 +1110,8 @@ void CGSTPlayer::SeekTime(__int64 seek_ms)
     gst_element_get_state(m_gstvars->player, NULL, NULL, 100 * GST_MSECOND);
     // restart the playback
     gst_element_set_state(m_gstvars->player, GST_STATE_PLAYING);
+    // remove any displaying subtitles
+    m_gstvars->subtitle_end = 0;
   }
 
   m_callback.OnPlayBackSeek((int)seek_ms, (int)(seek_ms - m_elapsed_ms));
@@ -1131,28 +1119,28 @@ void CGSTPlayer::SeekTime(__int64 seek_ms)
 
 __int64 CGSTPlayer::GetTime()
 {
-  CSingleLock lock(m_gst_csection);
-
   if (m_gstvars->ready)
   {
-    gint64 elapsed_ns = 0;
+    CSingleLock lock(m_gstvars->csection);
+
+    gint64 elapsed_ns;
     GstFormat fmt = GST_FORMAT_TIME;
     if (gst_element_query_position(m_gstvars->player, &fmt, &elapsed_ns))
-      m_elapsed_ms = elapsed_ns / GST_MSECOND;
+      m_elapsed_ms = elapsed_ns / 1e6;
   }
   return m_elapsed_ms;
 }
 
 int CGSTPlayer::GetTotalTime()
 {
-  CSingleLock lock(m_gst_csection);
-
   if (m_gstvars->ready)
   {
+    CSingleLock lock(m_gstvars->csection);
+
     gint64 duration_ns = 0;
     GstFormat fmt = GST_FORMAT_TIME;
     if (gst_element_query_duration(m_gstvars->player, &fmt, &duration_ns))
-      m_duration_ms = duration_ns / GST_MSECOND;
+      m_duration_ms = duration_ns / 1e6;
   }
 	return m_duration_ms / 1000;
 }
@@ -1192,11 +1180,13 @@ int CGSTPlayer::GetSampleRate()
 
 CStdString CGSTPlayer::GetAudioCodecName()
 {
+  CSingleLock lock(m_gstvars->csection);
   return m_gstvars->acodec_name[m_audio_index];
 }
 
 CStdString CGSTPlayer::GetVideoCodecName()
 {
+  CSingleLock lock(m_gstvars->csection);
   return m_gstvars->vcodec_name[m_video_index];
 }
 
@@ -1221,16 +1211,16 @@ void CGSTPlayer::ToFFRW(int iSpeed)
   if (m_StopPlaying)
     return;
 
-  CSingleLock lock(m_gst_csection);
   if (m_speed != iSpeed)
   {
+    CSingleLock lock(m_gstvars->csection);
 /*
     // TODO: figure out why FF/RW are not working.
     g_print("CGSTPlayer::ToFFRW: iSpeed(%d)\n", iSpeed);
 
     if (m_gstvars->ready)
     {
-      gint64 elapsed_ns = 0;
+      gint64 elapsed_ns;
       GstFormat fmt = GST_FORMAT_TIME;
       if (!gst_element_query_position(m_gstvars->player, &fmt, &elapsed_ns))
         elapsed_ns = GST_CLOCK_TIME_NONE;
@@ -1252,6 +1242,38 @@ void CGSTPlayer::ToFFRW(int iSpeed)
 */
     m_speed = iSpeed;
   }
+}
+
+bool CGSTPlayer::GetCurrentSubtitle(CStdString& strSubtitle)
+{
+  strSubtitle = "";
+
+  if (m_gstvars->ready)
+  {
+    CSingleLock lock(m_gstvars->csection);
+
+    if (m_gstvars->subtitle_end < CTimeUtils::GetTimeMS())
+      m_gstvars->subtitle_text = "";
+    
+    strSubtitle = m_gstvars->subtitle_text;
+  }
+
+  return !strSubtitle.IsEmpty();
+}
+  
+CStdString CGSTPlayer::GetPlayerState()
+{
+  return "";
+}
+
+bool CGSTPlayer::SetPlayerState(CStdString state)
+{
+  return false;
+}
+
+CStdString CGSTPlayer::GetPlayingTitle()
+{
+  return m_gstvars->video_title;
 }
 
 void CGSTPlayer::OnStartup()
@@ -1366,11 +1388,6 @@ void CGSTPlayer::ProbeStreams()
   m_video_index = 0;
   m_subtitle_index = 0;
 
-  g_object_get(G_OBJECT(m_gstvars->player),
-    "n-audio", &m_audio_count, "n-video", &m_video_count, "n-text", &m_subtitle_count, NULL);
-  g_print("CGSTPlayer::Process: n-audio(%d), n-video(%d), n-text(%d)\n",
-    m_audio_count, m_video_count, m_subtitle_count);
-
   if (m_video_count)
     g_object_set(m_gstvars->player, "current-video", m_video_index, NULL);
   if (m_audio_count)
@@ -1410,9 +1427,6 @@ void CGSTPlayer::ProbeStreams()
             m_video_width  = video_width;
             m_video_height = video_height;
           }
-
-          g_print("CGSTPlayer::Process: video caps(%s)\n", caps_str);
-
           gst_caps_unref(caps);
         }
         gst_object_unref(pad);
@@ -1427,9 +1441,8 @@ void CGSTPlayer::ProbeStreams()
         gst_tag_list_get_string(tags, GST_TAG_VIDEO_CODEC,   &codec);
         gst_tag_list_free(tags);
 
-        g_print("CGSTPlayer::Process: video language(%s), codec(%s)\n", language, codec);
         m_gstvars->vcodec_name.push_back(gstTagNameToVideoName(codec));
-        m_gstvars->vcodec_language.push_back(gstTagNameToLanguage(language));
+        m_gstvars->vcodec_language.push_back(gst_tag_get_language_name(language));
       }
       else
       {
@@ -1451,7 +1464,6 @@ void CGSTPlayer::ProbeStreams()
           gint width, channels, samplerate;
           CStdString caps_str = gst_caps_to_string(caps);
           GstStructure *structure = gst_caps_get_structure(caps, 0);
-          g_print("CGSTPlayer::Process: audio caps(%s)\n", caps_str.c_str());
 
           if (!gst_structure_get_int(structure, "width", &width))
             width = 0;
@@ -1480,9 +1492,8 @@ void CGSTPlayer::ProbeStreams()
         gst_tag_list_get_string(tags, GST_TAG_AUDIO_CODEC,   &codec);
         gst_tag_list_free(tags);
 
-        g_print("CGSTPlayer::Process: audio language(%s), codec(%s)\n", language, codec);
         m_gstvars->acodec_name.push_back(gstTagNameToAudioName(codec));
-        m_gstvars->acodec_language.push_back(gstTagNameToLanguage(language));
+        m_gstvars->acodec_language.push_back(gst_tag_get_language_name(language));
       }
       else
       {
@@ -1502,13 +1513,10 @@ void CGSTPlayer::ProbeStreams()
         if (caps)
         {
           gchar *caps_str = gst_caps_to_string(caps);
-          g_print("CGSTPlayer::Process: subtitle caps(%s)\n", caps_str);
           gst_caps_unref(caps);
         }
         gst_object_unref(pad);
       }
-      else
-        g_print("CGSTPlayer::Process: subtitle get-text-pad not found\n");
 
       GstTagList *tags = NULL;
       g_signal_emit_by_name(m_gstvars->player, "get-text-tags", i, &tags);
@@ -1520,9 +1528,8 @@ void CGSTPlayer::ProbeStreams()
         gst_tag_list_get_string(tags, GST_TAG_SUBTITLE_CODEC, &codec);
         gst_tag_list_free(tags);
 
-        g_print("CGSTPlayer::Process: subtitles: language(%s), codec(%s)\n", language, codec);
         m_gstvars->tcodec_name.push_back("");
-        m_gstvars->tcodec_language.push_back(gstTagNameToLanguage(language));
+        m_gstvars->tcodec_language.push_back(gst_tag_get_language_name(language));
       }
       else
       {

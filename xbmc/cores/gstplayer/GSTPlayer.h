@@ -122,12 +122,12 @@ public:
   virtual void  DoAudioWork()                                     {};
   virtual bool  OnAction(const CAction &action)                   {return false;};
 
-  virtual bool  GetCurrentSubtitle(CStdString& strSubtitle)       {strSubtitle = ""; return false;}
+  virtual bool  GetCurrentSubtitle(CStdString& strSubtitle);
   //returns a state that is needed for resuming from a specific time
-  virtual CStdString GetPlayerState()                             {return "";};
-  virtual bool  SetPlayerState(CStdString state)                  {return false;};
+  virtual CStdString GetPlayerState();
+  virtual bool  SetPlayerState(CStdString state);
   
-  virtual CStdString GetPlayingTitle()                            {return "";};
+  virtual CStdString GetPlayingTitle();
   
   INT_GST_VARS* GetGSTVars() {return m_gstvars;};
 
@@ -148,7 +148,8 @@ private:
   CEvent                  m_ready;
   CFileItem               m_item;
   CPlayerOptions          m_options;
-  
+  CCriticalSection        m_csection;
+
   int64_t                 m_elapsed_ms;
   int64_t                 m_duration_ms;
   int                     m_audio_index;
@@ -163,7 +164,7 @@ private:
   int                     m_subtitle_index;
   int                     m_subtitle_count;
   bool                    m_subtitle_show;
-  
+
   int                     m_chapter_count;
   struct chapters
   {
@@ -176,7 +177,6 @@ private:
   int                     m_video_height;
   
   INT_GST_VARS            *m_gstvars;
-  CCriticalSection        m_gst_csection;
   CStdString              m_textsink_name;
   CStdString              m_audiosink_name;
   CStdString              m_videosink_name;
