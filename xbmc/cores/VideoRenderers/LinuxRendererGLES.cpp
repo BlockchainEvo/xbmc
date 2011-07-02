@@ -175,7 +175,7 @@ bool CLinuxRendererGLES::Configure(unsigned int width, unsigned int height, unsi
     m_buffers[i].image.flags = 0;
 
   m_iLastRenderBuffer = -1;
-  m_BYPASS_RenderUpdated = false;
+  m_BYPASS_RenderUpdated = 4;
   return true;
 }
 
@@ -401,14 +401,15 @@ void CLinuxRendererGLES::RenderUpdate(bool clear, DWORD flags, DWORD alpha)
 
   if (m_renderMethod & RENDER_BYPASS)
   {
-    //if (!m_BYPASS_RenderUpdated)
+    if (clear || m_BYPASS_RenderUpdated)
     {
       g_graphicsContext.BeginPaint();
       g_graphicsContext.Clear();
       g_graphicsContext.EndPaint();
       glFinish();
+      if (m_BYPASS_RenderUpdated)
+        m_BYPASS_RenderUpdated--;
     }
-    m_BYPASS_RenderUpdated = true;
     return;
   }
 

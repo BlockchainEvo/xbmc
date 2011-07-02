@@ -1328,7 +1328,7 @@ void CGSTPlayer::Process()
 
       // big fake out here, we do not know the video width, height yet
       // so setup renderer to full display size and tell it we are doing
-      // bypass. This tell it to get out of the way as amp will be doing
+      // bypass. This tell it to get out of the way as hardware will be doing
       // the actual video rendering in a video plane that is under the GUI
       // layer.
       int width = g_graphicsContext.GetWidth();
