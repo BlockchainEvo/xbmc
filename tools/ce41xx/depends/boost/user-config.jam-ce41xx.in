@@ -1,4 +1,4 @@
-using gcc : : i686-cm-linux-gcc :
-  <cflags>"-fvisibility=hidden -fvisibility-inlines-hidden -DBOOST_AC_USE_PTHREADS -DBOOST_SP_USE_PTHREADS"
-  <cxxflags>"-fvisibility=hidden -fvisibility-inlines-hidden -DBOOST_AC_USE_PTHREADS -DBOOST_SP_USE_PTHREADS"
+using gcc : : i686-cm-linux-g++ :
+  <cflags>"-fvisibility-inlines-hidden -DBOOST_AC_USE_PTHREADS -DBOOST_SP_USE_PTHREADS"
+  <cxxflags>"-fvisibility-inlines-hidden -DBOOST_AC_USE_PTHREADS -DBOOST_SP_USE_PTHREADS"
 ;
