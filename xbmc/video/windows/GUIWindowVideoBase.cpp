@@ -96,12 +96,6 @@ CGUIWindowVideoBase::~CGUIWindowVideoBase()
 
 bool CGUIWindowVideoBase::OnAction(const CAction &action)
 {
-  if (action.GetID() == ACTION_SHOW_PLAYLIST)
-  {
-    OutputDebugString("activate guiwindowvideoplaylist!\n");
-    g_windowManager.ActivateWindow(WINDOW_VIDEO_PLAYLIST);
-    return true;
-  }
   if (action.GetID() == ACTION_SCAN_ITEM)
     return OnContextButton(m_viewControl.GetSelectedItem(),CONTEXT_BUTTON_SCAN);
 
@@ -850,13 +844,18 @@ int  CGUIWindowVideoBase::GetResumeItemOffset(const CFileItem *item)
   }
   else if (!item->IsNFO() && !item->IsPlayList())
   {
-    CBookmark bookmark;
-    CStdString strPath = item->m_strPath;
-    if ((item->IsVideoDb() || item->IsDVD()) && item->HasVideoInfoTag())
-      strPath = item->GetVideoInfoTag()->m_strFileNameAndPath;
+    if (item->HasVideoInfoTag() && item->GetVideoInfoTag()->m_resumePoint.timeInSeconds > 0.0)
+      startoffset = (long)(item->GetVideoInfoTag()->m_resumePoint.timeInSeconds*75);
+    else
+    {
+      CBookmark bookmark;
+      CStdString strPath = item->m_strPath;
+      if ((item->IsVideoDb() || item->IsDVD()) && item->HasVideoInfoTag())
+        strPath = item->GetVideoInfoTag()->m_strFileNameAndPath;
 
-    if (db.GetResumeBookMark(strPath, bookmark))
-      startoffset = (long)(bookmark.timeInSeconds*75);
+      if (db.GetResumeBookMark(strPath, bookmark))
+        startoffset = (long)(bookmark.timeInSeconds*75);
+    }
   }
   db.Close();
 
@@ -1024,19 +1023,24 @@ bool CGUIWindowVideoBase::OnResumeItem(int iItem)
   if (iItem < 0 || iItem >= m_vecItems->Size()) return true;
   CFileItemPtr item = m_vecItems->Get(iItem);
 
-  if (!item->m_bIsFolder)
+  if (item->m_bIsFolder)
   {
-    CStdString resumeString = GetResumeString(*item);
-    if (!resumeString.IsEmpty())
-    {
-      CContextButtons choices;
-      choices.Add(SELECT_ACTION_RESUME, resumeString);
-      choices.Add(SELECT_ACTION_PLAY, 12021);   // Start from beginning
-      int value = CGUIDialogContextMenu::ShowAndGetChoice(choices);
-      if (value < 0)
-        return true;
-      return OnFileAction(iItem, value);
-    }
+    // resuming directories isn't supported yet. play.
+    PlayItem(iItem);
+    return true;
+  }
+
+  CStdString resumeString = GetResumeString(*item);
+
+  if (!resumeString.IsEmpty())
+  {
+    CContextButtons choices;
+    choices.Add(SELECT_ACTION_RESUME, resumeString);
+    choices.Add(SELECT_ACTION_PLAY, 12021);   // Start from beginning
+    int value = CGUIDialogContextMenu::ShowAndGetChoice(choices);
+    if (value < 0)
+      return true;
+    return OnFileAction(iItem, value);
   }
 
   return OnFileAction(iItem, SELECT_ACTION_PLAY);

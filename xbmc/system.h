@@ -64,6 +64,11 @@
 #define HAS_FILESYSTEM_VTP
 #define HAS_FILESYSTEM_HTSP
 
+#ifdef HAVE_LIBNFS
+  #define HAS_FILESYSTEM_NFS
+#endif
+
+
 /**********************
  * Non-free Components
  **********************/
@@ -93,6 +98,7 @@
 #define HAS_LIBRTMP
 #define HAVE_LIBBLURAY
 #define HAS_ASAP_CODEC
+#define HAVE_YAJL_YAJL_VERSION_H
 #endif
 
 /*****************
@@ -198,9 +204,6 @@
  ****************************************/
 
 #ifdef _WIN32
-#if !(defined(_WINSOCKAPI_) || defined(_WINSOCK_H))
-#include <winsock2.h>
-#endif
 #include <windows.h>
 #define DIRECTINPUT_VERSION 0x0800
 #include "mmsystem.h"
@@ -218,13 +221,8 @@
 #endif
 
 #ifdef _LINUX
-#include <unistd.h>
 #include <time.h>
 #include <sys/time.h>
-#include <netdb.h>
-#include <arpa/inet.h>
-#include <netinet/in.h>
-#include <sys/socket.h>
 #include <sys/types.h>
 #include <errno.h>
 #include "PlatformInclude.h"

@@ -38,15 +38,20 @@ public:
 #ifdef _WIN32
 #include "windows/WinEventsWin32.h"
 #define CWinEvents CWinEventsWin32
+#endif
 
+#ifdef _LINUX
+#if defined(__APPLE__)
+#if defined(__arm__)
+#include "osx/WinEventsIOS.h"
+#define CWinEvents CWinEventsIOS
+#else
+#include "osx/WinEventsOSX.h"
+#define CWinEvents CWinEventsOSX
+#endif
 #elif defined(HAS_INTELCE)
 #include "WinEventsIntelCE.h"
 #define CWinEvents CWinEventsIntelCE
-
-#elif _LINUX
-#if defined(__APPLE__) && defined(__arm__)
-#include "osx/WinEventsIOS.h"
-#define CWinEvents CWinEventsIOS
 #else
 #include "WinEventsSDL.h"
 #define CWinEvents CWinEventsSDL

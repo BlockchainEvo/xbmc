@@ -64,18 +64,18 @@ public:
   CRetakeLock(CSharedSection &section, bool immidiate = true, CCriticalSection &owned = g_graphicsContext)
     : m_owned(owned)
   {
-    m_count = ExitCriticalSection(m_owned);
+    m_count = m_owned.exit();
     m_lock  = new T(section);
     if(immidiate)
     {
-      RestoreCriticalSection(m_owned, m_count);
+      m_owned.restore(m_count);
       m_count = 0;
     }
   }
   ~CRetakeLock()
   {
     delete m_lock;
-    RestoreCriticalSection(m_owned, m_count);
+    m_owned.restore(m_count);
   }
   void Leave() { m_lock->Leave(); }
   void Enter() { m_lock->Enter(); }
@@ -111,7 +111,7 @@ CXBMCRenderManager::~CXBMCRenderManager()
 /* These is based on CurrentHostCounter() */
 double CXBMCRenderManager::GetPresentTime()
 {
-  return CDVDClock::GetAbsoluteClock() / DVD_TIME_BASE;
+  return CDVDClock::GetAbsoluteClock(false) / DVD_TIME_BASE;
 }
 
 static double wrap(double x, double minimum, double maximum)
