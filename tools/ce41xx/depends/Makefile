@@ -9,7 +9,7 @@ SUBDIRS = \
 	libpng libjpeg-turbo tiff jasper \
 	libogg libvorbis libflac libmad fribidi libwavpack libmpeg2 \
 	enca libass libcdio libsamplerate \
-	libmicrohttpd libmodplug librtmp libxml2 libbluray \
+	libmicrohttpd libmodplug librtmp libxml2 libbluray yajl \
 	liboil libxml2 glib-2.0 liba52 libdca gstreamer \
 	gstreamer-plugins-base gstreamer-plugins-good \
 	gstreamer-plugins-bad gstreamer-plugin-ugly \
