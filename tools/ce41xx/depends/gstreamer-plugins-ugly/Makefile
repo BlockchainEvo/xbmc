@@ -3,7 +3,7 @@ include ../intel-sdk.mk
 
 # lib name, version
 LIBNAME=gst-plugins-ugly
-VERSION=0.10.15
+VERSION=0.10.18
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
 

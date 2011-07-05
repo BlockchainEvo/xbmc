@@ -3,7 +3,7 @@ include ../intel-sdk.mk
 
 # lib name, version
 LIBNAME=gst-plugins-bad
-VERSION=0.10.19
+VERSION=0.10.22
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
 

@@ -3,7 +3,8 @@ include ../intel-sdk.mk
 
 # lib name, version
 LIBNAME=gstreamer
-VERSION=0.10.30
+#VERSION=0.10.30
+VERSION=0.10.35
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
 
