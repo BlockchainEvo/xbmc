@@ -3,11 +3,11 @@ include ../intel-sdk.mk
 
 # lib name, version
 LIBNAME=glib
-VERSION=2.22.5
+VERSION=2.24.2
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.bz2
 
-BASE_URL=http://ftp.acc.umu.se/pub/gnome/sources/glib/2.22
+BASE_URL=http://ftp.acc.umu.se/pub/gnome/sources/glib/2.24
 
 # configuration settings
 # convert filenames from locale encoding to UTF-8
