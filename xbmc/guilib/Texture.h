@@ -82,6 +82,7 @@ public:
   unsigned int GetTextureHeight() const { return m_textureHeight; }
   unsigned int GetWidth() const { return m_imageWidth; }
   unsigned int GetHeight() const { return m_imageHeight; }
+  unsigned int GetFormat() const { return m_format; }
   int GetOrientation() const { return m_orientation; }
 
   void Update(unsigned int width, unsigned int height, unsigned int pitch, unsigned int format, const unsigned char *pixels, bool loadToGPU);

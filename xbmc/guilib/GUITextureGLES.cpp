@@ -96,13 +96,19 @@ void CGUITextureGLES::Begin(color_t color)
   }
   else
   {
-    if ( hasAlpha )
+    if ((texture->GetFormat() & XB_FMT_R8G8B8) == 0)
     {
-      g_Windowing.EnableGUIShader(SM_TEXTURE);
+      if ( hasAlpha )
+        g_Windowing.EnableGUIShader(SM_TEXTURE);
+      else
+        g_Windowing.EnableGUIShader(SM_TEXTURE_NOBLEND);
     }
     else
     {
-      g_Windowing.EnableGUIShader(SM_TEXTURE_NOBLEND);
+      if ( hasAlpha )
+        g_Windowing.EnableGUIShader(SM_TEXTURE_RGBA_BLENDCOLOR);
+      else
+        g_Windowing.EnableGUIShader(SM_TEXTURE_RGBA);
     }
   }
 

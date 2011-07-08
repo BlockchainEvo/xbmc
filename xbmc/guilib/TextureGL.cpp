@@ -92,7 +92,7 @@ void CGLTexture::LoadToGPU()
   }
 
   GLenum format;
-
+  GLint numcomponents;
   switch (m_format)
   {
   case XB_FMT_DXT1:
@@ -105,15 +105,20 @@ void CGLTexture::LoadToGPU()
   case XB_FMT_DXT5_YCoCg:
     format = GL_COMPRESSED_RGBA_S3TC_DXT5_EXT;
     break;
+  case XB_FMT_R8G8B8:
+    format = GL_RGB;
+    numcomponents = GL_RGB;
+    break;
   case XB_FMT_A8R8G8B8:
   default:
     format = GL_BGRA;
+    numcomponents = GL_RGBA;
     break;
   }
 
   if ((m_format & XB_FMT_DXT_MASK) == 0)
   {
-    glTexImage2D(GL_TEXTURE_2D, 0, 4, m_textureWidth, m_textureHeight, 0,
+    glTexImage2D(GL_TEXTURE_2D, 0, numcomponents , m_textureWidth, m_textureHeight, 0,
       format, GL_UNSIGNED_BYTE, m_pixels);
   }
   else
@@ -132,8 +137,22 @@ void CGLTexture::LoadToGPU()
   glTexImage2D(GL_TEXTURE_2D, 0, GL_BGRA_EXT, m_textureWidth, m_textureHeight, 0,
 		GL_BGRA_EXT, GL_UNSIGNED_BYTE, m_pixels);
 #elif HAS_GLES == 2
-  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_textureWidth, m_textureHeight, 0,
-		GL_RGBA, GL_UNSIGNED_BYTE, m_pixels);
+  GLenum format;
+  GLint numcomponents;
+  switch (m_format)
+  {
+  case XB_FMT_R8G8B8:
+    format = GL_RGB;
+    numcomponents = GL_RGB;
+    break;
+  default:
+    format = GL_RGBA;
+    numcomponents = GL_RGBA;
+    break;
+  }
+
+  glTexImage2D(GL_TEXTURE_2D, 0, numcomponents, m_textureWidth, m_textureHeight, 0,
+		format, GL_UNSIGNED_BYTE, m_pixels);
 #endif
 
 #endif
