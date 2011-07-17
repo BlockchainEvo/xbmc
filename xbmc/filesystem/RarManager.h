@@ -41,10 +41,10 @@ class CFileItemList;
 #define RAR_DEFAULT_CACHE "special://temp/"
 #define RAR_DEFAULT_PASSWORD ""
 
-class CFileInfo{
+class CRarFileInfo{
 public:
-  CFileInfo();
-  ~CFileInfo();
+  CRarFileInfo();
+  ~CRarFileInfo();
   CStdString m_strCachedPath;
   CStdString m_strPathInRar;
   bool  m_bAutoDel;
@@ -76,7 +76,7 @@ public:
                       const CStdString& strPathInRar = "");
   bool GetFilesInRar(CFileItemList& vecpItems, const CStdString& strRarPath,
                      bool bMask=true, const CStdString& strPathInRar="");
-  CFileInfo* GetFileInRar(const CStdString& strRarPath, const CStdString& strPathInRar);
+  CRarFileInfo* GetFileInRar(const CStdString& strRarPath, const CStdString& strPathInRar);
   bool IsFileInRar(bool& bResult, const CStdString& strRarPath, const CStdString& strPathInRar);
   void ClearCache(bool force=false);
   void ClearCachedFile(const CStdString& strRarPath, const CStdString& strPathInRar);
@@ -84,7 +84,7 @@ public:
 protected:
 
   bool ListArchive(const CStdString& strRarPath, ArchiveList_struct* &pArchiveList);
-  std::map<CStdString, std::pair<ArchiveList_struct*,std::vector<CFileInfo> > > m_ExFiles;
+  std::map<CStdString, std::pair<ArchiveList_struct*,std::vector<CRarFileInfo> > > m_ExFiles;
   CCriticalSection m_CritSection;
 
   int64_t CheckFreeSpace(const CStdString& strDrive);

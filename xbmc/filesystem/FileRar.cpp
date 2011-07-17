@@ -165,7 +165,7 @@ bool CFileRar::Open(const CURL& url)
       m_bOpen = true;
 
       // perform 'noidx' check
-      CFileInfo* pFile = g_RarManager.GetFileInRar(m_strRarPath,m_strPathInRar);
+      CRarFileInfo* pFile = g_RarManager.GetFileInRar(m_strRarPath,m_strPathInRar);
       if (pFile)
       {
         if (pFile->m_iIsSeekable == -1)
