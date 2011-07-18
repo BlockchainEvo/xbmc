@@ -236,8 +236,6 @@ bool CTextureBundleXBT::ConvertFrameToTexture(const CStdString& name, CXBTFFrame
   *ppTexture = new CTexture();
   (*ppTexture)->LoadFromMemory(frame.GetWidth(), frame.GetHeight(), 0, frame.GetFormat(), buffer);
 
-  delete[] buffer;
-
   return true;
 }
 

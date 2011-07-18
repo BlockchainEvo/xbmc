@@ -96,8 +96,12 @@ void CBaseTexture::Update(unsigned int width, unsigned int height, unsigned int 
   { // compressed format that we don't support
     Allocate(width, height, XB_FMT_A8R8G8B8);
     CDDSImage::Decompress(m_pixels, std::min(width, m_textureWidth), std::min(height, m_textureHeight), GetPitch(m_textureWidth), pixels, format);
+    ClampToEdge();
+    delete[] pixels;
   }
-  else
+  else if (!g_Windowing.SupportsNPOT((m_format & XB_FMT_DXT_MASK) != 0) ||
+        width > g_Windowing.GetMaxTextureSize() ||
+        height > g_Windowing.GetMaxTextureSize() )
   {
     Allocate(width, height, format);
 
@@ -119,8 +123,17 @@ void CBaseTexture::Update(unsigned int width, unsigned int height, unsigned int 
         dst += dstPitch;
       }
     }
+    ClampToEdge();
+    delete[] pixels;
   }
-  ClampToEdge();
+  else
+  {
+    // We already have a suitable image that does not need to be modified
+    // Don't delete, the dtor handles it.
+    m_textureWidth = width;
+    m_textureHeight = height;
+    m_pixels=(unsigned char *) pixels;
+  }
 
   if (loadToGPU)
     LoadToGPU();
