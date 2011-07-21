@@ -1,5 +1,6 @@
 SRCS=	\
-	GSTPlayer.cpp
+	GSTPlayer.cpp \
+	CGST_Appsrc.cpp
 
 LIB=	GSTPlayer.a
 

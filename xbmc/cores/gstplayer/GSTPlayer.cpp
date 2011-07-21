@@ -23,6 +23,7 @@
 
 #if defined (HAVE_LIBGSTREAMER)
 #include "GSTPlayer.h"
+#include "CGST_Appsrc.h"
 #include "Application.h"
 #include "FileItem.h"
 #include "cores/VideoRenderers/RenderManager.h"
@@ -59,7 +60,6 @@ typedef enum {
   GST_PLAY_FLAG_DEINTERLACE   = (1 << 9)
 } GstPlayFlags;
 
-
 struct INT_GST_VARS
 {
   bool                    inited;
@@ -72,10 +72,7 @@ struct INT_GST_VARS
   GstElement              *videosink;
   GstElement              *audiosink;
 
-  std::string             url;
-  bool                    use_appsrc;
-  GstElement              *appsrc;
-  XFILE::CFile            *cfile;
+  CGST_Appsrc             *appsrc;
 
   std::vector<CStdString> acodec_name;
   std::vector<CStdString> vcodec_name;
@@ -328,84 +325,6 @@ gboolean CGSTPlayerBusCallback(GstBus *bus, GstMessage *msg, CGSTPlayer *gstplay
 }
 
 // ****************************************************************
-static void CGSTPlayerFeedData(GstElement *appsrc, guint size, CGSTPlayer *ctx)
-{
-  // This push method is called by the need-data signal callback,
-  //  we feed data into the appsrc with an arbitrary size.
-  INT_GST_VARS  *gstvars = ctx->GetGSTVars();
-  unsigned int  readSize;
-  GstBuffer     *buffer;
-  GstFlowReturn ret;
-
-  buffer   = gst_buffer_new_and_alloc(size);
-  readSize = gstvars->cfile->Read(buffer->data, size);
-  if (readSize > 0)
-  {
-    GST_BUFFER_SIZE(buffer) = readSize;
-
-    g_signal_emit_by_name(gstvars->appsrc, "push-buffer", buffer, &ret);
-		// this takes ownership of the buffer; don't unref
-		//gst_app_src_push_buffer(appsrc, buffer);
-  }
-  else
-  {
-    // we are EOS, send end-of-stream
-    g_signal_emit_by_name(gstvars->appsrc, "end-of-stream", &ret);
-    //gst_app_src_end_of_stream(appsrc);
-  }
-  gst_buffer_unref(buffer);
-
-  return;
-}
-
-static gboolean CGSTPlayerSeekData(GstElement *appsrc, guint64 position, CGSTPlayer *ctx)
-{
-  // called when appsrc wants us to return data from a new position
-  // with the next call to push-buffer (FeedData).
-  position = ctx->GetGSTVars()->cfile->Seek(position, SEEK_SET);
-  if (position >= 0)
-    return TRUE;
-  else
-    return FALSE;
-}
-
-static void CGSTPlayerFoundSource(GObject *object, GObject *orig, GParamSpec *pspec, CGSTPlayer *ctx)
-{
-  INT_GST_VARS  *gstvars = ctx->GetGSTVars();
-  // called when playbin2 has constructed a source object to read
-  //  from. Since we provided the appsrc:// uri to playbin2, 
-  //  this will be the appsrc that we must handle. 
-  // we set up some signals to push data into appsrc and one to perform a seek.
-
-  // get a handle to the appsrc
-  g_object_get(orig, pspec->name, &gstvars->appsrc, NULL);
-
-  unsigned int flags = READ_TRUNCATED;
-  gstvars->cfile = new XFILE::CFile();
-  if (CFileItem(gstvars->url, false).IsInternetStream())
-    flags |= READ_CACHED;
-  // open file in binary mode
-  if (!gstvars->cfile->Open(gstvars->url, flags))
-    return;
-
-  // we can set the length in appsrc. This allows some elements to estimate the
-  // total duration of the stream. It's a good idea to set the property when you
-  // can but it's not required.
-  int64_t filelength = gstvars->cfile->GetLength();
-  if (filelength > 0)
-    g_object_set(gstvars->appsrc, "size", (gint64)filelength, NULL);
-  // we are seekable in push mode, this means that the element usually pushes
-  // out buffers of an undefined size and that seeks happen only occasionally
-  // and only by request of the user.
-  if (filelength > 0)
-    gst_util_set_object_arg(G_OBJECT(gstvars->appsrc), "stream-type", "seekable");
-
-  // configure the appsrc, we will push a buffer to appsrc when it needs more data
-  g_signal_connect(gstvars->appsrc, "need-data", G_CALLBACK(CGSTPlayerFeedData), ctx);
-  g_signal_connect(gstvars->appsrc, "seek-data", G_CALLBACK(CGSTPlayerSeekData), ctx);
-}
-
-// ****************************************************************
 static void CGSTPlayerSubsOnNewBuffer(GstElement *subs_sink, CGSTPlayer *ctx)
 {
   INT_GST_VARS  *gstvars = ctx->GetGSTVars();
@@ -503,41 +422,40 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
     if(ThreadHandle())
       CloseFile();
 
+    std::string url;
+
     m_item = file;
     m_options = options;
 
-    m_gstvars->cfile = NULL;
     m_gstvars->appsrc = NULL;
-    m_gstvars->use_appsrc = false;
     if (m_item.m_strPath.Left(6).Equals("udp://"))
     {
       // protocol goes to gstreamer as is
-      m_gstvars->url = m_item.m_strPath;
-      if (!gst_uri_is_valid(m_gstvars->url.c_str()))
+      url = m_item.m_strPath;
+      if (!gst_uri_is_valid(url.c_str()))
         return false;
     }
     else if (m_item.m_strPath.Left(7).Equals("rtsp://"))
     {
       // protocol goes to gstreamer as is
-      m_gstvars->url = m_item.m_strPath;
-      if (!gst_uri_is_valid(m_gstvars->url.c_str()))
+      url = m_item.m_strPath;
+      if (!gst_uri_is_valid(url.c_str()))
         return false;
     }
     else if (m_item.m_strPath.Left(7).Equals("http://"))
     {
       // strip user agent that we append
-      m_gstvars->url = m_item.m_strPath;
-      m_gstvars->url = m_gstvars->url.erase(m_gstvars->url.rfind('|'), m_gstvars->url.size());
-      if (!gst_uri_is_valid(m_gstvars->url.c_str()))
+      url = m_item.m_strPath;
+      url = url.erase(url.rfind('|'), url.size());
+      if (!gst_uri_is_valid(url.c_str()))
         return false;
     }
     else
     {
-      m_gstvars->use_appsrc = true;
-      m_gstvars->url = m_item.m_strPath;
+      m_gstvars->appsrc = new CGST_Appsrc(m_item.m_strPath);
     }
 
-    CLog::Log(LOGNOTICE, "CGSTPlayer: Opening: URL=%s", m_gstvars->url.c_str());
+    CLog::Log(LOGNOTICE, "CGSTPlayer: Opening: URL=%s", url.c_str());
 
     m_elapsed_ms  =  0;
     m_duration_ms =  0;
@@ -643,15 +561,15 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
     // "av-offset
 
     // set the player url and change state to paused (from null)
-    if (m_gstvars->use_appsrc)
+    if (m_gstvars->appsrc)
     {
       g_object_set(m_gstvars->player, "uri", "appsrc://", NULL);
       g_signal_connect(m_gstvars->player, "deep-notify::source",
-        (GCallback)CGSTPlayerFoundSource, this);
+        (GCallback)m_gstvars->appsrc->FoundSource, m_gstvars->appsrc);
     }
     else
     {
-      g_object_set(m_gstvars->player, "uri", m_gstvars->url.c_str(), NULL);
+      g_object_set(m_gstvars->player, "uri", url.c_str(), NULL);
     }
 
     m_gstvars->inited = true;
@@ -709,11 +627,10 @@ bool CGSTPlayer::CloseFile()
   // we are done after the StopThread call
   StopThread();
 
-  if (m_gstvars->cfile)
+  if (m_gstvars->appsrc)
   {
-    m_gstvars->cfile->Close();
-    delete m_gstvars->cfile;
-    m_gstvars->cfile = NULL;
+    delete m_gstvars->appsrc;
+    m_gstvars->appsrc = NULL;
   }
 
   CLog::Log(LOGDEBUG, "CGSTPlayer: finished waiting");
