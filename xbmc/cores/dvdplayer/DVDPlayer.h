@@ -102,6 +102,8 @@ typedef struct
   CDemuxStream::EFlags flags;
   int          source;
   int          id;
+  std::string  codec;
+  int          channels;
 } SelectionStream;
 
 class CSelectionStreams
@@ -177,6 +179,7 @@ public:
   virtual int GetSubtitleCount();
   virtual int GetSubtitle();
   virtual void GetSubtitleName(int iStream, CStdString &strStreamName);
+  virtual void GetSubtitleLanguage(int iStream, CStdString &strStreamLang);
   virtual void SetSubtitle(int iStream);
   virtual bool GetSubtitleVisible();
   virtual void SetSubtitleVisible(bool bVisible);
@@ -372,6 +375,7 @@ protected:
       dts           = DVD_NOPTS_VALUE;
       player_state  = "";
       chapter       = 0;
+      chapter_name  = "";
       chapter_count = 0;
       canrecord     = false;
       recording     = false;

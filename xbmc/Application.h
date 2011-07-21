@@ -27,6 +27,8 @@
 #include "guilib/IMsgTargetCallback.h"
 #include "threads/Condition.h"
 
+#include <map>
+
 class CFileItem;
 class CFileItemList;
 namespace ADDON
@@ -62,6 +64,7 @@ namespace ADDON
 #endif
 
 class CKaraokeLyricsManager;
+class CInertialScrollingHandler;
 class CApplicationMessenger;
 class DPMSSupport;
 class CSplash;
@@ -194,7 +197,6 @@ public:
   bool ExecuteAction(CGUIActionDescriptor action);
 
   static bool OnEvent(XBMC_Event& newEvent);
-
 
   CApplicationMessenger& getApplicationMessenger();
 #if defined(HAS_LINUX_NETWORK)
@@ -369,6 +371,7 @@ protected:
   bool InitDirectoriesWin32();
   void CreateUserDirs();
 
+  CInertialScrollingHandler *m_pInertialScrollingHandler;
   CApplicationMessenger m_applicationMessenger;
 #if defined(HAS_LINUX_NETWORK)
   CNetworkLinux m_network;
@@ -384,6 +387,16 @@ protected:
 #ifdef HAS_EVENT_SERVER
   std::map<std::string, std::map<int, float> > m_lastAxisMap;
 #endif
+
+  class NotFrameCount
+  {
+    CApplication* ths;
+  public:
+    inline NotFrameCount(CApplication* o) : ths(o) {}
+    inline bool operator!() { return !(ths->m_frameCount); }
+  };
+
+  friend class NotFrameCount;
 };
 
 extern CApplication g_application;

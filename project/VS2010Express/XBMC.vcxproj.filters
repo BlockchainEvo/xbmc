@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="win32">
@@ -229,6 +229,12 @@
     <Filter Include="libs\SlingboxLib">
       <UniqueIdentifier>{dfa70c36-927b-4540-b505-35919e64eb3d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="threads\platform">
+      <UniqueIdentifier>{2165ba63-177d-4746-b1c6-e5e425c9f0a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="threads\platform\win">
+      <UniqueIdentifier>{1f49caed-1c84-46a1-83fc-b1fa6cfd749e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\xbmc\win32\pch.cpp">
@@ -370,6 +376,9 @@
       <Filter>cores\dvdplayer\DVDCodecs\Overlay</Filter>
     </ClCompile>
     <ClCompile Include="..\..\xbmc\cores\dvdplayer\DVDCodecs\Overlay\DVDOverlayCodecText.cpp">
+      <Filter>cores\dvdplayer\DVDCodecs\Overlay</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\xbmc\cores\dvdplayer\DVDCodecs\Overlay\DVDOverlayCodecTX3G.cpp">
       <Filter>cores\dvdplayer\DVDCodecs\Overlay</Filter>
     </ClCompile>
     <ClCompile Include="..\..\xbmc\cores\dvdplayer\DVDCodecs\Overlay\libspucc\cc_decoder.c">
@@ -568,9 +577,6 @@
       <Filter>cores\DllLoader\exports\util</Filter>
     </ClCompile>
     <ClCompile Include="..\..\xbmc\cores\VideoRenderers\BaseRenderer.cpp">
-      <Filter>cores\VideoRenderers</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\cores\VideoRenderers\LinuxRenderer.cpp">
       <Filter>cores\VideoRenderers</Filter>
     </ClCompile>
     <ClCompile Include="..\..\xbmc\cores\VideoRenderers\LinuxRendererGL.cpp">
@@ -1955,6 +1961,9 @@
     <ClCompile Include="..\..\xbmc\utils\StreamDetails.cpp">
       <Filter>utils</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\xbmc\utils\StreamUtils.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\xbmc\utils\StringUtils.cpp">
       <Filter>utils</Filter>
     </ClCompile>
@@ -2463,8 +2472,9 @@
     <ClCompile Include="..\..\xbmc\guilib\DirtyRegionTracker.cpp">
       <Filter>guilib</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\threads\ThreadLocal.cpp">
-      <Filter>threads</Filter>
+    <ClCompile Include="..\..\xbmc\InertialScrollingHandler.cpp" />
+    <ClCompile Include="..\..\xbmc\threads\platform\Implementation.cpp">
+      <Filter>threads\platform</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2637,6 +2647,9 @@
       <Filter>cores\dvdplayer\DVDCodecs\Overlay</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\cores\dvdplayer\DVDCodecs\Overlay\DVDOverlayCodecText.h">
+      <Filter>cores\dvdplayer\DVDCodecs\Overlay</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\cores\dvdplayer\DVDCodecs\Overlay\DVDOverlayCodecTX3G.h">
       <Filter>cores\dvdplayer\DVDCodecs\Overlay</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\cores\dvdplayer\DVDCodecs\Overlay\DVDOverlayImage.h">
@@ -2934,9 +2947,6 @@
       <Filter>cores\DllLoader\exports\util</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\cores\VideoRenderers\BaseRenderer.h">
-      <Filter>cores\VideoRenderers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\cores\VideoRenderers\LinuxRenderer.h">
       <Filter>cores\VideoRenderers</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\cores\VideoRenderers\LinuxRendererGL.h">
@@ -4462,6 +4472,9 @@
     <ClInclude Include="..\..\xbmc\utils\StreamDetails.h">
       <Filter>utils</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\xbmc\utils\StreamUtils.h">
+      <Filter>utils</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\xbmc\utils\StringUtils.h">
       <Filter>utils</Filter>
     </ClInclude>
@@ -4948,6 +4961,28 @@
     </ClInclude>
     <ClInclude Include="..\..\xbmc\threads\ThreadLocal.h">
       <Filter>threads</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\InertialScrollingHandler.h" />
+    <ClInclude Include="..\..\xbmc\threads\platform\Condition.h">
+      <Filter>threads\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\threads\platform\CriticalSection.h">
+      <Filter>threads\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\threads\platform\ThreadLocal.h">
+      <Filter>threads\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\threads\platform\win\Condition.h">
+      <Filter>threads\platform\win</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\threads\platform\win\CriticalSection.h">
+      <Filter>threads\platform\win</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\threads\platform\win\ThreadLocal.h">
+      <Filter>threads\platform\win</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\xbmc\threads\platform\platform.select.h">
+      <Filter>threads\platform</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

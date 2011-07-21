@@ -26,6 +26,7 @@
 #include "guilib/Key.h"
 #include "threads/Thread.h"
 #include "threads/Event.h"
+#include <boost/shared_ptr.hpp>
 
 #include <queue>
 
@@ -56,6 +57,7 @@ class CGUIDialog;
 #define TMSG_PLAYLISTPLAYER_INSERT 218
 #define TMSG_PLAYLISTPLAYER_REMOVE 219
 #define TMSG_PLAYLISTPLAYER_SWAP 223
+#define TMSG_PLAYLISTPLAYER_REPEAT 224
 
 #define TMSG_PICTURE_SHOW         220
 #define TMSG_PICTURE_SLIDESHOW    221
@@ -100,7 +102,7 @@ typedef struct
   DWORD dwParam2;
   CStdString strParam;
   std::vector<CStdString> params;
-  CEvent* hWaitEvent;
+  boost::shared_ptr<CEvent> waitEvent;
   LPVOID lpVoid;
 }
 ThreadMessage;
@@ -156,6 +158,7 @@ public:
   void PlayListPlayerInsert(int playlist, const CFileItemList &list, int position);
   void PlayListPlayerRemove(int playlist, int position);
   void PlayListPlayerSwap(int playlist, int indexItem1, int indexItem2);
+  void PlayListPlayerRepeat(int playlist, int repeatState);
 
   void PlayFile(const CFileItem &item, bool bRestart = false); // thread safe version of g_application.PlayFile()
   void PictureShow(std::string filename);

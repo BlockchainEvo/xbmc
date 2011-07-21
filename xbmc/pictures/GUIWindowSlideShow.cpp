@@ -19,6 +19,7 @@
  *
  */
 
+#include "threads/SystemClock.h"
 #include "system.h"
 #include "GUIWindowSlideShow.h"
 #include "Application.h"
@@ -95,12 +96,12 @@ void CBackgroundPicLoader::Process()
     {
       if (m_pCallback)
       {
-        unsigned int start = CTimeUtils::GetTimeMS();
+        unsigned int start = XbmcThreads::SystemClockMillis();
         CBaseTexture* texture = new CTexture();
         unsigned int originalWidth = 0;
         unsigned int originalHeight = 0;
         texture->LoadFromFile(m_strFileName, m_maxWidth, m_maxHeight, g_guiSettings.GetBool("pictures.useexifrotation"), &originalWidth, &originalHeight);
-        totalTime += CTimeUtils::GetTimeMS() - start;
+        totalTime += XbmcThreads::SystemClockMillis() - start;
         count++;
         // tell our parent
         bool bFullSize = ((int)texture->GetWidth() < m_maxWidth) && ((int)texture->GetHeight() < m_maxHeight);
@@ -238,8 +239,14 @@ void CGUIWindowSlideShow::Select(const CStdString& strPicture)
     const CFileItemPtr item = m_slides->Get(i);
     if (item->m_strPath == strPicture)
     {
-      m_iNextSlide = i;
       m_iDirection = 1;
+      if (IsActive())
+        m_iNextSlide = i;
+      else
+      {
+        m_iCurrentSlide = i;
+        m_iNextSlide = GetNextSlide();
+      }
       m_bLoadNextPic = true;
       return ;
     }
@@ -521,6 +528,7 @@ bool CGUIWindowSlideShow::OnAction(const CAction &action)
     }
     break;
   case ACTION_PREVIOUS_MENU:
+  case ACTION_NAV_BACK:
   case ACTION_STOP:
     g_windowManager.PreviousWindow();
     break;
@@ -696,10 +704,10 @@ bool CGUIWindowSlideShow::OnMessage(CGUIMessage& message)
     }
     break;
     case GUI_MSG_PLAYBACK_STARTED:
-    {     
-      //only bring the fullscreen on front if we are not in a slideshow
-      if(!m_bSlideShow)
+    {
+      if(m_bSlideShow && m_bPlayingVideo)
         g_windowManager.ActivateWindow(WINDOW_FULLSCREEN_VIDEO);
+      m_bPlayingVideo = false;
     }
     break;
     case GUI_MSG_PLAYBACK_STOPPED:

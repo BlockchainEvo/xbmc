@@ -19,6 +19,7 @@
  *
  */
 
+#include "threads/SystemClock.h"
 #include "system.h"
 #include "Application.h"
 #include "interfaces/Builtins.h"
@@ -51,6 +52,7 @@
 #include "network/libscrobbler/lastfmscrobbler.h"
 #include "network/libscrobbler/librefmscrobbler.h"
 #include "GUIPassword.h"
+#include "InertialScrollingHandler.h"
 #include "ApplicationMessenger.h"
 #include "SectionLoader.h"
 #include "cores/DllLoader/DllLoaderContainer.h"
@@ -346,6 +348,7 @@ CApplication::CApplication(void) : m_itemCurrentFile(new CFileItem), m_progressT
   m_bStandalone = false;
   m_bEnableLegacyRes = false;
   m_bSystemScreenSaverEnable = false;
+  m_pInertialScrollingHandler = new CInertialScrollingHandler();
 }
 
 CApplication::~CApplication(void)
@@ -357,6 +360,7 @@ CApplication::~CApplication(void)
 #endif
 
   delete m_dpms;
+  delete m_pInertialScrollingHandler;
 }
 
 bool CApplication::OnEvent(XBMC_Event& newEvent)
@@ -738,7 +742,7 @@ bool CApplication::Create()
 
   g_mediaManager.Initialize();
 
-  m_lastFrameTime = CTimeUtils::GetTimeMS();
+  m_lastFrameTime = XbmcThreads::SystemClockMillis();
   m_lastRenderTime = m_lastFrameTime;
 
   return Initialize();
@@ -783,7 +787,7 @@ bool CApplication::InitDirectoriesLinux()
 
   if (xbmcPath.IsEmpty())
   {
-    xbmcPath = INSTALL_PATH;
+    xbmcPath = xbmcBinPath;
     /* Check if xbmc binaries and arch independent data files are being kept in
      * separate locations. */
     if (!CFile::Exists(URIUtils::AddFileToFolder(xbmcPath, "language")))
@@ -1877,32 +1881,10 @@ bool CApplication::WaitFrame(unsigned int timeout)
   // Wait for all other frames to be presented
   CSingleLock lock(m_frameMutex);
   //wait until event is set, but modify remaining time
-  DWORD dwStartTime = CTimeUtils::GetTimeMS();
-  DWORD dwRemainingTime = timeout;
-  while(m_frameCount > 0)
-  {
-    ConditionVariable::TimedWaitResponse result = m_frameCond.wait(lock, dwRemainingTime);
-    if (result == ConditionVariable::TW_OK)
-    {
-      //fix time to wait because of spurious wakeups
-      DWORD dwElapsed = CTimeUtils::GetTimeMS() - dwStartTime;
-      if(dwElapsed < dwRemainingTime)
-      {
-        dwRemainingTime -= dwElapsed;
-        continue;
-      }
-      else
-      {
-        //ran out of time
-        result = ConditionVariable::TW_TIMEDOUT;
-      }
-    }
 
-    if(result == ConditionVariable::TW_TIMEDOUT)
-      break;
-    if(result < 0)
-      CLog::Log(LOGWARNING, "CApplication::WaitFrame - error from conditional wait");
-  }
+  NotFrameCount nfc(this);
+  TightConditionVariable<NotFrameCount&> cv(m_frameCond, nfc);
+  cv.wait(lock,timeout);
   done = m_frameCount == 0;
 
   return done;
@@ -1952,34 +1934,8 @@ void CApplication::Render()
     {
       CSingleLock lock(m_frameMutex);
 
-      //wait until event is set, but modify remaining time
-      DWORD dwStartTime = CTimeUtils::GetTimeMS();
-      DWORD dwRemainingTime = 100;
-      // If we have frames or if we get notified of one, consume it.
-      while(m_frameCount == 0)
-      {
-        ConditionVariable::TimedWaitResponse result = m_frameCond.wait(lock, dwRemainingTime);
-        if (result == ConditionVariable::TW_OK)
-        {
-          //fix time to wait because of spurious wakeups
-          DWORD dwElapsed = CTimeUtils::GetTimeMS() - dwStartTime;
-          if(dwElapsed < dwRemainingTime)
-          {
-            dwRemainingTime -= dwElapsed;
-            continue;
-          }
-          else
-          {
-            //ran out of time
-            result = ConditionVariable::TW_TIMEDOUT;
-          }
-        }
-
-        if(result == ConditionVariable::TW_TIMEDOUT)
-          break;
-        if(result < 0)
-          CLog::Log(LOGWARNING, "CApplication::Render - error from conditional wait");
-      }
+      TightConditionVariable<int&> cv(m_frameCond,m_frameCount);
+      cv.wait(lock,100);
 
       m_bPresentFrame = m_frameCount > 0;
       decrement = m_bPresentFrame;
@@ -2039,7 +1995,7 @@ void CApplication::Render()
 
   lock.Leave();
 
-  unsigned int now = CTimeUtils::GetTimeMS();
+  unsigned int now = XbmcThreads::SystemClockMillis();
   if (hasRendered)
     m_lastRenderTime = now;
 
@@ -2061,7 +2017,7 @@ void CApplication::Render()
     if (frameTime < singleFrameTime)
       Sleep(singleFrameTime - frameTime);
   }
-  m_lastFrameTime = CTimeUtils::GetTimeMS();
+  m_lastFrameTime = XbmcThreads::SystemClockMillis();
 
   if (flip)
     g_graphicsContext.Flip();
@@ -2180,7 +2136,7 @@ bool CApplication::OnKey(const CKey& key)
               action.GetID() == ACTION_SELECT_ITEM ||
               action.GetID() == ACTION_ENTER ||
               action.GetID() == ACTION_PREVIOUS_MENU ||
-              action.GetID() == ACTION_CLOSE_DIALOG))
+              action.GetID() == ACTION_NAV_BACK))
         {
           // the action isn't plain navigation - check for a keyboard-specific keymap
           action = CButtonTranslator::GetInstance().GetAction(WINDOW_DIALOG_KEYBOARD, key, false);
@@ -2306,13 +2262,18 @@ bool CApplication::OnAction(const CAction &action)
       return OnAction(CAction(ACTION_PLAYER_PLAY));
   }
 
-// in normal case
-  // just pass the action to the current window and let it handle it
-  if (g_windowManager.OnAction(action))
+  //if the action would start or stop inertial scrolling
+  //by gesture - bypass the normal OnAction handler of current window
+  if( !m_pInertialScrollingHandler->CheckForInertialScrolling(&action) )
   {
-    m_navigationTimer.StartZero();
-    return true;
-  }
+    // in normal case
+    // just pass the action to the current window and let it handle it
+    if (g_windowManager.OnAction(action))
+    {
+      m_navigationTimer.StartZero();
+      return true;
+    }
+  } 
 
   // handle extra global presses
 
@@ -2594,7 +2555,7 @@ void CApplication::UpdateLCD()
   long lTimeOut = 1000;
   if ( m_iPlaySpeed != 1)
     lTimeOut = 0;
-  if ( ((long)CTimeUtils::GetTimeMS() - lTickCount) >= lTimeOut)
+  if ( ((long)XbmcThreads::SystemClockMillis() - lTickCount) >= lTimeOut)
   {
     if (g_application.NavigationIdleTime() < 5)
       g_lcd->Render(ILCD::LCD_MODE_NAVIGATION);
@@ -2608,7 +2569,7 @@ void CApplication::UpdateLCD()
       g_lcd->Render(ILCD::LCD_MODE_GENERAL);
 
     // reset tick count
-    lTickCount = CTimeUtils::GetTimeMS();
+    lTickCount = XbmcThreads::SystemClockMillis();
   }
 #endif
 }
@@ -2648,6 +2609,7 @@ void CApplication::FrameMove()
   ProcessRemote(frameTime);
   ProcessGamepad(frameTime);
   ProcessEventServer(frameTime);
+  m_pInertialScrollingHandler->ProcessInertialScroll(frameTime);
 
   // Process events and animate controls
   if (!m_bStop)
@@ -3117,6 +3079,11 @@ bool CApplication::Cleanup()
     g_windowManager.Remove(WINDOW_DIALOG_VOLUME_BAR);
 
     CAddonMgr::Get().DeInit();
+
+#if defined(HAS_LIRC) || defined(HAS_IRSERVERSUITE)
+    CLog::Log(LOGNOTICE, "closing down remote control service");
+    g_RemoteControl.Disconnect();
+#endif
 
     CLog::Log(LOGNOTICE, "unload sections");
 
@@ -4495,10 +4462,7 @@ bool CApplication::OnMessage(CGUIMessage& message)
 
       if (message.GetMessage() == GUI_MSG_PLAYBACK_ENDED)
       {
-        // sending true to PlayNext() effectively passes bRestart to PlayFile()
-        // which is not generally what we want (except for stacks, which are
-        // handled above)
-        g_playlistPlayer.PlayNext();
+        g_playlistPlayer.PlayNext(1, true);
       }
       else
       {
@@ -4667,6 +4631,7 @@ void CApplication::Process()
     ProcessSlow();
   }
 
+  g_cpuInfo.getUsedPercentage(); // must call it to recalculate pct values
 }
 
 // We get called every 500ms

@@ -439,6 +439,7 @@ int CGUIInfoManager::TranslateSingleString(const CStdString &strCondition)
       int compareString = ConditionalStringParameter(label);
       return AddMultiInfo(GUIInfo(bNegate ? -SYSTEM_ADDON_ICON : SYSTEM_ADDON_ICON, compareString, 1));
     }
+    else if (strTest.Equals("system.batterylevel")) ret = SYSTEM_BATTERY_LEVEL;
   }
   // library test conditions
   else if (strTest.Left(7).Equals("library"))
@@ -1270,6 +1271,7 @@ CStdString CGUIInfoManager::GetLabel(int info, int contextWindow)
   case SYSTEM_INTERNET_STATE:
   case SYSTEM_UPTIME:
   case SYSTEM_TOTALUPTIME:
+  case SYSTEM_BATTERY_LEVEL:
     return g_sysinfo.GetInfo(info);
     break;
 
@@ -1706,6 +1708,8 @@ int CGUIInfoManager::GetInt(int info, int contextWindow) const
       }
     case SYSTEM_CPU_USAGE:
       return g_cpuInfo.getUsedPercentage();
+    case SYSTEM_BATTERY_LEVEL:
+      return g_powerManager.BatteryLevel();
   }
   return 0;
 }

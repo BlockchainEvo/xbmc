@@ -144,6 +144,12 @@ config.log
 
 # /lib/asap/
 /lib/asap/Makefile
+/lib/asap/players.h
+/lib/asap/players/*.obx
+/lib/asap/win32/xbmc_asap.dll
+/lib/asap/win32/xbmc_asap.lib
+/lib/asap/xbmc/xbmc_asap.res
+
 
 # /lib/cmyth/
 lib/cmyth/Makefile
@@ -297,20 +303,12 @@ lib/cmyth/Makefile
 /project/obj
 /project/output
 
-# /project/Win32BuildSetup/dependencies
-/project/Win32BuildSetup/dependencies/SDL.dll
-/project/Win32BuildSetup/dependencies/glew32.dll
-/project/Win32BuildSetup/dependencies/pcre.dll
-/project/Win32BuildSetup/dependencies/pcrecpp.dll
-/project/Win32BuildSetup/dependencies/python26.dll
-/project/Win32BuildSetup/dependencies/libcdio-12.dll
-/project/Win32BuildSetup/dependencies/vcredist
-
 # /project/Win32BuildSetup/
 /project/Win32BuildSetup/BuildLog.htm
 /project/Win32BuildSetup/XBMCSetup*.exe
 /project/Win32BuildSetup/languages.nsi
 /project/Win32BuildSetup/BUILD_WIN32/
+/project/Win32BuildSetup/dependencies
 
 # /project/BuildDependencies
 /project/BuildDependencies/downloads
@@ -342,6 +340,7 @@ lib/cmyth/Makefile
 /project/VS2010Express/libs
 /project/VS2010Express/objs
 /project/VS2010Express/ipch
+/project/VS2010Express/*.vsp
 
 # /skin/
 /skin/Confluence/media/Textures.xbt
@@ -657,6 +656,7 @@ lib/cmyth/Makefile
 /lib/libmpeg2/libtool
 /lib/libmpeg2/configure.lineno
 /lib/libmpeg2/Makefile
+/lib/libmpeg2/src/*.exe
 
 # /lib/libmpeg2/doc/
 /lib/libmpeg2/doc/Makefile
