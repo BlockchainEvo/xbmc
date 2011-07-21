@@ -41,11 +41,6 @@ class COpenMaxVideo;
 
 #define NUM_BUFFERS 3
 
-
-#undef ALIGN
-#define ALIGN(value, alignment) (((value)+((alignment)-1))&~((alignment)-1))
-#define CLAMP(a, min, max) ((a) > (max) ? (max) : ( (a) < (min) ? (min) : a ))
-
 #define AUTOSOURCE -1
 
 #define IMAGE_FLAG_WRITING   0x01 /* image is in use after a call to GetImage, caller may be reading or writing */
