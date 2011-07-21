@@ -420,7 +420,7 @@ static void CGSTPlayerSubsOnNewBuffer(GstElement *subs_sink, CGSTPlayer *ctx)
     // use timestamps instead of gst_element_query_position
     // as gstreamer sometimes does not update its internal 
     // position as rapidly as we want the values.
-    gstvars->subtitle_end = CTimeUtils::GetTimeMS() + 4000;
+    gstvars->subtitle_end = XbmcThreads::SystemClockMillis() + 4000;
 
     guint8 *data = GST_BUFFER_DATA(buffer);
     guint   size = GST_BUFFER_SIZE(buffer);
@@ -1251,7 +1251,7 @@ bool CGSTPlayer::GetCurrentSubtitle(CStdString& strSubtitle)
   {
     CSingleLock lock(m_gstvars->csection);
 
-    if (m_gstvars->subtitle_end < CTimeUtils::GetTimeMS())
+    if (m_gstvars->subtitle_end < XbmcThreads::SystemClockMillis())
       m_gstvars->subtitle_text = "";
     
     strSubtitle = m_gstvars->subtitle_text;
