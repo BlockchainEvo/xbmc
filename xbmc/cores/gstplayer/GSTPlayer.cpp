@@ -23,7 +23,7 @@
 
 #if defined (HAVE_LIBGSTREAMER)
 #include "GSTPlayer.h"
-#include "CGST_Appsrc.h"
+#include "GSTAppsrc.h"
 #include "Application.h"
 #include "FileItem.h"
 #include "cores/VideoRenderers/RenderManager.h"
@@ -72,7 +72,7 @@ struct INT_GST_VARS
   GstElement              *videosink;
   GstElement              *audiosink;
 
-  CGST_Appsrc             *appsrc;
+  CGSTAppsrc              *appsrc;
 
   std::vector<CStdString> acodec_name;
   std::vector<CStdString> vcodec_name;
@@ -452,7 +452,7 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
     }
     else
     {
-      m_gstvars->appsrc = new CGST_Appsrc(m_item.m_strPath);
+      m_gstvars->appsrc = new CGSTAppsrc(m_item.m_strPath);
     }
 
     CLog::Log(LOGNOTICE, "CGSTPlayer: Opening: URL=%s", url.c_str());

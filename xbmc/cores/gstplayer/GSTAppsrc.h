@@ -26,17 +26,17 @@
 #include <gst/gst.h>
 
 class CFile;
-class CGST_Appsrc;
+class CGSTAppsrc;
 
-class CGST_Appsrc
+class CGSTAppsrc
 {
 public:
-  CGST_Appsrc(const std::string url);
-  ~CGST_Appsrc();
+  CGSTAppsrc(const std::string url);
+  ~CGSTAppsrc();
 
-  static void FeedData(GstElement *appsrc, guint size, CGST_Appsrc *ctx);
-  static gboolean SeekData(GstElement *appsrc, guint64 position, CGST_Appsrc *ctx);
-  static void FoundSource(GObject *object, GObject *orig, GParamSpec *pspec, CGST_Appsrc *ctx);
+  static void     FeedData(GstElement *appsrc, guint size, CGSTAppsrc *ctx);
+  static gboolean SeekData(GstElement *appsrc, guint64 position, CGSTAppsrc *ctx);
+  static void     FoundSource(GObject *object, GObject *orig, GParamSpec *pspec, CGSTAppsrc *ctx);
 
 private:
   std::string   m_url;

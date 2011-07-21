@@ -21,19 +21,19 @@
 
 #include "system.h"
 
-#include "CGST_Appsrc.h"
+#include "GSTAppsrc.h"
 #include "FileItem.h"
 #include "utils/log.h"
 
 #include <gst/gst.h>
 
-CGST_Appsrc::CGST_Appsrc(const std::string url)
+CGSTAppsrc::CGSTAppsrc(const std::string url)
 {
   m_url = url;
   m_cfile = NULL;
   m_appsrc = NULL;
 }
-CGST_Appsrc::~CGST_Appsrc()
+CGSTAppsrc::~CGSTAppsrc()
 {
   if (m_cfile)
   {
@@ -43,7 +43,7 @@ CGST_Appsrc::~CGST_Appsrc()
   }
 }
 
-void CGST_Appsrc::FeedData(GstElement *appsrc, guint size, CGST_Appsrc *ctx)
+void CGSTAppsrc::FeedData(GstElement *appsrc, guint size, CGSTAppsrc *ctx)
 {
   // This push method is called by the need-data signal callback,
   //  we feed data into the appsrc with an arbitrary size.
@@ -72,7 +72,7 @@ void CGST_Appsrc::FeedData(GstElement *appsrc, guint size, CGST_Appsrc *ctx)
   return;
 }
 
-gboolean CGST_Appsrc::SeekData(GstElement *appsrc, guint64 position, CGST_Appsrc *ctx)
+gboolean CGSTAppsrc::SeekData(GstElement *appsrc, guint64 position, CGSTAppsrc *ctx)
 {
   // called when appsrc wants us to return data from a new position
   // with the next call to push-buffer (FeedData).
@@ -83,7 +83,7 @@ gboolean CGST_Appsrc::SeekData(GstElement *appsrc, guint64 position, CGST_Appsrc
     return FALSE;
 }
 
-void CGST_Appsrc::FoundSource(GObject *object, GObject *orig, GParamSpec *pspec, CGST_Appsrc *ctx)
+void CGSTAppsrc::FoundSource(GObject *object, GObject *orig, GParamSpec *pspec, CGSTAppsrc *ctx)
 {
   // called when playbin2 has constructed a source object to read
   //  from. Since we provided the appsrc:// uri to playbin2, 
