@@ -373,6 +373,7 @@ CGSTPlayer::CGSTPlayer(IPlayerCallback &callback)
   m_gstvars->audiosink = NULL;
   m_gstvars->subtitle_end = 0;
 
+  // may be called multiple times in an app, subsequent calls are no-op
   gst_init(NULL, NULL);
 }
 
