@@ -126,7 +126,7 @@ bool CGSTFileInfo::ExtractThumb(const CStdString &strPath, const CStdString &str
   gst_caps_unref(thumbcaps);
 
   // add all elements to the pipeline.
-	gst_bin_add_many(GST_BIN(pipeline), decoder, ffmpegcolorspace, videoscale, thumbsink, NULL);
+  gst_bin_add_many(GST_BIN(pipeline), decoder, ffmpegcolorspace, videoscale, thumbsink, NULL);
 
   // connect uridecodebin signals. we use this to;
   // 1) filter out ismd hardware decoders
@@ -134,13 +134,18 @@ bool CGSTFileInfo::ExtractThumb(const CStdString &strPath, const CStdString &str
   g_signal_connect(decoder, "autoplug-select", G_CALLBACK(on_autoplug_select), NULL);
   g_signal_connect(decoder, "pad-added",       G_CALLBACK(on_pad_added),       ffmpegcolorspace);
 
-  // link the color convert, scaler and thumbsink elements together.
-  // we will dynamically connect uridecodebin to ffmpegcolorspace using "pad-added" signal.
-  gst_element_link_many(ffmpegcolorspace, videoscale, thumbsink, NULL);
-
   // create our vfs appsrc and connect it to the pipeline
   CGSTAppsrc appsrc(strPath.c_str());
   g_signal_connect(pipeline, "deep-notify::source", (GCallback)appsrc.FoundSource, &appsrc);
+
+  // link the color convert, scaler and thumbsink elements together.
+  // we will dynamically connect uridecodebin to ffmpegcolorspace using "pad-added" signal.
+  if (!gst_element_link_many(ffmpegcolorspace, videoscale, thumbsink, NULL))
+  {
+    CLog::Log(LOGDEBUG, "%s - gst_element_link_many failed", __FUNCTION__);
+    rtn = false;
+    goto do_exit;
+  }
 
   // set to PAUSED to make the first frame arrive in the appsink callback
   GstStateChangeReturn gst_state_rtn;
@@ -257,9 +262,9 @@ do_exit:
 // ****************************************************************
 bool CGSTFileInfo::GetFileStreamDetails(CFileItem *pItem)
 {
+/*
   if (!pItem)
     return false;
-/*
   CStdString strFileNameAndPath;
   if (pItem->HasVideoInfoTag())
     strFileNameAndPath = pItem->GetVideoInfoTag()->m_strFileNameAndPath;
@@ -296,88 +301,3 @@ bool CGSTFileInfo::GetFileStreamDetails(CFileItem *pItem)
 */
   return false;
 }
-
-/* returns true if details have been added */
-/*
-// ****************************************************************
-bool CGSTFileInfo::DemuxerToStreamDetails(CDVDInputStream *pInputStream, CDVDDemux *pDemux, CStreamDetails &details, const CStdString &path)
-{
-  bool retVal = false;
-  details.Reset();
-
-  for (int iStream=0; iStream<pDemux->GetNrOfStreams(); iStream++)
-  {
-    CDemuxStream *stream = pDemux->GetStream(iStream);
-    if (stream->type == STREAM_VIDEO)
-    {
-      CStreamDetailVideo *p = new CStreamDetailVideo();
-      p->m_iWidth = ((CDemuxStreamVideo *)stream)->iWidth;
-      p->m_iHeight = ((CDemuxStreamVideo *)stream)->iHeight;
-      p->m_fAspect = ((CDemuxStreamVideo *)stream)->fAspect;
-      if (p->m_fAspect == 0.0f)
-        p->m_fAspect = (float)p->m_iWidth / p->m_iHeight;
-      pDemux->GetStreamCodecName(iStream, p->m_strCodec);
-      p->m_iDuration = pDemux->GetStreamLength();
-
-      // stack handling
-      if (URIUtils::IsStack(path))
-      {
-        CFileItemList files;
-        XFILE::CStackDirectory stack;
-        stack.GetDirectory(path, files);
-
-        // skip first path as we already know the duration
-        for (int i = 1; i < files.Size(); i++)
-        {
-           int duration = 0;
-           if (CDVDFileInfo::GetFileDuration(files[i]->m_strPath, duration))
-             p->m_iDuration = p->m_iDuration + duration;
-        }
-      }
-
-      // finally, calculate seconds
-      if (p->m_iDuration > 0)
-        p->m_iDuration = p->m_iDuration / 1000;
-
-      details.AddStream(p);
-      retVal = true;
-    }
-
-    else if (stream->type == STREAM_AUDIO)
-    {
-      CStreamDetailAudio *p = new CStreamDetailAudio();
-      p->m_iChannels = ((CDemuxStreamAudio *)stream)->iChannels;
-      if (stream->language)
-        p->m_strLanguage = stream->language;
-      pDemux->GetStreamCodecName(iStream, p->m_strCodec);
-      details.AddStream(p);
-      retVal = true;
-    }
-
-    else if (stream->type == STREAM_SUBTITLE)
-    {
-      if (stream->language)
-      {
-        CStreamDetailSubtitle *p = new CStreamDetailSubtitle();
-        p->m_strLanguage = stream->language;
-        details.AddStream(p);
-        retVal = true;
-      }
-    }
-  }  // for iStream
-
-  details.DetermineBestStreams();
-
-  // correct bluray runtime. we need the duration from the input stream, not the demuxer.
-  if (pInputStream->IsStreamType(DVDSTREAM_TYPE_BLURAY))
-  {
-    if(((CDVDInputStreamBluray*)pInputStream)->GetTotalTime() > 0)
-    {
-      ((CStreamDetailVideo*)details.GetNthStream(CStreamDetail::VIDEO,0))->m_iDuration = ((CDVDInputStreamBluray*)pInputStream)->GetTotalTime() / 1000;
-    }
-  }
-
-  return retVal;
-}
-*/
-
