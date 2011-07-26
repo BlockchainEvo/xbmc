@@ -1,6 +1,9 @@
+CXXFLAGS+=-isystem/home/davilla/IntelCE-21.0.11124.264601/build_i686/staging_dir/include/linux_user
+
 SRCS=	\
 	GSTPlayer.cpp \
-	GSTAppsrc.cpp
+	GSTAppsrc.cpp \
+	GSTFileInfo.cpp \
 
 LIB=	GSTPlayer.a
 
