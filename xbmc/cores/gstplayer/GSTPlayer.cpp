@@ -346,9 +346,15 @@ static void CGSTPlayerSubsOnNewBuffer(GstElement *subs_sink, CGSTPlayer *ctx)
 
     // sanity clamp the incoming text block
     if (data && size < 4096)
+    {
       gstvars->subtitle_text = std::string((char*)data, size);
+      // quirks
+      gstvars->subtitle_text.Replace("&apos;","\'");
+    }
     else
+    {
       gstvars->subtitle_text = "";
+    }
   }
 }
 
