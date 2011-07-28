@@ -35,5 +35,5 @@ public:
   // Probe the files streams and store the info in the VideoInfoTag
   static bool GetFileStreamDetails(CFileItem *pItem);
 
-  static bool GetFileDuration(const CStdString &path, int &duration);
+  static bool GetFileDuration(const CStdString &strPath, int &duration_ms);
 };

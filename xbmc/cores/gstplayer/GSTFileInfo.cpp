@@ -30,6 +30,7 @@
 #include "pictures/Picture.h"
 #include "settings/AdvancedSettings.h"
 #include "utils/log.h"
+#include "utils/URIUtils.h"
 #include "video/VideoInfoTag.h"
 
 #include <gst/gst.h>
@@ -54,7 +55,7 @@ static GstAutoplugSelectResult on_autoplug_select(GstElement *decodebin, GstPad 
   if (try_factory.Left(5).Equals("ismd_"))
     rtn = GST_AUTOPLUG_SELECT_SKIP;
   /*
-  if (try_factory.Left(5).Equals("ismd_"))
+  if (rtn == GST_AUTOPLUG_SELECT_SKIP)
   {
     GstStructure *structure = gst_caps_get_structure(caps, 0);
     g_print("skipping %s with caps %s\n", try_factory.c_str(), gst_structure_get_name(structure));
@@ -78,20 +79,20 @@ static void on_pad_added(GstElement *element, GstPad *pad, gpointer data)
 }
 
 // ****************************************************************
-bool CGSTFileInfo::GetFileDuration(const CStdString &path, int& duration)
+bool CGSTFileInfo::GetFileDuration(const CStdString &strPath, int& duration_ms)
 {
-  duration = 0;
-
-  // TODO: add duration fetch
-  if (duration > 0)
-    return true;
-  else
-    return false;
+  return false;
 }
 
 // ****************************************************************
 bool CGSTFileInfo::ExtractThumb(const CStdString &strPath, const CStdString &strTarget, CStreamDetails *pStreamDetails)
 {
+  // TODO: figure out why everything but mov/mkv's will hang us.
+  CStdString extension;
+  extension = URIUtils::GetExtension(strPath);
+  if (!extension.Equals(".mkv") && !extension.Equals(".mov"))
+    return false;
+
   bool rtn = false;
   int  bgn_time = XbmcThreads::SystemClockMillis();
 
@@ -254,50 +255,17 @@ do_exit:
       file.Close();
   }
 
-  CLog::Log(LOGDEBUG, "%s - measured %d ms to extract %d x %d thumb from file <%s> ",
-    __FUNCTION__, (XbmcThreads::SystemClockMillis() - bgn_time), width, height, strPath.c_str());
+  if(rtn)
+  {
+    CLog::Log(LOGDEBUG, "%s - measured %d ms to extract %d x %d thumb from file <%s> ",
+      __FUNCTION__, (XbmcThreads::SystemClockMillis() - bgn_time), width, height, strPath.c_str());
+  }
+
   return rtn;
 }
 
 // ****************************************************************
 bool CGSTFileInfo::GetFileStreamDetails(CFileItem *pItem)
 {
-/*
-  if (!pItem)
-    return false;
-  CStdString strFileNameAndPath;
-  if (pItem->HasVideoInfoTag())
-    strFileNameAndPath = pItem->GetVideoInfoTag()->m_strFileNameAndPath;
-  else
-    return false;
-
-  CStdString playablePath = strFileNameAndPath;
-  if (URIUtils::IsStack(playablePath))
-    playablePath = XFILE::CStackDirectory::GetFirstStackedFile(playablePath);
-
-  CDVDInputStream *pInputStream = CDVDFactoryInputStream::CreateInputStream(NULL, playablePath, "");
-  if (!pInputStream)
-    return false;
-
-  if (pInputStream->IsStreamType(DVDSTREAM_TYPE_DVD) || !pInputStream->Open(playablePath.c_str(), ""))
-  {
-    delete pInputStream;
-    return false;
-  }
-
-  CDVDDemux *pDemuxer = CDVDFactoryDemuxer::CreateDemuxer(pInputStream);
-  if (pDemuxer)
-  {
-    bool retVal = DemuxerToStreamDetails(pInputStream, pDemuxer, pItem->GetVideoInfoTag()->m_streamDetails, strFileNameAndPath);
-    delete pDemuxer;
-    delete pInputStream;
-    return retVal;
-  }
-  else
-  {
-    delete pInputStream;
-    return false;
-  }
-*/
   return false;
 }
