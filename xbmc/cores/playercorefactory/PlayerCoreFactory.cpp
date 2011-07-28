@@ -9,7 +9,7 @@
  *
  *  This Program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See othe
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
@@ -22,9 +22,13 @@
 #include "utils/BitstreamStats.h"
 #include "PlayerCoreFactory.h"
 #include "threads/SingleLock.h"
+#if defined(USE_FFMPEG)
 #include "cores/dvdplayer/DVDPlayer.h"
 #include "cores/paplayer/PAPlayer.h"
 #include "cores/paplayer/DVDPlayerCodec.h"
+#elif defined(HAVE_LIBGSTREAMER)
+#include "cores/gstplayer/GSTPlayer.h"
+#endif
 #include "dialogs/GUIDialogContextMenu.h"
 #include "utils/HttpHeader.h"
 #include "settings/GUISettings.h"
@@ -145,6 +149,7 @@ void CPlayerCoreFactory::GetPlayers( const CFileItem& item, VECPLAYERCORES &vecC
 
   CLog::Log(LOGDEBUG, "CPlayerCoreFactory::GetPlayers: matched %"PRIuS" rules with players", vecCores.size());
 
+#if defined(USE_FFMPEG)
   if( PAPlayer::HandlesType(url.GetFileType()) )
   {
     // We no longer force PAPlayer as our default audio player (used to be true):
@@ -182,6 +187,7 @@ void CPlayerCoreFactory::GetPlayers( const CFileItem& item, VECPLAYERCORES &vecC
       }
     }
   }
+#endif
 
   // Process defaults
 
@@ -268,17 +274,27 @@ bool CPlayerCoreFactory::LoadConfiguration(TiXmlElement* pConfig, bool clear)
       delete *it;
     s_vecCoreConfigs.clear();
     // Builtin players; hard-coded because re-ordering them would break scripts
+#if defined(USE_FFMPEG)
     CPlayerCoreConfig* dvdplayer = new CPlayerCoreConfig("DVDPlayer", EPC_DVDPLAYER, NULL);
     dvdplayer->m_bPlaysAudio = dvdplayer->m_bPlaysVideo = true;
     s_vecCoreConfigs.push_back(dvdplayer);
-
+#endif
      // Don't remove this, its a placeholder for the old MPlayer core, it would break scripts
     CPlayerCoreConfig* mplayer = new CPlayerCoreConfig("oldmplayercore", EPC_DVDPLAYER, NULL);
     s_vecCoreConfigs.push_back(mplayer);
 
+#if defined(USE_FFMPEG)
     CPlayerCoreConfig* paplayer = new CPlayerCoreConfig("PAPlayer", EPC_PAPLAYER, NULL);
     paplayer->m_bPlaysAudio = true;
     s_vecCoreConfigs.push_back(paplayer);
+#endif
+
+#if defined(HAVE_LIBGSTREAMER)
+    CPlayerCoreConfig* gstplayer = new CPlayerCoreConfig("GSTPlayer", EPC_GSTPLAYER, NULL);
+    gstplayer->m_bPlaysAudio = true;
+    gstplayer->m_bPlaysVideo = true;
+    s_vecCoreConfigs.push_back(gstplayer);
+#endif
 
     for(std::vector<CPlayerSelectionRule *>::iterator it = s_vecCoreSelectionRules.begin(); it != s_vecCoreSelectionRules.end(); it++)
       delete *it;
@@ -303,9 +319,14 @@ bool CPlayerCoreFactory::LoadConfiguration(TiXmlElement* pConfig, bool clear)
       type.ToLower();
 
       EPLAYERCORES eCore = EPC_NONE;
+#if defined(USE_FFMPEG)
       if (type == "dvdplayer" || type == "mplayer") eCore = EPC_DVDPLAYER;
       if (type == "paplayer" ) eCore = EPC_PAPLAYER;
+#endif
       if (type == "externalplayer" ) eCore = EPC_EXTPLAYER;
+#if defined(HAVE_LIBGSTREAMER)
+      if (type == "gstplayer" ) eCore = EPC_GSTPLAYER;
+#endif
 
       if (eCore != EPC_NONE)
       {

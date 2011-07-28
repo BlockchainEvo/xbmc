@@ -23,7 +23,7 @@
 
 #include "threads/Thread.h"
 #include "DVDMessageQueue.h"
-#include "video/TeletextDefines.h"
+#include "video/Teletext.h"
 
 class CDVDStreamInfo;
 

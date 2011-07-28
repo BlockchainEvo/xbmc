@@ -84,7 +84,9 @@ bool CMusicInfoTagLoaderMP3::Load(const CStdString& strFileName, CMusicInfoTag& 
     if (id3tag.Read(strFileName))
     {
       id3tag.GetMusicInfoTag(tag);
+#if defined(USE_FFMPEG)
       m_replayGainInfo=id3tag.GetReplayGain();
+#endif
     }
 
 #ifndef ARMEL_ // TODO this will probably be OK next time we sync to trunk
@@ -131,8 +133,10 @@ bool CMusicInfoTagLoaderMP3::Load(const CStdString& strFileName, CMusicInfoTag& 
         tag.SetPartOfSet(apeTag.GetDiscNum());
       if (apeTag.GetComment().size())
         tag.SetComment(apeTag.GetComment());
+#if defined(USE_FFMPEG)
       if (apeTag.GetReplayGain().iHasGainInfo)
         m_replayGainInfo = apeTag.GetReplayGain();
+#endif
       if (apeTag.GetRating() > '0')
         tag.SetRating(apeTag.GetRating());
     }
@@ -157,10 +161,13 @@ bool CMusicInfoTagLoaderMP3::ReadSeekAndReplayGainInfo(const CStdString &strFile
   CAPEv2Tag apeTag;
   if (apeTag.ReadTag(strFileName.c_str()))
   { // found - let's copy over the additional info (if any)
+#if defined(USE_FFMPEG)
     if (apeTag.GetReplayGain().iHasGainInfo)
       m_replayGainInfo = apeTag.GetReplayGain();
+#endif
   }
 #endif
+#if defined(USE_FFMPEG)
   if (!m_replayGainInfo.iHasGainInfo)
   { // Nothing found query id3 tag
     CID3Tag id3tag;
@@ -170,6 +177,7 @@ bool CMusicInfoTagLoaderMP3::ReadSeekAndReplayGainInfo(const CStdString &strFile
         m_replayGainInfo = id3tag.GetReplayGain();
     }
   }
+#endif
 
   // now read the duration
   int duration = ReadDuration(strFileName);
@@ -686,10 +694,14 @@ bool CMusicInfoTagLoaderMP3::ReadLAMETagInfo(BYTE *b)
 
 bool CMusicInfoTagLoaderMP3::GetReplayGain(CReplayGain &info) const
 {
+#if defined(USE_FFMPEG)
   if (!m_replayGainInfo.iHasGainInfo)
     return false;
   info = m_replayGainInfo;
   return true;
+#else
+  return false;
+#endif
 }
 
 bool CMusicInfoTagLoaderMP3::PrioritiseAPETags() const

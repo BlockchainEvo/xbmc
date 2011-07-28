@@ -23,6 +23,9 @@
 #if (defined HAVE_CONFIG_H) && (!defined WIN32)
   #include "config.h"
 #endif
+
+#if defined(USE_FFMPEG)
+
 #include "DynamicDll.h"
 #include "utils/log.h"
 
@@ -114,4 +117,5 @@ class DllPostProc : public DllDynamic, DllPostProcInterface
   END_METHOD_RESOLVE()
 };
 
+#endif
 #endif

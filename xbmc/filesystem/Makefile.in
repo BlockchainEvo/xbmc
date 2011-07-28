@@ -58,7 +58,6 @@ SRCS=AddonsDirectory.cpp \
      MythSession.cpp \
      NptXbmcFile.cpp \
      NSFFileDirectory.cpp \
-     OGGFileDirectory.cpp \
      PlaylistDirectory.cpp \
      PlaylistFileDirectory.cpp \
      PluginDirectory.cpp \
@@ -86,6 +85,10 @@ SRCS=AddonsDirectory.cpp \
      ZeroconfDirectory.cpp \
      ZipDirectory.cpp \
      ZipManager.cpp \
+
+ifeq (@USE_FFMPEG@,1)
+SRCS+=OGGFileDirectory.cpp
+endif
 
 ifeq (@HAVE_XBMC_NONFREE@,1)
 SRCS+=FileRar.cpp \

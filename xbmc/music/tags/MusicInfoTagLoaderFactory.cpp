@@ -22,18 +22,20 @@
 #include "system.h"
 #include "MusicInfoTagLoaderFactory.h"
 #include "MusicInfoTagLoaderMP3.h"
-#include "MusicInfoTagLoaderOgg.h"
 #include "MusicInfoTagLoaderWMA.h"
 #include "MusicInfoTagLoaderFlac.h"
 #include "MusicInfoTagLoaderMP4.h"
 #include "MusicInfoTagLoaderCDDA.h"
 #include "MusicInfoTagLoaderApe.h"
-#include "MusicInfoTagLoaderMPC.h"
 #include "MusicInfoTagLoaderShn.h"
 #include "MusicInfoTagLoaderMod.h"
-#include "MusicInfoTagLoaderWav.h"
 #include "MusicInfoTagLoaderAAC.h"
+#if defined(USE_FFMPEG)
+#include "MusicInfoTagLoaderMPC.h"
+#include "MusicInfoTagLoaderOgg.h"
+#include "MusicInfoTagLoaderWav.h"
 #include "MusicInfoTagLoaderWavPack.h"
+#endif
 #ifdef HAS_MOD_PLAYER
 #include "cores/ModPlayer.h"
 #endif
@@ -78,11 +80,13 @@ IMusicInfoTagLoader* CMusicInfoTagLoaderFactory::CreateLoader(const CStdString& 
     CMusicInfoTagLoaderMP3 *pTagLoader = new CMusicInfoTagLoaderMP3();
     return (IMusicInfoTagLoader*)pTagLoader;
   }
+#if defined(USE_FFMPEG)
   else if (strExtension == "ogg" || strExtension == "oggstream")
   {
     CMusicInfoTagLoaderOgg *pTagLoader = new CMusicInfoTagLoaderOgg();
     return (IMusicInfoTagLoader*)pTagLoader;
   }
+#endif
   else if (strExtension == "wma")
   {
     CMusicInfoTagLoaderWMA *pTagLoader = new CMusicInfoTagLoaderWMA();
@@ -110,11 +114,13 @@ IMusicInfoTagLoader* CMusicInfoTagLoaderFactory::CreateLoader(const CStdString& 
     CMusicInfoTagLoaderApe *pTagLoader = new CMusicInfoTagLoaderApe();
     return (IMusicInfoTagLoader*)pTagLoader;
   }
+#if defined(USE_FFMPEG)
   else if (strExtension == "mpc" || strExtension == "mpp" || strExtension == "mp+")
   {
     CMusicInfoTagLoaderMPC *pTagLoader = new CMusicInfoTagLoaderMPC();
     return (IMusicInfoTagLoader*)pTagLoader;
   }
+#endif
   else if (strExtension == "shn")
   {
     CMusicInfoTagLoaderSHN *pTagLoader = new CMusicInfoTagLoaderSHN();
@@ -127,21 +133,25 @@ IMusicInfoTagLoader* CMusicInfoTagLoaderFactory::CreateLoader(const CStdString& 
     return (IMusicInfoTagLoader*)pTagLoader;
   }
 #endif
+#if defined(USE_FFMPEG)
   else if (strExtension == "wav")
   {
     CMusicInfoTagLoaderWAV *pTagLoader = new CMusicInfoTagLoaderWAV();
     return (IMusicInfoTagLoader*)pTagLoader;
   }
+#endif
   else if (strExtension == "aac")
   {
     CMusicInfoTagLoaderAAC *pTagLoader = new CMusicInfoTagLoaderAAC();
     return (IMusicInfoTagLoader*)pTagLoader;
   }
+#if defined(USE_FFMPEG)
   else if (strExtension == "wv")
   {
     CMusicInfoTagLoaderWAVPack *pTagLoader = new CMusicInfoTagLoaderWAVPack();
     return (IMusicInfoTagLoader*)pTagLoader;
   }
+#endif
   else if (strExtension == "nsf" || strExtension == "nsfstream")
   {
     CMusicInfoTagLoaderNSF *pTagLoader = new CMusicInfoTagLoaderNSF();
@@ -164,11 +174,12 @@ IMusicInfoTagLoader* CMusicInfoTagLoaderFactory::CreateLoader(const CStdString& 
     return (IMusicInfoTagLoader*)pTagLoader;
   }
 #endif
+#if defined(USE_FFMPEG)
   else if ( TimidityCodec::IsSupportedFormat( strExtension ) )
   {
     CMusicInfoTagLoaderMidi * pTagLoader = new CMusicInfoTagLoaderMidi();
     return (IMusicInfoTagLoader*)pTagLoader;
   }
-
+#endif
   return NULL;
 }

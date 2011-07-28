@@ -126,6 +126,8 @@ protected:
 
 private:
   CVBRMP3SeekHelper m_seekInfo;
+#if defined(USE_FFMPEG)
   CReplayGain       m_replayGainInfo;
+#endif
 };
 }

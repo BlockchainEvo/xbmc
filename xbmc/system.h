@@ -158,6 +158,7 @@
 #undef HAS_SDL_AUDIO
 #undef HAS_SDL_OPENGL
 #undef HAS_LIRC
+#undef HAS_KARAOKE
 
 #define HAS_EGL
 #define HAS_GLES 2

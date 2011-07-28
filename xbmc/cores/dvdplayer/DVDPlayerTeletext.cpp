@@ -42,58 +42,6 @@ const uint8_t rev_lut[32] =
   0x30,0xb0,0x70,0xf0
 };
 
-void CDVDTeletextTools::NextDec(int *i) /* skip to next decimal */
-{
-  (*i)++;
-
-  if ((*i & 0x0F) > 0x09)
-    *i += 0x06;
-
-  if ((*i & 0xF0) > 0x90)
-    *i += 0x60;
-
-  if (*i > 0x899)
-    *i = 0x100;
-}
-
-void CDVDTeletextTools::PrevDec(int *i)           /* counting down */
-{
-  (*i)--;
-
-  if ((*i & 0x0F) > 0x09)
-    *i -= 0x06;
-
-  if ((*i & 0xF0) > 0x90)
-    *i -= 0x60;
-
-  if (*i < 0x100)
-    *i = 0x899;
-}
-
-/* print hex-number into string, s points to last digit, caller has to provide enough space, no termination */
-void CDVDTeletextTools::Hex2Str(char *s, unsigned int n)
-{
-  do {
-    char c = (n & 0xF);
-    *s-- = number2char(c);
-    n >>= 4;
-  } while (n);
-}
-
-signed int CDVDTeletextTools::deh24(unsigned char *p)
-{
-  int e = hamm24par[0][p[0]]
-    ^ hamm24par[1][p[1]]
-    ^ hamm24par[2][p[2]];
-
-  int x = hamm24val[p[0]]
-    + (p[1] & 127) * 16
-    + (p[2] & 127) * 2048;
-
-  return (x ^ hamm24cor[e]) | hamm24err[e];
-}
-
-
 CDVDTeletextData::CDVDTeletextData()
 : CThread()
 , m_messageQueue("teletext")
@@ -540,8 +488,8 @@ void CDVDTeletextData::Process()
                   p = pageinfo_thread->ext->p27;
                   for (i = 0; i < 4; i++)
                   {
-                    int d1 = CDVDTeletextTools::deh24(&vtxt_row[6*i + 3]);
-                    int d2 = CDVDTeletextTools::deh24(&vtxt_row[6*i + 6]);
+                    int d1 = CTeletextTools::deh24(&vtxt_row[6*i + 3]);
+                    int d2 = CTeletextTools::deh24(&vtxt_row[6*i + 6]);
                     if (d1 < 0 || d2 < 0)
                       continue;
 
@@ -601,7 +549,7 @@ void CDVDTeletextData::Process()
 
                 if (descode != 2)
                 {
-                  int t1 = CDVDTeletextTools::deh24(&vtxt_row[7-4]);
+                  int t1 = CTeletextTools::deh24(&vtxt_row[7-4]);
                   pageinfo_thread->function = t1 & 0x0f;
                   if (!pageinfo_thread->nationalvalid)
                   {
@@ -681,8 +629,8 @@ void CDVDTeletextData::Decode_p2829(unsigned char *vtxt_row, TextExtData_t **ptE
 {
   int bitsleft, colorindex;
   unsigned char *p;
-  int t1 = CDVDTeletextTools::deh24(&vtxt_row[7-4]);
-  int t2 = CDVDTeletextTools::deh24(&vtxt_row[10-4]);
+  int t1 = CTeletextTools::deh24(&vtxt_row[7-4]);
+  int t2 = CTeletextTools::deh24(&vtxt_row[10-4]);
 
   if (t1 < 0 || t2 < 0)
     return;
@@ -707,7 +655,7 @@ void CDVDTeletextData::Decode_p2829(unsigned char *vtxt_row, TextExtData_t **ptE
   {
     if (bitsleft < 12)
     {
-      t2 |= CDVDTeletextTools::deh24(p) << bitsleft;
+      t2 |= CTeletextTools::deh24(p) << bitsleft;
       if (t2 < 0)  /* hamming error */
         break;
       p += 3;

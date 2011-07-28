@@ -20,7 +20,7 @@ SRCS=APEv2Tag.cpp \
      MusicInfoTagLoaderYM.cpp \
      VorbisTag.cpp \
 
-ifeq (0,1)
+ifeq (@USE_FFMPEG@,1)
 SRCS+=\
      MusicInfoTagLoaderMPC.cpp \
      MusicInfoTagLoaderOgg.cpp \

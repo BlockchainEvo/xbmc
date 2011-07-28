@@ -37,10 +37,10 @@
 #include "programs/Shortcut.h"
 #include "video/VideoInfoTag.h"
 
-#if defined (HAVE_LIBGSTREAMER)
-#include "cores/gstplayer/GSTFileInfo.h"
-#else
+#if defined (USE_FFMPEG)
 #include "cores/dvdplayer/DVDFileInfo.h"
+#elif defined (HAVE_LIBGSTREAMER)
+#include "cores/gstplayer/GSTFileInfo.h"
 #endif
 
 using namespace XFILE;
@@ -144,10 +144,12 @@ bool CThumbExtractor::DoWork()
   if (m_thumb)
   {
     CLog::Log(LOGDEBUG,"%s - trying to extract thumb from video file %s", __FUNCTION__, m_path.c_str());
-#if defined (HAVE_LIBGSTREAMER)
+#if defined (USE_FFMPEG)
+    result = CDVDFileInfo::ExtractThumb(m_path, m_target, &m_item.GetVideoInfoTag()->m_streamDetails);
+#elif defined (HAVE_LIBGSTREAMER)
     result = CGSTFileInfo::ExtractThumb(m_path, m_target, &m_item.GetVideoInfoTag()->m_streamDetails);
 #else
-    result = CDVDFileInfo::ExtractThumb(m_path, m_target, &m_item.GetVideoInfoTag()->m_streamDetails);
+    result = false;
 #endif
     if(result)
     {
@@ -159,10 +161,12 @@ bool CThumbExtractor::DoWork()
   else if (m_item.HasVideoInfoTag() && !m_item.GetVideoInfoTag()->HasStreamDetails())
   {
     CLog::Log(LOGDEBUG,"%s - trying to extract filestream details from video file %s", __FUNCTION__, m_path.c_str());
-#if defined (HAVE_LIBGSTREAMER)
+#if defined (USE_FFMPEG)
+    result = CDVDFileInfo::GetFileStreamDetails(&m_item);
+#elif defined (HAVE_LIBGSTREAMER)
     result = CGSTFileInfo::GetFileStreamDetails(&m_item);
 #else
-    result = CDVDFileInfo::GetFileStreamDetails(&m_item);
+    result = false;
 #endif
   }
 

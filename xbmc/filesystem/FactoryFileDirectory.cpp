@@ -25,7 +25,9 @@
 #include "utils/URIUtils.h"
 #include "FactoryFileDirectory.h"
 #ifdef HAS_FILESYSTEM
+#if defined(USE_FFMPEG)
 #include "OGGFileDirectory.h"
+#endif
 #include "NSFFileDirectory.h"
 #include "SIDFileDirectory.h"
 #include "ASAPFileDirectory.h"
@@ -63,6 +65,7 @@ IFileDirectory* CFactoryFileDirectory::Create(const CStdString& strPath, CFileIt
   strExtension.MakeLower();
 
 #ifdef HAS_FILESYSTEM
+#if defined(USE_FFMPEG)
   if ((strExtension.Equals(".ogg") || strExtension.Equals(".oga")) && CFile::Exists(strPath))
   {
     IFileDirectory* pDir=new COGGFileDirectory;
@@ -75,6 +78,7 @@ IFileDirectory* CFactoryFileDirectory::Create(const CStdString& strPath, CFileIt
     delete pDir;
     return NULL;
   }
+#endif
   if (strExtension.Equals(".nsf") && CFile::Exists(strPath))
   {
     IFileDirectory* pDir=new CNSFFileDirectory;

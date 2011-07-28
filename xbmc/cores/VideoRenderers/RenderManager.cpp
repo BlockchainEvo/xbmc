@@ -48,10 +48,13 @@
 #include "RenderCapture.h"
 
 /* to use the same as player */
+#if defined(USE_FFMPEG)
 #include "../dvdplayer/DVDClock.h"
 #include "../dvdplayer/DVDCodecs/Video/DVDVideoCodec.h"
 #include "../dvdplayer/DVDCodecs/DVDCodecUtils.h"
-
+#elif defined(HAVE_LIBGSTREAMER)
+#include "../gstplayer/GSTClock.h"
+#endif
 #define MAXPRESENTDELAY 0.500
 
 /* at any point we want an exclusive lock on rendermanager */
@@ -113,7 +116,13 @@ CXBMCRenderManager::~CXBMCRenderManager()
 /* These is based on CurrentHostCounter() */
 double CXBMCRenderManager::GetPresentTime()
 {
+#if defined(USE_FFMPEG)
   return CDVDClock::GetAbsoluteClock(false) / DVD_TIME_BASE;
+#elif defined(HAVE_LIBGSTREAMER)
+  return CGSTClock::GetAbsoluteClock(false) / DVD_TIME_BASE;
+#else
+  // What to do here ?
+#endif
 }
 
 static double wrap(double x, double minimum, double maximum)
@@ -136,11 +145,23 @@ void CXBMCRenderManager::WaitPresentTime(double presenttime)
   if(fps <= 0)
   {
     /* smooth video not enabled */
+#if defined(USE_FFMPEG)
     CDVDClock::WaitAbsoluteClock(presenttime * DVD_TIME_BASE);
+#elif defined(HAVE_LIBGSTREAMER)
+    CGSTClock::WaitAbsoluteClock(presenttime * DVD_TIME_BASE);
+#else
+  // What to do here ?
+#endif
     return;
   }
 
+#if defined(USE_FFMPEG)
   bool ismaster = CDVDClock::IsMasterClock();
+#elif defined(HAVE_LIBGSTREAMER)
+  bool ismaster = CGSTClock::IsMasterClock();
+#else
+  // What to do here ?
+#endif
 
   //the videoreferenceclock updates its clock on every vertical blank
   //we want every frame's presenttime to end up in the middle of two vblanks
@@ -148,7 +169,13 @@ void CXBMCRenderManager::WaitPresentTime(double presenttime)
   if (ismaster)
     presenttime += m_presentcorr * frametime;
 
+#if defined(USE_FFMPEG)
   double clock     = CDVDClock::WaitAbsoluteClock(presenttime * DVD_TIME_BASE) / DVD_TIME_BASE;
+#elif defined(HAVE_LIBGSTREAMER)
+  double clock     = CGSTClock::WaitAbsoluteClock(presenttime * DVD_TIME_BASE) / DVD_TIME_BASE;
+#else
+  // What to do here ?
+#endif
   double target    = 0.5;
   double error     = ( clock - presenttime ) / frametime - target;
 
@@ -700,6 +727,7 @@ int CXBMCRenderManager::AddVideoPicture(DVDVideoPicture& pic)
   if(index < 0)
     return index;
 
+#if defined(USE_FFMPEG)
   if(pic.format == DVDVideoPicture::FMT_YUV420P)
   {
     CDVDCodecUtils::CopyPicture(&image, &pic);
@@ -713,6 +741,7 @@ int CXBMCRenderManager::AddVideoPicture(DVDVideoPicture& pic)
   {
     CDVDCodecUtils::CopyYUV422PackedPicture(&image, &pic);
   }
+#endif
 #ifdef HAS_DX
   else if(pic.format == DVDVideoPicture::FMT_DXVA)
     m_pRenderer->AddProcessor(pic.proc, pic.proc_id);

@@ -31,6 +31,7 @@
 #include "utils/fastmemcpy.h"
 #include "utils/MathUtils.h"
 #include "utils/GLUtils.h"
+#include "utils/log.h"
 #include "settings/Settings.h"
 #include "settings/AdvancedSettings.h"
 #include "settings/GUISettings.h"
@@ -99,8 +100,9 @@ CLinuxRendererGLES::CLinuxRendererGLES()
 
   m_rgbBuffer = NULL;
   m_rgbBufferSize = 0;
-
+#if defined(USE_FFMPEG)
   m_dllSwScale = new DllSwScale;
+#endif
   m_sw_context = NULL;
 }
 
@@ -122,7 +124,9 @@ CLinuxRendererGLES::~CLinuxRendererGLES()
     m_pYUVShader = NULL;
   }
 
+#if defined(USE_FFMPEG)
   delete m_dllSwScale;
+#endif
 }
 
 void CLinuxRendererGLES::ManageTextures()
@@ -507,9 +511,10 @@ unsigned int CLinuxRendererGLES::PreInit()
   // setup the background colour
   m_clearColour = (float)(g_advancedSettings.m_videoBlackBarColour & 0xff) / 0xff;
 
+#if defined(USE_FFMPEG)
   if (!m_dllSwScale->Load())
     CLog::Log(LOGERROR,"CLinuxRendererGL::PreInit - failed to load rescale libraries!");
-
+#endif
   return true;
 }
 
@@ -698,11 +703,13 @@ void CLinuxRendererGLES::UnInit()
   for (int i = 0; i < NUM_BUFFERS; ++i)
     (this->*m_textureDelete)(i);
 
+#if defined(USE_FFMPEG)
   if (m_dllSwScale && m_sw_context)
   {
     m_dllSwScale->sws_freeContext(m_sw_context);
     m_sw_context = NULL;
   }
+#endif
   // cleanup framebuffer object if it was in use
   m_fbo.Cleanup();
   m_bValidated = false;
@@ -1296,7 +1303,7 @@ bool CLinuxRendererGLES::RenderCapture(CRenderCapture* capture)
   // OpenGLES returns in RGBA order but CRenderCapture needs BGRA order
   // XOR Swap RGBA -> BGRA
   unsigned char* pixels = (unsigned char*)capture->GetRenderBuffer();
-  for (int i = 0; i < capture->GetWidth() * capture->GetHeight(); i++, pixels+=4)
+  for (unsigned int i = 0; i < capture->GetWidth() * capture->GetHeight(); i++, pixels+=4)
   {
     if (pixels[0] != pixels[2])
     {
@@ -1351,7 +1358,7 @@ void CLinuxRendererGLES::UploadYV12Texture(int source)
 #if defined(__ARM_NEON__)
     yuv420_2_rgb8888_neon(m_rgbBuffer, im->plane[0], im->plane[2], im->plane[1],
       m_sourceWidth, m_sourceHeight, im->stride[0], im->stride[1], m_sourceWidth * 4);
-#else
+#elif defined(USE_FFMPEG)
     m_sw_context = m_dllSwScale->sws_getCachedContext(m_sw_context,
       im->width, im->height, PIX_FMT_YUV420P,
       im->width, im->height, PIX_FMT_RGBA,

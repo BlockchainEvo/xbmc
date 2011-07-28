@@ -835,9 +835,9 @@ void CTeletextDecoder::GetNextPageOne(bool up)
   int subp;
   do {
     if (up)
-      CDVDTeletextTools::NextDec(&m_txtCache->Page);
+      CTeletextTools::NextDec(&m_txtCache->Page);
     else
-      CDVDTeletextTools::PrevDec(&m_txtCache->Page);
+      CTeletextTools::PrevDec(&m_txtCache->Page);
     subp = m_txtCache->SubPageTable[m_txtCache->Page];
   } while (subp == 0xFF && m_txtCache->Page != m_LastPage);
 
@@ -1264,7 +1264,7 @@ void CTeletextDecoder::RenderPage()
                 m_RenderInfo.PageAtrb[0].fg = TXT_ColorYellow;
                 m_RenderInfo.PageAtrb[0].bg = TXT_ColorMenu1;
               }
-              CDVDTeletextTools::Hex2Str((char*)m_RenderInfo.PageChar+3, m_txtCache->Page);
+              CTeletextTools::Hex2Str((char*)m_RenderInfo.PageChar+3, m_txtCache->Page);
 
               int col;
               for (col = m_RenderInfo.nofirst; col < 7; col++) // selected page
@@ -1563,7 +1563,7 @@ void CTeletextDecoder::Decode_BTT()
       }
     }
     m_txtCache->BasicTop[current] = b1;
-    CDVDTeletextTools::NextDec(&current);
+    CTeletextTools::NextDec(&current);
   }
   /* page linking table */
   m_txtCache->ADIP_PgMax = -1; /* rebuild table of adip pages */
@@ -1674,9 +1674,9 @@ int CTeletextDecoder::TopText_GetNext(int startpage, int up, int findgroup)
 
   do {
     if (up)
-      CDVDTeletextTools::NextDec(&current);
+      CTeletextTools::NextDec(&current);
     else
-      CDVDTeletextTools::PrevDec(&current);
+      CTeletextTools::PrevDec(&current);
 
     if (!m_txtCache->BTTok || m_txtCache->BasicTop[current]) /* only if existent */
     {
@@ -1749,10 +1749,10 @@ void CTeletextDecoder::Showlink(int column, int linkpage)
     if (linkpage < m_txtCache->Page)
     {
       line[6] = '<';
-      CDVDTeletextTools::Hex2Str((char*)line + 5, linkpage);
+      CTeletextTools::Hex2Str((char*)line + 5, linkpage);
     }
     else
-      CDVDTeletextTools::Hex2Str((char*)line + 6, linkpage);
+      CTeletextTools::Hex2Str((char*)line + 6, linkpage);
 
     for (unsigned char *p = line; p < line+9; p++)
       RenderCharBB(*p, &Text_AtrTable[ATR_L250 + column]);
@@ -2783,12 +2783,12 @@ TextPageinfo_t* CTeletextDecoder::DecodePage(bool showl25,             // 1=deco
   else
   {
     memset(PageChar, ' ', 8);
-    CDVDTeletextTools::Hex2Str((char*)PageChar+3, m_txtCache->Page);
+    CTeletextTools::Hex2Str((char*)PageChar+3, m_txtCache->Page);
     if (m_txtCache->SubPage)
     {
       *(PageChar+4) ='/';
       *(PageChar+5) ='0';
-      CDVDTeletextTools::Hex2Str((char*)PageChar+6, m_txtCache->SubPage);
+      CTeletextTools::Hex2Str((char*)PageChar+6, m_txtCache->SubPage);
     }
   }
 
@@ -2814,7 +2814,7 @@ TextPageinfo_t* CTeletextDecoder::DecodePage(bool showl25,             // 1=deco
         *p++ = number2char(row); /* first column: number (0-9, A-..) */
         for (int col = 1; col < 40; col += 3)
         {
-          int d = CDVDTeletextTools::deh24(p);
+          int d = CTeletextTools::deh24(p);
           if (d < 0)
           {
             memcpy(p, "???", 3);
@@ -2848,7 +2848,7 @@ TextPageinfo_t* CTeletextDecoder::DecodePage(bool showl25,             // 1=deco
         p = PageChar + i;
         h = dehamming[*p];
         if (parityerror && h != 0xFF)  /* if no regular page (after any parity error) */
-          CDVDTeletextTools::Hex2Str((char*)p, h);  /* first try dehamming */
+          CTeletextTools::Hex2Str((char*)p, h);  /* first try dehamming */
         else
         {
           if (*p == ' ' || deparity[*p] != ' ') /* correct parity */
@@ -2857,7 +2857,7 @@ TextPageinfo_t* CTeletextDecoder::DecodePage(bool showl25,             // 1=deco
           {
             parityerror = 1;
             if (h != 0xFF)  /* first parity error: try dehamming */
-              CDVDTeletextTools::Hex2Str((char*)p, h);
+              CTeletextTools::Hex2Str((char*)p, h);
             else
               *p = ' ';
           }
@@ -3472,7 +3472,7 @@ void CTeletextDecoder::Eval_NumberedObject(int p, int s, int packet, int triplet
   unsigned char pagedata[23*40];
   g_application.m_pPlayer->LoadPage(p, s,pagedata);
 
-  int idata = CDVDTeletextTools::deh24(pagedata + 40*(packet-1) + 1 + 3*triplet);
+  int idata = CTeletextTools::deh24(pagedata + 40*(packet-1) + 1 + 3*triplet);
   int iONr;
 
   if (idata < 0)  /* hamming error: ignore triplet */
@@ -3919,7 +3919,7 @@ int CTeletextDecoder::iTripletNumber2Data(int iONr, TextCachedPage_t *pstCachedP
       return -1;
     p = pstCachedPage->pageinfo.ext->p26[descode] + packetoffset;  /* first byte (=designation code) is not cached */
   }
-  return CDVDTeletextTools::deh24(p);
+  return CTeletextTools::deh24(p);
 }
 
 int CTeletextDecoder::SetNational(unsigned char sec)
@@ -4021,4 +4021,56 @@ color_t CTeletextDecoder::GetColorRGB(enumTeletextColor ttc)
                    m_RenderInfo.rd0[index];
   return color;
 }
+
+void CTeletextTools::NextDec(int *i) /* skip to next decimal */
+{
+  (*i)++;
+
+  if ((*i & 0x0F) > 0x09)
+    *i += 0x06;
+
+  if ((*i & 0xF0) > 0x90)
+    *i += 0x60;
+
+  if (*i > 0x899)
+    *i = 0x100;
+}
+
+void CTeletextTools::PrevDec(int *i)           /* counting down */
+{
+  (*i)--;
+
+  if ((*i & 0x0F) > 0x09)
+    *i -= 0x06;
+
+  if ((*i & 0xF0) > 0x90)
+    *i -= 0x60;
+
+  if (*i < 0x100)
+    *i = 0x899;
+}
+
+/* print hex-number into string, s points to last digit, caller has to provide enough space, no termination */
+void CTeletextTools::Hex2Str(char *s, unsigned int n)
+{
+  do {
+    char c = (n & 0xF);
+    *s-- = number2char(c);
+    n >>= 4;
+  } while (n);
+}
+
+signed int CTeletextTools::deh24(unsigned char *p)
+{
+  int e = hamm24par[0][p[0]]
+    ^ hamm24par[1][p[1]]
+    ^ hamm24par[2][p[2]];
+
+  int x = hamm24val[p[0]]
+    + (p[1] & 127) * 16
+    + (p[2] & 127) * 2048;
+
+  return (x ^ hamm24cor[e]) | hamm24err[e];
+}
+
 

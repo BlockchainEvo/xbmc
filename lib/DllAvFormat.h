@@ -23,6 +23,9 @@
 #if (defined HAVE_CONFIG_H) && (!defined WIN32)
   #include "config.h"
 #endif
+
+#if defined(USE_FFMPEG)
+
 #include "DynamicDll.h"
 #include "DllAvCodec.h"
 
@@ -363,4 +366,5 @@ public:
   }
 };
 
+#endif
 #endif

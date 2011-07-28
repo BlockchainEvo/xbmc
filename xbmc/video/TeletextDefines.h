@@ -474,12 +474,3 @@ typedef struct
   bool DelayStarted;
   unsigned int SubtitleDelay;
 } TextRenderInfo_t;
-
-class CDVDTeletextTools
-{
-public:
-  static void NextDec(int *i);
-  static void PrevDec(int *i);
-  static void Hex2Str(char *s, unsigned int n);
-  static signed int deh24(unsigned char *p);
-};

@@ -54,7 +54,9 @@
 #include "utils/RegExp.h"
 #include "utils/log.h"
 #include "utils/Variant.h"
+#ifdef HAS_KARAOKE
 #include "music/karaoke/karaokelyricsfactory.h"
+#endif
 #include "ThumbnailCache.h"
 
 using namespace std;
@@ -564,10 +566,14 @@ bool CFileItem::IsAudio() const
 
 bool CFileItem::IsKaraoke() const
 {
+#ifdef HAS_KARAOKE
   if ( !IsAudio() || IsLastFM())
     return false;
 
   return CKaraokeLyricsFactory::HasLyrics( m_strPath );
+#else
+  return false;
+#endif
 }
 
 bool CFileItem::IsPicture() const

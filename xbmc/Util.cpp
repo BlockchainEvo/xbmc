@@ -90,8 +90,10 @@
 #include "utils/log.h"
 #include "pictures/Picture.h"
 #include "utils/JobManager.h"
+#if defined (USE_FFMPEG)
 #include "cores/dvdplayer/DVDSubtitles/DVDSubtitleTagSami.h"
 #include "cores/dvdplayer/DVDSubtitles/DVDSubtitleStream.h"
+#endif
 #include "windowing/WindowingFactory.h"
 #include "video/VideoInfoTag.h"
 
@@ -2363,6 +2365,7 @@ void CUtil::ScanForExternalSubtitles(const CStdString& strMovie, std::vector<CSt
     }
   }
 
+#if defined (USE_FFMPEG)
   iSize = vecSubtitles.size();
   for (int i = 0; i < iSize; i++)
   {
@@ -2390,6 +2393,7 @@ void CUtil::ScanForExternalSubtitles(const CStdString& strMovie, std::vector<CSt
       delete pStream;
     }
   }
+#endif
   CLog::Log(LOGDEBUG,"%s: END (total time: %i ms)", __FUNCTION__, (int)(XbmcThreads::SystemClockMillis() - startTimer));
 }
 

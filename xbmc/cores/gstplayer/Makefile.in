@@ -4,6 +4,7 @@ SRCS=	\
 	GSTPlayer.cpp \
 	GSTAppsrc.cpp \
 	GSTFileInfo.cpp \
+	GSTClock.cpp \
 
 LIB=	GSTPlayer.a
 

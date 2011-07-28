@@ -137,6 +137,7 @@ bool CAPEv2Tag::ReadTag(const char* filename)
 
 void CAPEv2Tag::GetReplayGainFromTag(apetag *tag)
 {
+#if defined(USE_FFMPEG)
   if (!tag) return;
 
   //  foobar2000 saves gain info as lowercase key items
@@ -182,4 +183,7 @@ void CAPEv2Tag::GetReplayGainFromTag(apetag *tag)
     m_replayGain.fAlbumPeak = (float)atof(apefrm_getstr(tag, (char*)"REPLAYGAIN_ALBUM_PEAK"));
     m_replayGain.iHasGainInfo |= REPLAY_GAIN_HAS_ALBUM_PEAK;
   }
+#else
+  return;
+#endif
 }

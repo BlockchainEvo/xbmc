@@ -31,9 +31,11 @@
 #include "guilib/MatrixGLES.h"
 #endif
 #include "RenderManager.h"
+#if defined(USE_FFMPEG)
 #include "cores/dvdplayer/DVDCodecs/Overlay/DVDOverlayImage.h"
 #include "cores/dvdplayer/DVDCodecs/Overlay/DVDOverlaySpu.h"
 #include "cores/dvdplayer/DVDCodecs/Overlay/DVDOverlaySSA.h"
+#endif
 #include "windowing/WindowingFactory.h"
 #include "settings/Settings.h"
 #include "utils/MathUtils.h"
@@ -144,6 +146,7 @@ static void LoadTexture(GLenum target
   *v = (GLfloat)height / height2;
 }
 
+#if defined(USE_FFMPEG)
 COverlayTextureGL::COverlayTextureGL(CDVDOverlayImage* o)
 {
   m_texture = 0;
@@ -386,6 +389,7 @@ COverlayGlyphGL::COverlayGlyphGL(CDVDOverlaySSA* o, double pts)
   glBindTexture(GL_TEXTURE_2D, 0);
   glDisable(GL_TEXTURE_2D);
 }
+#endif
 
 COverlayGlyphGL::~COverlayGlyphGL()
 {

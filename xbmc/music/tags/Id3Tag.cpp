@@ -569,6 +569,7 @@ CStdString CID3Tag::ParseMP3Genre(const CStdString& str) const
 
 void CID3Tag::ParseReplayGainInfo()
 {
+#if defined(USE_FFMPEG)
   CStdString strGain = GetUserText("replaygain_track_gain");
   if (!strGain.IsEmpty())
   {
@@ -593,4 +594,5 @@ void CID3Tag::ParseReplayGainInfo()
     m_replayGain.fAlbumPeak = (float)atof(strGain.c_str());
     m_replayGain.iHasGainInfo |= REPLAY_GAIN_HAS_ALBUM_PEAK;
   }
+#endif
 }

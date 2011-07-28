@@ -22,15 +22,18 @@
  */
 #include "system.h"
 #include "OverlayRenderer.h"
+#if defined(USE_FFMPEG)
 #include "cores/dvdplayer/DVDCodecs/Overlay/DVDOverlay.h"
 #include "cores/dvdplayer/DVDCodecs/Overlay/DVDOverlayImage.h"
 #include "cores/dvdplayer/DVDCodecs/Overlay/DVDOverlaySpu.h"
 #include "cores/dvdplayer/DVDCodecs/Overlay/DVDOverlaySSA.h"
+#endif
 #include "cores/VideoRenderers/RenderManager.h"
 #include "Application.h"
 #include "windowing/WindowingFactory.h"
 #include "settings/Settings.h"
 #include "threads/SingleLock.h"
+#include "threads/Atomics.h"
 #if defined(HAS_GL) || defined(HAS_GLES)
 #include "OverlayRendererGL.h"
 #elif defined(HAS_DX)
@@ -98,6 +101,7 @@ CRenderer::~CRenderer()
     Release(m_buffers[i]);
 }
 
+#if defined(USE_FFMPEG)
 void CRenderer::AddOverlay(CDVDOverlay* o, double pts)
 {
   CSingleLock lock(m_section);
@@ -110,6 +114,7 @@ void CRenderer::AddOverlay(CDVDOverlay* o, double pts)
     e.overlay_dvd = o->Acquire();
   m_buffers[m_decode].push_back(e);
 }
+#endif
 
 void CRenderer::AddOverlay(COverlay* o, double pts)
 {
@@ -136,8 +141,10 @@ void CRenderer::Release(SElementV& list)
   {
     if(it->overlay)
       it->overlay->Release();
+#if defined(USE_FFMPEG)
     if(it->overlay_dvd)
       it->overlay_dvd->Release();
+#endif
   }
 }
 
@@ -181,9 +188,10 @@ void CRenderer::Render()
   {
     COverlay*& o = it->overlay;
 
+#if defined(USE_FFMPEG)
     if(!o && it->overlay_dvd)
       o = Convert(it->overlay_dvd, it->pts);
-
+#endif
     if(!o)
       continue;
 
@@ -281,6 +289,7 @@ void CRenderer::Render(COverlay* o)
   o->Render(state);
 }
 
+#if defined(USE_FFMPEG)
 COverlay* CRenderer::Convert(CDVDOverlay* o, double pts)
 {
   COverlay* r = o->m_overlay;
@@ -307,4 +316,4 @@ COverlay* CRenderer::Convert(CDVDOverlay* o, double pts)
     o->m_overlay = r->Acquire();
   return r;
 }
-
+#endif

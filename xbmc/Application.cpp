@@ -30,7 +30,11 @@
 #include "Util.h"
 #include "pictures/Picture.h"
 #include "guilib/TextureManager.h"
+#if defined (USE_FFMPEG)
 #include "cores/dvdplayer/DVDFileInfo.h"
+#elif defined (HAVE_LIBGSTREAMER)
+#include "cores/gstplayer/GSTFileInfo.h"
+#endif
 #include "PlayListPlayer.h"
 #include "Autorun.h"
 #ifdef HAS_LCD
@@ -3379,7 +3383,13 @@ bool CApplication::PlayStack(const CFileItem& item, bool bRestart)
     else
     {
       int duration;
+#if   defined (USE_FFMPEG)
       if (!CDVDFileInfo::GetFileDuration((*m_currentStack)[i]->m_strPath, duration))
+#elif defined (HAVE_LIBGSTREAMER)
+      if (!CGSTFileInfo::GetFileDuration((*m_currentStack)[i]->m_strPath, duration))
+#else
+      if (false)
+#endif
       {
         m_currentStack->Clear();
         return false;
