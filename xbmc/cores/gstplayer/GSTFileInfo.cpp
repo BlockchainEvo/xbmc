@@ -26,6 +26,7 @@
 #include "FileItem.h"
 #include "filesystem/File.h"
 #include "filesystem/StackDirectory.h"
+#include "threads/Event.h"
 #include "threads/SystemClock.h"
 #include "pictures/Picture.h"
 #include "settings/AdvancedSettings.h"
@@ -52,30 +53,54 @@ static GstAutoplugSelectResult on_autoplug_select(GstElement *decodebin, GstPad 
 
   CStdString try_factory(GST_PLUGIN_FEATURE_NAME(factory));
 
+  // ignore 'ismd_' those are hw decoders
   if (try_factory.Left(5).Equals("ismd_"))
     rtn = GST_AUTOPLUG_SELECT_SKIP;
-  /*
+
+/*
+  // skip these in an attempt to avoid hanging with audio/mpeg
+  if (try_factory.Equals("flupsdemux"))
+    rtn = GST_AUTOPLUG_SELECT_SKIP;
+  if (try_factory.Equals("mpegpsdemux"))
+    rtn = GST_AUTOPLUG_SELECT_SKIP;
+  GstStructure *structure = gst_caps_get_structure(caps, 0);
   if (rtn == GST_AUTOPLUG_SELECT_SKIP)
   {
-    GstStructure *structure = gst_caps_get_structure(caps, 0);
     g_print("skipping %s with caps %s\n", try_factory.c_str(), gst_structure_get_name(structure));
   }
   else
   {
-    g_print("trying   %s\n", try_factory.c_str());
+    g_print("trying   %s with caps %s\n", try_factory.c_str(), gst_structure_get_name(structure));
   }
-  */
+*/
   return rtn;
 }
 
 static void on_pad_added(GstElement *element, GstPad *pad, gpointer data)
 {
   GstPad *sinkpad;
-  GstElement *color = (GstElement *)data;
 
-  sinkpad = gst_element_get_static_pad(color, "sink");
-  gst_pad_link (pad, sinkpad);
-  gst_object_unref (sinkpad);
+  GstCaps *caps = gst_pad_get_caps(pad);
+  GstStructure *structure = gst_caps_get_structure(caps, 0);
+  CStdString check_cap(gst_structure_get_name(structure));
+
+  // ignore anything that is not video
+  if (check_cap.Left(11).Equals("video/x-raw"))
+  {
+    GstElement *ffmpegcolorspace = (GstElement *)data;
+    sinkpad = gst_element_get_static_pad(ffmpegcolorspace, "sink");
+    gst_pad_link(pad, sinkpad);
+    gst_object_unref(sinkpad);
+    //g_print("%s - adding %s\n", __FUNCTION__, check_cap.c_str());
+  }
+  gst_caps_unref(caps);
+}
+
+static void new_preroll(GstElement *appsink, gpointer user_data)
+{
+  //g_print("have new-preroll/n");
+  if (user_data)
+    ((CEvent*)user_data)->Set();
 }
 
 // ****************************************************************
@@ -87,13 +112,21 @@ bool CGSTFileInfo::GetFileDuration(const CStdString &strPath, int& duration_ms)
 // ****************************************************************
 bool CGSTFileInfo::ExtractThumb(const CStdString &strPath, const CStdString &strTarget, CStreamDetails *pStreamDetails)
 {
-  // TODO: figure out why everything but mov/mkv's will hang us.
   CStdString extension;
   extension = URIUtils::GetExtension(strPath);
-  if (!extension.Equals(".mkv") && !extension.Equals(".mov"))
+/*
+  if (!extension.Equals(".mkv") &&
+    !extension.Equals(".mov")   &&
+    !extension.Equals(".mpg")   &&
+    !extension.Equals(".mpeg")  &&
+    !extension.Equals(".ts"))
+  {
     return false;
-
-  bool rtn = false;
+  }
+*/
+  bool   rtn = false;
+  CEvent got_preroll;
+  got_preroll.Reset();
   int  bgn_time = XbmcThreads::SystemClockMillis();
 
   // setup desired width, gstreamer will calc a height with 1:1 pixel aspect ratio
@@ -104,13 +137,17 @@ bool CGSTFileInfo::ExtractThumb(const CStdString &strPath, const CStdString &str
   // may be called multiple times in an app, subsequent calls are no-op
   gst_init(NULL, NULL);
 
-  GstElement *pipeline = gst_pipeline_new("thumb-extractor");
+  GstElement *pipeline  = gst_pipeline_new("thumb-extractor");
 
-  GstElement *decoder  = gst_element_factory_make("uridecodebin",  "uridecodebin");
+  GstElement *decoder   = gst_element_factory_make("uridecodebin", "uridecodebin");
   g_object_set(decoder, "uri", "appsrc://", NULL);
+  g_object_set(decoder, "use-buffering", TRUE, NULL);
 
   GstElement *ffmpegcolorspace = gst_element_factory_make("ffmpegcolorspace", NULL);
+
   GstElement *videoscale = gst_element_factory_make("videoscale", NULL);
+  //Add black borders if necessary to keep the DAR
+  g_object_set(videoscale, "add-borders", TRUE, NULL);
 
   GstElement *thumbsink  = gst_element_factory_make("appsink", "sink");
 	GstCaps *thumbcaps = gst_caps_new_simple("video/x-raw-rgb",
@@ -123,7 +160,8 @@ bool CGSTFileInfo::ExtractThumb(const CStdString &strPath, const CStdString &str
     "green_mask", G_TYPE_INT, 0x00FF0000,
     "blue_mask",  G_TYPE_INT, 0xFF000000,
     NULL);
-  g_object_set(thumbsink, "caps", thumbcaps, NULL);
+  g_object_set(thumbsink, "caps", thumbcaps, "emit-signals", TRUE, NULL);
+  g_signal_connect(thumbsink, "new-preroll", (GCallback)new_preroll, &got_preroll);
   gst_caps_unref(thumbcaps);
 
   // add all elements to the pipeline.
@@ -181,27 +219,50 @@ bool CGSTFileInfo::ExtractThumb(const CStdString &strPath, const CStdString &str
   gint64    duration, position;
   GstFormat format;
   format = GST_FORMAT_TIME;
-  gst_element_query_duration(pipeline, &format, &duration);
+  duration = -1;
+  /*
+  if (!gst_element_query_duration(pipeline, &format, &duration))
+  {
+    CLog::Log(LOGDEBUG, "%s - failed to get duration", __FUNCTION__);
+    rtn = false;
+    goto do_exit;
+  }
+  */
 
   if (duration != -1)
-    // we have a duration, seek to 5%
-    position = duration * 5 / 100;
+    // we have a duration, seek to 33%
+    position = duration * (33 / 100);
   else
-    // no duration, seek to 1 second, this could EOS
-    position = 1 * GST_SECOND;
+    // no duration, seek to 30 second, this could EOS
+    position = 30 * GST_SECOND;
 
   // seek to the a position in the file. Most files have a black first frame so
   // by seeking to somewhere else we have a bigger chance of getting something
   // more interesting. An optimisation would be to detect black images and then
   // seek a little more
   gst_element_seek_simple(pipeline, GST_FORMAT_TIME,
-      (GstSeekFlags)(GST_SEEK_FLAG_ACCURATE | GST_SEEK_FLAG_FLUSH), position);
+      (GstSeekFlags)(GST_SEEK_FLAG_KEY_UNIT | GST_SEEK_FLAG_FLUSH), position);
 
-  // get the preroll buffer from appsink, this block untils appsink really prerolls
   GstElement *sink;
-  GstBuffer  *buffer;
   sink = gst_bin_get_by_name(GST_BIN(pipeline), "sink");
+  if (!sink)
+  {
+    CLog::Log(LOGDEBUG, "%s - failed to get sink element", __FUNCTION__);
+    rtn = false;
+    goto do_exit;
+  }
+
+  // wait for preroll buffer from appsink, this block untils appsink really prerolls
+  if (!got_preroll.WaitMSec(2000))
+  {
+    CLog::Log(LOGDEBUG, "%s - failed to get pull-preroll buffer", __FUNCTION__);
+    rtn = false;
+    goto do_exit;
+  }
+
+  GstBuffer  *buffer;
   g_signal_emit_by_name(sink, "pull-preroll", &buffer, NULL);
+  //g_signal_emit_by_name(sink, "pull-buffer", &buffer, NULL);
   // possible that we don't have a buffer because 
   // we went EOS right away or had an error so check.
   if (buffer)
