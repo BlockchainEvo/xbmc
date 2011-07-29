@@ -3,12 +3,12 @@ include ../intel-sdk.mk
 
 # lib name, version
 LIBNAME=gst-fluendo-mpegdemux
-VERSION=0.10.64
-#VERSION=r2125
+#VERSION=0.10.64
+VERSION=r2152
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
 
-BASE_URL=http://core.fluendo.com/gstreamer/src/gst-fluendo-mpegdemux
+#BASE_URL=http://core.fluendo.com/gstreamer/src/gst-fluendo-mpegdemux
 
 # configuration settings
 export CFLAGS+=-isystem$(SDKSTAGE)/include/linux_user
@@ -29,6 +29,7 @@ $(SOURCE): $(TARBALLS_LOCATION)/$(ARCHIVE)
 	$(ARCHIVE_TOOL) $(ARCHIVE_TOOL_FLAGS) $(TARBALLS_LOCATION)/$(ARCHIVE)
 	echo $(SOURCE) > .gitignore
 	cd $(SOURCE); patch -p0 <../lpcm.patch
+	mv $(SOURCE)/win32/vs9 $(SOURCE)/win32/oa
 	cd $(SOURCE); $(CONFIGURE)
 
 $(LIBDYLIB): $(SOURCE)

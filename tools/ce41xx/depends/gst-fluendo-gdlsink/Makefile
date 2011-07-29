@@ -3,12 +3,12 @@ include ../intel-sdk.mk
 
 # lib name, version
 LIBNAME=gst-fluendo-gdlsink
-VERSION=0.10.14
-#VERSION=r2125
+#VERSION=0.10.14
+VERSION=r2152
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
 
-BASE_URL=http://core.fluendo.com/gstreamer/src/gst-fluendo-gdlsink
+#BASE_URL=http://core.fluendo.com/gstreamer/src/gst-fluendo-gdlsink
 
 # configuration settings
 CONFIGURE=./configure --prefix=$(PREFIX) --host=$(HOST) --with-gdl-path=${SDKSTAGE}
@@ -28,6 +28,8 @@ $(SOURCE): $(TARBALLS_LOCATION)/$(ARCHIVE)
 	echo $(SOURCE) > .gitignore
 	cd $(SOURCE); autoreconf -vif
 	cd $(SOURCE); $(CONFIGURE)
+	# configure defaults to -Werror if svn build, remove it.
+	sed -i "s|-Wall -Werror|-Wall|" $(SOURCE)/Makefile $(SOURCE)/src/Makefile $(SOURCE)/common/Makefile
 
 $(LIBDYLIB): $(SOURCE)
 	make -j 1 -C $(SOURCE)

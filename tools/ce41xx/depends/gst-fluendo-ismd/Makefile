@@ -3,12 +3,12 @@ include ../intel-sdk.mk
 
 # lib name, version
 LIBNAME=gst-fluendo-ismd
-VERSION=0.10.22
-#VERSION=r2125
+#VERSION=0.10.22
+VERSION=r2152
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
 
-BASE_URL=http://core.fluendo.com/gstreamer/src/gst-fluendo-ismd
+#BASE_URL=http://core.fluendo.com/gstreamer/src/gst-fluendo-ismd
 
 # configuration settings
 export CFLAGS+=-isystem$(SDKSTAGE)/include/linux_user
@@ -30,6 +30,8 @@ $(SOURCE): $(TARBALLS_LOCATION)/$(ARCHIVE)
 	echo $(SOURCE) > .gitignore
 	cd $(SOURCE); autoreconf -vif
 	cd $(SOURCE); $(CONFIGURE)
+	# configure defaults to -Werror if svn build, remove it.
+	sed -i "s|-Wall -Werror|-Wall|" $(SOURCE)/Makefile $(SOURCE)/docs/Makefile $(SOURCE)/src/Makefile $(SOURCE)/examples/glplayer/Makefile
 
 $(LIBDYLIB): $(SOURCE)
 	make -j 1 -C $(SOURCE)
