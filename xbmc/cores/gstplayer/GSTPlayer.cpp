@@ -509,6 +509,10 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
         #endif
       }
     }
+    // turn off qos for video sink, breaks seeking in mkv containers
+    g_object_set(m_gstvars->videosink, "qos", FALSE, NULL);
+    g_object_set(m_gstvars->videosink, "async-handling", TRUE, NULL);
+    g_object_set(m_gstvars->videosink, "message-forward", TRUE, NULL);
     g_object_set(m_gstvars->player, "video-sink", m_gstvars->videosink, NULL);
 
     // ---------------------------------------------------
@@ -1020,11 +1024,11 @@ void CGSTPlayer::SeekTime(__int64 seek_ms)
     // blocks until the pipeline is set to playing again.
     gst_element_seek(m_gstvars->player,
 			m_gstvars->rate, GST_FORMAT_TIME, 
-      (GstSeekFlags)(GST_SEEK_FLAG_FLUSH | GST_SEEK_FLAG_ACCURATE),
-			GST_SEEK_TYPE_SET,  seek_ns,               // start
-      GST_SEEK_TYPE_NONE, GST_CLOCK_TIME_NONE);  // end
+      (GstSeekFlags)(GST_SEEK_FLAG_FLUSH | GST_SEEK_FLAG_KEY_UNIT),
+			GST_SEEK_TYPE_SET,  seek_ns,  // start
+      GST_SEEK_TYPE_SET,   -1);     // end
     // wait for seek to complete
-    gst_element_get_state(m_gstvars->player, NULL, NULL, 100 * GST_MSECOND);
+    gst_element_get_state(m_gstvars->player, NULL, NULL, 200 * GST_MSECOND);
     // restart the playback
     gst_element_set_state(m_gstvars->player, GST_STATE_PLAYING);
     // remove any displaying subtitles
@@ -1134,17 +1138,44 @@ void CGSTPlayer::ToFFRW(int iSpeed)
 
     if (m_gstvars->ready)
     {
-      GstSeekFlags flags  = GST_SEEK_FLAG_SKIP;
-      GstEvent *rate_seek = gst_event_new_seek(m_gstvars->rate,
-        GST_FORMAT_TIME, flags,
-        GST_SEEK_TYPE_NONE, GST_CLOCK_TIME_NONE,
-        GST_SEEK_TYPE_NONE, GST_CLOCK_TIME_NONE);
-   
-      if (!gst_element_send_event(m_gstvars->player, rate_seek))
-        GST_WARNING ("element failed to change playback rate");
+      if (!m_paused)
+      {
+        gst_element_set_state(m_gstvars->player, GST_STATE_PAUSED);
+        gst_element_get_state(m_gstvars->player, NULL, NULL, 200 * GST_MSECOND);
+      }
+    
+      gint64 elapsed_ns;
+      GstFormat seek_fmt = GST_FORMAT_TIME;
+      if (!gst_element_query_position(m_gstvars->player, &seek_fmt, &elapsed_ns))
+        elapsed_ns = GST_CLOCK_TIME_NONE;
 
-      // wait for rate change to complete
-      gst_element_get_state(m_gstvars->player, NULL, NULL, 100 * GST_MSECOND);
+      // gst can only do -8X to 8X
+      m_gstvars->rate = iSpeed;
+      if (iSpeed < 0)
+      {
+        if (m_gstvars->rate < -8.0)
+          m_gstvars->rate = -8.0;
+        gst_element_seek(m_gstvars->player, m_gstvars->rate,
+          seek_fmt, GST_SEEK_FLAG_FLUSH,
+          GST_SEEK_TYPE_SET, elapsed_ns,
+          GST_SEEK_TYPE_SET, -1);
+      }
+      else
+      {
+        if (m_gstvars->rate > 8.0)
+          m_gstvars->rate = 8.0;
+        gst_element_seek(m_gstvars->player, m_gstvars->rate,
+          seek_fmt, GST_SEEK_FLAG_FLUSH,
+          GST_SEEK_TYPE_SET, elapsed_ns,
+          GST_SEEK_TYPE_SET, -1);
+      }
+      
+      g_print("CGSTPlayer::ToFFRW, rate(%f)\n", m_gstvars->rate);
+      if (!m_paused)
+      {
+        gst_element_set_state(m_gstvars->player, GST_STATE_PLAYING);
+        gst_element_get_state(m_gstvars->player, NULL, NULL, 200 * GST_MSECOND);
+      }
     }
 
     m_speed = iSpeed;
