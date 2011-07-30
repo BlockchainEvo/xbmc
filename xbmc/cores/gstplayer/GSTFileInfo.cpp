@@ -220,21 +220,13 @@ bool CGSTFileInfo::ExtractThumb(const CStdString &strPath, const CStdString &str
   GstFormat format;
   format = GST_FORMAT_TIME;
   duration = -1;
-  /*
-  if (!gst_element_query_duration(pipeline, &format, &duration))
-  {
-    CLog::Log(LOGDEBUG, "%s - failed to get duration", __FUNCTION__);
-    rtn = false;
-    goto do_exit;
-  }
-  */
 
   if (duration != -1)
     // we have a duration, seek to 33%
     position = duration * (33 / 100);
   else
     // no duration, seek to 30 second, this could EOS
-    position = 30 * GST_SECOND;
+    position = 60 * GST_SECOND;
 
   // seek to the a position in the file. Most files have a black first frame so
   // by seeking to somewhere else we have a bigger chance of getting something
