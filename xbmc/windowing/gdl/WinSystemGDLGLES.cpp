@@ -32,7 +32,7 @@ CWinSystemGDLGLES::~CWinSystemGDLGLES()
 {
 }
 
-bool CWinSystemGDLGLES::PresentRenderImpl()
+bool CWinSystemGDLGLES::PresentRenderImpl(const CDirtyRegionList &dirty)
 {    
   eglSwapBuffers(m_eglBinding.GetDisplay(), m_eglBinding.GetSurface());
   return true;
