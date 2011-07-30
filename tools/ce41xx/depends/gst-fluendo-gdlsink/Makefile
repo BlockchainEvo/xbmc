@@ -3,12 +3,9 @@ include ../intel-sdk.mk
 
 # lib name, version
 LIBNAME=gst-fluendo-gdlsink
-#VERSION=0.10.14
 VERSION=r2152
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
-
-#BASE_URL=http://core.fluendo.com/gstreamer/src/gst-fluendo-gdlsink
 
 # configuration settings
 CONFIGURE=./configure --prefix=$(PREFIX) --host=$(HOST) --with-gdl-path=${SDKSTAGE}

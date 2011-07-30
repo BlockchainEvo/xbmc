@@ -7,13 +7,11 @@ VERSION=0.15.1b
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
 
-BASE_URL=http://softlayer.dl.sourceforge.net/project/mad/libid3tag/0.15.1b
-
 # configuration settings
 
 CONFIGURE=./configure --prefix=$(PREFIX) --build=$(BUILD) --host=$(HOST) \
 
-LIBDYLIB=$(SOURCE)/ext/ffmpeg/.libs/libgstffmpeg.so
+LIBDYLIB=$(SOURCE)/.libs/libid3tag.so
 
 CLEAN_FILES=$(ARCHIVE) $(SOURCE)
 

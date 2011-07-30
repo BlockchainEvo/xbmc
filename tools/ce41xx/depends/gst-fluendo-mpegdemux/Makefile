@@ -3,12 +3,9 @@ include ../intel-sdk.mk
 
 # lib name, version
 LIBNAME=gst-fluendo-mpegdemux
-#VERSION=0.10.64
 VERSION=r2152
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
-
-#BASE_URL=http://core.fluendo.com/gstreamer/src/gst-fluendo-mpegdemux
 
 # configuration settings
 export CFLAGS+=-isystem$(SDKSTAGE)/include/linux_user
