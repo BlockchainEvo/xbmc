@@ -346,7 +346,7 @@ static void CGSTPlayerSubsOnNewBuffer(GstElement *subs_sink, CGSTPlayer *ctx)
 // ****************************************************************
 CGSTPlayer::CGSTPlayer(IPlayerCallback &callback) 
   : IPlayer(callback),
-  CThread(),
+  CThread("CGSTPlayer"),
   m_ready(true)
 {
   m_speed = 1;
@@ -1213,8 +1213,6 @@ CStdString CGSTPlayer::GetPlayingTitle()
 
 void CGSTPlayer::OnStartup()
 {
-  CThread::SetName("CGSTPlayer");
-
   g_renderManager.PreInit();
 }
 
