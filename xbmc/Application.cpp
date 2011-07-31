@@ -286,6 +286,10 @@
   #include "input/windows/IRServerSuite.h"
 #endif
 
+#if defined(HAVE_LIBGSTREAMER)
+#include <gst/gst.h>
+#endif
+
 using namespace std;
 using namespace ADDON;
 using namespace XFILE;
@@ -333,6 +337,10 @@ CApplication::CApplication(void) : m_itemCurrentFile(new CFileItem), m_progressT
 
 #ifdef HAS_GLX
   XInitThreads();
+#endif
+
+#if defined(HAVE_LIBGSTREAMER)
+  gst_init(NULL, NULL);
 #endif
 
   //true while we in IsPaused mode! Workaround for OnPaused, which must be add. after v2.0
