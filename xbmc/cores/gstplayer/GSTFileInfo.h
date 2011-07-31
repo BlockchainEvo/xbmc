@@ -29,11 +29,11 @@ class CDVDInputStream;
 class CGSTFileInfo
 {
 public:
-  // Extract a thumbnail immage from the media at strPath an image file in strTarget, optionally populating a streamdetails class with the data
-  static bool ExtractThumb(const CStdString &strPath, const CStdString &strTarget, CStreamDetails *pStreamDetails);
+  static bool GetFileDuration(const CStdString &strPath, int &duration_ms);
 
   // Probe the files streams and store the info in the VideoInfoTag
   static bool GetFileStreamDetails(CFileItem *pItem);
 
-  static bool GetFileDuration(const CStdString &strPath, int &duration_ms);
+  // Extract a thumbnail immage from the media at strPath an image file in strTarget, optionally populating a streamdetails class with the data
+  static bool ExtractThumb(const CStdString &strPath, const CStdString &strTarget, CStreamDetails *pStreamDetails);
 };
