@@ -12,8 +12,7 @@ BASE_URL=http://gstreamer.freedesktop.org/src/gst-ffmpeg
 # configuration settings
 
 CONFIGURE=./configure --prefix=$(PREFIX) --build=$(BUILD) --host=$(HOST) \
-
-# --with-ffmpeg-extra-configure=
+  --with-ffmpeg-extra-configure="--cpu=atom --extra-cflags='-march=atom'"
 
 LIBDYLIB=$(SOURCE)/ext/ffmpeg/.libs/libgstffmpeg.so
 
