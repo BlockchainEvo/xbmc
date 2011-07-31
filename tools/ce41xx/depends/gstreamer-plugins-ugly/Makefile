@@ -11,8 +11,8 @@ BASE_URL=http://gstreamer.freedesktop.org/src/gst-plugins-ugly
 
 # configuration settings
 CONFIGURE=./autogen.sh --prefix=$(PREFIX) --host=$(HOST) \
- --disable-docbook  \
  --disable-gtk-doc  \
+ --disable-valgrind
 
 LIBDYLIB=$(SOURCE)/sys/ximage/.libs/libgstximagesrc.so
 
