@@ -3,6 +3,7 @@ include ../intel-sdk.mk
 
 SOURCE=../../../../
 # configuration settings
+export CXXFLAGS+=-isystem$(SDKSTAGE)/include/linux_user
 export ALSA_CFLAGS=-I$(SDKSTAGE)/usr/include/alsa
 export ALSA_LIBS=-L$(SDKSTAGE)/usr/lib -lasound
 CONFIGURE=./configure --prefix=$(PREFIX) --host=$(HOST) \
