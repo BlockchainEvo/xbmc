@@ -35,7 +35,7 @@ $(LIBDYLIB): $(SOURCE)
 
 .installed:
 	make -C $(SOURCE) install
-	cp -f $(SOURCE)/src/ismd_gst_buffer.h $(PREFIX)/includes/
+	cp -f $(SOURCE)/src/ismd_gst_buffer.h $(PREFIX)/include/
 	touch $@
 
 clean:
