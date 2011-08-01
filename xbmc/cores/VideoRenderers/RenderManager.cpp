@@ -695,7 +695,7 @@ void CXBMCRenderManager::PresentWeave()
 
 void CXBMCRenderManager::Recover()
 {
-#ifdef HAS_GL
+#if defined(HAS_GL) && !defined(TARGET_DARWIN)
   glFlush(); // attempt to have gpu done with pixmap and vdpau
 #endif
 }
@@ -721,6 +721,10 @@ int CXBMCRenderManager::AddVideoPicture(DVDVideoPicture& pic)
   if (!m_pRenderer)
     return -1;
 
+#ifdef HAS_DX
+  m_pRenderer->AddProcessor(&pic);
+#endif
+
   YV12Image image;
   int index = m_pRenderer->GetImage(&image);
 
@@ -741,10 +745,6 @@ int CXBMCRenderManager::AddVideoPicture(DVDVideoPicture& pic)
   {
     CDVDCodecUtils::CopyYUV422PackedPicture(&image, &pic);
   }
-#endif
-#ifdef HAS_DX
-  else if(pic.format == DVDVideoPicture::FMT_DXVA)
-    m_pRenderer->AddProcessor(pic.proc, pic.proc_id);
 #endif
 #ifdef HAVE_LIBVDPAU
   else if(pic.format == DVDVideoPicture::FMT_VDPAU)

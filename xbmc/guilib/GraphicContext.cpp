@@ -803,9 +803,9 @@ void CGraphicContext::SetMediaDir(const CStdString &strMediaDir)
   m_strMediaDir = strMediaDir;
 }
 
-void CGraphicContext::Flip()
+void CGraphicContext::Flip(const CDirtyRegionList& dirty)
 {
-  g_Windowing.PresentRender();
+  g_Windowing.PresentRender(dirty);
 }
 
 void CGraphicContext::ApplyHardwareTransform()

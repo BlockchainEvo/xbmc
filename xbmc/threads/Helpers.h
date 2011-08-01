@@ -21,8 +21,6 @@
 
 #pragma once
 
-#include <assert.h>
-
 namespace XbmcThreads
 {
   /**
@@ -36,16 +34,22 @@ namespace XbmcThreads
     inline NonCopyable() {}
   };
 
+  /**
+   * This will create a new predicate from an old predicate P with 
+   *  inverse truth value. This predicate is safe to use in a 
+   *  TightConditionVariable<P>
+   */
+  template <class P> class InversePredicate
+  {
+    P predicate;
+
+  public:
+    inline InversePredicate(P predicate_) : predicate(predicate_) {}
+    inline InversePredicate(const InversePredicate<P>& other) : predicate(other.predicate) {}
+    inline InversePredicate<P>& operator=(InversePredicate<P>& other) { predicate = other.predicate; }
+
+    inline bool operator!() const { return !(!predicate); }
+  };
+
 }
 
-#ifdef NDEBUG
-#define XBMC_ASSERT_TRUE(expression) assert( expression )
-#define XBMC_ASSERT_NOTEQUALS(compareTo,expression) assert( compareTo != expression )
-#define XBMC_ASSERT_EQUALS(compareTo,expression) assert( compareTo == expression )
-#define XBMC_ASSERT_ZERO(expression) assert( 0 == expression )
-#else
-#define XBMC_ASSERT_TRUE(expression) expression
-#define XBMC_ASSERT_NOTEQUALS(compareTo,expression) expression
-#define XBMC_ASSERT_EQUALS(compareTo,expression) expression
-#define XBMC_ASSERT_ZERO(expression) expression
-#endif
