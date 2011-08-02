@@ -180,7 +180,6 @@ bool CLinuxRendererGLES::Configure(unsigned int width, unsigned int height, unsi
     m_buffers[i].image.flags = 0;
 
   m_iLastRenderBuffer = -1;
-  m_BYPASS_RenderUpdated = 4;
   return true;
 }
 
@@ -406,15 +405,24 @@ void CLinuxRendererGLES::RenderUpdate(bool clear, DWORD flags, DWORD alpha)
 
   if (m_renderMethod & RENDER_BYPASS)
   {
-    if (clear || m_BYPASS_RenderUpdated)
-    {
-      g_graphicsContext.BeginPaint();
-      g_graphicsContext.Clear();
-      g_graphicsContext.EndPaint();
-      glFinish();
-      if (m_BYPASS_RenderUpdated)
-        m_BYPASS_RenderUpdated--;
-    }
+    ManageDisplay();
+    ManageTextures();
+    g_graphicsContext.BeginPaint();
+
+    // RENDER_BYPASS means we are rendering video
+    // outside the control of gles and on a different
+    // graphics plane that is under the gles layer.
+    // Clear a hole where video would appear so we do not see
+    // background images that have already been rendered. 
+    g_graphicsContext.SetScissors(m_destRect);
+
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glClearColor(0, 0, 0, 0);
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    g_graphicsContext.EndPaint();
+    glFinish();
     return;
   }
 

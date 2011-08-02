@@ -268,7 +268,6 @@ protected:
   unsigned int m_rgbBufferSize;
 
   CEvent* m_eventTexturesDone[NUM_BUFFERS];
-  int m_BYPASS_RenderUpdated;
 
 };
 
