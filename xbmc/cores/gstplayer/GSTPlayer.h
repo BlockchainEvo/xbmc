@@ -129,14 +129,14 @@ public:
   
   virtual CStdString GetPlayingTitle();
   
-  INT_GST_VARS* GetGSTVars() {return m_gstvars;};
+  INT_GST_VARS* GetGSTVars(void)                                  {return m_gstvars;};
+  void    ProbeStreams(void);
 
 protected:
   virtual void  OnStartup();
   virtual void  OnExit();
   virtual void  Process();
 
-  void          ProbeStreams();
   bool          WaitForGSTPaused( int timeout_ms);
   bool          WaitForGSTPlaying(int timeout_ms);
   bool          WaitForWindowFullScreenVideo(int timeout_ms);

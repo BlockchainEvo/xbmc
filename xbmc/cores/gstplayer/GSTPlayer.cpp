@@ -286,6 +286,10 @@ gboolean CGSTPlayerBusCallback(GstBus *bus, GstMessage *msg, CGSTPlayer *gstplay
       break;
     case GST_MESSAGE_ASYNC_DONE:
       g_print("GStreamer: Message ASYNC_DONE\n");
+      // ASYNC_DONE, we can query position, duration and other properties
+      gstplayer->ProbeStreams();
+      gstvars->rate  = 1.0;
+      gstvars->ready = true;
       break;
 #if (GST_VERSION_MICRO >= 26)
     case GST_MESSAGE_REQUEST_STATE:
@@ -356,6 +360,7 @@ CGSTPlayer::CGSTPlayer(IPlayerCallback &callback)
   m_gstvars = (INT_GST_VARS*)new INT_GST_VARS;
   m_gstvars->inited = false;
   m_gstvars->ready  = false;
+  m_gstvars->rate   = 1.0;
   m_gstvars->loop   = NULL;
   m_gstvars->player = NULL;
   m_gstvars->textsink  = NULL;
@@ -478,7 +483,7 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
     if (m_gstvars->bus  == NULL)
       return false;
     gst_bus_add_watch(m_gstvars->bus, (GstBusFunc)CGSTPlayerBusCallback, this);
-    
+
     // ---------------------------------------------------
     // create video sink
     m_gstvars->videosink = gst_element_factory_make(m_videosink_name.c_str(), NULL);
@@ -599,6 +604,7 @@ bool CGSTPlayer::CloseFile()
 
   if (m_gstvars->inited)
   {
+    m_gstvars->rate   = 1.0;
     m_gstvars->ready  = false;
     m_gstvars->inited = false;
 
@@ -1237,11 +1243,6 @@ void CGSTPlayer::Process()
   {
     if (WaitForGSTPaused(10000))
     {
-      m_gstvars->rate  = 1.0;
-      m_gstvars->ready = true;
-
-      ProbeStreams();
-
       // starttime has units of seconds (SeekTime will start playback)
       if (m_options.starttime > 0)
         SeekTime(m_options.starttime * 1000);
@@ -1331,148 +1332,148 @@ void CGSTPlayer::ProbeStreams()
   if (m_subtitle_count)
     g_object_set(m_gstvars->player, "current-text", m_subtitle_index, NULL);
 
-  if (m_gstvars->ready)
-  {
-    // probe video
-    for (int i = 0; i < m_video_count; i++)
-    { 
-      GstPad *pad = NULL;
-      g_signal_emit_by_name(m_gstvars->player, "get-video-pad", i, &pad, NULL);
-      if (pad)
+  // probe video
+  m_gstvars->vcodec_name.clear();
+  for (int i = 0; i < m_video_count; i++)
+  { 
+    GstPad *pad = NULL;
+    g_signal_emit_by_name(m_gstvars->player, "get-video-pad", i, &pad, NULL);
+    if (pad)
+    {
+      GstCaps *caps = gst_pad_get_negotiated_caps(pad); 
+      if (caps)
       {
-        GstCaps *caps = gst_pad_get_negotiated_caps(pad); 
-        if (caps)
+        GstStructure *structure = gst_caps_get_structure(caps, 0);
+
+        gint video_fps_d, video_fps_n, video_width, video_height;
+        if (!gst_structure_get_fraction(structure, "framerate", &video_fps_n, &video_fps_d))
         {
-          GstStructure *structure = gst_caps_get_structure(caps, 0);
-
-          gint video_fps_d, video_fps_n, video_width, video_height;
-          if (!gst_structure_get_fraction(structure, "framerate", &video_fps_n, &video_fps_d))
-          {
-            video_fps_n = 0;
-            video_fps_d = 1;
-          }
-          if (!gst_structure_get_int(structure, "width",  &video_width))
-            video_width = 0;
-          if (!gst_structure_get_int(structure, "height",  &video_height))
-            video_height = 0;
-
-          if (i == m_video_index)
-          {
-            m_video_fps    = (float)video_fps_n/(float)video_fps_d;
-            m_video_width  = video_width;
-            m_video_height = video_height;
-          }
-          gst_caps_unref(caps);
+          video_fps_n = 0;
+          video_fps_d = 1;
         }
-        gst_object_unref(pad);
-      }
+        if (!gst_structure_get_int(structure, "width",  &video_width))
+          video_width = 0;
+        if (!gst_structure_get_int(structure, "height",  &video_height))
+          video_height = 0;
 
-      GstTagList *tags = NULL;
-      g_signal_emit_by_name(m_gstvars->player, "get-video-tags", i, &tags);
-      if (tags)
-      {
-        gchar *language = NULL, *codec = NULL;
-        gst_tag_list_get_string(tags, GST_TAG_LANGUAGE_CODE, &language);
-        gst_tag_list_get_string(tags, GST_TAG_VIDEO_CODEC,   &codec);
-        gst_tag_list_free(tags);
-
-        if (codec)
-          m_gstvars->vcodec_name.push_back(gstTagNameToVideoName(codec));
-        else
-          m_gstvars->vcodec_name.push_back("");
-        if (language)
-          m_gstvars->vcodec_language.push_back(gst_tag_get_language_name(language));
-        else
-          m_gstvars->vcodec_language.push_back("");
+        if (i == m_video_index)
+        {
+          m_video_fps    = (float)video_fps_n/(float)video_fps_d;
+          m_video_width  = video_width;
+          m_video_height = video_height;
+        }
+        gst_caps_unref(caps);
       }
+      gst_object_unref(pad);
+    }
+
+    GstTagList *tags = NULL;
+    g_signal_emit_by_name(m_gstvars->player, "get-video-tags", i, &tags);
+    if (tags)
+    {
+      gchar *language = NULL, *codec = NULL;
+      gst_tag_list_get_string(tags, GST_TAG_LANGUAGE_CODE, &language);
+      gst_tag_list_get_string(tags, GST_TAG_VIDEO_CODEC,   &codec);
+      gst_tag_list_free(tags);
+
+      if (codec)
+        m_gstvars->vcodec_name.push_back(gstTagNameToVideoName(codec));
       else
-      {
-        m_gstvars->vcodec_name.push_back("unknown");
+        m_gstvars->vcodec_name.push_back("");
+      if (language)
+        m_gstvars->vcodec_language.push_back(gst_tag_get_language_name(language));
+      else
         m_gstvars->vcodec_language.push_back("");
-      }
     }
-
-    // probe audio
-    for (int i = 0; i < m_audio_count; i++)
+    else
     {
-      GstPad *pad = NULL;
-      g_signal_emit_by_name(m_gstvars->player, "get-audio-pad", i, &pad, NULL);
-      if (pad)
+      m_gstvars->vcodec_name.push_back("unknown");
+      m_gstvars->vcodec_language.push_back("");
+    }
+  }
+
+  // probe audio
+  m_gstvars->acodec_name.clear();
+  for (int i = 0; i < m_audio_count; i++)
+  {
+    GstPad *pad = NULL;
+    g_signal_emit_by_name(m_gstvars->player, "get-audio-pad", i, &pad, NULL);
+    if (pad)
+    {
+      GstCaps *caps = gst_pad_get_negotiated_caps(pad); 
+      if (caps)
       {
-        GstCaps *caps = gst_pad_get_negotiated_caps(pad); 
-        if (caps)
+        gint width, channels, samplerate;
+        GstStructure *structure = gst_caps_get_structure(caps, 0);
+
+        if (!gst_structure_get_int(structure, "width", &width))
+          width = 0;
+        if (!gst_structure_get_int(structure, "channels", &channels))
+          channels = 2;
+        if (!gst_structure_get_int(structure, "rate", &samplerate))
+          samplerate = 48000;
+
+        if (i == m_audio_index)
         {
-          gint width, channels, samplerate;
-          GstStructure *structure = gst_caps_get_structure(caps, 0);
-
-          if (!gst_structure_get_int(structure, "width", &width))
-            width = 0;
-          if (!gst_structure_get_int(structure, "channels", &channels))
-            channels = 2;
-          if (!gst_structure_get_int(structure, "rate", &samplerate))
-            samplerate = 48000;
-
-          if (i == m_audio_index)
-          {
-            m_audio_bits = width;
-            m_audio_channels = channels;
-            m_audio_samplerate = channels;
-          }
-          gst_caps_unref(caps);
+          m_audio_bits = width;
+          m_audio_channels = channels;
+          m_audio_samplerate = channels;
         }
-        gst_object_unref(pad);
+        gst_caps_unref(caps);
       }
-      
-      GstTagList *tags = NULL;
-      g_signal_emit_by_name(m_gstvars->player, "get-audio-tags", i, &tags);
-      if (tags)
-      {
-        gchar *language = NULL, *codec = NULL;
-        gst_tag_list_get_string(tags, GST_TAG_LANGUAGE_CODE, &language);
-        gst_tag_list_get_string(tags, GST_TAG_AUDIO_CODEC,   &codec);
-        gst_tag_list_free(tags);
-
-        if (codec)
-          m_gstvars->acodec_name.push_back(gstTagNameToAudioName(codec));
-        else
-          m_gstvars->acodec_name.push_back("");
-        if (language)
-          m_gstvars->acodec_language.push_back(gst_tag_get_language_name(language));
-        else
-          m_gstvars->acodec_language.push_back("");
-      }
-      else
-      {
-        m_gstvars->acodec_name.push_back("unknown");
-        m_gstvars->acodec_language.push_back("");
-      }
+      gst_object_unref(pad);
     }
-
-    // probe subtitles
-    for (int i = 0; i < m_subtitle_count; i++)
+    
+    GstTagList *tags = NULL;
+    g_signal_emit_by_name(m_gstvars->player, "get-audio-tags", i, &tags);
+    if (tags)
     {
-      GstTagList *tags = NULL;
-      g_signal_emit_by_name(m_gstvars->player, "get-text-tags", i, &tags);
-      if (tags)
-      {
-        gchar *language = NULL, *codec = NULL;
+      gchar *language = NULL, *codec = NULL;
+      gst_tag_list_get_string(tags, GST_TAG_LANGUAGE_CODE, &language);
+      gst_tag_list_get_string(tags, GST_TAG_AUDIO_CODEC,   &codec);
+      gst_tag_list_free(tags);
 
-        gst_tag_list_get_string(tags, GST_TAG_LANGUAGE_CODE,  &language);
-        gst_tag_list_get_string(tags, GST_TAG_SUBTITLE_CODEC, &codec);
-        gst_tag_list_free(tags);
-
-        m_gstvars->tcodec_name.push_back("");
-        if (language)
-          m_gstvars->tcodec_language.push_back(gst_tag_get_language_name(language));
-        else
-          m_gstvars->tcodec_language.push_back("");
-
-      }
+      if (codec)
+        m_gstvars->acodec_name.push_back(gstTagNameToAudioName(codec));
       else
-      {
-        m_gstvars->tcodec_name.push_back("unknown");
+        m_gstvars->acodec_name.push_back("");
+      if (language)
+        m_gstvars->acodec_language.push_back(gst_tag_get_language_name(language));
+      else
+        m_gstvars->acodec_language.push_back("");
+    }
+    else
+    {
+      m_gstvars->acodec_name.push_back("unknown");
+      m_gstvars->acodec_language.push_back("");
+    }
+  }
+
+  // probe subtitles
+  m_gstvars->tcodec_name.clear();
+  for (int i = 0; i < m_subtitle_count; i++)
+  {
+    GstTagList *tags = NULL;
+    g_signal_emit_by_name(m_gstvars->player, "get-text-tags", i, &tags);
+    if (tags)
+    {
+      gchar *language = NULL, *codec = NULL;
+
+      gst_tag_list_get_string(tags, GST_TAG_LANGUAGE_CODE,  &language);
+      gst_tag_list_get_string(tags, GST_TAG_SUBTITLE_CODEC, &codec);
+      gst_tag_list_free(tags);
+
+      m_gstvars->tcodec_name.push_back("");
+      if (language)
+        m_gstvars->tcodec_language.push_back(gst_tag_get_language_name(language));
+      else
         m_gstvars->tcodec_language.push_back("");
-      }
+
+    }
+    else
+    {
+      m_gstvars->tcodec_name.push_back("unknown");
+      m_gstvars->tcodec_language.push_back("");
     }
   }
 }
