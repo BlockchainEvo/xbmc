@@ -190,9 +190,6 @@ int CLinuxRendererGLES::NextYV12Texture()
 
 int CLinuxRendererGLES::GetImage(YV12Image *image, int source, bool readonly)
 {
-  if (m_renderMethod & RENDER_BYPASS)
-    return 0;
-
   if (!image) return -1;
   if (!m_bValidated) return -1;
 
@@ -248,9 +245,6 @@ int CLinuxRendererGLES::GetImage(YV12Image *image, int source, bool readonly)
 
 void CLinuxRendererGLES::ReleaseImage(int source, bool preserve)
 {
-  if (m_renderMethod & RENDER_BYPASS)
-    return;
-
   YV12Image &im = m_buffers[source].image;
 
   if( im.flags & IMAGE_FLAG_WRITING )
