@@ -1252,7 +1252,7 @@ void CGSTPlayer::Process()
     else
     {
       CLog::Log(LOGDEBUG, "CGSTPlayer::Process:WaitForGSTPaused timeout");
-      throw;
+      goto do_exit;
     }
 
     if (WaitForGSTPlaying(2000))
@@ -1261,35 +1261,36 @@ void CGSTPlayer::Process()
       // drop CGUIDialogBusy, and release the hold in OpenFile
       m_ready.Set();
 
-      // big fake out here, we do not know the video width, height yet
-      // so setup renderer to full display size and tell it we are doing
-      // bypass. This tell it to get out of the way as hardware will be doing
-      // the actual video rendering in a video plane that is under the GUI
-      // layer.
-      int width = g_graphicsContext.GetWidth();
-      int height= g_graphicsContext.GetHeight();
-      int displayWidth  = width;
-      int displayHeight = height;
-      double fFrameRate = 24;
-      unsigned int flags = 0;
+      if (m_video_count)
+      {
+        // big fake out here, we do not know the video width, height yet
+        // so setup renderer to full display size and tell it we are doing
+        // bypass. This tell it to get out of the way as hardware will be doing
+        // the actual video rendering in a video plane that is under the GUI
+        // layer.
+        int width = g_graphicsContext.GetWidth();
+        int height= g_graphicsContext.GetHeight();
+        int displayWidth  = width;
+        int displayHeight = height;
+        double fFrameRate = 24;
+        unsigned int flags = 0;
 
-      flags |= CONF_FLAGS_FORMAT_BYPASS;
-      flags |= CONF_FLAGS_FULLSCREEN;
-      CStdString formatstr = "BYPASS";
-      CLog::Log(LOGDEBUG,"%s - change configuration. %dx%d. framerate: %4.2f. format: %s",
-        __FUNCTION__, width, height, fFrameRate, formatstr.c_str());
-      g_renderManager.IsConfigured();
-      if(!g_renderManager.Configure(width, height, displayWidth, displayHeight, fFrameRate, flags))
-        CLog::Log(LOGERROR, "%s - failed to configure renderer", __FUNCTION__);
-      if (!g_renderManager.IsStarted())
-        CLog::Log(LOGERROR, "%s - renderer not started", __FUNCTION__);
+        flags |= CONF_FLAGS_FORMAT_BYPASS;
+        flags |= CONF_FLAGS_FULLSCREEN;
+        CStdString formatstr = "BYPASS";
+        CLog::Log(LOGDEBUG,"%s - change configuration. %dx%d. framerate: %4.2f. format: %s",
+          __FUNCTION__, width, height, fFrameRate, formatstr.c_str());
+        g_renderManager.IsConfigured();
+        if(!g_renderManager.Configure(width, height, displayWidth, displayHeight, fFrameRate, flags))
+          CLog::Log(LOGERROR, "%s - failed to configure renderer", __FUNCTION__);
+        if (!g_renderManager.IsStarted())
+          CLog::Log(LOGERROR, "%s - renderer not started", __FUNCTION__);
+      }
     }
     else
     {
-      m_ready.Set();
-      m_StopPlaying = true;
       CLog::Log(LOGERROR, "CGSTPlayer::Process: WaitForGSTPlaying() failed");
-      throw;
+      goto do_exit;
     }
 
     m_callback.OnPlayBackStarted();
@@ -1307,12 +1308,12 @@ void CGSTPlayer::Process()
   }
   catch(...)
   {
-    m_ready.Set();
-    m_StopPlaying = true;
-    g_Windowing.Show();
     CLog::Log(LOGERROR, "CGSTPlayer::Process: Exception thrown");
-    return;
   }
+
+do_exit:
+  m_ready.Set();
+  m_StopPlaying = true;
 
 }
 
