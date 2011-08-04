@@ -1243,11 +1243,7 @@ void CGSTPlayer::Process()
   {
     if (WaitForGSTPaused(10000))
     {
-      // starttime has units of seconds (SeekTime will start playback)
-      if (m_options.starttime > 0)
-        SeekTime(m_options.starttime * 1000);
-      else
-        gst_element_set_state(m_gstvars->player, GST_STATE_PLAYING);
+      gst_element_set_state(m_gstvars->player, GST_STATE_PLAYING);
     }
     else
     {
@@ -1255,8 +1251,11 @@ void CGSTPlayer::Process()
       goto do_exit;
     }
 
-    if (WaitForGSTPlaying(2000))
+    if (WaitForGSTPlaying(4000))
     {
+      // starttime has units of seconds (SeekTime will start playback)
+      if (m_options.starttime > 0)
+        SeekTime(m_options.starttime * 1000);
       // we are done initializing now, set the readyevent which will
       // drop CGUIDialogBusy, and release the hold in OpenFile
       m_ready.Set();
