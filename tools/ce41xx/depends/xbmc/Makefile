@@ -17,8 +17,8 @@ configure:
 	cd $(SOURCE); ./bootstrap
 	cd $(SOURCE); $(CONFIGURE)
 	cd $(SOURCE); make -j $(JOBS)
-	#cd $(SOURCE); make install
-
+	cd $(SOURCE); make install
+	find $(PREFIX)/share/xbmc/addons/skin.confluence/media -not -name *.xbt -exec rm {} \;
 clean:
 	cd $(SOURCE); make clean
 
