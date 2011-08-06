@@ -7,9 +7,9 @@ SUBDIRS = \
 	bzip2 liblzo2 freetype2 fontconfig \
 	openssl libssh2 curl \
 	libpng libjpeg-turbo tiff jasper \
-	libogg libvorbis libflac libid3tag libmad fribidi libwavpack libmpeg2 \
+	libogg libvorbis libflac libid3tag libmad fribidi libmpeg2 \
 	enca libass libcdio libsamplerate \
-	libmicrohttpd libmodplug librtmp libxml2 libbluray yajl \
+	libmicrohttpd libmodplug librtmp libxml2 yajl \
 	liboil libxml2 glib-2.0 liba52 libdca gstreamer \
 	gstreamer-plugins-base gstreamer-plugins-good \
 	gstreamer-plugins-bad gstreamer-plugins-ugly gst-ffmpeg \
