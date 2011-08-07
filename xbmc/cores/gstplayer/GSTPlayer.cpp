@@ -88,6 +88,7 @@ struct INT_GST_VARS
   CStdString              subtitle_text;
   CStdString              video_title;
 
+  bool                    is_udp;
   bool                    udp_video;
   bool                    udp_audio;
   bool                    udp_text;
@@ -321,7 +322,8 @@ gboolean CGSTPlayerBusCallback(GstBus *bus, GstMessage *msg, CGSTPlayer *gstplay
     case GST_MESSAGE_ASYNC_DONE:
       g_print("GStreamer: Message ASYNC_DONE\n");
       // ASYNC_DONE, we can query position, duration and other properties
-      gstplayer->ProbeStreams();
+      if (!gstvars->is_udp)
+        gstplayer->ProbeStreams();
       gstvars->rate  = 1.0;
       gstvars->ready = true;
       break;
@@ -588,6 +590,7 @@ CGSTPlayer::CGSTPlayer(IPlayerCallback &callback)
   m_gstvars->audiosink = NULL;
   m_gstvars->subtitle_end = 0;
 
+  m_gstvars->is_udp = false;
   m_gstvars->udp_video = false;
   m_gstvars->udp_audio = false;
   m_gstvars->udp_text  = false;
@@ -645,27 +648,28 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
     m_options = options;
     m_StopPlaying = false;
 
-    m_elapsed_ms  =  0;
-    m_duration_ms =  0;
+    m_elapsed_ms  = 0;
+    m_duration_ms = 0;
 
-    m_audio_index = -1;
-    m_audio_count =  0;
-    m_audio_bits  =  0;
+    m_audio_index = 0;
+    m_audio_count = 0;
+    m_audio_bits  = 0;
     m_audio_channels = 0;
     m_audio_samplerate = 0;
 
-    m_video_index = -1;
-    m_video_count =  0;
-    m_video_fps   =  0.0;
-    m_video_width =  0;
-    m_video_height=  0;
+    m_video_index = 0;
+    m_video_count = 0;
+    m_video_fps   = 0.0;
+    m_video_width = 0;
+    m_video_height= 0;
 
-    m_subtitle_index = -1;
-    m_subtitle_count =  0;
+    m_subtitle_index = 0;
+    m_subtitle_count = 0;
     m_subtitle_show  = g_settings.m_currentVideoSettings.m_SubtitleOn;
     m_chapter_count  =  0;
 
     m_gstvars->appsrc = NULL;
+    m_gstvars->is_udp = false;
     m_gstvars->udp_video = false;
     m_gstvars->udp_audio = false;
     m_gstvars->udp_text  = false;
@@ -703,6 +707,7 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
       gst_element_link_many(source, queue, clkrecover, decoder, NULL);
       g_signal_connect(decoder, "pad-added", G_CALLBACK(udp_decoder_padadded), this);
 
+      m_gstvars->is_udp = true;
       CLog::Log(LOGNOTICE, "CGSTPlayer: Opening: URL=%s", url.c_str());
     }
     else
@@ -915,6 +920,9 @@ void CGSTPlayer::Pause()
   CSingleLock lock(m_csection);
 
   if (m_StopPlaying)
+    return;
+
+  if (m_gstvars->is_udp)
     return;
 
   if (m_paused == true)
@@ -1264,6 +1272,9 @@ float CGSTPlayer::GetActualFPS()
 
 void CGSTPlayer::SeekTime(__int64 seek_ms)
 {
+  if (m_gstvars->is_udp)
+    return;
+
   if (m_gstvars->ready)
   {
     CSingleLock lock(m_gstvars->csection);
@@ -1417,6 +1428,9 @@ void CGSTPlayer::ToFFRW(int iSpeed)
   if (m_StopPlaying)
     return;
 
+  if (m_gstvars->is_udp)
+    return;
+
   if (m_speed != iSpeed)
   {
     CSingleLock lock(m_gstvars->csection);
@@ -1533,7 +1547,7 @@ void CGSTPlayer::Process()
       goto do_exit;
     }
 
-    if (WaitForGSTPlaying(40000))
+    if (WaitForGSTPlaying(4000))
     {
       // starttime has units of seconds (SeekTime will start playback)
       if (m_options.starttime > 0)
