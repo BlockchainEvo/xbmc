@@ -1,0 +1,17 @@
+<advancedsettings>
+
+  <gui>
+    <visualizedirtyregions>false</visualizedirtyregions>
+    <algorithmdirtyregions>1</algorithmdirtyregions>
+    <nofliptimeout>500</nofliptimeout>
+  </gui>
+
+  <audio>
+    <defaultplayer>gstplayer</defaultplayer>
+  </audio>
+
+  <video>
+    <defaultplayer>gstplayer</defaultplayer>
+  </video>
+
+</advancedsettings>
