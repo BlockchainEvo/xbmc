@@ -1396,7 +1396,7 @@ int CGSTPlayer::GetSampleRate()
 
 CStdString CGSTPlayer::GetAudioCodecName()
 {
-  if (m_audio_index > 0)
+  if (m_audio_index >= 0)
   {
     CSingleLock lock(m_gstvars->csection);
     return m_gstvars->acodec_name[m_audio_index];
@@ -1409,7 +1409,7 @@ CStdString CGSTPlayer::GetAudioCodecName()
 
 CStdString CGSTPlayer::GetVideoCodecName()
 {
-  if (m_video_index > 0)
+  if (m_video_index >= 0)
   {
     CSingleLock lock(m_gstvars->csection);
     return m_gstvars->vcodec_name[m_video_index];
