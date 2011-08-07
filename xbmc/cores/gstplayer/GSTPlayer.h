@@ -137,6 +137,7 @@ protected:
   virtual void  OnExit();
   virtual void  Process();
 
+  void          ProbeUDPStreams(void);
   bool          WaitForGSTPaused( int timeout_ms);
   bool          WaitForGSTPlaying(int timeout_ms);
   bool          WaitForWindowFullScreenVideo(int timeout_ms);

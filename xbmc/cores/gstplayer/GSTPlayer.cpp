@@ -96,6 +96,7 @@ struct INT_GST_VARS
   CCriticalSection        csection;
 };
 
+/*
 static void print_caps(GstCaps *caps)
 {
   for (unsigned int i = 0; i < gst_caps_get_size(caps); i++)
@@ -107,6 +108,7 @@ static void print_caps(GstCaps *caps)
     g_free(tmp);
   }
 }
+*/
 
 static bool testName(const CStdString codec, const char *name)
 {
@@ -168,7 +170,6 @@ gboolean CGSTPlayerBusCallback(GstBus *bus, GstMessage *msg, CGSTPlayer *gstplay
   switch (GST_MESSAGE_TYPE(msg))
   {
     case GST_MESSAGE_EOS:
-      g_print("GStreamer: End of stream\n");
       gst_element_set_state(gstvars->player, GST_STATE_READY);
       g_main_loop_quit(gstvars->loop);
       break;
@@ -216,6 +217,15 @@ gboolean CGSTPlayerBusCallback(GstBus *bus, GstMessage *msg, CGSTPlayer *gstplay
         if (gst_tag_list_get_string(tags, GST_TAG_CONTAINER_FORMAT, &tag))
           g_print("GStreamer: Message TAG from %s, containter format:%s\n",
             GST_MESSAGE_SRC_NAME(msg), tag);
+        else if (gst_tag_list_get_string(tags, GST_TAG_LANGUAGE_CODE, &tag))
+          g_print("GStreamer: Message TAG from %s, language format:%s\n",
+            GST_MESSAGE_SRC_NAME(msg), tag);
+        else if (gst_tag_list_get_string(tags, GST_TAG_VIDEO_CODEC, &tag))
+          g_print("GStreamer: Message TAG from %s, video codec format:%s\n",
+            GST_MESSAGE_SRC_NAME(msg), tag);
+        else if (gst_tag_list_get_string(tags, GST_TAG_AUDIO_CODEC, &tag))
+          g_print("GStreamer: Message TAG from %s, audio codec format:%s\n",
+            GST_MESSAGE_SRC_NAME(msg), tag);
         else if (gst_tag_list_get_string(tags, GST_TAG_TITLE, &tag))
         {
           gstvars->video_title = tag;
@@ -223,7 +233,9 @@ gboolean CGSTPlayerBusCallback(GstBus *bus, GstMessage *msg, CGSTPlayer *gstplay
             GST_MESSAGE_SRC_NAME(msg), tag);
         }
         else
+        {
           g_print("GStreamer: Message TAG from %s\n", GST_MESSAGE_SRC_NAME(msg));
+        }
       }
       break;
     case GST_MESSAGE_BUFFERING:
@@ -322,8 +334,7 @@ gboolean CGSTPlayerBusCallback(GstBus *bus, GstMessage *msg, CGSTPlayer *gstplay
     case GST_MESSAGE_ASYNC_DONE:
       g_print("GStreamer: Message ASYNC_DONE\n");
       // ASYNC_DONE, we can query position, duration and other properties
-      if (!gstvars->is_udp)
-        gstplayer->ProbeStreams();
+      gstplayer->ProbeStreams();
       gstvars->rate  = 1.0;
       gstvars->ready = true;
       break;
@@ -462,16 +473,10 @@ static void udp_decoder_padadded(GstElement *element, GstPad *pad, CGSTPlayer *c
   const gchar *mime;
   mime = gst_structure_get_name(gst_caps_get_structure(caps, 0));
 
-  g_print("Dynamic decoder pad %s:%s created with mime-type %s\n",
-    GST_OBJECT_NAME(element), GST_OBJECT_NAME(pad), mime);
-  print_caps(caps);
-
   GstPad *sinkpad = NULL;
   INT_GST_VARS *gstvars = ctx->GetGSTVars();
   if (g_strrstr(mime, "video"))
   {
-    g_print ("Linking decoder video...\n");
-
     GstElement *vbin = gst_bin_new ("vbin");
     GstElement *vqueue  = gst_element_factory_make("queue", "vqueue");
     g_object_set(vqueue, "max-size-buffers", 3, NULL);
@@ -494,26 +499,20 @@ static void udp_decoder_padadded(GstElement *element, GstPad *pad, CGSTPlayer *c
 
   if (g_strrstr(mime, "audio"))
   {
-    g_print ("Linking decoder audio...\n");
-
     GstElement *abin = gst_bin_new ("abin");
     GstElement *aqueue  = gst_element_factory_make("queue", "aqueue");
     gst_bin_add(GST_BIN(abin), aqueue);
     gstvars->audiosink  = gst_element_factory_make("ismd_audio_sink", NULL);
     gst_bin_add(GST_BIN(abin), gstvars->audiosink);
 
-    sinkpad = gst_element_get_static_pad(gstvars->audiosink, "sink");
-    GstCaps *sinkcaps = gst_pad_get_caps(sinkpad);
-    print_caps(caps);
-    gst_object_unref(sinkpad);
-    gst_caps_unref(sinkcaps);
-
     if (g_strrstr(mime, "audio/x-raw-float"))
     {
       GstElement *aconvert = gst_element_factory_make("audioconvert", NULL);
       gst_bin_add(GST_BIN(abin), aconvert);
       gst_element_link_many(aqueue, aconvert, gstvars->audiosink, NULL);
-    }
+      gstvars->acodec_name.clear();
+      gstvars->acodec_name.push_back("");
+   }
     else if (g_strrstr(mime, "ac3") || g_strrstr(mime, "x-dd"))
     {
       GstElement *decoder = gst_element_factory_make("a52dec", NULL);
@@ -523,6 +522,9 @@ static void udp_decoder_padadded(GstElement *element, GstPad *pad, CGSTPlayer *c
       GstElement *convert = gst_element_factory_make("audioconvert", NULL);
       gst_bin_add(GST_BIN(abin), convert);
       gst_element_link_many(aqueue, decoder, resample, convert, gstvars->audiosink, NULL);
+      
+      gstvars->acodec_name.clear();
+      gstvars->acodec_name.push_back("ac3");
     }
     else if (g_strrstr(mime, "dts"))
     {
@@ -533,10 +535,14 @@ static void udp_decoder_padadded(GstElement *element, GstPad *pad, CGSTPlayer *c
       GstElement *convert = gst_element_factory_make("audioconvert", NULL);
       gst_bin_add(GST_BIN(abin), convert);
       gst_element_link_many(aqueue, decoder, resample, convert, gstvars->audiosink, NULL);
+      gstvars->acodec_name.clear();
+      gstvars->acodec_name.push_back("ac3");
     }
     else
     {
       gst_element_link(aqueue, gstvars->audiosink);
+      gstvars->acodec_name.clear();
+      gstvars->acodec_name.push_back("aac");
     }
     //
     GstPad *apad = gst_element_get_pad(aqueue, "sink");
@@ -552,8 +558,14 @@ static void udp_decoder_padadded(GstElement *element, GstPad *pad, CGSTPlayer *c
 
   if (g_strrstr(mime, "text"))
   {
-    g_print ("Linking decoder text...\n");
-    //sinkpad = gst_element_get_static_pad(gstvars->videosink, "sink");
+    gstvars->textsink = gst_element_factory_make("appsink", "subtitle_sink");
+    g_object_set(gstvars->textsink, "emit-signals", TRUE, NULL);
+    // timestamp offset in nanoseconds
+    g_object_set(gstvars->textsink, "ts-offset", 0 * GST_SECOND, NULL);
+    g_signal_connect(gstvars->textsink, "new-buffer", G_CALLBACK(CGSTPlayerSubsOnNewBuffer), ctx);
+    gst_bin_add(GST_BIN(gstvars->player), gstvars->textsink);
+    //
+    sinkpad = gst_element_get_static_pad(gstvars->textsink, "sink");
     gstvars->udp_text = true;
   }
 
@@ -695,7 +707,8 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
         ";audio/x-raw-int;audio/x-private1-lpcm"
         ";audio/x-raw-float"
         ";audio/x-ac3;audio/x-private1-ac3;audio/x-dd;audio/x-ddplus"
-        ";audio/x-dts;audio/x-private1-dts");
+        ";audio/x-dts;audio/x-private1-dts"
+        ";text/plain;text/x-pango-markup");
       g_object_set(decoder, "caps", decoder_caps, NULL);
       gst_caps_unref(decoder_caps);
       g_object_set(decoder, "max-size-bytes", 65536, NULL);
@@ -795,7 +808,7 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
           // timestamp offset in nanoseconds
           g_object_set(subs_sink, "ts-offset", 0 * GST_SECOND, NULL);
           g_signal_connect(subs_sink, "new-buffer", G_CALLBACK(CGSTPlayerSubsOnNewBuffer), this);
-          GstCaps *subcaps = gst_caps_from_string("text/plain; text/x-pango-markup");
+          GstCaps *subcaps = gst_caps_from_string("text/plain;text/x-pango-markup");
           g_object_set(subs_sink, "caps", subcaps, NULL);
           gst_caps_unref(subcaps);
           m_gstvars->textsink = subs_sink;
@@ -1469,7 +1482,6 @@ void CGSTPlayer::ToFFRW(int iSpeed)
             GST_SEEK_TYPE_SET, -1);
       }
       
-      g_print("CGSTPlayer::ToFFRW, rate(%f)\n", m_gstvars->rate);
       if (!m_paused)
       {
         gst_element_set_state(m_gstvars->player, GST_STATE_PLAYING);
@@ -1614,6 +1626,12 @@ do_exit:
 
 void CGSTPlayer::ProbeStreams()
 {
+  if (m_gstvars->is_udp)
+  {
+    ProbeUDPStreams();
+    return;
+  }
+
   m_audio_index = 0;
   m_video_index = 0;
   m_subtitle_index = 0;
@@ -1772,6 +1790,84 @@ void CGSTPlayer::ProbeStreams()
       m_gstvars->tcodec_language.push_back("");
     }
   }
+}
+
+void CGSTPlayer::ProbeUDPStreams()
+{
+  bool done = false;
+  gpointer elementdata = NULL;
+  GstElement *child = GST_ELEMENT_PARENT(m_gstvars->videosink);
+  GstElement *parent = GST_ELEMENT_PARENT(child);
+  GstIterator *element_iter = gst_bin_iterate_elements(GST_BIN_CAST(parent));
+  while (!done && element_iter)
+  {
+    switch (gst_iterator_next(element_iter, &elementdata))
+    {
+      case GST_ITERATOR_DONE:
+      case GST_ITERATOR_ERROR:
+        done = true;
+      break;
+      case GST_ITERATOR_RESYNC:
+        gst_iterator_resync(element_iter);
+      break;
+      case GST_ITERATOR_OK:
+        GstElement *element = GST_ELEMENT_CAST(elementdata);
+        gchar *elementname  = gst_element_get_name(element);
+        if (g_strrstr(elementname, "abin") || g_strrstr(elementname, "vbin"))
+        {
+          gpointer paddata = NULL;
+          GstIterator *pad_iter = gst_element_iterate_sink_pads(element);
+          while (gst_iterator_next(pad_iter, &paddata) == GST_ITERATOR_OK)
+          {
+            GstPad  *pad  = GST_PAD(paddata);
+            GstCaps *caps = gst_pad_get_negotiated_caps(pad);
+            gchar   *str  = gst_caps_to_string(caps);
+            if (g_str_has_prefix(str, "video/"))
+            {
+              GstStructure *structure = gst_caps_get_structure(caps, 0);
+
+              gint video_fps_d, video_fps_n, video_width, video_height;
+              if (!gst_structure_get_fraction(structure, "framerate", &video_fps_n, &video_fps_d))
+              {
+                video_fps_n = 0;
+                video_fps_d = 1;
+              }
+              if (!gst_structure_get_int(structure, "width",  &video_width))
+                video_width = 0;
+              if (!gst_structure_get_int(structure, "height",  &video_height))
+                video_height = 0;
+
+              m_video_fps    = (float)video_fps_n/(float)video_fps_d;
+              m_video_width  = video_width;
+              m_video_height = video_height;
+            }
+            else if (g_str_has_prefix(str, "audio/"))
+            {
+              gint width, channels, samplerate;
+              GstStructure *structure = gst_caps_get_structure(caps, 0);
+
+              if (!gst_structure_get_int(structure, "width", &width))
+                width = 0;
+              if (!gst_structure_get_int(structure, "channels", &channels))
+                channels = 2;
+              if (!gst_structure_get_int(structure, "rate", &samplerate))
+                samplerate = 48000;
+
+              m_audio_bits = width;
+              m_audio_channels = channels;
+              m_audio_samplerate = channels;
+            }
+            else if (g_str_has_prefix(str, "text/"))
+            {
+            }
+          }
+          gst_iterator_free(pad_iter);
+        }
+        g_free(elementname);
+      break;
+    }
+  }
+  gst_iterator_free(element_iter);
 }
 
 bool CGSTPlayer::WaitForGSTPaused(int timeout_ms)
