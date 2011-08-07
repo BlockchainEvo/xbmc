@@ -24,7 +24,7 @@
 #ifdef HAS_GDL
 #include "gdl_types.h"
 
-#define DEFAULT_OVERSCAN 0.03f
+#define DEFAULT_OVERSCAN 0
 
 #include "WinSystemGDL.h"
 #include "utils/log.h"
