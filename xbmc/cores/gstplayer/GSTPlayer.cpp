@@ -522,6 +522,16 @@ static void udp_decoder_padadded(GstElement *element, GstPad *pad, CGSTPlayer *c
       gst_bin_add(GST_BIN(abin), convert);
       gst_element_link_many(aqueue, decoder, resample, convert, gstvars->audiosink, NULL);
     }
+    else if (g_strrstr(mime, "dts"))
+    {
+      GstElement *decoder = gst_element_factory_make("dtsdec", NULL);
+      gst_bin_add(GST_BIN(abin), decoder);
+      GstElement *resample = gst_element_factory_make("audioresample", NULL);
+      gst_bin_add(GST_BIN(abin), resample);
+      GstElement *convert = gst_element_factory_make("audioconvert", NULL);
+      gst_bin_add(GST_BIN(abin), convert);
+      gst_element_link_many(aqueue, decoder, resample, convert, gstvars->audiosink, NULL);
+    }
     else
     {
       gst_element_link(aqueue, gstvars->audiosink);
