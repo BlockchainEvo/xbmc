@@ -9,9 +9,13 @@
 /opt/xbmc-cex/lib/*.a
 /opt/xbmc-cex/lib/*/*.a
 /opt/xbmc-cex/lib/*/*/*.a
-/opt/xbmc-cex/lib/python/*.py
-/opt/xbmc-cex/lib/python/*/*.py
-/opt/xbmc-cex/lib/python/*/*/*.py
+/opt/xbmc-cex/lib/python2.6/test
+/opt/xbmc-cex/lib/python2.6/*.py
+/opt/xbmc-cex/lib/python2.6/*.pyc
+/opt/xbmc-cex/lib/python2.6/*/*.py
+/opt/xbmc-cex/lib/python2.6/*/*.pyc
+/opt/xbmc-cex/lib/python2.6/*/*/*.py
+/opt/xbmc-cex/lib/python2.6/*/*/*.pyc
 
 /opt/xbmc-cex/share/automake-1.10
 /opt/xbmc-cex/share/libtool
