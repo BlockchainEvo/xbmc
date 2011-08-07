@@ -1454,19 +1454,19 @@ void CGSTPlayer::ToFFRW(int iSpeed)
       {
         if (m_gstvars->rate < -8.0)
           m_gstvars->rate = -8.0;
-        gst_element_seek(m_gstvars->player, m_gstvars->rate,
-          seek_fmt, GST_SEEK_FLAG_FLUSH,
-          GST_SEEK_TYPE_SET, elapsed_ns,
-          GST_SEEK_TYPE_SET, -1);
+          gst_element_seek(m_gstvars->player, m_gstvars->rate,
+            seek_fmt, GST_SEEK_FLAG_FLUSH,
+            GST_SEEK_TYPE_SET, elapsed_ns,
+            GST_SEEK_TYPE_SET, -1);
       }
       else
       {
         if (m_gstvars->rate > 8.0)
           m_gstvars->rate = 8.0;
-        gst_element_seek(m_gstvars->player, m_gstvars->rate,
-          seek_fmt, GST_SEEK_FLAG_FLUSH,
-          GST_SEEK_TYPE_SET, elapsed_ns,
-          GST_SEEK_TYPE_SET, -1);
+          gst_element_seek(m_gstvars->player, m_gstvars->rate,
+            seek_fmt, GST_SEEK_FLAG_FLUSH,
+            GST_SEEK_TYPE_SET, elapsed_ns,
+            GST_SEEK_TYPE_SET, -1);
       }
       
       g_print("CGSTPlayer::ToFFRW, rate(%f)\n", m_gstvars->rate);
