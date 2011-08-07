@@ -11,8 +11,8 @@ SDKSTAGE=$BUILDROOT/build_i686/staging_dir
 TARGETFS=$BUILDROOT/project_build_i686/IntelCE/root
 TOOLCHAIN=$BUILDROOT/build_i686/staging_dir/bin
 #
-sudo mkdir -p $XBMCPREFIX
-sudo chmod 777 $XBMCPREFIX
+sudo mkdir -p $XBMCPREFIX $TARBALLS
+sudo chmod 777 $XBMCPREFIX $TARBALLS
 mkdir -p $XBMCPREFIX/lib
 mkdir -p $XBMCPREFIX/include
 #
