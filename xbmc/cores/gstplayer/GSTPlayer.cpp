@@ -71,8 +71,6 @@ struct INT_GST_VARS
   GstElement              *player;
   GstElement              *textsink;
   GstElement              *videosink;
-  GstElement              *audioconvert;
-  GstElement              *audiosink;
 
   CGSTAppsrc              *appsrc;
 
@@ -450,7 +448,6 @@ static void udp_demuxer_padadded(GstElement *element, GstPad *pad, CGSTPlayer *c
 
   if (sinkpad)
   {
-    // link
     if (!GST_PAD_IS_LINKED(sinkpad))
       gst_pad_link(pad, sinkpad);
     gst_object_unref(sinkpad);
@@ -500,47 +497,47 @@ static void udp_decoder_padadded(GstElement *element, GstPad *pad, CGSTPlayer *c
   if (g_strrstr(mime, "audio"))
   {
     GstElement *abin = gst_bin_new ("abin");
-    GstElement *aqueue  = gst_element_factory_make("queue", "aqueue");
+    GstElement *aqueue = gst_element_factory_make("queue", "aqueue");
     gst_bin_add(GST_BIN(abin), aqueue);
-    gstvars->audiosink  = gst_element_factory_make("ismd_audio_sink", NULL);
-    gst_bin_add(GST_BIN(abin), gstvars->audiosink);
+    GstElement *audiosink = gst_element_factory_make("ismd_audio_sink", NULL);
+    gst_bin_add(GST_BIN(abin), audiosink);
 
     if (g_strrstr(mime, "audio/x-raw-float"))
     {
       GstElement *aconvert = gst_element_factory_make("audioconvert", NULL);
       gst_bin_add(GST_BIN(abin), aconvert);
-      gst_element_link_many(aqueue, aconvert, gstvars->audiosink, NULL);
+      gst_element_link_many(aqueue, aconvert, audiosink, NULL);
       gstvars->acodec_name.clear();
       gstvars->acodec_name.push_back("");
-   }
+    }
     else if (g_strrstr(mime, "ac3") || g_strrstr(mime, "x-dd"))
     {
-      GstElement *decoder = gst_element_factory_make("a52dec", NULL);
+      GstElement *decoder  = gst_element_factory_make("a52dec", NULL);
       gst_bin_add(GST_BIN(abin), decoder);
       GstElement *resample = gst_element_factory_make("audioresample", NULL);
       gst_bin_add(GST_BIN(abin), resample);
-      GstElement *convert = gst_element_factory_make("audioconvert", NULL);
+      GstElement *convert  = gst_element_factory_make("audioconvert",  NULL);
       gst_bin_add(GST_BIN(abin), convert);
-      gst_element_link_many(aqueue, decoder, resample, convert, gstvars->audiosink, NULL);
+      gst_element_link_many(aqueue, decoder, resample, convert, audiosink, NULL);
       
       gstvars->acodec_name.clear();
       gstvars->acodec_name.push_back("ac3");
     }
     else if (g_strrstr(mime, "dts"))
     {
-      GstElement *decoder = gst_element_factory_make("dtsdec", NULL);
+      GstElement *decoder  = gst_element_factory_make("dtsdec", NULL);
       gst_bin_add(GST_BIN(abin), decoder);
       GstElement *resample = gst_element_factory_make("audioresample", NULL);
       gst_bin_add(GST_BIN(abin), resample);
-      GstElement *convert = gst_element_factory_make("audioconvert", NULL);
+      GstElement *convert  = gst_element_factory_make("audioconvert",  NULL);
       gst_bin_add(GST_BIN(abin), convert);
-      gst_element_link_many(aqueue, decoder, resample, convert, gstvars->audiosink, NULL);
+      gst_element_link_many(aqueue, decoder, resample, convert, audiosink, NULL);
       gstvars->acodec_name.clear();
       gstvars->acodec_name.push_back("ac3");
     }
     else
     {
-      gst_element_link(aqueue, gstvars->audiosink);
+      gst_element_link(aqueue, audiosink);
       gstvars->acodec_name.clear();
       gstvars->acodec_name.push_back("aac");
     }
@@ -571,7 +568,6 @@ static void udp_decoder_padadded(GstElement *element, GstPad *pad, CGSTPlayer *c
 
   if (sinkpad)
   {
-    // link
     if (!GST_PAD_IS_LINKED(sinkpad))
       gst_pad_link(pad, sinkpad);
     gst_object_unref(sinkpad);
@@ -599,7 +595,6 @@ CGSTPlayer::CGSTPlayer(IPlayerCallback &callback)
   m_gstvars->player = NULL;
   m_gstvars->textsink  = NULL;
   m_gstvars->videosink = NULL;
-  m_gstvars->audiosink = NULL;
   m_gstvars->subtitle_end = 0;
 
   m_gstvars->is_udp = false;
@@ -623,10 +618,8 @@ bool CGSTPlayer::Initialize(TiXmlElement* pConfig)
 {
   m_textsink_name  = "subtitle_sink";
 #if defined(__APPLE__)
-  m_audiosink_name = "osxaudiosink";
   m_videosink_name = "osxvideosink";
 #else
-  m_audiosink_name = "ismd_audio_sink";
   m_videosink_name = "ismd_vidrend_bin";
 #endif
 
@@ -638,7 +631,6 @@ bool CGSTPlayer::Initialize(TiXmlElement* pConfig)
     XMLUtils::GetString(pConfig, "videosink", m_videosink_name);
   }
   CLog::Log(LOGNOTICE, "CGSTPlayer : textsink  (%s)", m_textsink_name.c_str());
-  CLog::Log(LOGNOTICE, "CGSTPlayer : audiosink (%s)", m_audiosink_name.c_str());
   CLog::Log(LOGNOTICE, "CGSTPlayer : videosink (%s)", m_videosink_name.c_str());
 
   return true;
@@ -678,21 +670,25 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
     m_subtitle_index = 0;
     m_subtitle_count = 0;
     m_subtitle_show  = g_settings.m_currentVideoSettings.m_SubtitleOn;
-    m_chapter_count  =  0;
+    m_chapter_count  = 0;
 
     m_gstvars->appsrc = NULL;
     m_gstvars->is_udp = false;
     m_gstvars->udp_video = false;
     m_gstvars->udp_audio = false;
     m_gstvars->udp_text  = false;
+
     if (m_item.m_strPath.Left(6).Equals("udp://"))
     {
-      // protocol goes to gstreamer as is
+      // udp playback in gstreamer requires constructing a pipeline
+      // with a udpsrc, queue, ismd_clock_recovery_provider and decodebin2.
+      // we hook the "pad-added" callback and create and attach the final
+      // audio, video and subtitle elements.
       url = m_item.m_strPath;
       if (!gst_uri_is_valid(url.c_str()))
         return false;
 
-      m_gstvars->player       = gst_pipeline_new ("udp-player");
+      m_gstvars->player       = gst_pipeline_new ("gstplayer-udp");
       GstElement *source      = gst_element_factory_make("udpsrc", "source");
       g_object_set(source, "uri", url.c_str(), NULL);
       //
@@ -745,7 +741,9 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
         m_gstvars->appsrc = new CGSTAppsrc(m_item.m_strPath);
       }
 
-      m_gstvars->player = gst_element_factory_make( "playbin2", "player");
+      // playbin2 will figure out elements for audio automatically
+      // but we need to assist with video and subtitles elements.
+      m_gstvars->player = gst_element_factory_make( "playbin2", "gstplayer");
 
       // ---------------------------------------------------
       if (m_item.IsVideo())
@@ -781,24 +779,8 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
         g_object_set(m_gstvars->videosink, "async-handling", TRUE, NULL);
         g_object_set(m_gstvars->videosink, "message-forward", TRUE, NULL);
         g_object_set(m_gstvars->player, "video-sink", m_gstvars->videosink, NULL);
-      }
 
-      // ---------------------------------------------------
-      if (m_item.IsVideo() || m_item.IsAudio())
-      {
-        // create audio sink
-        m_gstvars->audiosink = gst_element_factory_make(m_audiosink_name.c_str(), NULL);
-        if (!m_gstvars->audiosink)
-        {
-          CLog::Log(LOGDEBUG, "CGSTPlayer::OpenFile: using default autoaudiosink");
-          m_gstvars->audiosink = gst_element_factory_make("autoaudiosink", NULL);
-        }
-        g_object_set(m_gstvars->player, "audio-sink", m_gstvars->audiosink, NULL);
-      }
-
-      // ---------------------------------------------------
-      if (m_item.IsVideo())
-      {
+        // ---------------------------------------------------
         // create subtitle sink
         if (m_textsink_name.Equals("subtitle_sink"))
         {
@@ -823,6 +805,7 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
         }
         g_object_set(m_gstvars->player, "text-sink", m_gstvars->textsink, NULL);
       }
+
       // video time offset (to audio)
       // Specifies an offset in ns to apply on clock synchronization.
       // "stream-time-offset"
