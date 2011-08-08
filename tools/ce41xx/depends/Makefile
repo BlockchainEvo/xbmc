@@ -12,8 +12,8 @@ SUBDIRS = \
 	libmicrohttpd libmodplug librtmp libxml2 yajl \
 	liboil libxml2 glib-2.0 liba52 libdca gstreamer \
 	gstreamer-plugins-base gstreamer-plugins-good \
-	gstreamer-plugins-bad gstreamer-plugins-ugly gst-ffmpeg \
-	gst-fluendo-gdlsink gst-fluendo-mpegdemux gst-fluendo-ismd \
+	gstreamer-plugins-bad gstreamer-plugins-ugly  \
+	gst-fluendo-mpegdemux gst-fluendo-ismd \
 	samba dbus python26 mysqlclient boost xbmc \
 
 IMAGENAME = xbmc-selectv-`date +'%y%m%d'`
