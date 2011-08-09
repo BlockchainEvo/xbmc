@@ -372,7 +372,7 @@ void CGUISettings::Initialize()
   // contains a DISPLAYMODE
   bool showhide = true;
 #if defined(TARGET_CE41XX)
-  showhide = false;
+  //showhide = false;
 #endif
   AddInt(showhide ? vs : NULL, "videoscreen.screen", 240, 0, -1, 1, g_Windowing.GetNumScreens(), SPIN_CONTROL_TEXT);
   // this setting would ideally not be saved, as its value is systematically derived from videoscreen.screenmode.
