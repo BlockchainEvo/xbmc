@@ -26,6 +26,7 @@
 #include "GSTAppsrc.h"
 #include "Application.h"
 #include "FileItem.h"
+#include "GUIInfoManager.h"
 #include "cores/VideoRenderers/RenderManager.h"
 #include "filesystem/File.h"
 #include "filesystem/SpecialProtocol.h"
@@ -332,6 +333,27 @@ gboolean CGSTPlayerBusCallback(GstBus *bus, GstMessage *msg, CGSTPlayer *gstplay
     case GST_MESSAGE_ASYNC_DONE:
       g_print("GStreamer: Message ASYNC_DONE\n");
       // ASYNC_DONE, we can query position, duration and other properties
+      /*
+      {
+        //GstElement *audiosink;
+        //g_object_get(gstvars->player, "audio-sink", &audiosink, NULL);
+
+        //GstElement *audiosink = gst_bin_get_by_name(GST_BIN(gstvars->player), "ismd_audio_sink");
+        GstElement *audiosink = gst_bin_get_by_name(GST_BIN(gstvars->player), "audiosink-actual-sink-ismd_audio_");
+        if (audiosink)
+        {
+          //  (-1): auto             - Autoselect PCM or Passthrough
+          //   (0): off              - Off
+          //   (1): pcm              - PCM
+          //   (2): pt               - Passthrough
+          //   (3): ac3              - Dolby Digital
+          //   (4): dts              - DTS
+          g_print("GStreamer: Message ASYNC_DONE: set ismd_audio_sink to 2\n");
+          g_object_set(audiosink, "audio-output-hdmi", 2, NULL);
+          //g_object_set(audiosink, "audio-output-spdif", 2, NULL);
+        }
+      }
+      */
       gstplayer->ProbeStreams();
       gstvars->rate  = 1.0;
       gstvars->ready = true;
@@ -500,6 +522,13 @@ static void udp_decoder_padadded(GstElement *element, GstPad *pad, CGSTPlayer *c
     GstElement *aqueue = gst_element_factory_make("queue", "aqueue");
     gst_bin_add(GST_BIN(abin), aqueue);
     GstElement *audiosink = gst_element_factory_make("ismd_audio_sink", NULL);
+    //  (-1): auto             - Autoselect PCM or Passthrough
+    //   (0): off              - Off
+    //   (1): pcm              - PCM
+    //   (2): pt               - Passthrough
+    //   (3): ac3              - Dolby Digital
+    //   (4): dts              - DTS
+    g_object_set(audiosink, "audio-output-hdmi", -1, NULL);
     gst_bin_add(GST_BIN(abin), audiosink);
 
     if (g_strrstr(mime, "audio/x-raw-float"))
@@ -781,6 +810,18 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
         g_object_set(m_gstvars->player, "video-sink", m_gstvars->videosink, NULL);
 
         // ---------------------------------------------------
+        // create audio sink
+        GstElement *audiosink = gst_element_factory_make("ismd_audio_sink", NULL);
+        //  (-1): auto             - Autoselect PCM or Passthrough
+        //   (0): off              - Off
+        //   (1): pcm              - PCM
+        //   (2): pt               - Passthrough
+        //   (3): ac3              - Dolby Digital
+        //   (4): dts              - DTS
+        g_object_set(audiosink, "audio-output-hdmi", -1, NULL);
+        g_object_set(m_gstvars->player, "audio-sink", audiosink, NULL);
+
+        // ---------------------------------------------------
         // create subtitle sink
         if (m_textsink_name.Equals("subtitle_sink"))
         {
@@ -885,7 +926,6 @@ bool CGSTPlayer::CloseFile()
     gst_object_unref(m_gstvars->player);
   }
 
-  m_bStop = true;
   m_StopPlaying = true;
 
   CLog::Log(LOGDEBUG, "CGSTPlayer: waiting for threads to exit");
@@ -893,7 +933,7 @@ bool CGSTPlayer::CloseFile()
   // since this main thread cleans up all other resources and threads
   // we are done after the StopThread call
   StopThread();
-
+  
   if (m_gstvars->appsrc)
   {
     delete m_gstvars->appsrc;
@@ -1583,7 +1623,14 @@ void CGSTPlayer::Process()
       goto do_exit;
     }
 
-    m_callback.OnPlayBackStarted();
+    {
+      CFileItem item(g_application.CurrentFileItem());
+      g_application.CurrentFileItem() = item;
+      g_infoManager.SetCurrentItem(item);
+    }
+
+    if (m_options.identify == false)
+      m_callback.OnPlayBackStarted();
     /*
     while (!m_bStop && !m_StopPlaying)
     {
@@ -1594,7 +1641,6 @@ void CGSTPlayer::Process()
     }
     */
     g_main_loop_run(m_gstvars->loop);
-    m_callback.OnPlayBackEnded();
   }
   catch(...)
   {
@@ -1603,7 +1649,6 @@ void CGSTPlayer::Process()
 
 do_exit:
   m_ready.Set();
-  m_StopPlaying = true;
 
 }
 
