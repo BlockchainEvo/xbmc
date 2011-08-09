@@ -736,14 +736,6 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
         if (!gst_uri_is_valid(url.c_str()))
           return false;
       }
-      else if (m_item.m_strPath.Left(7).Equals("http://"))
-      {
-        // strip user agent that we append
-        url = m_item.m_strPath;
-        url = url.erase(url.rfind('|'), url.size());
-        if (!gst_uri_is_valid(url.c_str()))
-          return false;
-      }
       else
       {
         m_gstvars->appsrc = new CGSTAppsrc(m_item.m_strPath);
