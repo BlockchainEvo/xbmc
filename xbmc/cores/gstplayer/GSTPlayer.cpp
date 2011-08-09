@@ -333,27 +333,6 @@ gboolean CGSTPlayerBusCallback(GstBus *bus, GstMessage *msg, CGSTPlayer *gstplay
     case GST_MESSAGE_ASYNC_DONE:
       g_print("GStreamer: Message ASYNC_DONE\n");
       // ASYNC_DONE, we can query position, duration and other properties
-      /*
-      {
-        //GstElement *audiosink;
-        //g_object_get(gstvars->player, "audio-sink", &audiosink, NULL);
-
-        //GstElement *audiosink = gst_bin_get_by_name(GST_BIN(gstvars->player), "ismd_audio_sink");
-        GstElement *audiosink = gst_bin_get_by_name(GST_BIN(gstvars->player), "audiosink-actual-sink-ismd_audio_");
-        if (audiosink)
-        {
-          //  (-1): auto             - Autoselect PCM or Passthrough
-          //   (0): off              - Off
-          //   (1): pcm              - PCM
-          //   (2): pt               - Passthrough
-          //   (3): ac3              - Dolby Digital
-          //   (4): dts              - DTS
-          g_print("GStreamer: Message ASYNC_DONE: set ismd_audio_sink to 2\n");
-          g_object_set(audiosink, "audio-output-hdmi", 2, NULL);
-          //g_object_set(audiosink, "audio-output-spdif", 2, NULL);
-        }
-      }
-      */
       gstplayer->ProbeStreams();
       gstvars->rate  = 1.0;
       gstvars->ready = true;
