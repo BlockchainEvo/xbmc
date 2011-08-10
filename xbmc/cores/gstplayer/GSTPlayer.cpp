@@ -1527,6 +1527,7 @@ void CGSTPlayer::OnStartup()
 void CGSTPlayer::OnExit()
 {
   //CLog::Log(LOGNOTICE, "CGSTPlayer::OnExit()");
+  usleep(100000);
   m_bStop = true;
   // if we didn't stop playing, advance to the next item in xbmc's playlist
   if(m_options.identify == false)
