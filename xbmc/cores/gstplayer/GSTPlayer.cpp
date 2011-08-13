@@ -662,6 +662,8 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
 
     m_elapsed_ms  = 0;
     m_duration_ms = 0;
+    m_avdelay_ms  = 0;
+    m_subdelay_ms = 0;
 
     m_audio_index = 0;
     m_audio_count = 0;
@@ -744,6 +746,16 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
       // playbin2 will figure out elements for audio automatically
       // but we need to assist with video and subtitles elements.
       m_gstvars->player = gst_element_factory_make( "playbin2", "gstplayer");
+      /*
+      // disable the mpeg4 ISMD H/W decoder because handling of avi's are crap.
+      GstPluginFeature *gstfeature = gst_registry_find_feature(gst_registry_get_default(),
+        "ismd_mpeg4_viddec", GST_TYPE_ELEMENT_FACTORY);
+      if (gstfeature)
+      {
+        gst_plugin_feature_set_rank(gstfeature, GST_RANK_NONE);
+        gst_object_unref(gstfeature);
+      }      
+      */
 
       // ---------------------------------------------------
       if (m_item.IsVideo())
@@ -1073,6 +1085,34 @@ float CGSTPlayer::GetPercentage()
     return 100.0f * (float)m_elapsed_ms/(float)m_duration_ms;
   else
     return 0.0f;
+}
+
+float CGSTPlayer::GetCachePercentage()
+{
+  CSingleLock lock(m_csection);
+  return std::min(100.0, (double)(GetPercentage() + GetCacheLevel()));
+}
+
+void CGSTPlayer::SetAVDelay(float fValue)
+{
+  // a/v time offset in ms
+  m_avdelay_ms = fValue;
+}
+
+float CGSTPlayer::GetAVDelay()
+{
+  return m_avdelay_ms;
+}
+
+void CGSTPlayer::SetSubTitleDelay(float fValue)
+{
+  // subtitle time offset in ms
+  m_subdelay_ms = fValue;
+}
+
+float CGSTPlayer::GetSubTitleDelay()
+{
+  return m_subdelay_ms;
 }
 
 void CGSTPlayer::SetVolume(long nVolume)
@@ -1517,6 +1557,14 @@ bool CGSTPlayer::SetPlayerState(CStdString state)
 CStdString CGSTPlayer::GetPlayingTitle()
 {
   return m_gstvars->video_title;
+}
+
+int CGSTPlayer::GetCacheLevel() const
+{
+  if (m_gstvars->appsrc)
+    return m_gstvars->appsrc->CacheLevel(m_duration_ms) * 100;
+  else
+    return 0;
 }
 
 void CGSTPlayer::OnStartup()

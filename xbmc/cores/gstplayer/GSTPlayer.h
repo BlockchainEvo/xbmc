@@ -52,6 +52,8 @@ public:
   virtual bool  SeekScene(bool bPlus = true);
   virtual void  SeekPercentage(float fPercent = 0.0f);
   virtual float GetPercentage();
+  virtual float GetCachePercentage();
+
   virtual void  SetVolume(long nVolume);
   virtual void  SetDynamicRangeCompression(long drc)              {}
   virtual void  GetAudioInfo(CStdString &strAudioInfo);
@@ -63,12 +65,11 @@ public:
   virtual bool  CanRecord()                                       {return false;};
   virtual bool  IsRecording()                                     {return false;};
   virtual bool  Record(bool bOnOff)                               {return false;};
+  virtual void  SetAVDelay(float fValue = 0.0f);
+  virtual float GetAVDelay();
 
-  virtual void  SetAVDelay(float fValue = 0.0f)                   {return;}
-  virtual float GetAVDelay()                                      {return 0.0f;};
-
-  virtual void  SetSubTitleDelay(float fValue = 0.0f)             {};
-  virtual float GetSubTitleDelay()                                {return 0.0f;}
+  virtual void  SetSubTitleDelay(float fValue = 0.0f);
+  virtual float GetSubTitleDelay();
   virtual int   GetSubtitleCount();
   virtual int   GetSubtitle();
   virtual void  GetSubtitleName(int iStream, CStdString &strStreamName);
@@ -96,6 +97,7 @@ public:
   virtual void  SeekTime(__int64 iTime = 0);
   virtual __int64 GetTime();
   virtual int   GetTotalTime();
+  virtual void  ToFFRW(int iSpeed = 0);
   virtual int   GetAudioBitrate();
   virtual int   GetVideoBitrate();
   virtual int   GetSourceBitrate();
@@ -107,14 +109,8 @@ public:
   virtual int   GetPictureWidth();
   virtual int   GetPictureHeight();
   virtual bool  GetStreamDetails(CStreamDetails &details);
-  virtual void  ToFFRW(int iSpeed = 0);
   // Skip to next track/item inside the current media (if supported).
   virtual bool  SkipNext()                                        {return false;}
-
-  //Returns true if not playback (paused or stopped beeing filled)
-  virtual bool  IsCaching() const                                 {return false;};
-  //Cache filled in Percent
-  virtual int   GetCacheLevel() const                             {return -1;};
 
   virtual bool  IsInMenu() const                                  {return false;};
   virtual bool  HasMenu()                                         {return false;};
@@ -129,6 +125,9 @@ public:
   
   virtual CStdString GetPlayingTitle();
   
+  virtual bool  IsCaching() const                                 {return false;};
+  virtual int   GetCacheLevel() const;
+
   INT_GST_VARS* GetGSTVars(void)                                  {return m_gstvars;};
   void    ProbeStreams(void);
 
@@ -149,10 +148,13 @@ private:
   CEvent                  m_ready;
   CFileItem               m_item;
   CPlayerOptions          m_options;
+
   CCriticalSection        m_csection;
 
   int64_t                 m_elapsed_ms;
   int64_t                 m_duration_ms;
+  int64_t                 m_avdelay_ms;
+  int64_t                 m_subdelay_ms;
   int                     m_audio_index;
   int                     m_audio_count;
   CStdString              m_audio_info;
