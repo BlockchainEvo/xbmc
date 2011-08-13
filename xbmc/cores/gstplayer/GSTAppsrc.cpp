@@ -22,6 +22,7 @@
 #include "system.h"
 
 #include "GSTAppsrc.h"
+#include "GSTClock.h"
 #include "FileItem.h"
 #include "utils/log.h"
 
@@ -41,6 +42,25 @@ CGSTAppsrc::~CGSTAppsrc()
     delete m_cfile;
     m_cfile = NULL;
   }
+}
+
+double CGSTAppsrc::CacheLevel(double duration_ms)
+{
+  if (!m_cfile)
+    return -1.0;
+
+  XFILE::SCacheStatus status;
+  if (m_cfile->IoControl(XFILE::IOCTRL_CACHE_STATUS, &status) < 0)
+    return -1.0;
+
+  int64_t cachedbytes = status.forward;
+  int64_t bytelength  = m_cfile->GetLength();
+
+    // some error, not using cache or buffer is full
+  if (cachedbytes < 0 || bytelength <= 0)
+    return -1.0;
+
+  return (double)cachedbytes / bytelength;
 }
 
 void CGSTAppsrc::FeedData(GstElement *appsrc, guint size, CGSTAppsrc *ctx)
@@ -93,9 +113,9 @@ void CGSTAppsrc::FoundSource(GObject *object, GObject *orig, GParamSpec *pspec, 
   // get a handle to the appsrc
   g_object_get(orig, pspec->name, &ctx->m_appsrc, NULL);
 
-  unsigned int flags = READ_TRUNCATED;
+  unsigned int flags = READ_TRUNCATED | READ_BITRATE | READ_CHUNKED;
   ctx->m_cfile = new XFILE::CFile();
-  if (CFileItem(ctx->m_url, false).IsInternetStream())
+  //if (CFileItem(ctx->m_url, false).IsInternetStream())
     flags |= READ_CACHED;
   // open file in binary mode
   if (!ctx->m_cfile->Open(ctx->m_url, flags))

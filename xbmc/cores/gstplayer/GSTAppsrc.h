@@ -28,11 +28,13 @@
 class CFile;
 class CGSTAppsrc;
 
-class CGSTAppsrc
+class CGSTAppsrc 
 {
 public:
   CGSTAppsrc(const std::string url);
   ~CGSTAppsrc();
+
+  double          CacheLevel(double duration_ms);
 
   static void     FeedData(GstElement *appsrc, guint size, CGSTAppsrc *ctx);
   static gboolean SeekData(GstElement *appsrc, guint64 position, CGSTAppsrc *ctx);
