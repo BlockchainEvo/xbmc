@@ -1480,6 +1480,7 @@ void CGSTPlayer::ToFFRW(int iSpeed)
 
   if (m_speed != iSpeed)
   {
+    /*
     CSingleLock lock(m_gstvars->csection);
 
     if (m_gstvars->ready)
@@ -1501,19 +1502,19 @@ void CGSTPlayer::ToFFRW(int iSpeed)
       {
         if (m_gstvars->rate < -8.0)
           m_gstvars->rate = -8.0;
-          gst_element_seek(m_gstvars->player, m_gstvars->rate,
-            seek_fmt, GST_SEEK_FLAG_FLUSH,
-            GST_SEEK_TYPE_SET, elapsed_ns,
-            GST_SEEK_TYPE_SET, -1);
+        gst_element_seek(m_gstvars->player, m_gstvars->rate,
+          seek_fmt, GST_SEEK_FLAG_FLUSH,
+          GST_SEEK_TYPE_SET, elapsed_ns,
+          GST_SEEK_TYPE_SET, -1);
       }
       else
       {
         if (m_gstvars->rate > 8.0)
           m_gstvars->rate = 8.0;
-          gst_element_seek(m_gstvars->player, m_gstvars->rate,
-            seek_fmt, GST_SEEK_FLAG_FLUSH,
-            GST_SEEK_TYPE_SET, elapsed_ns,
-            GST_SEEK_TYPE_SET, -1);
+        gst_element_seek(m_gstvars->player, m_gstvars->rate,
+          seek_fmt, GST_SEEK_FLAG_FLUSH,
+          GST_SEEK_TYPE_SET, elapsed_ns,
+          GST_SEEK_TYPE_SET, -1);
       }
       
       if (!m_paused)
@@ -1522,7 +1523,7 @@ void CGSTPlayer::ToFFRW(int iSpeed)
         gst_element_get_state(m_gstvars->player, NULL, NULL, 200 * GST_MSECOND);
       }
     }
-
+    */
     m_speed = iSpeed;
   }
 }
