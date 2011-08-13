@@ -1561,6 +1561,7 @@ void CGSTPlayer::Process()
         SeekTime(m_options.starttime * 1000);
       // we are done initializing now, set the readyevent which will
       // drop CGUIDialogBusy, and release the hold in OpenFile
+      SetVolume(g_settings.m_nVolumeLevel);
       m_ready.Set();
 
       if (m_video_count || m_gstvars->udp_video)
