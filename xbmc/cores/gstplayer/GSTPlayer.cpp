@@ -1732,7 +1732,7 @@ void CGSTPlayer::ProbeStreams()
         {
           m_audio_bits = width;
           m_audio_channels = channels;
-          m_audio_samplerate = channels;
+          m_audio_samplerate = samplerate;
         }
         gst_caps_unref(caps);
       }
@@ -1856,7 +1856,7 @@ void CGSTPlayer::ProbeUDPStreams()
 
               m_audio_bits = width;
               m_audio_channels = channels;
-              m_audio_samplerate = channels;
+              m_audio_samplerate = samplerate;
             }
             else if (g_str_has_prefix(str, "text/"))
             {
