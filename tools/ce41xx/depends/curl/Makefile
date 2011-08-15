@@ -3,7 +3,7 @@ include ../intel-sdk.mk
 
 # lib name, version
 LIBNAME=curl
-VERSION=7.19.4
+VERSION=7.19.7
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.bz2
 
