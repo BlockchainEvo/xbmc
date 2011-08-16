@@ -282,13 +282,16 @@ bool CWinSystemGDL::CreateNewWindow(const CStdString& name, bool fullScreen, RES
   di.id                = GDL_DISPLAY_ID_0;
   di.flags             = 0;
   di.bg_color          = 0;
-  di.color_space       = GDL_COLOR_SPACE_RGB;
   di.gamma             = GDL_GAMMA_LINEAR;
   di.tvmode.width      = res.iScreenWidth;
   di.tvmode.height     = res.iScreenHeight;
   di.tvmode.refresh    = refresh;
   di.tvmode.interlaced = (res.dwFlags & D3DPRESENTFLAG_INTERLACED ? GDL_TRUE : GDL_FALSE);
   di.tvmode.stereo_type= GDL_STEREO_NONE;
+  if (di.tvmode.height > 576)
+    di.color_space = GDL_COLOR_SPACE_BT709;
+  else
+    di.color_space = GDL_COLOR_SPACE_BT601;
 
   rc = gdl_set_display_info(&di);
   if ( rc != GDL_SUCCESS)
