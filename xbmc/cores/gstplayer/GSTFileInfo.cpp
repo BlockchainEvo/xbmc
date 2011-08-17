@@ -358,6 +358,11 @@ do_exit:
   return rtn;
 }
 
+bool CGSTFileInfo::ExtractSnapshot(void)
+{
+  return false;
+}
+
 #else
 
 // thumbnail generation using a 1 stage gstreamer pipeline.

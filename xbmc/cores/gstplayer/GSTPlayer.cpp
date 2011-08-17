@@ -24,6 +24,7 @@
 #if defined (HAVE_LIBGSTREAMER)
 #include "GSTPlayer.h"
 #include "GSTAppsrc.h"
+#include "GSTFileInfo.h"
 #include "Application.h"
 #include "FileItem.h"
 #include "GUIInfoManager.h"
@@ -1352,7 +1353,8 @@ void CGSTPlayer::SeekTime(__int64 seek_ms)
     // Performing a non-flushing seek in a PAUSED pipeline
     // blocks until the pipeline is set to playing again.
     gst_element_seek(m_gstvars->player,
-			m_gstvars->rate, GST_FORMAT_TIME, 
+			m_gstvars->rate, GST_FORMAT_TIME,
+      //(GstSeekFlags)(GST_SEEK_FLAG_FLUSH | GST_SEEK_FLAG_ACCURATE | GST_SEEK_FLAG_SEGMENT),
       (GstSeekFlags)(GST_SEEK_FLAG_FLUSH | GST_SEEK_FLAG_KEY_UNIT),
 			GST_SEEK_TYPE_SET,  seek_ns,  // start
       GST_SEEK_TYPE_SET,   -1);     // end
@@ -1840,6 +1842,12 @@ void CGSTPlayer::ProbeStreams()
       m_gstvars->tcodec_language.push_back("");
     }
   }
+}
+
+
+void CGSTPlayer::GetLastFrame()
+{
+  CGSTFileInfo::ExtractSnapshot();
 }
 
 void CGSTPlayer::ProbeUDPStreams()

@@ -96,6 +96,10 @@
 #endif
 #include "windowing/WindowingFactory.h"
 #include "video/VideoInfoTag.h"
+#if defined(HAVE_LIBGSTREAMER)
+//TODO: this is a hack to get to gstplayer functions
+#include "cores/gstplayer/GSTPlayer.h"
+#endif
 
 using namespace std;
 using namespace XFILE;
@@ -902,6 +906,14 @@ void CUtil::TakeScreenshot(const CStdString &filename, bool sync)
   lpBackbuffer->Release();
 
   g_graphicsContext.Unlock();
+
+#elif defined(HAVE_LIBGSTREAMER)
+  // this must be defined above defined(HAS_GLES)
+  CGSTPlayer *gstplayer = (CGSTPlayer*)g_application.m_pPlayer;
+  
+  if (gstplayer)
+    gstplayer->GetLastFrame();
+  return;
 
 #elif defined(HAS_GL) || defined(HAS_GLES)
 

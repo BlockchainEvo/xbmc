@@ -36,4 +36,6 @@ public:
 
   // Extract a thumbnail immage from the media at strPath an image file in strTarget, optionally populating a streamdetails class with the data
   static bool ExtractThumb(const CStdString &strPath, const CStdString &strTarget, CStreamDetails *pStreamDetails);
+  
+  static bool ExtractSnapshot(void);
 };

@@ -40,6 +40,10 @@
 #include "utils/URIUtils.h"
 #include "threads/SingleLock.h"
 #include "utils/log.h"
+#if defined(HAVE_LIBGSTREAMER)
+//TODO: this is a hack to get to gstplayer functions
+#include "cores/gstplayer/GSTPlayer.h"
+#endif
 
 using namespace std;
 
@@ -251,6 +255,13 @@ void CGUIDialogVideoBookmarks::AddBookmark(CVideoInfoTag* tag)
   }
   {
 #ifdef HAS_VIDEO_PLAYBACK
+#if defined(HAVE_LIBGSTREAMER)
+  CGSTPlayer *gstplayer = (CGSTPlayer*)g_application.m_pPlayer;
+  
+  if (gstplayer)
+    gstplayer->GetLastFrame();
+  return;
+#else
     CRenderCapture* thumbnail = g_renderManager.AllocRenderCapture();
     g_renderManager.Capture(thumbnail, width, height, CAPTUREFLAG_IMMEDIATELY);
     if (thumbnail->GetUserState() == CAPTURESTATE_DONE)
@@ -267,6 +278,7 @@ void CGUIDialogVideoBookmarks::AddBookmark(CVideoInfoTag* tag)
       CLog::Log(LOGERROR,"CGUIDialogVideoBookmarks: failed to create thumbnail");
 
     g_renderManager.ReleaseRenderCapture(thumbnail);
+#endif
 #endif
   }
   videoDatabase.Open();
