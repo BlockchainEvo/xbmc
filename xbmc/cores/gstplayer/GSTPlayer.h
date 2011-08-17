@@ -131,6 +131,7 @@ public:
   INT_GST_VARS* GetGSTVars(void)                                  {return m_gstvars;};
   void    ProbeStreams(void);
   void    GetLastFrame(void);
+  void    ChangeDecoderRect(void);
 
 protected:
   virtual void  OnStartup();

@@ -1850,6 +1850,47 @@ void CGSTPlayer::GetLastFrame()
   CGSTFileInfo::ExtractSnapshot();
 }
 
+void CGSTPlayer::ChangeDecoderRect(void)
+{
+  // to change "scale-mode" and "rectangle" for trick view mode
+  // we first have to find the ismd_vidrend_bin element. It will be
+  // the parent of the video sink.
+  bool done = false;
+  gpointer elementdata = NULL;
+  GstElement *parent = GST_ELEMENT_PARENT(m_gstvars->videosink);
+  GstIterator *element_iter = gst_bin_iterate_elements(GST_BIN_CAST(parent));
+  while (!done && element_iter)
+  {
+    switch (gst_iterator_next(element_iter, &elementdata))
+    {
+      case GST_ITERATOR_DONE:
+      case GST_ITERATOR_ERROR:
+        done = true;
+      break;
+      case GST_ITERATOR_RESYNC:
+        gst_iterator_resync(element_iter);
+      break;
+      case GST_ITERATOR_OK:
+        GstElement *element = GST_ELEMENT_CAST(elementdata);
+        gchar *elementname  = gst_element_get_name(element);
+        g_print("GST_MESSAGE_ASYNC_DONE:elementname(%s)\n", elementname);
+        if (g_strrstr(elementname, "ismdgstvidrendbin"))
+        {
+          //CStdString rect;
+          //rect.Format("%d,%d,%d,%d", 0,0, 640, 480);
+
+          // scale-mode defaults to ZOOM_TO_FIT and 
+          // can be SCALE_TO_FIT (0), VPP_NO_SCALING (1), ZOOM_TO_FILL (2) or ZOOM_TO_FIT (3)
+          //g_object_set(element, "scale-mode", 2, "rectangle", rect.c_str(), NULL);
+          done = true;
+        }
+        g_free(elementname);
+      break;
+    }
+  }
+  gst_iterator_free(element_iter);
+}
+
 void CGSTPlayer::ProbeUDPStreams()
 {
   bool done = false;
