@@ -1,5 +1,5 @@
 export PREFIX=${XBMCPREFIX}
-export CFLAGS=-isystem${XBMCPREFIX}/include -isystem${SDKSTAGE}/include -isystem${SDKSTAGE}/usr/include -isystem${SDKSTAGE}/usr/local/include
+export CFLAGS=-isystem${XBMCPREFIX}/include -isystem${SDKSTAGE}/include -isystem${SDKSTAGE}/usr/include
 export CXXFLAGS=${CFLAGS}
 export CPPFLAGS=${CFLAGS}
 export LDFLAGS=-L${PREFIX}/lib -L${SDKSTAGE}/lib -L${SDKSTAGE}/usr/lib
