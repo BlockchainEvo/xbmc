@@ -226,6 +226,7 @@ bool CWinSystemGDL::CreateNewWindow(const CStdString& name, bool fullScreen, RES
   gdl_ret_t          rc = GDL_SUCCESS;
   gdl_boolean_t      hdcpControlEnabled = GDL_FALSE;
   gdl_boolean_t      scalineEnabled = GDL_FALSE;
+  gdl_boolean_t      alphaPremult = GDL_TRUE;
   BlackLevelType     blackLevel;
   //bool bUsingHDMI = g_IntelSMDGlobals.GetAudioOutputAdded(AUDIO_DIGITAL_HDMI);
   //sdd CSingleLock lock(CIntelSMDAudioRenderer::m_SMDAudioLock);
@@ -350,6 +351,9 @@ bool CWinSystemGDL::CreateNewWindow(const CStdString& name, bool fullScreen, RES
 
   if(GDL_SUCCESS == rc)
     rc = gdl_plane_set_attr(GDL_PLANE_SCALE, &scalineEnabled);
+
+  if(GDL_SUCCESS == rc)
+    rc = gdl_plane_set_attr(GDL_PLANE_ALPHA_PREMULT, &alphaPremult);
 
   if (GDL_SUCCESS == rc)
     rc = gdl_plane_config_end(GDL_FALSE);

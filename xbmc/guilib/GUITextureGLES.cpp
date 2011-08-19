@@ -109,7 +109,11 @@ void CGUITextureGLES::Begin(color_t color)
 
   if ( hasAlpha )
   {
+#if defined(HAS_GDL)
+    glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE_MINUS_DST_ALPHA, GL_ONE);
+#else
     glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+#endif
     glEnable( GL_BLEND );
   }
   else
@@ -226,7 +230,11 @@ void CGUITextureGLES::DrawQuad(const CRect &rect, color_t color, CBaseTexture *t
   else
     glDisable(GL_TEXTURE_2D);
 
+#if defined(HAS_GDL)
+  glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE_MINUS_DST_ALPHA, GL_ONE);
+#else
   glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+#endif
   glEnable(GL_BLEND);          // Turn Blending On
 
   VerifyGLState();
