@@ -31,144 +31,8 @@
 #include "threads/SingleLock.h"
 #include "settings/Settings.h"
 #include "settings/GUISettings.h"
-//#include "IntelSMDGlobals.h"
 #include "guilib/GraphicContext.h"
-//#include "cores/AudioRenderers/IntelSMDAudioRenderer.h"
 
-
-//------------------------------------------------------------------------------
-// __yes_no()
-//------------------------------------------------------------------------------
-static void __yes_no(const char * s, gdl_boolean_t cond)
-{
-    CLog::Log(LOGNONE, "%s %s\n", s, cond ? "yes" : "no");
-}
-
-//------------------------------------------------------------------------------
-// query_generic_info()
-//------------------------------------------------------------------------------
-void query_generic_info(gdl_pd_id_t port)
-{
-    gdl_pd_recv_t cmd = GDL_PD_RECV_HDMI_SINK_INFO;
-    gdl_hdmi_sink_info_t si;
-    int i, map;
-
-    if (gdl_port_recv(port, cmd, &si, sizeof(si)) == GDL_SUCCESS)
-    {
-      CLog::Log(LOGNONE, " - Manufacturer ID        : 0x%.4x\n", si.manufac_id  );
-      CLog::Log(LOGNONE, " - Product code           : 0x%.4x\n", si.product_code);
-
-        __yes_no(" - HDMI                   :", si.hdmi       );
-        __yes_no(" - YCbCr444               :", si.ycbcr444   );
-        __yes_no(" - YCbCr422               :", si.ycbcr422   );
-        __yes_no(" - 30 bit color           :", si.dc_30      );
-        __yes_no(" - 36 bit color           :", si.dc_36      );
-        __yes_no(" - YCbCr444 in deep color :", si.dc_y444    );
-        __yes_no(" - xvycc601 colorimetry   :", si.xvycc601   );
-        __yes_no(" - xvycc709 colorimetry   :", si.xvycc709   );
-        __yes_no(" - Supports AI            :", si.supports_ai);
-
-        CLog::Log(LOGNONE, " - Max TMDS clock         : %d\n", si.max_tmds_clock);
-
-        __yes_no(" - Latency valid          :", si.latency_present);
-        __yes_no(" - Latency int valid      :", si.latency_int_present);
-        if(si.latency_present)
-        {
-          CLog::Log(LOGNONE, " - Video latency          : %d\n", si.latency_video);
-          CLog::Log(LOGNONE, " - Audio latency          : %d\n", si.latency_audio);
-        }
-        if(si.latency_int_present)
-        {
-          CLog::Log(LOGNONE, " - Video latency int      : %d\n", si.latency_video_interlaced);
-          CLog::Log(LOGNONE, " - Audio latency int      : %d\n", si.latency_audio_interlaced);
-        }
-        if(si.hdmi_video_present)
-        {
-            __yes_no(" - hdmi_video             :", si.hdmi_video_present);
-            __yes_no(" - hdmi_video 3D          :", si.enabled_3d);
-            CLog::Log(LOGNONE, " - Number of 3D modes     : %d\n", si.num_modes_3d);
-        }
-
-        CLog::Log(LOGNONE, " - Source Physical Address: %d.%d.%d.%d\n",
-               si.spa.a, si.spa.b, si.spa.c, si.spa.d       );
-
-        CLog::Log(LOGNONE, " - Speaker map            :");
-        map = si.speaker_map;
-        for (i = 0; i < 11; i++)
-        {
-            //printf(" %s", (map & (1<<i)) ? gdl_dbg_string_speaker_map(1<<i) : "");
-        }
-        CLog::Log(LOGNONE, "\n");
-    }
-}
-
-//------------------------------------------------------------------------------
-// query_hdcp_info()
-//------------------------------------------------------------------------------
-void query_hdcp_info(gdl_pd_id_t port)
-{
-    gdl_pd_recv_t cmd = GDL_PD_RECV_HDMI_HDCP_INFO;
-    gdl_hdmi_hdcp_info_t hi;
-
-    if (gdl_port_recv(port, cmd, &hi, sizeof(hi)) == GDL_SUCCESS)
-    {
-        __yes_no(" - HDCP support           :", GDL_TRUE   );
-        __yes_no(" - HDCP 1.1               :", hi.hdcp_1p1);
-        __yes_no(" - Repeater               :", hi.repeater);
-
-        // Dump topology information if connected sink is a repeater
-        if (hi.repeater)
-        {
-          CLog::Log(LOGNONE, "   . devices connected    : %d\n", hi.device_count        );
-          CLog::Log(LOGNONE, "   . depth                : %d\n", hi.depth               );
-            __yes_no("   . max devs  exceeded   :"     , hi.max_devs_exceeded   );
-            __yes_no("   . max depth exceeded   :"     , hi.max_cascade_exceeded);
-        }
-
-        // Get and print KSVs
-        cmd = GDL_PD_RECV_HDMI_HDCP_KSVS;
-        /*
-        unsigned char ksvs[635];
-        if (gdl_port_recv(port, cmd, ksvs, sizeof(ksvs)) == GDL_SUCCESS)
-        {
-          CLog::Log(LOGNONE, " - List of KSVs:\n");
-            for (int i = 0; i < hi.device_count + 1; i++)
-            {
-              CLog::Log(LOGNONE, "   . %2x %2x %2x %2x %2x\n",
-                       ksvs[i * 5 + 0],
-                       ksvs[i * 5 + 1],
-                       ksvs[i * 5 + 2],
-                       ksvs[i * 5 + 3],
-                       ksvs[i * 5 + 4]);
-            }
-        }
-        else
-        {
-          CLog::Log(LOGNONE, " - KSV information unavailable\n");
-        }
-        */
-
-        // Print HDCP debug information
-        /*
-        CLog::Log(LOGNONE, "\nHDCP debug information\n");
-        CLog::Log(LOGNONE, " - AKSV = %2x %2x %2x %2x %2x\n",
-               hi.aksv[0], hi.aksv[1], hi.aksv[2], hi.aksv[3], hi.aksv[4]);
-        CLog::Log(LOGNONE, " - BKSV = %2x %2x %2x %2x %2x\n",
-               hi.bksv[0], hi.bksv[1], hi.bksv[2], hi.bksv[3], hi.bksv[4]);
-        CLog::Log(LOGNONE, " - AN   = 0x%llx\n", hi.an);
-        CLog::Log(LOGNONE, " - Ri   = %04x  Ri_prime = %04x\n", hi.ri, hi.ri_prime);
-        if (hi.hdcp_1p1)
-        {
-          CLog::Log(LOGNONE, " - Pj   = %04x  Pj_prime = %04x\n", hi.pj, hi.pj_prime);
-        }
-        */
-
-    }
-    else
-    {
-        __yes_no(" - HDCP support           :", GDL_FALSE  );
-    }
-}
 
 CWinSystemGDL::CWinSystemGDL() : CWinSystemBase()
 {
@@ -228,8 +92,6 @@ bool CWinSystemGDL::CreateNewWindow(const CStdString& name, bool fullScreen, RES
   gdl_boolean_t      scalineEnabled = GDL_FALSE;
   gdl_boolean_t      alphaPremult = GDL_TRUE;
   BlackLevelType     blackLevel;
-  //bool bUsingHDMI = g_IntelSMDGlobals.GetAudioOutputAdded(AUDIO_DIGITAL_HDMI);
-  //sdd CSingleLock lock(CIntelSMDAudioRenderer::m_SMDAudioLock);
 
   // see CWinSystemGDL::UpdateResolutions.
   if ((res.iScreenWidth > res.iWidth) && (res.iScreenHeight > res.iHeight))
@@ -269,14 +131,8 @@ bool CWinSystemGDL::CreateNewWindow(const CStdString& name, bool fullScreen, RES
   else
   {
     CLog::Log(LOGERROR, "Unsupported refresh rate: %f", res.fRefreshRate);
-    goto fail;
+    return false;
   }
-
-  // Since HDMI audio signals are carried within the video signals, 
-  // resetting the state of the HDMI port driver with active audio
-  // can result in an audio pipeline stall. To avoid this, stop HDMI audio
-  // prior to changing the display mode and reconfigure/restart HDMI audio afterwards
-  //sdd g_IntelSMDGlobals.DisableAudioOutput();
 
   // Default values of optional args
   memset(&di, 0, sizeof (gdl_display_info_t));
@@ -298,7 +154,7 @@ bool CWinSystemGDL::CreateNewWindow(const CStdString& name, bool fullScreen, RES
   if ( rc != GDL_SUCCESS)
   {
     CLog::Log(LOGNONE, "Could not set display mode for display 0");
-    goto fail;
+    return false;
   }
 
   m_nWidth  = res.iWidth;
@@ -315,7 +171,7 @@ bool CWinSystemGDL::CreateNewWindow(const CStdString& name, bool fullScreen, RES
   srcRect.width  = res.iWidth;
   srcRect.height = res.iHeight;
 
-//sdd  blackLevel = g_settings.GetBlackLevelAsEnum(g_guiSettings.GetString("videoscreen.blacklevel"));
+  //sdd  blackLevel = g_settings.GetBlackLevelAsEnum(g_guiSettings.GetString("videoscreen.blacklevel"));
   blackLevel = BLACK_LEVEL_VIDEO;
   if(blackLevel == BLACK_LEVEL_PC)
     EnableHDMIClamp(false);
@@ -363,25 +219,17 @@ bool CWinSystemGDL::CreateNewWindow(const CStdString& name, bool fullScreen, RES
   if (GDL_SUCCESS != rc)
   {
     CLog::Log(LOGNONE, "GDL configuration failed! GDL error code is 0x%x", rc);
-    goto fail;
+    return false;
   }
 
   CLog::Log(LOGNONE, "GDL plane setup complete");
 
   if (!m_eglBinding.CreateWindow(EGL_DEFAULT_DISPLAY, (NativeWindowType) m_gdlPlane))
-    goto fail;
+    return false;
 
   CLog::Log(LOGNONE, "GDL plane attach to EGL complete");
 
-  //sdd g_IntelSMDGlobals.EnableAudioOutput();
-
   return true;
-
-  fail:
-
-  //sdd g_IntelSMDGlobals.EnableAudioOutput();
-  return false;
-
 }
 
 bool CWinSystemGDL::DestroyWindow()
@@ -562,173 +410,6 @@ void CWinSystemGDL::UpdateResolutions()
   {
     CLog::Log(LOGNONE, "Warning: 720p not supported, desktop not changed");
   }
-}
-
-#define LOWER_NIBBLE( x ) \
-        ((1|2|4|8) & (x))
-
-#define UPPER_NIBBLE( x ) \
-        (((128|64|32|16) & (x)) >> 4)
-
-#define DETAILED_TIMING_DESCRIPTIONS_START      0x36
-#define DETAILED_TIMING_DESCRIPTION_SIZE        18
-#define NO_DETAILED_TIMING_DESCRIPTIONS         4
-
-#define UNKNOWN_DESCRIPTOR      -1
-#define DETAILED_TIMING_BLOCK   -2
-
-#define COMBINE_HI_8LO( hi, lo ) \
-        ( (((unsigned)hi) << 8) | (unsigned)lo )
-
-#define PIXEL_CLOCK_LO     (unsigned)block[ 0 ]
-#define PIXEL_CLOCK_HI     (unsigned)block[ 1 ]
-#define PIXEL_CLOCK        (COMBINE_HI_8LO( PIXEL_CLOCK_HI,PIXEL_CLOCK_LO )*10000)
-
-#define H_BLANKING_LO      (unsigned)block[ 3 ]
-#define H_BLANKING_HI      LOWER_NIBBLE( (unsigned)block[ 4 ] )
-#define H_BLANKING         COMBINE_HI_8LO( H_BLANKING_HI, H_BLANKING_LO )
-
-#define V_BLANKING_LO      (unsigned)block[ 6 ]
-#define V_BLANKING_HI      LOWER_NIBBLE( (unsigned)block[ 7 ] )
-#define V_BLANKING         COMBINE_HI_8LO( V_BLANKING_HI, V_BLANKING_LO )
-
-#define V_ACTIVE_LO        (unsigned)block[ 5 ]
-#define V_ACTIVE_HI        UPPER_NIBBLE( (unsigned)block[ 7 ] )
-#define V_ACTIVE           COMBINE_HI_8LO( V_ACTIVE_HI, V_ACTIVE_LO )
-
-#define H_ACTIVE_LO        (unsigned)block[ 2 ]
-#define H_ACTIVE_HI        UPPER_NIBBLE( (unsigned)block[ 4 ] )
-#define H_ACTIVE           COMBINE_HI_8LO( H_ACTIVE_HI, H_ACTIVE_LO )
-
-#define FLAGS              (unsigned)block[ 17 ]
-#define INTERLACED         (FLAGS&128)
-
-const unsigned char edid_v1_descriptor_flag[] = { 0x00, 0x00 };
-
-void CWinSystemGDL::GetNativeDisplayResolution(std::vector<RESOLUTION_INFO>& resolutions)
-{
-  unsigned char* edid_buffer;
-  int edid_len;
-
-  if (ReadEDID(&edid_buffer, &edid_len))
-  {
-    GetNativeResolutionFromEDID(edid_buffer, edid_len, resolutions);
-  }
-
-  if (resolutions.size() == 0)
-  {
-    RESOLUTION_INFO fallthrough;
-    fallthrough.iWidth  = 1280;
-    fallthrough.iHeight = 720;
-    fallthrough.fRefreshRate = 59.94f;
-    resolutions.push_back(fallthrough);
-  }
-}
-
-bool ResolutionSortPredicate(const RESOLUTION_INFO& d1, const RESOLUTION_INFO& d2)
-{
-  return (d1.iWidth * d1.iHeight) > (d2.iWidth * d2.iHeight);
-}
-
-bool CWinSystemGDL::GetNativeResolutionFromEDID(unsigned char* edid_data, int edid_len, std::vector<RESOLUTION_INFO>& resolutions)
-{
-  std::vector<RESOLUTION_INFO> interlacedResolutions;
-
-  unsigned char* block = edid_data + DETAILED_TIMING_DESCRIPTIONS_START;
-
-  for (int i = 0; i < NO_DETAILED_TIMING_DESCRIPTIONS; i++, block += DETAILED_TIMING_DESCRIPTION_SIZE)
-  {
-    if (GetEDIDBlockType( block ) == DETAILED_TIMING_BLOCK)
-    {
-      RESOLUTION_INFO resolution;
-
-      int htotal, vtotal;
-      htotal = H_ACTIVE + H_BLANKING;
-      vtotal = V_ACTIVE + V_BLANKING;
-      float vfreq = (float)PIXEL_CLOCK/((float)vtotal*(float)htotal);
-
-      resolution.iWidth = H_ACTIVE;
-      resolution.iHeight = V_ACTIVE;
-      resolution.fRefreshRate = vfreq;
-      resolution.dwFlags = 0;
-      if (INTERLACED)
-      {
-        resolution.dwFlags |= D3DPRESENTFLAG_INTERLACED;
-        resolution.iHeight *= 2;
-        interlacedResolutions.push_back(resolution);
-      }
-      else
-      {
-        resolutions.push_back(resolution);
-      }
-    }
-  }
-
-  // sort resolutions according to size
-  std::sort(resolutions.begin(), resolutions.end(), ResolutionSortPredicate);
-  std::sort(interlacedResolutions.begin(), interlacedResolutions.end(), ResolutionSortPredicate);
-
-  // append interlaced resolution at the end
-  resolutions.insert(resolutions.end(), interlacedResolutions.begin(), interlacedResolutions.end());
-
-  return true;
-}
-
-int CWinSystemGDL::GetEDIDBlockType( unsigned char* block )
-{
-  if (!strncmp( (const char*) edid_v1_descriptor_flag, (const char*) block, 2))
-  {
-     if (block[2] != 0)
-       return UNKNOWN_DESCRIPTOR;
-     return block[ 3 ];
-  }
-  else
-  {
-    /* detailed timing block */
-    return DETAILED_TIMING_BLOCK;
-  }
-}
-
-
-bool CWinSystemGDL::ReadEDID(unsigned char** edid_data, int* len)
-{
-  gdl_ret_t rc = GDL_SUCCESS;
-  unsigned int n;
-  gdl_hdmi_edid_block_t eb;
-  eb.index = 0;
-
-  *edid_data = NULL;
-  *len = 0;
-
-  // Read first block
-  if (gdl_port_recv(GDL_PD_ID_HDMI, GDL_PD_RECV_HDMI_EDID_BLOCK, (void *) &eb,
-      sizeof(gdl_hdmi_edid_block_t)) != GDL_SUCCESS)
-  {
-    return false;
-  }
-
-  // Determine total number of blocks
-  n = eb.data[126] + 1;
-
-  *edid_data = (unsigned char*) malloc(n * 128);
-
-  // Read and print all EDID blocks
-  for (eb.index = 0; eb.index < n; eb.index++)
-  {
-    rc = gdl_port_recv(GDL_PD_ID_HDMI, GDL_PD_RECV_HDMI_EDID_BLOCK,
-        (void *) &eb, sizeof(gdl_hdmi_edid_block_t));
-
-    if (rc == GDL_SUCCESS)
-    {
-      memcpy(*edid_data + *len, eb.data, 128);
-      *len += 128;
-    }
-
-    if (rc != GDL_SUCCESS)
-      break;
-  }
-
-  return true;
 }
 
 void CWinSystemGDL::NotifyAppActiveChange(bool bActivated)

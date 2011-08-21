@@ -31,7 +31,7 @@
 #include <libgdl.h>
 
 #define GDL_VIDEO_PLANE           GDL_PLANE_ID_UPP_A  // bottom for video
-#define GDL_SUBTITLE_PLANE        GDL_PLANE_ID_UPP_B  // subtitles
+#define GDL_SUBTITLE_PLANE        GDL_PLANE_ID_UPP_B  // subtitles (not used)
 #define GDL_FLASH_GRAPHICS_PLANE  GDL_PLANE_ID_UPP_C  // pages with embedded video
 #define GDL_GRAPHICS_PLANE        GDL_PLANE_ID_UPP_D  // top for overlays
 
@@ -61,10 +61,6 @@ public:
   bool EnableHDCP(bool enable);
 
 protected:  
-  void GetNativeDisplayResolution(std::vector<RESOLUTION_INFO>& resolutions);
-  bool ReadEDID(unsigned char** edid_data, int* len);
-  int  GetEDIDBlockType(unsigned char* block);
-  bool GetNativeResolutionFromEDID(unsigned char* edid_data, int edid_len, std::vector<RESOLUTION_INFO>& resolutions);
 
   CWinBindingEGL m_eglBinding;
   gdl_plane_id_t m_gdlPlane;
