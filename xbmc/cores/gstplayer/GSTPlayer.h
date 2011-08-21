@@ -61,6 +61,7 @@ public:
   virtual void  GetGeneralInfo(CStdString &strVideoInfo);
   virtual void  Update(bool bPauseDrawing);
   virtual void  GetVideoRect(CRect& SrcRect, CRect& DestRect);
+  virtual void  SetVideoRect(const CRect &SrcRect, const CRect &DestRect);
   virtual void  GetVideoAspectRatio(float &fAR);
   virtual bool  CanRecord()                                       {return false;};
   virtual bool  IsRecording()                                     {return false;};
@@ -131,7 +132,6 @@ public:
   INT_GST_VARS* GetGSTVars(void)                                  {return m_gstvars;};
   void    ProbeStreams(void);
   void    GetLastFrame(void);
-  void    ChangeDecoderRect(void);
 
 protected:
   virtual void  OnStartup();
@@ -180,7 +180,9 @@ private:
   float                   m_video_fps;
   int                     m_video_width;
   int                     m_video_height;
-  
+  CRect                   m_dst_rect;
+  int                     m_view_mode;
+
   INT_GST_VARS            *m_gstvars;
   CStdString              m_textsink_name;
   CStdString              m_audiosink_name;

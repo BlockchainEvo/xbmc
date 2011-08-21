@@ -28,6 +28,7 @@
 #include <locale.h>
 #include "guilib/MatrixGLES.h"
 #include "LinuxRendererGLES.h"
+#include "Application.h"
 #include "utils/fastmemcpy.h"
 #include "utils/MathUtils.h"
 #include "utils/GLUtils.h"
@@ -385,6 +386,7 @@ void CLinuxRendererGLES::Update(bool bPauseDrawing)
 {
   if (!m_bConfigured) return;
 
+
   ManageDisplay();
   ManageTextures();
 }
@@ -401,14 +403,21 @@ void CLinuxRendererGLES::RenderUpdate(bool clear, DWORD flags, DWORD alpha)
   {
     ManageDisplay();
     ManageTextures();
-    g_graphicsContext.BeginPaint();
+    // if running bypass, then player adjusts src/dst rects for video.
+    if (g_application.m_pPlayer)
+      g_application.m_pPlayer->SetVideoRect(m_sourceRect, m_destRect);
 
+    g_graphicsContext.BeginPaint();
     // RENDER_BYPASS means we are rendering video
     // outside the control of gles and on a different
     // graphics plane that is under the gles layer.
     // Clear a hole where video would appear so we do not see
-    // background images that have already been rendered. 
-    g_graphicsContext.SetScissors(m_destRect);
+    // background images that have already been rendered.
+    // TODO: something wrong here, if we punch a m_destRect
+    //  sized hole for video, then some gui elements don't
+    //  get updated or cleared. See video view controls 
+    //  (zoom, offset, pixel ratio, etc).
+    //g_graphicsContext.SetScissors(m_destRect);
 
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

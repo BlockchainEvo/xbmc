@@ -38,6 +38,7 @@
 #include "threads/SingleLock.h"
 #include "windowing/WindowingFactory.h"
 #include "utils/log.h"
+#include "utils/MathUtils.h"
 #include "utils/TimeUtils.h"
 #include "utils/URIUtils.h"
 #include "utils/XMLUtils.h"
@@ -62,6 +63,14 @@ typedef enum {
 // g_object_set(G_OBJECT(m_playbin), "flags", flags, NULL);
 
 
+// ismd scale-mode, defaults to ISMD_ZOOM_TO_FIT.
+typedef enum {
+  ISMD_SCALE_TO_FIT,    // independent x and y scaling, ignores pixel aspect ratio
+  ISMD_VPP_NO_SCALING,  // force the output to be same size as the input ignores pixel aspect ratio
+  ISMD_ZOOM_TO_FILL,    // fill entire screen. use both the source and destination pixel aspect ratios
+  ISMD_ZOOM_TO_FIT,     // fit at least one side of the destination rectangle, letterbox/pillarbox the remainder
+  ISMD_VPP_SCP_ANAMORPHIC
+} ISMD_SCALE_MODE;
 
 struct INT_GST_VARS
 {
@@ -1156,6 +1165,13 @@ void CGSTPlayer::GetVideoInfo(CStdString &strVideoInfo)
 void CGSTPlayer::GetGeneralInfo(CStdString& strGeneralInfo)
 {
   //CLog::Log(LOGDEBUG, "CGSTPlayer::GetGeneralInfo");
+  CRect SrcRect, DestRect;
+  g_renderManager.GetVideoRect(SrcRect, DestRect);
+  g_print("CGSTPlayer::GetVideoRect"
+  "SrcRect.x1(%f), SrcRect.y1(%f), SrcRect.x2(%f), SrcRect.y2(%f) \n"
+  "DestRect.x1(%f), DestRect.y1(%f), DestRect.x2(%f), DestRect.y2(%f)\n",
+  SrcRect.x1, SrcRect.y1, SrcRect.x2, SrcRect.y2,
+  DestRect.x1, DestRect.y1, DestRect.x2, DestRect.y2);
 }
 
 int CGSTPlayer::GetAudioStreamCount()
@@ -1252,6 +1268,86 @@ void CGSTPlayer::Update(bool bPauseDrawing)
 void CGSTPlayer::GetVideoRect(CRect& SrcRect, CRect& DestRect)
 {
   g_renderManager.GetVideoRect(SrcRect, DestRect);
+}
+
+void CGSTPlayer::SetVideoRect(const CRect &SrcRect, const CRect &DestRect)
+{
+  // check if destination rect or video view mode has changed
+  if ((m_dst_rect != DestRect) || (m_view_mode != g_settings.m_currentVideoSettings.m_ViewMode))
+  {
+    m_dst_rect  = DestRect;
+    m_view_mode = g_settings.m_currentVideoSettings.m_ViewMode;
+  }
+  else
+  {
+    return;
+  }
+
+  // ismd destination rectangle cannot be outside display bounds
+  // or it will output black frames when updating GDL_PLANE_DST_RECT fails
+  CRect display;
+  display.SetRect(0, 0, g_graphicsContext.GetWidth(), g_graphicsContext.GetHeight());
+  if (!display.PtInRect(CPoint(m_dst_rect.x1, m_dst_rect.y1)))
+    return;
+  if (!display.PtInRect(CPoint(m_dst_rect.x2, m_dst_rect.y2)))
+    return;
+
+  // to change "scale-mode" and "rectangle" for trick view mode
+  // we first have to find the ismd_vidrend_bin element. It will be
+  // the parent of the video sink.
+  bool done = false;
+  gpointer elementdata = NULL;
+  GstElement *parent = GST_ELEMENT_PARENT(m_gstvars->videosink);
+  GstIterator *element_iter = gst_bin_iterate_elements(GST_BIN_CAST(parent));
+  while (!done && element_iter)
+  {
+    switch (gst_iterator_next(element_iter, &elementdata))
+    {
+      case GST_ITERATOR_DONE:
+      case GST_ITERATOR_ERROR:
+        done = true;
+      break;
+      case GST_ITERATOR_RESYNC:
+        gst_iterator_resync(element_iter);
+      break;
+      case GST_ITERATOR_OK:
+        GstElement *element = GST_ELEMENT_CAST(elementdata);
+        gchar *elementname  = gst_element_get_name(element);
+        if (g_strrstr(elementname, "ismdgstvidrendbin"))
+        {
+          // setup the destination rectangle
+          CStdString rectangle;
+          rectangle.Format("%i,%i,%i,%i",
+            (int)m_dst_rect.x1, (int)m_dst_rect.y1,
+            (int)m_dst_rect.Width(), (int)m_dst_rect.Height());
+          // setup the scaling mode (we might need to tweak these settings)
+          ISMD_SCALE_MODE scale_mode;
+          switch(m_view_mode)
+          {
+            default:
+            case VIEW_MODE_NORMAL:
+            case VIEW_MODE_CUSTOM:
+            case VIEW_MODE_STRETCH_4x3:
+            case VIEW_MODE_STRETCH_16x9:
+              scale_mode = ISMD_SCALE_TO_FIT;
+            break;
+            case VIEW_MODE_ZOOM:
+            case VIEW_MODE_WIDE_ZOOM:
+              scale_mode = ISMD_ZOOM_TO_FILL;
+            break;
+            case VIEW_MODE_ORIGINAL:
+              scale_mode = ISMD_VPP_NO_SCALING;
+            break;
+          }
+          // update ismd_vidrend_bin with new settings.
+          g_object_set(element, "scale-mode", scale_mode, "rectangle",  rectangle.c_str(), NULL);
+          done = true;
+        }
+        g_free(elementname);
+      break;
+    }
+  }
+  gst_iterator_free(element_iter);
 }
 
 void CGSTPlayer::GetVideoAspectRatio(float &fAR)
@@ -1617,28 +1713,21 @@ void CGSTPlayer::Process()
 
       if (m_video_count || m_gstvars->udp_video)
       {
-        // big fake out here, we do not know the video width, height yet
-        // so setup renderer to full display size and tell it we are doing
-        // bypass. This tell it to get out of the way as hardware will be doing
-        // the actual video rendering in a video plane that is under the GUI
-        // layer.
-        int width = g_graphicsContext.GetWidth();
-        int height= g_graphicsContext.GetHeight();
-        int displayWidth  = width;
-        int displayHeight = height;
-        double fFrameRate = 24;
         unsigned int flags = 0;
-
         flags |= CONF_FLAGS_FORMAT_BYPASS;
         flags |= CONF_FLAGS_FULLSCREEN;
-        CStdString formatstr = "BYPASS";
-        CLog::Log(LOGDEBUG,"%s - change configuration. %dx%d. framerate: %4.2f. format: %s",
-          __FUNCTION__, width, height, fFrameRate, formatstr.c_str());
-        g_renderManager.IsConfigured();
-        if(!g_renderManager.Configure(width, height, displayWidth, displayHeight, fFrameRate, flags))
+        CLog::Log(LOGDEBUG,"%s - change configuration. %dx%d. framerate: %4.2f. format: BYPASS",
+          __FUNCTION__, m_video_width, m_video_height, m_video_fps);
+
+        if(!g_renderManager.Configure(m_video_width, m_video_height,
+          m_video_width, m_video_height, m_video_fps, flags))
+        {
           CLog::Log(LOGERROR, "%s - failed to configure renderer", __FUNCTION__);
+        }
         if (!g_renderManager.IsStarted())
+        {
           CLog::Log(LOGERROR, "%s - renderer not started", __FUNCTION__);
+        }
       }
     }
     else
@@ -1844,51 +1933,9 @@ void CGSTPlayer::ProbeStreams()
   }
 }
 
-
 void CGSTPlayer::GetLastFrame()
 {
   CGSTFileInfo::ExtractSnapshot();
-}
-
-void CGSTPlayer::ChangeDecoderRect(void)
-{
-  // to change "scale-mode" and "rectangle" for trick view mode
-  // we first have to find the ismd_vidrend_bin element. It will be
-  // the parent of the video sink.
-  bool done = false;
-  gpointer elementdata = NULL;
-  GstElement *parent = GST_ELEMENT_PARENT(m_gstvars->videosink);
-  GstIterator *element_iter = gst_bin_iterate_elements(GST_BIN_CAST(parent));
-  while (!done && element_iter)
-  {
-    switch (gst_iterator_next(element_iter, &elementdata))
-    {
-      case GST_ITERATOR_DONE:
-      case GST_ITERATOR_ERROR:
-        done = true;
-      break;
-      case GST_ITERATOR_RESYNC:
-        gst_iterator_resync(element_iter);
-      break;
-      case GST_ITERATOR_OK:
-        GstElement *element = GST_ELEMENT_CAST(elementdata);
-        gchar *elementname  = gst_element_get_name(element);
-        g_print("GST_MESSAGE_ASYNC_DONE:elementname(%s)\n", elementname);
-        if (g_strrstr(elementname, "ismdgstvidrendbin"))
-        {
-          //CStdString rect;
-          //rect.Format("%d,%d,%d,%d", 0,0, 640, 480);
-
-          // scale-mode defaults to ZOOM_TO_FIT and 
-          // can be SCALE_TO_FIT (0), VPP_NO_SCALING (1), ZOOM_TO_FILL (2) or ZOOM_TO_FIT (3)
-          //g_object_set(element, "scale-mode", 2, "rectangle", rect.c_str(), NULL);
-          done = true;
-        }
-        g_free(elementname);
-      break;
-    }
-  }
-  gst_iterator_free(element_iter);
 }
 
 void CGSTPlayer::ProbeUDPStreams()
