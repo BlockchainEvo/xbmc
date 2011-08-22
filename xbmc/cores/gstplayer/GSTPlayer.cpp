@@ -1711,7 +1711,6 @@ void CGSTPlayer::Process()
 
     {
       CFileItem item(g_application.CurrentFileItem());
-      g_application.CurrentFileItem() = item;
       g_infoManager.SetCurrentItem(item);
     }
 
