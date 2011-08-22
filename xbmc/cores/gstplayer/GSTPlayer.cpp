@@ -1292,62 +1292,35 @@ void CGSTPlayer::SetVideoRect(const CRect &SrcRect, const CRect &DestRect)
   if (!display.PtInRect(CPoint(m_dst_rect.x2, m_dst_rect.y2)))
     return;
 
-  // to change "scale-mode" and "rectangle" for trick view mode
-  // we first have to find the ismd_vidrend_bin element. It will be
-  // the parent of the video sink.
-  bool done = false;
-  gpointer elementdata = NULL;
-  GstElement *parent = GST_ELEMENT_PARENT(m_gstvars->videosink);
-  GstIterator *element_iter = gst_bin_iterate_elements(GST_BIN_CAST(parent));
-  while (!done && element_iter)
+  if (m_gstvars->videosink)
   {
-    switch (gst_iterator_next(element_iter, &elementdata))
+    // setup the destination rectangle
+    CStdString rectangle;
+    rectangle.Format("%i,%i,%i,%i",
+      (int)m_dst_rect.x1, (int)m_dst_rect.y1,
+      (int)m_dst_rect.Width(), (int)m_dst_rect.Height());
+    // setup the scaling mode (we might need to tweak these settings)
+    ISMD_SCALE_MODE scale_mode;
+    switch(m_view_mode)
     {
-      case GST_ITERATOR_DONE:
-      case GST_ITERATOR_ERROR:
-        done = true;
+      default:
+      case VIEW_MODE_NORMAL:
+      case VIEW_MODE_CUSTOM:
+      case VIEW_MODE_STRETCH_4x3:
+      case VIEW_MODE_STRETCH_16x9:
+        scale_mode = ISMD_SCALE_TO_FIT;
       break;
-      case GST_ITERATOR_RESYNC:
-        gst_iterator_resync(element_iter);
+      case VIEW_MODE_ZOOM:
+      case VIEW_MODE_WIDE_ZOOM:
+        scale_mode = ISMD_ZOOM_TO_FILL;
       break;
-      case GST_ITERATOR_OK:
-        GstElement *element = GST_ELEMENT_CAST(elementdata);
-        gchar *elementname  = gst_element_get_name(element);
-        if (g_strrstr(elementname, "ismdgstvidrendbin"))
-        {
-          // setup the destination rectangle
-          CStdString rectangle;
-          rectangle.Format("%i,%i,%i,%i",
-            (int)m_dst_rect.x1, (int)m_dst_rect.y1,
-            (int)m_dst_rect.Width(), (int)m_dst_rect.Height());
-          // setup the scaling mode (we might need to tweak these settings)
-          ISMD_SCALE_MODE scale_mode;
-          switch(m_view_mode)
-          {
-            default:
-            case VIEW_MODE_NORMAL:
-            case VIEW_MODE_CUSTOM:
-            case VIEW_MODE_STRETCH_4x3:
-            case VIEW_MODE_STRETCH_16x9:
-              scale_mode = ISMD_SCALE_TO_FIT;
-            break;
-            case VIEW_MODE_ZOOM:
-            case VIEW_MODE_WIDE_ZOOM:
-              scale_mode = ISMD_ZOOM_TO_FILL;
-            break;
-            case VIEW_MODE_ORIGINAL:
-              scale_mode = ISMD_VPP_NO_SCALING;
-            break;
-          }
-          // update ismd_vidrend_bin with new settings.
-          g_object_set(element, "scale-mode", scale_mode, "rectangle",  rectangle.c_str(), NULL);
-          done = true;
-        }
-        g_free(elementname);
+      case VIEW_MODE_ORIGINAL:
+        scale_mode = ISMD_VPP_NO_SCALING;
       break;
     }
+    // update ismd_vidrend_bin with new settings.
+    g_object_set(m_gstvars->videosink, "scale-mode", scale_mode, "rectangle",  rectangle.c_str(), NULL);
   }
-  gst_iterator_free(element_iter);
 }
 
 void CGSTPlayer::GetVideoAspectRatio(float &fAR)
