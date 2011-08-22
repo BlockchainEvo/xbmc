@@ -1165,13 +1165,6 @@ void CGSTPlayer::GetVideoInfo(CStdString &strVideoInfo)
 void CGSTPlayer::GetGeneralInfo(CStdString& strGeneralInfo)
 {
   //CLog::Log(LOGDEBUG, "CGSTPlayer::GetGeneralInfo");
-  CRect SrcRect, DestRect;
-  g_renderManager.GetVideoRect(SrcRect, DestRect);
-  g_print("CGSTPlayer::GetVideoRect"
-  "SrcRect.x1(%f), SrcRect.y1(%f), SrcRect.x2(%f), SrcRect.y2(%f) \n"
-  "DestRect.x1(%f), DestRect.y1(%f), DestRect.x2(%f), DestRect.y2(%f)\n",
-  SrcRect.x1, SrcRect.y1, SrcRect.x2, SrcRect.y2,
-  DestRect.x1, DestRect.y1, DestRect.x2, DestRect.y2);
 }
 
 int CGSTPlayer::GetAudioStreamCount()
@@ -1707,11 +1700,6 @@ void CGSTPlayer::Process()
     {
       CLog::Log(LOGERROR, "CGSTPlayer::Process: WaitForGSTPlaying() failed");
       goto do_exit;
-    }
-
-    {
-      CFileItem item(g_application.CurrentFileItem());
-      g_infoManager.SetCurrentItem(item);
     }
 
     if (m_options.identify == false)
