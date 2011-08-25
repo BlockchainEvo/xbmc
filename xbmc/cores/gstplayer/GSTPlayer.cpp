@@ -97,6 +97,8 @@ struct INT_GST_VARS
   CStdString              subtitle_text;
   CStdString              video_title;
 
+  int                     flags;
+
   bool                    is_udp;
   bool                    udp_video;
   bool                    udp_audio;
@@ -614,7 +616,7 @@ CGSTPlayer::CGSTPlayer(IPlayerCallback &callback)
   m_gstvars->textsink  = NULL;
   m_gstvars->videosink = NULL;
   m_gstvars->subtitle_end = 0;
-
+  m_gstvars->flags = GST_PLAY_FLAG_VIDEO | GST_PLAY_FLAG_AUDIO | GST_PLAY_FLAG_TEXT;
   m_gstvars->is_udp = false;
   m_gstvars->udp_video = false;
   m_gstvars->udp_audio = false;
@@ -756,6 +758,11 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
       // playbin2 will figure out elements for audio automatically
       // but we need to assist with video and subtitles elements.
       m_gstvars->player = gst_element_factory_make( "playbin2", "gstplayer");
+
+      g_object_get(m_gstvars->player, "flags", &m_gstvars->flags, NULL);
+      m_gstvars->flags |= GST_PLAY_FLAG_NATIVE_VIDEO;
+      g_object_set(G_OBJECT(m_gstvars->player), "flags", m_gstvars->flags, NULL);
+
       /*
       // disable the mpeg4 ISMD H/W decoder because handling of avi's are crap.
       GstPluginFeature *gstfeature = gst_registry_find_feature(gst_registry_get_default(),
