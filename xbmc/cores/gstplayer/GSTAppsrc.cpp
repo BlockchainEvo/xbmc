@@ -115,7 +115,7 @@ void CGSTAppsrc::FoundSource(GObject *object, GObject *orig, GParamSpec *pspec, 
 
   unsigned int flags = READ_TRUNCATED | READ_BITRATE | READ_CHUNKED;
   ctx->m_cfile = new XFILE::CFile();
-  //if (CFileItem(ctx->m_url, false).IsInternetStream())
+  if (CFileItem(ctx->m_url, false).IsInternetStream())
     flags |= READ_CACHED;
   // open file in binary mode
   if (!ctx->m_cfile->Open(ctx->m_url, flags))
@@ -130,8 +130,10 @@ void CGSTAppsrc::FoundSource(GObject *object, GObject *orig, GParamSpec *pspec, 
   // we are seekable in push mode, this means that the element usually pushes
   // out buffers of an undefined size and that seeks happen only occasionally
   // and only by request of the user.
-  if (filelength > 0)
-    gst_util_set_object_arg(G_OBJECT(ctx->m_appsrc), "stream-type", "seekable");
+  if (!CFileItem(ctx->m_url, false).IsInternetStream())
+    gst_util_set_object_arg(G_OBJECT(ctx->m_appsrc), "stream-type", "random-access");
+  else
+    gst_util_set_object_arg(G_OBJECT(ctx->m_appsrc), "stream-type", "stream");
 
   // configure the appsrc, we will push a buffer to appsrc when it needs more data
   g_signal_connect(ctx->m_appsrc, "need-data", G_CALLBACK(FeedData), ctx);
