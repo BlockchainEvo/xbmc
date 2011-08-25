@@ -759,20 +759,34 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
       // but we need to assist with video and subtitles elements.
       m_gstvars->player = gst_element_factory_make( "playbin2", "gstplayer");
 
+#if 0
+      // disable the mpeg4 ISMD H/W decoder. FFMPEG plugins will need to be used instead.
+      // The hardware decoder produces very choppy video that appears as though its framerate is wrong
+      GstPluginFeature *hw_mpeg4_decoder = gst_registry_find_feature(gst_registry_get_default(),
+        "ismd_mpeg4_viddec", GST_TYPE_ELEMENT_FACTORY);
+      if (hw_mpeg4_decoder)
+      {
+        gst_plugin_feature_set_rank(hw_mpeg4_decoder, GST_RANK_PRIMARY-3);
+        gst_object_unref(hw_mpeg4_decoder);
+      }
+#endif
+#if 0
+      // Lower the priority of the mp3 hardware decoder by instead using Fluendo's plugin if it exists.
+      // The ISMD decoder produces very coarse timestamps, which manifests by sometimes showing 2-sec
+      // Jumps in time.
+
+      GstPluginFeature *sw_mp3_decoder = gst_registry_find_feature(gst_registry_get_default(),
+        "flump3dec", GST_TYPE_ELEMENT_FACTORY);
+      if (sw_mp3_decoder)
+      {
+        gst_plugin_feature_set_rank(sw_mp3_decoder, GST_RANK_PRIMARY+3);
+        gst_object_unref(sw_mp3_decoder);
+      }
+#endif
+
       g_object_get(m_gstvars->player, "flags", &m_gstvars->flags, NULL);
       m_gstvars->flags |= GST_PLAY_FLAG_NATIVE_VIDEO;
       g_object_set(G_OBJECT(m_gstvars->player), "flags", m_gstvars->flags, NULL);
-
-      /*
-      // disable the mpeg4 ISMD H/W decoder because handling of avi's are crap.
-      GstPluginFeature *gstfeature = gst_registry_find_feature(gst_registry_get_default(),
-        "ismd_mpeg4_viddec", GST_TYPE_ELEMENT_FACTORY);
-      if (gstfeature)
-      {
-        gst_plugin_feature_set_rank(gstfeature, GST_RANK_NONE);
-        gst_object_unref(gstfeature);
-      }      
-      */
 
       // ---------------------------------------------------
       if (m_item.IsVideo())
