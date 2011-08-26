@@ -303,6 +303,7 @@ gboolean CGSTPlayerBusCallback(GstBus *bus, GstMessage *msg, CGSTPlayer *gstplay
           g_free(description);
         }
       }
+#if defined(__APPLE__)
       else if (gst_structure_has_name(msg->structure, "have-ns-view"))
       {
         //NSView *nsview = NULL;
@@ -310,14 +311,7 @@ gboolean CGSTPlayerBusCallback(GstBus *bus, GstMessage *msg, CGSTPlayer *gstplay
         nsview = g_value_get_pointer(gst_structure_get_value(msg->structure, "nsview"));
         // passes a GstGLView object to the callback, the object is an NSView
       }
-      else if (gst_structure_has_name(msg->structure, "playbin2-stream-changed"))
-      {
-        g_print("GStreamer: Element %s\n", gst_structure_get_name(msg->structure));
-      }
-      else
-      {
-        g_print("GStreamer: Element %s\n", gst_structure_get_name(msg->structure));
-      }
+#endif
       break;
     case GST_MESSAGE_SEGMENT_START:
       g_print("GStreamer: Message SEGMENT_START\n");
