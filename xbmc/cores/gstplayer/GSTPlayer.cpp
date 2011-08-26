@@ -310,14 +310,6 @@ gboolean CGSTPlayerBusCallback(GstBus *bus, GstMessage *msg, CGSTPlayer *gstplay
         nsview = g_value_get_pointer(gst_structure_get_value(msg->structure, "nsview"));
         // passes a GstGLView object to the callback, the object is an NSView
       }
-      else if (gst_structure_has_name(msg->structure, "prepare-gdl-plane"))
-      {
-        gint gdl_plane;
-        gchar *rectangle = NULL;
-        g_object_get(gstvars->videosink, "rectangle", &rectangle, NULL);
-        g_object_get(gstvars->videosink, "gdl-plane", &gdl_plane, NULL);
-        g_free(rectangle);
-      }
       else if (gst_structure_has_name(msg->structure, "playbin2-stream-changed"))
       {
         g_print("GStreamer: Element %s\n", gst_structure_get_name(msg->structure));
@@ -513,14 +505,6 @@ static void udp_decoder_padadded(GstElement *element, GstPad *pad, CGSTPlayer *c
     GstElement *aqueue = gst_element_factory_make("queue", "aqueue");
     gst_bin_add(GST_BIN(abin), aqueue);
     GstElement *audiosink = gst_element_factory_make("ismd_audio_sink", NULL);
-    //  (-1): auto             - Autoselect PCM or Passthrough
-    //   (0): off              - Off
-    //   (1): pcm              - PCM
-    //   (2): pt               - Passthrough
-    //   (3): ac3              - Dolby Digital
-    //   (4): dts              - DTS
-    g_object_set(audiosink, "audio-output-hdmi", -1, NULL);
-    gst_bin_add(GST_BIN(abin), audiosink);
 
     if (g_strrstr(mime, "audio/x-raw-float"))
     {
@@ -636,23 +620,6 @@ CGSTPlayer::~CGSTPlayer()
 
 bool CGSTPlayer::Initialize(TiXmlElement* pConfig)
 {
-  m_textsink_name  = "subtitle_sink";
-#if defined(__APPLE__)
-  m_videosink_name = "osxvideosink";
-#else
-  m_videosink_name = "ismd_vidrend_bin";
-#endif
-
-  if (pConfig)
-  {
-    // New config specific to gstplayer
-    XMLUtils::GetString(pConfig, "textsink",  m_textsink_name);
-    XMLUtils::GetString(pConfig, "videosink", m_videosink_name);
-    XMLUtils::GetString(pConfig, "videosink", m_videosink_name);
-  }
-  CLog::Log(LOGNOTICE, "CGSTPlayer : textsink  (%s)", m_textsink_name.c_str());
-  CLog::Log(LOGNOTICE, "CGSTPlayer : videosink (%s)", m_videosink_name.c_str());
-
   return true;
 }
 
@@ -759,105 +726,18 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
       // but we need to assist with video and subtitles elements.
       m_gstvars->player = gst_element_factory_make( "playbin2", "gstplayer");
 
-#if 0
-      // disable the mpeg4 ISMD H/W decoder. FFMPEG plugins will need to be used instead.
-      // The hardware decoder produces very choppy video that appears as though its framerate is wrong
-      GstPluginFeature *hw_mpeg4_decoder = gst_registry_find_feature(gst_registry_get_default(),
-        "ismd_mpeg4_viddec", GST_TYPE_ELEMENT_FACTORY);
-      if (hw_mpeg4_decoder)
-      {
-        gst_plugin_feature_set_rank(hw_mpeg4_decoder, GST_RANK_PRIMARY-3);
-        gst_object_unref(hw_mpeg4_decoder);
-      }
-#endif
-#if 0
-      // Lower the priority of the mp3 hardware decoder by instead using Fluendo's plugin if it exists.
-      // The ISMD decoder produces very coarse timestamps, which manifests by sometimes showing 2-sec
-      // Jumps in time.
-
-      GstPluginFeature *sw_mp3_decoder = gst_registry_find_feature(gst_registry_get_default(),
-        "flump3dec", GST_TYPE_ELEMENT_FACTORY);
-      if (sw_mp3_decoder)
-      {
-        gst_plugin_feature_set_rank(sw_mp3_decoder, GST_RANK_PRIMARY+3);
-        gst_object_unref(sw_mp3_decoder);
-      }
-#endif
-
-      g_object_get(m_gstvars->player, "flags", &m_gstvars->flags, NULL);
-      m_gstvars->flags |= GST_PLAY_FLAG_NATIVE_VIDEO;
-      g_object_set(G_OBJECT(m_gstvars->player), "flags", m_gstvars->flags, NULL);
-
       // ---------------------------------------------------
       if (m_item.IsVideo())
       {
-        // create video sink
-        m_gstvars->videosink = gst_element_factory_make(m_videosink_name.c_str(), NULL);
-        if (m_gstvars->videosink)
-        {
-          gint gdl_plane;
-          g_object_get(m_gstvars->videosink, "gdl-plane", &gdl_plane, NULL);
-          if (gdl_plane != GDL_VIDEO_PLANE)
-            g_object_set(m_gstvars->videosink, "gdl-plane", GDL_VIDEO_PLANE, NULL);
-          g_object_set(m_gstvars->videosink, "rectangle", "0,0,0,0", NULL);
-        }
-        else
-        {
-          CLog::Log(LOGDEBUG, "CGSTPlayer::OpenFile: using default autovideosink");
-          m_gstvars->videosink = gst_element_factory_make("autovideosink", NULL);
-          if (m_gstvars->videosink)
-          {
-            #if defined(__APPLE__)
-            // When the NSView to be embedded is created an element #GstMessage with a
-            //  name of 'have-ns-view' will be created and posted on the bus.
-            //  The pointer to the NSView to embed will be in the 'nsview' field of that
-            //  message. The application MUST handle this message and embed the view
-            //  appropriately.
-            g_object_set(m_gstvars->videosink, "embed", true, NULL);
-            #endif
-          }
-        }
-        // turn off qos for video sink, breaks seeking in mkv containers
-        g_object_set(m_gstvars->videosink, "qos", FALSE, NULL);
-        g_object_set(m_gstvars->videosink, "async-handling", TRUE, NULL);
-        g_object_set(m_gstvars->videosink, "message-forward", TRUE, NULL);
-        g_object_set(m_gstvars->player, "video-sink", m_gstvars->videosink, NULL);
-
-        // ---------------------------------------------------
-        // create audio sink
-        GstElement *audiosink = gst_element_factory_make("ismd_audio_sink", NULL);
-        //  (-1): auto             - Autoselect PCM or Passthrough
-        //   (0): off              - Off
-        //   (1): pcm              - PCM
-        //   (2): pt               - Passthrough
-        //   (3): ac3              - Dolby Digital
-        //   (4): dts              - DTS
-        g_object_set(audiosink, "audio-output-hdmi", -1, NULL);
-        g_object_set(m_gstvars->player, "audio-sink", audiosink, NULL);
-
-        // ---------------------------------------------------
         // create subtitle sink
-        if (m_textsink_name.Equals("subtitle_sink"))
-        {
-          CLog::Log(LOGDEBUG, "CGSTPlayer::OpenFile: using subtitle_sink");
-          GstElement *subs_sink = gst_element_factory_make("appsink", "subtitle_sink");
-          g_object_set(subs_sink, "emit-signals", TRUE, NULL);
-          // timestamp offset in nanoseconds
-          g_object_set(subs_sink, "ts-offset", 0 * GST_SECOND, NULL);
-          g_signal_connect(subs_sink, "new-buffer", G_CALLBACK(CGSTPlayerSubsOnNewBuffer), this);
-          GstCaps *subcaps = gst_caps_from_string("text/plain;text/x-pango-markup");
-          g_object_set(subs_sink, "caps", subcaps, NULL);
-          gst_caps_unref(subcaps);
-          m_gstvars->textsink = subs_sink;
-        }
-        else
-        {
-          m_gstvars->textsink = gst_element_factory_make(m_textsink_name.c_str(), NULL);
-          if (!m_gstvars->textsink)
-          {
-            m_gstvars->textsink = gst_element_factory_make("fakesink", NULL);
-          }
-        }
+        m_gstvars->textsink = gst_element_factory_make("appsink", "subtitle_sink");
+        g_object_set(m_gstvars->textsink, "emit-signals", TRUE, NULL);
+        // timestamp offset in nanoseconds
+        g_object_set(m_gstvars->textsink, "ts-offset", 0 * GST_SECOND, NULL);
+        g_signal_connect(m_gstvars->textsink, "new-buffer", G_CALLBACK(CGSTPlayerSubsOnNewBuffer), this);
+        GstCaps *subcaps = gst_caps_from_string("text/plain;text/x-pango-markup");
+        g_object_set(m_gstvars->textsink, "caps", subcaps, NULL);
+        gst_caps_unref(subcaps);
         g_object_set(m_gstvars->player, "text-sink", m_gstvars->textsink, NULL);
       }
 
@@ -878,6 +758,38 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
         g_object_set(m_gstvars->player, "uri", url.c_str(), NULL);
         CLog::Log(LOGNOTICE, "CGSTPlayer: Opening: URL=%s", url.c_str());
       }
+
+#if 0
+      // disable the mpeg4 ISMD H/W decoder. FFMPEG plugins will need to be used instead.
+      // The hardware decoder produces very choppy video that appears as though its framerate is wrong
+      GstPluginFeature *hw_mpeg4_decoder = gst_registry_find_feature(gst_registry_get_default(),
+        "ismd_mpeg4_viddec", GST_TYPE_ELEMENT_FACTORY);
+      if (hw_mpeg4_decoder)
+      {
+        gst_plugin_feature_set_rank(hw_mpeg4_decoder, GST_RANK_PRIMARY-3);
+        gst_object_unref(hw_mpeg4_decoder);
+      }
+#endif=
+#if 0
+      // Lower the priority of the mp3 hardware decoder by instead using Fluendo's plugin if it exists.
+      // The ISMD decoder produces very coarse timestamps, which manifests by sometimes showing 2-sec
+      // Jumps in time.
+
+      GstPluginFeature *sw_mp3_decoder = gst_registry_find_feature(gst_registry_get_default(),
+        "flump3dec", GST_TYPE_ELEMENT_FACTORY);
+      if (sw_mp3_decoder)
+      {
+        gst_plugin_feature_set_rank(sw_mp3_decoder, GST_RANK_PRIMARY+3);
+        gst_object_unref(sw_mp3_decoder);
+      }
+#endif
+
+      // setup playbin2 playback flags, generally we accept the default flags and
+      // enable GST_PLAY_FLAG_NATIVE_VIDEO so we only accept formats that we can handle
+      // natively (without converting). 
+      g_object_get(m_gstvars->player, "flags", &m_gstvars->flags, NULL);
+      m_gstvars->flags |= GST_PLAY_FLAG_NATIVE_VIDEO;
+      g_object_set(G_OBJECT(m_gstvars->player), "flags", m_gstvars->flags, NULL);
     }
 
     // create a gts main loop
@@ -931,6 +843,10 @@ bool CGSTPlayer::CloseFile()
     m_gstvars->rate   = 1.0;
     m_gstvars->ready  = false;
     m_gstvars->inited = false;
+    // unref the videosink object that we got from async-done
+    // or we hold open the hw decoder/renderer.
+    g_object_unref(m_gstvars->videosink);
+    m_gstvars->videosink = NULL;
 
     gst_element_set_state(m_gstvars->player, GST_STATE_NULL);
     gst_element_get_state(m_gstvars->player, NULL, NULL, 100 * GST_MSECOND);
@@ -1754,6 +1670,24 @@ void CGSTPlayer::ProbeStreams()
     return;
   }
 
+  // find playbin2's video-sink and setup some handling
+  if (!m_gstvars->videosink)
+  {
+    g_object_get(m_gstvars->player, "video-sink", &m_gstvars->videosink, NULL);
+    // turn off qos for video sink, breaks seeking in mkv containers
+    g_object_set(m_gstvars->videosink, "qos", FALSE, NULL);
+    g_object_set(m_gstvars->videosink, "async-handling", TRUE, NULL);
+    g_object_set(m_gstvars->videosink, "message-forward", TRUE, NULL);
+    #if defined(__APPLE__)
+    // When the NSView to be embedded is created an element #GstMessage with a
+    //  name of 'have-ns-view' will be created and posted on the bus.
+    //  The pointer to the NSView to embed will be in the 'nsview' field of that
+    //  message. The application MUST handle this message and embed the view
+    //  appropriately.
+    g_object_set(m_gstvars->videosink, "embed", true, NULL);
+    #endif
+  }
+  // now let's see what we have in terms of audio, video and subtitles
   m_audio_index = 0;
   m_video_index = 0;
   m_subtitle_index = 0;

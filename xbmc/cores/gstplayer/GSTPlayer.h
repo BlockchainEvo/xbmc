@@ -184,7 +184,4 @@ private:
   int                     m_view_mode;
 
   INT_GST_VARS            *m_gstvars;
-  CStdString              m_textsink_name;
-  CStdString              m_audiosink_name;
-  CStdString              m_videosink_name;
 };
