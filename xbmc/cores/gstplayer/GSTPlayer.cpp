@@ -763,7 +763,7 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
         gst_plugin_feature_set_rank(hw_mpeg4_decoder, GST_RANK_PRIMARY-3);
         gst_object_unref(hw_mpeg4_decoder);
       }
-#endif=
+#endif
 #if 0
       // Lower the priority of the mp3 hardware decoder by instead using Fluendo's plugin if it exists.
       // The ISMD decoder produces very coarse timestamps, which manifests by sometimes showing 2-sec
@@ -1668,8 +1668,14 @@ void CGSTPlayer::ProbeStreams()
   if (!m_gstvars->videosink)
   {
     g_object_get(m_gstvars->player, "video-sink", &m_gstvars->videosink, NULL);
-    // turn off qos for video sink, breaks seeking in mkv containers
-    g_object_set(m_gstvars->videosink, "qos", FALSE, NULL);
+    //
+    gchar *elementname = gst_element_get_name(m_gstvars->videosink);
+    if (g_strrstr(elementname, "ismdgstvidrendbin"))
+    {
+      // turn off qos for video sink, breaks seeking in mkv containers
+      g_object_set(m_gstvars->videosink, "qos", FALSE, NULL);
+    }
+    g_free(elementname);
     g_object_set(m_gstvars->videosink, "async-handling", TRUE, NULL);
     g_object_set(m_gstvars->videosink, "message-forward", TRUE, NULL);
     #if defined(__APPLE__)
