@@ -1858,7 +1858,7 @@ void CGSTPlayer::GSTShutdown(void)
     m_gstvars->inited = false;
     // unref the videosink object that we got from async-done
     // or we hold open the hw decoder/renderer.
-  if (!m_gstvars->is_udp)
+    if (!m_gstvars->is_udp)
       g_object_unref(m_gstvars->videosink);
     m_gstvars->videosink = NULL;
 
@@ -1866,8 +1866,11 @@ void CGSTPlayer::GSTShutdown(void)
     gst_element_get_state(m_gstvars->player, NULL, NULL, 100 * GST_MSECOND);
     g_main_loop_quit(m_gstvars->loop);
     g_main_loop_unref(m_gstvars->loop);
+    m_gstvars->loop = NULL;
     gst_object_unref(m_gstvars->bus);
+    m_gstvars->bus = NULL;
     gst_object_unref(m_gstvars->player);
+    m_gstvars->player = NULL;
   }
 }
 
