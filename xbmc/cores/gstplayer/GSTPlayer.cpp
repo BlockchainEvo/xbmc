@@ -100,6 +100,13 @@ struct INT_GST_VARS
   int                     flags;
 
   bool                    is_udp;
+  GstElement              *udp_vbin;
+  GstElement              *udp_abin;
+  GstElement              *udp_source;
+  GstElement              *udp_queue;
+  GstElement              *udp_clkrecover;
+  GstElement              *udp_typefind;
+  GstElement              *udp_decoder;
   bool                    udp_video;
   bool                    udp_audio;
   bool                    udp_text;
@@ -194,6 +201,7 @@ gboolean CGSTPlayerBusCallback(GstBus *bus, GstMessage *msg, CGSTPlayer *gstplay
         g_error_free(error);
       }
       g_free(dbg_info);
+      gst_element_set_state(gstvars->player, GST_STATE_READY);
       g_main_loop_quit(gstvars->loop);
       break;
 
@@ -474,43 +482,47 @@ static void udp_decoder_padadded(GstElement *element, GstPad *pad, CGSTPlayer *c
   // get mime type
   const gchar *mime;
   mime = gst_structure_get_name(gst_caps_get_structure(caps, 0));
+  //g_print("Dynamic decoder pad added %s:%s created with mime-type %s\n",
+  //  GST_OBJECT_NAME(element), GST_OBJECT_NAME(pad), mime);
 
   GstPad *sinkpad = NULL;
   INT_GST_VARS *gstvars = ctx->GetGSTVars();
   if (g_strrstr(mime, "video"))
   {
-    GstElement *vbin = gst_bin_new ("vbin");
-    GstElement *vqueue  = gst_element_factory_make("queue", "vqueue");
+    gstvars->udp_vbin  = gst_bin_new("vbin");
+    GstElement *vqueue = gst_element_factory_make("queue", "vqueue");
     g_object_set(vqueue, "max-size-buffers", 3, NULL);
-    gst_bin_add(GST_BIN(vbin), vqueue);
+    gst_bin_add(GST_BIN(gstvars->udp_vbin), vqueue);
     gstvars->videosink = gst_element_factory_make("ismd_vidrend_bin",  "vsink");
     g_object_set(gstvars->videosink, "qos", FALSE, NULL);
-    gst_bin_add(GST_BIN(vbin), gstvars->videosink);
+    g_object_set(gstvars->videosink, "async-handling", TRUE, NULL);
+    g_object_set(gstvars->videosink, "message-forward", TRUE, NULL);
+    gst_bin_add(GST_BIN(gstvars->udp_vbin), gstvars->videosink);
     gst_element_link_many(vqueue, gstvars->videosink, NULL);
     //
     GstPad *vpad = gst_element_get_pad(vqueue, "sink");
-    gst_element_add_pad(vbin, gst_ghost_pad_new("sink", vpad));
+    gst_element_add_pad(gstvars->udp_vbin, gst_ghost_pad_new("sink", vpad));
     gst_object_unref(vpad);
     //
-    gst_bin_add(GST_BIN(gstvars->player), vbin);
-    gst_element_sync_state_with_parent(vbin);
+    gst_bin_add(GST_BIN(gstvars->player), gstvars->udp_vbin);
+    gst_element_sync_state_with_parent(gstvars->udp_vbin);
 
-    sinkpad = gst_element_get_static_pad(vbin, "sink");
+    sinkpad = gst_element_get_static_pad(gstvars->udp_vbin, "sink");
     gstvars->udp_video = true;
   }
 
   if (g_strrstr(mime, "audio"))
   {
-    GstElement *abin = gst_bin_new ("abin");
+    gstvars->udp_abin = gst_bin_new("abin");
     GstElement *aqueue = gst_element_factory_make("queue", "aqueue");
-    gst_bin_add(GST_BIN(abin), aqueue);
+    gst_bin_add(GST_BIN(gstvars->udp_abin), aqueue);
     GstElement *audiosink = gst_element_factory_make("ismd_audio_sink", NULL);
-    gst_bin_add(GST_BIN(abin), audiosink);
+    gst_bin_add(GST_BIN(gstvars->udp_abin), audiosink);
 
     if (g_strrstr(mime, "audio/x-raw-float"))
     {
       GstElement *aconvert = gst_element_factory_make("audioconvert", NULL);
-      gst_bin_add(GST_BIN(abin), aconvert);
+      gst_bin_add(GST_BIN(gstvars->udp_abin), aconvert);
       gst_element_link_many(aqueue, aconvert, audiosink, NULL);
       gstvars->acodec_name.clear();
       gstvars->acodec_name.push_back("");
@@ -518,11 +530,11 @@ static void udp_decoder_padadded(GstElement *element, GstPad *pad, CGSTPlayer *c
     else if (g_strrstr(mime, "ac3") || g_strrstr(mime, "x-dd"))
     {
       GstElement *decoder  = gst_element_factory_make("a52dec", NULL);
-      gst_bin_add(GST_BIN(abin), decoder);
+      gst_bin_add(GST_BIN(gstvars->udp_abin), decoder);
       GstElement *resample = gst_element_factory_make("audioresample", NULL);
-      gst_bin_add(GST_BIN(abin), resample);
+      gst_bin_add(GST_BIN(gstvars->udp_abin), resample);
       GstElement *convert  = gst_element_factory_make("audioconvert",  NULL);
-      gst_bin_add(GST_BIN(abin), convert);
+      gst_bin_add(GST_BIN(gstvars->udp_abin), convert);
       gst_element_link_many(aqueue, decoder, resample, convert, audiosink, NULL);
       
       gstvars->acodec_name.clear();
@@ -531,11 +543,11 @@ static void udp_decoder_padadded(GstElement *element, GstPad *pad, CGSTPlayer *c
     else if (g_strrstr(mime, "dts"))
     {
       GstElement *decoder  = gst_element_factory_make("dtsdec", NULL);
-      gst_bin_add(GST_BIN(abin), decoder);
+      gst_bin_add(GST_BIN(gstvars->udp_abin), decoder);
       GstElement *resample = gst_element_factory_make("audioresample", NULL);
-      gst_bin_add(GST_BIN(abin), resample);
+      gst_bin_add(GST_BIN(gstvars->udp_abin), resample);
       GstElement *convert  = gst_element_factory_make("audioconvert",  NULL);
-      gst_bin_add(GST_BIN(abin), convert);
+      gst_bin_add(GST_BIN(gstvars->udp_abin), convert);
       gst_element_link_many(aqueue, decoder, resample, convert, audiosink, NULL);
       gstvars->acodec_name.clear();
       gstvars->acodec_name.push_back("ac3");
@@ -548,13 +560,13 @@ static void udp_decoder_padadded(GstElement *element, GstPad *pad, CGSTPlayer *c
     }
     //
     GstPad *apad = gst_element_get_pad(aqueue, "sink");
-    gst_element_add_pad(abin, gst_ghost_pad_new("sink", apad));
+    gst_element_add_pad(gstvars->udp_abin, gst_ghost_pad_new("sink", apad));
     gst_object_unref(apad);
     //
-    gst_bin_add(GST_BIN(gstvars->player), abin);
-    gst_element_sync_state_with_parent(abin);
+    gst_bin_add(GST_BIN(gstvars->player), gstvars->udp_abin);
+    gst_element_sync_state_with_parent(gstvars->udp_abin);
 
-    sinkpad = gst_element_get_static_pad(abin, "sink");
+    sinkpad = gst_element_get_static_pad(gstvars->udp_abin, "sink");
     gstvars->udp_audio = true;
   }
 
@@ -581,6 +593,30 @@ static void udp_decoder_padadded(GstElement *element, GstPad *pad, CGSTPlayer *c
   gst_caps_unref(caps);
 }
 
+static void udp_decoder_padremoved(GstElement *element, GstPad *pad, CGSTPlayer *ctx)
+{
+  INT_GST_VARS *gstvars = ctx->GetGSTVars();
+
+  if (gstvars->udp_vbin)
+  {
+    GstPad *sinkpad = gst_element_get_static_pad(gstvars->udp_vbin, "sink");
+    gst_pad_unlink(pad, sinkpad);
+    gst_object_unref(gstvars->udp_vbin);
+    gstvars->udp_vbin = NULL;
+    return;
+  }
+
+  if (gstvars->udp_abin)
+  {
+    GstPad *sinkpad = gst_element_get_static_pad(gstvars->udp_abin, "sink");
+    gst_pad_unlink(pad, sinkpad);
+    gst_object_unref(gstvars->udp_abin);
+    gstvars->udp_abin = NULL;
+  }
+  
+  // text will take care of itself as gstvars->player owns it
+
+}
 // ****************************************************************
 // ****************************************************************
 CGSTPlayer::CGSTPlayer(IPlayerCallback &callback) 
@@ -603,6 +639,13 @@ CGSTPlayer::CGSTPlayer(IPlayerCallback &callback)
   m_gstvars->subtitle_end = 0;
   m_gstvars->flags = GST_PLAY_FLAG_VIDEO | GST_PLAY_FLAG_AUDIO | GST_PLAY_FLAG_TEXT;
   m_gstvars->is_udp = false;
+  m_gstvars->udp_vbin   = NULL;
+  m_gstvars->udp_abin   = NULL;
+  m_gstvars->udp_source = NULL;;
+  m_gstvars->udp_queue  = NULL;;
+  m_gstvars->udp_clkrecover = NULL;;
+  m_gstvars->udp_typefind   = NULL;;
+  m_gstvars->udp_decoder    = NULL;;
   m_gstvars->udp_video = false;
   m_gstvars->udp_audio = false;
   m_gstvars->udp_text  = false;
@@ -668,6 +711,11 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
     m_gstvars->udp_audio = false;
     m_gstvars->udp_text  = false;
 
+    // create a gst main loop
+    m_gstvars->loop = g_main_loop_new(NULL, FALSE);
+    if (m_gstvars->loop == NULL)
+      return false;
+
     if (m_item.m_strPath.Left(6).Equals("udp://"))
     {
       // udp playback in gstreamer requires constructing a pipeline
@@ -678,18 +726,20 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
       if (!gst_uri_is_valid(url.c_str()))
         return false;
 
-      m_gstvars->player       = gst_pipeline_new ("gstplayer-udp");
-      GstElement *source      = gst_element_factory_make("udpsrc", "source");
-      g_object_set(source, "uri", url.c_str(), NULL);
+      m_gstvars->player       = gst_pipeline_new("gstplayer-udp");
+      m_gstvars->udp_source   = gst_element_factory_make("udpsrc", "source");
+      g_object_set(m_gstvars->udp_source, "uri", url.c_str(), NULL);
       guint64 timeout = 4 * 1e6;
-      g_object_set(source, "timeout", timeout, NULL);
+      g_object_set(m_gstvars->udp_source, "timeout", timeout, NULL);
       //
-      GstElement *queue       = gst_element_factory_make("queue", "udpqueue");
-      g_object_set(queue, "max-size-time", 0, "max-size-buffers", 0, NULL);
+      m_gstvars->udp_queue    = gst_element_factory_make("queue", "udpqueue");
+      g_object_set(m_gstvars->udp_queue, "max-size-time", 0, "max-size-buffers", 0, NULL);
       //
-      GstElement *clkrecover  = gst_element_factory_make("ismd_clock_recovery_provider", NULL);
+      m_gstvars->udp_clkrecover = gst_element_factory_make("ismd_clock_recovery_provider", "clkrecover");
       //
-      GstElement *decoder     = gst_element_factory_make("decodebin2", "decoder");
+      m_gstvars->udp_typefind = gst_element_factory_make("typefind", "typefind");
+
+      m_gstvars->udp_decoder  = gst_element_factory_make("decodebin2", "decoder");
       GstCaps *decoder_caps   = gst_caps_from_string("video/x-decoded-ismd;video/x-raw-yuv"
         ";audio/mpeg;audio/x-mpeg;audio/x-aac"
         ";audio/x-raw-int;audio/x-private1-lpcm"
@@ -697,16 +747,26 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
         ";audio/x-ac3;audio/x-private1-ac3;audio/x-dd;audio/x-ddplus"
         ";audio/x-dts;audio/x-private1-dts"
         ";text/plain;text/x-pango-markup");
-      g_object_set(decoder, "caps", decoder_caps, NULL);
+      g_object_set(m_gstvars->udp_decoder, "caps", decoder_caps, NULL);
       gst_caps_unref(decoder_caps);
-      g_object_set(decoder, "max-size-bytes", 65536, NULL);
+      g_object_set(m_gstvars->udp_decoder, "max-size-bytes", 65536, NULL);
 
-      gst_bin_add_many(GST_BIN(m_gstvars->player), source, queue, clkrecover, decoder, NULL);
+      gst_bin_add_many(GST_BIN(m_gstvars->player),
+        m_gstvars->udp_source,
+        m_gstvars->udp_queue, 
+        m_gstvars->udp_clkrecover, 
+        m_gstvars->udp_typefind, 
+        m_gstvars->udp_decoder, NULL);
       // link together - note that we cannot link the decoder and
       // sink yet, because the decoder uses dynamic pads. For that,
       // we set a pad-added signal handler.
-      gst_element_link_many(source, queue, clkrecover, decoder, NULL);
-      g_signal_connect(decoder, "pad-added", G_CALLBACK(udp_decoder_padadded), this);
+      gst_element_link_many(m_gstvars->udp_source,
+        m_gstvars->udp_queue,
+        m_gstvars->udp_clkrecover,
+        m_gstvars->udp_typefind,
+        m_gstvars->udp_decoder, NULL);
+      g_signal_connect(m_gstvars->udp_decoder, "pad-added", G_CALLBACK(udp_decoder_padadded), this);
+      g_signal_connect(m_gstvars->udp_decoder, "pad-removed", G_CALLBACK(udp_decoder_padremoved), this);
 
       m_gstvars->is_udp = true;
       CLog::Log(LOGNOTICE, "CGSTPlayer: Opening: URL=%s", url.c_str());
@@ -773,7 +833,7 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
         gst_object_unref(hw_mpeg4_decoder);
       }
 #endif
-#if 0
+#if 1
       // Lower the priority of the mp3 hardware decoder by instead using Fluendo's plugin if it exists.
       // The ISMD decoder produces very coarse timestamps, which manifests by sometimes showing 2-sec
       // Jumps in time.
@@ -794,11 +854,6 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
       m_gstvars->flags |= GST_PLAY_FLAG_NATIVE_VIDEO;
       g_object_set(G_OBJECT(m_gstvars->player), "flags", m_gstvars->flags, NULL);
     }
-
-    // create a gts main loop
-    m_gstvars->loop = g_main_loop_new(NULL, FALSE);
-    if (m_gstvars->loop == NULL)
-      return false;
 
     // get the bus and setup the bus callback
     m_gstvars->bus = gst_pipeline_get_bus(GST_PIPELINE(m_gstvars->player));
@@ -1173,7 +1228,7 @@ void CGSTPlayer::SetSubtitleVisible(bool bVisible)
 int CGSTPlayer::AddSubtitle(const CStdString& strSubPath)
 {
   // not sure we can add a subtitle file on the fly.
-  g_print("CGSTPlayer::AddSubtitle(%s)\n", strSubPath.c_str());
+  //g_print("CGSTPlayer::AddSubtitle(%s)\n", strSubPath.c_str());
   return -1;
 }
 
@@ -1865,12 +1920,33 @@ void CGSTPlayer::GSTShutdown(void)
     gst_element_set_state(m_gstvars->player, GST_STATE_NULL);
     gst_element_get_state(m_gstvars->player, NULL, NULL, 100 * GST_MSECOND);
     g_main_loop_quit(m_gstvars->loop);
-    g_main_loop_unref(m_gstvars->loop);
-    m_gstvars->loop = NULL;
+
     gst_object_unref(m_gstvars->bus);
     m_gstvars->bus = NULL;
+
     gst_object_unref(m_gstvars->player);
     m_gstvars->player = NULL;
+
+    // Why do I have to manuallly delete these elements, they
+    // were gst_bin_add_many to player and should auto-delete.
+    if (m_gstvars->udp_source)
+      gst_object_unref(m_gstvars->udp_source);
+    m_gstvars->udp_source = NULL;
+    if (m_gstvars->udp_queue)
+      gst_object_unref(m_gstvars->udp_queue);
+    m_gstvars->udp_queue = NULL;
+    if (m_gstvars->udp_clkrecover)
+      gst_object_unref(m_gstvars->udp_clkrecover);
+    m_gstvars->udp_clkrecover = NULL;
+    if (m_gstvars->udp_typefind)
+      gst_object_unref(m_gstvars->udp_typefind);
+    m_gstvars->udp_typefind = NULL;
+    if (m_gstvars->udp_decoder)
+      gst_object_unref(m_gstvars->udp_decoder);
+    m_gstvars->udp_decoder = NULL;
+
+    g_main_loop_unref(m_gstvars->loop);
+    m_gstvars->loop = NULL;
   }
 }
 
