@@ -138,6 +138,7 @@ protected:
   virtual void  OnExit();
   virtual void  Process();
 
+  void          GSTShutdown(void);
   void          ProbeUDPStreams(void);
   bool          WaitForGSTPaused( int timeout_ms);
   bool          WaitForGSTPlaying(int timeout_ms);

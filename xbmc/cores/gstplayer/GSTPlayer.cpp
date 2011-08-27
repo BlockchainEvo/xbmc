@@ -690,7 +690,7 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
       GstElement *clkrecover  = gst_element_factory_make("ismd_clock_recovery_provider", NULL);
       //
       GstElement *decoder     = gst_element_factory_make("decodebin2", "decoder");
-      GstCaps *decoder_caps   = gst_caps_from_string("video/x-decoded-ismd"
+      GstCaps *decoder_caps   = gst_caps_from_string("video/x-decoded-ismd;video/x-raw-yuv"
         ";audio/mpeg;audio/x-mpeg;audio/x-aac"
         ";audio/x-raw-int;audio/x-private1-lpcm"
         ";audio/x-raw-float"
@@ -841,24 +841,7 @@ bool CGSTPlayer::CloseFile()
 {
   CLog::Log(LOGDEBUG, "CGSTPlayer::CloseFile");
 
-  if (m_gstvars->inited)
-  {
-    m_gstvars->rate   = 1.0;
-    m_gstvars->ready  = false;
-    m_gstvars->inited = false;
-    // unref the videosink object that we got from async-done
-    // or we hold open the hw decoder/renderer.
-  if (!m_gstvars->is_udp)
-      g_object_unref(m_gstvars->videosink);
-    m_gstvars->videosink = NULL;
-
-    gst_element_set_state(m_gstvars->player, GST_STATE_NULL);
-    gst_element_get_state(m_gstvars->player, NULL, NULL, 100 * GST_MSECOND);
-    g_main_loop_quit(m_gstvars->loop);
-    g_main_loop_unref(m_gstvars->loop);
-    gst_object_unref(m_gstvars->bus);
-    gst_object_unref(m_gstvars->player);
-  }
+  GSTShutdown();
 
   m_StopPlaying = true;
 
@@ -1582,6 +1565,9 @@ void CGSTPlayer::OnExit()
 {
   //CLog::Log(LOGNOTICE, "CGSTPlayer::OnExit()");
   usleep(100000);
+  
+  GSTShutdown();
+
   m_bStop = true;
   // if we didn't stop playing, advance to the next item in xbmc's playlist
   if(m_options.identify == false)
@@ -1863,7 +1849,29 @@ void CGSTPlayer::GetLastFrame()
   CGSTFileInfo::ExtractSnapshot();
 }
 
-void CGSTPlayer::ProbeUDPStreams()
+void CGSTPlayer::GSTShutdown(void)
+{
+  if (m_gstvars->inited)
+  {
+    m_gstvars->rate   = 1.0;
+    m_gstvars->ready  = false;
+    m_gstvars->inited = false;
+    // unref the videosink object that we got from async-done
+    // or we hold open the hw decoder/renderer.
+  if (!m_gstvars->is_udp)
+      g_object_unref(m_gstvars->videosink);
+    m_gstvars->videosink = NULL;
+
+    gst_element_set_state(m_gstvars->player, GST_STATE_NULL);
+    gst_element_get_state(m_gstvars->player, NULL, NULL, 100 * GST_MSECOND);
+    g_main_loop_quit(m_gstvars->loop);
+    g_main_loop_unref(m_gstvars->loop);
+    gst_object_unref(m_gstvars->bus);
+    gst_object_unref(m_gstvars->player);
+  }
+}
+
+void CGSTPlayer::ProbeUDPStreams(void)
 {
   bool done = false;
   gpointer elementdata = NULL;
