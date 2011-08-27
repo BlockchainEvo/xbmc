@@ -312,6 +312,12 @@ gboolean CGSTPlayerBusCallback(GstBus *bus, GstMessage *msg, CGSTPlayer *gstplay
         // passes a GstGLView object to the callback, the object is an NSView
       }
 #endif
+      else if (gst_structure_has_name(msg->structure, "GstUDPSrcTimeout"))
+      {
+        gst_element_set_state(gstvars->player, GST_STATE_NULL);
+        g_main_loop_quit(gstvars->loop);
+      }
+
       break;
     case GST_MESSAGE_SEGMENT_START:
       g_print("GStreamer: Message SEGMENT_START\n");
@@ -499,6 +505,7 @@ static void udp_decoder_padadded(GstElement *element, GstPad *pad, CGSTPlayer *c
     GstElement *aqueue = gst_element_factory_make("queue", "aqueue");
     gst_bin_add(GST_BIN(abin), aqueue);
     GstElement *audiosink = gst_element_factory_make("ismd_audio_sink", NULL);
+    gst_bin_add(GST_BIN(abin), audiosink);
 
     if (g_strrstr(mime, "audio/x-raw-float"))
     {
@@ -674,6 +681,8 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
       m_gstvars->player       = gst_pipeline_new ("gstplayer-udp");
       GstElement *source      = gst_element_factory_make("udpsrc", "source");
       g_object_set(source, "uri", url.c_str(), NULL);
+      guint64 timeout = 4 * 1e6;
+      g_object_set(source, "timeout", timeout, NULL);
       //
       GstElement *queue       = gst_element_factory_make("queue", "udpqueue");
       g_object_set(queue, "max-size-time", 0, "max-size-buffers", 0, NULL);
@@ -839,7 +848,8 @@ bool CGSTPlayer::CloseFile()
     m_gstvars->inited = false;
     // unref the videosink object that we got from async-done
     // or we hold open the hw decoder/renderer.
-    g_object_unref(m_gstvars->videosink);
+  if (!m_gstvars->is_udp)
+      g_object_unref(m_gstvars->videosink);
     m_gstvars->videosink = NULL;
 
     gst_element_set_state(m_gstvars->player, GST_STATE_NULL);
