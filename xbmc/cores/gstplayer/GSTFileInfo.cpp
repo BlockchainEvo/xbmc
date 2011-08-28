@@ -407,9 +407,6 @@ bool CGSTFileInfo::GSTExtractThumb(const CStdString &strPath, const CStdString &
   width  = g_advancedSettings.m_thumbSize;
   height = 0;
 
-  // may be called multiple times in an app, subsequent calls are no-op
-  gst_init(NULL, NULL);
-
   CEvent got_preroll;
   got_preroll.Reset();
   GstElement *pipeline         = gst_pipeline_new("thumb-extractor");
