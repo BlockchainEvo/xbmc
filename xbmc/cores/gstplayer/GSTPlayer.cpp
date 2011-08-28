@@ -72,13 +72,13 @@ typedef enum {
   ISMD_VPP_SCP_ANAMORPHIC
 } ISMD_SCALE_MODE;
 
+static GMainLoop *gstvars_loop = NULL;
 struct INT_GST_VARS
 {
   bool                    inited;
   bool                    ready;
   gdouble                 rate;
   GstBus                  *bus;
-  GMainLoop               *loop;
   GstElement              *player;
   GstElement              *textsink;
   GstElement              *videosink;
@@ -114,6 +114,11 @@ struct INT_GST_VARS
   CCriticalSection        csection;
 };
 
+static void really_unref(GstElement *obj)
+{
+  while(obj && GST_OBJECT_REFCOUNT(obj))
+    gst_object_unref(obj);
+}
 /*
 static void print_caps(GstCaps *caps)
 {
@@ -189,7 +194,7 @@ gboolean CGSTPlayerBusCallback(GstBus *bus, GstMessage *msg, CGSTPlayer *gstplay
   {
     case GST_MESSAGE_EOS:
       gst_element_set_state(gstvars->player, GST_STATE_READY);
-      g_main_loop_quit(gstvars->loop);
+      g_main_loop_quit(gstvars_loop);
       break;
 
     case GST_MESSAGE_ERROR:
@@ -202,7 +207,7 @@ gboolean CGSTPlayerBusCallback(GstBus *bus, GstMessage *msg, CGSTPlayer *gstplay
       }
       g_free(dbg_info);
       gst_element_set_state(gstvars->player, GST_STATE_READY);
-      g_main_loop_quit(gstvars->loop);
+      g_main_loop_quit(gstvars_loop);
       break;
 
     case GST_MESSAGE_WARNING:
@@ -323,7 +328,7 @@ gboolean CGSTPlayerBusCallback(GstBus *bus, GstMessage *msg, CGSTPlayer *gstplay
       else if (gst_structure_has_name(msg->structure, "GstUDPSrcTimeout"))
       {
         gst_element_set_state(gstvars->player, GST_STATE_NULL);
-        g_main_loop_quit(gstvars->loop);
+        g_main_loop_quit(gstvars_loop);
       }
 
       break;
@@ -599,19 +604,21 @@ static void udp_decoder_padremoved(GstElement *element, GstPad *pad, CGSTPlayer 
 
   if (gstvars->udp_vbin)
   {
+    g_print ("Unlinking udp_vbin...\n");
     GstPad *sinkpad = gst_element_get_static_pad(gstvars->udp_vbin, "sink");
-    gst_pad_unlink(pad, sinkpad);
-    gst_object_unref(gstvars->udp_vbin);
-    gstvars->udp_vbin = NULL;
-    return;
+    if (GST_PAD_IS_LINKED(sinkpad))
+    {
+      gst_pad_unlink(pad, sinkpad);
+      return;
+    }
   }
 
   if (gstvars->udp_abin)
   {
+    g_print ("Unlinking udp_abin...\n");
     GstPad *sinkpad = gst_element_get_static_pad(gstvars->udp_abin, "sink");
-    gst_pad_unlink(pad, sinkpad);
-    gst_object_unref(gstvars->udp_abin);
-    gstvars->udp_abin = NULL;
+    if (GST_PAD_IS_LINKED(sinkpad))
+      gst_pad_unlink(pad, sinkpad);
   }
   
   // text will take care of itself as gstvars->player owns it
@@ -632,7 +639,6 @@ CGSTPlayer::CGSTPlayer(IPlayerCallback &callback)
   m_gstvars->inited = false;
   m_gstvars->ready  = false;
   m_gstvars->rate   = 1.0;
-  m_gstvars->loop   = NULL;
   m_gstvars->player = NULL;
   m_gstvars->textsink  = NULL;
   m_gstvars->videosink = NULL;
@@ -712,8 +718,9 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
     m_gstvars->udp_text  = false;
 
     // create a gst main loop
-    m_gstvars->loop = g_main_loop_new(NULL, FALSE);
-    if (m_gstvars->loop == NULL)
+    if (gstvars_loop == NULL)
+      gstvars_loop = g_main_loop_new(NULL, FALSE);
+    if (gstvars_loop == NULL)
       return false;
 
     if (m_item.m_strPath.Left(6).Equals("udp://"))
@@ -767,7 +774,13 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
         m_gstvars->udp_decoder, NULL);
       g_signal_connect(m_gstvars->udp_decoder, "pad-added", G_CALLBACK(udp_decoder_padadded), this);
       g_signal_connect(m_gstvars->udp_decoder, "pad-removed", G_CALLBACK(udp_decoder_padremoved), this);
-
+      /*
+      g_print("udp_source GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->udp_source));
+      g_print("udp_queue  GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->udp_queue ));
+      g_print("udp_clkrecover GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->udp_clkrecover));
+      g_print("udp_typefind GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->udp_typefind));
+      g_print("udp_decoder GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->udp_decoder));
+      */
       m_gstvars->is_udp = true;
       CLog::Log(LOGNOTICE, "CGSTPlayer: Opening: URL=%s", url.c_str());
     }
@@ -1695,7 +1708,7 @@ void CGSTPlayer::Process()
         usleep(50*1000);
     }
     */
-    g_main_loop_run(m_gstvars->loop);
+    g_main_loop_run(gstvars_loop);
   }
   catch(...)
   {
@@ -1914,12 +1927,12 @@ void CGSTPlayer::GSTShutdown(void)
     // unref the videosink object that we got from async-done
     // or we hold open the hw decoder/renderer.
     if (!m_gstvars->is_udp)
-      g_object_unref(m_gstvars->videosink);
+      gst_object_unref(m_gstvars->videosink);
     m_gstvars->videosink = NULL;
 
     gst_element_set_state(m_gstvars->player, GST_STATE_NULL);
     gst_element_get_state(m_gstvars->player, NULL, NULL, 100 * GST_MSECOND);
-    g_main_loop_quit(m_gstvars->loop);
+    g_main_loop_quit(gstvars_loop);
 
     gst_object_unref(m_gstvars->bus);
     m_gstvars->bus = NULL;
@@ -1927,26 +1940,58 @@ void CGSTPlayer::GSTShutdown(void)
     gst_object_unref(m_gstvars->player);
     m_gstvars->player = NULL;
 
-    // Why do I have to manuallly delete these elements, they
-    // were gst_bin_add_many to player and should auto-delete.
-    if (m_gstvars->udp_source)
-      gst_object_unref(m_gstvars->udp_source);
-    m_gstvars->udp_source = NULL;
-    if (m_gstvars->udp_queue)
-      gst_object_unref(m_gstvars->udp_queue);
-    m_gstvars->udp_queue = NULL;
-    if (m_gstvars->udp_clkrecover)
-      gst_object_unref(m_gstvars->udp_clkrecover);
-    m_gstvars->udp_clkrecover = NULL;
-    if (m_gstvars->udp_typefind)
-      gst_object_unref(m_gstvars->udp_typefind);
-    m_gstvars->udp_typefind = NULL;
-    if (m_gstvars->udp_decoder)
-      gst_object_unref(m_gstvars->udp_decoder);
-    m_gstvars->udp_decoder = NULL;
+    if (m_gstvars->is_udp)
+    {
+      /*
+      if (m_gstvars->udp_vbin)
+        g_print("udp_vbin GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->udp_vbin));
+      if (m_gstvars->udp_abin)
+        g_print("udp_abin GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->udp_abin));
+      g_print("udp_source GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->udp_source));
+      g_print("udp_queue  GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->udp_queue ));
+      g_print("udp_clkrecover GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->udp_clkrecover));
+      g_print("udp_typefind GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->udp_typefind));
+      g_print("udp_decoder GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->udp_decoder));
+      */
+      // Why do I have to manually delete these elements, they
+      // were gst_bin_add_many to player and should auto-delete.
+      if (m_gstvars->udp_vbin)
+      {
+        really_unref(m_gstvars->udp_vbin);
+        //g_print("udp_vbin GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->udp_vbin));
+        m_gstvars->udp_vbin = NULL;
+      }
+      if (m_gstvars->udp_abin)
+      {
+        really_unref(m_gstvars->udp_abin);
+        //g_print("udp_abin GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->udp_abin));
+        m_gstvars->udp_abin = NULL;
+      }
+      if (m_gstvars->udp_source)
+        really_unref(m_gstvars->udp_source);
+      if (m_gstvars->udp_queue)
+        really_unref(m_gstvars->udp_queue);
+      if (m_gstvars->udp_clkrecover)
+        really_unref(m_gstvars->udp_clkrecover);
+      if (m_gstvars->udp_typefind)
+        really_unref(m_gstvars->udp_typefind);
+      if (m_gstvars->udp_decoder)
+        really_unref(m_gstvars->udp_decoder);
 
-    g_main_loop_unref(m_gstvars->loop);
-    m_gstvars->loop = NULL;
+      /*
+      g_print("udp_source GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->udp_source));
+      g_print("udp_queue  GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->udp_queue ));
+      g_print("udp_clkrecover GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->udp_clkrecover));
+      g_print("udp_typefind GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->udp_typefind));
+      g_print("udp_decoder GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->udp_decoder));
+      */
+
+      m_gstvars->udp_source = NULL;
+      m_gstvars->udp_queue = NULL;
+      m_gstvars->udp_clkrecover = NULL;
+      m_gstvars->udp_typefind = NULL;
+      m_gstvars->udp_decoder = NULL;
+    }
   }
 }
 
