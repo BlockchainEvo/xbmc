@@ -102,6 +102,7 @@ struct INT_GST_VARS
   bool                    is_udp;
   GstElement              *udp_vbin;
   GstElement              *udp_abin;
+  GstElement              *udp_volume;
   GstElement              *udp_source;
   GstElement              *udp_queue;
   GstElement              *udp_clkrecover;
@@ -523,6 +524,7 @@ static void udp_decoder_padadded(GstElement *element, GstPad *pad, CGSTPlayer *c
     gst_bin_add(GST_BIN(gstvars->udp_abin), aqueue);
     GstElement *audiosink = gst_element_factory_make("ismd_audio_sink", NULL);
     gst_bin_add(GST_BIN(gstvars->udp_abin), audiosink);
+    gstvars->udp_volume = audiosink;
 
     if (g_strrstr(mime, "audio/x-raw-float"))
     {
@@ -647,6 +649,7 @@ CGSTPlayer::CGSTPlayer(IPlayerCallback &callback)
   m_gstvars->is_udp = false;
   m_gstvars->udp_vbin   = NULL;
   m_gstvars->udp_abin   = NULL;
+  m_gstvars->udp_volume = NULL;
   m_gstvars->udp_source = NULL;;
   m_gstvars->udp_queue  = NULL;;
   m_gstvars->udp_clkrecover = NULL;;
@@ -1134,7 +1137,10 @@ void CGSTPlayer::SetVolume(long nVolume)
   if (m_gstvars->ready)
   {
     CSingleLock lock(m_gstvars->csection);
-    g_object_set(m_gstvars->player, "volume", volume, NULL);
+    if (m_gstvars->is_udp)
+      g_object_set(m_gstvars->udp_volume, "volume", volume, NULL);
+    else
+      g_object_set(m_gstvars->player, "volume", volume, NULL);
   }
 }
 
@@ -1966,6 +1972,7 @@ void CGSTPlayer::GSTShutdown(void)
         really_unref(m_gstvars->udp_abin);
         //g_print("udp_abin GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->udp_abin));
         m_gstvars->udp_abin = NULL;
+        m_gstvars->udp_volume = NULL;
       }
       if (m_gstvars->udp_source)
         really_unref(m_gstvars->udp_source);
