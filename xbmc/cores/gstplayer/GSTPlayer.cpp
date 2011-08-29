@@ -606,7 +606,7 @@ static void udp_decoder_padremoved(GstElement *element, GstPad *pad, CGSTPlayer 
 
   if (gstvars->udp_vbin)
   {
-    g_print ("Unlinking udp_vbin...\n");
+    //g_print ("Unlinking udp_vbin...\n");
     GstPad *sinkpad = gst_element_get_static_pad(gstvars->udp_vbin, "sink");
     if (GST_PAD_IS_LINKED(sinkpad))
     {
@@ -617,7 +617,7 @@ static void udp_decoder_padremoved(GstElement *element, GstPad *pad, CGSTPlayer 
 
   if (gstvars->udp_abin)
   {
-    g_print ("Unlinking udp_abin...\n");
+    //g_print ("Unlinking udp_abin...\n");
     GstPad *sinkpad = gst_element_get_static_pad(gstvars->udp_abin, "sink");
     if (GST_PAD_IS_LINKED(sinkpad))
       gst_pad_unlink(pad, sinkpad);
