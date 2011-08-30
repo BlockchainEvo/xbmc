@@ -570,6 +570,7 @@ CStdString CSysInfo::GetUserAgent()
   result += "; ";
   result += GetUnameVersion();
 #endif
+  result += "; SelecTV";
   result += "; http://www.xbmc.org)";
 
   return result;
