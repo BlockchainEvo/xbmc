@@ -849,7 +849,7 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
         gst_object_unref(hw_mpeg4_decoder);
       }
 #endif
-#if 0
+#if 1
       // Lower the priority of the mp3 hardware decoder by instead using Fluendo's plugin if it exists.
       // The ISMD decoder produces very coarse timestamps, which manifests by sometimes showing 2-sec
       // Jumps in time.
