@@ -27,6 +27,10 @@
 #include "pictures/DllImageLib.h"
 #include "DDSImage.h"
 #include "filesystem/SpecialProtocol.h"
+#include "jpeglib.h"
+#include "utils/fastmemcpy.h"
+#include "filesystem/File.h"
+#include <setjmp.h>
 #if defined(__APPLE__) && defined(__arm__)
 #include <ImageIO/ImageIO.h>
 #include "filesystem/File.h"
@@ -300,6 +304,13 @@ bool CBaseTexture::LoadFromFile(const CStdString& texturePath, unsigned int maxW
   CFRelease(cfdata);
   delete [] imageBuff;
 #else
+
+  if (URIUtils::GetExtension(texturePath).Equals(".jpg") || URIUtils::GetExtension(texturePath).Equals(".tbn"))
+  {
+    if (DecodeJPEG(texturePath))
+      return true;
+  }
+
   DllImageLib dll;
   if (!dll.Load())
     return false;
@@ -441,6 +452,9 @@ unsigned int CBaseTexture::GetPitch(unsigned int width) const
     return ((width + 3) / 4) * 16;
   case XB_FMT_A8:
     return width;
+  case XB_FMT_RGB8:
+    return width*3;
+    break;
   case XB_FMT_RGBA8:
   case XB_FMT_A8R8G8B8:
   default:
@@ -483,4 +497,95 @@ unsigned int CBaseTexture::GetBlockSize() const
 bool CBaseTexture::HasAlpha() const
 {
   return m_hasAlpha;
+}
+
+
+struct my_error_mgr {
+  struct jpeg_error_mgr pub;	/* "public" fields */
+  jmp_buf setjmp_buffer;	/* for return to caller */
+};
+
+typedef struct my_error_mgr * my_error_ptr;
+
+void my_error_exit (j_common_ptr cinfo)
+{
+  my_error_ptr myerr = (my_error_ptr) cinfo->err;
+  longjmp(myerr->setjmp_buffer, 1);
+}
+
+bool CBaseTexture::DecodeJPEG(const char* texturePath)
+{
+  struct jpeg_decompress_struct cinfo;
+  struct my_error_mgr jerr;
+  JSAMPROW row_pointer[1];
+  XFILE::CFile file;
+  uint8_t *imageBuff = NULL;
+  int64_t imageBuffSize = 0;
+
+  if (file.Open(texturePath, 0))
+  {
+    int64_t imgsize;
+    imgsize = file.GetLength();
+    imageBuff = new uint8_t[imgsize];
+    imageBuffSize = file.Read(imageBuff, imgsize);
+    file.Close();
+
+    if ((imgsize != imageBuffSize) || (imageBuffSize <= 0))
+    {
+      delete [] imageBuff;
+      return false;
+    }
+  }
+  else
+  {
+    return false;
+  }
+
+  cinfo.err = jpeg_std_error(&jerr.pub);
+  jerr.pub.error_exit = my_error_exit;
+  if (setjmp(jerr.setjmp_buffer))
+  {
+    jpeg_destroy_decompress(&cinfo);
+ //   CLog::Log(LOGERROR,"Error reading file: %s", texturePath);
+    delete [] imageBuff;
+    return false;
+  }
+
+  jpeg_create_decompress( &cinfo );
+  jpeg_mem_src(&cinfo, imageBuff, imageBuffSize);
+  jpeg_read_header( &cinfo, TRUE );
+
+  //need rgb output
+  cinfo.out_color_space=JCS_RGB;
+ 
+  jpeg_start_decompress( &cinfo );
+
+  //jpegs don't have alpha so we only need rgb. we can use an rbg texture
+  //directly. It won't be 32bit aligned, but we make up for it by not having
+  //to set dummy alpha values.
+  Allocate(cinfo.image_width, cinfo.image_height, XB_FMT_RGB8);
+  m_hasAlpha = false;
+
+  unsigned int dstPitch = GetPitch();
+  unsigned int srcPitch = cinfo.output_width * cinfo.num_components;
+  unsigned char *dst = m_pixels;
+  unsigned char *src = imageBuff;
+
+  //pad rows to the destination texture size
+  row_pointer[0] = (unsigned char *)malloc( dstPitch );
+  memset(row_pointer[0],'\0',sizeof(dstPitch));
+
+  /* read one scan line at a time */
+  while( cinfo.output_scanline < cinfo.image_height )
+    {
+      jpeg_read_scanlines( &cinfo, row_pointer, 1 );
+      fast_memcpy(dst, row_pointer[0], dstPitch);
+      dst+=dstPitch;
+    }
+
+jpeg_finish_decompress( &cinfo );
+jpeg_destroy_decompress( &cinfo );
+free( row_pointer[0] );
+
+return true;
 }
