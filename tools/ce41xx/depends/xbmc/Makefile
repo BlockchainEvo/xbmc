@@ -6,7 +6,7 @@ SOURCE=../../../../
 export CXXFLAGS+=-isystem$(SDKSTAGE)/include/linux_user
 CONFIGURE=./configure --prefix=$(PREFIX) --host=$(HOST) \
   --enable-external-python --enable-gles --disable-xrandr \
-  --disable-optical-drive --disable-dvdcss --enable-optimizations \
+  --disable-optical-drive --disable-dvdcss --disable-optimizations \
   --disable-ffmpeg --disable-debug --disable-non-free
 
 all: configure
