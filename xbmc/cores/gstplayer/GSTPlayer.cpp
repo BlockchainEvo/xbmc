@@ -712,6 +712,9 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
     m_subtitle_offset_ms = g_settings.m_currentVideoSettings.m_SubtitleDelay;
 
     m_gstvars->appsrc = NULL;
+    m_gstvars->volume = NULL;
+    m_gstvars->textsink  = NULL;
+    m_gstvars->videosink = NULL;
     m_gstvars->is_udp = false;
     m_gstvars->udp_video = false;
     m_gstvars->udp_audio = false;
@@ -814,6 +817,11 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
         gst_caps_unref(subcaps);
         g_object_set(m_gstvars->player, "text-sink", m_gstvars->textsink, NULL);
       }
+
+      // Expected delay needed for elements to spin up to PLAYING in nanoseconds
+      // Resolves 1st 0.5 seconds of audio getting cut off on music files.
+      guint64 delay = 800000000;
+      g_object_set(m_gstvars->player, "delay", delay, NULL);
 
       // set the player url and change state to paused (from null)
       if (m_gstvars->appsrc)
@@ -1090,14 +1098,12 @@ float CGSTPlayer::GetCachePercentage()
 
 void CGSTPlayer::SetAVDelay(float fValue)
 {
-  g_print("CGSTPlayer::SetAVDelay(%f)\n", fValue);
   // time offset in seconds of audio with respect to video
   m_audio_offset_ms = fValue * 1e3;
   if (m_gstvars->ready && !m_gstvars->is_udp)
   {
     // av-offset in nanoseconds
     gint64 offset_ns = m_audio_offset_ms * 1e6;
-    g_print("CGSTPlayer::SetAVDelay:offset_ns(%lld)\n", offset_ns);
     g_object_set(m_gstvars->player, "av-offset", offset_ns, NULL);
   }
 }
@@ -1109,14 +1115,12 @@ float CGSTPlayer::GetAVDelay()
 
 void CGSTPlayer::SetSubTitleDelay(float fValue)
 {
-  g_print("CGSTPlayer::SetSubTitleDelay(%f)\n", fValue);
   // time offset in seconds of subtitle with respect to playback
   m_subtitle_offset_ms = fValue * 1e3;
   if (m_gstvars->ready && m_gstvars->textsink)
   {
     // timestamp offset in nanoseconds
     gint64 offset_ns = m_subtitle_offset_ms * 1e6;
-    g_print("CGSTPlayer::SetSubTitleDelay:offset_ns(%lld)\n", offset_ns);
     g_object_set(m_gstvars->textsink, "ts-offset", -offset_ns, NULL);
   }
 }
@@ -1741,7 +1745,7 @@ void CGSTPlayer::ProbeStreams()
   }
 
   // find playbin2's video-sink and setup some handling
-  if (!m_gstvars->videosink)
+  if (m_item.IsVideo() && !m_gstvars->videosink)
   {
     g_object_get(m_gstvars->player, "video-sink", &m_gstvars->videosink, NULL);
     //
@@ -1761,6 +1765,7 @@ void CGSTPlayer::ProbeStreams()
     g_object_set(m_gstvars->videosink, "embed", true, NULL);
     #endif
   }
+  // grab a copy of player element ptr for setting volume.
   m_gstvars->volume = m_gstvars->player;
 
   // now let's see what we have in terms of audio, video and subtitles
@@ -1939,7 +1944,7 @@ void CGSTPlayer::GSTShutdown(void)
     m_gstvars->volume = NULL;
     // unref the videosink object that we got from async-done
     // or we hold open the hw decoder/renderer.
-    if (!m_gstvars->is_udp)
+    if (!m_gstvars->is_udp && m_gstvars->videosink)
       gst_object_unref(m_gstvars->videosink);
     m_gstvars->videosink = NULL;
 
