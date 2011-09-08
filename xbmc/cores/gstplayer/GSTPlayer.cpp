@@ -101,6 +101,7 @@ struct INT_GST_VARS
   int                     flags;
 
   bool                    is_udp;
+  bool                    is_rtmp;
   GstElement              *udp_vbin;
   GstElement              *udp_abin;
   GstElement              *udp_source;
@@ -644,6 +645,7 @@ CGSTPlayer::CGSTPlayer(IPlayerCallback &callback)
   m_gstvars->subtitle_end = 0;
   m_gstvars->flags = GST_PLAY_FLAG_VIDEO | GST_PLAY_FLAG_AUDIO | GST_PLAY_FLAG_TEXT;
   m_gstvars->is_udp = false;
+  m_gstvars->is_rtmp = false;
   m_gstvars->udp_vbin   = NULL;
   m_gstvars->udp_abin   = NULL;
   m_gstvars->udp_source = NULL;;
@@ -716,6 +718,7 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
     m_gstvars->textsink  = NULL;
     m_gstvars->videosink = NULL;
     m_gstvars->is_udp = false;
+    m_gstvars->is_rtmp = false;
     m_gstvars->udp_video = false;
     m_gstvars->udp_audio = false;
     m_gstvars->udp_text  = false;
@@ -744,12 +747,14 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
         g_object_set(m_gstvars->udp_source, "uri", url.c_str(), NULL);
         guint64 timeout = 4 * 1e6;
         g_object_set(m_gstvars->udp_source, "timeout", timeout, NULL);
+        m_gstvars->is_udp = true;
       }
       else if (m_item.m_strPath.Left(7).Equals("rtmp://"))
       {
         m_gstvars->player       = gst_pipeline_new("gstplayer-rtmp");
         m_gstvars->udp_source   = gst_element_factory_make("rtmpsrc", "source");
         g_object_set(m_gstvars->udp_source, "location", url.c_str(), NULL);
+        m_gstvars->is_rtmp = true;
       }
       //
       m_gstvars->udp_queue    = gst_element_factory_make("queue", "udpqueue");
@@ -794,7 +799,6 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
       g_print("udp_typefind GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->udp_typefind));
       g_print("udp_decoder GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->udp_decoder));
       */
-      m_gstvars->is_udp = true;
       CLog::Log(LOGNOTICE, "CGSTPlayer: Opening: URL=%s", url.c_str());
     }
     else
@@ -1110,7 +1114,7 @@ void CGSTPlayer::SetAVDelay(float fValue)
 {
   // time offset in seconds of audio with respect to video
   m_audio_offset_ms = fValue * 1e3;
-  if (m_gstvars->ready && !m_gstvars->is_udp)
+  if (m_gstvars->ready && !(m_gstvars->is_udp || m_gstvars->is_rtmp))
   {
     // av-offset in nanoseconds
     gint64 offset_ns = m_audio_offset_ms * 1e6;
@@ -1748,7 +1752,7 @@ do_exit:
 
 void CGSTPlayer::ProbeStreams()
 {
-  if (m_gstvars->is_udp)
+  if (m_gstvars->is_udp || m_gstvars->is_rtmp)
   {
     ProbeUDPStreams();
     return;
@@ -1954,7 +1958,7 @@ void CGSTPlayer::GSTShutdown(void)
     m_gstvars->volume = NULL;
     // unref the videosink object that we got from async-done
     // or we hold open the hw decoder/renderer.
-    if (!m_gstvars->is_udp && m_gstvars->videosink)
+    if (m_gstvars->videosink && !(m_gstvars->is_udp || m_gstvars->is_rtmp))
       gst_object_unref(m_gstvars->videosink);
     m_gstvars->videosink = NULL;
 
@@ -1968,7 +1972,7 @@ void CGSTPlayer::GSTShutdown(void)
     gst_object_unref(m_gstvars->player);
     m_gstvars->player = NULL;
 
-    if (m_gstvars->is_udp)
+    if (m_gstvars->is_udp || m_gstvars->is_rtmp)
     {
       /*
       if (m_gstvars->udp_vbin)
