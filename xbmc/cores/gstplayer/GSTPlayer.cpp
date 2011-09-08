@@ -726,7 +726,8 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
     if (gstvars_loop == NULL)
       return false;
 
-    if (m_item.m_strPath.Left(6).Equals("udp://"))
+    if (m_item.m_strPath.Left(6).Equals("udp://") || 
+        m_item.m_strPath.Left(7).Equals("rtmp://"))
     {
       // udp playback in gstreamer requires constructing a pipeline
       // with a udpsrc, queue, ismd_clock_recovery_provider and decodebin2.
@@ -736,11 +737,20 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
       if (!gst_uri_is_valid(url.c_str()))
         return false;
 
-      m_gstvars->player       = gst_pipeline_new("gstplayer-udp");
-      m_gstvars->udp_source   = gst_element_factory_make("udpsrc", "source");
-      g_object_set(m_gstvars->udp_source, "uri", url.c_str(), NULL);
-      guint64 timeout = 4 * 1e6;
-      g_object_set(m_gstvars->udp_source, "timeout", timeout, NULL);
+      if (m_item.m_strPath.Left(6).Equals("udp://"))
+      {
+        m_gstvars->player       = gst_pipeline_new("gstplayer-udp");
+        m_gstvars->udp_source   = gst_element_factory_make("udpsrc", "source");
+        g_object_set(m_gstvars->udp_source, "uri", url.c_str(), NULL);
+        guint64 timeout = 4 * 1e6;
+        g_object_set(m_gstvars->udp_source, "timeout", timeout, NULL);
+      }
+      else if (m_item.m_strPath.Left(7).Equals("rtmp://"))
+      {
+        m_gstvars->player       = gst_pipeline_new("gstplayer-rtmp");
+        m_gstvars->udp_source   = gst_element_factory_make("rtmpsrc", "source");
+        g_object_set(m_gstvars->udp_source, "location", url.c_str(), NULL);
+      }
       //
       m_gstvars->udp_queue    = gst_element_factory_make("queue", "udpqueue");
       g_object_set(m_gstvars->udp_queue, "max-size-time", 0, "max-size-buffers", 0, NULL);
