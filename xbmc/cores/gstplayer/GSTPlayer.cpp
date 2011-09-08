@@ -80,6 +80,7 @@ struct INT_GST_VARS
   gdouble                 rate;
   GstBus                  *bus;
   GstElement              *player;
+  GstElement              *volume;
   GstElement              *textsink;
   GstElement              *videosink;
 
@@ -102,7 +103,6 @@ struct INT_GST_VARS
   bool                    is_udp;
   GstElement              *udp_vbin;
   GstElement              *udp_abin;
-  GstElement              *udp_volume;
   GstElement              *udp_source;
   GstElement              *udp_queue;
   GstElement              *udp_clkrecover;
@@ -501,8 +501,6 @@ static void udp_decoder_padadded(GstElement *element, GstPad *pad, CGSTPlayer *c
     gst_bin_add(GST_BIN(gstvars->udp_vbin), vqueue);
     gstvars->videosink = gst_element_factory_make("ismd_vidrend_bin",  "vsink");
     g_object_set(gstvars->videosink, "qos", FALSE, NULL);
-    g_object_set(gstvars->videosink, "async-handling", TRUE, NULL);
-    g_object_set(gstvars->videosink, "message-forward", TRUE, NULL);
     gst_bin_add(GST_BIN(gstvars->udp_vbin), gstvars->videosink);
     gst_element_link_many(vqueue, gstvars->videosink, NULL);
     //
@@ -524,7 +522,7 @@ static void udp_decoder_padadded(GstElement *element, GstPad *pad, CGSTPlayer *c
     gst_bin_add(GST_BIN(gstvars->udp_abin), aqueue);
     GstElement *audiosink = gst_element_factory_make("ismd_audio_sink", NULL);
     gst_bin_add(GST_BIN(gstvars->udp_abin), audiosink);
-    gstvars->udp_volume = audiosink;
+    gstvars->volume = audiosink;
 
     if (g_strrstr(mime, "audio/x-raw-float"))
     {
@@ -581,8 +579,6 @@ static void udp_decoder_padadded(GstElement *element, GstPad *pad, CGSTPlayer *c
   {
     gstvars->textsink = gst_element_factory_make("appsink", "subtitle_sink");
     g_object_set(gstvars->textsink, "emit-signals", TRUE, NULL);
-    // timestamp offset in nanoseconds
-    g_object_set(gstvars->textsink, "ts-offset", 0 * GST_SECOND, NULL);
     g_signal_connect(gstvars->textsink, "new-buffer", G_CALLBACK(CGSTPlayerSubsOnNewBuffer), ctx);
     gst_bin_add(GST_BIN(gstvars->player), gstvars->textsink);
     //
@@ -642,6 +638,7 @@ CGSTPlayer::CGSTPlayer(IPlayerCallback &callback)
   m_gstvars->ready  = false;
   m_gstvars->rate   = 1.0;
   m_gstvars->player = NULL;
+  m_gstvars->volume = NULL;
   m_gstvars->textsink  = NULL;
   m_gstvars->videosink = NULL;
   m_gstvars->subtitle_end = 0;
@@ -649,7 +646,6 @@ CGSTPlayer::CGSTPlayer(IPlayerCallback &callback)
   m_gstvars->is_udp = false;
   m_gstvars->udp_vbin   = NULL;
   m_gstvars->udp_abin   = NULL;
-  m_gstvars->udp_volume = NULL;
   m_gstvars->udp_source = NULL;;
   m_gstvars->udp_queue  = NULL;;
   m_gstvars->udp_clkrecover = NULL;;
@@ -694,14 +690,13 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
 
     m_elapsed_ms  = 0;
     m_duration_ms = 0;
-    m_avdelay_ms  = 0;
-    m_subdelay_ms = 0;
 
     m_audio_index = 0;
     m_audio_count = 0;
     m_audio_bits  = 0;
     m_audio_channels = 0;
     m_audio_samplerate = 0;
+    m_audio_offset_ms = g_settings.m_currentVideoSettings.m_AudioDelay;
 
     m_video_index = 0;
     m_video_count = 0;
@@ -709,10 +704,12 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
     m_video_width = 0;
     m_video_height= 0;
 
+
     m_subtitle_index = 0;
     m_subtitle_count = 0;
     m_subtitle_show  = g_settings.m_currentVideoSettings.m_SubtitleOn;
     m_chapter_count  = 0;
+    m_subtitle_offset_ms = g_settings.m_currentVideoSettings.m_SubtitleDelay;
 
     m_gstvars->appsrc = NULL;
     m_gstvars->is_udp = false;
@@ -811,19 +808,12 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
         // create subtitle sink
         m_gstvars->textsink = gst_element_factory_make("appsink", "subtitle_sink");
         g_object_set(m_gstvars->textsink, "emit-signals", TRUE, NULL);
-        // timestamp offset in nanoseconds
-        g_object_set(m_gstvars->textsink, "ts-offset", 0 * GST_SECOND, NULL);
         g_signal_connect(m_gstvars->textsink, "new-buffer", G_CALLBACK(CGSTPlayerSubsOnNewBuffer), this);
         GstCaps *subcaps = gst_caps_from_string("text/plain;text/x-pango-markup");
         g_object_set(m_gstvars->textsink, "caps", subcaps, NULL);
         gst_caps_unref(subcaps);
         g_object_set(m_gstvars->player, "text-sink", m_gstvars->textsink, NULL);
       }
-
-      // video time offset (to audio)
-      // Specifies an offset in ns to apply on clock synchronization.
-      // "stream-time-offset"
-      // "av-offset
 
       // set the player url and change state to paused (from null)
       if (m_gstvars->appsrc)
@@ -1100,24 +1090,40 @@ float CGSTPlayer::GetCachePercentage()
 
 void CGSTPlayer::SetAVDelay(float fValue)
 {
-  // a/v time offset in ms
-  m_avdelay_ms = fValue;
+  g_print("CGSTPlayer::SetAVDelay(%f)\n", fValue);
+  // time offset in seconds of audio with respect to video
+  m_audio_offset_ms = fValue * 1e3;
+  if (m_gstvars->ready && !m_gstvars->is_udp)
+  {
+    // av-offset in nanoseconds
+    gint64 offset_ns = m_audio_offset_ms * 1e6;
+    g_print("CGSTPlayer::SetAVDelay:offset_ns(%lld)\n", offset_ns);
+    g_object_set(m_gstvars->player, "av-offset", offset_ns, NULL);
+  }
 }
 
 float CGSTPlayer::GetAVDelay()
 {
-  return m_avdelay_ms;
+  return m_audio_offset_ms;
 }
 
 void CGSTPlayer::SetSubTitleDelay(float fValue)
 {
-  // subtitle time offset in ms
-  m_subdelay_ms = fValue;
+  g_print("CGSTPlayer::SetSubTitleDelay(%f)\n", fValue);
+  // time offset in seconds of subtitle with respect to playback
+  m_subtitle_offset_ms = fValue * 1e3;
+  if (m_gstvars->ready && m_gstvars->textsink)
+  {
+    // timestamp offset in nanoseconds
+    gint64 offset_ns = m_subtitle_offset_ms * 1e6;
+    g_print("CGSTPlayer::SetSubTitleDelay:offset_ns(%lld)\n", offset_ns);
+    g_object_set(m_gstvars->textsink, "ts-offset", -offset_ns, NULL);
+  }
 }
 
 float CGSTPlayer::GetSubTitleDelay()
 {
-  return m_subdelay_ms;
+  return m_subtitle_offset_ms;
 }
 
 void CGSTPlayer::SetVolume(long nVolume)
@@ -1137,10 +1143,7 @@ void CGSTPlayer::SetVolume(long nVolume)
   if (m_gstvars->ready)
   {
     CSingleLock lock(m_gstvars->csection);
-    if (m_gstvars->is_udp)
-      g_object_set(m_gstvars->udp_volume, "volume", volume, NULL);
-    else
-      g_object_set(m_gstvars->player, "volume", volume, NULL);
+    g_object_set(m_gstvars->volume, "volume", volume, NULL);
   }
 }
 
@@ -1673,9 +1676,12 @@ void CGSTPlayer::Process()
       // starttime has units of seconds (SeekTime will start playback)
       if (m_options.starttime > 0)
         SeekTime(m_options.starttime * 1000);
+      SetVolume(g_settings.m_nVolumeLevel);
+      SetAVDelay(m_audio_offset_ms);
+      SetSubTitleDelay(m_subtitle_offset_ms);
+        
       // we are done initializing now, set the readyevent which will
       // drop CGUIDialogBusy, and release the hold in OpenFile
-      SetVolume(g_settings.m_nVolumeLevel);
       m_ready.Set();
 
       if (m_video_count || m_gstvars->udp_video)
@@ -1746,8 +1752,6 @@ void CGSTPlayer::ProbeStreams()
       g_object_set(m_gstvars->videosink, "qos", FALSE, NULL);
     }
     g_free(elementname);
-    g_object_set(m_gstvars->videosink, "async-handling", TRUE, NULL);
-    g_object_set(m_gstvars->videosink, "message-forward", TRUE, NULL);
     #if defined(__APPLE__)
     // When the NSView to be embedded is created an element #GstMessage with a
     //  name of 'have-ns-view' will be created and posted on the bus.
@@ -1757,6 +1761,8 @@ void CGSTPlayer::ProbeStreams()
     g_object_set(m_gstvars->videosink, "embed", true, NULL);
     #endif
   }
+  m_gstvars->volume = m_gstvars->player;
+
   // now let's see what we have in terms of audio, video and subtitles
   m_audio_index = 0;
   m_video_index = 0;
@@ -1930,6 +1936,7 @@ void CGSTPlayer::GSTShutdown(void)
     m_gstvars->rate   = 1.0;
     m_gstvars->ready  = false;
     m_gstvars->inited = false;
+    m_gstvars->volume = NULL;
     // unref the videosink object that we got from async-done
     // or we hold open the hw decoder/renderer.
     if (!m_gstvars->is_udp)
@@ -1972,7 +1979,6 @@ void CGSTPlayer::GSTShutdown(void)
         really_unref(m_gstvars->udp_abin);
         //g_print("udp_abin GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->udp_abin));
         m_gstvars->udp_abin = NULL;
-        m_gstvars->udp_volume = NULL;
       }
       if (m_gstvars->udp_source)
         really_unref(m_gstvars->udp_source);

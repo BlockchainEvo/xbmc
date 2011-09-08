@@ -156,20 +156,20 @@ private:
 
   int64_t                 m_elapsed_ms;
   int64_t                 m_duration_ms;
-  int64_t                 m_avdelay_ms;
-  int64_t                 m_subdelay_ms;
   int                     m_audio_index;
   int                     m_audio_count;
   CStdString              m_audio_info;
   uint32_t                m_audio_bits;
   uint32_t                m_audio_channels;
   uint32_t                m_audio_samplerate;
+  int64_t                 m_audio_offset_ms;
   int                     m_video_index;
   int                     m_video_count;
   CStdString              m_video_info;
   int                     m_subtitle_index;
   int                     m_subtitle_count;
   bool                    m_subtitle_show;
+  int64_t                 m_subtitle_offset_ms;
 
   int                     m_chapter_count;
   struct chapters
