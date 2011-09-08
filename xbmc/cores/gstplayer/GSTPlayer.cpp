@@ -102,16 +102,16 @@ struct INT_GST_VARS
 
   bool                    is_udp;
   bool                    is_rtmp;
-  GstElement              *udp_vbin;
-  GstElement              *udp_abin;
-  GstElement              *udp_source;
-  GstElement              *udp_queue;
-  GstElement              *udp_clkrecover;
-  GstElement              *udp_typefind;
-  GstElement              *udp_decoder;
-  bool                    udp_video;
-  bool                    udp_audio;
-  bool                    udp_text;
+  GstElement              *net_vbin;
+  GstElement              *net_abin;
+  GstElement              *net_source;
+  GstElement              *net_queue;
+  GstElement              *net_clkrecover;
+  GstElement              *net_typefind;
+  GstElement              *net_decoder;
+  bool                    net_video;
+  bool                    net_audio;
+  bool                    net_text;
 
   CCriticalSection        csection;
 };
@@ -412,7 +412,7 @@ static void CGSTPlayerSubsOnNewBuffer(GstElement *subs_sink, CGSTPlayer *ctx)
 }
 
 /*
-static void udp_demuxer_padadded(GstElement *element, GstPad *pad, CGSTPlayer *ctx)
+static void net_demuxer_padadded(GstElement *element, GstPad *pad, CGSTPlayer *ctx)
 {
   // do this only once per pad
   if (gst_pad_is_linked(pad) == TRUE)
@@ -477,7 +477,7 @@ static void udp_demuxer_padadded(GstElement *element, GstPad *pad, CGSTPlayer *c
 }
 */
 
-static void udp_decoder_padadded(GstElement *element, GstPad *pad, CGSTPlayer *ctx)
+static void net_decoder_padadded(GstElement *element, GstPad *pad, CGSTPlayer *ctx)
 {
   // do this only once per pad
   if (gst_pad_is_linked(pad) == TRUE)
@@ -496,39 +496,39 @@ static void udp_decoder_padadded(GstElement *element, GstPad *pad, CGSTPlayer *c
   INT_GST_VARS *gstvars = ctx->GetGSTVars();
   if (g_strrstr(mime, "video"))
   {
-    gstvars->udp_vbin  = gst_bin_new("vbin");
+    gstvars->net_vbin  = gst_bin_new("vbin");
     GstElement *vqueue = gst_element_factory_make("queue", "vqueue");
     g_object_set(vqueue, "max-size-buffers", 3, NULL);
-    gst_bin_add(GST_BIN(gstvars->udp_vbin), vqueue);
+    gst_bin_add(GST_BIN(gstvars->net_vbin), vqueue);
     gstvars->videosink = gst_element_factory_make("ismd_vidrend_bin",  "vsink");
     g_object_set(gstvars->videosink, "qos", FALSE, NULL);
-    gst_bin_add(GST_BIN(gstvars->udp_vbin), gstvars->videosink);
+    gst_bin_add(GST_BIN(gstvars->net_vbin), gstvars->videosink);
     gst_element_link_many(vqueue, gstvars->videosink, NULL);
     //
     GstPad *vpad = gst_element_get_pad(vqueue, "sink");
-    gst_element_add_pad(gstvars->udp_vbin, gst_ghost_pad_new("sink", vpad));
+    gst_element_add_pad(gstvars->net_vbin, gst_ghost_pad_new("sink", vpad));
     gst_object_unref(vpad);
     //
-    gst_bin_add(GST_BIN(gstvars->player), gstvars->udp_vbin);
-    gst_element_sync_state_with_parent(gstvars->udp_vbin);
+    gst_bin_add(GST_BIN(gstvars->player), gstvars->net_vbin);
+    gst_element_sync_state_with_parent(gstvars->net_vbin);
 
-    sinkpad = gst_element_get_static_pad(gstvars->udp_vbin, "sink");
-    gstvars->udp_video = true;
+    sinkpad = gst_element_get_static_pad(gstvars->net_vbin, "sink");
+    gstvars->net_video = true;
   }
 
   if (g_strrstr(mime, "audio"))
   {
-    gstvars->udp_abin = gst_bin_new("abin");
+    gstvars->net_abin = gst_bin_new("abin");
     GstElement *aqueue = gst_element_factory_make("queue", "aqueue");
-    gst_bin_add(GST_BIN(gstvars->udp_abin), aqueue);
+    gst_bin_add(GST_BIN(gstvars->net_abin), aqueue);
     GstElement *audiosink = gst_element_factory_make("ismd_audio_sink", NULL);
-    gst_bin_add(GST_BIN(gstvars->udp_abin), audiosink);
+    gst_bin_add(GST_BIN(gstvars->net_abin), audiosink);
     gstvars->volume = audiosink;
 
     if (g_strrstr(mime, "audio/x-raw-float"))
     {
       GstElement *aconvert = gst_element_factory_make("audioconvert", NULL);
-      gst_bin_add(GST_BIN(gstvars->udp_abin), aconvert);
+      gst_bin_add(GST_BIN(gstvars->net_abin), aconvert);
       gst_element_link_many(aqueue, aconvert, audiosink, NULL);
       gstvars->acodec_name.clear();
       gstvars->acodec_name.push_back("");
@@ -536,11 +536,11 @@ static void udp_decoder_padadded(GstElement *element, GstPad *pad, CGSTPlayer *c
     else if (g_strrstr(mime, "ac3") || g_strrstr(mime, "x-dd"))
     {
       GstElement *decoder  = gst_element_factory_make("a52dec", NULL);
-      gst_bin_add(GST_BIN(gstvars->udp_abin), decoder);
+      gst_bin_add(GST_BIN(gstvars->net_abin), decoder);
       GstElement *resample = gst_element_factory_make("audioresample", NULL);
-      gst_bin_add(GST_BIN(gstvars->udp_abin), resample);
+      gst_bin_add(GST_BIN(gstvars->net_abin), resample);
       GstElement *convert  = gst_element_factory_make("audioconvert",  NULL);
-      gst_bin_add(GST_BIN(gstvars->udp_abin), convert);
+      gst_bin_add(GST_BIN(gstvars->net_abin), convert);
       gst_element_link_many(aqueue, decoder, resample, convert, audiosink, NULL);
       
       gstvars->acodec_name.clear();
@@ -549,11 +549,11 @@ static void udp_decoder_padadded(GstElement *element, GstPad *pad, CGSTPlayer *c
     else if (g_strrstr(mime, "dts"))
     {
       GstElement *decoder  = gst_element_factory_make("dtsdec", NULL);
-      gst_bin_add(GST_BIN(gstvars->udp_abin), decoder);
+      gst_bin_add(GST_BIN(gstvars->net_abin), decoder);
       GstElement *resample = gst_element_factory_make("audioresample", NULL);
-      gst_bin_add(GST_BIN(gstvars->udp_abin), resample);
+      gst_bin_add(GST_BIN(gstvars->net_abin), resample);
       GstElement *convert  = gst_element_factory_make("audioconvert",  NULL);
-      gst_bin_add(GST_BIN(gstvars->udp_abin), convert);
+      gst_bin_add(GST_BIN(gstvars->net_abin), convert);
       gst_element_link_many(aqueue, decoder, resample, convert, audiosink, NULL);
       gstvars->acodec_name.clear();
       gstvars->acodec_name.push_back("ac3");
@@ -566,14 +566,14 @@ static void udp_decoder_padadded(GstElement *element, GstPad *pad, CGSTPlayer *c
     }
     //
     GstPad *apad = gst_element_get_pad(aqueue, "sink");
-    gst_element_add_pad(gstvars->udp_abin, gst_ghost_pad_new("sink", apad));
+    gst_element_add_pad(gstvars->net_abin, gst_ghost_pad_new("sink", apad));
     gst_object_unref(apad);
     //
-    gst_bin_add(GST_BIN(gstvars->player), gstvars->udp_abin);
-    gst_element_sync_state_with_parent(gstvars->udp_abin);
+    gst_bin_add(GST_BIN(gstvars->player), gstvars->net_abin);
+    gst_element_sync_state_with_parent(gstvars->net_abin);
 
-    sinkpad = gst_element_get_static_pad(gstvars->udp_abin, "sink");
-    gstvars->udp_audio = true;
+    sinkpad = gst_element_get_static_pad(gstvars->net_abin, "sink");
+    gstvars->net_audio = true;
   }
 
   if (g_strrstr(mime, "text"))
@@ -584,7 +584,7 @@ static void udp_decoder_padadded(GstElement *element, GstPad *pad, CGSTPlayer *c
     gst_bin_add(GST_BIN(gstvars->player), gstvars->textsink);
     //
     sinkpad = gst_element_get_static_pad(gstvars->textsink, "sink");
-    gstvars->udp_text = true;
+    gstvars->net_text = true;
   }
 
   if (sinkpad)
@@ -597,14 +597,14 @@ static void udp_decoder_padadded(GstElement *element, GstPad *pad, CGSTPlayer *c
   gst_caps_unref(caps);
 }
 
-static void udp_decoder_padremoved(GstElement *element, GstPad *pad, CGSTPlayer *ctx)
+static void net_decoder_padremoved(GstElement *element, GstPad *pad, CGSTPlayer *ctx)
 {
   INT_GST_VARS *gstvars = ctx->GetGSTVars();
 
-  if (gstvars->udp_vbin)
+  if (gstvars->net_vbin)
   {
-    //g_print ("Unlinking udp_vbin...\n");
-    GstPad *sinkpad = gst_element_get_static_pad(gstvars->udp_vbin, "sink");
+    //g_print ("Unlinking net_vbin...\n");
+    GstPad *sinkpad = gst_element_get_static_pad(gstvars->net_vbin, "sink");
     if (GST_PAD_IS_LINKED(sinkpad))
     {
       gst_pad_unlink(pad, sinkpad);
@@ -612,10 +612,10 @@ static void udp_decoder_padremoved(GstElement *element, GstPad *pad, CGSTPlayer 
     }
   }
 
-  if (gstvars->udp_abin)
+  if (gstvars->net_abin)
   {
-    //g_print ("Unlinking udp_abin...\n");
-    GstPad *sinkpad = gst_element_get_static_pad(gstvars->udp_abin, "sink");
+    //g_print ("Unlinking net_abin...\n");
+    GstPad *sinkpad = gst_element_get_static_pad(gstvars->net_abin, "sink");
     if (GST_PAD_IS_LINKED(sinkpad))
       gst_pad_unlink(pad, sinkpad);
   }
@@ -646,16 +646,16 @@ CGSTPlayer::CGSTPlayer(IPlayerCallback &callback)
   m_gstvars->flags = GST_PLAY_FLAG_VIDEO | GST_PLAY_FLAG_AUDIO | GST_PLAY_FLAG_TEXT;
   m_gstvars->is_udp = false;
   m_gstvars->is_rtmp = false;
-  m_gstvars->udp_vbin   = NULL;
-  m_gstvars->udp_abin   = NULL;
-  m_gstvars->udp_source = NULL;;
-  m_gstvars->udp_queue  = NULL;;
-  m_gstvars->udp_clkrecover = NULL;;
-  m_gstvars->udp_typefind   = NULL;;
-  m_gstvars->udp_decoder    = NULL;;
-  m_gstvars->udp_video = false;
-  m_gstvars->udp_audio = false;
-  m_gstvars->udp_text  = false;
+  m_gstvars->net_vbin   = NULL;
+  m_gstvars->net_abin   = NULL;
+  m_gstvars->net_source = NULL;;
+  m_gstvars->net_queue  = NULL;;
+  m_gstvars->net_clkrecover = NULL;;
+  m_gstvars->net_typefind   = NULL;;
+  m_gstvars->net_decoder    = NULL;;
+  m_gstvars->net_video = false;
+  m_gstvars->net_audio = false;
+  m_gstvars->net_text  = false;
 }
 
 CGSTPlayer::~CGSTPlayer()
@@ -719,9 +719,9 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
     m_gstvars->videosink = NULL;
     m_gstvars->is_udp = false;
     m_gstvars->is_rtmp = false;
-    m_gstvars->udp_video = false;
-    m_gstvars->udp_audio = false;
-    m_gstvars->udp_text  = false;
+    m_gstvars->net_video = false;
+    m_gstvars->net_audio = false;
+    m_gstvars->net_text  = false;
 
     // create a gst main loop
     if (gstvars_loop == NULL)
@@ -743,28 +743,28 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
       if (m_item.m_strPath.Left(6).Equals("udp://"))
       {
         m_gstvars->player       = gst_pipeline_new("gstplayer-udp");
-        m_gstvars->udp_source   = gst_element_factory_make("udpsrc", "source");
-        g_object_set(m_gstvars->udp_source, "uri", url.c_str(), NULL);
+        m_gstvars->net_source   = gst_element_factory_make("udpsrc", "source");
+        g_object_set(m_gstvars->net_source, "uri", url.c_str(), NULL);
         guint64 timeout = 4 * 1e6;
-        g_object_set(m_gstvars->udp_source, "timeout", timeout, NULL);
+        g_object_set(m_gstvars->net_source, "timeout", timeout, NULL);
         m_gstvars->is_udp = true;
       }
       else if (m_item.m_strPath.Left(7).Equals("rtmp://"))
       {
         m_gstvars->player       = gst_pipeline_new("gstplayer-rtmp");
-        m_gstvars->udp_source   = gst_element_factory_make("rtmpsrc", "source");
-        g_object_set(m_gstvars->udp_source, "location", url.c_str(), NULL);
+        m_gstvars->net_source   = gst_element_factory_make("rtmpsrc", "source");
+        g_object_set(m_gstvars->net_source, "location", url.c_str(), NULL);
         m_gstvars->is_rtmp = true;
       }
       //
-      m_gstvars->udp_queue    = gst_element_factory_make("queue", "udpqueue");
-      g_object_set(m_gstvars->udp_queue, "max-size-time", 0, "max-size-buffers", 0, NULL);
+      m_gstvars->net_queue    = gst_element_factory_make("queue", "udpqueue");
+      g_object_set(m_gstvars->net_queue, "max-size-time", 0, "max-size-buffers", 0, NULL);
       //
-      m_gstvars->udp_clkrecover = gst_element_factory_make("ismd_clock_recovery_provider", "clkrecover");
+      m_gstvars->net_clkrecover = gst_element_factory_make("ismd_clock_recovery_provider", "clkrecover");
       //
-      m_gstvars->udp_typefind = gst_element_factory_make("typefind", "typefind");
+      m_gstvars->net_typefind = gst_element_factory_make("typefind", "typefind");
 
-      m_gstvars->udp_decoder  = gst_element_factory_make("decodebin2", "decoder");
+      m_gstvars->net_decoder  = gst_element_factory_make("decodebin2", "decoder");
       GstCaps *decoder_caps   = gst_caps_from_string("video/x-decoded-ismd;video/x-raw-yuv"
         ";audio/mpeg;audio/x-mpeg;audio/x-aac"
         ";audio/x-raw-int;audio/x-private1-lpcm"
@@ -772,32 +772,32 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
         ";audio/x-ac3;audio/x-private1-ac3;audio/x-dd;audio/x-ddplus"
         ";audio/x-dts;audio/x-private1-dts"
         ";text/plain;text/x-pango-markup");
-      g_object_set(m_gstvars->udp_decoder, "caps", decoder_caps, NULL);
+      g_object_set(m_gstvars->net_decoder, "caps", decoder_caps, NULL);
       gst_caps_unref(decoder_caps);
-      g_object_set(m_gstvars->udp_decoder, "max-size-bytes", 65536, NULL);
+      g_object_set(m_gstvars->net_decoder, "max-size-bytes", 65536, NULL);
 
       gst_bin_add_many(GST_BIN(m_gstvars->player),
-        m_gstvars->udp_source,
-        m_gstvars->udp_queue, 
-        m_gstvars->udp_clkrecover, 
-        m_gstvars->udp_typefind, 
-        m_gstvars->udp_decoder, NULL);
+        m_gstvars->net_source,
+        m_gstvars->net_queue, 
+        m_gstvars->net_clkrecover, 
+        m_gstvars->net_typefind, 
+        m_gstvars->net_decoder, NULL);
       // link together - note that we cannot link the decoder and
       // sink yet, because the decoder uses dynamic pads. For that,
       // we set a pad-added signal handler.
-      gst_element_link_many(m_gstvars->udp_source,
-        m_gstvars->udp_queue,
-        m_gstvars->udp_clkrecover,
-        m_gstvars->udp_typefind,
-        m_gstvars->udp_decoder, NULL);
-      g_signal_connect(m_gstvars->udp_decoder, "pad-added", G_CALLBACK(udp_decoder_padadded), this);
-      g_signal_connect(m_gstvars->udp_decoder, "pad-removed", G_CALLBACK(udp_decoder_padremoved), this);
+      gst_element_link_many(m_gstvars->net_source,
+        m_gstvars->net_queue,
+        m_gstvars->net_clkrecover,
+        m_gstvars->net_typefind,
+        m_gstvars->net_decoder, NULL);
+      g_signal_connect(m_gstvars->net_decoder, "pad-added", G_CALLBACK(net_decoder_padadded), this);
+      g_signal_connect(m_gstvars->net_decoder, "pad-removed", G_CALLBACK(net_decoder_padremoved), this);
       /*
-      g_print("udp_source GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->udp_source));
-      g_print("udp_queue  GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->udp_queue ));
-      g_print("udp_clkrecover GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->udp_clkrecover));
-      g_print("udp_typefind GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->udp_typefind));
-      g_print("udp_decoder GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->udp_decoder));
+      g_print("net_source GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->net_source));
+      g_print("net_queue  GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->net_queue ));
+      g_print("net_clkrecover GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->net_clkrecover));
+      g_print("net_typefind GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->net_typefind));
+      g_print("net_decoder GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->net_decoder));
       */
       CLog::Log(LOGNOTICE, "CGSTPlayer: Opening: URL=%s", url.c_str());
     }
@@ -991,12 +991,12 @@ bool CGSTPlayer::IsPaused() const
 
 bool CGSTPlayer::HasVideo() const
 {
-  return (m_video_count > 0) || m_gstvars->udp_video;
+  return (m_video_count > 0) || m_gstvars->net_video;
 }
 
 bool CGSTPlayer::HasAudio() const
 {
-  return (m_audio_count > 0) || m_gstvars->udp_audio;
+  return (m_audio_count > 0) || m_gstvars->net_audio;
 }
 
 void CGSTPlayer::ToggleFrameDrop()
@@ -1702,7 +1702,7 @@ void CGSTPlayer::Process()
       // drop CGUIDialogBusy, and release the hold in OpenFile
       m_ready.Set();
 
-      if (m_video_count || m_gstvars->udp_video)
+      if (m_video_count || m_gstvars->net_video)
       {
         unsigned int flags = 0;
         flags |= CONF_FLAGS_FORMAT_BYPASS;
@@ -1975,54 +1975,54 @@ void CGSTPlayer::GSTShutdown(void)
     if (m_gstvars->is_udp || m_gstvars->is_rtmp)
     {
       /*
-      if (m_gstvars->udp_vbin)
-        g_print("udp_vbin GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->udp_vbin));
-      if (m_gstvars->udp_abin)
-        g_print("udp_abin GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->udp_abin));
-      g_print("udp_source GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->udp_source));
-      g_print("udp_queue  GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->udp_queue ));
-      g_print("udp_clkrecover GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->udp_clkrecover));
-      g_print("udp_typefind GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->udp_typefind));
-      g_print("udp_decoder GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->udp_decoder));
+      if (m_gstvars->net_vbin)
+        g_print("net_vbin GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->net_vbin));
+      if (m_gstvars->net_abin)
+        g_print("net_abin GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->net_abin));
+      g_print("net_source GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->net_source));
+      g_print("net_queue  GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->net_queue ));
+      g_print("net_clkrecover GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->net_clkrecover));
+      g_print("net_typefind GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->net_typefind));
+      g_print("net_decoder GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->net_decoder));
       */
       // Why do I have to manually delete these elements, they
       // were gst_bin_add_many to player and should auto-delete.
-      if (m_gstvars->udp_vbin)
+      if (m_gstvars->net_vbin)
       {
-        really_unref(m_gstvars->udp_vbin);
-        //g_print("udp_vbin GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->udp_vbin));
-        m_gstvars->udp_vbin = NULL;
+        really_unref(m_gstvars->net_vbin);
+        //g_print("net_vbin GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->net_vbin));
+        m_gstvars->net_vbin = NULL;
       }
-      if (m_gstvars->udp_abin)
+      if (m_gstvars->net_abin)
       {
-        really_unref(m_gstvars->udp_abin);
-        //g_print("udp_abin GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->udp_abin));
-        m_gstvars->udp_abin = NULL;
+        really_unref(m_gstvars->net_abin);
+        //g_print("net_abin GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->net_abin));
+        m_gstvars->net_abin = NULL;
       }
-      if (m_gstvars->udp_source)
-        really_unref(m_gstvars->udp_source);
-      if (m_gstvars->udp_queue)
-        really_unref(m_gstvars->udp_queue);
-      if (m_gstvars->udp_clkrecover)
-        really_unref(m_gstvars->udp_clkrecover);
-      if (m_gstvars->udp_typefind)
-        really_unref(m_gstvars->udp_typefind);
-      if (m_gstvars->udp_decoder)
-        really_unref(m_gstvars->udp_decoder);
+      if (m_gstvars->net_source)
+        really_unref(m_gstvars->net_source);
+      if (m_gstvars->net_queue)
+        really_unref(m_gstvars->net_queue);
+      if (m_gstvars->net_clkrecover)
+        really_unref(m_gstvars->net_clkrecover);
+      if (m_gstvars->net_typefind)
+        really_unref(m_gstvars->net_typefind);
+      if (m_gstvars->net_decoder)
+        really_unref(m_gstvars->net_decoder);
 
       /*
-      g_print("udp_source GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->udp_source));
-      g_print("udp_queue  GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->udp_queue ));
-      g_print("udp_clkrecover GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->udp_clkrecover));
-      g_print("udp_typefind GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->udp_typefind));
-      g_print("udp_decoder GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->udp_decoder));
+      g_print("net_source GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->net_source));
+      g_print("net_queue  GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->net_queue ));
+      g_print("net_clkrecover GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->net_clkrecover));
+      g_print("net_typefind GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->net_typefind));
+      g_print("net_decoder GST_OBJECT_REFCOUNT(%d)\n", GST_OBJECT_REFCOUNT(m_gstvars->net_decoder));
       */
 
-      m_gstvars->udp_source = NULL;
-      m_gstvars->udp_queue = NULL;
-      m_gstvars->udp_clkrecover = NULL;
-      m_gstvars->udp_typefind = NULL;
-      m_gstvars->udp_decoder = NULL;
+      m_gstvars->net_source = NULL;
+      m_gstvars->net_queue = NULL;
+      m_gstvars->net_clkrecover = NULL;
+      m_gstvars->net_typefind = NULL;
+      m_gstvars->net_decoder = NULL;
     }
   }
 }
