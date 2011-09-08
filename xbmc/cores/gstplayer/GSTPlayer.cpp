@@ -831,11 +831,13 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
         gst_caps_unref(subcaps);
         g_object_set(m_gstvars->player, "text-sink", m_gstvars->textsink, NULL);
       }
-
-      // Expected delay needed for elements to spin up to PLAYING in nanoseconds
-      // Resolves 1st 0.5 seconds of audio getting cut off on music files.
-      guint64 delay = 800000000;
-      g_object_set(m_gstvars->player, "delay", delay, NULL);
+      else
+      {
+        // Expected delay needed for elements to spin up to PLAYING in nanoseconds
+        // Resolves 1st 0.5 seconds of audio getting cut off on music files.
+        guint64 delay = 800000000;
+        g_object_set(m_gstvars->player, "delay", delay, NULL);
+      }
 
       // set the player url and change state to paused (from null)
       if (m_gstvars->appsrc)
