@@ -706,7 +706,6 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
     m_video_width = 0;
     m_video_height= 0;
 
-
     m_subtitle_index = 0;
     m_subtitle_count = 0;
     m_subtitle_show  = g_settings.m_currentVideoSettings.m_SubtitleOn;
@@ -1827,6 +1826,12 @@ void CGSTPlayer::ProbeStreams()
         GstStructure *structure = gst_caps_get_structure(caps, 0);
 
         gint video_fps_d, video_fps_n, video_width, video_height;
+        gint video_par_d, video_par_n;
+        if (!gst_structure_get_fraction(structure, "pixel-aspect-ratio", &video_par_n, &video_par_d))
+        {
+          video_par_n = 1;
+          video_par_d = 1;
+        }
         if (!gst_structure_get_fraction(structure, "framerate", &video_fps_n, &video_fps_d))
         {
           video_fps_n = 0;
@@ -1840,7 +1845,7 @@ void CGSTPlayer::ProbeStreams()
         if (i == m_video_index)
         {
           m_video_fps    = (float)video_fps_n/(float)video_fps_d;
-          m_video_width  = video_width;
+          m_video_width  = video_width * (float)video_par_n/(float)video_par_d;
           m_video_height = video_height;
         }
         gst_caps_unref(caps);
@@ -2081,6 +2086,12 @@ void CGSTPlayer::ProbeUDPStreams(void)
               GstStructure *structure = gst_caps_get_structure(caps, 0);
 
               gint video_fps_d, video_fps_n, video_width, video_height;
+              gint video_par_d, video_par_n;
+              if (!gst_structure_get_fraction(structure, "pixel-aspect-ratio", &video_par_n, &video_par_d))
+              {
+                video_par_n = 1;
+                video_par_d = 1;
+              }
               if (!gst_structure_get_fraction(structure, "framerate", &video_fps_n, &video_fps_d))
               {
                 video_fps_n = 0;
@@ -2092,7 +2103,7 @@ void CGSTPlayer::ProbeUDPStreams(void)
                 video_height = 0;
 
               m_video_fps    = (float)video_fps_n/(float)video_fps_d;
-              m_video_width  = video_width;
+              m_video_width  = video_width * (float)video_par_n/(float)video_par_d;
               m_video_height = video_height;
             }
             else if (g_str_has_prefix(str, "audio/"))
