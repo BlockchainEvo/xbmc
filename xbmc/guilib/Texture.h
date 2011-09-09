@@ -96,7 +96,7 @@ protected:
   unsigned int GetPitch(unsigned int width) const;
   unsigned int GetRows(unsigned int height) const;
   unsigned int GetBlockSize() const;
-  bool DecodeJPEG(const char *);
+  bool DecodeJPEG(const CStdString& texturePath, bool autoRotate, int minx, int miny);
 
   unsigned int m_imageWidth;
   unsigned int m_imageHeight;

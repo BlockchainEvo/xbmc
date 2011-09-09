@@ -28,8 +28,10 @@
 #include "DDSImage.h"
 #include "filesystem/SpecialProtocol.h"
 #include "jpeglib.h"
-#include "utils/fastmemcpy.h"
 #include "filesystem/File.h"
+#include "pictures/DllLibExif.h"
+#include "settings/GUISettings.h"
+#include "settings/Settings.h"
 #include <setjmp.h>
 #if defined(__APPLE__) && defined(__arm__)
 #include <ImageIO/ImageIO.h>
@@ -307,7 +309,7 @@ bool CBaseTexture::LoadFromFile(const CStdString& texturePath, unsigned int maxW
 
   if (URIUtils::GetExtension(texturePath).Equals(".jpg") || URIUtils::GetExtension(texturePath).Equals(".tbn"))
   {
-    if (DecodeJPEG(texturePath))
+    if (DecodeJPEG(texturePath, autoRotate, 0, 0))
       return true;
   }
 
@@ -513,7 +515,7 @@ void my_error_exit (j_common_ptr cinfo)
   longjmp(myerr->setjmp_buffer, 1);
 }
 
-bool CBaseTexture::DecodeJPEG(const char* texturePath)
+bool CBaseTexture::DecodeJPEG(const CStdString& texturePath, bool autoRotate, int minx=0, int miny=0)
 {
   struct jpeg_decompress_struct cinfo;
   struct my_error_mgr jerr;
@@ -522,7 +524,7 @@ bool CBaseTexture::DecodeJPEG(const char* texturePath)
   uint8_t *imageBuff = NULL;
   int64_t imageBuffSize = 0;
 
-  if (file.Open(texturePath, 0))
+  if (file.Open(texturePath.c_str(), 0))
   {
     int64_t imgsize;
     imgsize = file.GetLength();
@@ -561,22 +563,31 @@ bool CBaseTexture::DecodeJPEG(const char* texturePath)
   m_hasAlpha = false;
 
 /*  libjpeg can scale the image for us if it is too big. It must be in the format
-  num/denom, where (for our purposes) num is [1-8]/8.
+  num/denom, where (for our purposes) that is [1-8]/8.
   The only way to know how big a resulting image will be is to try a ratio and
-  test its resulting size. When we go too far, we stop and back up one.*/
-  cinfo.scale_num = 1;
-  cinfo.scale_denom=8;
-  unsigned int maxtexsize=g_Windowing.GetMaxTextureSize();
-  jpeg_calc_output_dimensions (&cinfo);
-  while (cinfo.scale_num <= 8
-         && cinfo.output_width < maxtexsize
-         && cinfo.output_height < maxtexsize)
+  test its resulting size.
+  If the res is greater than the one desired, use that one since there's no need
+  to decode a bigger one just to squish it back down. If the res is greater than
+  the gpu can hold, use the previous one.*/
+  if (minx <= 0 || miny <= 0)
   {
-    cinfo.scale_num++;
-    jpeg_calc_output_dimensions (&cinfo);
+    minx = g_settings.m_ResInfo[g_guiSettings.m_LookAndFeelResolution].iScreenWidth;
+    miny = g_settings.m_ResInfo[g_guiSettings.m_LookAndFeelResolution].iScreenHeight;
   }
-  cinfo.scale_num--;
-  jpeg_calc_output_dimensions (&cinfo);
+  cinfo.scale_denom=8;
+  unsigned int maxtexsize = g_Windowing.GetMaxTextureSize();
+  for (cinfo.scale_num = 1;cinfo.scale_num <=8 ;cinfo.scale_num++)
+  {
+    jpeg_calc_output_dimensions (&cinfo);
+    if ((cinfo.output_width * cinfo.output_height) > (maxtexsize * maxtexsize))
+    {
+      cinfo.scale_num--;
+      jpeg_calc_output_dimensions (&cinfo);
+      break;
+    }
+    if ( cinfo.output_width >= minx && cinfo.output_height >= miny)
+      break;
+  }
 
   unsigned int srcPitch = (((cinfo.output_width + 1)* 3 / 4) * 4); // bitmap row length is aligned to 4 bytes
   Allocate(srcPitch / cinfo.num_components, cinfo.output_height, XB_FMT_RGB8);
@@ -585,20 +596,29 @@ bool CBaseTexture::DecodeJPEG(const char* texturePath)
      return false;
 
   unsigned char *dst = m_pixels;
-  unsigned char *src = imageBuff;
-  row_pointer[0] = (unsigned char *)malloc( srcPitch );
-  memset(row_pointer[0],'\0',sizeof(srcPitch));
-
   jpeg_start_decompress( &cinfo );
   while( cinfo.output_scanline < cinfo.output_height )
     {
-      jpeg_read_scanlines( &cinfo, row_pointer, 1 );
-      fast_memcpy(dst, row_pointer[0], dstPitch);
+      jpeg_read_scanlines( &cinfo, &dst, 1 );
       dst+=dstPitch;
     }
 
-jpeg_finish_decompress( &cinfo );
-jpeg_destroy_decompress( &cinfo );
-free( row_pointer[0] );
+  jpeg_finish_decompress( &cinfo );
+  jpeg_destroy_decompress( &cinfo );
+
+  //Now that we've decoded the image, we need to check the EXIF tag for possible rotation
+  ExifInfo_t m_exifInfo;
+  IPTCInfo_t m_iptcInfo;
+  DllLibExif exifDll;
+  if (!exifDll.Load())
+    {
+      m_orientation=0;
+      return true;
+    }
+  exifDll.process_jpeg(texturePath.c_str(), &m_exifInfo, &m_iptcInfo);
+  if (autoRotate && m_exifInfo.Orientation)
+    m_orientation = m_exifInfo.Orientation - 1;
+
+
 return true;
 }
