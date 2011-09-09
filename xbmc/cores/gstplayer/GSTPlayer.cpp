@@ -605,7 +605,7 @@ static void net_decoder_padremoved(GstElement *element, GstPad *pad, CGSTPlayer 
   {
     //g_print ("Unlinking net_vbin...\n");
     GstPad *sinkpad = gst_element_get_static_pad(gstvars->net_vbin, "sink");
-    if (GST_PAD_IS_LINKED(sinkpad))
+    if (sinkpad && GST_PAD_IS_LINKED(sinkpad))
     {
       gst_pad_unlink(pad, sinkpad);
       return;
@@ -616,7 +616,7 @@ static void net_decoder_padremoved(GstElement *element, GstPad *pad, CGSTPlayer 
   {
     //g_print ("Unlinking net_abin...\n");
     GstPad *sinkpad = gst_element_get_static_pad(gstvars->net_abin, "sink");
-    if (GST_PAD_IS_LINKED(sinkpad))
+    if (sinkpad && GST_PAD_IS_LINKED(sinkpad))
       gst_pad_unlink(pad, sinkpad);
   }
   
@@ -719,6 +719,13 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
     m_gstvars->videosink = NULL;
     m_gstvars->is_udp = false;
     m_gstvars->is_rtmp = false;
+    m_gstvars->net_vbin   = NULL;
+    m_gstvars->net_abin   = NULL;
+    m_gstvars->net_source = NULL;;
+    m_gstvars->net_queue  = NULL;;
+    m_gstvars->net_clkrecover = NULL;;
+    m_gstvars->net_typefind   = NULL;;
+    m_gstvars->net_decoder    = NULL;;
     m_gstvars->net_video = false;
     m_gstvars->net_audio = false;
     m_gstvars->net_text  = false;
@@ -1309,6 +1316,11 @@ void CGSTPlayer::SetVideoRect(const CRect &SrcRect, const CRect &DestRect)
   if (m_gstvars->videosink)
   {
     // setup the destination rectangle
+    CStdString src_rectangle;
+    src_rectangle.Format("%i,%i,%i,%i",
+      (int)SrcRect.x1, (int)SrcRect.y1,
+      (int)SrcRect.Width(), (int)SrcRect.Height());
+
     CStdString rectangle;
     rectangle.Format("%i,%i,%i,%i",
       (int)m_dst_rect.x1, (int)m_dst_rect.y1,
@@ -1334,6 +1346,8 @@ void CGSTPlayer::SetVideoRect(const CRect &SrcRect, const CRect &DestRect)
     }
     // update ismd_vidrend_bin with new settings.
     g_object_set(m_gstvars->videosink, "scale-mode", scale_mode, "rectangle",  rectangle.c_str(), NULL);
+
+    g_print("scale-mode(%d), src_rect(%s), dst_rect(%s)\n", scale_mode, src_rectangle.c_str(), rectangle.c_str());
   }
 }
 
@@ -2031,6 +2045,9 @@ void CGSTPlayer::GSTShutdown(void)
 
 void CGSTPlayer::ProbeUDPStreams(void)
 {
+  if (!m_gstvars->videosink)
+    return;
+
   bool done = false;
   gpointer elementdata = NULL;
   GstElement *child = GST_ELEMENT_PARENT(m_gstvars->videosink);
