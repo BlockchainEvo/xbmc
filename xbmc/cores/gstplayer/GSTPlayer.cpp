@@ -1314,12 +1314,6 @@ void CGSTPlayer::SetVideoRect(const CRect &SrcRect, const CRect &DestRect)
 
   if (m_gstvars->videosink)
   {
-    // setup the destination rectangle
-    CStdString src_rectangle;
-    src_rectangle.Format("%i,%i,%i,%i",
-      (int)SrcRect.x1, (int)SrcRect.y1,
-      (int)SrcRect.Width(), (int)SrcRect.Height());
-
     CStdString rectangle;
     rectangle.Format("%i,%i,%i,%i",
       (int)m_dst_rect.x1, (int)m_dst_rect.y1,
@@ -1345,8 +1339,6 @@ void CGSTPlayer::SetVideoRect(const CRect &SrcRect, const CRect &DestRect)
     }
     // update ismd_vidrend_bin with new settings.
     g_object_set(m_gstvars->videosink, "scale-mode", scale_mode, "rectangle",  rectangle.c_str(), NULL);
-
-    g_print("scale-mode(%d), src_rect(%s), dst_rect(%s)\n", scale_mode, src_rectangle.c_str(), rectangle.c_str());
   }
 }
 
