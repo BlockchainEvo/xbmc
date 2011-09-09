@@ -1,0 +1,255 @@
+--- gst-fluendo-ismd-r2152/src/ismd_gst_audio_sink.c	2011-07-20 11:32:11.000000000 -0400
++++ gst-fluendo-ismd-mods/src/ismd_gst_audio_sink.c	2011-09-09 16:14:42.920014625 -0400
+@@ -145,7 +145,8 @@ enum
+   PROP_AUDIO_SYNC,
+   PROP_AUDIO_INPUT_GAIN,
+   PROP_AUDIO_VOLUME,
+-  PROP_AUDIO_MUTE
++  PROP_AUDIO_MUTE,
++  PROP_AUDIO_TS_OFFSET
+ };
+ 
+ enum
+@@ -170,6 +171,7 @@ enum
+ #define DEFAULT_ISMD_AUDIO_SINK_INPUT_GAIN  0.0
+ #define DEFAULT_ISMD_AUDIO_SINK_VOLUME      1.0
+ #define DEFAULT_ISMD_AUDIO_SINK_MUTE        FALSE
++#define DEFAULT_ISMD_AUDIO_SINK_TS_OFFSET   0  /* in nanoseconds */
+ 
+ #define MIN_INPUT_GAIN                      ((gfloat) ISMD_AUDIO_GAIN_MUTE / 10)
+ #define MAX_INPUT_GAIN                      ((gfloat) ISMD_AUDIO_GAIN_MAX / 10)
+@@ -1977,6 +1979,9 @@ ismd_gst_audio_sink_get_property (GObjec
+       g_value_set_boolean (value, sink->mute);
+       GST_OBJECT_UNLOCK (sink);
+       break;
++    case PROP_AUDIO_TS_OFFSET:
++      g_value_set_int64 (value, sink->ts_offset);
++      break;
+     default:
+       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+       break;
+@@ -2061,6 +2066,9 @@ ismd_gst_audio_sink_set_property (GObjec
+       GST_OBJECT_UNLOCK (sink);
+       update_gain_volume_and_mute (sink);
+       break;
++    case PROP_AUDIO_TS_OFFSET:
++      sink->ts_offset = g_value_get_int64 (value);
++      break;
+     default:
+       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+       break;
+@@ -2318,6 +2326,7 @@ ismd_gst_audio_sink_convert (ISmdGstElem
+   if (sink->format == GST_FORMAT_TIME) {
+     GstClockTime pts, duration;
+ 
++    GST_BUFFER_TIMESTAMP (buf) += sink->ts_offset;
+     gint64 clip_start, clip_stop;
+     gboolean in_seg;
+     pts = GST_BUFFER_TIMESTAMP (buf);
+@@ -2498,6 +2507,13 @@ ismd_gst_audio_sink_class_init (ISmdGstA
+           DEFAULT_ISMD_AUDIO_SINK_MUTE,
+           G_PARAM_READWRITE | GST_PARAM_CONTROLLABLE));
+ 
++  g_object_class_install_property (oclass,
++      PROP_AUDIO_TS_OFFSET,
++      g_param_spec_int64 ("ts-offset", "TS Offset",
++          "Timestamp offset in nanoseconds", G_MININT64, G_MAXINT64,
++          DEFAULT_ISMD_AUDIO_SINK_TS_OFFSET, G_PARAM_READWRITE));
++
++
+   oclass->dispose = GST_DEBUG_FUNCPTR (ismd_gst_audio_sink_dispose);
+   oclass->finalize = GST_DEBUG_FUNCPTR (ismd_gst_audio_sink_finalize);
+   eclass->change_state = GST_DEBUG_FUNCPTR (ismd_gst_audio_sink_change_state);
+@@ -2544,6 +2560,7 @@ ismd_gst_audio_sink_init (ISmdGstAudioSi
+   sink->current_volume = sink->volume;
+   sink->mute = DEFAULT_ISMD_AUDIO_SINK_MUTE;
+   sink->current_mute = sink->mute;
++  sink->ts_offset = DEFAULT_ISMD_AUDIO_SINK_TS_OFFSET;
+ 
+   sink->hdmi.ismd_port = GEN3_HW_OUTPUT_HDMI;
+   sink->hdmi.out_mode = DEFAULT_ISMD_AUDIO_SINK_HDMI;
+Binary files gst-fluendo-ismd-r2152/src/._ismd_gst_audio_sink.h and gst-fluendo-ismd-mods/src/._ismd_gst_audio_sink.h differ
+diff -rupN gst-fluendo-ismd-r2152/src/ismd_gst_audio_sink.h gst-fluendo-ismd-mods/src/ismd_gst_audio_sink.h
+--- gst-fluendo-ismd-r2152/src/ismd_gst_audio_sink.h	2011-07-20 11:32:11.000000000 -0400
++++ gst-fluendo-ismd-mods/src/ismd_gst_audio_sink.h	2011-09-09 16:14:42.920014625 -0400
+@@ -152,6 +152,7 @@ typedef struct _ISmdGstAudioSink
+   output_device i2s0;
+   output_device i2s1;
+   gint out_delay;
++  gint64 ts_offset;
+ 
+   ISmdGstClock *provided_clock;
+ 
+Binary files gst-fluendo-ismd-r2152/src/._ismd_gst_vidpproc.c and gst-fluendo-ismd-mods/src/._ismd_gst_vidpproc.c differ
+diff -rupN gst-fluendo-ismd-r2152/src/ismd_gst_vidpproc.c gst-fluendo-ismd-mods/src/ismd_gst_vidpproc.c
+--- gst-fluendo-ismd-r2152/src/ismd_gst_vidpproc.c	2011-07-18 11:12:42.000000000 -0400
++++ gst-fluendo-ismd-mods/src/ismd_gst_vidpproc.c	2011-09-09 16:14:42.920014625 -0400
+@@ -150,12 +150,14 @@ enum
+   PROP_VIDPPROC_UNKNOWN,
+   PROP_VIDPPROC_SCALE_MODE,
+   PROP_VIDPPROC_PAN_AND_SCAN,
+-  PROP_VIDPPROC_RECTANGLE
++  PROP_VIDPPROC_RECTANGLE,
++  PROP_VIDPPROC_TS_OFFSET
+ };
+ 
+ #define DEFAULT_ISMD_VIDPPROC_SCALE_MODE      ZOOM_TO_FIT
+ #define DEFAULT_ISMD_VIDPPROC_RECTANGLE       "0,0,0,0"
+ #define DEFAULT_ISMD_VIDPPROC_PAN_AND_SCAN    FALSE
++#define DEFAULT_ISMD_VIDPPROC_TS_OFFSET       0  /* in nanoseconds */
+ 
+ enum
+ {
+@@ -744,7 +746,7 @@ vidpproc_yv12_to_nv12 (ISmdGstVidpproc *
+ 
+   out_buffer = GST_BUFFER_CAST (ismd_gst_buf);
+ 
+-  GST_BUFFER_TIMESTAMP (out_buffer) = GST_BUFFER_TIMESTAMP (in_buffer);
++  GST_BUFFER_TIMESTAMP (out_buffer) = GST_BUFFER_TIMESTAMP (in_buffer) + vidpproc->ts_offset;
+   GST_BUFFER_DURATION (out_buffer) = GST_BUFFER_DURATION (in_buffer);
+   GST_BUFFER_FLAGS (out_buffer) = GST_BUFFER_FLAGS (in_buffer);
+   out_data_y = GST_BUFFER_DATA(out_buffer);
+@@ -795,6 +797,7 @@ ismd_gst_vidpproc_convert (ISmdGstElemen
+     goto beach;
+   }
+ 
++  GST_BUFFER_TIMESTAMP (buf) += vidpproc->ts_offset;
+   pts = GST_BUFFER_TIMESTAMP (buf);
+   duration = GST_BUFFER_DURATION (buf);
+   if (GST_CLOCK_TIME_IS_VALID (pts)) {
+@@ -884,6 +887,9 @@ ismd_gst_vidpproc_get_property (GObject
+     case PROP_VIDPPROC_PAN_AND_SCAN:
+       g_value_set_boolean (value, vidpproc->pan_and_scan_enabled);
+       break;
++    case PROP_VIDPPROC_TS_OFFSET:
++      g_value_set_int64 (value, vidpproc->ts_offset);
++      break;
+     default:
+       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+       break;
+@@ -941,6 +947,9 @@ ismd_gst_vidpproc_set_property (GObject
+       }
+       break;
+     }
++    case PROP_VIDPPROC_TS_OFFSET:
++      vidpproc->ts_offset = g_value_get_int64 (value);
++      break;
+ 
+     default:
+       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+@@ -1190,6 +1199,12 @@ ismd_gst_vidpproc_class_init (ISmdGstVid
+           "Enable usage of Pan and Scan information if present in the stream",
+           DEFAULT_ISMD_VIDPPROC_PAN_AND_SCAN, G_PARAM_READWRITE));
+ 
++  g_object_class_install_property (oclass,
++      PROP_VIDPPROC_TS_OFFSET,
++      g_param_spec_int64 ("ts-offset", "TS Offset",
++          "Timestamp offset in nanoseconds", G_MININT64, G_MAXINT64,
++          DEFAULT_ISMD_VIDPPROC_TS_OFFSET, G_PARAM_READWRITE));
++
+   oclass->finalize = GST_DEBUG_FUNCPTR (ismd_gst_vidpproc_finalize);
+   iclass->convert = GST_DEBUG_FUNCPTR (ismd_gst_vidpproc_convert);
+   iclass->event = GST_DEBUG_FUNCPTR (ismd_gst_vidpproc_event);
+@@ -1214,6 +1229,7 @@ ismd_gst_vidpproc_init (ISmdGstVidpproc
+   gst_object_unref (pad);
+   vidpproc->scale_mode = DEFAULT_ISMD_VIDPPROC_SCALE_MODE;
+   vidpproc->pan_and_scan_enabled = DEFAULT_ISMD_VIDPPROC_PAN_AND_SCAN;
++  vidpproc->ts_offset = DEFAULT_ISMD_VIDPPROC_TS_OFFSET;
+   vidpproc->aspect_x = vidpproc->aspect_y = 1;
+   g_value_init (&vidpproc->rectangle, GST_TYPE_RECTANGLE);
+   gst_value_set_rectangle (&vidpproc->rectangle, 0, 0, 0, 0);
+Binary files gst-fluendo-ismd-r2152/src/._ismd_gst_vidpproc.h and gst-fluendo-ismd-mods/src/._ismd_gst_vidpproc.h differ
+diff -rupN gst-fluendo-ismd-r2152/src/ismd_gst_vidpproc.h gst-fluendo-ismd-mods/src/ismd_gst_vidpproc.h
+--- gst-fluendo-ismd-r2152/src/ismd_gst_vidpproc.h	2011-07-18 11:12:42.000000000 -0400
++++ gst-fluendo-ismd-mods/src/ismd_gst_vidpproc.h	2011-09-09 16:14:42.910015072 -0400
+@@ -107,6 +107,7 @@ struct _ISmdGstVidpproc
+   gint system_stride;
+   gboolean setup;
+   gint tv_width, tv_height;
++  gint64 ts_offset;
+ 
+   gboolean is_yv12;
+   gboolean is_i420;
+Binary files gst-fluendo-ismd-r2152/src/._ismd_gst_vidrend_bin.c and gst-fluendo-ismd-mods/src/._ismd_gst_vidrend_bin.c differ
+diff -rupN gst-fluendo-ismd-r2152/src/ismd_gst_vidrend_bin.c gst-fluendo-ismd-mods/src/ismd_gst_vidrend_bin.c
+--- gst-fluendo-ismd-r2152/src/ismd_gst_vidrend_bin.c	2011-04-14 11:43:46.000000000 -0400
++++ gst-fluendo-ismd-mods/src/ismd_gst_vidrend_bin.c	2011-09-09 16:14:42.910015072 -0400
+@@ -80,6 +80,7 @@ GST_DEBUG_CATEGORY_EXTERN (ismd_gst_vidr
+ #define DEFAULT_ISMD_VIDEO_PAN_AND_SCAN    FALSE
+ #define DEFAULT_ISMD_VIDEO_QOS             TRUE
+ #define DEFAULT_ISMD_VIDEO_BIN_FLUSH_REPEAT_FRAME TRUE
++#define DEFAULT_ISMD_VIDEO_BIN_TS_OFFSET   0  /* in nanoseconds */
+ 
+ /* video postprocessor related */
+ #define DEFAULT_ISMD_VIDEO_BIN_SCALE_MODE  ZOOM_TO_FIT
+@@ -99,7 +100,8 @@ enum
+   PROP_VIDEO_SCALE_MODE,
+   PROP_VIDEO_PAN_AND_SCAN,
+   PROP_VIDEO_QOS,
+-  PROP_VIDEO_FLUSH_REPEAT_FRAME
++  PROP_VIDEO_FLUSH_REPEAT_FRAME,
++  PROP_VIDEO_TS_OFFSET
+ };
+ 
+ static GstElementDetails ismd_gst_vidrend_bin_details = {
+@@ -132,6 +134,7 @@ ismd_gst_vidrend_bin_get_property (GObje
+   ISmdGstVidrendBin *bin = ISMD_GST_VIDREND_BIN (object);
+   gint tvmode;
+   guint32 bgcolor;
++  gint64  ts_offset;
+   gdl_plane_id_t gdlplane;
+   ismd_vidpproc_scaling_policy_t scalemode;
+   gboolean pan_and_scan, qos, flush_repeat_frame;
+@@ -172,6 +175,10 @@ ismd_gst_vidrend_bin_get_property (GObje
+       g_object_get (G_OBJECT (bin->vidrendsink), "flush-repeat-frame", &flush_repeat_frame, NULL);
+       g_value_set_boolean (value, flush_repeat_frame);
+       break;
++    case PROP_VIDEO_TS_OFFSET:
++      g_object_get (G_OBJECT (bin->vidpproc), "ts-offset", &ts_offset, NULL);
++      g_value_set_int64 (value, ts_offset);
++      break;
+     default:
+       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+       break;
+@@ -185,6 +192,7 @@ ismd_gst_vidrend_bin_set_property (GObje
+   ISmdGstVidrendBin *bin = ISMD_GST_VIDREND_BIN (object);
+   gint tvmode;
+   guint32 bgcolor;
++  gint64  ts_offset;
+   gdl_plane_id_t gdlplane;
+   ismd_vidpproc_scaling_policy_t scalemode;
+   gboolean pan_and_scan, qos, flush_repeat_frame;
+@@ -248,6 +256,10 @@ ismd_gst_vidrend_bin_set_property (GObje
+       flush_repeat_frame = g_value_get_boolean (value);
+       g_object_set (G_OBJECT (bin->vidrendsink), "flush-repeat-frame", flush_repeat_frame, NULL);
+       break;
++    case PROP_VIDEO_TS_OFFSET:
++      ts_offset = g_value_get_int64 (value);
++      g_object_set (G_OBJECT (bin->vidpproc), "ts-offset", ts_offset, NULL);
++      break;
+     default:
+       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+       break;
+@@ -365,6 +377,12 @@ ismd_gst_vidrend_bin_class_init (ISmdGst
+           "Keep displaying the last frame rather than a black one whilst flushing",
+           DEFAULT_ISMD_VIDEO_BIN_FLUSH_REPEAT_FRAME,
+           G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
++
++  g_object_class_install_property (oclass,
++      PROP_VIDEO_TS_OFFSET,
++      g_param_spec_int64 ("ts-offset", "TS Offset",
++          "Timestamp offset in nanoseconds", G_MININT64, G_MAXINT64,
++          DEFAULT_ISMD_VIDEO_BIN_TS_OFFSET, G_PARAM_READWRITE));
+ }
+ 
+ static void
+@@ -411,7 +429,8 @@ ismd_gst_vidrend_bin_init (ISmdGstVidren
+     g_object_set (G_OBJECT (vidpproc),
+         "scale-mode", DEFAULT_ISMD_VIDEO_BIN_SCALE_MODE,
+         "pan-and-scan", DEFAULT_ISMD_VIDEO_PAN_AND_SCAN,
+-        "rectangle", DEFAULT_ISMD_VIDEO_RECTANGLE, NULL);
++        "rectangle", DEFAULT_ISMD_VIDEO_RECTANGLE,
++        "ts-offset", DEFAULT_ISMD_VIDEO_BIN_TS_OFFSET, NULL);
+   }
+   else {
+     GST_ERROR_OBJECT (bin, "vidpproc creation failed");
