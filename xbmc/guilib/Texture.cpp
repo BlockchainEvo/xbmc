@@ -605,6 +605,7 @@ bool CBaseTexture::DecodeJPEG(const CStdString& texturePath, bool autoRotate, in
 
   jpeg_finish_decompress( &cinfo );
   jpeg_destroy_decompress( &cinfo );
+  delete [] imageBuff;
 
   //Now that we've decoded the image, we need to check the EXIF tag for possible rotation
   ExifInfo_t m_exifInfo;
