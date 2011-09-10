@@ -455,7 +455,7 @@ unsigned int CBaseTexture::GetPitch(unsigned int width) const
   case XB_FMT_A8:
     return width;
   case XB_FMT_RGB8:
-    return width*3;
+    return (((width + 1)* 3 / 4) * 4);
     break;
   case XB_FMT_RGBA8:
   case XB_FMT_A8R8G8B8:
@@ -590,7 +590,7 @@ bool CBaseTexture::DecodeJPEG(const CStdString& texturePath, bool autoRotate, in
   }
 
   unsigned int srcPitch = (((cinfo.output_width + 1)* 3 / 4) * 4); // bitmap row length is aligned to 4 bytes
-  Allocate(srcPitch / cinfo.num_components, cinfo.output_height, XB_FMT_RGB8);
+  Allocate(cinfo.output_width, cinfo.output_height, XB_FMT_RGB8);
   unsigned int dstPitch = GetPitch();
   if (srcPitch > dstPitch)
      return false;
