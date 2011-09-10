@@ -841,7 +841,7 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
       {
         // Expected delay needed for elements to spin up to PLAYING in nanoseconds
         // Resolves 1st 0.5 seconds of audio getting cut off on music files.
-        guint64 delay = 800000000;
+        guint64 delay = 550000000;
         g_object_set(m_gstvars->player, "delay", delay, NULL);
       }
 
