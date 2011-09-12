@@ -582,12 +582,12 @@ bool CBaseTexture::DecodeJPEG(const CStdString& texturePath, bool autoRotate, in
     if ((cinfo.output_width * cinfo.output_height) > (maxtexsize * maxtexsize))
     {
       cinfo.scale_num--;
-      jpeg_calc_output_dimensions (&cinfo);
       break;
     }
     if ( cinfo.output_width >= minx && cinfo.output_height >= miny)
       break;
   }
+  jpeg_calc_output_dimensions (&cinfo);
 
   unsigned int srcPitch = (((cinfo.output_width + 1)* 3 / 4) * 4); // bitmap row length is aligned to 4 bytes
   Allocate(cinfo.output_width, cinfo.output_height, XB_FMT_RGB8);
