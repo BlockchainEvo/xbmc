@@ -1,12 +1,12 @@
 include ../Makefile.include
 
-BUILDTOOLS = help2man autoconf automake libtool pkg-config yasm cmake patchelf
+BUILDTOOLS = help2man autoconf automake libtool pkg-config yasm cmake
 
 SUBDIRS = \
 	pcre expat gettext readline sqlite3 libgpg-error libgcrypt \
 	bzip2 liblzo2 freetype2 fontconfig \
-	openssl libssh2 curl \
-	libpng libjpeg-turbo tiff jasper \
+	libssh2 \
+	libjpeg-turbo tiff jasper \
 	libogg libvorbis libflac libid3tag libmad fribidi libmpeg2 \
 	enca libass libcdio libsamplerate \
 	libmicrohttpd libmodplug librtmp libxml2 yajl libvpx \
