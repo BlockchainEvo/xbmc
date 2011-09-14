@@ -10,8 +10,9 @@ ARCHIVE=$(SOURCE).tar.gz
 BASE_URL=http://core.fluendo.com/gstreamer/src/gst-fluendo-mp3
 
 # configuration settings
-CONFIGURE=./autogen.sh --prefix=$(PREFIX) --host=$(HOST) \
-  --disable-maintainer-mode --enable-cpu-tune-atom
+CONFIGURE=./configure --prefix=$(PREFIX) --host=$(HOST) \
+  --disable-maintainer-mode --enable-cpu-tune-atom \
+  --with-pkg-config-path=$(PKG_CONFIG_LIBDIR)
 
 LIBDYLIB=$(SOURCE)/src/.libs/libgstfluimp3.so
 
