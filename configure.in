@@ -639,7 +639,6 @@ AC_CHECK_HEADER([curl/curl.h],, AC_MSG_ERROR($missing_library))
 AC_CHECK_HEADER([FLAC/stream_decoder.h],, AC_MSG_ERROR($missing_library))
 AC_CHECK_LIB([bz2],         [main],, AC_MSG_ERROR($missing_library))
 AC_CHECK_LIB([jpeg],        [main],, AC_MSG_ERROR($missing_library)) # check for cximage
-AC_CHECK_LIB([tiff],        [main],, AC_MSG_ERROR($missing_library))
 AC_CHECK_LIB([pthread],     [main],, AC_MSG_ERROR($missing_library))
 AC_CHECK_LIB([lzo2],        [main],, AC_MSG_ERROR($missing_library))
 AC_CHECK_LIB([z],           [main],, AC_MSG_ERROR($missing_library))
@@ -650,6 +649,9 @@ AC_CHECK_LIB([ssh],         [sftp_tell64],, AC_MSG_RESULT([Could not find suitab
 AC_CHECK_LIB([smbclient],   [main],, AC_MSG_ERROR($missing_library))
 AC_CHECK_LIB([bluetooth],   [hci_devid],, AC_MSG_RESULT([Could not find suitable version of libbluetooth]))
 AC_CHECK_LIB([yajl],        [main],, AC_MSG_ERROR($missing_library))
+AC_CHECK_LIB([tiff],     [main], \
+  AC_DEFINE([HAVE_LIBTIFF],[1],["Define to 1 if libtiff is installed"]), \
+  AC_MSG_ERROR($missing_library)) # check for cximage
 
 PKG_CHECK_MODULES([FONTCONFIG], [fontconfig],
   [INCLUDES="$INCLUDES $FONTCONFIG_CFLAGS"; LIBS="$LIBS $FONTCONFIG_LIBS"],
@@ -660,9 +662,8 @@ PKG_CHECK_MODULES([FRIBIDI],    [fribidi],
 PKG_CHECK_MODULES([SQLITE3],    [sqlite3],
   [INCLUDES="$INCLUDES $SQLITE3_CFLAGS"; LIBS="$LIBS $SQLITE3_LIBS"],
   AC_MSG_ERROR($missing_library))
-PKG_CHECK_MODULES([PNG],        [libpng],
-  [INCLUDES="$INCLUDES $PNG_CFLAGS"; LIBS="$LIBS $PNG_LIBS"],
-  AC_MSG_ERROR($missing_library))
+PKG_CHECK_MODULES([PNG],        [libpng],,
+  AC_MSG_ERROR($missing_library)  #check for cximage)
 PKG_CHECK_MODULES([PCRE],       [libpcre],
   [INCLUDES="$INCLUDES $PCRE_CFLAGS"; LIBS="$LIBS $PCRE_LIBS"]; \
   AC_DEFINE([HAVE_LIBPCRE],[1],["Define to 1 if libpcre is installed"]),
@@ -739,8 +740,10 @@ if test "$host_vendor" = "apple" ; then
 else
   AC_CHECK_LIB([dl],         [main],, AC_MSG_ERROR($missing_library))
   AC_CHECK_LIB([resolv],     [main],, AC_MSG_ERROR($missing_library))
-  AC_CHECK_LIB([jasper],     [main],, AC_MSG_ERROR($missing_library)) # check for cximage
   AC_CHECK_LIB([rt],         [clock_gettime],, AC_MSG_ERROR($missing_library))
+  AC_CHECK_LIB([jasper],     [main], \
+    AC_DEFINE([HAVE_LIBJASPER],[1],["Define to 1 if jasper is installed"]), \
+    AC_MSG_ERROR($missing_library)) # check for cximage
 
   PKG_CHECK_MODULES([ALSA],  [alsa],
     [INCLUDES="$INCLUDES $ALSA_CFLAGS"; LIBS="$LIBS $ALSA_LIBS"; use_alsa=yes],
@@ -754,9 +757,11 @@ else
     PKG_CHECK_MODULES([SDL],   [sdl],
       [INCLUDES="$INCLUDES $SDL_CFLAGS"; LIBS="$LIBS $SDL_LIBS"],
       AC_MSG_ERROR($missing_library))
-    AC_CHECK_LIB([SDL_mixer],  [main],, AC_MSG_ERROR($missing_library))
-    AC_CHECK_LIB([SDL_image],  [main],, AC_MSG_ERROR($missing_library))
     AC_DEFINE([HAVE_SDL],[1],["Define to 1 if using sdl"])
+    AC_CHECK_LIB([SDL_mixer],  [main],, AC_MSG_ERROR($missing_library))
+    AC_CHECK_LIB([SDL_image],     [main], \
+      AC_DEFINE([HAVE_SDL_IMAGE],[1],["Define to 1 if sdl_image is installed"]), \
+      AC_MSG_ERROR($missing_library)) # check for cximage
   fi
 fi
 
@@ -896,11 +901,9 @@ else
   DISABLE_RSXS=0
   # darwin osx can do rsxs but does not use x11, so do not pkg-config check for them
   if test "$host_vendor" != "apple" ; then
-    PKG_CHECK_MODULES([XT],    [xt],
-      [INCLUDES="$INCLUDES $XT_CFLAGS"; LIBS="$LIBS $XT_LIBS"],
+    PKG_CHECK_MODULES([XT],    [xt],,
       AC_MSG_ERROR($missing_library))
-    PKG_CHECK_MODULES([XMU],   [xmu],
-      [INCLUDES="$INCLUDES $XMU_CFLAGS"; LIBS="$LIBS $XMU_LIBS"],
+    PKG_CHECK_MODULES([XMU],   [xmu],,
       AC_MSG_ERROR($missing_library))
   fi
 fi
