@@ -3,9 +3,10 @@ include ../intel-sdk.mk
 
 # lib name, version
 LIBNAME=libcdio
-VERSION=0.82
+VERSION=0.80
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
+BASE_URL=http://ftp.gnu.org/gnu/libcdio
 
 # configuration settings
 CONFIGURE=./configure --prefix=$(PREFIX) --host=$(HOST) 
