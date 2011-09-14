@@ -18,6 +18,7 @@ CONFIGURE=./autogen.sh --prefix=$(PREFIX) --host=$(HOST) \
   --disable-examples \
   --disable-check \
   --disable-tests \
+  --disable-loadsave \
 
 LIBDYLIB=$(SOURCE)/gst/.libs/libgstreamer-0.10.0.dylib
 

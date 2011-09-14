@@ -14,7 +14,8 @@ CONFIGURE=./autogen.sh --prefix=$(PREFIX) --host=$(HOST) \
   --disable-docbook  \
   --disable-gtk-doc  \
   --disable-schemas-install \
-  --with-default-videosink=ximagesink
+  --with-default-videosink=ximagesink \
+  --disable-annodex \
 
 LIBDYLIB=$(SOURCE)/sys/ximage/.libs/libgstximagesrc.so
 
