@@ -10,6 +10,8 @@ ARCHIVE=$(SOURCE).tar.bz2
 # configuration settings
 #NATIVE_ENV=CFLAGS="" CXXFLAGS="" LDFLAGS="" CPPFLAGS="" EXTRA_CFLAGS="" LIBS="" CPP="cpp -E" CC=gcc CXX=g++ LD=ld AR=ar RANLIB=ranlib
 export EXTRA_CFLAGS=$(CFLAGS)
+export PYTHON_MODULES_INCLUDE=$(XBMCPREFIX)/include $(SDKSTAGE)/include $(SDKSTAGE)/usr/include
+export PYTHON_MODULES_LIB=$(XBMCPREFIX)/lib $(SDKSTAGE)/lib $(SDKSTAGE)/usr/lib
 DISABLE_MODS="_ctypes readline _curses _curses_panel _tkinter nis gdbm bsddb _codecs_kr _codecs_jp _codecs_cn _codecs_tw _codecs_hk"
 CONFIGURE_NATIVE=$(NATIVE_ENV) ./configure
 CONFIGURE=./configure --prefix=$(PREFIX) --host=$(HOST) \
@@ -29,6 +31,7 @@ $(LIBDYLIB): $(TARBALLS_LOCATION)/$(ARCHIVE)
 	$(ARCHIVE_TOOL) $(ARCHIVE_TOOL_FLAGS) $(TARBALLS_LOCATION)/$(ARCHIVE)
 	echo $(SOURCE) > .gitignore
 	cd $(SOURCE); patch -p1 < ../Python-2.6.5-xcompile.patch
+	cd $(SOURCE); patch -p1 < ../Python-2.6.5-modules-paths.py
 	cd $(SOURCE); patch -p0 < ../Python-2.6.5-disable-modules.patch
 	cd $(SOURCE); $(CONFIGURE_NATIVE)
 	cd $(SOURCE); make python Parser/pgen

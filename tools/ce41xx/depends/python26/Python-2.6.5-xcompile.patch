@@ -271,15 +271,6 @@ diff -uN Python-2.6.2/setup.py Python-2.6.2POld/setup.py
          except:
              exc_type, why, tb = sys.exc_info()
              self.announce('*** WARNING: importing extension "%s" '
-@@ -665,7 +672,7 @@
- 
-         if (ssl_incs is not None and
-             ssl_libs is not None and
--            openssl_ver >= 0x00907000):
-+            openssl_ver >= 0x00907000 and False):
-             # The _hashlib module wraps optimized implementations
-             # of hash functions from the OpenSSL library.
-             exts.append( Extension('_hashlib', ['_hashopenssl.c'],
 @@ -685,7 +692,7 @@
                              depends = ['md5.h']) )
              missing.append('_hashlib')
