@@ -663,7 +663,7 @@ PKG_CHECK_MODULES([SQLITE3],    [sqlite3],
   [INCLUDES="$INCLUDES $SQLITE3_CFLAGS"; LIBS="$LIBS $SQLITE3_LIBS"],
   AC_MSG_ERROR($missing_library))
 PKG_CHECK_MODULES([PNG],        [libpng],,
-  AC_MSG_ERROR($missing_library)  #check for cximage)
+  AC_MSG_ERROR($missing_library))  #check for cximage
 PKG_CHECK_MODULES([PCRE],       [libpcre],
   [INCLUDES="$INCLUDES $PCRE_CFLAGS"; LIBS="$LIBS $PCRE_LIBS"]; \
   AC_DEFINE([HAVE_LIBPCRE],[1],["Define to 1 if libpcre is installed"]),
@@ -761,7 +761,7 @@ else
     AC_CHECK_LIB([SDL_mixer],  [main],, AC_MSG_ERROR($missing_library))
     AC_CHECK_LIB([SDL_image],     [main], \
       AC_DEFINE([HAVE_SDL_IMAGE],[1],["Define to 1 if sdl_image is installed"]), \
-      AC_MSG_ERROR($missing_library)) # check for cximage
+      AC_MSG_ERROR($missing_library)) # check for TexturePacker
   fi
 fi
 
