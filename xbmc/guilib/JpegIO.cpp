@@ -262,12 +262,12 @@ bool CJpegIO::Decode(const unsigned char *pixels, unsigned int format)
       {
         jpeg_read_scanlines( &m_cinfo, &row, 1 );
         unsigned char *dst2 = dst;
-        for (unsigned int x = 0; x < m_width; x++, dst2 += 4)
+        for (unsigned int x = 0; x < m_width; x++)
         {
-          dst2[0] = row[(x*3)+2];
-          dst2[1] = row[(x*3)+1];
-          dst2[2] = row[(x*3)+0];
-          dst2[3] = 0xff;
+          *dst2++ = row[(x*3)+2];
+          *dst2++ = row[(x*3)+1];
+          *dst2++ = row[(x*3)+0];
+          *dst2++ = 0xff;
         }
         dst += m_width * 4;
       }
