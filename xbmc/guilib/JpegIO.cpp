@@ -209,7 +209,6 @@ bool CJpegIO::Open(const CStdString& texturePath,  unsigned int minx, unsigned i
     jpeg_calc_output_dimensions (&m_cinfo);
     m_width = m_cinfo.output_width;
     m_height = m_cinfo.output_height;
-    m_pitch = (((m_cinfo.output_width + 1)* 3 / 4) * 4); //align to 4-bytes
 
     GetExif();
     return true;
@@ -243,21 +242,24 @@ bool CJpegIO::GetExif()
 bool CJpegIO::Decode(const unsigned char *pixels, unsigned int format)
 {
   unsigned char *dst = (unsigned char *) pixels;
+  unsigned int pitch;
   try
   {
     jpeg_start_decompress( &m_cinfo );
 
     if (format == XB_FMT_RGB8)
     {
+    pitch = ((m_width + 1)* 3 / 4) * 4; //align to 4-bytes
       while( m_cinfo.output_scanline < m_height )
       {
-       jpeg_read_scanlines( &m_cinfo, &dst, 1 );
-       dst+=m_pitch;
+        jpeg_read_scanlines( &m_cinfo, &dst, 1 );
+        dst+=pitch;
       }
     }
     else if (format == XB_FMT_A8R8G8B8)
     {
       unsigned char* row = new unsigned char[m_width * 3];
+      pitch = m_width*4;
       while( m_cinfo.output_scanline < m_height)
       {
         jpeg_read_scanlines( &m_cinfo, &row, 1 );
@@ -269,7 +271,7 @@ bool CJpegIO::Decode(const unsigned char *pixels, unsigned int format)
           *dst2++ = row[(x*3)+0];
           *dst2++ = 0xff;
         }
-        dst += m_width * 4;
+        dst += pitch;
       }
     }
     else
