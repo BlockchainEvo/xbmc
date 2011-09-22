@@ -10,7 +10,7 @@ SUBDIRS = \
 	libogg libvorbis libflac libid3tag libmad fribidi libmpeg2 \
 	enca libass libcdio libsamplerate \
 	libmicrohttpd libmodplug librtmp libxml2 yajl libvpx \
-	liboil libxml2 glib-2.0 liba52 libdca gstreamer \
+	liboil libxml2 glib-2.0 liba52 libdca libsoup gstreamer \
 	gstreamer-plugins-base gstreamer-plugins-good \
 	gstreamer-plugins-bad gstreamer-plugins-ugly  \
 	gst-fluendo-mp3 gst-fluendo-mpegdemux gst-fluendo-ismd \
