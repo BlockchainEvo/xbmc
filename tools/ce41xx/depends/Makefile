@@ -5,7 +5,7 @@ BUILDTOOLS = help2man autoconf automake libtool pkg-config yasm cmake
 SUBDIRS = \
 	pcre expat gettext readline sqlite3 libgpg-error libgcrypt \
 	bzip2 liblzo2 freetype2 fontconfig \
-	libssh2 \
+	openssl libssh2 curl \
 	libjpeg-turbo tiff jasper \
 	libogg libvorbis libflac libid3tag libmad fribidi libmpeg2 \
 	enca libass libcdio libsamplerate \
