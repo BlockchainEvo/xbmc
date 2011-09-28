@@ -134,6 +134,8 @@ bool CWinSystemGDL::CreateNewWindow(const CStdString& name, bool fullScreen, RES
     return false;
   }
 
+  gdl_plane_reset_all();
+
   // Default values of optional args
   memset(&di, 0, sizeof (gdl_display_info_t));
   di.id                = GDL_DISPLAY_ID_0;
