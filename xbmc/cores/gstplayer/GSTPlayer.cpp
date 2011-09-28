@@ -1313,21 +1313,39 @@ void CGSTPlayer::SetVideoRect(const CRect &SrcRect, const CRect &DestRect)
     return;
   }
 
+  // on cex, when running 1080p display size, 
+  // gui is at 720p but m_dst_rect is relative to gui.
+  // need to scale up m_dst_rect to display size as video decodes
+  // to separate video plane that is at display size.
+  CRect gui, display, dst_rect;
+  RESOLUTION res = g_graphicsContext.GetVideoResolution();
+  gui.SetRect(0, 0, g_settings.m_ResInfo[res].iWidth, g_settings.m_ResInfo[res].iHeight);
+  display.SetRect(0, 0, g_settings.m_ResInfo[res].iScreenWidth, g_settings.m_ResInfo[res].iScreenHeight);
+  
+  dst_rect = m_dst_rect;
+  if (gui != display)
+  {
+    float xscale = display.Width()  / gui.Width();
+    float yscale = display.Height() / gui.Height();
+    dst_rect.x1 *= xscale;
+    dst_rect.x2 *= xscale;
+    dst_rect.y1 *= yscale;
+    dst_rect.y2 *= yscale;
+  }
+
   // ismd destination rectangle cannot be outside display bounds
   // or it will output black frames when updating GDL_PLANE_DST_RECT fails
-  CRect display;
-  display.SetRect(0, 0, g_graphicsContext.GetWidth(), g_graphicsContext.GetHeight());
-  if (!display.PtInRect(CPoint(m_dst_rect.x1, m_dst_rect.y1)))
+  if (!display.PtInRect(CPoint(dst_rect.x1, dst_rect.y1)))
     return;
-  if (!display.PtInRect(CPoint(m_dst_rect.x2, m_dst_rect.y2)))
+  if (!display.PtInRect(CPoint(dst_rect.x2, dst_rect.y2)))
     return;
 
   if (m_gstvars->videosink)
   {
     CStdString rectangle;
     rectangle.Format("%i,%i,%i,%i",
-      (int)m_dst_rect.x1, (int)m_dst_rect.y1,
-      (int)m_dst_rect.Width(), (int)m_dst_rect.Height());
+      (int)dst_rect.x1, (int)dst_rect.y1,
+      (int)dst_rect.Width(), (int)dst_rect.Height());
     // setup the scaling mode (we might need to tweak these settings)
     ISMD_SCALE_MODE scale_mode;
     switch(m_view_mode)
