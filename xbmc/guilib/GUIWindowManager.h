@@ -33,6 +33,7 @@
 #include "IWindowManagerCallback.h"
 #include "IMsgTargetCallback.h"
 #include "DirtyRegionTracker.h"
+#include "FrameBufferObject.h"
 
 class CGUIDialog;
 
@@ -164,6 +165,9 @@ private:
   bool m_bShowOverlay;
   int  m_iNested;
   bool m_initialized;
+
+  bool m_fboCreated;
+  CFrameBufferObject m_fbo;
 
   CDirtyRegionTracker m_tracker;
 };

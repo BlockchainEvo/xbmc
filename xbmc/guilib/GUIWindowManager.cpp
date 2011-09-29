@@ -43,6 +43,7 @@ CGUIWindowManager::CGUIWindowManager(void)
   m_bShowOverlay = true;
   m_iNested = 0;
   m_initialized = false;
+  m_fboCreated = false;
 }
 
 CGUIWindowManager::~CGUIWindowManager(void)
@@ -55,6 +56,23 @@ void CGUIWindowManager::Initialize()
   m_initialized = true;
 
   LoadNotOnDemandWindows();
+
+  if (g_advancedSettings.m_guiAlgorithmDirtyRegions != DIRTYREGION_SOLVER_NONE && !m_fboCreated)
+  {
+    m_fbo.Cleanup();
+
+    if (!m_fbo.Initialize())
+    {
+      CLog::Log(LOGERROR,"GL: Error initializing FBO");
+    }
+
+    if(m_fbo.CreateAndBindToTexture(GL_TEXTURE_2D, (int) g_graphicsContext.GetWidth(), (int) g_graphicsContext.GetHeight() ,GL_RGBA))
+    {
+    printf("width: %i, height: %i\n",(int) g_graphicsContext.GetWidth(), (int) g_graphicsContext.GetHeight());
+
+      m_fboCreated = true;
+    }
+  }
 }
 
 bool CGUIWindowManager::SendMessage(int message, int senderID, int destID, int param1, int param2)
@@ -549,13 +567,14 @@ bool CGUIWindowManager::Render()
 
   bool hasRendered = false;
   // If we visualize the regions we will always render the entire viewport
-  if (g_advancedSettings.m_guiVisualizeDirtyRegions || g_advancedSettings.m_guiAlgorithmDirtyRegions == DIRTYREGION_SOLVER_NONE)
+  if (g_advancedSettings.m_guiVisualizeDirtyRegions || !m_fboCreated)
   {
     RenderPass();
     hasRendered = true;
   }
   else
   {
+    m_fbo.BeginRender();
     for (CDirtyRegionList::const_iterator i = dirtyRegions.begin(); i != dirtyRegions.end(); i++)
     {
       if (i->IsEmpty())
@@ -566,12 +585,13 @@ bool CGUIWindowManager::Render()
       hasRendered = true;
     }
     g_graphicsContext.ResetScissors();
+    m_fbo.EndRender();
   }
 
   if (g_advancedSettings.m_guiVisualizeDirtyRegions)
   {
     g_graphicsContext.SetRenderingResolution(g_graphicsContext.GetResInfo(), false);
-    const CDirtyRegionList &markedRegions  = m_tracker.GetMarkedRegions(); 
+    const CDirtyRegionList &markedRegions  = m_tracker.GetMarkedRegions();
     for (CDirtyRegionList::const_iterator i = markedRegions.begin(); i != markedRegions.end(); i++)
       CGUITexture::DrawQuad(*i, 0x0fff0000);
     for (CDirtyRegionList::const_iterator i = dirtyRegions.begin(); i != dirtyRegions.end(); i++)
@@ -579,6 +599,15 @@ bool CGUIWindowManager::Render()
   }
 
   m_tracker.CleanMarkedRegions();
+
+  if (hasRendered && m_fboCreated)
+  {
+    unsigned int width = g_graphicsContext.GetWidth();
+    unsigned int height = g_graphicsContext.GetHeight();
+    glBindFramebuffer(GL_READ_FRAMEBUFFER,  m_fbo.Texture());
+    glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
+    glBlitFramebuffer(0, 0, width, height, 0, 0, width, height, GL_COLOR_BUFFER_BIT, GL_LINEAR);
+  }
 
   return hasRendered;
 }
