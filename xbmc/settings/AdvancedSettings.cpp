@@ -289,7 +289,7 @@ void CAdvancedSettings::Initialize()
   m_canWindowed = true;
   m_guiVisualizeDirtyRegions = false;
   m_guiAlgorithmDirtyRegions = 3;
-  m_guiDirtyRegionNoFlipTimeout = -1;
+  m_guiDirtyRegionNoFlipTimeout = 0;
   m_logEnableAirtunes = false;
 }
 
