@@ -41,6 +41,10 @@ void CDirtyRegionTracker::SelectAlgorithm()
 
   switch (g_advancedSettings.m_guiAlgorithmDirtyRegions)
   {
+    case DIRTYREGION_SOLVER_FILL_VIEWPORT_ALWAYS:
+      CLog::Log(LOGDEBUG, "guilib: Fill viewport always for solving rendering passes");
+      m_solver = new CFillViewportAlwaysRegionSolver();
+      break;
     case DIRTYREGION_SOLVER_UNION:
       m_solver = new CUnionDirtyRegionSolver();
       CLog::Log(LOGDEBUG, "guilib: Union as algorithm for solving rendering passes");
@@ -49,16 +53,18 @@ void CDirtyRegionTracker::SelectAlgorithm()
       CLog::Log(LOGDEBUG, "guilib: Cost reduction as algorithm for solving rendering passes");
       m_solver = new CGreedyDirtyRegionSolver();
       break;
-    case DIRTYREGION_SOLVER_FILL_VIEWPORT_ALWAYS:
-      CLog::Log(LOGDEBUG, "guilib: Fill viewport always for solving rendering passes");
-      m_solver = new CFillViewportAlwaysRegionSolver();
-      break;
     case DIRTYREGION_SOLVER_FILL_VIEWPORT_ON_CHANGE:
     default:
       CLog::Log(LOGDEBUG, "guilib: Fill viewport on change for solving rendering passes");
       m_solver = new CFillViewportOnChangeRegionSolver();
       break;
   }
+  if (g_advancedSettings.m_guiAlgorithmDirtyRegions > 0 && g_advancedSettings.m_guiDirtyRegionNoFlipTimeout != 0)
+  {
+    //  Flipping while not rendering
+    CLog::Log(LOGWARNING, "guilib: Unsupported configuration. If the display is incorrect, set nofliptimeout back to 0.");
+  }
+
 }
 
 void CDirtyRegionTracker::MarkDirtyRegion(const CDirtyRegion &region)
