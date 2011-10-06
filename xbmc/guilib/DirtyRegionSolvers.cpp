@@ -29,6 +29,8 @@ void CUnionDirtyRegionSolver::Solve(const CDirtyRegionList &input, CDirtyRegionL
   for (unsigned int i = 0; i < input.size(); i++)
     unifiedRegion.Union(input[i]);
 
+  unifiedRegion.Intersect(CRect(CRect(0,0,g_graphicsContext.GetWidth(),g_graphicsContext.GetHeight())));
+
   if (!unifiedRegion.IsEmpty())
     output.push_back(unifiedRegion);
 }
@@ -43,7 +45,7 @@ void CFillViewportOnChangeRegionSolver::Solve(const CDirtyRegionList &input, CDi
 {
   if (input.size() > 0)
   {
-    CDirtyRegion unifiedRegion(g_graphicsContext.GetViewWindow());
+    CDirtyRegion unifiedRegion(CRect(0,0,g_graphicsContext.GetWidth(),g_graphicsContext.GetHeight()));
     output.push_back(unifiedRegion);
   }
 }
