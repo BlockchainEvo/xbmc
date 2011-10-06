@@ -35,7 +35,7 @@ void CUnionDirtyRegionSolver::Solve(const CDirtyRegionList &input, CDirtyRegionL
 
 void CFillViewportAlwaysRegionSolver::Solve(const CDirtyRegionList &input, CDirtyRegionList &output)
 {
-  CDirtyRegion unifiedRegion(g_graphicsContext.GetViewWindow());
+  CDirtyRegion unifiedRegion(CRect(0,0,g_graphicsContext.GetWidth(),g_graphicsContext.GetHeight()));
   output.push_back(unifiedRegion);
 }
 
