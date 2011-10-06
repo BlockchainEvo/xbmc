@@ -37,7 +37,7 @@ namespace ADDON
   class IAddon;
   typedef boost::shared_ptr<IAddon> AddonPtr;
 }
-
+#include "guilib/DirtyRegion.h"
 #include "cores/IPlayer.h"
 #include "cores/playercorefactory/PlayerCoreFactory.h"
 #include "PlayListPlayer.h"
@@ -88,7 +88,7 @@ public:
   virtual bool Initialize();
   virtual void FrameMove(bool processEvents);
   virtual void Render();
-  virtual bool RenderNoPresent();
+  virtual CDirtyRegionList RenderNoPresent();
   virtual void Preflight();
   virtual bool Create();
   virtual bool Cleanup();

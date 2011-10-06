@@ -1881,7 +1881,7 @@ bool CApplication::LoadUserWindows()
   return true;
 }
 
-bool CApplication::RenderNoPresent()
+CDirtyRegionList CApplication::RenderNoPresent()
 {
   MEASURE_FUNCTION;
 
@@ -1909,7 +1909,8 @@ bool CApplication::RenderNoPresent()
 
   }
 
-  bool hasRendered = g_windowManager.Render();
+  CDirtyRegionList dirtyRegions = g_windowManager.GetDirty();
+  g_windowManager.Render();
 
   // if we're recording an audio stream then show blinking REC
   if (!g_graphicsContext.IsFullScreenVideo())
@@ -1931,7 +1932,7 @@ bool CApplication::RenderNoPresent()
 
   g_graphicsContext.Unlock();
 
-  return hasRendered;
+  return dirtyRegions;
 }
 
 float CApplication::GetDimScreenSaverLevel() const
@@ -2052,7 +2053,8 @@ void CApplication::Render()
   if(!g_Windowing.BeginRender())
     return;
 
-  if (RenderNoPresent())
+  CDirtyRegionList dirtyRegions = RenderNoPresent();
+  if (dirtyRegions.size() > 0)
     hasRendered = true;
 
   g_Windowing.EndRender();
@@ -2091,7 +2093,7 @@ void CApplication::Render()
   m_lastFrameTime = XbmcThreads::SystemClockMillis();
 
   if (flip)
-    g_graphicsContext.Flip(g_windowManager.GetDirty());
+    g_graphicsContext.Flip(dirtyRegions);
   CTimeUtils::UpdateFrameTime(flip);
 
   g_renderManager.UpdateResolution();
