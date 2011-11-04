@@ -268,7 +268,7 @@ gboolean CGSTPlayerBusCallback(GstBus *bus, GstMessage *msg, CGSTPlayer *gstplay
       {
         gint percent = 0;
         gst_message_parse_buffering(msg, &percent);
-        g_print("GStreamer: Buffering %d percent done)", percent);
+        g_print("GStreamer: Buffering %d percent done)\n", percent);
       }
       break;
     case GST_MESSAGE_STATE_CHANGED:
