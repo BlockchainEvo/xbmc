@@ -134,6 +134,8 @@ CJpegIO::CJpegIO()
   m_imgsize = 0;
   m_width  = 0;
   m_height = 0;
+  m_original_width = 0;
+  m_original_height = 0;
   m_orientation = 0;
   m_inputBuffSize = 0;
   m_inputBuff = NULL;
@@ -150,7 +152,7 @@ void CJpegIO::Close()
   delete [] m_inputBuff;
 }
 
-bool CJpegIO::Open(const CStdString &texturePath, unsigned int minx, unsigned int miny)
+bool CJpegIO::Open(const CStdString &texturePath, unsigned int minx, unsigned int miny, unsigned int *original_width, unsigned int *original_height)
 {
   m_texturePath = texturePath;
   m_minx = minx;
@@ -201,6 +203,12 @@ bool CJpegIO::Open(const CStdString &texturePath, unsigned int minx, unsigned in
       m_minx = g_settings.m_ResInfo[g_guiSettings.m_LookAndFeelResolution].iWidth;
       m_miny = g_settings.m_ResInfo[g_guiSettings.m_LookAndFeelResolution].iHeight;
     }
+    m_original_width = m_cinfo.image_width;
+    m_original_height = m_cinfo.image_height;
+    if (original_width)
+      *original_width = m_original_width;
+    if (original_height)
+      *original_height = m_original_height;
     m_cinfo.scale_denom = 8;
     m_cinfo.out_color_space = JCS_RGB;
     unsigned int maxtexsize = g_Windowing.GetMaxTextureSize();
@@ -218,7 +226,9 @@ bool CJpegIO::Open(const CStdString &texturePath, unsigned int minx, unsigned in
     jpeg_calc_output_dimensions(&m_cinfo);
     m_width  = m_cinfo.output_width;
     m_height = m_cinfo.output_height;
-
+    if (m_original_width > m_width || m_original_height > m_height)
+      CLog::Log(LOGNOTICE, "JpegIO: %s: Full size: %ix%i. Only decoding: %ix%i for output size: %ix%i",
+        texturePath.c_str(), m_original_width, m_original_height, m_width, m_height, minx, miny);
     GetExif();
     return true;
   }
