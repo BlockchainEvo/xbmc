@@ -174,7 +174,7 @@ bool CBaseTexture::LoadFromFile(const CStdString& texturePath, unsigned int maxW
   if (URIUtils::GetExtension(texturePath).Equals(".jpg") || URIUtils::GetExtension(texturePath).Equals(".tbn"))
   {
     CJpegIO jpegfile;
-    if (jpegfile.Open(texturePath))
+    if (jpegfile.Open(texturePath, maxWidth, maxHeight, &m_originalImageWidth, &m_originalImageHeight))
     {
       if (jpegfile.Width() > 0 && jpegfile.Height() > 0)
       {
@@ -184,6 +184,10 @@ bool CBaseTexture::LoadFromFile(const CStdString& texturePath, unsigned int maxW
           if (autoRotate && jpegfile.Orientation())
             m_orientation = jpegfile.Orientation() - 1;
           m_hasAlpha=false;
+          if (originalWidth)
+            *originalWidth = m_originalImageWidth;
+          if (originalHeight)
+            *originalHeight = m_originalImageHeight;
           return true;
         }
       }
