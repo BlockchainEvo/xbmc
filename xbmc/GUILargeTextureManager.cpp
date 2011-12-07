@@ -132,7 +132,7 @@ void CGUILargeTextureManager::CLargeTexture::SetTexture(CBaseTexture* texture)
 {
   assert(!m_texture.size());
   if (texture)
-    m_texture.Set(texture, texture->GetWidth(), texture->GetHeight());
+    m_texture.Set(texture, texture->GetWidth(), texture->GetHeight(), texture->GetOriginalImageWidth(), texture->GetOriginalImageHeight());
 }
 
 CGUILargeTextureManager::CGUILargeTextureManager()
