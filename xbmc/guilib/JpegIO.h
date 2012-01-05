@@ -38,6 +38,9 @@ public:
   ~CJpegIO();
   bool           Open(const CStdString& m_texturePath,  unsigned int minx=0, unsigned int miny=0, unsigned int *original_width=NULL, unsigned int *original_height=NULL, bool read=true);
   bool           Decode(const unsigned char *pixels, unsigned int pitch, unsigned int format);
+  bool           CreateThumbnail(const CStdString& sourceFile, const CStdString& destFile, int minx, int miny, bool rotateExif);
+  bool           CreateThumbnailFromMemory(unsigned char* buffer, unsigned int bufSize, const CStdString& destFile, unsigned int minx, unsigned int miny);
+  bool           CreateThumbnailFromSurface(unsigned char* buffer, unsigned int width, unsigned int height, unsigned int pitch, const CStdString& destFile);
   void           Close();
 
   unsigned int   Width()       { return m_width; }
