@@ -343,7 +343,7 @@ bool CJpegIO::Read(unsigned char* buffer, unsigned int bufSize, unsigned int min
         m_cinfo.scale_num--;
         break;
       }
-      if (m_cinfo.output_width >= minx && m_cinfo.output_height >= miny)
+      if (m_cinfo.output_width >= minx || m_cinfo.output_height >= miny)
         break;
     }
     jpeg_calc_output_dimensions(&m_cinfo);
