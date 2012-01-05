@@ -28,6 +28,7 @@
 #include "DllImageLib.h"
 #include "utils/log.h"
 #include "utils/URIUtils.h"
+#include "guilib/JpegIO.h"
 
 using namespace XFILE;
 
@@ -46,6 +47,7 @@ bool CPicture::CacheImage(const CStdString& sourceUrl, const CStdString& destFil
   {
     CLog::Log(LOGINFO, "Caching image from: %s to %s with width %i and height %i", sourceUrl.c_str(), destFile.c_str(), width, height);
     
+    CJpegIO jpegImage;
     DllImageLib dll;
     if (!dll.Load()) return false;
 
@@ -55,6 +57,11 @@ bool CPicture::CacheImage(const CStdString& sourceUrl, const CStdString& destFil
       CStdString data;
       if (http.Get(sourceUrl, data))
       {
+        if (URIUtils::GetExtension(sourceUrl).Equals(".jpg") || URIUtils::GetExtension(sourceUrl).Equals(".tbn"))
+        {
+          if (jpegImage.CreateThumbnailFromMemory((unsigned char *)data.c_str(), data.GetLength(), destFile.c_str(), width, height))
+            return true;
+        }
         if (!dll.CreateThumbnailFromMemory((BYTE *)data.c_str(), data.GetLength(), URIUtils::GetExtension(sourceUrl).c_str(), destFile.c_str(), width, height))
         {
           CLog::Log(LOGERROR, "%s Unable to create new image %s from image %s", __FUNCTION__, destFile.c_str(), sourceUrl.c_str());
@@ -65,6 +72,11 @@ bool CPicture::CacheImage(const CStdString& sourceUrl, const CStdString& destFil
       return false;
     }
 
+    if (URIUtils::GetExtension(sourceUrl).Equals(".jpg") || URIUtils::GetExtension(sourceUrl).Equals(".tbn"))
+    {
+      if (jpegImage.CreateThumbnail(sourceUrl, destFile, width, height, g_guiSettings.GetBool("pictures.useexifrotation")))
+        return true;
+    }
     if (!dll.CreateThumbnail(sourceUrl.c_str(), destFile.c_str(), width, height, g_guiSettings.GetBool("pictures.useexifrotation")))
     {
       CLog::Log(LOGERROR, "%s Unable to create new image %s from image %s", __FUNCTION__, destFile.c_str(), sourceUrl.c_str());
@@ -96,6 +108,12 @@ bool CPicture::CacheFanart(const CStdString& sourceUrl, const CStdString& destFi
 bool CPicture::CreateThumbnailFromMemory(const unsigned char* buffer, int bufSize, const CStdString& extension, const CStdString& thumbFile)
 {
   CLog::Log(LOGINFO, "Creating album thumb from memory: %s", thumbFile.c_str());
+  if (extension == "jpg" || extension == "tbn")
+  {
+    CJpegIO jpegImage;
+    if (jpegImage.CreateThumbnailFromMemory((unsigned char*)buffer, bufSize, thumbFile.c_str(), g_advancedSettings.m_thumbSize, g_advancedSettings.m_thumbSize))
+      return true;
+  }
   DllImageLib dll;
   if (!dll.Load()) return false;
   if (!dll.CreateThumbnailFromMemory((BYTE *)buffer, bufSize, extension.c_str(), thumbFile.c_str(), g_advancedSettings.m_thumbSize, g_advancedSettings.m_thumbSize))
@@ -122,6 +140,12 @@ void CPicture::CreateFolderThumb(const CStdString *thumbs, const CStdString &fol
 
 bool CPicture::CreateThumbnailFromSurface(const unsigned char *buffer, int width, int height, int stride, const CStdString &thumbFile)
 {
+  if (URIUtils::GetExtension(thumbFile).Equals(".jpg") || URIUtils::GetExtension(thumbFile).Equals(".tbn"))
+  {
+    CJpegIO jpegImage;
+    if (jpegImage.CreateThumbnailFromSurface((BYTE *)buffer, width, height, stride, thumbFile.c_str()))
+      return true;
+  }
   DllImageLib dll;
   if (!buffer || !dll.Load()) return false;
   return dll.CreateThumbnailFromSurface((BYTE *)buffer, width, height, stride, thumbFile.c_str());
