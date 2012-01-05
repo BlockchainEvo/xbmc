@@ -36,7 +36,7 @@ class CJpegIO
 public:
   CJpegIO();
   ~CJpegIO();
-  bool           Open(const CStdString& m_texturePath,  unsigned int minx=0, unsigned int miny=0, unsigned int *original_width=NULL, unsigned int *original_height=NULL);
+  bool           Open(const CStdString& m_texturePath,  unsigned int minx=0, unsigned int miny=0, unsigned int *original_width=NULL, unsigned int *original_height=NULL, bool read=true);
   bool           Decode(const unsigned char *pixels, unsigned int pitch, unsigned int format);
   void           Close();
 
@@ -45,6 +45,7 @@ public:
   unsigned int   Orientation() { return m_orientation; }
 
 protected:
+  bool           Read(unsigned char* buffer, unsigned int bufSize, unsigned int minx, unsigned int miny);
   static  void   jpeg_error_exit(j_common_ptr cinfo);
 
   bool           GetExif();

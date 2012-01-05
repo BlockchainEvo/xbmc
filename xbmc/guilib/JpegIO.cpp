@@ -152,7 +152,7 @@ void CJpegIO::Close()
   delete [] m_exif_data;
 }
 
-bool CJpegIO::Open(const CStdString &texturePath, unsigned int minx, unsigned int miny, unsigned int *original_width, unsigned int *original_height)
+bool CJpegIO::Open(const CStdString &texturePath, unsigned int minx, unsigned int miny, unsigned int *original_width, unsigned int *original_height, bool read)
 {
   m_texturePath = texturePath;
   unsigned int imgsize = 0;
@@ -171,9 +171,33 @@ bool CJpegIO::Open(const CStdString &texturePath, unsigned int minx, unsigned in
   else
     return false;
 
+  if (!read)
+    return true;
+
+  if (Read(m_inputBuff, m_inputBuffSize, minx, miny))
+  {
+    if (original_width)
+      *original_width = m_original_width;
+    if (original_height)
+      *original_height = m_original_height;
+    return true;
+  }
+  return false;
+}
+
+bool CJpegIO::Read(unsigned char* buffer, unsigned int bufSize, unsigned int minx, unsigned int miny)
+{
   struct my_error_mgr jerr;
   m_cinfo.err = jpeg_std_error(&jerr.pub);
   jerr.pub.error_exit = jpeg_error_exit;
+
+  if (buffer == NULL || !bufSize )
+    return false;
+
+  //incase Open() wasn't called
+  m_inputBuff = buffer;
+  m_inputBuffSize = bufSize;
+
   jpeg_create_decompress(&m_cinfo);
 #if JPEG_LIB_VERSION < 80
   x_mem_src(&m_cinfo, m_inputBuff, m_inputBuffSize);
@@ -205,10 +229,6 @@ bool CJpegIO::Open(const CStdString &texturePath, unsigned int minx, unsigned in
     }
     m_original_width = m_cinfo.image_width;
     m_original_height = m_cinfo.image_height;
-    if (original_width)
-      *original_width = m_original_width;
-    if (original_height)
-      *original_height = m_original_height;
     m_cinfo.scale_denom = 8;
     m_cinfo.out_color_space = JCS_RGB;
     unsigned int maxtexsize = g_Windowing.GetMaxTextureSize();
@@ -227,8 +247,8 @@ bool CJpegIO::Open(const CStdString &texturePath, unsigned int minx, unsigned in
     m_width  = m_cinfo.output_width;
     m_height = m_cinfo.output_height;
     if (m_original_width > m_width || m_original_height > m_height)
-      CLog::Log(LOGNOTICE, "JpegIO: %s: Full size: %ix%i. Only decoding: %ix%i for output size: %ix%i",
-        texturePath.c_str(), m_original_width, m_original_height, m_width, m_height, minx, miny);
+      CLog::Log(LOGNOTICE, "JpegIO: Full size: %ix%i. Only decoding: %ix%i for output size: %ix%i",
+        m_original_width, m_original_height, m_width, m_height, minx, miny);
 
     if (m_cinfo.marker_list)
     {
