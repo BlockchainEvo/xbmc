@@ -36,11 +36,10 @@ class CJpegIO
 public:
   CJpegIO();
   ~CJpegIO();
-  bool           Open(const CStdString& m_texturePath,  unsigned int m_minx=0, unsigned int m_miny=0, unsigned int *original_width=NULL, unsigned int *original_height=NULL);
+  bool           Open(const CStdString& m_texturePath,  unsigned int minx=0, unsigned int miny=0, unsigned int *original_width=NULL, unsigned int *original_height=NULL);
   bool           Decode(const unsigned char *pixels, unsigned int pitch, unsigned int format);
   void           Close();
 
-  unsigned int   FileSize()    { return m_imgsize; }
   unsigned int   Width()       { return m_width; }
   unsigned int   Height()      { return m_height; }
   unsigned int   Orientation() { return m_orientation; }
@@ -52,12 +51,9 @@ protected:
 
   unsigned char  *m_inputBuff;
   unsigned int   m_inputBuffSize;
-  unsigned int   m_minx;
-  unsigned int   m_miny;
   struct         jpeg_decompress_struct m_cinfo;
   CStdString     m_texturePath;
 
-  unsigned int   m_imgsize;
   unsigned int   m_width;
   unsigned int   m_height;
   unsigned int   m_orientation;

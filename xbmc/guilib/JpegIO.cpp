@@ -129,9 +129,6 @@ static void x_mem_src (j_decompress_ptr cinfo, unsigned char * inbuffer, unsigne
 
 CJpegIO::CJpegIO()
 {
-  m_minx = 0;
-  m_miny = 0;
-  m_imgsize = 0;
   m_width  = 0;
   m_height = 0;
   m_original_width = 0;
@@ -158,18 +155,17 @@ void CJpegIO::Close()
 bool CJpegIO::Open(const CStdString &texturePath, unsigned int minx, unsigned int miny, unsigned int *original_width, unsigned int *original_height)
 {
   m_texturePath = texturePath;
-  m_minx = minx;
-  m_miny = miny;
+  unsigned int imgsize = 0;
 
   XFILE::CFile file;
   if (file.Open(m_texturePath.c_str(), 0))
   {
-    m_imgsize = file.GetLength();
-    m_inputBuff = new unsigned char[m_imgsize];
-    m_inputBuffSize = file.Read(m_inputBuff, m_imgsize);
+    imgsize = file.GetLength();
+    m_inputBuff = new unsigned char[imgsize];
+    m_inputBuffSize = file.Read(m_inputBuff, imgsize);
     file.Close();
 
-    if ((m_imgsize != m_inputBuffSize) || (m_inputBuffSize == 0))
+    if ((imgsize != m_inputBuffSize) || (m_inputBuffSize == 0))
       return false;
   }
   else
@@ -202,10 +198,10 @@ bool CJpegIO::Open(const CStdString &texturePath, unsigned int minx, unsigned in
     If the res is greater than the one desired, use that one since there's no need
     to decode a bigger one just to squish it back down. If the res is greater than
     the gpu can hold, use the previous one.*/
-    if (m_minx == 0 || m_miny == 0)
+    if (minx == 0 || miny == 0)
     {
-      m_minx = g_settings.m_ResInfo[g_guiSettings.m_LookAndFeelResolution].iWidth;
-      m_miny = g_settings.m_ResInfo[g_guiSettings.m_LookAndFeelResolution].iHeight;
+      minx = g_settings.m_ResInfo[g_guiSettings.m_LookAndFeelResolution].iWidth;
+      miny = g_settings.m_ResInfo[g_guiSettings.m_LookAndFeelResolution].iHeight;
     }
     m_original_width = m_cinfo.image_width;
     m_original_height = m_cinfo.image_height;
@@ -224,7 +220,7 @@ bool CJpegIO::Open(const CStdString &texturePath, unsigned int minx, unsigned in
         m_cinfo.scale_num--;
         break;
       }
-      if (m_cinfo.output_width >= m_minx && m_cinfo.output_height >= m_miny)
+      if (m_cinfo.output_width >= minx && m_cinfo.output_height >= miny)
         break;
     }
     jpeg_calc_output_dimensions(&m_cinfo);
