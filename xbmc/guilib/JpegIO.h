@@ -49,9 +49,7 @@ protected:
   static  void   jpeg_error_exit(j_common_ptr cinfo);
 
   bool           GetExif();
-  unsigned int   findExifMarker( unsigned char *jpegData, 
-                                 unsigned int dataSize, 
-                                 unsigned char *&exifPtr);
+
   unsigned char  *m_inputBuff;
   unsigned int   m_inputBuffSize;
   unsigned int   m_minx;
