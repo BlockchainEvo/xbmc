@@ -65,6 +65,9 @@ protected:
   unsigned int   m_orientation;
   unsigned int   m_original_width;
   unsigned int   m_original_height;
+
+  unsigned int   m_exif_size;
+  unsigned char  *m_exif_data;
 };
 
 #endif

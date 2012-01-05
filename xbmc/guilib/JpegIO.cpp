@@ -140,6 +140,8 @@ CJpegIO::CJpegIO()
   m_inputBuffSize = 0;
   m_inputBuff = NULL;
   m_texturePath = "";
+  m_exif_data = NULL;
+  m_exif_size = 0;
 }
 
 CJpegIO::~CJpegIO()
@@ -150,6 +152,7 @@ CJpegIO::~CJpegIO()
 void CJpegIO::Close()
 {
   delete [] m_inputBuff;
+  delete [] m_exif_data;
 }
 
 bool CJpegIO::Open(const CStdString &texturePath, unsigned int minx, unsigned int miny, unsigned int *original_width, unsigned int *original_height)
@@ -189,6 +192,7 @@ bool CJpegIO::Open(const CStdString &texturePath, unsigned int minx, unsigned in
   }
   else
   {
+    jpeg_save_markers (&m_cinfo, JPEG_APP0 + 1, 0xFFFF);
     jpeg_read_header(&m_cinfo, true);
 
     /*  libjpeg can scale the image for us if it is too big. It must be in the format
@@ -229,6 +233,14 @@ bool CJpegIO::Open(const CStdString &texturePath, unsigned int minx, unsigned in
     if (m_original_width > m_width || m_original_height > m_height)
       CLog::Log(LOGNOTICE, "JpegIO: %s: Full size: %ix%i. Only decoding: %ix%i for output size: %ix%i",
         texturePath.c_str(), m_original_width, m_original_height, m_width, m_height, minx, miny);
+
+    if (m_cinfo.marker_list)
+    {
+      m_exif_size = m_cinfo.marker_list->data_length;
+      m_exif_data = new unsigned char [m_exif_size];
+      memcpy(m_exif_data, m_cinfo.marker_list->data, m_exif_size);
+    }
+
     GetExif();
     return true;
   }
@@ -370,31 +382,22 @@ unsigned int CJpegIO::findExifMarker( unsigned char *jpegData,
 
 bool CJpegIO::GetExif()
 {
-  unsigned int length = 0;
   unsigned int offset = 0;
   unsigned int numberOfTags = 0;
   unsigned int tagNumber = 0;
   bool isMotorola = false;
-  unsigned char *exif_data = NULL;
+  unsigned char *exif_data = m_exif_data;
   unsigned const char ExifHeader[] = "Exif\0\0";
-
-  length = findExifMarker(m_inputBuff, m_imgsize, exif_data);
 
   // read exif head, check for "Exif"
   //   next we want to read to current offset + length
   //   check if buffer is big enough
-  if (length && memcmp(exif_data, ExifHeader, 6) == 0)
+  if (m_exif_size && memcmp(exif_data, ExifHeader, 6) == 0)
   {
     //read exif body
     exif_data += 6;
   }
   else
-  {
-    return false;
-  }
-
-  //check for broken files
-  if ((m_inputBuff + m_imgsize) < (exif_data + length))
   {
     return false;
   }
@@ -437,7 +440,7 @@ bool CJpegIO::GetExif()
     offset += exif_data[4];
   }
 
-  if (offset > length - 2)
+  if (offset > m_exif_size - 2)
     return false; // check end of data segment
 
   // Get the number of directory entries contained in this IFD
@@ -461,7 +464,7 @@ bool CJpegIO::GetExif()
   // Search for Orientation Tag in IFD0 - hey almost there! :D
   while(1)//hopefully this jpeg has correct exif data...
   {
-    if (offset > length - 12)
+    if (offset > m_exif_size - 12)
       return false; // check end of data segment
 
     // Get Tag number
