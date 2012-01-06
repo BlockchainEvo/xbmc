@@ -125,6 +125,7 @@ static void x_mem_src (j_decompress_ptr cinfo, unsigned char * inbuffer, unsigne
   src->bytes_in_buffer = (size_t) insize;
   src->next_input_byte = (JOCTET *) inbuffer;
 }
+#endif
 
 #define OUTPUT_BUF_SIZE  4096
 typedef struct {
@@ -228,7 +229,6 @@ static void x_jpeg_mem_dest (j_compress_ptr cinfo,
   dest->pub.next_output_byte = dest->buffer = *outbuffer;
   dest->pub.free_in_buffer = dest->bufsize = *outsize;
 }
-#endif
 
 CJpegIO::CJpegIO()
 {
@@ -476,7 +476,11 @@ bool CJpegIO::CreateThumbnailFromSurface(unsigned char* buffer, unsigned int wid
   }
   else
   {
+#if JPEG_LIB_VERSION < 80
     x_jpeg_mem_dest(&cinfo, &dst, &outBufSize);
+#else
+    jpeg_mem_dest(&cinfo, &dst, &outBufSize);
+#endif
     cinfo.image_width = width;
     cinfo.image_height = height;
     cinfo.input_components = 3;
