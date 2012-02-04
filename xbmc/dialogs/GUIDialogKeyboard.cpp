@@ -657,12 +657,12 @@ int CGUIDialogKeyboard::ShowAndVerifyPassword(CStdString& strPassword, const CSt
   }
 }
 
-void CGUIDialogKeyboard::OnDeinitWindow(int nextWindowID)
+void CGUIDialogKeyboard::Close(bool forceClose)
 {
-  // call base class
-  CGUIDialog::OnDeinitWindow(nextWindowID);
   // reset the heading (we don't always have this)
   m_strHeading = "";
+  // call base class
+  CGUIDialog::Close(forceClose);
 }
 
 void CGUIDialogKeyboard::MoveCursor(int iAmount)
