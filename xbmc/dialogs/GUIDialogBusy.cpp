@@ -39,7 +39,7 @@ void CGUIDialogBusy::Show_Internal()
   m_bRunning = true;
   m_bModal = true;
   m_bLastVisible = true;
-  m_closing = false;
+  m_dialogClosing = false;
   g_windowManager.RouteToWindow(this);
 
   // active this window...
