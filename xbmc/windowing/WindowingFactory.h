@@ -24,32 +24,29 @@
 
 #include "system.h"
 
-#if defined(_WIN32) && defined(HAS_GL)
+#if   defined(TARGET_WINDOWS) && defined(HAS_GL)
 #include "windows/WinSystemWin32GL.h"
-#endif
 
-#if defined(_WIN32) && defined(HAS_DX)
+#elif defined(TARGET_WINDOWS) && defined(HAS_DX)
 #include "windows/WinSystemWin32DX.h"
-#endif
 
-#if defined(__APPLE__)
-#if defined(__arm__)
-#include "osx/WinSystemIOS.h"
-#else
-#include "osx/WinSystemOSXGL.h"
-#endif
-#endif
-
-#if defined(HAS_GLX)
+#elif defined(TARGET_LINUX)   && defined(HAS_GL)   && defined(HAVE_X11)
 #include "X11/WinSystemX11GL.h"
-#endif
 
-#if defined(HAS_EGL) && !defined(__APPLE__) && !defined(HAS_GDL)
-#include "egl/WinSystemEGL.h"
-#endif
+#elif defined(TARGET_LINUX)   && defined(HAS_GLES) && defined(HAVE_X11)
+#include "X11/WinSystemX11GLES.h"
 
-#if defined(HAS_GDL) && defined(HAS_EGL)
-#include "gdl/WinSystemGDLGLES.h"
+#elif defined(TARGET_LINUX) && defined(HAS_GLES) && defined(HAS_EGL) && !defined(HAS_GDL)
+#include "egl/WinSystemGLES.h"
+
+#elif defined(TARGET_DARWIN_OSX)
+#include "osx/WinSystemOSXGL.h"
+
+#elif defined(TARGET_DARWIN_IOS)
+#include "osx/WinSystemIOS.h"
+
+#elif defined(HAS_EGL) && defined(HAS_GDL)
+#include "gdl/WinSystemGDL.h"
 #endif
 
 #endif // WINDOWING_FACTORY_H

@@ -27,12 +27,7 @@
 #include "pictures/DllImageLib.h"
 #include "DDSImage.h"
 #include "filesystem/SpecialProtocol.h"
-#include "jpeglib.h"
-#include "filesystem/File.h"
-#include "pictures/DllLibExif.h"
-#include "settings/GUISettings.h"
-#include "settings/Settings.h"
-#include <setjmp.h>
+#include "JpegIO.h"
 #if defined(__APPLE__) && defined(__arm__)
 #include <ImageIO/ImageIO.h>
 #include "filesystem/File.h"
@@ -89,7 +84,6 @@ void CBaseTexture::Allocate(unsigned int width, unsigned int height, unsigned in
   CLAMP(m_textureHeight, g_Windowing.GetMaxTextureSize());
   CLAMP(m_imageWidth, m_textureWidth);
   CLAMP(m_imageHeight, m_textureHeight);
-
   delete[] m_pixels;
   m_pixels = new unsigned char[GetPitch() * GetRows()];
 }
@@ -177,140 +171,24 @@ bool CBaseTexture::LoadFromFile(const CStdString& texturePath, unsigned int maxW
     return false;
   }
 
-#if defined(__APPLE__) && defined(__arm__)
-  XFILE::CFile file;
-  UInt8 *imageBuff      = NULL;
-  int64_t imageBuffSize = 0;
-
-  //open path and read data to buffer
-  //this handles advancedsettings.xml pathsubstitution
-  //and resulting networking
-  if (file.Open(texturePath, 0))
-  {
-    imageBuffSize =file.GetLength();
-    imageBuff = new UInt8[imageBuffSize];
-    imageBuffSize = file.Read(imageBuff, imageBuffSize);
-    file.Close();
-  }
-  else
-  {
-    CLog::Log(LOGERROR, "Texture manager unable to open file %s", texturePath.c_str());
-    return false;
-  }
-
-  if (imageBuffSize <= 0)
-  {
-    CLog::Log(LOGERROR, "Texture manager read texture file failed.");
-    delete [] imageBuff;
-    return false;
-  }
-
-  // create the image from buffer;
-  CGImageSourceRef imageSource;
-  // create a CFDataRef using CFDataCreateWithBytesNoCopy and kCFAllocatorNull for deallocator.
-  // this allows us to do a nocopy reference and we handle the free of imageBuff
-  CFDataRef cfdata = CFDataCreateWithBytesNoCopy(NULL, imageBuff, imageBuffSize, kCFAllocatorNull);
-  imageSource = CGImageSourceCreateWithData(cfdata, NULL);   
-    
-  if (imageSource == nil)
-  {
-    CLog::Log(LOGERROR, "Texture manager unable to load file: %s", CSpecialProtocol::TranslatePath(texturePath).c_str());
-    CFRelease(cfdata);
-    delete [] imageBuff;
-    return false;
-  }
-
-  CGImageRef image = CGImageSourceCreateImageAtIndex(imageSource, 0, NULL);
-
-  int rotate = 0;
-  if (autoRotate)
-  { // get the orientation of the image for displaying it correctly
-    CFDictionaryRef imagePropertiesDictionary = CGImageSourceCopyPropertiesAtIndex(imageSource,0, NULL);
-    if (imagePropertiesDictionary != nil)
-    {
-      CFNumberRef orientation = (CFNumberRef)CFDictionaryGetValue(imagePropertiesDictionary, kCGImagePropertyOrientation);
-      if (orientation != nil)
-      {
-        int value = 0;
-        CFNumberGetValue(orientation, kCFNumberIntType, &value);
-        if (value)
-          rotate = value - 1;
-      }
-      CFRelease(imagePropertiesDictionary);
-    }
-  }
-
-  CFRelease(imageSource);
-
-  unsigned int width  = CGImageGetWidth(image);
-  unsigned int height = CGImageGetHeight(image);
-
-  m_hasAlpha = (CGImageGetAlphaInfo(image) != kCGImageAlphaNone);
-
-  if (originalWidth)
-    *originalWidth = width;
-  if (originalHeight)
-    *originalHeight = height;
-
-  // check texture size limits and limit to screen size - preserving aspectratio of image  
-  if ( width > g_Windowing.GetMaxTextureSize() || height > g_Windowing.GetMaxTextureSize() )
-  {
-    float aspect;
-
-    if ( width > height )
-    {
-      aspect = (float)width / (float)height;
-      width  = g_Windowing.GetWidth();
-      height = (float)width / (float)aspect;
-    }
-    else
-    {
-      aspect = (float)height / (float)width;
-      height = g_Windowing.GetHeight();
-      width  = (float)height / (float)aspect;
-    }
-    CLog::Log(LOGDEBUG, "Texture manager texture clamp:new texture size: %i x %i", width, height);
-  }
-
-  // use RGBA to skip swizzling
-  Allocate(width, height, XB_FMT_RGBA8);
-  m_orientation = rotate;
-    
-  CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-
-  // hw convert jmpeg to RGBA
-  CGContextRef context = CGBitmapContextCreate(m_pixels,
-    width, height, 8, GetPitch(), colorSpace,
-    kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big);
-
-  CGColorSpaceRelease(colorSpace);
-
-  // Flip so that it isn't upside-down
-  //CGContextTranslateCTM(context, 0, height);
-  //CGContextScaleCTM(context, 1.0f, -1.0f);
-  #if MAC_OS_X_VERSION_MAX_ALLOWED < MAC_OS_X_VERSION_10_5
-    CGContextClearRect(context, CGRectMake(0, 0, width, height));
-  #else
-    #if MAC_OS_X_VERSION_MIN_REQUIRED < MAC_OS_X_VERSION_10_5
-    // (just a way of checking whether we're running in 10.5 or later)
-    if (CGContextDrawLinearGradient == 0)
-      CGContextClearRect(context, CGRectMake(0, 0, width, height));
-    else
-    #endif
-      CGContextSetBlendMode(context, kCGBlendModeCopy);
-  #endif
-  //CGContextSetBlendMode(context, kCGBlendModeCopy);
-  CGContextDrawImage(context, CGRectMake(0, 0, width, height), image);
-  CGContextRelease(context);
-  CGImageRelease(image);
-  CFRelease(cfdata);
-  delete [] imageBuff;
-#else
-
+  //ImageLib is sooo sloow for jpegs. Try our own decoder first. If it fails, fall back to ImageLib.
   if (URIUtils::GetExtension(texturePath).Equals(".jpg") || URIUtils::GetExtension(texturePath).Equals(".tbn"))
   {
-    if (DecodeJPEG(texturePath, autoRotate, 0, 0))
-      return true;
+    CJpegIO jpegfile;
+    if (jpegfile.Open(texturePath))
+    {
+      if (jpegfile.Width() > 0 && jpegfile.Height() > 0)
+      {
+        Allocate(jpegfile.Width(), jpegfile.Height(), XB_FMT_A8R8G8B8);
+        if (jpegfile.Decode(m_pixels, GetPitch(), XB_FMT_A8R8G8B8))
+        {
+          if (autoRotate && jpegfile.Orientation())
+            m_orientation = jpegfile.Orientation() - 1;
+          m_hasAlpha=false;
+          return true;
+        }
+      }
+    }
   }
 
   DllImageLib dll;
@@ -377,7 +255,6 @@ bool CBaseTexture::LoadFromFile(const CStdString& texturePath, unsigned int maxW
     }
   }
   dll.ReleaseImage(&image);
-#endif
 
   ClampToEdge();
 
@@ -456,7 +333,6 @@ unsigned int CBaseTexture::GetPitch(unsigned int width) const
     return width;
   case XB_FMT_RGB8:
     return (((width + 1)* 3 / 4) * 4);
-    break;
   case XB_FMT_RGBA8:
   case XB_FMT_A8R8G8B8:
   default:
@@ -499,127 +375,4 @@ unsigned int CBaseTexture::GetBlockSize() const
 bool CBaseTexture::HasAlpha() const
 {
   return m_hasAlpha;
-}
-
-
-struct my_error_mgr {
-  struct jpeg_error_mgr pub;	/* "public" fields */
-  jmp_buf setjmp_buffer;	/* for return to caller */
-};
-
-typedef struct my_error_mgr * my_error_ptr;
-
-void my_error_exit (j_common_ptr cinfo)
-{
-  my_error_ptr myerr = (my_error_ptr) cinfo->err;
-  longjmp(myerr->setjmp_buffer, 1);
-}
-
-bool CBaseTexture::DecodeJPEG(const CStdString& texturePath, bool autoRotate, int minx=0, int miny=0)
-{
-  struct jpeg_decompress_struct cinfo;
-  struct my_error_mgr jerr;
-  JSAMPROW row_pointer[1];
-  XFILE::CFile file;
-  uint8_t *imageBuff = NULL;
-  int64_t imageBuffSize = 0;
-
-  if (file.Open(texturePath.c_str(), 0))
-  {
-    int64_t imgsize;
-    imgsize = file.GetLength();
-    imageBuff = new uint8_t[imgsize];
-    imageBuffSize = file.Read(imageBuff, imgsize);
-    file.Close();
-
-    if ((imgsize != imageBuffSize) || (imageBuffSize <= 0))
-    {
-      delete [] imageBuff;
-      return false;
-    }
-  }
-  else
-  {
-    return false;
-  }
-
-  cinfo.err = jpeg_std_error(&jerr.pub);
-  jerr.pub.error_exit = my_error_exit;
-  if (setjmp(jerr.setjmp_buffer))
-  {
-    jpeg_destroy_decompress(&cinfo);
-    delete [] imageBuff;
-    return false;
-  }
-
-  jpeg_create_decompress( &cinfo );
-  jpeg_mem_src(&cinfo, imageBuff, imageBuffSize);
-  jpeg_read_header( &cinfo, TRUE );
-
-/*  jpegs don't have alpha so we only need rgb. we can use an rbg texture
-  directly. It won't be 32bit aligned, but we make up for it by not having
-  to set dummy alpha values.*/
-  cinfo.out_color_space=JCS_RGB;
-  m_hasAlpha = false;
-
-/*  libjpeg can scale the image for us if it is too big. It must be in the format
-  num/denom, where (for our purposes) that is [1-8]/8.
-  The only way to know how big a resulting image will be is to try a ratio and
-  test its resulting size.
-  If the res is greater than the one desired, use that one since there's no need
-  to decode a bigger one just to squish it back down. If the res is greater than
-  the gpu can hold, use the previous one.*/
-  if (minx <= 0 || miny <= 0)
-  {
-    minx = g_settings.m_ResInfo[g_guiSettings.m_LookAndFeelResolution].iScreenWidth;
-    miny = g_settings.m_ResInfo[g_guiSettings.m_LookAndFeelResolution].iScreenHeight;
-  }
-  cinfo.scale_denom=8;
-  unsigned int maxtexsize = g_Windowing.GetMaxTextureSize();
-  for (cinfo.scale_num = 1;cinfo.scale_num <=8 ;cinfo.scale_num++)
-  {
-    jpeg_calc_output_dimensions (&cinfo);
-    if ((cinfo.output_width * cinfo.output_height) > (maxtexsize * maxtexsize))
-    {
-      cinfo.scale_num--;
-      break;
-    }
-    if ( cinfo.output_width >= minx && cinfo.output_height >= miny)
-      break;
-  }
-  jpeg_calc_output_dimensions (&cinfo);
-
-  unsigned int srcPitch = (((cinfo.output_width + 1)* 3 / 4) * 4); // bitmap row length is aligned to 4 bytes
-  Allocate(cinfo.output_width, cinfo.output_height, XB_FMT_RGB8);
-  unsigned int dstPitch = GetPitch();
-  if (srcPitch > dstPitch)
-     return false;
-
-  unsigned char *dst = m_pixels;
-  jpeg_start_decompress( &cinfo );
-  while( cinfo.output_scanline < cinfo.output_height )
-    {
-      jpeg_read_scanlines( &cinfo, &dst, 1 );
-      dst+=dstPitch;
-    }
-
-  jpeg_finish_decompress( &cinfo );
-  jpeg_destroy_decompress( &cinfo );
-  delete [] imageBuff;
-
-  //Now that we've decoded the image, we need to check the EXIF tag for possible rotation
-  ExifInfo_t m_exifInfo;
-  IPTCInfo_t m_iptcInfo;
-  DllLibExif exifDll;
-  if (!exifDll.Load())
-    {
-      m_orientation=0;
-      return true;
-    }
-  exifDll.process_jpeg(texturePath.c_str(), &m_exifInfo, &m_iptcInfo);
-  if (autoRotate && m_exifInfo.Orientation)
-    m_orientation = m_exifInfo.Orientation - 1;
-
-
-return true;
 }

@@ -90,8 +90,8 @@ void CGLTexture::LoadToGPU()
     m_textureWidth = maxSize;
   }
 
-  GLenum format;
-  GLint numcomponents;
+  GLenum format = GL_BGRA;
+  GLint numcomponents = GL_RGBA;
 
   switch (m_format)
   {
@@ -111,8 +111,6 @@ void CGLTexture::LoadToGPU()
     break;
   case XB_FMT_A8R8G8B8:
   default:
-    format = GL_BGRA;
-    numcomponents = GL_RGBA;
     break;
   }
 
@@ -147,11 +145,12 @@ void CGLTexture::LoadToGPU()
 
   switch (m_format)
   {
-    case XB_FMT_RGB8:
-      internalformat = pixelformat = GL_RGB;
-      break;
+    default:
     case XB_FMT_RGBA8:
       internalformat = pixelformat = GL_RGBA;
+      break;
+    case XB_FMT_RGB8:
+      internalformat = pixelformat = GL_RGB;
       break;
     case XB_FMT_A8R8G8B8:
       if (g_Windowing.SupportsBGRA())

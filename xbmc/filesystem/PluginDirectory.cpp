@@ -25,6 +25,7 @@
 #include "PluginDirectory.h"
 #include "utils/URIUtils.h"
 #include "addons/AddonManager.h"
+#include "addons/AddonInstaller.h"
 #include "addons/IAddon.h"
 #ifdef HAS_PYTHON
 #include "interfaces/python/XBPython.h"
@@ -77,7 +78,7 @@ bool CPluginDirectory::StartScript(const CStdString& strPath, bool retrievingDir
 {
   CURL url(strPath);
 
-  if (!CAddonMgr::Get().GetAddon(url.GetHostName(), m_addon, ADDON_PLUGIN))
+  if (!CAddonMgr::Get().GetAddon(url.GetHostName(), m_addon, ADDON_PLUGIN) && !CAddonInstaller::Get().PromptForInstall(url.GetHostName(), m_addon))
   {
     CLog::Log(LOGERROR, "Unable to find plugin %s", url.GetHostName().c_str());
     return false;
@@ -98,7 +99,8 @@ bool CPluginDirectory::StartScript(const CStdString& strPath, bool retrievingDir
   // clear out our status variables
   m_fileResult->Reset();
   m_listItems->Clear();
-  m_listItems->m_strPath = strPath;
+  m_listItems->SetPath(strPath);
+  m_listItems->SetLabel(m_addon->Name());
   m_cancelled = false;
   m_success = false;
   m_totalItems = 0;
@@ -141,8 +143,8 @@ bool CPluginDirectory::GetPluginResult(const CStdString& strPath, CFileItem &res
   if (success)
   { // update the play path and metadata, saving the old one as needed
     if (!resultItem.HasProperty("original_listitem_url"))
-      resultItem.SetProperty("original_listitem_url", resultItem.m_strPath);
-    resultItem.m_strPath = newDir->m_fileResult->m_strPath;
+      resultItem.SetProperty("original_listitem_url", resultItem.GetPath());
+    resultItem.SetPath(newDir->m_fileResult->GetPath());
     resultItem.SetMimeType(newDir->m_fileResult->GetMimeType(false));
     resultItem.UpdateInfo(*newDir->m_fileResult);
   }
@@ -407,7 +409,7 @@ bool CPluginDirectory::RunScriptWithParams(const CStdString& strPath)
     return false;
 
   AddonPtr addon;
-  if (!CAddonMgr::Get().GetAddon(url.GetHostName(), addon, ADDON_PLUGIN))
+  if (!CAddonMgr::Get().GetAddon(url.GetHostName(), addon, ADDON_PLUGIN) && !CAddonInstaller::Get().PromptForInstall(url.GetHostName(), addon))
   {
     CLog::Log(LOGERROR, "Unable to find plugin %s", url.GetHostName().c_str());
     return false;

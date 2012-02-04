@@ -25,10 +25,8 @@
 
 #if defined(TARGET_DARWIN_IOS)
 #define DEFAULT_BUFFERING 4
-#elif defined(_WIN32) || defined(HAS_INTELCE)
-#define DEFAULT_BUFFERING 3
 #else
-#define DEFAULT_BUFFERING 2
+#define DEFAULT_BUFFERING 3
 #endif
 
 class CDirtyRegionTracker

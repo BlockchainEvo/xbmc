@@ -26,7 +26,11 @@
 #define RENDER_FLAG_TOP         0x02
 #define RENDER_FLAG_BOTH (RENDER_FLAG_BOT | RENDER_FLAG_TOP)
 #define RENDER_FLAG_FIELDMASK   0x03
-#define RENDER_FLAG_LAST        0x40
+
+#define RENDER_FLAG_FIELD0      0x80
+#define RENDER_FLAG_FIELD1      0x100
+
+// #define RENDER_FLAG_LAST        0x40
 
 #define RENDER_FLAG_NOOSD       0x04 /* don't draw any osd */
 #define RENDER_FLAG_NOOSDALPHA  0x08 /* don't allow alpha when osd is drawn */
@@ -65,7 +69,7 @@
 #define CONF_FLAGS_TRC_GAMMA22    0x0800
 #define CONF_FLAGS_TRC_GAMMA28    0x0c00
 
-#define CONF_FLAGS_FORMAT_MASK(a) ((a) & 0x1ff000)
+#define CONF_FLAGS_FORMAT_MASK(a) ((a) & 0x00fff000)
 #define CONF_FLAGS_FORMAT_YV12   0x001000
 #define CONF_FLAGS_FORMAT_NV12   0x002000
 #define CONF_FLAGS_FORMAT_UYVY   0x004000

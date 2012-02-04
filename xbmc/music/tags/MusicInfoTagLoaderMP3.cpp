@@ -89,7 +89,6 @@ bool CMusicInfoTagLoaderMP3::Load(const CStdString& strFileName, CMusicInfoTag& 
 #endif
     }
 
-#ifndef ARMEL_ // TODO this will probably be OK next time we sync to trunk
     // Check for an APEv2 tag
     CAPEv2Tag apeTag;
     if (PrioritiseAPETags() && apeTag.ReadTag(strFileName.c_str()))
@@ -140,7 +139,7 @@ bool CMusicInfoTagLoaderMP3::Load(const CStdString& strFileName, CMusicInfoTag& 
       if (apeTag.GetRating() > '0')
         tag.SetRating(apeTag.GetRating());
     }
-#endif
+
     tag.SetDuration(ReadDuration(strFileName));
 
     return tag.Loaded();
@@ -156,7 +155,6 @@ bool CMusicInfoTagLoaderMP3::Load(const CStdString& strFileName, CMusicInfoTag& 
 
 bool CMusicInfoTagLoaderMP3::ReadSeekAndReplayGainInfo(const CStdString &strFileName)
 {
-#ifndef ARMEL_ // TODO this will probably be OK next time we sync to trunk
   // First check for an APEv2 tag
   CAPEv2Tag apeTag;
   if (apeTag.ReadTag(strFileName.c_str()))
@@ -166,7 +164,7 @@ bool CMusicInfoTagLoaderMP3::ReadSeekAndReplayGainInfo(const CStdString &strFile
       m_replayGainInfo = apeTag.GetReplayGain();
 #endif
   }
-#endif
+
 #if defined(USE_FFMPEG)
   if (!m_replayGainInfo.iHasGainInfo)
   { // Nothing found query id3 tag

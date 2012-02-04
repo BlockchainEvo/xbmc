@@ -91,7 +91,7 @@ enum PixelFormat CDVDVideoCodecFFmpeg::GetFormat( struct AVCodecContext * avctx
   if(DXVA::CDecoder::Supports(*cur) && g_guiSettings.GetBool("videoplayer.usedxva2"))
   {
     DXVA::CDecoder* dec = new DXVA::CDecoder();
-    if(dec->Open(avctx, *cur))
+    if(dec->Open(avctx, *cur, ctx->m_uSurfacesCount))
     {
       ctx->SetHardware(dec);
       return *cur;
@@ -101,7 +101,9 @@ enum PixelFormat CDVDVideoCodecFFmpeg::GetFormat( struct AVCodecContext * avctx
   }
 #endif
 #ifdef HAVE_LIBVA
-    if(*cur == PIX_FMT_VAAPI_VLD && g_guiSettings.GetBool("videoplayer.usevaapi"))
+    // mpeg4 vaapi decoding is disabled
+    if(*cur == PIX_FMT_VAAPI_VLD && g_guiSettings.GetBool("videoplayer.usevaapi") 
+    && (avctx->codec_id != CODEC_ID_MPEG4 || g_advancedSettings.m_videoAllowMpeg4VAAPI)) 
     {
       VAAPI::CDecoder* dec = new VAAPI::CDecoder();
       if(dec->Open(avctx, *cur))
@@ -110,7 +112,7 @@ enum PixelFormat CDVDVideoCodecFFmpeg::GetFormat( struct AVCodecContext * avctx
         return *cur;
       }
       else
-        dec->Release();      
+        dec->Release();
     }
 #endif
     cur++;
@@ -130,6 +132,8 @@ CDVDVideoCodecFFmpeg::CDVDVideoCodecFFmpeg() : CDVDVideoCodec()
 
   m_iPictureWidth = 0;
   m_iPictureHeight = 0;
+
+  m_uSurfacesCount = 0;
 
   m_iScreenWidth = 0;
   m_iScreenHeight = 0;
@@ -163,6 +167,22 @@ bool CDVDVideoCodecFFmpeg::Open(CDVDStreamInfo &hints, CDVDCodecOptions &options
 
   pCodec = NULL;
 
+  if (hints.codec == CODEC_ID_H264)
+  {
+    switch(hints.profile)
+    {
+      case FF_PROFILE_H264_HIGH_10:
+      case FF_PROFILE_H264_HIGH_10_INTRA:
+      case FF_PROFILE_H264_HIGH_422:
+      case FF_PROFILE_H264_HIGH_422_INTRA:
+      case FF_PROFILE_H264_HIGH_444_PREDICTIVE:
+      case FF_PROFILE_H264_HIGH_444_INTRA:
+      case FF_PROFILE_H264_CAVLC_444:
+      m_bSoftware = true;
+      break;
+    }
+  }
+
 #ifdef HAVE_LIBVDPAU
   if(g_guiSettings.GetBool("videoplayer.usevdpau") && !m_bSoftware)
   {
@@ -179,6 +199,8 @@ bool CDVDVideoCodecFFmpeg::Open(CDVDStreamInfo &hints, CDVDCodecOptions &options
         m_pCodecContext->codec_id = hints.codec;
         m_pCodecContext->width    = hints.width;
         m_pCodecContext->height   = hints.height;
+        m_pCodecContext->coded_width   = hints.width;
+        m_pCodecContext->coded_height  = hints.height;
         if(vdp->Open(m_pCodecContext, pCodec->pix_fmts ? pCodec->pix_fmts[0] : PIX_FMT_NONE))
         {
           m_pHardware = vdp;
@@ -247,7 +269,10 @@ bool CDVDVideoCodecFFmpeg::Open(CDVDStreamInfo &hints, CDVDCodecOptions &options
   // set any special options
   for(CDVDCodecOptions::iterator it = options.begin(); it != options.end(); it++)
   {
-    m_dllAvUtil.av_set_string3(m_pCodecContext, it->m_name.c_str(), it->m_value.c_str(), 0, NULL);
+    if (it->m_name == "surfaces")
+      m_uSurfacesCount = std::atoi(it->m_value.c_str());
+    else
+      m_dllAvUtil.av_set_string3(m_pCodecContext, it->m_name.c_str(), it->m_value.c_str(), 0, NULL);
   }
 
   int num_threads = std::min(8 /*MAX_THREADS*/, g_cpuInfo.getCPUCount());
@@ -533,7 +558,7 @@ void CDVDVideoCodecFFmpeg::Reset()
 
   if (m_pConvertFrame)
   {
-    delete[] m_pConvertFrame->data[0];
+    m_dllAvCodec.avpicture_free(m_pConvertFrame);
     m_dllAvUtil.av_free(m_pConvertFrame);
     m_pConvertFrame = NULL;
   }
@@ -661,6 +686,7 @@ bool CDVDVideoCodecFFmpeg::GetPicture(DVDVideoPicture* pDvdVideoPicture)
 
   pDvdVideoPicture->iFlags |= pDvdVideoPicture->data[0] ? 0 : DVP_FLAG_DROPPED;
   pDvdVideoPicture->format = DVDVideoPicture::FMT_YUV420P;
+  pDvdVideoPicture->extended_format = 0;
 
   return true;
 }
