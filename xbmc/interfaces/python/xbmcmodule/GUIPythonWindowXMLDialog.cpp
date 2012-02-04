@@ -27,6 +27,7 @@
 CGUIPythonWindowXMLDialog::CGUIPythonWindowXMLDialog(int id, CStdString strXML, CStdString strFallBackPath)
 : CGUIPythonWindowXML(id,strXML,strFallBackPath)
 {
+  m_bRunning = false;
   m_loadOnDemand = false;
 }
 
@@ -55,15 +56,14 @@ void CGUIPythonWindowXMLDialog::Show_Internal(bool show /* = true */)
     // active this dialog...
     CGUIMessage msg(GUI_MSG_WINDOW_INIT,0,0);
     OnMessage(msg);
-    m_active = true;
+    m_bRunning = true;
   }
   else // hide
-    Close();
-}
+  {
+    CGUIMessage msg(GUI_MSG_WINDOW_DEINIT,0,0);
+    OnMessage(msg);
 
-void CGUIPythonWindowXMLDialog::OnDeinitWindow(int nextWindowID)
-{
-  g_windowManager.RemoveDialog(GetID());
-  CGUIWindow::OnDeinitWindow(nextWindowID);
-  g_windowManager.Delete(GetID());
+    g_windowManager.RemoveDialog(GetID());
+    m_bRunning = false;
+  }
 }

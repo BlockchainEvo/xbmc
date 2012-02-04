@@ -72,7 +72,7 @@ bool CGUIDialogVideoScan::OnMessage(CGUIMessage& message)
 
 void CGUIDialogVideoScan::FrameMove()
 {
-  if (m_active)
+  if (m_bRunning)
     UpdateState();
 
   CGUIDialog::FrameMove();
