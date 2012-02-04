@@ -138,7 +138,6 @@ private:
   void HideOverlay(CGUIWindow::OVERLAY_STATE state);
   void AddToWindowHistory(int newWindowID);
   void ClearWindowHistory();
-  void CloseWindowSync(CGUIWindow *window, int nextWindowID = 0);
   CGUIWindow *GetTopMostDialog() const;
 
   friend class CApplicationMessenger;
