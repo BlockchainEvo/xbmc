@@ -46,7 +46,7 @@
 #include "osx/WinSystemIOS.h"
 
 #elif defined(HAS_EGL) && defined(HAS_GDL)
-#include "gdl/WinSystemGDL.h"
+#include "gdl/WinSystemGDLGLES.h"
 #endif
 
 #endif // WINDOWING_FACTORY_H

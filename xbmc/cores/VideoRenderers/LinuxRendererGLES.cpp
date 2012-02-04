@@ -1747,22 +1747,6 @@ bool CLinuxRendererGLES::CreateBYPASSTexture(int index)
   return true;
 }
 
-//********************************************************************************************************
-// BYPASS creation, deletion, copying + clearing
-//********************************************************************************************************
-void CLinuxRendererGLES::UploadBYPASSTexture(int index)
-{
-  m_eventTexturesDone[index]->Set();
-}
-void CLinuxRendererGLES::DeleteBYPASSTexture(int index)
-{
-}
-bool CLinuxRendererGLES::CreateBYPASSTexture(int index)
-{
-  m_eventTexturesDone[index]->Set();
-  return true;
-}
-
 void CLinuxRendererGLES::SetTextureFilter(GLenum method)
 {
   for (int i = 0 ; i<m_NumYV12Buffers ; i++)

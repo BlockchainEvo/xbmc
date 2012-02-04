@@ -678,7 +678,7 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
 {
   try
   {
-    CLog::Log(LOGNOTICE, "CGSTPlayer: Opening: %s", file.m_strPath.c_str());
+    CLog::Log(LOGNOTICE, "CGSTPlayer: Opening: %s", file.GetPath().c_str());
     // if playing a file close it first
     // this has to be changed so we won't have to close it.
     if(ThreadHandle())
@@ -735,18 +735,18 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
     if (gstvars_loop == NULL)
       return false;
 
-    if (m_item.m_strPath.Left(6).Equals("udp://") || 
-        m_item.m_strPath.Left(7).Equals("rtmp://"))
+    if (m_item.GetPath().Left(6).Equals("udp://") || 
+        m_item.GetPath().Left(7).Equals("rtmp://"))
     {
       // udp playback in gstreamer requires constructing a pipeline
       // with a udpsrc, queue, ismd_clock_recovery_provider and decodebin2.
       // we hook the "pad-added" callback and create and attach the final
       // audio, video and subtitle elements.
-      url = m_item.m_strPath;
+      url = m_item.GetPath();
       if (!gst_uri_is_valid(url.c_str()))
         return false;
 
-      if (m_item.m_strPath.Left(6).Equals("udp://"))
+      if (m_item.GetPath().Left(6).Equals("udp://"))
       {
         m_gstvars->player       = gst_pipeline_new("gstplayer-udp");
         m_gstvars->net_source   = gst_element_factory_make("udpsrc", "source");
@@ -755,7 +755,7 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
         g_object_set(m_gstvars->net_source, "timeout", timeout, NULL);
         m_gstvars->is_udp = true;
       }
-      else if (m_item.m_strPath.Left(7).Equals("rtmp://"))
+      else if (m_item.GetPath().Left(7).Equals("rtmp://"))
       {
         m_gstvars->player       = gst_pipeline_new("gstplayer-rtmp");
         m_gstvars->net_source   = gst_element_factory_make("rtmpsrc", "source");
@@ -809,17 +809,17 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
     }
     else
     {
-      if (m_item.m_strPath.Left(7).Equals("rtsp://"))
+      if (m_item.GetPath().Left(7).Equals("rtsp://"))
       {
         // protocol goes to gstreamer as is
-        url = m_item.m_strPath;
+        url = m_item.GetPath();
         if (!gst_uri_is_valid(url.c_str()))
           return false;
       }
-      else if (m_item.m_strPath.Left(7).Equals("http://"))
+      else if (m_item.GetPath().Left(7).Equals("http://"))
       {
       // strip user agent that we append
-        url = m_item.m_strPath;
+        url = m_item.GetPath();
         size_t pos = url.rfind('|');
         if (pos > string::npos)
           url = url.erase(pos, url.size());
@@ -828,7 +828,7 @@ bool CGSTPlayer::OpenFile(const CFileItem &file, const CPlayerOptions &options)
       }
       else
       {
-        m_gstvars->appsrc = new CGSTAppsrc(m_item.m_strPath);
+        m_gstvars->appsrc = new CGSTAppsrc(m_item.GetPath());
       }
 
       // playbin2 will figure out elements for audio automatically
@@ -1746,7 +1746,7 @@ void CGSTPlayer::Process()
           __FUNCTION__, m_video_width, m_video_height, m_video_fps);
 
         if(!g_renderManager.Configure(m_video_width, m_video_height,
-          m_video_width, m_video_height, m_video_fps, flags))
+          m_video_width, m_video_height, m_video_fps, flags, 0))
         {
           CLog::Log(LOGERROR, "%s - failed to configure renderer", __FUNCTION__);
         }

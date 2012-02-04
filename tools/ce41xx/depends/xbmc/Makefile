@@ -7,7 +7,7 @@ export CXXFLAGS+=-isystem$(SDKSTAGE)/include/linux_user
 CONFIGURE=./configure --prefix=$(PREFIX) --host=$(HOST) \
   --enable-external-python --enable-gles --disable-xrandr \
   --disable-optical-drive --disable-dvdcss --disable-optimizations \
-  --disable-ffmpeg --disable-debug --disable-non-free
+  --disable-ffmpeg --disable-debug --disable-non-free --disable-sdl --disable-x11
 
 all: configure
 

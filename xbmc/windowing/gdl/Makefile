@@ -1,6 +1,5 @@
 INCLUDES=-I. -I../.. -I../../linux
 SRCS= \
-     WinBindingEGL.cpp \
      WinSystemGDL.cpp \
      WinSystemGDLGLES.cpp
 

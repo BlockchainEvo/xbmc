@@ -25,7 +25,7 @@
  */
 #include "windowing/WinSystem.h"
 #include "guilib/Geometry.h"
-#include "WinBindingEGL.h"
+#include "windowing/egl/WinBindingEGL.h"
 
 #include <vector>
 #include <libgdl.h>
