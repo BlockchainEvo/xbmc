@@ -181,6 +181,7 @@
 #undef HAS_SDL_OPENGL
 #undef HAS_LIRC
 #undef HAS_KARAOKE
+#undef USE_ALSA
 
 #define HAS_EGL
 #define HAS_GLES 2
