@@ -14,7 +14,7 @@ SUBDIRS = \
 	gstreamer-plugins-base gstreamer-plugins-good \
 	gstreamer-plugins-bad gstreamer-plugins-ugly  \
 	gst-fluendo-mp3 gst-fluendo-mpegdemux gst-fluendo-ismd \
-	samba dbus python26 mysqlclient boost xbmc \
+	samba dbus python26 mysqlclient boost libusb xbmc \
 
 IMAGENAME = xbmc-selectv-`date +'%y%m%d'`
 
