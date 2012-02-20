@@ -36,7 +36,7 @@
 class CImageLoader : public CJob
 {
 public:
-  CImageLoader(const CStdString &path, float width = 0, float height = 0);
+  CImageLoader(const CStdString &path, float *width = NULL, float *height = NULL);
   virtual ~CImageLoader();
 
   /*!
@@ -46,8 +46,8 @@ public:
 
   CStdString    m_path; ///< path of image to load
   CBaseTexture *m_texture; ///< Texture object to load the image into \sa CBaseTexture.
-  float           m_width;
-  float           m_height;
+  float           *m_width;
+  float           *m_height;
 };
 
 /*!
@@ -101,7 +101,7 @@ public:
    \param immediately if set true the image is immediately unloaded once its reference count reaches zero
                       rather than being unloaded after a delay.
    */
-  void ReleaseImage(const CStdString &path, bool immediately = false);
+  void ReleaseImage(const CStdString &path, bool immediately = false, float width = 0, float height = 0);
 
   /*!
    \brief Cleanup images that are no longer in use.
@@ -125,7 +125,9 @@ private:
     bool DecrRef(bool deleteImmediately);
     bool DeleteIfRequired(bool deleteImmediately = false);
     void SetTexture(CBaseTexture* texture);
-
+    float *GetWidth() { return &m_width; }; 
+    float *GetHeight() { return &m_height; };
+    void  SetSize(float width, float height) {m_width = width; m_height = height; };
     const CStdString &GetPath() const { return m_path; };
     const CTextureArray &GetTexture() const { return m_texture; };
 
@@ -136,6 +138,8 @@ private:
     CStdString m_path;
     CTextureArray m_texture;
     unsigned int m_timeToDelete;
+    float m_width;
+    float m_height;
   };
 
   void QueueImage(const CStdString &path, float width = 0, float height = 0);

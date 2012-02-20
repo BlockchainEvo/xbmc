@@ -35,12 +35,14 @@
 using namespace std;
 
 
-CImageLoader::CImageLoader(const CStdString &path, float width, float height)
+CImageLoader::CImageLoader(const CStdString &path, float *width, float *height)
 {
   m_path = path;
   m_texture = NULL;
-  m_width = width;
-  m_height = height;
+  if (width)
+    m_width = width;
+  if (height)
+    m_height = height;
 }
 
 CImageLoader::~CImageLoader()
@@ -71,16 +73,16 @@ bool CImageLoader::DoWork()
     else
       return true;
   }
- 
+
   m_texture = new CTexture();
   unsigned int start = XbmcThreads::SystemClockMillis();
-  if (!m_texture->LoadFromFile(loadPath, (unsigned int)m_width, (unsigned int)m_height, g_guiSettings.GetBool("pictures.useexifrotation")))
+  if (!m_texture->LoadFromFile(m_path, (unsigned int)*m_width, (unsigned int)*m_height, g_guiSettings.GetBool("pictures.useexifrotation")))
   {
     delete m_texture;
     m_texture = NULL;
   }
   else if (XbmcThreads::SystemClockMillis() - start > 100)
-    CLog::Log(LOGDEBUG, "%s - took %u ms to load %s", __FUNCTION__, XbmcThreads::SystemClockMillis() - start, loadPath.c_str());
+    CLog::Log(LOGDEBUG, "%s - took %u ms to load %s", __FUNCTION__, XbmcThreads::SystemClockMillis() - start, m_path.c_str());
 
   return true;
 }
@@ -162,59 +164,73 @@ void CGUILargeTextureManager::CleanupUnusedImages(bool immediately)
 // else, add to the queue list if appropriate.
 bool CGUILargeTextureManager::GetImage(const CStdString &path, CTextureArray &texture, bool firstRequest, float width, float height)
 {
-  // note: max size to load images: 2048x1024? (8MB)
   CSingleLock lock(m_listSection);
   for (listIterator it = m_allocated.begin(); it != m_allocated.end(); ++it)
   {
     CLargeTexture *image = *it;
     if (image->GetPath() == path)
     {
-      if (firstRequest)
-        image->AddRef();
-      texture = image->GetTexture();
-      if (texture.size() > 0)
-        {
+      CTextureArray temp = image->GetTexture();
+      if (temp.size() > 0)
+      {
         // Our image may have been scaled to fit a control. If it's too small we'll need to create a new one.
         // If the current image is bigger than the required size, use it. If it's the full-size image, use it.
         // Else, return false signaling that we need a new GetImage.
-          if (texture.m_width >= (int)width || texture.m_height >= (int)height)
-            return true;
-          if (texture.m_width == texture.m_originalWidth && texture.m_height == texture.m_originalHeight)
-            return true;
-          return false;
+        if (((int)temp.m_width >= (int)width && (int)temp.m_height >= (int)height) || 
+           ((int)temp.m_width == (int)temp.m_originalWidth && (int)temp.m_height == (int)temp.m_originalHeight))
+        {
+          if (firstRequest)
+            image->AddRef();
+          texture = temp;
+          return true;
         }
+      }
     }
   }
-
   if (firstRequest)
+  {
     QueueImage(path, width, height);
-
+  }
   return true;
 }
 
-void CGUILargeTextureManager::ReleaseImage(const CStdString &path, bool immediately)
+void CGUILargeTextureManager::ReleaseImage(const CStdString &path, bool immediately, float width, float height)
 {
   CSingleLock lock(m_listSection);
+  float foundWidth = 0, foundHeight = 0;
   for (listIterator it = m_allocated.begin(); it != m_allocated.end(); ++it)
   {
     CLargeTexture *image = *it;
     if (image->GetPath() == path)
     {
-      if (image->DecrRef(immediately) && immediately)
-        m_allocated.erase(it);
-      return;
+      CTextureArray texture;
+      texture = image->GetTexture();
+      if (texture.size() > 0 && (int)(texture.m_width) == (int)width && (int)(texture.m_height) == (int)height)
+      {
+        foundWidth = texture.m_width;
+        foundHeight = texture.m_height;
+        if (image->DecrRef(immediately) && immediately)
+          m_allocated.erase(it);
+        break;
+      }
     }
   }
   for (queueIterator it = m_queued.begin(); it != m_queued.end(); ++it)
   {
     unsigned int id = it->first;
     CLargeTexture *image = it->second;
-    if (image->GetPath() == path && image->DecrRef(true))
+    if (image->GetPath() == path)
     {
-      // cancel this job
-      CJobManager::GetInstance().CancelJob(id);
-      m_queued.erase(it);
-      return;
+      CTextureArray texture;
+      texture = image->GetTexture();
+      if ((int)width <= (int)foundWidth && (int)height <= (int)foundHeight)
+      {
+        // cancel this job
+        image->DecrRef(true);
+        CJobManager::GetInstance().CancelJob(id);
+        m_queued.erase(it);
+        break;
+      }
     }
   }
 }
@@ -228,14 +244,16 @@ void CGUILargeTextureManager::QueueImage(const CStdString &path, float width, fl
     CLargeTexture *image = it->second;
     if (image->GetPath() == path)
     {
+      if (width > (int)*(image->GetWidth()) || height > (int)*(image->GetHeight()))
+        image->SetSize(width, height);
       image->AddRef();
       return; // already queued
     }
   }
-
   // queue the item
   CLargeTexture *image = new CLargeTexture(path);
-  unsigned int jobID = CJobManager::GetInstance().AddJob(new CImageLoader(path, width, height), this, CJob::PRIORITY_NORMAL);
+  image->SetSize(width, height);
+  unsigned int jobID = CJobManager::GetInstance().AddJob(new CImageLoader(path, image->GetWidth(), image->GetHeight()), this, CJob::PRIORITY_NORMAL);
   m_queued.push_back(make_pair(jobID, image));
 }
 
