@@ -325,11 +325,10 @@ bool CJpegIO::Read(unsigned char* buffer, unsigned int bufSize, unsigned int min
     If the res is greater than the one desired, use that one since there's no need
     to decode a bigger one just to squish it back down. If the res is greater than
     the gpu can hold, use the previous one.*/
-    if (minx == 0 || miny == 0)
-    {
+    if (minx == 0 || minx > (unsigned int) g_settings.m_ResInfo[g_guiSettings.m_LookAndFeelResolution].iWidth)
       minx = g_settings.m_ResInfo[g_guiSettings.m_LookAndFeelResolution].iWidth;
+    if (miny == 0 || miny > (unsigned int) g_settings.m_ResInfo[g_guiSettings.m_LookAndFeelResolution].iHeight)
       miny = g_settings.m_ResInfo[g_guiSettings.m_LookAndFeelResolution].iHeight;
-    }
     m_original_width = m_cinfo.image_width;
     m_original_height = m_cinfo.image_height;
     m_cinfo.scale_denom = 8;
@@ -343,7 +342,7 @@ bool CJpegIO::Read(unsigned char* buffer, unsigned int bufSize, unsigned int min
         m_cinfo.scale_num--;
         break;
       }
-      if (m_cinfo.output_width >= minx || m_cinfo.output_height >= miny)
+      if (m_cinfo.output_width >= minx && m_cinfo.output_height >= miny)
         break;
     }
     jpeg_calc_output_dimensions(&m_cinfo);

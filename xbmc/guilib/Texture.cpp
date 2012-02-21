@@ -44,6 +44,8 @@ CBaseTexture::CBaseTexture(unsigned int width, unsigned int height, unsigned int
 #endif
   m_pixels = NULL;
   m_loadedToGPU = false;
+  m_originalImageWidth = 0;
+  m_originalImageHeight = 0;
   Allocate(width, height, format);
 }
 
@@ -185,12 +187,12 @@ bool CBaseTexture::LoadFromFile(const CStdString& texturePath, unsigned int maxW
           if (autoRotate && jpegfile.Orientation())
             m_orientation = jpegfile.Orientation() - 1;
           m_hasAlpha=false;
-          if (originalWidth)
-            *originalWidth = (int)originalImageWidth;
-          if (originalHeight)
-            *originalHeight = (int)originalImageHeight;
           m_originalImageWidth = originalImageWidth;
           m_originalImageHeight = originalImageHeight;
+          if (originalWidth)
+            originalWidth = &m_originalImageWidth;
+          if (originalHeight)
+            originalHeight = &m_originalImageHeight;
           return true;
         }
       }
@@ -204,8 +206,8 @@ bool CBaseTexture::LoadFromFile(const CStdString& texturePath, unsigned int maxW
   ImageInfo image;
   memset(&image, 0, sizeof(image));
 
-  unsigned int width = maxWidth ? std::min(maxWidth, g_Windowing.GetMaxTextureSize()) : g_Windowing.GetMaxTextureSize();
-  unsigned int height = maxHeight ? std::min(maxHeight, g_Windowing.GetMaxTextureSize()) : g_Windowing.GetMaxTextureSize();
+  unsigned int width = g_Windowing.GetMaxTextureSize();
+  unsigned int height = g_Windowing.GetMaxTextureSize();
 
   if(!dll.LoadImage(texturePath.c_str(), width, height, &image))
   {
