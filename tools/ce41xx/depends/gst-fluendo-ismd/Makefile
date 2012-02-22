@@ -3,9 +3,9 @@ include ../intel-sdk.mk
 
 # lib name, version
 LIBNAME=gst-fluendo-ismd
-VERSION=pr25
+VERSION=r2152
 SOURCE=$(LIBNAME)-$(VERSION)
-ARCHIVE=$(SOURCE).tgz
+ARCHIVE=$(SOURCE).tar.gz
 
 # configuration settings
 export CFLAGS+=-isystem$(SDKSTAGE)/include/linux_user
