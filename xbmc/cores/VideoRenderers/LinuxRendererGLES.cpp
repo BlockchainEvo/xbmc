@@ -403,14 +403,15 @@ void CLinuxRendererGLES::RenderUpdate(bool clear, DWORD flags, DWORD alpha)
   {
     ManageDisplay();
     ManageTextures();
-    g_graphicsContext.BeginPaint();
+    if (g_application.m_pPlayer)
+      g_application.m_pPlayer->SetVideoRect(m_sourceRect, m_destRect);
 
     // RENDER_BYPASS means we are rendering video
     // outside the control of gles and on a different
     // graphics plane that is under the gles layer.
     // Clear a hole where video would appear so we do not see
     // background images that have already been rendered. 
-    g_graphicsContext.SetScissors(m_destRect);
+    g_graphicsContext.BeginPaint();
 
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
