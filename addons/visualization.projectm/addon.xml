@@ -64,6 +64,6 @@ Alla projectM kräver ett grafikkort med 3D-acceleration och din favoritmusik.</
     <description lang="zh">projectM是一个音乐可视化效果。它是Unix世界中最好的。它的伟大来自于社区的辛苦工作。使用者可以创建预设参数把音乐和难以置信的可视化效果连接起来。试试吧！
 projectM可视化效果是用OpenGL按照LGPL协议对Milkdrop的重新实现
 projectM所要求的仅是一块有3D加速功能的显卡和你喜爱的音乐。</description>
-    <platform>linux osx wingl</platform>
+    <platform>linuxgl osx wingl</platform>
   </extension>
 </addon>
