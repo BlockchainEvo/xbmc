@@ -52,6 +52,7 @@
 #include "xbmc/cores/dvdplayer/DVDClock.h"
 #include "xbmc/cores/dvdplayer/DVDPlayerSubtitle.h"
 #include "xbmc/cores/dvdplayer/DVDDemuxers/DVDDemuxVobsub.h"
+#include "settings/VideoSettings.h"
 
 // amlogic libplayer
 #include "DllLibamplayer.h"
@@ -2266,3 +2267,41 @@ void CAMLPlayer::RenderUpdateCallBack(const void *ctx, const CRect &SrcRect, con
   CAMLPlayer *player = (CAMLPlayer*)ctx;
   player->SetVideoRect(SrcRect, DestRect);
 }
+void CAMLPlayer::GetRenderFeatures(Features* renderFeatures)
+{
+  renderFeatures->push_back(RENDERFEATURE_STRETCH);
+  return;
+}
+
+void CAMLPlayer::GetDeinterlaceMethods(Features* deinterlaceMethods)
+{
+  deinterlaceMethods->push_back(VS_INTERLACEMETHOD_DEINTERLACE);
+  return;
+}
+
+void CAMLPlayer::GetDeinterlaceModes(Features* deinterlaceModes)
+{
+  deinterlaceModes->push_back(VS_DEINTERLACEMODE_AUTO);
+  return;
+}
+
+void CAMLPlayer::GetScalingMethods(Features* scalingMethods)
+{
+  return;
+}
+
+void CAMLPlayer::GetAudioCapabilities(Features* audioCaps)
+{
+  audioCaps->push_back(IPC_AUD_SELECT_STREAM);
+  audioCaps->push_back(IPC_AUD_SELECT_OUTPUT);
+  return;
+}
+
+void CAMLPlayer::GetSubtitleCapabilities(Features* subCaps)
+{
+  subCaps->push_back(IPC_SUBS_EXTERNAL);
+  subCaps->push_back(IPC_SUBS_SELECT);
+  return;
+}
+
+#endif

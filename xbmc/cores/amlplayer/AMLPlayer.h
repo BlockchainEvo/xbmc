@@ -27,6 +27,7 @@
 typedef struct AMLChapterInfo AMLChapterInfo;
 typedef struct AMLPlayerStreamInfo AMLPlayerStreamInfo;
 typedef struct player_info player_info_t;
+typedef std::vector<int> Features;
 
 struct AMLSubtitle
 {
@@ -164,6 +165,13 @@ public:
   virtual void  GetAudioCapabilities(Features* audioCaps);
   virtual void  GetSubtitleCapabilities(Features* subCaps);
 */
+
+  virtual void  GetRenderFeatures(Features* renderFeatures);
+  virtual void  GetDeinterlaceMethods(Features* deinterlaceMethods);
+  virtual void  GetDeinterlaceModes(Features* deinterlaceModes);
+  virtual void  GetScalingMethods(Features* scalingMethods);
+  virtual void  GetAudioCapabilities(Features* audioCaps);
+  virtual void  GetSubtitleCapabilities(Features* subCaps);
 
 protected:
   virtual void  OnStartup();
