@@ -71,6 +71,26 @@ public:
 class CFileItem;
 class CRect;
 
+typedef std::vector<int> Features;
+
+enum IPlayerAudioCapabilities
+{
+  IPC_AUD_ALL,
+  IPC_AUD_OFFSET,
+  IPC_AUD_AMP,
+  IPC_AUD_SELECT_STREAM,
+  IPC_AUD_OUTPUT_STEREO,
+  IPC_AUD_SELECT_OUTPUT
+};
+
+enum IPlayerSubtitleCapabilities
+{
+  IPC_SUBS_ALL,
+  IPC_SUBS_SELECT,
+  IPC_SUBS_EXTERNAL,
+  IPC_SUBS_OFFSET
+};
+
 class IPlayer
 {
 public:
@@ -181,6 +201,13 @@ public:
   virtual CStdString GetPlayingTitle() { return ""; };
 
   virtual bool SwitchChannel(const PVR::CPVRChannel &channel) { return false; }
+  virtual void GetRenderFeatures(Features* renderFeatures) {};
+  virtual void GetDeinterlaceMethods(Features* deinterlaceMethods) {};
+  virtual void GetDeinterlaceModes(Features* deinterlaceModes) {};
+  virtual void GetScalingMethods(Features* scalingMethods) {};
+  virtual void GetAudioCapabilities(Features* audioCaps) { audioCaps->assign(1,IPC_AUD_ALL); };
+  virtual void GetSubtitleCapabilities(Features* subCaps) { subCaps->assign(1,IPC_SUBS_ALL); };
+
 protected:
   IPlayerCallback& m_callback;
 };
