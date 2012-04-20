@@ -361,7 +361,7 @@ void GUIFontManager::LoadFonts(const CStdString& strFontSet)
 
         const char* unicodeAttr = ((TiXmlElement*) pChild)->Attribute("unicode");
 
-        if (foundTTF.IsEmpty() && idAttr != NULL && unicodeAttr != NULL && stricmp(unicodeAttr, "true") == 0)
+        if (foundTTF.IsEmpty() && idAttr != NULL)
           foundTTF = idAttr;
 
         // Check if this is the fontset that we want
@@ -372,11 +372,8 @@ void GUIFontManager::LoadFonts(const CStdString& strFontSet)
           if (unicodeAttr != NULL && stricmp(unicodeAttr, "true") == 0)
             m_fontsetUnicode=true;
 
-          if (m_fontsetUnicode)
-          {
-            LoadFonts(pChild->FirstChild());
-            break;
-          }
+          LoadFonts(pChild->FirstChild());
+          break;
         }
 
       }
