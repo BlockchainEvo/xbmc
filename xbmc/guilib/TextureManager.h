@@ -30,8 +30,11 @@
 #include <vector>
 #include "TextureBundle.h"
 #include "threads/CriticalSection.h"
+#include <map>
 
 #pragma once
+
+class CTextureInfo;
 
 /************************************************************************/
 /*                                                                      */
@@ -59,6 +62,9 @@ public:
   int m_loops;
   int m_texWidth;
   int m_texHeight;
+  int m_texXOffset;
+  int m_texYOffset;
+
   bool m_texCoordsArePixels;
 };
 
@@ -77,10 +83,15 @@ public:
   virtual ~CTextureMap();
 
   void Add(CBaseTexture* texture, int delay);
+  bool AddSubTexture(const CStdString &textureName, CTextureArray* subTexture);
   bool Release();
 
   const CStdString& GetName() const;
   const CTextureArray& GetTexture();
+  const CTextureArray& GetSubTexture(const CStdString &textureName);
+  bool  HasSubTexture(const CStdString &textureName);
+  bool  ReleaseSubTexture(const CStdString &textureName);
+  uint32_t GetSubTextureCount() const {return m_atlasTextures.size();}
   void Dump() const;
   uint32_t GetMemoryUsage() const;
   void Flush();
@@ -92,6 +103,8 @@ protected:
   CTextureArray m_texture;
   unsigned int m_referenceCount;
   uint32_t m_memUsage;
+  std::map<CStdString, CTextureArray> m_atlasTextures;
+  typedef std::map<CStdString, CTextureArray>::iterator iterAtlas;
 };
 
 /*!

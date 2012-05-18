@@ -35,6 +35,7 @@
 #include "filesystem/Directory.h"
 #include <assert.h>
 
+#include "GUITexture.h"
 using namespace std;
 
 
@@ -49,6 +50,8 @@ CTextureArray::CTextureArray(int width, int height, int loops,  bool texCoordsAr
   m_orientation = 0;
   m_texWidth = 0;
   m_texHeight = 0;
+  m_texXOffset = 0;
+  m_texYOffset = 0;
   m_texCoordsArePixels = false;
 }
 
@@ -78,6 +81,8 @@ void CTextureArray::Reset()
   m_orientation = 0;
   m_texWidth = 0;
   m_texHeight = 0;
+  m_texXOffset = 0;
+  m_texYOffset = 0;
   m_texCoordsArePixels = false;
 }
 
@@ -148,7 +153,6 @@ bool CTextureMap::Release()
     return true;
   if (!m_referenceCount)
     return true;
-
   m_referenceCount--;
   if (!m_referenceCount)
   {
@@ -200,6 +204,45 @@ bool CTextureMap::IsEmpty() const
   return m_texture.m_textures.size() == 0;
 }
 
+bool CTextureMap::AddSubTexture(const CStdString &textureName, CTextureArray *subTexture)
+{
+  if (!textureName.length() || !subTexture->size())
+    return false;
+
+  m_atlasTextures.insert(make_pair(textureName, *subTexture));
+  return true;
+}
+
+const CTextureArray& CTextureMap::GetSubTexture(const CStdString &textureName)
+{
+  static CTextureArray emptyTexture;
+  iterAtlas subTexture;
+  subTexture = m_atlasTextures.find(textureName);
+  if (subTexture != m_atlasTextures.end())
+  {
+    return subTexture->second;
+  }
+  return emptyTexture;
+}
+
+bool CTextureMap::HasSubTexture(const CStdString &textureName)
+{
+  iterAtlas subTexture;
+  subTexture = m_atlasTextures.find(textureName);
+  if (subTexture != m_atlasTextures.end())
+    return true;
+  else
+    return false;
+}
+
+bool CTextureMap::ReleaseSubTexture(const CStdString &textureName)
+{
+  if (!HasSubTexture(textureName))
+    return false;
+
+  return  m_atlasTextures.erase(textureName) > 0;
+}
+
 void CTextureMap::Add(CBaseTexture* texture, int delay)
 {
   m_texture.Add(texture, delay);
@@ -225,16 +268,21 @@ CGUITextureManager::~CGUITextureManager(void)
 const CTextureArray& CGUITextureManager::GetTexture(const CStdString& strTextureName)
 {
   static CTextureArray emptyTexture;
-  //  CLog::Log(LOGINFO, " refcount++ for  GetTexture(%s)\n", strTextureName.c_str());
-  for (int i = 0; i < (int)m_vecTextures.size(); ++i)
+
+  // Check in separate loops to be sure we check for all subtextures before textures.
+
+  for (ivecTextures iter=m_vecTextures.begin(); iter != m_vecTextures.end(); ++iter)
   {
-    CTextureMap *pMap = m_vecTextures[i];
-    if (pMap->GetName() == strTextureName)
-    {
-      //CLog::Log(LOGDEBUG, "Total memusage %u", GetMemoryUsage());
-      return pMap->GetTexture();
-    }
+    if ((*iter)->HasSubTexture(strTextureName))
+      return (*iter)->GetSubTexture(strTextureName);
   }
+
+  for (ivecTextures iter=m_vecTextures.begin(); iter != m_vecTextures.end(); ++iter)
+  {
+    if ((*iter)->GetName() == strTextureName)
+      return (*iter)->GetTexture();
+  }
+
   return emptyTexture;
 }
 
@@ -390,13 +438,54 @@ int CGUITextureManager::Load(const CStdString& strTextureName, bool checkBundleO
 
   CBaseTexture *pTexture = NULL;
   int width = 0, height = 0;
+
+  CStdString atlasName;
+  CTextureMap* pMap = NULL;
   if (bundle >= 0)
   {
-    if (FAILED(m_TexBundle[bundle].LoadTexture(strTextureName, &pTexture, width, height)))
+    for (int i = 0 ; i < (int)m_vecTextures.size(); ++i)
     {
-      CLog::Log(LOGERROR, "Texture manager unable to load bundled file: %s", strTextureName.c_str());
-      return 0;
+      pMap = m_vecTextures[i];
+      if (pMap->HasSubTexture(strTextureName))
+        return 1;
     }
+
+    // Find the atlas the subtexture belongs to
+    atlasName = m_TexBundle[bundle].FindAtlas(strTextureName);
+    if (!atlasName.length())
+      return 0;
+    for (int i = 0 ; i < (int)m_vecTextures.size(); ++i)
+    {
+      pMap = m_vecTextures[i];
+      if (pMap->GetName() == atlasName)
+        break;
+    }
+
+    // Load the atlas itself if it's not already
+    if (!pMap || pMap->GetName() != atlasName)
+    {
+      CLog::Log(LOGDEBUG, "CGUITextureManager::Load Atlas:%s", atlasName.c_str());
+      pTexture = new CTexture();
+      if(!pTexture->LoadFromFile(atlasName))
+      {
+        CLog::Log(LOGERROR, "Texture manager unable to load Atlas: %s. GUI will be very broken.", atlasName.c_str());
+        return 0;
+      }
+      width = pTexture->GetWidth();
+      height = pTexture->GetHeight();
+      pMap = new CTextureMap(atlasName, width, height, 0);
+      pMap->Add(pTexture, 100);
+      m_vecTextures.push_back(pMap);
+    }
+
+    CTextureArray pTextureArray;
+    if (m_TexBundle[bundle].LoadSubTexture(strTextureName, &pTextureArray))
+    {
+      pTextureArray.m_textures = pMap->GetTexture().m_textures;
+      pMap->AddSubTexture(strTextureName, &pTextureArray);
+    }
+    else
+      return 0;
   }
   else
   {
@@ -405,14 +494,10 @@ int CGUITextureManager::Load(const CStdString& strTextureName, bool checkBundleO
       return 0;
     width = pTexture->GetWidth();
     height = pTexture->GetHeight();
+    pMap = new CTextureMap(strTextureName, width, height, 0);
+    pMap->Add(pTexture, 100);
+    m_vecTextures.push_back(pMap);
   }
-
-  if (!pTexture) return 0;
-
-  CTextureMap* pMap = new CTextureMap(strTextureName, width, height, 0);
-  pMap->Add(pTexture, 100);
-  m_vecTextures.push_back(pMap);
-
 #ifdef _DEBUG_TEXTURES
   int64_t end, freq;
   end = CurrentHostCounter();
@@ -429,6 +514,21 @@ int CGUITextureManager::Load(const CStdString& strTextureName, bool checkBundleO
 void CGUITextureManager::ReleaseTexture(const CStdString& strTextureName)
 {
   CSingleLock lock(g_graphicsContext);
+
+  for (ivecTextures iter=m_vecTextures.begin(); iter != m_vecTextures.end(); ++iter)
+  {
+    if ((*iter)->HasSubTexture(strTextureName))
+    {
+      (*iter)->ReleaseSubTexture(strTextureName);
+      if (!(*iter)->GetSubTextureCount())
+      {
+        ReleaseTexture((*iter)->GetName());
+//        m_unusedTextures.push_back(*iter);
+//        m_vecTextures.erase(iter);
+      }
+    return;
+    }
+  }
 
   ivecTextures i;
   i = m_vecTextures.begin();
@@ -582,3 +682,19 @@ void CGUITextureManager::GetBundledTexturesFromPath(const CStdString& texturePat
   if (items.empty())
     m_TexBundle[1].GetTexturesFromPath(texturePath, items);
 }
+/*
+bool CGUITextureManager::UsingAtlas(const CStdString &atlasName)
+{
+  if (!atlasName.length())
+    return false;
+  for (int i = 0; i < (int)m_vecTextures.size(); ++i)
+  {
+    CTextureMap *pMap = m_vecTextures[i];
+//    if (pMap->GetAtlasName() == atlasName)
+    {
+      return true;
+    }
+  }
+  return false;
+}
+*/

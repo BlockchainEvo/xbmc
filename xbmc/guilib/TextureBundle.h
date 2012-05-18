@@ -24,7 +24,9 @@
 #include "utils/StdString.h"
 #include "TextureBundleXPR.h"
 #include "TextureBundleXBT.h"
+#include "TextureBundleAtlas.h"
 
+class CTextureArray;
 class CTextureBundle
 {
 public:
@@ -38,16 +40,20 @@ public:
   void GetTexturesFromPath(const CStdString &path, std::vector<CStdString> &textures);
   static CStdString Normalize(const CStdString &name);
 
+  const CStdString FindAtlas(const CStdString& Filename);
   bool LoadTexture(const CStdString& Filename, CBaseTexture** ppTexture, int &width, int &height);
+  bool LoadSubTexture(const CStdString &Filename, CTextureArray *ppTextureArray);
 
   int LoadAnim(const CStdString& Filename, CBaseTexture*** ppTextures, int &width, int &height, int& nLoops, int** ppDelays);
 
 private:
   CTextureBundleXPR m_tbXPR;
   CTextureBundleXBT m_tbXBT;
+  CTextureBundleAtlas m_tbAtlas;
 
   bool m_useXPR;
   bool m_useXBT;
+  bool m_useAtlas;
 };
 
 
