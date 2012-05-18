@@ -206,9 +206,10 @@ bool CTextureMap::IsEmpty() const
 
 bool CTextureMap::AddSubTexture(const CStdString &textureName, CTextureArray *subTexture)
 {
-  if (!textureName.length() || !subTexture->size())
+  if (!textureName.length())
     return false;
 
+  subTexture->m_textures = m_texture.m_textures;
   m_atlasTextures.insert(make_pair(textureName, *subTexture));
   return true;
 }
@@ -220,6 +221,7 @@ const CTextureArray& CTextureMap::GetSubTexture(const CStdString &textureName)
   subTexture = m_atlasTextures.find(textureName);
   if (subTexture != m_atlasTextures.end())
   {
+    m_referenceCount++;
     return subTexture->second;
   }
   return emptyTexture;
@@ -237,10 +239,7 @@ bool CTextureMap::HasSubTexture(const CStdString &textureName)
 
 bool CTextureMap::ReleaseSubTexture(const CStdString &textureName)
 {
-  if (!HasSubTexture(textureName))
-    return false;
-
-  return  m_atlasTextures.erase(textureName) > 0;
+  return true;
 }
 
 void CTextureMap::Add(CBaseTexture* texture, int delay)
@@ -481,7 +480,6 @@ int CGUITextureManager::Load(const CStdString& strTextureName, bool checkBundleO
     CTextureArray pTextureArray;
     if (m_TexBundle[bundle].LoadSubTexture(strTextureName, &pTextureArray))
     {
-      pTextureArray.m_textures = pMap->GetTexture().m_textures;
       pMap->AddSubTexture(strTextureName, &pTextureArray);
     }
     else
@@ -519,14 +517,16 @@ void CGUITextureManager::ReleaseTexture(const CStdString& strTextureName)
   {
     if ((*iter)->HasSubTexture(strTextureName))
     {
-      (*iter)->ReleaseSubTexture(strTextureName);
-      if (!(*iter)->GetSubTextureCount())
+      if ((*iter)->Release())
       {
-        ReleaseTexture((*iter)->GetName());
-//        m_unusedTextures.push_back(*iter);
-//        m_vecTextures.erase(iter);
+        /*
+        // Don't destroy atlases, let cleanup get them instead.
+
+        m_unusedTextures.push_back(*iter);
+        m_vecTextures.erase(iter);
+        */
       }
-    return;
+      return;
     }
   }
 
