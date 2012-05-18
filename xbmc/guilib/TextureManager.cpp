@@ -682,19 +682,3 @@ void CGUITextureManager::GetBundledTexturesFromPath(const CStdString& texturePat
   if (items.empty())
     m_TexBundle[1].GetTexturesFromPath(texturePath, items);
 }
-/*
-bool CGUITextureManager::UsingAtlas(const CStdString &atlasName)
-{
-  if (!atlasName.length())
-    return false;
-  for (int i = 0; i < (int)m_vecTextures.size(); ++i)
-  {
-    CTextureMap *pMap = m_vecTextures[i];
-//    if (pMap->GetAtlasName() == atlasName)
-    {
-      return true;
-    }
-  }
-  return false;
-}
-*/
