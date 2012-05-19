@@ -237,11 +237,6 @@ bool CTextureMap::HasSubTexture(const CStdString &textureName)
     return false;
 }
 
-bool CTextureMap::ReleaseSubTexture(const CStdString &textureName)
-{
-  return true;
-}
-
 void CTextureMap::Add(CBaseTexture* texture, int delay)
 {
   m_texture.Add(texture, delay);

@@ -90,7 +90,6 @@ public:
   const CTextureArray& GetTexture();
   const CTextureArray& GetSubTexture(const CStdString &textureName);
   bool  HasSubTexture(const CStdString &textureName);
-  bool  ReleaseSubTexture(const CStdString &textureName);
   void Dump() const;
   uint32_t GetMemoryUsage() const;
   void Flush();
