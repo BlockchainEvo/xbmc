@@ -63,8 +63,9 @@ bool CXBMCTinyXML::LoadFile(const CStdString &_filename, TiXmlEncoding encoding)
   // Add an extra string to avoid the crash.
   CStdString filename(_filename);
   value = filename;
-
-  XFILE::CFileStream file;
+  XFILE::CFile file;
+  const char *data = NULL;
+  int64_t length = 0, readSize = 0;
   if (!file.Open(value))
   {
     SetError(TIXML_ERROR_OPENING_FILE, NULL, NULL, TIXML_ENCODING_UNKNOWN);
@@ -74,13 +75,19 @@ bool CXBMCTinyXML::LoadFile(const CStdString &_filename, TiXmlEncoding encoding)
   // Delete the existing data:
   Clear();
   location.Clear();
-
-  CStdString data;
-  data.reserve(8 * 1000);
-  StreamIn(&file, &data);
+  length = file.GetLength();
+  data = new char[file.GetLength()];
+  readSize = file.Read((void*)data, length);
   file.Close();
+  if (readSize != length || !data)
+  {
+    SetError(TIXML_ERROR_OPENING_FILE, NULL, NULL, TIXML_ENCODING_UNKNOWN);
+    delete [] data;
+    return false;
+  }
 
   Parse(data, NULL, encoding);
+  delete [] data;
 
   if (Error())
     return false;
