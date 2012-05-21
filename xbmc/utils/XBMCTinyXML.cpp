@@ -76,7 +76,7 @@ bool CXBMCTinyXML::LoadFile(const CStdString &_filename, TiXmlEncoding encoding)
   Clear();
   location.Clear();
   length = file.GetLength();
-  data = new char[file.GetLength()];
+  data = new char[length];
   readSize = file.Read((void*)data, length);
   file.Close();
   if (readSize != length || !data)
