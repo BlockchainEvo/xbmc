@@ -86,6 +86,7 @@ bool CXBMCTinyXML::LoadFile(const CStdString &_filename, TiXmlEncoding encoding)
     return false;
   }
 
+  NormalizeEOL((char*)data, length);
   Parse(data, NULL, encoding);
   delete [] data;
 
@@ -130,6 +131,29 @@ const char *CXBMCTinyXML::Parse(const char *_data, TiXmlParsingData *prevData, T
 {
   CStdString data(_data);
   return Parse(data, prevData, encoding);
+}
+
+void CXBMCTinyXML::NormalizeEOL(char *data, int64_t length)
+{
+  //Based on TinyXML's version in TiXmlDocument::LoadFile
+
+  const char* p = data;
+  char* q = (char*) data;
+  const char CR = 0x0d;
+  const char LF = 0x0a;
+
+  while( p != data+length)
+  {
+    if ( *p == CR )
+    {
+      *q++ = LF;
+      p++;
+      if ( *p == LF )
+      p++;
+    }
+    else
+      *q++ = *p++;
+  }
 }
 
 const char *CXBMCTinyXML::Parse(CStdString &data, TiXmlParsingData *prevData, TiXmlEncoding encoding)

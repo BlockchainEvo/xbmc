@@ -66,5 +66,6 @@ public:
   bool SaveFile(const CStdString&) const;
   const char *Parse(const char*, TiXmlParsingData *prevData = NULL, TiXmlEncoding encoding = TIXML_DEFAULT_ENCODING);
   const char *Parse(CStdString&, TiXmlParsingData *prevData = NULL, TiXmlEncoding encoding = TIXML_DEFAULT_ENCODING);
+  void NormalizeEOL(char *data, int64_t length);
   static bool Test();
 };
