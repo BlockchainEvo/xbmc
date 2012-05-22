@@ -173,8 +173,8 @@ bool CTextureBundleAtlas::LoadSubTexture(const CStdString& Filename, CTextureArr
 
   ppTextureArray->m_width = frame.GetWidth();
   ppTextureArray->m_height = frame.GetHeight();
-  ppTextureArray->m_texWidth = ATLAS_WIDTH;
-  ppTextureArray->m_texHeight = ATLAS_HEIGHT;
+  ppTextureArray->m_texWidth = frame.GetAtlasWidth();
+  ppTextureArray->m_texHeight = frame.GetAtlasHeight();
   ppTextureArray->m_texXOffset = frame.GetTextureXOffset();
   ppTextureArray->m_texYOffset = frame.GetTextureYOffset();
 
