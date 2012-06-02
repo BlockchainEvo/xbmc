@@ -83,7 +83,7 @@ int main(int argc, char* argv[])
   appParamParser.Parse((const char **)argv, argc);
 #endif
 
-  RunXBMC(renderGUI);
+  XBMC_Run(renderGUI);
 
   return status;
 }

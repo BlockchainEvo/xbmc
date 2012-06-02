@@ -29,7 +29,7 @@
 
 #include "Application.h"
 #include "xbmc.h"
-int RunXBMC(bool renderGUI)
+int XBMC_Run(bool renderGUI)
 {
   int status = 0;
   if (!g_application.Create())

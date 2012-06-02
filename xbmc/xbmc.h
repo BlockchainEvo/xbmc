@@ -20,5 +20,5 @@
 
 #pragma once
 extern "C" {
-int RunXBMC(bool renderGUI);
+int XBMC_Run(bool renderGUI);
 }

@@ -25,5 +25,5 @@
 int main(int argc, char* argv[])
 {
   bool renderGUI = false;
-  return RunXBMC(renderGUI);
+  return XBMC_Run(renderGUI);
 }
