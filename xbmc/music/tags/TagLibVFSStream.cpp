@@ -29,6 +29,10 @@ using namespace TagLib;
 using namespace MUSIC_INFO;
 using namespace std;
 
+#ifdef TARGET_WINDOWS
+#pragma comment(lib, "tag.lib")
+#endif
+
 /*!
  * Construct a File object and opens the \a file.  \a file should be a
  * be an XBMC Vfile.
@@ -62,7 +66,7 @@ TagLibVFSStream::~TagLibVFSStream()
  */
 FileName TagLibVFSStream::name() const
 {
-//  return m_file.
+  return m_strFileName.c_str();
 }
 
 /*!
