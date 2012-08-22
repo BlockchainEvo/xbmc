@@ -20,7 +20,7 @@
 
 #include "system.h"
 
-#if defined(TARGET_ANDROID)
+#if defined(HAS_EGL_ANDROID)
 
 #include <unistd.h>
 #include <string.h>

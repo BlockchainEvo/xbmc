@@ -20,7 +20,7 @@
 
 #include "system.h"
 
-#if defined(TARGET_RASPBERRY_PI)
+#if defined(HAS_EGL_RPI)
 
 #include "system_gl.h"
 

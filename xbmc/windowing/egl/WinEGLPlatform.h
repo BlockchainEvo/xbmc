@@ -23,14 +23,20 @@
 
 #include "system.h"
 
-#if   defined(TARGET_RASPBERRY_PI)
+#if defined(HAS_EGL_RPI)
   #include "xbmc/windowing/egl/WinEGLPlatformRaspberryPI.h"
   class CWinEGLPlatformRaspberryPI;
-    #define CWinEGLPlatform CWinEGLPlatformRaspberryPI
-#elif   defined(TARGET_ANDROID)
+  #define CWinEGLPlatform CWinEGLPlatformRaspberryPI
+
+#elif defined(HAS_EGL_ANDROID)
   #include "xbmc/windowing/egl/WinEGLPlatformAndroid.h"
   class CWinEGLPlatformAndroid;
   #define CWinEGLPlatform CWinEGLPlatformAndroid
+
+#elif defined(HAS_EGL_AMLOGIC)
+  #include "xbmc/windowing/egl/WinEGLPlatformAmlogic.h"
+  class CWinEGLPlatformAmlogic;
+  #define CWinEGLPlatform CWinEGLPlatformAmlogic
 
 #else
   #include "xbmc/windowing/egl/WinEGLPlatformGeneric.h"
