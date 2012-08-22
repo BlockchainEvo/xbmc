@@ -46,7 +46,7 @@
  */
 
 #include "system.h"
-#if defined(HAS_LINUX_EVENTS)
+#if defined(TARGET_LINUX) && !defined(HAS_SDL_WIN_EVENTS)
 
 #include <linux/version.h>
 
