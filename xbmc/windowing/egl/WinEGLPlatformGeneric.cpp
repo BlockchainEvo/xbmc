@@ -34,6 +34,7 @@ CWinEGLPlatformGeneric::CWinEGLPlatformGeneric()
   m_surface = EGL_NO_SURFACE;
   m_context = EGL_NO_CONTEXT;
   m_display = EGL_NO_DISPLAY;
+  m_nativeWindow = 0;
   
   // most egl platforms cannot render 1080p
   // default to 720p
@@ -214,8 +215,6 @@ bool CWinEGLPlatformGeneric::CreateWindow()
   if (m_surface != EGL_NO_SURFACE)
     return true;
   
-  m_nativeWindow = getNativeWindow();
-
   m_surface = eglCreateWindowSurface(m_display, m_config, m_nativeWindow, NULL);
   if (!m_surface)
   {
@@ -385,7 +384,7 @@ bool CWinEGLPlatformGeneric::IsExtSupported(const char* extension)
 EGLNativeWindowType CWinEGLPlatformGeneric::getNativeWindow()
 {
   // most egl platforms can handle EGLNativeWindowType == 0
-  return 0;
+  return m_nativeWindow;
 }
 
 EGLDisplay CWinEGLPlatformGeneric::GetEGLDisplay()
