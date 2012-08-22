@@ -24,10 +24,15 @@
 
 #include "system.h"
 
-#if   defined(TARGET_ANDROID)
+#if defined(HAS_EGL_ANDROID)
   #include "xbmc/windowing/egl/WinEGLPlatformAndroid.h"
   class CWinEGLPlatformAndroid;
   #define CWinEGLPlatform CWinEGLPlatformAndroid
+
+#elif defined(HAS_EGL_AMLOGIC)
+  #include "xbmc/windowing/egl/WinEGLPlatformAmlogic.h"
+  class CWinEGLPlatformAmlogic;
+  #define CWinEGLPlatform CWinEGLPlatformAmlogic
 
 #else
   #include "xbmc/windowing/egl/WinEGLPlatformGeneric.h"

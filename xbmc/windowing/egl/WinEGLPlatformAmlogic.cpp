@@ -19,6 +19,9 @@
  *
  */
 
+#include "xbmc/system.h"
+#if defined(HAS_EGL_AMLOGIC)
+
 #include <unistd.h>
 #include <string.h>
 #include <stdio.h>
@@ -384,3 +387,4 @@ void CWinEGLPlatformAmlogic::DisableFreeScale()
     close(fd0);
   }
 }
+#endif

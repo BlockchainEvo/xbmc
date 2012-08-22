@@ -18,7 +18,8 @@
  *  http://www.gnu.org/copyleft/gpl.html
  *
  */
-
+#include "system.h"
+#if defined(HAS_EGL_ANDROID)
 #include <unistd.h>
 #include <string.h>
 #include <stdio.h>
@@ -69,3 +70,4 @@ EGLNativeWindowType CWinEGLPlatformAndroid::getNativeWindow()
 {
   return (EGLNativeWindowType)CXBMCApp::GetNativeWindow();
 }
+#endif
