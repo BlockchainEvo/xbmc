@@ -214,6 +214,12 @@ AC_ARG_ENABLE([gles],
   [use_gles=$enableval],
   [use_gles=no])
 
+AC_ARG_WITH([egl],
+  [AS_HELP_STRING([--with-egl],
+  [select EGL implementation. Requires --enable-gles.  [generic,android,amlogic]. (default is generic)])],
+  [use_egl=$withval],
+  [use_egl=generic])
+
 AC_ARG_ENABLE([sdl],
   [AS_HELP_STRING([--enable-sdl],
   [enable SDL (default is auto)])],
@@ -614,6 +620,7 @@ case $host in
      target_platform=target_android
      use_arch="arm"
      use_cpu=cortex-a9
+     use_egl=android
      ARCH="arm"
      ffmpeg_target_os=linux
      ;;
@@ -1747,6 +1754,17 @@ if test "$use_gles" = "yes"; then
   final_message="$final_message\n  OpenGLES:\tYes"
   USE_OPENGLES=1
   USE_OPENGL=0
+  AS_CASE([x$use_egl],
+    [xandroid],[
+      AC_DEFINE([HAS_EGL_ANDROID], [1], [Uses Android EGL Implementation])
+      final_message="$final_message\n  EGL: \t\tAndroid"
+    ],
+    [xamlogic],[
+      AC_DEFINE([HAS_EGL_AMLOGIC], [1], [Uses Amlogic EGL Implementation])
+      final_message="$final_message\n  EGL: \t\tAmlogic"
+    ],[
+      AC_DEFINE([HAS_EGL_GENERIC], [1], [Uses Generic EGL Implementation])
+      final_message="$final_message\n  EGL: \t\tGeneric"])
 else
   USE_OPENGLES=0
   if test "$use_gl" = "yes"; then
