@@ -18,7 +18,6 @@ SRCS=ADPCMCodec.cpp \
      OGGcodec.cpp \
      PAPlayer.cpp \
      PCMCodec.cpp \
-     ReplayGain.cpp \
      SIDCodec.cpp \
      TimidityCodec.cpp \
      VGMCodec.cpp \
