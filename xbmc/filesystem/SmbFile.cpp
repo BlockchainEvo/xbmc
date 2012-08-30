@@ -568,9 +568,12 @@ int CSmbFile::Truncate(int64_t size)
 {
   if (m_fd == -1) return 0;
   CSingleLock lock(smb); // Init not called since it has to be "inited" by now
-  
+#if defined(TARGET_ANDROID)
+  int iResult = 0;
+#else
   int iResult = smbc_ftruncate(m_fd, size);
-  
+#endif
+
   return iResult;
 }
 
