@@ -22,6 +22,7 @@
 
 #include "WinEGLPlatformGeneric.h"
 #include <string>
+#include "guilib/Resolution.h"
 
 class CWinEGLPlatformAmlogic : public CWinEGLPlatformGeneric
 {
@@ -30,9 +31,9 @@ public:
 
   virtual EGLNativeWindowType InitWindowSystem(EGLNativeDisplayType nativeDisplay, int width, int height, int bpp);
   virtual void DestroyWindowSystem(EGLNativeWindowType native_window);
-  virtual bool SetDisplayResolution(int width, int height, float refresh, bool interlace);
+  virtual bool SetDisplayResolution(RESOLUTION_INFO &res);
   virtual bool ClampToGUIDisplayLimits(int &width, int &height);
-  virtual bool ProbeDisplayResolutions(std::vector<CStdString> &resolutions);
+  virtual bool ProbeDisplayResolutions(std::vector<RESOLUTION_INFO> &resolutions);
   virtual bool ShowWindow(bool show);
 
   // amlogic specific functions

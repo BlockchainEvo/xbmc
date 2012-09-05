@@ -131,15 +131,15 @@ void CWinEGLPlatformAmlogic::DestroyWindowSystem(EGLNativeWindowType native_wind
   DisableFreeScale();
 }
 
-bool CWinEGLPlatformAmlogic::SetDisplayResolution(int width, int height, float refresh, bool interlace)
+bool CWinEGLPlatformAmlogic::SetDisplayResolution(RESOLUTION_INFO &res)
 {
-  if (width == 1920 && height == 1080 && !interlace)
+  if (res.iWidth == 1920 && res.iWidth == 1080 && !(res.dwFlags & D3DPRESENTFLAG_INTERLACED))
     SetDisplayResolution("1080p");
-  else if (width == 1920 && height == 1080)
+  else if (res.iWidth == 1920 && res.iHeight == 1080)
     SetDisplayResolution("1080i");
-  else if (width == 1280 && height == 720)
+  else if (res.iWidth == 1280 && res.iHeight == 720)
     SetDisplayResolution("720p");
-  else if (width == 720  && height == 480)
+  else if (res.iWidth == 720  && res.iHeight == 480)
     SetDisplayResolution("480p");
 
   return true;
@@ -159,7 +159,7 @@ bool CWinEGLPlatformAmlogic::ClampToGUIDisplayLimits(int &width, int &height)
   return rtn;
 }
 
-bool CWinEGLPlatformAmlogic::ProbeDisplayResolutions(std::vector<CStdString> &resolutions)
+bool CWinEGLPlatformAmlogic::ProbeDisplayResolutions(std::vector<RESOLUTION_INFO> &resolutions)
 {
   int fd = open("/sys/class/amhdmitx/amhdmitx0/disp_cap", O_RDONLY);
   if (fd >= 0)
@@ -174,24 +174,55 @@ bool CWinEGLPlatformAmlogic::ProbeDisplayResolutions(std::vector<CStdString> &re
     StringUtils::SplitString(valstr, "\n", probe_str);
 
     resolutions.clear();
+    RESOLUTION_INFO res;
     for (size_t i = 0; i < probe_str.size(); i++)
     {
+      res.iWidth=0; res.iHeight = 0; res.fRefreshRate = 60; res.dwFlags = 0;
       // strips, for example, 720p* to 720p
       if (probe_str[i].Right(1) == "*")
         probe_str[i] = probe_str[i].Left(std::max(0, (int)probe_str[i].size() - 1));
-      
-      if (probe_str[i].Equals("480p"))            resolutions.push_back("720x480p60Hzp");
-      else if (probe_str[i].Equals("720p"))       resolutions.push_back("1280x720p60Hz");
-      else if (probe_str[i].Equals("720p50hz"))   resolutions.push_back("1280x720p50Hz");
-      else if (probe_str[i].Equals("1080i"))      resolutions.push_back("1920x1080i60Hz");
-      else if (probe_str[i].Equals("1080i50hz"))  resolutions.push_back("1920x1080i50Hz");
-      else if (probe_str[i].Equals("1080p"))      resolutions.push_back("1920x1080p60Hz");
-      else if (probe_str[i].Equals("1080p50hz"))  resolutions.push_back("1920x1080p50Hz");
+      if (probe_str[i].Equals("480p"))
+      {
+        res.iWidth = 720; res.iHeight=480;
+        resolutions.push_back(res);
+      }
+      else if (probe_str[i].Equals("720p"))
+      {
+        res.iWidth = 1280; res.iHeight=720;
+        resolutions.push_back(res);
+      }
+      else if (probe_str[i].Equals("720p50hz"))
+      {
+        res.iWidth = 1280; res.iHeight=720; res.fRefreshRate = 50;
+        resolutions.push_back(res);
+      }
+      else if (probe_str[i].Equals("1080i"))
+      {
+        res.iWidth = 1920; res.iHeight=1080; res.dwFlags |= D3DPRESENTFLAG_INTERLACED;
+        resolutions.push_back(res);
+      }
+      else if (probe_str[i].Equals("1080i50hz"))
+      {
+        res.iWidth = 1920; res.iHeight=1080; res.dwFlags |= D3DPRESENTFLAG_INTERLACED; res.fRefreshRate = 50;
+        resolutions.push_back(res);
+      }
+      else if (probe_str[i].Equals("1080p"))
+      {
+        res.iWidth = 1920; res.iHeight=1080;
+        resolutions.push_back(res);
+      }
+      else if (probe_str[i].Equals("1080p50hz"))
+      {
+        res.iWidth = 1920; res.iHeight=1080; res.fRefreshRate = 50;
+        resolutions.push_back(res);
+      }
     }
     if (resolutions.size() == 0)
-      resolutions.push_back("1280x720p60Hz");
+    {
+      res.iWidth=1280; res.iHeight = 720; res.fRefreshRate = 60; res.dwFlags = 0;
+      resolutions.push_back(res);
+    }
   }
-  
   return false;
 }
 
