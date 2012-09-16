@@ -191,7 +191,7 @@ bool CLinuxRendererGLES::Configure(unsigned int width, unsigned int height, unsi
 
   m_RenderUpdateCallBackFn = NULL;
   m_RenderUpdateCallBackCtx = NULL;
-  if ((format & RENDER_BYPASS) && g_application.GetCurrentPlayer())
+  if ((m_format == RENDER_FMT_BYPASS) && g_application.GetCurrentPlayer())
   {
     g_application.m_pPlayer->GetRenderFeatures(&m_renderFeatures);
     g_application.m_pPlayer->GetDeinterlaceMethods(&m_deinterlaceMethods);
