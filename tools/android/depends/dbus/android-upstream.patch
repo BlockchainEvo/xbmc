@@ -1,0 +1,117 @@
+From 234cd48f9d1ca42743f9d99a84b2c1a68b8130c6 Mon Sep 17 00:00:00 2001
+From: Alvaro Soliverez <alvaro.soliverez@collabora.co.uk>
+Date: Tue, 8 Nov 2011 15:45:29 -0300
+Subject: [PATCH 3/3] Modifications to fit the way Android works
+
+---
+ bus/main.c               |    8 ++++++++
+ dbus/dbus-internals.c    |   23 +++++++++++++++--------
+ dbus/dbus-message-util.c |    4 ++++
+ dbus/dbus-transport.c    |    4 ++++
+ 4 files changed, 31 insertions(+), 8 deletions(-)
+
+diff --git a/bus/main.c b/bus/main.c
+index a0bf07c..32d1c5b 100644
+--- a/bus/main.c
++++ b/bus/main.c
+@@ -44,6 +44,10 @@ static BusContext *context;
+ 
+ #ifdef DBUS_UNIX
+ 
++#ifdef ANDROID
++int dbus_daemon_main (int argc, char **argv);
++#endif
++
+ static int reload_pipe[2];
+ #define RELOAD_READ_END 0
+ #define RELOAD_WRITE_END 1
+@@ -342,7 +346,11 @@ close_reload_pipe (DBusWatch **watch)
+ #endif /* DBUS_UNIX */
+ 
+ int
++#ifdef ANDROID
++dbus_daemon_main (int argc, char **argv)
++#else
+ main (int argc, char **argv)
++#endif
+ {
+   DBusError error;
+   DBusString config_file;
+diff --git a/dbus/dbus-internals.c b/dbus/dbus-internals.c
+index fcea079..8d54da2 100644
+--- a/dbus/dbus-internals.c
++++ b/dbus/dbus-internals.c
+@@ -625,11 +625,23 @@ _dbus_read_uuid_file_without_creating (const DBusString *filename,
+   DBusString contents;
+   DBusString decoded;
+   int end;
++  const char *tempenv;
+   
+-  if (!_dbus_string_init (&contents))
++  tempenv = _dbus_getenv("DBUS_MACHINE_ID");
++  if (tempenv)
++    _dbus_string_init_const (&contents, tempenv);
++  else
+     {
+-      _DBUS_SET_OOM (error);
+-      return FALSE;
++      if (!_dbus_string_init (&contents))
++        {
++          _DBUS_SET_OOM (error);
++          return FALSE;
++        }
++
++      if (!_dbus_file_get_contents (&contents, filename, error))
++        goto error;
++
++      _dbus_string_chop_white (&contents);
+     }
+ 
+   if (!_dbus_string_init (&decoded))
+@@ -638,11 +650,6 @@ _dbus_read_uuid_file_without_creating (const DBusString *filename,
+       _DBUS_SET_OOM (error);
+       return FALSE;
+     }
+-  
+-  if (!_dbus_file_get_contents (&contents, filename, error))
+-    goto error;
+-
+-  _dbus_string_chop_white (&contents);
+ 
+   if (_dbus_string_get_length (&contents) != DBUS_UUID_LENGTH_HEX)
+     {
+diff --git a/dbus/dbus-message-util.c b/dbus/dbus-message-util.c
+index f785952..2ca70e8 100644
+--- a/dbus/dbus-message-util.c
++++ b/dbus/dbus-message-util.c
+@@ -40,6 +40,10 @@
+ #include <errno.h>
+ #endif
+ 
++#ifdef __BIONIC__
++#include <sys/select.h>
++#include <linux/time.h>
++#endif
+ /**
+  * @addtogroup DBusMessage
+  * @{
+diff --git a/dbus/dbus-transport.c b/dbus/dbus-transport.c
+index f743d01..0f6ac69 100644
+--- a/dbus/dbus-transport.c
++++ b/dbus/dbus-transport.c
+@@ -677,8 +677,12 @@ auth_via_default_rules (DBusTransport *transport)
+                          " but our UID is "DBUS_UID_FORMAT", disconnecting\n",
+                          _dbus_credentials_get_unix_uid(auth_identity),
+                          _dbus_credentials_get_unix_uid(our_identity));
++#ifdef __BIONIC__
++	allow = TRUE;
++#else
+       _dbus_transport_disconnect (transport);
+       allow = FALSE;
++#endif
+     }  
+ 
+   _dbus_credentials_unref (our_identity);
+-- 
+1.7.7
+

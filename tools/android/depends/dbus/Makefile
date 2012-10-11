@@ -8,14 +8,15 @@ SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
 
 # configuration settings
-CONFIGURE=./configure --prefix=$(PREFIX) --host=$(HOST) \
-  --without-x --disable-xml-docs --disable-doxygen-docs
+CONFIGURE=cp -f $(CONFIG_SUB) $(CONFIG_GUESS) .; \
+          ./configure --prefix=$(PREFIX) --host=$(HOST) --disable-shared \
+          --without-x --disable-xml-docs --disable-doxygen-docs
 
-LIBDYLIB=$(PLATFORM)/$(LIBNAME)/.libs/$(LIBNAME).so
+LIBDYLIB=$(PLATFORM)/$(LIBNAME)/.libs/libdbus-1.a
 
 CLEAN_FILES=$(ARCHIVE) $(PLATFORM)
 
-all: $(LIBDYLIB) .installed-$(PLATFORM)
+all: .installed-$(PLATFORM)
 
 $(TARBALLS_LOCATION)/$(ARCHIVE):
 	$(RETRIEVE_TOOL) $(RETRIEVE_TOOL_FLAGS) $(BASE_URL)/$(ARCHIVE)
@@ -23,13 +24,15 @@ $(TARBALLS_LOCATION)/$(ARCHIVE):
 $(PLATFORM): $(TARBALLS_LOCATION)/$(ARCHIVE) $(DEPS)
 	rm -rf $(PLATFORM)/*; mkdir -p $(PLATFORM)
 	$(ARCHIVE_TOOL) $(ARCHIVE_TOOL_FLAGS) $(TARBALLS_LOCATION)/$(ARCHIVE)
+	cd $(PLATFORM); patch -p1 < ../android-upstream.patch
+	cd $(PLATFORM); patch -p1 < ../android.patch
 	cd $(PLATFORM); $(CONFIGURE)
 
 $(LIBDYLIB): $(PLATFORM)
-	$(MAKE) -C $(PLATFORM)
+	$(MAKE) -C $(PLATFORM)/dbus/
 
 .installed-$(PLATFORM): $(LIBDYLIB)
-	$(MAKE) -C $(PLATFORM) install
+	$(MAKE) -C $(PLATFORM)/dbus install
 	touch $@
 
 clean:
@@ -38,3 +41,4 @@ clean:
 
 distclean::
 	rm -rf $(PLATFORM) .installed-$(PLATFORM)
+

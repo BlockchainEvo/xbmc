@@ -1,0 +1,44 @@
+diff --git a/dbus/sd-daemon.c b/dbus/sd-daemon.c
+index 9c23b91..048d844 100644
+--- a/dbus/sd-daemon.c
++++ b/dbus/sd-daemon.c
+@@ -32,7 +32,11 @@
+ #include <sys/stat.h>
+ #include <sys/socket.h>
+ #include <sys/un.h>
++#ifdef __BIONIC__
++#include <linux/fcntl.h>
++#else
+ #include <sys/fcntl.h>
++#endif
+ #include <netinet/in.h>
+ #include <stdlib.h>
+ #include <errno.h>
+--- a/dbus/dbus-sysdeps-unix.c	2011-02-17 12:24:11.000000000 -0500
++++ b/dbus/dbus-sysdeps-unix.c	2012-10-10 20:58:07.757324492 -0400
+@@ -1979,11 +1979,21 @@
+         p = NULL;
+ #ifdef HAVE_POSIX_GETPWNAM_R
+         if (uid != DBUS_UID_UNSET)
+-          result = getpwuid_r (uid, &p_str, buf, buflen,
+-                               &p);
++        {
++          p = getpwuid(uid);
++          if (p == NULL)
++            result = -1;
++          else
++            result = 0;
++        }
+         else
+-          result = getpwnam_r (username_c, &p_str, buf, buflen,
+-                               &p);
++        {
++          p = getpwnam(username_c);
++          if (p == NULL)
++            result = -1;
++          else
++            result = 0;
++        }
+ #else
+         if (uid != DBUS_UID_UNSET)
+           p = getpwuid_r (uid, &p_str, buf, buflen);
