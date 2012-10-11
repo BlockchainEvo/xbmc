@@ -1,0 +1,12 @@
+diff -ruN armeabi-v7a-new//avahi-daemon/Makefile.am armeabi-v7a/avahi-daemon/Makefile.am
+--- armeabi-v7a-new//avahi-daemon/Makefile.am	2012-10-10 19:51:58.277326996 -0400
++++ armeabi-v7a/avahi-daemon/Makefile.am	2012-10-10 19:48:37.637327122 -0400
+@@ -52,7 +52,7 @@
+ 	static-hosts.c static-hosts.h \
+ 	ini-file-parser.c ini-file-parser.h \
+ 	setproctitle.c setproctitle.h \
+-	sd-daemon.h sd-daemon.c glob.c \
++	sd-daemon.h sd-daemon.c \
+ 	../avahi-client/check-nss.c
+ 
+ avahi_daemon_CFLAGS = $(AM_CFLAGS) $(LIBDAEMON_CFLAGS) $(XML_CFLAGS)
