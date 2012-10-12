@@ -408,7 +408,7 @@ bool CAESinkALSA::InitializeSW(AEAudioFormat &format)
   memset(sw_params, 0, snd_pcm_sw_params_sizeof());
 
   snd_pcm_sw_params_current              (m_pcm, sw_params);
-  snd_pcm_sw_params_set_start_threshold  (m_pcm, sw_params, INT_MAX);
+  snd_pcm_sw_params_set_start_threshold  (m_pcm, sw_params, format.m_frames);
   snd_pcm_sw_params_set_silence_threshold(m_pcm, sw_params, 0);
   snd_pcm_sw_params_get_boundary         (sw_params, &boundary);
   snd_pcm_sw_params_set_silence_size     (m_pcm, sw_params, boundary);
@@ -491,9 +491,6 @@ unsigned int CAESinkALSA::AddPackets(uint8_t *data, unsigned int frames, bool ha
 {
   if (!m_pcm)
     return 0;
-
-  if (snd_pcm_state(m_pcm) == SND_PCM_STATE_PREPARED)
-    snd_pcm_start(m_pcm);
 
   int ret;
 
