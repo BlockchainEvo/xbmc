@@ -494,18 +494,18 @@ unsigned int CAESinkALSA::AddPackets(uint8_t *data, unsigned int frames, bool ha
 
   int ret;
 
-  ret = snd_pcm_avail(m_pcm);
-  if (ret < 0) 
-  {
-    HandleError("snd_pcm_avail", ret);
-    ret = 0;
-  }
-
   if ((unsigned int)ret < frames)
   {
     ret = snd_pcm_wait(m_pcm, m_timeout);
     if (ret < 0)
       HandleError("snd_pcm_wait", ret);
+  }
+
+  ret = snd_pcm_avail(m_pcm);
+  if (ret < 0)
+  {
+    HandleError("snd_pcm_avail", ret);
+    ret = 0;
   }
 
   ret = snd_pcm_writei(m_pcm, (void*)data, frames);
