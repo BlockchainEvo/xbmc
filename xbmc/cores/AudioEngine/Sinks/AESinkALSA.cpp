@@ -131,6 +131,7 @@ bool CAESinkALSA::Initialize(AEAudioFormat &format, std::string &device)
 {
   m_initDevice = device;
   m_initFormat = format;
+  m_hwCanPause = false;
 
   /* if we are raw, correct the data format */
   if (AE_IS_RAW(format.m_dataFormat))
@@ -378,7 +379,9 @@ bool CAESinkALSA::InitializeHW(AEAudioFormat &format)
 
   snd_pcm_hw_params_get_period_size(hw_params_copy, &periodSize, NULL);
   snd_pcm_hw_params_get_buffer_size(hw_params_copy, &bufferSize);
-  
+  m_hwCanPause = snd_pcm_hw_params_can_pause(hw_params_copy);
+  if (!m_hwCanPause)
+    CLog::Log(LOGWARNING, "CAESinkALSA::InitializeHW - Hardware cannot pause");
 
   CLog::Log(LOGDEBUG, "CAESinkALSA::InitializeHW - Got: periodSize %lu, periods %u, bufferSize %lu", periodSize, periods, bufferSize);
 
@@ -560,6 +563,27 @@ void CAESinkALSA::Drain()
   snd_pcm_nonblock(m_pcm, 0);
   snd_pcm_drain(m_pcm);
   snd_pcm_nonblock(m_pcm, 1);
+}
+
+bool CAESinkALSA::SoftSuspend()
+{
+  if (m_hwCanPause)
+  {
+    if (snd_pcm_pause(m_pcm, 1))
+      m_hwCanPause = false;
+  }
+  return m_hwCanPause;
+}
+
+bool CAESinkALSA::SoftResume()
+{
+  snd_pcm_state_t state = snd_pcm_state(m_pcm);
+  {
+    if(state == SND_PCM_STATE_PAUSED)
+      snd_pcm_pause(m_pcm,0);
+    return true;
+  }
+  return false;
 }
 
 void CAESinkALSA::AppendParams(std::string &device, const std::string &params)

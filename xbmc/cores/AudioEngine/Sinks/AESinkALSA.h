@@ -49,7 +49,8 @@ public:
   virtual double       GetCacheTotal   ();
   virtual unsigned int AddPackets      (uint8_t *data, unsigned int frames, bool hasAudio);
   virtual void         Drain           ();
-
+  virtual bool         SoftResume      ();
+  virtual bool         SoftSuspend     ();
   static void EnumerateDevicesEx(AEDeviceInfoList &list);
 private:
   CAEChannelInfo GetChannelLayout(AEAudioFormat format);
@@ -66,6 +67,7 @@ private:
   std::string       m_device;
   snd_pcm_t        *m_pcm;
   int               m_timeout;
+  bool              m_hwCanPause;
 
   static snd_pcm_format_t AEFormatToALSAFormat(const enum AEDataFormat format);
 
