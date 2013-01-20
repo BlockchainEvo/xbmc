@@ -25,6 +25,7 @@ CPPFLAGS="@platform_cflags@ @platform_includes@ -I@prefix@/@deps_dir@/include $C
 
 export PKG_CONFIG=@prefix@/@build_cpu@-@build_os@-native/bin/pkg-config
 export PKG_CONFIG_PATH=@prefix@/@deps_dir@/lib/pkgconfig
+export YASM=@prefix@/@build_cpu@-@build_os@-native/bin/yasm
 export NASM=@prefix@/@build_cpu@-@build_os@-native/bin/yasm
 export MYSQL_CONFIG=@prefix@/@deps_dir@/bin/mysql_config
 
