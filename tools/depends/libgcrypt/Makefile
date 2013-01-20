@@ -1,5 +1,5 @@
 include ../Makefile.include
-DEPS= ../Makefile.include 01-gcrypt-android-select.patch gcrypt-disable-tests.patch Makefile
+DEPS= ../Makefile.include 03-gcrypt-android-select.patch gcrypt-disable-tests.patch Makefile
 
 # lib name, version
 LIBNAME=libgcrypt
@@ -28,8 +28,10 @@ $(PLATFORM): $(TARBALLS_LOCATION)/$(ARCHIVE) $(DEPS)
 	rm -rf $(PLATFORM)/*; mkdir -p $(PLATFORM)
 	cd $(PLATFORM); $(ARCHIVE_TOOL) $(ARCHIVE_TOOL_FLAGS) $(TARBALLS_LOCATION)/$(ARCHIVE)
 	cd $(PLATFORM); patch -p1 < ../gcrypt-disable-tests.patch
+	cd $(PLATFORM); patch -p0 < ../01-static-mpi_mpi-internal.patch 
+	cd $(PLATFORM); patch -p0 < ../02-armasm.patch
+	cd $(PLATFORM); patch -p1 < ../03-gcrypt-android-select.patch
 	cd $(PLATFORM); $(CONFIGURE)
-	cd $(PLATFORM); patch -p1 < ../01-gcrypt-android-select.patch
 
 $(LIBDYLIB): $(PLATFORM)
 	$(MAKE) -C $(PLATFORM)
