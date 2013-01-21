@@ -16,6 +16,7 @@
 /*/x86_64-darwin10.8.0-native/*
 /*/arm-apple-darwin/*
 /*/x86_64-apple-darwin/*
+/*/i386-apple-darwin/*
 Toolchain.cmake
 config.site
 config.site.native
