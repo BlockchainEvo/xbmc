@@ -87,6 +87,10 @@ if test "@platform_os@" = "android"; then
   samba_cv_HAVE_UT_UT_TYPE=no
   ac_cv_func_srand=yes
   ac_cv_func_rand=yes
+
+  #python: android doesn't have libutil
+  PYTHON_LDFLAGS="-L@prefix@/@deps_dir@/lib -lpython${PYTHON_VERSION} -lc -ldl -lm -lexpat -lffi -lintl"
+
 fi
 
 if test "@platform_os@" = "ios"; then
