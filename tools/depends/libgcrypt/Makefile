@@ -11,7 +11,7 @@ ARCHIVE=$(SOURCE).tar.bz2
 CONFIGURE=cp -f $(CONFIG_SUB) $(CONFIG_GUESS) .; \
           ./configure --prefix=$(PREFIX) --disable-shared \
 
-ifeq ($(PLATFORM),x86)
+ifeq ($(OS),osx)
 CONFIGURE+=--disable-asm
 endif
 
