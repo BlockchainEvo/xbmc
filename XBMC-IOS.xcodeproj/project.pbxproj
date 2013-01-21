@@ -7914,7 +7914,6 @@
 					"-lpcre",
 					"-lpcrecpp",
 					"-lfribidi",
-					"-lcdio",
 					"-lfreetype",
 					"-lfontconfig",
 					"-lsqlite3",
