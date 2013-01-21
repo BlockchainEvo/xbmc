@@ -7839,7 +7839,6 @@
 					"-lswscale",
 					"-lGLEW",
 					"-lSDL",
-					"-lSDL_mixer",
 					"-lsmbclient",
 					"-lpython2.6",
 					"-ltag",
