@@ -13,13 +13,14 @@ SUBDIRS = \
 	python26-native python26 samba libcdio afpfs-ng libshairport \
 	libplist libcec libbluray boost tinyxml dummy-libxbmc libsdl-native \
 	liblzo2-native libjpeg-turbo-native libpng-native tiff-native libsdl_image-native rpl-native \
-	libamplayer libssh taglib swig-native pcre-native xbmc-pvr-addons libusb libnfs
+	libamplayer libssh taglib swig-native pcre-native xbmc-pvr-addons libusb libnfs libmp3lame
 
 ifeq (@platform_os@,ios)
   EXCLUDED = libcec libcrystalhd libusb
 endif
 
 ifeq (@platform_os@,osx)
+  SUBDIRS += libGLEW libsdl
   EXCLUDED = libusb
 endif
 
@@ -95,6 +96,7 @@ libnfs: rpl-native
 xbmc-pvr-addons: boost mysql
 mysql: readline openssl
 libzip: $(ZLIB)
+libmp3lame: ncurses $(ICONV)
 
 buildtools: $(BUILDTOOLS)
 $(BUILDTOOLS):
