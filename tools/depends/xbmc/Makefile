@@ -20,7 +20,6 @@ all: $(SOURCE)/libxbmc.so
 $(SOURCE)/libxbmc.so:
 	cd $(SOURCE); ./bootstrap
 	cd $(SOURCE); $(CONFIGURE)
-	cd $(SOURCE); $(MAKE)
 
 ../Makefile.include:
 	$(error Please run edit and run setup-sdk.sh)
