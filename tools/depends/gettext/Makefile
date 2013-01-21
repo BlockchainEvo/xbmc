@@ -17,7 +17,7 @@ CONFIGURE=cp -f $(CONFIG_SUB) $(CONFIG_GUESS) build-aux/; \
     --with-included-glib \
     --with-included-libcroco \
     --with-included-libxml \
-    --without-git --without-cvs \
+    --without-git --without-cvs --disable-shared \
 
 LIBDYLIB=$(PLATFORM)/gettext-tools/src/.libs/libgettextsrc.a
 
