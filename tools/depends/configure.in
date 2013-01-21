@@ -231,7 +231,7 @@ AC_PATH_TOOL([CPP],[$platform_cpp],,[$use_toolchain:$use_toolchain/bin:$PATH])
 AC_PATH_TOOL([CXX],[$platform_cxx],,[$use_toolchain:$use_toolchain/bin:$PATH])
 
 AC_CHECK_LIB([z],   [main], has_zlib=1, AC_MSG_WARN("No zlib support in toolchain. Will build libz."); has_zlib=0)
-AC_SEARCH_LIBS([iconv_open],iconv, link_iconv=$ac_cv_search_iconv_open, AC_MSG_WARN("No iconv support in toolchain. Will build libiconv."); need_libiconv=1)
+AC_SEARCH_LIBS([iconv_open],iconv, link_iconv=$ac_cv_search_iconv_open, link_iconv=-liconv; AC_MSG_WARN("No iconv support in toolchain. Will build libiconv."); need_libiconv=1)
 
 if test "$link_iconv" = "none required"; then
   link_iconv=
