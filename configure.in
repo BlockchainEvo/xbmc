@@ -1039,8 +1039,10 @@ AS_CASE([x$use_libbluray],
 AM_ICONV
 LIBS="$LIBS $LIBICONV"
 AC_SEARCH_LIBS([dlopen],dl)
-AC_SEARCH_LIBS([clock_gettime])
-AC_SEARCH_LIBS([res_init],resolv)
+AC_SEARCH_LIBS([clock_gettime],rt)
+AC_SEARCH_LIBS(dn_expand,  resolv)
+AC_SEARCH_LIBS(_dn_expand, resolv)
+AC_SEARCH_LIBS(__dn_expand,resolv)
 
 # platform dependent libraries
 if test "$host_vendor" = "apple" ; then
