@@ -47,6 +47,7 @@ export AUTOCONF=@prefix@/@build_cpu@-@build_os@-native/bin/autoconf
 export ACLOCAL=@prefix@/@build_cpu@-@build_os@-native/bin/aclocal
 export ACLOCAL_PATH=@prefix@/@deps_dir@/share/aclocal:@prefix@/@build_cpu@-@build_os@-native/share/aclocal
 export AUTOPOINT=@prefix@/@build_cpu@-@build_os@-native/bin/autopoint
+export AUTOHEADER=@prefix@/@build_cpu@-@build_os@-native/bin/autoheader
 export LIBTOOL=@prefix@/@build_cpu@-@build_os@-native/bin/libtool
 export LIBTOOLIZE=@prefix@/@build_cpu@-@build_os@-native/bin/libtoolize
 
