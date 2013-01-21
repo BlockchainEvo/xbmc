@@ -1,4 +1,3 @@
-NATIVE_BUILD=1
 include ../Makefile.include
 DEPS= ../Makefile.include 01-SDL_SetWidthHeight.patch 02-mmx.patch Makefile
 
@@ -17,13 +16,11 @@ LIBDYLIB=$(PLATFORM)/build/.libs/lib$(LIBNAME).so
 all: .installed-$(PLATFORM)
 
 $(TARBALLS_LOCATION)/$(ARCHIVE):
-	$(RETRIEVE_TOOL) $(RETRIEVE_TOOL_FLAGS) $(BASE_URL)/$(ARCHIVE)
-	echo $(ARCHIVE) > .gitignore
+	cd $(TARBALLS_LOCATION); $(RETRIEVE_TOOL) $(RETRIEVE_TOOL_FLAGS) $(BASE_URL)/$(ARCHIVE)
 
 $(PLATFORM): $(TARBALLS_LOCATION)/$(ARCHIVE) $(DEPS)
 	rm -rf $(PLATFORM); mkdir -p $(PLATFORM)
-	$(ARCHIVE_TOOL) $(ARCHIVE_TOOL_FLAGS) $(TARBALLS_LOCATION)/$(ARCHIVE)
-	echo $(PLATFORM) > .gitignore
+	cd $(PLATFORM); $(ARCHIVE_TOOL) $(ARCHIVE_TOOL_FLAGS) $(TARBALLS_LOCATION)/$(ARCHIVE)
 	cd $(PLATFORM); patch -p0 < ../01-SDL_SetWidthHeight.patch
 	cd $(PLATFORM); patch -p0 < ../02-mmx.patch
 	cd $(PLATFORM); $(CONFIGURE)
