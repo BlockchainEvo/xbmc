@@ -284,16 +284,15 @@ static void to_wfinddata64i32(_finddata64i32_t *data, _wfinddata64i32_t *wdata)
   wdata->size = data->size;
 }
 #endif
-
 extern "C"
 {
-  void dll_sleep(unsigned long imSec)
+  __attribute__((visibility("default"))) void dll_sleep(unsigned long imSec)
   {
     Sleep(imSec);
   }
 
   // FIXME, XXX, !!!!!!
-  void dllReleaseAll( )
+  __attribute__((visibility("default"))) void dllReleaseAll( )
   {
     // close all open dirs...
     if (bVecDirsInited)
@@ -306,7 +305,7 @@ extern "C"
     }
   }
 
-  void* dllmalloc(size_t size)
+  __attribute__((visibility("default"))) void* dllmalloc(size_t size)
   {
     void* pBlock = malloc(size);
     if (!pBlock)
@@ -316,12 +315,12 @@ extern "C"
     return pBlock;
   }
 
-  void dllfree( void* pPtr )
+  __attribute__((visibility("default"))) void dllfree( void* pPtr )
   {
     free(pPtr);
   }
 
-  void* dllcalloc(size_t num, size_t size)
+  __attribute__((visibility("default"))) void* dllcalloc(size_t num, size_t size)
   {
     void* pBlock = calloc(num, size);
     if (!pBlock)
@@ -331,7 +330,7 @@ extern "C"
     return pBlock;
   }
 
-  void* dllrealloc( void *memblock, size_t size )
+  __attribute__((visibility("default"))) void* dllrealloc( void *memblock, size_t size )
   {
     void* pBlock =  realloc(memblock, size);
     if (!pBlock)
@@ -341,17 +340,17 @@ extern "C"
     return pBlock;
   }
 
-  void dllexit(int iCode)
+  __attribute__((visibility("default"))) void dllexit(int iCode)
   {
     not_implement("msvcrt.dll fake function exit() called\n");      //warning
   }
 
-  void dllabort()
+  __attribute__((visibility("default"))) void dllabort()
   {
     not_implement("msvcrt.dll fake function abort() called\n");     //warning
   }
 
-  void* dll__dllonexit(PFV input, PFV ** start, PFV ** end)
+  __attribute__((visibility("default"))) void* dll__dllonexit(PFV input, PFV ** start, PFV ** end)
   {
     //ported from WINE code
     PFV *tmp;
@@ -392,7 +391,7 @@ extern "C"
     return NULL;
   }
 
-  int dllputs(const char* szLine)
+  __attribute__((visibility("default"))) int dllputs(const char* szLine)
   {
     if (!szLine[0]) return EOF;
     if (szLine[strlen(szLine) - 1] != '\n')
@@ -404,7 +403,7 @@ extern "C"
     return 0;
   }
 
-  int dllprintf(const char *format, ...)
+  __attribute__((visibility("default"))) int dllprintf(const char *format, ...)
   {
     va_list va;
     static char tmp[2048];
@@ -417,7 +416,7 @@ extern "C"
     return strlen(tmp);
   }
 
-  char *dll_fullpath(char *absPath, const char *relPath, size_t maxLength)
+  __attribute__((visibility("default"))) char *dll_fullpath(char *absPath, const char *relPath, size_t maxLength)
   {
     unsigned int len = strlen(relPath);
     if (len > maxLength && absPath != NULL) return NULL;
@@ -451,13 +450,13 @@ extern "C"
     return NULL;
   }
 
-  FILE* dll_popen(const char *command, const char *mode)
+  __attribute__((visibility("default"))) FILE* dll_popen(const char *command, const char *mode)
   {
     not_implement("msvcrt.dll fake function _popen(...) called\n"); //warning
     return NULL;
   }
 
-  void *dll_dlopen(const char *filename, int flag)
+  __attribute__((visibility("default"))) void *dll_dlopen(const char *filename, int flag)
   {
 #if defined(TARGET_ANDROID)
     CAndroidDyload temp;
@@ -469,13 +468,13 @@ extern "C"
 #endif
   }
 
-  int dll_pclose(FILE *stream)
+  __attribute__((visibility("default"))) int dll_pclose(FILE *stream)
   {
     not_implement("msvcrt.dll fake function _pclose(...) called\n");        //warning
     return 0;
   }
 
-  FILE* dll_fdopen(int fd, const char* mode)
+  __attribute__((visibility("default"))) FILE* dll_fdopen(int fd, const char* mode)
   {
     EmuFileObject* o = g_emuFileWrapper.GetFileObjectByDescriptor(fd);
     if (o)
@@ -499,7 +498,7 @@ extern "C"
     return NULL;
   }
 
-  int dll_open(const char* szFileName, int iMode)
+  __attribute__((visibility("default"))) int dll_open(const char* szFileName, int iMode)
   {
     char str[1024];
     int size = sizeof(str);
@@ -555,7 +554,7 @@ extern "C"
     return -1;
   }
 
-  FILE* dll_freopen(const char *path, const char *mode, FILE *stream)
+  __attribute__((visibility("default"))) FILE* dll_freopen(const char *path, const char *mode, FILE *stream)
   {
     if (g_emuFileWrapper.StreamIsEmulatedFile(stream))
     {
@@ -575,7 +574,7 @@ extern "C"
   }
 
 
-  int dll_read(int fd, void* buffer, unsigned int uiSize)
+  __attribute__((visibility("default"))) int dll_read(int fd, void* buffer, unsigned int uiSize)
   {
     CFile* pFile = g_emuFileWrapper.GetFileXbmcByDescriptor(fd);
     if (pFile != NULL)
@@ -592,7 +591,7 @@ extern "C"
     return -1;
   }
 
-  int dll_write(int fd, const void* buffer, unsigned int uiSize)
+  __attribute__((visibility("default"))) int dll_write(int fd, const void* buffer, unsigned int uiSize)
   {
     CFile* pFile = g_emuFileWrapper.GetFileXbmcByDescriptor(fd);
     if (pFile != NULL)
@@ -609,7 +608,7 @@ extern "C"
     return -1;
   }
 
-  int dll_fstat64(int fd, struct __stat64 *buf)
+  __attribute__((visibility("default"))) int dll_fstat64(int fd, struct __stat64 *buf)
   {
     CFile* pFile = g_emuFileWrapper.GetFileXbmcByDescriptor(fd);
     if (pFile != NULL)
@@ -620,7 +619,7 @@ extern "C"
     return -1;
   }
 
-  int dll_close(int fd)
+  __attribute__((visibility("default"))) int dll_close(int fd)
   {
     CFile* pFile = g_emuFileWrapper.GetFileXbmcByDescriptor(fd);
     if (pFile != NULL)
@@ -641,7 +640,7 @@ extern "C"
     return -1;
   }
 
-  __off64_t dll_lseeki64(int fd, __off64_t lPos, int iWhence)
+  __attribute__((visibility("default"))) __off64_t dll_lseeki64(int fd, __off64_t lPos, int iWhence)
   {
     CFile* pFile = g_emuFileWrapper.GetFileXbmcByDescriptor(fd);
     if (pFile != NULL)
@@ -661,7 +660,7 @@ extern "C"
     return (__int64)-1;
   }
 
-  __off_t dll_lseek(int fd, __off_t lPos, int iWhence)
+  __attribute__((visibility("default"))) __off_t dll_lseek(int fd, __off_t lPos, int iWhence)
   {
     if (g_emuFileWrapper.DescriptorIsEmulatedFile(fd))
     {
@@ -677,7 +676,7 @@ extern "C"
     return -1;
   }
 
-  void dll_rewind(FILE* stream)
+  __attribute__((visibility("default"))) void dll_rewind(FILE* stream)
   {
     int fd = g_emuFileWrapper.GetDescriptorByStream(stream);
     if (fd >= 0)
@@ -696,7 +695,7 @@ extern "C"
   }
 
   //---------------------------------------------------------------------------------------------------------
-  void dll_flockfile(FILE *stream)
+  __attribute__((visibility("default"))) void dll_flockfile(FILE *stream)
   {
     int fd = g_emuFileWrapper.GetDescriptorByStream(stream);
     if (fd >= 0)
@@ -717,7 +716,7 @@ extern "C"
     CLog::Log(LOGERROR, "%s emulated function failed",  __FUNCTION__);
   }
 
-  int dll_ftrylockfile(FILE *stream)
+  __attribute__((visibility("default"))) int dll_ftrylockfile(FILE *stream)
   {
     int fd = g_emuFileWrapper.GetDescriptorByStream(stream);
     if (fd >= 0)
@@ -739,7 +738,7 @@ extern "C"
     return -1;
   }
 
-  void dll_funlockfile(FILE *stream)
+  __attribute__((visibility("default"))) void dll_funlockfile(FILE *stream)
   {
     int fd = g_emuFileWrapper.GetDescriptorByStream(stream);
     if (fd >= 0)
@@ -760,7 +759,7 @@ extern "C"
     CLog::Log(LOGERROR, "%s emulated function failed",  __FUNCTION__);
   }
 
-  int dll_fclose(FILE * stream)
+  __attribute__((visibility("default"))) int dll_fclose(FILE * stream)
   {
     int fd = g_emuFileWrapper.GetDescriptorByStream(stream);
     if (fd >= 0)
@@ -778,7 +777,7 @@ extern "C"
 
 #ifndef _LINUX
   // should be moved to CFile classes
-  intptr_t dll_findfirst(const char *file, struct _finddata_t *data)
+  __attribute__((visibility("default"))) intptr_t dll_findfirst(const char *file, struct _finddata_t *data)
   {
     struct _finddata64i32_t data64i32;
     intptr_t ret = dll_findfirst64i32(file, &data64i32);
@@ -795,7 +794,7 @@ extern "C"
     return ret;
   }
 
-  intptr_t dll_findfirst64i32(const char *file, struct _finddata64i32_t *data)
+  __attribute__((visibility("default"))) intptr_t dll_findfirst64i32(const char *file, struct _finddata64i32_t *data)
   {
     char str[1024];
     int size = sizeof(str);
@@ -879,7 +878,7 @@ extern "C"
   }
 
   // should be moved to CFile classes
-  int dll_findnext(intptr_t f, _finddata_t* data)
+  __attribute__((visibility("default"))) int dll_findnext(intptr_t f, _finddata_t* data)
   {
     struct _finddata64i32_t data64i32;
     int ret = dll_findnext64i32(f, &data64i32);
@@ -896,7 +895,7 @@ extern "C"
     return ret;
   }
 
-  int dll_findnext64i32(intptr_t f, _finddata64i32_t* data)
+  __attribute__((visibility("default"))) int dll_findnext64i32(intptr_t f, _finddata64i32_t* data)
   {
     int found = MAX_OPEN_DIRS;
     for (int i = 0; i < MAX_OPEN_DIRS; i++)
@@ -934,7 +933,7 @@ extern "C"
     return -1;
   }
 
-  int dll_findclose(intptr_t handle)
+  __attribute__((visibility("default"))) int dll_findclose(intptr_t handle)
   {
     int found = MAX_OPEN_DIRS;
     for (int i = 0; i < MAX_OPEN_DIRS; i++)
@@ -953,7 +952,7 @@ extern "C"
     return 0;
   }
 
-  void dll__security_error_handler(int code, void *data)
+  __attribute__((visibility("default"))) void dll__security_error_handler(int code, void *data)
   {
     //NOTE: __security_error_handler has been removed in VS2005 and up
     CLog::Log(LOGERROR, "security_error, code %i", code);
@@ -961,7 +960,7 @@ extern "C"
 
 #endif
 
-  DIR *dll_opendir(const char *file)
+  __attribute__((visibility("default"))) DIR *dll_opendir(const char *file)
   {
     CURL url(CSpecialProtocol::TranslatePath(file));
     if (url.IsLocal())
@@ -996,7 +995,7 @@ extern "C"
       return NULL;
   }
 
-  struct dirent *dll_readdir(DIR *dirp)
+  __attribute__((visibility("default")))  struct dirent *dll_readdir(DIR *dirp)
   {
     if (!dirp)
       return NULL;
@@ -1038,7 +1037,7 @@ extern "C"
     return NULL;
   }
 
-  int dll_closedir(DIR *dirp)
+  __attribute__((visibility("default"))) int dll_closedir(DIR *dirp)
   {
     bool emulated(false);
     for (int i = 0; i < MAX_OPEN_DIRS; i++)
@@ -1062,7 +1061,7 @@ extern "C"
     return 0;
   }
 
-  void dll_rewinddir(DIR *dirp)
+  __attribute__((visibility("default"))) void dll_rewinddir(DIR *dirp)
   {
     bool emulated(false);
     for (int i = 0; i < MAX_OPEN_DIRS; i++)
@@ -1087,7 +1086,7 @@ extern "C"
     dirData->curr_index = 0;
   }
 
-  char* dll_fgets(char* pszString, int num ,FILE * stream)
+  __attribute__((visibility("default"))) char* dll_fgets(char* pszString, int num ,FILE * stream)
   {
     CFile* pFile = g_emuFileWrapper.GetFileXbmcByStream(stream);
     if (pFile != NULL)
@@ -1112,7 +1111,7 @@ extern "C"
     return NULL;
   }
 
-  int dll_feof(FILE * stream)
+  __attribute__((visibility("default"))) int dll_feof(FILE * stream)
   {
     CFile* pFile = g_emuFileWrapper.GetFileXbmcByStream(stream);
     if (pFile != NULL)
@@ -1130,7 +1129,7 @@ extern "C"
     return 1; // eof by default
   }
 
-  int dll_fread(void * buffer, size_t size, size_t count, FILE * stream)
+  __attribute__((visibility("default"))) int dll_fread(void * buffer, size_t size, size_t count, FILE * stream)
   {
     int fd = g_emuFileWrapper.GetDescriptorByStream(stream);
     if (fd >= 0)
@@ -1152,7 +1151,7 @@ extern "C"
     return -1;
   }
 
-  int dll_fgetc(FILE* stream)
+  __attribute__((visibility("default"))) int dll_fgetc(FILE* stream)
   {
     if (g_emuFileWrapper.StreamIsEmulatedFile(stream))
     {
@@ -1174,7 +1173,7 @@ extern "C"
     return EOF;
   }
 
-  int dll_getc(FILE* stream)
+  __attribute__((visibility("default"))) int dll_getc(FILE* stream)
   {
     if (g_emuFileWrapper.StreamIsEmulatedFile(stream))
     {
@@ -1191,7 +1190,7 @@ extern "C"
     return EOF;
   }
 
-  FILE* dll_fopen(const char* filename, const char* mode)
+  __attribute__((visibility("default"))) FILE* dll_fopen(const char* filename, const char* mode)
   {
     FILE* file = NULL;
 #if defined(_LINUX) && !defined(TARGET_DARWIN) && !defined(__FreeBSD__) && !defined(__ANDROID__)
@@ -1211,7 +1210,7 @@ extern "C"
     return file;
   }
 
-  int dll_putc(int c, FILE *stream)
+  __attribute__((visibility("default"))) int dll_putc(int c, FILE *stream)
   {
     if (g_emuFileWrapper.StreamIsEmulatedFile(stream) || IS_STD_STREAM(stream))
     {
@@ -1224,12 +1223,12 @@ extern "C"
     return EOF;
   }
 
-  int dll_putchar(int c)
+  __attribute__((visibility("default"))) int dll_putchar(int c)
   {
     return dll_putc(c, stdout);
   }
 
-  int dll_fputc(int character, FILE* stream)
+  __attribute__((visibility("default"))) int dll_fputc(int character, FILE* stream)
   {
     if (IS_STDOUT_STREAM(stream) || IS_STDERR_STREAM(stream))
     {
@@ -1260,7 +1259,7 @@ extern "C"
     return EOF;
   }
 
-  int dll_fputs(const char * szLine, FILE* stream)
+  __attribute__((visibility("default"))) int dll_fputs(const char * szLine, FILE* stream)
   {
     if (IS_STDOUT_STREAM(stream) || IS_STDERR_STREAM(stream))
     {
@@ -1287,7 +1286,7 @@ extern "C"
     return EOF;
   }
 
-  int dll_fseek64(FILE* stream, off64_t offset, int origin)
+  __attribute__((visibility("default"))) int dll_fseek64(FILE* stream, off64_t offset, int origin)
   {
     int fd = g_emuFileWrapper.GetDescriptorByStream(stream);
     if (fd >= 0)
@@ -1312,12 +1311,12 @@ extern "C"
     return -1;
   }
 
-  int dll_fseek(FILE *stream, long offset, int origin)
+  __attribute__((visibility("default"))) int dll_fseek(FILE *stream, long offset, int origin)
   {
     return dll_fseek64(stream, offset, origin);
   }
 
-  int dll_ungetc(int c, FILE* stream)
+  __attribute__((visibility("default"))) int dll_ungetc(int c, FILE* stream)
   {
     if (g_emuFileWrapper.StreamIsEmulatedFile(stream))
     {
@@ -1351,12 +1350,12 @@ extern "C"
     return EOF;
   }
 
-  long dll_ftell(FILE *stream)
+  __attribute__((visibility("default"))) long dll_ftell(FILE *stream)
   {
     return (long)dll_ftell64(stream);
   }
 
-  off64_t dll_ftell64(FILE *stream)
+  __attribute__((visibility("default"))) off64_t dll_ftell64(FILE *stream)
   {
     CFile* pFile = g_emuFileWrapper.GetFileXbmcByStream(stream);
     if (pFile != NULL)
@@ -1377,7 +1376,7 @@ extern "C"
     return -1;
   }
 
-  long dll_tell(int fd)
+  __attribute__((visibility("default"))) long dll_tell(int fd)
   {
     CFile* pFile = g_emuFileWrapper.GetFileXbmcByDescriptor(fd);
     if (pFile != NULL)
@@ -1398,7 +1397,7 @@ extern "C"
     return -1;
   }
 
-  __int64 dll_telli64(int fd)
+  __attribute__((visibility("default"))) __int64 dll_telli64(int fd)
   {
     CFile* pFile = g_emuFileWrapper.GetFileXbmcByDescriptor(fd);
     if (pFile != NULL)
@@ -1423,7 +1422,7 @@ extern "C"
     return -1;
   }
 
-  size_t dll_fwrite(const void * buffer, size_t size, size_t count, FILE* stream)
+  __attribute__((visibility("default"))) size_t dll_fwrite(const void * buffer, size_t size, size_t count, FILE* stream)
   {
     if (IS_STDOUT_STREAM(stream) || IS_STDERR_STREAM(stream))
     {
@@ -1462,7 +1461,7 @@ extern "C"
     return -1;
   }
 
-  int dll_fflush(FILE* stream)
+  __attribute__((visibility("default"))) int dll_fflush(FILE* stream)
   {
     CFile* pFile = g_emuFileWrapper.GetFileXbmcByStream(stream);
     if (pFile != NULL)
@@ -1481,7 +1480,7 @@ extern "C"
     return 0;
   }
 
-  int dll_ferror(FILE* stream)
+  __attribute__((visibility("default"))) int dll_ferror(FILE* stream)
   {
     CFile* pFile = g_emuFileWrapper.GetFileXbmcByStream(stream);
     if (pFile != NULL)
@@ -1495,7 +1494,7 @@ extern "C"
       return ferror(stream);
   }
 
-  int dllvprintf(const char *format, va_list va)
+  __attribute__((visibility("default"))) int dllvprintf(const char *format, va_list va)
   {
     CStdString buffer;
     buffer.FormatV(format, va);
@@ -1503,7 +1502,7 @@ extern "C"
     return buffer.length();
   }
 
-  int dll_vfprintf(FILE *stream, const char *format, va_list va)
+  __attribute__((visibility("default"))) int dll_vfprintf(FILE *stream, const char *format, va_list va)
   {
     static char tmp[2048];
 
@@ -1565,13 +1564,13 @@ extern "C"
     return strlen(tmp);
   }
 
-  int dll_fscanf(FILE* stream, const char* format, ...)
+  __attribute__((visibility("default"))) int dll_fscanf(FILE* stream, const char* format, ...)
   {
     CLog::Log(LOGERROR, "%s is not implemented",  __FUNCTION__);
     return -1;
   }
 
-  int dll_fprintf(FILE* stream, const char* format, ...)
+  __attribute__((visibility("default"))) int dll_fprintf(FILE* stream, const char* format, ...)
   {
     int res;
     va_list va;
@@ -1581,7 +1580,7 @@ extern "C"
     return res;
   }
 
-  int dll_fgetpos(FILE* stream, fpos_t* pos)
+  __attribute__((visibility("default"))) int dll_fgetpos(FILE* stream, fpos_t* pos)
   {
     fpos64_t tmpPos;
     int ret;
@@ -1595,7 +1594,7 @@ extern "C"
     return ret;
   }
 
-  int dll_fgetpos64(FILE *stream, fpos64_t *pos)
+  __attribute__((visibility("default"))) int dll_fgetpos64(FILE *stream, fpos64_t *pos)
   {
     CFile* pFile = g_emuFileWrapper.GetFileXbmcByStream(stream);
     if (pFile != NULL)
@@ -1617,7 +1616,7 @@ extern "C"
     return EINVAL;
   }
 
-  int dll_fsetpos64(FILE* stream, const fpos64_t* pos)
+  __attribute__((visibility("default"))) int dll_fsetpos64(FILE* stream, const fpos64_t* pos)
   {
     int fd = g_emuFileWrapper.GetDescriptorByStream(stream);
     if (fd >= 0)
@@ -1649,7 +1648,7 @@ extern "C"
     return EINVAL;
   }
 
-  int dll_fsetpos(FILE* stream, const fpos_t* pos)
+  __attribute__((visibility("default"))) int dll_fsetpos(FILE* stream, const fpos_t* pos)
   {
     int fd = g_emuFileWrapper.GetDescriptorByStream(stream);
     if (fd >= 0)
@@ -1672,7 +1671,7 @@ extern "C"
     return EINVAL;
   }
 
-  int dll_fileno(FILE* stream)
+  __attribute__((visibility("default"))) int dll_fileno(FILE* stream)
   {
     int fd = g_emuFileWrapper.GetDescriptorByStream(stream);
     if (fd >= 0)
@@ -1699,7 +1698,7 @@ extern "C"
     return -1;
   }
 
-  void dll_clearerr(FILE* stream)
+  __attribute__((visibility("default"))) void dll_clearerr(FILE* stream)
   {
     if (g_emuFileWrapper.StreamIsEmulatedFile(stream))
     {
@@ -1711,7 +1710,7 @@ extern "C"
     }
   }
 
-  char* dll_strdup( const char* str)
+  __attribute__((visibility("default"))) char* dll_strdup( const char* str)
   {
     char* pdup;
     pdup = strdup(str);
@@ -1721,7 +1720,7 @@ extern "C"
 
   //Critical Section has been fixed in EMUkernel32.cpp
 
-  int dll_initterm(PFV * start, PFV * end)        //pncrt.dll
+  __attribute__((visibility("default"))) int dll_initterm(PFV * start, PFV * end)        //pncrt.dll
   {
     PFV * temp;
     for (temp = start; temp < end; temp ++)
@@ -1731,7 +1730,7 @@ extern "C"
   }
 
   //SLOW CODE SHOULD BE REVISED
-  int dll_stat(const char *path, struct stat *buffer)
+  __attribute__((visibility("default"))) int dll_stat(const char *path, struct stat *buffer)
   {
     if (!strnicmp(path, "shout://", 8)) // don't stat shoutcast
       return -1;
@@ -1764,7 +1763,7 @@ extern "C"
     return -1;
   }
 
-  int dll_stati64(const char *path, struct _stati64 *buffer)
+  __attribute__((visibility("default"))) int dll_stati64(const char *path, struct _stati64 *buffer)
   {
     struct __stat64 a;
     memset(&a, 0, sizeof(a));
@@ -1777,7 +1776,7 @@ extern "C"
     return -1;
   }
 
-  int dll_stat64(const char *path, struct __stat64 *buffer)
+  __attribute__((visibility("default"))) int dll_stat64(const char *path, struct __stat64 *buffer)
   {
     if (!strnicmp(path, "shout://", 8)) // don't stat shoutcast
       return -1;
@@ -1804,7 +1803,7 @@ extern "C"
   }
 
 #ifdef _WIN32
-  int dll_stat64i32(const char *path, struct _stat64i32 *buffer)
+  __attribute__((visibility("default"))) int dll_stat64i32(const char *path, struct _stat64i32 *buffer)
   {
     struct __stat64 a;
     if(dll_stat64(path, &a) == 0)
@@ -1816,7 +1815,7 @@ extern "C"
   }
 #endif
 
-  int dll_fstat(int fd, struct stat* buffer)
+  __attribute__((visibility("default"))) int dll_fstat(int fd, struct stat* buffer)
   {
     CFile* pFile = g_emuFileWrapper.GetFileXbmcByDescriptor(fd);
     if (pFile != NULL)
@@ -1838,7 +1837,7 @@ extern "C"
     return -1;
   }
 
-  int dll_fstati64(int fd, struct _stati64 *buffer)
+  __attribute__((visibility("default"))) int dll_fstati64(int fd, struct _stati64 *buffer)
   {
     CFile* pFile = g_emuFileWrapper.GetFileXbmcByDescriptor(fd);
     if (pFile != NULL)
@@ -1868,7 +1867,7 @@ extern "C"
   }
 
 #ifdef _WIN32
-  int dll_fstat64i32(int fd, struct _stat64i32 *buffer)
+  __attribute__((visibility("default"))) int dll_fstat64i32(int fd, struct _stat64i32 *buffer)
   {
     CFile* pFile = g_emuFileWrapper.GetFileXbmcByDescriptor(fd);
     if (pFile != NULL)
@@ -1900,13 +1899,13 @@ extern "C"
   }
 #endif
 
-  int dll_setmode ( int handle, int mode )
+  __attribute__((visibility("default"))) int dll_setmode ( int handle, int mode )
   {
     not_implement("msvcrt.dll fake function dll_setmode() called\n");
     return -1;
   }
 
-  void dllperror(const char* s)
+  __attribute__((visibility("default"))) void dllperror(const char* s)
   {
     if (s)
     {
@@ -1914,14 +1913,14 @@ extern "C"
     }
   }
 
-  char* dllstrerror(int iErr)
+  __attribute__((visibility("default"))) char* dllstrerror(int iErr)
   {
     static char szError[32];
     sprintf(szError, "err:%i", iErr);
     return (char*)szError;
   }
 
-  int dll_mkdir(const char* dir)
+  __attribute__((visibility("default"))) int dll_mkdir(const char* dir)
   {
     if (!dir) return -1;
 
@@ -1936,13 +1935,13 @@ extern "C"
 #endif
   }
 
-  char* dll_getcwd(char *buffer, int maxlen)
+  __attribute__((visibility("default"))) char* dll_getcwd(char *buffer, int maxlen)
   {
     not_implement("msvcrt.dll fake function dll_getcwd() called\n");
     return (char*)"special://xbmc/";
   }
 
-  int dll_putenv(const char* envstring)
+  __attribute__((visibility("default"))) int dll_putenv(const char* envstring)
   {
     bool added = false;
 
@@ -2022,7 +2021,7 @@ extern "C"
 
 
 
-  char* dll_getenv(const char* szKey)
+  __attribute__((visibility("default"))) char* dll_getenv(const char* szKey)
   {
     char* value = NULL;
 
@@ -2052,19 +2051,19 @@ extern "C"
     return NULL;
   }
 
-  int dll_ctype(int i)
+  __attribute__((visibility("default"))) int dll_ctype(int i)
   {
     not_implement("msvcrt.dll fake function dll_ctype() called\n");
     return 0;
   }
 
-  int dll_system(const char *command)
+  __attribute__((visibility("default"))) int dll_system(const char *command)
   {
     not_implement("msvcrt.dll fake function dll_system() called\n");
     return 0; //system(command);
   }
 
-  void (__cdecl * dll_signal(int sig, void (__cdecl *func)(int)))(int)
+  __attribute__((visibility("default"))) void (__cdecl * dll_signal(int sig, void (__cdecl *func)(int)))(int)
   {
 #if defined(_WIN32)
     //vs2008 asserts for known signals, return err for everything unknown to windows.
@@ -2074,12 +2073,12 @@ extern "C"
     return signal(sig, func);
   }
 
-  int dll_getpid()
+  __attribute__((visibility("default"))) int dll_getpid()
   {
     return 1;
   }
 
-  int dll__commit(int fd)
+  __attribute__((visibility("default"))) int dll__commit(int fd)
   {
     CFile* pFile = g_emuFileWrapper.GetFileXbmcByDescriptor(fd);
     if (pFile != NULL)
@@ -2110,18 +2109,18 @@ extern "C"
 
 #ifdef _LINUX
 #if defined(__ANDROID__)
-  volatile int * __cdecl dll_errno(void)
+  __attribute__((visibility("default"))) volatile int * __cdecl dll_errno(void)
   {
     return &errno;
   }
 #else
-  int * __cdecl dll_errno(void)
+  __attribute__((visibility("default"))) int * __cdecl dll_errno(void)
   {
     return &errno;
   }
 #endif
 
-  int __cdecl dll_ioctl(int fd, unsigned long int request, va_list va)
+  __attribute__((visibility("default"))) int __cdecl dll_ioctl(int fd, unsigned long int request, va_list va)
   {
      int ret;
      CFile* pFile = g_emuFileWrapper.GetFileXbmcByDescriptor(fd);
@@ -2153,14 +2152,14 @@ extern "C"
   }
 #endif
 
-  int dll_setvbuf(FILE *stream, char *buf, int type, size_t size)
+  __attribute__((visibility("default"))) int dll_setvbuf(FILE *stream, char *buf, int type, size_t size)
   {
     CLog::Log(LOGWARNING, "%s - May not be implemented correctly",
               __FUNCTION__);
     return 0;
   }
 
-  struct mntent *dll_getmntent(FILE *fp)
+  __attribute__((visibility("default"))) struct mntent *dll_getmntent(FILE *fp)
   {
     if (fp == NULL)
       return NULL;
@@ -2179,7 +2178,7 @@ extern "C"
 #endif
   }
 
-  int dll_filbuf(FILE *fp)
+  __attribute__((visibility("default"))) int dll_filbuf(FILE *fp)
   {
     if (fp == NULL)
       return 0;
@@ -2203,7 +2202,7 @@ extern "C"
 #endif
   }
 
-  int dll_flsbuf(int data, FILE *fp)
+  __attribute__((visibility("default"))) int dll_flsbuf(int data, FILE *fp)
   {
     if (fp == NULL)
       return 0;
@@ -2232,7 +2231,7 @@ extern "C"
 #endif
   }
 #if _MSC_VER <= 1310
-  long __cdecl _ftol2_sse(double d)
+  __attribute__((visibility("default"))) long __cdecl _ftol2_sse(double d)
   {
     return (long)d;
   }
