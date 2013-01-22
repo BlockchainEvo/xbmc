@@ -31,6 +31,7 @@ $(LIBDYLIB): $(PLATFORM)
 .installed-$(PLATFORM): $(LIBDYLIB)
 	make -C $(PLATFORM)/build install
 	rm -f $(PREFIX)/lib/libssh.so $(PREFIX)/lib/libssh.so.4.2.0 $(PREFIX)/lib/libssh.so.4
+	rm -f $(PREFIX)/lib/libssh.*dylib*
 	touch $@
 
 clean:
