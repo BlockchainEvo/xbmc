@@ -162,7 +162,7 @@ case $host in
               use_cpu=x86_64
             fi
             platform_cflags="-arch $use_cpu -no_compact_linkedit -std=gnu99 -no-cpp-precomp -m$platform_min_version"
-            platform_ldflags=" -isysroot $use_sdk_path -arch $use_cpu -no_compact_linkedit -m$platform_min_version "
+            platform_ldflags=" -Wl,-search_paths_first -isysroot $use_sdk_path -arch $use_cpu -no_compact_linkedit -m$platform_min_version "
             platform_cxxflags="$platform_cflags"
           ;;
           i*86-apple-darwin*)
@@ -170,7 +170,7 @@ case $host in
               use_cpu=i386
             fi
             platform_cflags="-arch $use_cpu -no_compact_linkedit -std=gnu99 -no-cpp-precomp -m$platform_min_version"
-            platform_ldflags=" -isysroot $use_sdk_path -arch $use_cpu -no_compact_linkedit -m$platform_min_version "
+            platform_ldflags=" -Wl,-search_paths_first -isysroot $use_sdk_path -arch $use_cpu -no_compact_linkedit -m$platform_min_version "
             platform_cxxflags="$platform_cflags"
           ;;
           *)
@@ -202,7 +202,7 @@ case $host in
         use_sdk_path=[`$use_xcodebuild -version -sdk $sdk_name | grep ^Path | awk '{ print $2}'`]
         platform_os="ios"
         platform_includes+=" -isysroot $use_sdk_path "
-        platform_ldflags=" -isysroot $use_sdk_path -arch $use_cpu -L$use_sdk_path/usr/lib/system -L$use_sdk_path/usr/lib -m$platform_min_version "
+        platform_ldflags=" -Wl,-search_paths_first -isysroot $use_sdk_path -arch $use_cpu -L$use_sdk_path/usr/lib/system -L$use_sdk_path/usr/lib -m$platform_min_version "
         platform_cflags="-arch $use_cpu -mcpu=cortex-a8 -mfpu=neon -ftree-vectorize -mfloat-abi=softfp -pipe -Wno-trigraphs -fpascal-strings -O3 -Wreturn-type -Wunused-variable -fmessage-length=0 -gdwarf-2 -std=gnu99 -no-cpp-precomp -m$platform_min_version"
         platform_cxxflags="$platform_cflags"
 	deps_dir=$sdk_name"_"$use_cpu
