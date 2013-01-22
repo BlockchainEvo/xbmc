@@ -33,8 +33,13 @@ $(PLATFORM): $(TARBALLS_LOCATION)/$(ARCHIVE) $(DEPS)
 	cd $(PLATFORM); patch -p1 < ../python-osx-environ-fix.patch
 	cd $(PLATFORM); patch -p0 < ../Python-2.6.5-ffi-static.patch
 	cp modules.setup $(PLATFORM)/Modules/Setup.dist
+
+#Add -liconv as needed, and add the _scproxy module for darwin
 	cd $(PLATFORM); sed -ie 's|_locale _localemodule.c   -lintl|_locale _localemodule.c   -lintl $(LINK_ICONV) |' Modules/Setup.dist
-	#cd $(PLATFORM); sed -ie 's|-framework CoreFoundation||' configure.in
+ifeq (darwin, $(findstring darwin, $(PLATFORM)))
+	echo "_scproxy \$$(srcdir)/Mac/Modules/_scproxy.c -framework SystemConfiguration -framework CoreFoundation" >> $(PLATFORM)/Modules/Setup.dist
+endif
+
 	cd $(PLATFORM); $(AUTORECONF)
 	cd $(PLATFORM); $(CONFIGURE)
 
