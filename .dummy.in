@@ -1,0 +1,2 @@
+# Does nothing intentionally.
+# This exists solely so we can use AM_ICONV in configure.in
