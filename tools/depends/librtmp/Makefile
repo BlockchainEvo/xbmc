@@ -30,8 +30,10 @@ $(PLATFORM): $(TARBALLS_LOCATION)/$(ARCHIVE) $(DEPS)
 	sed -i -e 's|CC=|#CC=|' $(PLATFORM)/librtmp/Makefile
 	sed -i -e 's|LD=|#LD=|' $(PLATFORM)/librtmp/Makefile
 	sed -i -e 's|AR=|#AR=|' $(PLATFORM)/librtmp/Makefile
+
 $(LIBDYLIB): $(PLATFORM)
-	$(MAKE)  SYS=$(SYS) CC="$(CC)" LD="$(LD)" AR="$(AR)" XCFLAGS="$(CFLAGS)" XLDFLAGS="$(LDFLAGS)" -C $(PLATFORM)/librtmp
+	$(MAKE)  PREFIX=$(PREFIX) SYS=$(SYS) CC="$(CC)" LD="$(LD)" AR="$(AR)" XCFLAGS="$(CFLAGS)" XLDFLAGS="$(LDFLAGS)" -C $(PLATFORM)/librtmp
+
 .installed-$(PLATFORM): $(LIBDYLIB)
 	$(MAKE) SYS=$(SYS) prefix=$(PREFIX) -C $(PLATFORM)/librtmp install
 ifeq ($(OS),android)
