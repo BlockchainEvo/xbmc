@@ -37,7 +37,7 @@ OBJDUMP=@OBJDUMP@
 
 CMAKE=@prefix@/@build_cpu@-@build_os@-native/bin/cmake -DCMAKE_TOOLCHAIN_FILE=$(PREFIX)/share/Toolchain.cmake -DCMAKE_INSTALL_PREFIX=$(PREFIX)
 CFLAGS=@platform_cflags@ @platform_includes@ -I@prefix@/@deps_dir@/include
-LDFLAGS=@platform_ldflags@ -L@prefix@/@deps_dir@/lib
+LDFLAGS=-L@prefix@/@deps_dir@/lib @platform_ldflags@
 CXXFLAGS=@platform_cxxflags@ @platform_includes@ -I@prefix@/@deps_dir@/include
 CPPFLAGS=@platform_cflags@ @platform_includes@ -I@prefix@/@deps_dir@/include
 
