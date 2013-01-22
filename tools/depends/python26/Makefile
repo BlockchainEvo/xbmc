@@ -15,6 +15,10 @@ CONFIGURE=OPT="$(CFLAGS)" \
   ./configure --prefix=$(PREFIX) \
   --disable-toolbox-glue --disable-framework --with-system-ffi \
 
+ifeq ($(OS),ios)
+CONFIGURE+=LDFLAGS="$(LDFLAGS) -miphoneos-version-min=3.0"
+endif
+
 LIBDYLIB=$(PLATFORM)/libpython2.6.a
 
 all: .installed-$(PLATFORM)
