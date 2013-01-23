@@ -55,6 +55,8 @@ ifeq ($(OS),android)
 	rm -f $(PREFIX)/lib/libcrypto.so*
 	rm -f $(PREFIX)/lib/libssl.so*
 endif
+	rm -rf $(PREFIX)/lib/libcrypto.*dylib*
+	rm -rf $(PREFIX)/lib/libssl.*dylib*
 	touch $@
 
 clean:
