@@ -100,6 +100,7 @@ libzip: $(ZLIB)
 libmp3lame: ncurses $(ICONV)
 dpkg-native: buildtools
 libpng: $(ZLIB)
+openssl: $(ZLIB)
 
 buildtools: $(BUILDTOOLS)
 $(BUILDTOOLS):
