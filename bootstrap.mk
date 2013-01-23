@@ -1,3 +1,4 @@
+AUTORECONF ?= autoreconf
 BOOTSTRAP_SUBDIRS += configure.in
 BOOTSTRAP_SUBDIRS += xbmc/screensavers/rsxs-0.9/configure.ac
 BOOTSTRAP_SUBDIRS += xbmc/visualizations/Goom/goom2k4-0/configure.in
@@ -23,15 +24,15 @@ lib/libdvd/libdvdread/configure: $(DVD_CSS)
 lib/libdvd/libdvdnav/configure: lib/libdvd/libdvdread/configure
 
 %: %.ac
-	autoreconf -vif $(@D)
+	$(AUTORECONF) -vif $(@D)
 	-@rm -rf $(@D)/autom4te.cache
 
 %: %.in
-	autoreconf -vif $(@D)
+	$(AUTORECONF) -vif $(@D)
 	-@rm -rf $(@D)/autom4te.cache
 
 configure: configure.in
-	autoreconf -vif $(@D)
+	$(AUTORECONF) -vif $(@D)
 	-@rm -rf $(@D)/autom4te.cache
 	@test -n "$$BOOTSTRAP_STANDALONE" || ( echo "Configuration is stale. You should almost certainly reconfigure" && false )
 
