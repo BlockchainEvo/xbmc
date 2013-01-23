@@ -22,8 +22,11 @@ $(TARBALLS_LOCATION)/$(ARCHIVE):
 $(PLATFORM): $(TARBALLS_LOCATION)/$(ARCHIVE) $(DEPS)
 	rm -rf $(PLATFORM)/*; mkdir -p $(PLATFORM)
 	cd $(PLATFORM); $(ARCHIVE_TOOL) $(ARCHIVE_TOOL_FLAGS) $(TARBALLS_LOCATION)/$(ARCHIVE)
+	cd $(PLATFORM); touch NEWS AUTHORS ChangeLog
 	cd $(PLATFORM); patch -p1 < ../01-libmad-pkgconfig.patch
 	cd $(PLATFORM); patch -p1 < ../02-libmad-thumb-fix.patch
+	sed -ie "s|libmad.list|libmad.list mad.pc|g" "$(PLATFORM)/configure.ac"
+	cd $(PLATFORM); $(AUTORECONF) -vif
 	cd $(PLATFORM); sed -i '/-fforce-mem/d' configure; $(CONFIGURE)
 
 $(LIBDYLIB): $(PLATFORM)
