@@ -12,7 +12,7 @@ ARCHIVE=$(SOURCE).tar.gz
 # configuration settings
 CONFIGURE=./configure --prefix=$(PREFIX)
 
-LIBDYLIB=$(PLATFORM)/bin/m4
+LIBDYLIB=$(PLATFORM)/src/$(LIBNAME)
 
 CLEAN_FILES=$(ARCHIVE) $(PLATFORM)
 
