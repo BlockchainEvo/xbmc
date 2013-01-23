@@ -36,6 +36,9 @@ $(PLATFORM): $(TARBALLS_LOCATION)/$(ARCHIVE) $(DEPS)
 	cd $(PLATFORM); patch -p0 < ../Python-no-export-path.patch
 	cd $(PLATFORM); patch -p1 < ../python-osx-environ-fix.patch
 	cd $(PLATFORM); patch -p0 < ../Python-2.6.5-ffi-static.patch
+ifeq ($(OS),ios)
+	cd $(PLATFORM); patch -p0 < ../Python-2.6.5-scproxy.patch
+endif
 	cp modules.setup $(PLATFORM)/Modules/Setup.dist
 
 #Add -liconv as needed, and add the _scproxy module for darwin
