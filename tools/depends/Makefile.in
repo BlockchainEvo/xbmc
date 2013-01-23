@@ -16,6 +16,7 @@ SUBDIRS = \
 	libamplayer libssh taglib swig-native pcre-native xbmc-pvr-addons libusb libnfs libmp3lame
 
 ifeq (@platform_os@,ios)
+  SUBDIRS += dpkg-native
   EXCLUDED = libcec libcrystalhd libusb
 endif
 
@@ -97,6 +98,7 @@ xbmc-pvr-addons: boost mysql
 mysql: readline openssl
 libzip: $(ZLIB)
 libmp3lame: ncurses $(ICONV)
+dpkg-native: buildtools
 
 buildtools: $(BUILDTOOLS)
 $(BUILDTOOLS):
