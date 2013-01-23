@@ -99,6 +99,7 @@ mysql: readline openssl
 libzip: $(ZLIB)
 libmp3lame: ncurses $(ICONV)
 dpkg-native: buildtools
+libpng: $(ZLIB)
 
 buildtools: $(BUILDTOOLS)
 $(BUILDTOOLS):
