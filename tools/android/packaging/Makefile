@@ -1,4 +1,4 @@
-include ../depends/Makefile.include
+include ../../depends/Makefile.include
 
 OBJS = libcurl.so \
   librtmp.so  libmad.so \
@@ -22,10 +22,10 @@ ARMOVERRIDES=XBMC_OVERRIDE_HOST=arm-linux-androideabi XBMC_OVERRIDE_TOOLCHAIN=$(
 #this fixes a android ndk fuckup where the pathes to 
 #prebuilt stuff follow different name shemes for
 #arm and x86
-ifeq ($(findstring x86,$(PLATFORM)),x86)
-GDBPATH=$(NDKROOT)/toolchains/$(PLATFORM)-$(GCC_VERSION)/prebuilt/gdbserver
+ifeq ($(findstring x86,$(CPU)),x86)
+GDBPATH=$(NDKROOT)/toolchains/$(CPU)-$(GCC_VERSION)/prebuilt/gdbserver
 else
-GDBPATH=$(NDKROOT)/toolchains/$(HOST)-$(GCC_VERSION)/prebuilt/gdbserver
+GDBPATH=$(NDKROOT)/toolchains/$(PLATFORM)-$(GCC_VERSION)/prebuilt/gdbserver
 endif
 
 all: package
