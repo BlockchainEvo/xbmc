@@ -114,3 +114,13 @@ if test "@platform_os@" = "ios"; then
     export LDFLAGS="${LDFLAGS} -Wl,-read_only_relocs,suppress"
   fi
 fi
+
+# These libs do not correctly export their symbols. Force them in case
+# -fvisibility=hidden is set.
+if test "${ac_unique_file}" = "src/flac/main.c" || \
+   test "${ac_unique_file}" = "src/framing.c" || \
+   test "${ac_unique_file}" = "src/libdvdcss.c" || \
+   test "${PACKAGE_NAME}" = "libmpeg2" || \
+   test "${PACKAGE_NAME}" = "libssh2" ; then
+     CFLAGS="$CFLAGS -fvisibility=default"
+fi
