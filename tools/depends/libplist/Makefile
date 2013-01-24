@@ -22,7 +22,7 @@ $(PLATFORM): $(TARBALLS_LOCATION)/$(ARCHIVE) $(DEPS)
 	cd $(PLATFORM); patch -p1 < ../0001-dontbuildswig.patch
 	cd $(PLATFORM); sed -ie 's/TARGET_LINK_LIBRARIES( plist /TARGET_LINK_LIBRARIES( plist m z $(ICONV) /' src/CMakeLists.txt
 	cd $(PLATFORM); rm -rf build; mkdir -p build
-	cd $(PLATFORM)/build; $(CMAKE) ..
+	cd $(PLATFORM)/build; $(CMAKE) VERBOSE=1 -DCMAKE_C_FLAGS=-fvisibility=default ..
 
 $(LIBDYLIB): $(PLATFORM)
 	$(MAKE) -j 1 -C $(PLATFORM)/build VERBOSE=1
