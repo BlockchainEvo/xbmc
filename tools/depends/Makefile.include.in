@@ -53,10 +53,12 @@ export LIBTOOLIZE=@prefix@/@build_cpu@-@build_os@-native/bin/libtoolize
 
 export AUTORECONF=@prefix@/@build_cpu@-@build_os@-native/bin/autoreconf
 
-ifneq ($(shell test -f @prefix@/@deps_dir@/share/config.site && echo 1),1)
-  $(error Error: @prefix@/@deps_dir@/share/config.site is missing. Please reconfigure depends to generate it)
-endif
+ifeq (@PACKAGE_NAME@,xbmc-depends)
+  ifneq ($(shell test -f @prefix@/@deps_dir@/share/config.site && echo 1),1)
+    $(error Error: @prefix@/@deps_dir@/share/config.site is missing. Please reconfigure depends to generate it)
+  endif
 
-ifneq ($(shell test -f @prefix@/@build_cpu@-@build_os@-native/share/config.site && echo 1),1)
-  $(error Error: @prefix@/@build_cpu@-@build_os@-native/share/config.site is missing. Please reconfigure depends to generate it)
+  ifneq ($(shell test -f @prefix@/@build_cpu@-@build_os@-native/share/config.site && echo 1),1)
+    $(error Error: @prefix@/@build_cpu@-@build_os@-native/share/config.site is missing. Please reconfigure depends to generate it)
+  endif
 endif
