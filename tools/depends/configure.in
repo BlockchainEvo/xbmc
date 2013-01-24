@@ -1,5 +1,5 @@
 AC_PREREQ(2.59)
-AC_INIT([android-depends], [2.00], [http://trac.xbmc.org])
+AC_INIT([xbmc-depends], [2.00], [http://trac.xbmc.org])
 :${CFLAGS=""}
 AC_CONFIG_AUX_DIR([aux])
 AC_CONFIG_FILES([config.site config.site.native Makefile Makefile.include Toolchain.cmake])
