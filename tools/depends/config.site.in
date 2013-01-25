@@ -2,16 +2,16 @@ cross_compiling=yes
 host=@use_host@
 host_alias=@use_host@
 
-LD=@LD@
-CC=@CC@
-CXX=@CXX@
-CPP=@CPP@
-AR=@AR@
-AS=@AS@
-NM=@NM@
-STRIP=@STRIP@
-RANLIB=@RANLIB@
-OBJDUMP=@OBJDUMP@
+LD="@LD@"
+CC="@CC@"
+CXX="@CXX@"
+CPP="@CPP@"
+AR="@AR@"
+AS="@AS@"
+NM="@NM@"
+STRIP="@STRIP@"
+RANLIB="@RANLIB@"
+OBJDUMP="@OBJDUMP@"
 
 if test "@platform_os@" = "ios" ; then
   export AS="@prefix@/@build_cpu@-@build_os@-native/bin/gas-preprocessor.pl @CC@"
@@ -29,7 +29,7 @@ export YASM=@prefix@/@build_cpu@-@build_os@-native/bin/yasm
 export NASM=@prefix@/@build_cpu@-@build_os@-native/bin/yasm
 export MYSQL_CONFIG=@prefix@/@deps_dir@/bin/mysql_config
 
-PATH=@prefix@/@build_cpu@-@build_os@-native/bin:@use_toolchain@/bin:$PATH
+PATH=@prefix@/@build_cpu@-@build_os@-native/bin:@use_toolchain@/usr/bin:@use_toolchain@/bin:$PATH
 LD_LIBRARY_PATH=@prefix@/@build_cpu@-@build_os@-native/lib:$LD_LIBRARY_PATH
 
 PYTHON_VERSION=2.6
@@ -96,8 +96,8 @@ fi
 if test "@platform_os@" = "ios"; then
   # tweaks for libffi (ios must use llvm-gcc-4.2)
   if test "${PACKAGE_NAME}" = "libffi" ; then
-    export CC="@use_toolchain@/bin/llvm-gcc-4.2"
-    export CPP="@use_toolchain@/bin/llvm-gcc-4.2 -E"
+    export CC="@use_toolchain@/usr/bin/llvm-gcc-4.2"
+    export CPP="@use_toolchain@/usr/bin/llvm-gcc-4.2 -E"
     unset AS
     unset CCAS
   fi

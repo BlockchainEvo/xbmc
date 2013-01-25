@@ -41,6 +41,27 @@ LDFLAGS=-L@prefix@/@deps_dir@/lib @platform_ldflags@
 CXXFLAGS=@platform_cxxflags@ @platform_includes@ -I@prefix@/@deps_dir@/include
 CPPFLAGS=@platform_cflags@ @platform_includes@ -I@prefix@/@deps_dir@/include
 
+PATH:=@prefix@/@build_cpu@-@build_os@-native/bin:$(PATH)
+ifneq (@use_build_toolchain@,)
+  PATH:=@use_build_toolchain@/bin:@use_build_toolchain@/usr/bin:$(PATH)
+endif
+LD_FOR_BUILD=@LD_FOR_BUILD@
+CC_FOR_BUILD=@CC_FOR_BUILD@
+CXX_FOR_BUILD=@CXX_FOR_BUILD@
+AR_FOR_BUILD=@AR_FOR_BUILD@
+RANLIB_FOR_BUILD=@RANLIB_FOR_BUILD@
+AS_FOR_BUILD=@AS_FOR_BUILD@
+NM_FOR_BUILD=@NM_FOR_BUILD@
+STRIP_FOR_BUILD=@STRIP_FOR_BUILD@
+READELF_FOR_BUILD=@READELF_FOR_BUILD@
+OBJDUMP_FOR_BUILD=@OBJDUMP_FOR_BUILD@
+
+NATIVE_CFLAGS=-I@prefix@/@build_cpu@-@build_os@-native/include
+NATIVE_LDFLAGS=-L@prefix@/@build_cpu@-@build_os@-native/lib
+NATIVE_CPPFLAGS=-I@prefix@/@build_cpu@-@build_os@-native/include
+NATIVE_CXXFLAGS=-I@prefix@/@build_cpu@-@build_os@-native/include
+
+
 export AUTOM4TE=@prefix@/@build_cpu@-@build_os@-native/bin/autom4te
 export AUTOMAKE=@prefix@/@build_cpu@-@build_os@-native/bin/automake
 export AUTOCONF=@prefix@/@build_cpu@-@build_os@-native/bin/autoconf
