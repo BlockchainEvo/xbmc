@@ -9,7 +9,7 @@ SOURCE=$(APPNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
 
 # configuration settings
-CONFIGURE=./configure --prefix=$(PREFIX)
+CONFIGURE=./configure --prefix=$(PREFIX) --disable-nls --disable-python
 
 APP=$(PLATFORM)/$(APPNAME)
 
