@@ -10,6 +10,7 @@ FILENAME=v$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
 LIBDYLIB=$(PLATFORM)/build/src/libplist++.so
 ICONV=$(shell echo $(LINK_ICONV) | sed -e 's/\-l//')
+export CFLAGS+=-fvisibility=default
 all: .installed-$(PLATFORM)
 
 $(TARBALLS_LOCATION)/$(ARCHIVE):
@@ -22,7 +23,7 @@ $(PLATFORM): $(TARBALLS_LOCATION)/$(ARCHIVE) $(DEPS)
 	cd $(PLATFORM); patch -p1 < ../0001-dontbuildswig.patch
 	cd $(PLATFORM); sed -ie 's/TARGET_LINK_LIBRARIES( plist /TARGET_LINK_LIBRARIES( plist m z $(ICONV) /' src/CMakeLists.txt
 	cd $(PLATFORM); rm -rf build; mkdir -p build
-	cd $(PLATFORM)/build; $(CMAKE) VERBOSE=1 -DCMAKE_C_FLAGS=-fvisibility=default ..
+	cd $(PLATFORM)/build; $(CMAKE) VERBOSE=1 ..
 
 $(LIBDYLIB): $(PLATFORM)
 	$(MAKE) -j 1 -C $(PLATFORM)/build VERBOSE=1
