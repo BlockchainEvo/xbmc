@@ -7775,6 +7775,7 @@
 					"-Wl,-headerpad_max_install_names",
 					"-Wl,-all_load",
 					"-L$XBMC_DEPENDS/lib",
+					"-lbz2",
 					"-lintl",
 					"-lexpat",
 					"-lssl",
