@@ -3,8 +3,7 @@ DEPS= ../Makefile.include 01-gettext-tools-stpncpy.patch 02-gettext_android.patc
 
 # lib name, version
 LIBNAME=gettext
-VERSION=0.18.1.1
-#VERSION=0.17
+VERSION=0.18.2
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
 
