@@ -56,6 +56,11 @@ if test "x$TAR" = "xno" ; then
 fi
 
 use_host=$host_alias
+
+if test "x$host" = "x$build"; then
+use_host=$build_cpu-$build_os
+fi
+
 deps_dir=$use_host
 
 passed_cflags="$CFLAGS"
