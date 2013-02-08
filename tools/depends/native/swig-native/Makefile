@@ -11,7 +11,7 @@ SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
 
 # configuration settings
-CONFIGURE=./configure --prefix=$(PREFIX) --without-alllang --without-x
+CONFIGURE=./configure --prefix=$(PREFIX) --without-alllang --without-x --disable-ccache
 
 LIBDYLIB=$(PLATFORM)/swig
 
