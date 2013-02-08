@@ -12,7 +12,7 @@ AC_ARG_WITH([toolchain],
 
 AC_ARG_WITH([tarballs],
   [AS_HELP_STRING([--with-tarballs],
-  [path where tarballs will be saved])],
+  [path where tarballs will be saved [prefix/xbmc-tarballs]])],
   [use_tarballs=$withval])
 
 AC_ARG_WITH([cpu],
@@ -256,8 +256,12 @@ if test "$link_iconv" = "none required"; then
   link_iconv=
 fi
 
+if test "x$prefix" = "xNONE"; then
+  AC_MSG_ERROR([No prefix path defined. Use for ex: --prefix=/opt/xbmc-depends]);
+fi
+
 if test -z $use_tarballs; then
-  AC_MSG_ERROR([No tarballs path defined]);
+  use_tarballs=$prefix/xbmc-tarballs
 fi
 
 if test "$platform_os" == "android"; then
