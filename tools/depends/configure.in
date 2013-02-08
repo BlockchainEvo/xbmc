@@ -2,7 +2,7 @@ AC_PREREQ(2.59)
 AC_INIT([xbmc-depends], [2.00], [http://trac.xbmc.org])
 :${CFLAGS=""}
 AC_CONFIG_AUX_DIR([aux])
-AC_CONFIG_FILES([config.site config.site.native Makefile Makefile.include Toolchain.cmake])
+AC_CONFIG_FILES([depends/config.site native/config.site.native Makefile.include depends/Toolchain.cmake])
 AC_CANONICAL_HOST
 
 AC_ARG_WITH([toolchain],
@@ -62,6 +62,11 @@ use_host=$build_cpu-$build_os
 fi
 
 deps_dir=$use_host
+cross_compiling="yes"
+
+if test "x$host" = "x$build"; then
+  cross_compiling="no"
+fi
 
 passed_cflags="$CFLAGS"
 passed_ldflags="$LDFLAGS"
@@ -340,6 +345,7 @@ AC_SUBST(use_cpu)
 AC_SUBST(use_toolchain)
 AC_SUBST(use_build_toolchain)
 AC_SUBST(use_tarballs)
+AC_SUBST(cross_compiling)
 AC_SUBST(platform_cflags)
 AC_SUBST(platform_cxxflags)
 AC_SUBST(platform_ldflags)
@@ -362,6 +368,6 @@ if test "$platform_os" == "ios"; then
   cp -vf $simulator_sdk_path/usr/include/crt_externs.h $prefix/$deps_dir/include
 fi
 
-cp -vf config.site $prefix/$deps_dir/share
-cp -vf Toolchain.cmake $prefix/$deps_dir/share
-cp -vf config.site.native $prefix/$build_cpu-$build_os-native/share/config.site
+cp -vf depends/config.site $prefix/$deps_dir/share
+cp -vf depends/Toolchain.cmake $prefix/$deps_dir/share
+cp -vf native/config.site.native $prefix/$build_cpu-$build_os-native/share/config.site
