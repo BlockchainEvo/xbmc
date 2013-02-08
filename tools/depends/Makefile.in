@@ -13,7 +13,7 @@ SUBDIRS = \
 	python26-native python26 samba libcdio afpfs-ng libshairport \
 	libplist libcec libbluray boost tinyxml dummy-libxbmc libsdl-native \
 	liblzo2-native libjpeg-turbo-native libpng-native tiff-native libsdl_image-native rpl-native \
-	libamplayer libssh taglib swig-native pcre-native xbmc-pvr-addons libusb libnfs libmp3lame
+	libamplayer libssh taglib swig-native pcre-native xbmc-pvr-addons libusb libnfs libmp3lame zlib-native
 
 ifeq (@platform_os@,ios)
   SUBDIRS += dpkg-native
@@ -86,7 +86,7 @@ libmpeg2: rpl-native
 libogg: rpl-native
 rpl-native: python26-native
 libjpeg-turbo-native: buildtools
-libpng-native: buildtools
+libpng-native: zlib-native buildtools
 tiff-native: buildtools libjpeg-turbo-native 
 liblzo2-native: buildtools
 libssh: openssl cmake-native rpl-native
