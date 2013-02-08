@@ -35,7 +35,7 @@ ifneq ($(HAS_ZLIB),1)
 endif
 
 ICONV=
-ifeq ($(NEED_ICONV),1)
+ifeq ($(NEED_LIBICONV),1)
   DEPENDS += libiconv
   ICONV = libiconv
 endif
