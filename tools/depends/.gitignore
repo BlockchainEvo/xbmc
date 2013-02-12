@@ -11,7 +11,7 @@
 /native/*/armeabi-v7a-native/*
 /depends/*/arm-linux-gnueabihf/*
 /native/*/x86_64-linux-gnu-native/*
-/depends/*/arm-linux-androideabi/*
+/depends/*/arm-linux-androideabi-*/*
 /depends/*/x86_64-linux-gnu/*
 /depends/*/arm-linux-gnueabi/*
 /native/*/x86_64-darwin10.8.0-native/*
