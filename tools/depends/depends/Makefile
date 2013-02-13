@@ -12,10 +12,15 @@ DEPENDS = \
 	libogg libvorbis libflac libmad fribidi libmpeg2 \
 	libass libsamplerate \
 	libmodplug librtmp libxml2 yajl libmicrohttpd mysql libffi \
-	python26 samba libcdio afpfs-ng libshairport \
+	python26 libcdio afpfs-ng libshairport \
 	libplist libcec libbluray boost tinyxml dummy-libxbmc \
 	libamplayer libssh taglib xbmc-pvr-addons libusb libnfs libmp3lame
 
+ifeq ($(ENABLE_GPLV3),1)
+  DEPENDS+=samba-gplv3
+else
+  Depends+=samba
+endif
 
 ifeq ($(OS),ios)
   EXCLUDED_DEPENDS = libcec libcrystalhd libusb
