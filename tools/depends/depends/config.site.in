@@ -64,9 +64,36 @@ ac_cv_header_sys_un_h=yes
 
 #samba
 SMB_BUILD_CC_NEGATIVE_ENUM_VALUES=yes
+samba_cv_CC_NEGATIVE_ENUM_VALUES=yes
 libreplace_cv_HAVE_C99_VSNPRINTF=yes
 samba_cv_HAVE_C99_VSNPRINTF=yes
 ac_cv_header_standards_h=no
+
+ac_cv_file__proc_sys_kernel_core_pattern=no
+samba_cv_SYSCONF_SC_NPROCESSORS_ONLN=no
+
+if test "${PACKAGE_NAME}" = "Samba" -a "@platform_os@" = "ios"; then
+  # disable python support
+  export PYTHON_VER=0.0
+  # ios/osx-10.6 issue with collision of _MD5 exported from a system lib
+  export LDFLAGS="${LDFLAGS} -Wl,-unexported_symbol,_MD5* -lc"
+  # various configure overrides
+  libreplace_cv_HAVE_GETADDRINFO=no
+fi
+
+if test "${PACKAGE_NAME}" = "Samba" -a "@platform_os@" = "osx"; then
+  # disable python support
+  export PYTHON_VER=0.0
+  # ios/osx-10.6 issue with collision of _MD5 exported from a system lib
+  export LDFLAGS="${LDFLAGS} -Wl,-unexported_symbol,_MD5* -lc"
+  # uses OPT instead of CFLAGS
+  export OPT="${CFLAGS}"
+  # various configure overrides
+  ac_cv_header_libunwind_h=no
+  ac_cv_header_execinfo_h=no
+  # fixes crash on 10.6 if xbmc is built using 10.7 SDK with 10.6 min
+  ac_cv_func_vdprintf=no
+fi
 
 if test "@platform_os@" = "android"; then
   #samba
