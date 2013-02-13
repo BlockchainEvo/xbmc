@@ -83,12 +83,6 @@ bool CWinSystemEGL::InitWindowSystem()
     return false;
   }
 
-  if (!m_egl->CreateNativeWindow())
-  {
-    CLog::Log(LOGERROR, "%s: Could not get native window",__FUNCTION__);
-    return false;
-  }
-
   if (!m_egl->InitDisplay(&m_display))
   {
     CLog::Log(LOGERROR, "%s: Could not create display",__FUNCTION__);
@@ -114,6 +108,13 @@ bool CWinSystemEGL::InitWindowSystem()
     CLog::Log(LOGERROR, "%s: Could not find a compatible configuration",__FUNCTION__);
     return false;
   }
+
+  if (!m_egl->CreateNativeWindow())
+  {
+    CLog::Log(LOGERROR, "%s: Could not get native window",__FUNCTION__);
+    return false;
+  }
+
 
   // Some platforms require a surface before we can probe the resolution.
   // Create the window here, then the creation in CreateNewWindow() will be skipped.
