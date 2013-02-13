@@ -97,8 +97,11 @@ public:
     window and store it in m_nativeWindow. XBMC Will terminate if this fails.
     If possible, the created window should use the current display's geometry
     and allocate as needed so that it is immediately available for use.
-    If not, it must be made ready by SetNativeResolution(). */
-  virtual bool  CreateNativeWindow() = 0;
+    If not, it must be made ready by SetNativeResolution().
+
+    nativeVisual corresponds to EGL_NATIVE_VISUAL_ID, which is a
+    platform-depenent identifier for the current visual. */
+  virtual bool  CreateNativeWindow(int nativeVisual) = 0;
 
 /*! \brief Returns the current Native Display */
   virtual bool  GetNativeDisplay(XBNativeDisplayType **nativeDisplay) const = 0;

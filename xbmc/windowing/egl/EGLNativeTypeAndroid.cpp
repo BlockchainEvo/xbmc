@@ -56,7 +56,7 @@ bool CEGLNativeTypeAndroid::CreateNativeDisplay()
   return true;
 }
 
-bool CEGLNativeTypeAndroid::CreateNativeWindow()
+bool CEGLNativeTypeAndroid::CreateNativeWindow(int nativeVisual)
 {
 #if defined(TARGET_ANDROID)
   m_nativeWindow = CXBMCApp::GetNativeWindow();

@@ -119,12 +119,12 @@ bool CEGLWrapper::CreateNativeDisplay()
   return m_nativeTypes->CreateNativeDisplay();
 }
 
-bool CEGLWrapper::CreateNativeWindow()
+bool CEGLWrapper::CreateNativeWindow(int nativeVisual)
 {
   if(!m_nativeTypes)
     return false;
 
-  return m_nativeTypes->CreateNativeWindow();
+  return m_nativeTypes->CreateNativeWindow(nativeVisual);
 }
 
 void CEGLWrapper::DestroyNativeDisplay()
