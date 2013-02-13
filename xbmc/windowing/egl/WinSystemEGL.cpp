@@ -108,8 +108,9 @@ bool CWinSystemEGL::InitWindowSystem()
     CLog::Log(LOGERROR, "%s: Could not find a compatible configuration",__FUNCTION__);
     return false;
   }
-
-  if (!m_egl->CreateNativeWindow(0))
+  int nativeVisual = 0;
+  m_egl->GetConfigAttrib(m_display, m_config, EGL_NATIVE_VISUAL_ID, &nativeVisual);
+  if (!m_egl->CreateNativeWindow(nativeVisual))
   {
     CLog::Log(LOGERROR, "%s: Could not get native window",__FUNCTION__);
     return false;
@@ -145,7 +146,10 @@ bool CWinSystemEGL::CreateWindow(RESOLUTION_INFO &res)
   {
     CLog::Log(LOGNOTICE, "%s: Could not create a surface. Trying with a fresh Native Window.",__FUNCTION__);
     m_egl->DestroyNativeWindow();
-    if (!m_egl->CreateNativeWindow(0))
+
+    int nativeVisual = 0;
+    m_egl->GetConfigAttrib(m_display, m_config, EGL_NATIVE_VISUAL_ID, &nativeVisual);
+    if (!m_egl->CreateNativeWindow(nativeVisual))
     {
       CLog::Log(LOGERROR, "%s: Could not get native window",__FUNCTION__);
       return false;
