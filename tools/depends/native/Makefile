@@ -31,6 +31,7 @@ yasm-native: automake-native
 libpng-native: zlib-native
 tiff-native: libjpeg-turbo-native
 swig-native: pcre-native
+libsdl_image-native: libsdl-native
 
 buildtools: $(BUILDTOOLS)
 $(BUILDTOOLS):
