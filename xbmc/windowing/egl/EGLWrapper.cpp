@@ -375,8 +375,8 @@ void CEGLWrapper::SwapBuffers(EGLDisplay display, EGLSurface surface)
 bool CEGLWrapper::GetConfigAttrib(EGLDisplay display, EGLConfig config, EGLint attribute, EGLint *value)
 {
   if (display == EGL_NO_DISPLAY || !config || !attribute)
-    return eglGetConfigAttrib(display, config, attribute, value);
-  return false;
+    return false;
+  return eglGetConfigAttrib(display, config, attribute, value);
 }
 #endif
 
