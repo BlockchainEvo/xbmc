@@ -16,6 +16,7 @@ OS=@platform_os@
 HAS_ZLIB=@has_zlib@
 NEED_LIBICONV=@need_libiconv@
 LINK_ICONV=@link_iconv@
+ENABLE_GPLV3=@use_gplv3@
 
 BASE_URL=http://mirrors.xbmc.org/build-deps/sources
 RETRIEVE_TOOL_FLAGS=-Ls --create-dirs -f -O
