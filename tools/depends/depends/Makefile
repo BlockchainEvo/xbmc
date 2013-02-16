@@ -19,7 +19,7 @@ DEPENDS = \
 ifeq ($(ENABLE_GPLV3),1)
   DEPENDS+=samba-gplv3
 else
-  Depends+=samba
+  DEPENDS+=samba
 endif
 
 ifeq ($(OS),ios)
