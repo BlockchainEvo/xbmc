@@ -10,7 +10,7 @@ export CFLAGS+=-D__STDC_INT64__
 # configuration settings
 CONFIGURE=cp -f $(CONFIG_SUB) $(CONFIG_GUESS) .; \
           ./configure --prefix=$(PREFIX) --disable-docs --enable-malloc \
-          --disable-shared
+          --disable-shared --with-glib=no
 
 LIBDYLIB=$(PLATFORM)/lib/.libs/lib$(LIBNAME).a
 
