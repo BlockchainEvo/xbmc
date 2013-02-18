@@ -1,7 +1,7 @@
 include ../Makefile.include
 
-ifneq ($(shell test -f $(NATIVEPREFIX)/share/config.site && echo 1),1)
-  $(error Error: $(NATIVEPREFIX)/share/config.site  is missing. Please reconfigure depends to generate it)
+ifneq ($(shell test -f $(PREFIX)/share/config.site && echo 1),1)
+  $(error Error: $(PREFIX)/share/config.site  is missing. Please reconfigure depends to generate it)
 endif
 
 DEPENDS = \
