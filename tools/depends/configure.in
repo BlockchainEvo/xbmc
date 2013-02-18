@@ -7,8 +7,8 @@ AC_CANONICAL_HOST
 
 AC_ARG_WITH([toolchain],
   [AS_HELP_STRING([--with-toolchain],
-  [specify path to android toolchain])],
-  [use_toolchain=$withval],)
+  [specify path to toolchain. Required for android. Defaults to xcode root for darwin, /usr for linux])],
+  [use_toolchain=$withval],use_toolchain=/usr)
 
 AC_ARG_WITH([tarballs],
   [AS_HELP_STRING([--with-tarballs],
