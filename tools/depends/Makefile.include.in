@@ -12,6 +12,7 @@ ARCHIVE_TOOL=@TAR@
 PREFIX=@prefix@/@deps_dir@
 NATIVEPREFIX=@prefix@/@build_cpu@-@build_os@-native
 OS=@platform_os@
+CROSS_COMPILING=@cross_compiling@
 
 HAS_ZLIB=@has_zlib@
 NEED_LIBICONV=@need_libiconv@
