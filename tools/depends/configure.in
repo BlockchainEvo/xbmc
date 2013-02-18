@@ -97,6 +97,8 @@ case $host in
     if test "x$use_gplv3" = "xauto"; then
       use_gplv3=0
     fi
+    #android builds are always cross
+    cross_compiling="yes"
   ;;     
   i*86*-android-linux-gnu*)
     if test "x$use_cpu" = "xauto"; then
@@ -112,6 +114,8 @@ case $host in
     if test "x$use_gplv3" = "xauto"; then
       use_gplv3=0
     fi
+    #android builds are always cross
+    cross_compiling="yes"
   ;;
   arm*-*-linux-gnu*)
     if test "x$use_cpu" = "xauto"; then
@@ -142,6 +146,9 @@ case $host in
     use_xcode=[`$use_xcodebuild -version | grep Xcode | awk '{ print $2}'`]
     AC_MSG_RESULT(found xcodebuild at $use_xcodebuild)
     use_build_toolchain=$use_xcodepath
+
+    #darwin builds are always cross
+    cross_compiling="yes"
 
     platform_cflags="-Wl,-search_paths_first -no_compact_linkedit -std=gnu99 -no-cpp-precomp "
     platform_ldflags="-Wl,-search_paths_first -no_compact_linkedit "
