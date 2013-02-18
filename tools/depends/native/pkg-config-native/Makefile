@@ -10,9 +10,13 @@ VERSION=0.23
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
 
-# configuration settings
-CONFIGURE=./configure --prefix=$(PREFIX) --enable-indirect-deps --with-pc-path=$(PREFIX)/lib/pkgconfig:$(PREFIX)/share/pkgconfig
+PC_PATH=$(PREFIX)/lib/pkgconfig:$(PREFIX)/share/pkgconfig
+ifeq ($(CROSS_COMPILING),no)
+PC_PATH:=$(PC_PATH):/usr/lib/pkgconfig:/usr/lib/$(HOST)/pkgconfig:/usr/share/pkgconfig
+endif
 
+# configuration settings
+CONFIGURE=./configure --prefix=$(PREFIX) --enable-indirect-deps --with-pc-path=$(PC_PATH)
 LIBDYLIB=$(PLATFORM)/pkg-config
 
 CLEAN_FILES=$(ARCHIVE) $(PLATFORM)
