@@ -72,7 +72,7 @@ python26: expat gettext libxml2 sqlite3 openssl libffi
 libcdio: $(ICONV)
 afpfs-ng: libgcrypt readline $(ICONV)
 libshairport: openssl
-libplist: libxml2
+libplist: libxml2 $(ZLIB)
 libbluray: $(ICONV) libxml2
 libssh: openssl
 xbmc-pvr-addons: boost mysql
