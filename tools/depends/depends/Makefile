@@ -92,6 +92,16 @@ $(DEPENDS):
 clean:
 	for d in $(DEPENDS); do $(MAKE) -C $$d clean; done
 
+# Debug target, this will DELETE all data in staging!
+test-dependencies:
+	( for d in $(DEPENDS); do \
+	rm -rf $(PREFIX); \
+	mkdir -p $(PREFIX)/include $(PREFIX)/share $(PREFIX)/bin; \
+	cp -f config.site Toolchain.cmake $(PREFIX)/share/; \
+	$(MAKE) distclean; \
+	$(MAKE) $$d; done ) && echo "$@ built successfully"
+
+
 distclean::
 	for d in $(DEPENDS); do $(MAKE) -C $$d distclean; done
 
