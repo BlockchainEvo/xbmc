@@ -44,6 +44,15 @@ clean:
 	for d in $(BUILDTOOLS); do $(MAKE) -C $$d clean; done
 	for d in $(NATIVE); do $(MAKE) -C $$d clean; done
 
+# Debug target, this will DELETE all data in staging!
+test-dependencies:
+	( for d in $(NATIVE); do \
+	rm -rf $(NATIVEPREFIX); \
+        mkdir -p $(NATIVEPREFIX)/include $(NATIVEPREFIX)/share $(NATIVEPREFIX)/bin; \
+	cp -f config.site $(NATIVEPREFIX)/share/; \
+	$(MAKE) distclean; \
+	$(MAKE) $$d; done ) && echo "$@ built successfully"
+
 distclean::
 	for d in $(BUILDTOOLS); do $(MAKE) -C $$d distclean; done
 	for d in $(NATIVE); do $(MAKE) -C $$d distclean; done
