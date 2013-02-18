@@ -37,8 +37,8 @@ AC_ARG_WITH([sdk],
 
 AC_ARG_ENABLE([gplv3],
   [AS_HELP_STRING([--enable-gplv3],
-  [enable gplv3 components])],
-  [use_gplv3=1])
+  [enable gplv3 components. default off for android, on everywhere else])],
+  [use_gplv3=1], [use_gplv3=auto])
 
 
 AC_CHECK_PROG(HAVE_UNZIP,unzip,"yes","no",)
@@ -94,6 +94,9 @@ case $host in
     platform_ldflags=" -L$prefix/$deps_dir/lib/$use_sdk"
     platform_includes=" -I$prefix/$deps_dir/include/$use_sdk"
     platform_os="android"
+    if test "x$use_gplv3" = "xauto"; then
+      use_gplv3=0
+    fi
   ;;     
   i*86*-android-linux-gnu*)
     if test "x$use_cpu" = "xauto"; then
@@ -106,6 +109,9 @@ case $host in
     platform_ldflags="-L$prefix/$deps_dir/lib/$use_sdk"
     platform_includes="-I$prefix/$deps_dir/include/$use_sdk"
     platform_os="android"
+    if test "x$use_gplv3" = "xauto"; then
+      use_gplv3=0
+    fi
   ;;
   arm*-*-linux-gnu*)
     if test "x$use_cpu" = "xauto"; then
@@ -264,6 +270,10 @@ AC_PATH_PROG([CXX_FOR_BUILD],[g++ llvm-g++ $platform_cxx], g++, $PATH_FOR_BUILD)
 
 AC_CHECK_LIB([z],   [main], has_zlib=1, AC_MSG_WARN("No zlib support in toolchain. Will build libz."); has_zlib=0)
 AC_SEARCH_LIBS([iconv_open],iconv, link_iconv=$ac_cv_search_iconv_open, link_iconv=-liconv; AC_MSG_WARN("No iconv support in toolchain. Will build libiconv."); need_libiconv=1)
+
+if test "x$use_gplv3" = "xauto"; then
+  use_gplv3=1
+fi
 
 if test "$link_iconv" = "none required"; then
   link_iconv=
