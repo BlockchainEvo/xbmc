@@ -71,14 +71,13 @@ ac_cv_header_standards_h=no
 
 ac_cv_file__proc_sys_kernel_core_pattern=no
 samba_cv_SYSCONF_SC_NPROCESSORS_ONLN=no
+libreplace_cv_HAVE_GETADDRINFO=no
 
 if test "${PACKAGE_NAME}" = "Samba" -a "@platform_os@" = "ios"; then
   # disable python support
   export PYTHON_VER=0.0
   # ios/osx-10.6 issue with collision of _MD5 exported from a system lib
   export LDFLAGS="${LDFLAGS} -Wl,-unexported_symbol,_MD5* -lc"
-  # various configure overrides
-  libreplace_cv_HAVE_GETADDRINFO=no
 fi
 
 if test "${PACKAGE_NAME}" = "Samba" -a "@platform_os@" = "osx"; then
