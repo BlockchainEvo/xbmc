@@ -9,9 +9,9 @@ ARCHIVE=$(SOURCE).tar.gz
 
 # configuration settings
 CONFIGURE=cp -f $(CONFIG_SUB) $(CONFIG_GUESS) .; \
-          ./configure --prefix=$(PREFIX) --disable-gtktest --disable-frontend
+          ./configure --prefix=$(PREFIX) --disable-gtktest --disable-frontend --disable-decoder
 
-LIBDYLIB=$(PLATFORM)/.libs/$(LIBNAME).a
+LIBDYLIB=$(PLATFORM)/libmp3lame/.libs/libmp3lame.a
 
 CLEAN_FILES=$(ARCHIVE) $(PLATFORM)
 
@@ -26,10 +26,11 @@ $(PLATFORM): $(TARBALLS_LOCATION)/$(ARCHIVE) $(DEPS)
 	cd $(PLATFORM); $(CONFIGURE)
 
 $(LIBDYLIB): $(PLATFORM)
-	$(MAKE) -C $(PLATFORM)
+	$(MAKE) -C $(PLATFORM)/libmp3lame
 
 .installed-$(PLATFORM): $(LIBDYLIB)
-	$(MAKE) -C $(PLATFORM) install
+	$(MAKE) -C $(PLATFORM)/include install
+	$(MAKE) -C $(PLATFORM)/libmp3lame install
 	touch $@
 
 clean:
