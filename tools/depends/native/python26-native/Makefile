@@ -29,7 +29,7 @@ $(LIBDYLIB): $(PLATFORM)
 	cd $(PLATFORM); $(MAKE)
 
 .installed-$(PLATFORM): $(LIBDYLIB)
-	cd $(PLATFORM); make install
+	cd $(PLATFORM); make install -j1
 	touch $@
 
 clean:
