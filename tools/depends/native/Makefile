@@ -25,6 +25,9 @@ tiff-native: libjpeg-turbo-native
 swig-native: pcre-native
 libsdl_image-native: libsdl-native libpng-native libjpeg-turbo-native tiff-native
 
+#liblzo2 has stale packaged automake files that cause borked host/build detection
+liblzo2-native: automake-native
+
 native: $(NATIVE)
 $(NATIVE):
 	$(MAKE) -C $@
