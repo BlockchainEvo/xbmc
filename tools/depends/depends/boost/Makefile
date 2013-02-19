@@ -12,8 +12,8 @@ all: .installed-$(PLATFORM)
 $(TARBALLS_LOCATION)/$(ARCHIVE):
 	cd $(TARBALLS_LOCATION); $(RETRIEVE_TOOL) $(RETRIEVE_TOOL_FLAGS) $(BASE_URL)/$(ARCHIVE)
 
-.installed-$(PLATFORM): $(LIBDYLIB) $(TARBALLS_LOCATION)/$(ARCHIVE)
-	rm -rf $(PLATFORM)/*; mkdir -p $(PLATFORM)
+$(PLATFORM): $(TARBALLS_LOCATION)/$(ARCHIVE) $(DEPS)
+	rm -rf $(PLATFORM); mkdir -p $(PLATFORM)
 	cd $(PLATFORM); $(ARCHIVE_TOOL) $(ARCHIVE_TOOL_FLAGS) $(TARBALLS_LOCATION)/$(ARCHIVE)
 	echo 'using gcc : : $(CC) : ' > $(PLATFORM)/tools/build/v2/user-config.jam
 	echo '	<cflags>"$(CFLAGS)"' >> $(PLATFORM)/tools/build/v2/user-config.jam
@@ -22,6 +22,8 @@ $(TARBALLS_LOCATION)/$(ARCHIVE):
 	cd $(PLATFORM); patch -p1 < ../add-arm-mem-barrier.patch
 	cd $(PLATFORM); patch -p1 < ../fix-deprecated-swp.patch
 	cd $(PLATFORM); ./bootstrap.sh --prefix=$(PREFIX)
+
+.installed-$(PLATFORM): $(PLATFORM)
 	cd $(PLATFORM); ./bjam --prefix=$(PREFIX) toolset=gcc --toolset-root=$(TOOLCHAIN)/$(HOST)/bin --disable-icu \
 	--without-date_time --without-filesystem --without-graph --without-graph_parallel --without-iostreams --without-math --without-mpi --without-program_options \
 --without-python --without-random --without-regex --without-serialization --without-signals --without-system --without-test --without-thread --without-wave install 
