@@ -5,7 +5,7 @@ ifneq ($(shell test -f $(PREFIX)/share/config.site && echo 1),1)
 endif
 
 DEPENDS = \
-	ncurses pcre expat gettext readline sqlite3 libgpg-error \
+	pcre expat gettext sqlite3 libgpg-error \
 	libgcrypt bzip2 liblzo2 libzip freetype2 fontconfig \
 	openssl libssh2 curl \
 	libjpeg-turbo tiff jasper libpng \
@@ -55,7 +55,7 @@ endif
 
 all: .installed-$(PLATFORM)
 
-gettext: $(ICONV) ncurses
+gettext: $(ICONV)
 libgcrypt: libgpg-error
 fontconfig: freetype2 expat $(ICONV)
 libssh2: libgcrypt openssl
@@ -70,15 +70,15 @@ libxml2: $(ICONV)
 libmicrohttpd: openssl libgpg-error libgcrypt
 python26: expat gettext libxml2 sqlite3 openssl libffi
 libcdio: $(ICONV)
-afpfs-ng: libgcrypt readline $(ICONV)
+afpfs-ng: libgcrypt $(ICONV)
 libshairport: openssl
 libplist: libxml2 $(ZLIB)
 libbluray: $(ICONV) libxml2
 libssh: openssl
 xbmc-pvr-addons: boost mysql
-mysql: readline openssl
+mysql: openssl
 libzip: $(ZLIB)
-libmp3lame: ncurses $(ICONV)
+libmp3lame: $(ICONV)
 libpng: $(ZLIB)
 openssl: $(ZLIB)
 
