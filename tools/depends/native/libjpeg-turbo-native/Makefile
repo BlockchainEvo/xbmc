@@ -9,9 +9,8 @@ VERSION=1.2.0
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(LIBNAME)-$(VERSION).tar.gz
 # configuration settings
-export NASM=$(YASM)
 CONFIGURE=cp -f $(CONFIG_SUB) $(CONFIG_GUESS) .; \
-          NASM=$(YASM) ./configure --prefix=$(PREFIX) --with-jpeg8
+          ./configure --prefix=$(PREFIX) --with-jpeg8 --without-simd
 
 CFLAGS+=-O3
 
