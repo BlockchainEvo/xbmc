@@ -8,7 +8,7 @@ AC_CANONICAL_HOST
 AC_ARG_WITH([toolchain],
   [AS_HELP_STRING([--with-toolchain],
   [specify path to toolchain. Required for android. Defaults to xcode root for darwin, /usr for linux])],
-  [use_toolchain=$withval],use_toolchain=/usr)
+  [use_toolchain=$withval])
 
 AC_ARG_WITH([tarballs],
   [AS_HELP_STRING([--with-tarballs],
@@ -121,6 +121,7 @@ case $host in
     if test "x$use_cpu" = "xauto"; then
       use_cpu=$host_cpu
     fi
+    use_toolchain="${use_toolchain:-/usr}"
     platform_cflags+="-Os -fPIC -DPIC"
     platform_cxxflags="$platform_cflags"
     platform_ldflags="-Wl,-rpath-link=$prefix/$deps_dir/lib"
@@ -128,10 +129,12 @@ case $host in
   ;;
   *i686*-linux-gnu*)
     use_cpu=$host_cpu
+    use_toolchain="${use_toolchain:-/usr}"
     platform_os="linux"
   ;;
   x86_64*-linux-gnu*)
     use_cpu=$host_cpu
+    use_toolchain="${use_toolchain:-/usr}"
     platform_cflags="-fPIC -DPIC"
     platform_cxxflags="$platform_cflags"
     platform_os="linux"
