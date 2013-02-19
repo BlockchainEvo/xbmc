@@ -32,6 +32,7 @@ $(LIBDYLIB): $(PLATFORM)
 
 .installed-$(PLATFORM): $(LIBDYLIB)
 	$(MAKE) -C $(PLATFORM) install
+	touch $(LIBDYLIB)
 	touch $@
 
 clean:

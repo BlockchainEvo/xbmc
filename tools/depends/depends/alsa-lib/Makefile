@@ -21,7 +21,7 @@ CONFIGURE=cp -f $(CONFIG_SUB) $(CONFIG_GUESS) .; \
           --disable-resmgr --enable-aload --enable-mixer  --enable-pcm  --disable-rawmidi  --enable-hwdep  --disable-seq  --disable-alisp  --disable-old-symbols --disable-python \
           --with-softfloat=yes --with-libdl=yes --with-pthread=yes --with-librt=no --disable-shared \
 
-LIBDYLIB=$(PLATFORM)/src/.libs/$(LIBNAME).so
+LIBDYLIB=$(PLATFORM)/src/.libs/$(LIBNAME).a
 
 CLEAN_FILES=$(ARCHIVE) $(PLATFORM)
 
