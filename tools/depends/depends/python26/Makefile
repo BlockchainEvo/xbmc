@@ -55,7 +55,7 @@ $(LIBDYLIB): $(PLATFORM)
 	touch $@
 
 .installed-$(PLATFORM): $(LIBDYLIB)
-	make -C $(PLATFORM) HOSTPYTHON=$(NATIVEPREFIX)/bin/python HOSTPGEN=$(NATIVEPREFIX)/bin/pgen CROSS_COMPILE_TARGET=yes install
+	make -j1 -C $(PLATFORM) HOSTPYTHON=$(NATIVEPREFIX)/bin/python HOSTPGEN=$(NATIVEPREFIX)/bin/pgen CROSS_COMPILE_TARGET=yes install
 	find $(PREFIX)/lib/python2.6 -type f -name "*.py" -delete
 	find $(PREFIX)/lib/python2.6 -type f -name "*.pyc" -delete
 	#
