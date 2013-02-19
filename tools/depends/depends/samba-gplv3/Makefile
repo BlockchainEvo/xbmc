@@ -9,7 +9,10 @@ ARCHIVE=$(SOURCE).tar.gz
 CONFIGURE= cp -f $(CONFIG_SUB) $(CONFIG_GUESS) .; \
           ./configure --prefix=$(PREFIX) \
           --without-cluster-support --disable-swat --without-ldap \
-          --without-pam --without-pam_smbpass --with-fhs --disable-shared
+          --without-pam --without-pam_smbpass --with-fhs --with-libtalloc=no \
+          --with-libtdb=no --without-winbind --disable-cups --without-ads \
+          --disable-avahi --disable-fam --without-libaddns --without-libnetapi \
+          --without-dnsupdate --without-libsmbsharemodes
 
 LIBDYLIB=$(PLATFORM)/source3/bin/libsmbclient.a
 
