@@ -4,7 +4,7 @@ ifneq ($(shell test -f $(NATIVEPREFIX)/share/config.site && echo 1),1)
   $(error Error: $(NATIVEPREFIX)/share/config.site  is missing. Please reconfigure depends to generate it)
 endif
 
-NATIVE=m4-native autoconf-native automake-native libtool-native pkg-config-native yasm-native cmake-native gas-preprocessor-native python26-native zlib-native pcre-native swig-native rpl-native libsdl_image-native tiff-native libpng-native libjpeg-turbo-native liblzo2-native libsdl-native
+NATIVE=m4-native gettext-native autoconf-native automake-native libtool-native pkg-config-native yasm-native cmake-native gas-preprocessor-native python26-native zlib-native pcre-native swig-native rpl-native libsdl_image-native tiff-native libpng-native libjpeg-turbo-native liblzo2-native libsdl-native
 
 
 ifeq ($(OS),ios)
