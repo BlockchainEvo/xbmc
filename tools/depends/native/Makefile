@@ -20,11 +20,6 @@ all: native
 autoconf-native: m4-native
 automake-native: autoconf-native
 libtool-native: automake-native
-gettext-native: automake-native
-pkg-config-native: automake-native
-yasm-native: automake-native
-
-
 libpng-native: zlib-native
 tiff-native: libjpeg-turbo-native
 swig-native: pcre-native
