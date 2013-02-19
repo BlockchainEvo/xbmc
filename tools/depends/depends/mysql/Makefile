@@ -12,7 +12,7 @@ CONFIGURE=cp -f $(CONFIG_SUB) $(CONFIG_GUESS) .; \
           ./configure --prefix=$(PREFIX) --build=$(BUILD) \
 	--enable-thread-safe-client --with-extra-charsets=complex \
 	--with-named-thread-libs=-lc --with-named-curses-libs=-lncurses \
-	--without-libedit \
+	--with-libedit \
 	--without-server --without-bench --without-docs --without-man --disable-shared
 
 LIBDYLIB=$(PLATFORM)/lib$(LIBNAME)/.libs/lib$(LIBNAME)client.a
