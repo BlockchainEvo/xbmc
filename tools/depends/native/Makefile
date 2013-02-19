@@ -29,7 +29,7 @@ yasm-native: automake-native
 libpng-native: zlib-native
 tiff-native: libjpeg-turbo-native
 swig-native: pcre-native
-libsdl_image-native: libsdl-native
+libsdl_image-native: libsdl-native libpng-native libjpeg-turbo-native tiff-native
 
 native: $(NATIVE)
 $(NATIVE):
