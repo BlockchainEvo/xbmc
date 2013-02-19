@@ -1,5 +1,5 @@
 include ../../Makefile.include
-DEPS= ../../Makefile.include 01-gettext-tools-stpncpy.patch 02-gettext_android.patch
+DEPS= ../../Makefile.include Makefile
 
 # lib name, version
 LIBNAME=gettext
@@ -16,9 +16,9 @@ CONFIGURE=cp -f $(CONFIG_SUB) $(CONFIG_GUESS) build-aux/; \
     --with-included-glib \
     --with-included-libcroco \
     --with-included-libxml \
-    --without-git --without-cvs --disable-shared \
+    --without-git --without-cvs --disable-shared --disable-curses \
 
-LIBDYLIB=$(PLATFORM)/gettext-tools/src/.libs/libgettextsrc.a
+LIBDYLIB=$(PLATFORM)/gettext-runtime/intl/.libs/libintl.a
 
 CLEAN_FILES=$(ARCHIVE) $(PLATFORM)
 
@@ -30,15 +30,13 @@ $(TARBALLS_LOCATION)/$(ARCHIVE):
 $(PLATFORM): $(TARBALLS_LOCATION)/$(ARCHIVE) $(DEPS)
 	rm -rf $(PLATFORM)/*; mkdir -p $(PLATFORM)
 	cd $(PLATFORM); $(ARCHIVE_TOOL) $(ARCHIVE_TOOL_FLAGS) $(TARBALLS_LOCATION)/$(ARCHIVE)
-	cd $(PLATFORM); patch -p1 < ../01-gettext-tools-stpncpy.patch
-	cd $(PLATFORM); patch -p0 < ../02-gettext_android.patch
 	cd $(PLATFORM); $(CONFIGURE)
 
 $(LIBDYLIB): $(PLATFORM)
-	$(MAKE) -C $(PLATFORM)
+	$(MAKE) -C $(PLATFORM)/gettext-runtime
 
 .installed-$(PLATFORM): $(LIBDYLIB)
-	$(MAKE) -C $(PLATFORM) install
+	$(MAKE) -C $(PLATFORM)/gettext-runtime install
 	touch $@
 
 clean:
