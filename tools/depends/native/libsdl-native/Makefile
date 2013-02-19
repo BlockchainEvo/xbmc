@@ -11,7 +11,7 @@ ARCHIVE=$(SOURCE).tar.gz
 
 # configuration settings
 CONFIGURE=./configure --prefix=$(PREFIX) \
-  --without-x --disable-video-x11 --disable-video-directfb
+  --without-x --disable-video-x11 --disable-video-directfb --enable-nasm=no
 
 LIBDYLIB=$(PLATFORM)/build/.libs/lib$(LIBNAME).a
 
@@ -19,12 +19,10 @@ all: .installed-$(PLATFORM)
 
 $(TARBALLS_LOCATION)/$(ARCHIVE):
 	cd $(TARBALLS_LOCATION); $(RETRIEVE_TOOL) $(RETRIEVE_TOOL_FLAGS) $(BASE_URL)/$(ARCHIVE)
-	echo $(ARCHIVE) > .gitignore
 
 $(PLATFORM): $(TARBALLS_LOCATION)/$(ARCHIVE) $(DEPS)
 	rm -rf $(PLATFORM); mkdir -p $(PLATFORM)
 	cd $(PLATFORM); $(ARCHIVE_TOOL) $(ARCHIVE_TOOL_FLAGS) $(TARBALLS_LOCATION)/$(ARCHIVE)
-	echo $(PLATFORM) > .gitignore
 	cd $(PLATFORM); patch -p0 < ../01-SDL_SetWidthHeight.patch
 	cd $(PLATFORM); patch -p0 < ../02-mmx.patch
 	cd $(PLATFORM); $(CONFIGURE)
