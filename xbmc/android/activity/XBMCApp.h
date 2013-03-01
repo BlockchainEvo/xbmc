@@ -105,14 +105,10 @@ protected:
 
 private:
   static bool HasLaunchIntent(const std::string &package);
-  bool getWakeLock(JNIEnv *env);
-  void acquireWakeLock();
-  void releaseWakeLock();
   void run();
   void stop();
 
   static ANativeActivity *m_activity;
-  jobject m_wakeLock;
   
   bool m_firstrun;
   bool m_exiting;

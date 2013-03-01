@@ -61,7 +61,6 @@ ANativeActivity *CXBMCApp::m_activity = NULL;
 ANativeWindow* CXBMCApp::m_window = NULL;
 
 CXBMCApp::CXBMCApp(ANativeActivity *nativeActivity)
-  : m_wakeLock(NULL)
 {
   m_activity = nativeActivity;
   m_firstrun = true;
@@ -120,13 +119,6 @@ void CXBMCApp::onDestroy()
     pthread_join(m_thread, NULL);
     android_printf(" => XBMC finished");
   }
-
-  if (m_wakeLock != NULL && m_activity != NULL)
-  {
-    JNIEnv* env = xbmc_jnienv();
-    env->DeleteGlobalRef(m_wakeLock);
-    m_wakeLock = NULL;
-  }
 }
 
 void CXBMCApp::onSaveState(void **data, size_t *size)
@@ -156,7 +148,6 @@ void CXBMCApp::onCreateWindow(ANativeWindow* window)
     return;
   }
   m_window = window;
-  acquireWakeLock();
   if(!m_firstrun)
   {
     XBMC_SetupDisplay();
@@ -181,7 +172,6 @@ void CXBMCApp::onDestroyWindow()
     XBMC_Pause(true);
   }
 
-  releaseWakeLock();
   m_window=NULL;
 }
 
@@ -193,82 +183,6 @@ void CXBMCApp::onGainFocus()
 void CXBMCApp::onLostFocus()
 {
   android_printf("%s: ", __PRETTY_FUNCTION__);
-}
-
-bool CXBMCApp::getWakeLock(JNIEnv *env)
-{
-  android_printf("%s", __PRETTY_FUNCTION__);
-  if (m_activity == NULL)
-  {
-    android_printf("  missing activity => unable to use WakeLocks");
-    return false;
-  }
-
-  if (env == NULL)
-    return false;
-
-  if (m_wakeLock == NULL)
-  {
-    jobject oActivity = m_activity->clazz;
-    jclass cActivity = env->GetObjectClass(oActivity);
-
-    // get the wake lock
-    jmethodID midActivityGetSystemService = env->GetMethodID(cActivity, "getSystemService", "(Ljava/lang/String;)Ljava/lang/Object;");
-    jstring sPowerService = env->NewStringUTF("power"); // POWER_SERVICE
-    jobject oPowerManager = env->CallObjectMethod(oActivity, midActivityGetSystemService, sPowerService);
-
-    jclass cPowerManager = env->GetObjectClass(oPowerManager);
-    jmethodID midNewWakeLock = env->GetMethodID(cPowerManager, "newWakeLock", "(ILjava/lang/String;)Landroid/os/PowerManager$WakeLock;");
-    jstring sXbmcPackage = env->NewStringUTF("org.xbmc.xbmc");
-    jobject oWakeLock = env->CallObjectMethod(oPowerManager, midNewWakeLock, (jint)0x1a /* FULL_WAKE_LOCK */, sXbmcPackage);
-    m_wakeLock = env->NewGlobalRef(oWakeLock);
-
-    env->DeleteLocalRef(oWakeLock);
-    env->DeleteLocalRef(cPowerManager);
-    env->DeleteLocalRef(oPowerManager);
-    env->DeleteLocalRef(sPowerService);
-    env->DeleteLocalRef(sXbmcPackage);
-    env->DeleteLocalRef(cActivity);
-  }
-
-  return m_wakeLock != NULL;
-}
-
-void CXBMCApp::acquireWakeLock()
-{
-  if (m_activity == NULL)
-    return;
-
-  JNIEnv* env = xbmc_jnienv();
-
-  if (!getWakeLock(env))
-  {
-    android_printf("%s: unable to acquire a WakeLock");
-    return;
-  }
-
-  jclass cWakeLock = env->GetObjectClass(m_wakeLock);
-  jmethodID midWakeLockAcquire = env->GetMethodID(cWakeLock, "acquire", "()V");
-  env->CallVoidMethod(m_wakeLock, midWakeLockAcquire);
-  env->DeleteLocalRef(cWakeLock);
-}
-
-void CXBMCApp::releaseWakeLock()
-{
-  if (m_activity == NULL)
-    return;
-
-  JNIEnv* env = xbmc_jnienv();
-  if (!getWakeLock(env))
-  {
-    android_printf("%s: unable to release a WakeLock");
-    return;
-  }
-
-  jclass cWakeLock = env->GetObjectClass(m_wakeLock);
-  jmethodID midWakeLockRelease = env->GetMethodID(cWakeLock, "release", "()V");
-  env->CallVoidMethod(m_wakeLock, midWakeLockRelease);
-  env->DeleteLocalRef(cWakeLock);
 }
 
 void CXBMCApp::run()
