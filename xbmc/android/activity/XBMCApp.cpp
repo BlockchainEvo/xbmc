@@ -45,6 +45,7 @@
 #include "utils/log.h"
 #include "ApplicationMessenger.h"
 #include "JNIThreading.h"
+#include <android/window.h>
 
 #define GIGABYTES       1073741824
 
@@ -151,6 +152,7 @@ void CXBMCApp::onCreateWindow(ANativeWindow* window)
   if(!m_firstrun)
   {
     XBMC_SetupDisplay();
+    SetScreenLock(true);
     XBMC_Pause(false);
   }
 }
@@ -887,5 +889,13 @@ void CXBMCApp::SetSystemVolume(JNIEnv *env, float percent)
   env->CallObjectMethod(oAudioManager, msetStreamVolume, stream_music, int(GetMaxSystemVolume(env)*percent), 0);
   env->DeleteLocalRef(oAudioManager);
   env->DeleteLocalRef(cAudioManager);
+}
+
+void CXBMCApp::SetScreenLock(bool enabled)
+{
+  if (enabled)
+    ANativeActivity_setWindowFlags(m_activity, AWINDOW_FLAG_KEEP_SCREEN_ON, 0);
+  else
+    ANativeActivity_setWindowFlags(m_activity, 0, AWINDOW_FLAG_KEEP_SCREEN_ON);
 }
 

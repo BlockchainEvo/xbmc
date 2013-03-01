@@ -96,6 +96,7 @@ public:
   static int GetMaxSystemVolume();
 
   static int GetDPI();
+  static void SetScreenLock(bool enabled);
 protected:
   // limit who can access Volume
   friend class CAESinkAUDIOTRACK;
