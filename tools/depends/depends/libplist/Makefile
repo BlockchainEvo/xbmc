@@ -21,6 +21,7 @@ $(PLATFORM): $(TARBALLS_LOCATION)/$(ARCHIVE) $(DEPS)
 	rm -rf $(PLATFORM); mkdir -p $(PLATFORM)
 	cd $(PLATFORM); $(ARCHIVE_TOOL) $(ARCHIVE_TOOL_FLAGS) $(TARBALLS_LOCATION)/$(ARCHIVE)
 	cd $(PLATFORM); patch -p1 < ../0001-dontbuildswig.patch
+	cd $(PLATFORM); patch -p0 < ../0002-no-so-version.patch
 	cd $(PLATFORM); sed -ie 's/TARGET_LINK_LIBRARIES( plist /TARGET_LINK_LIBRARIES( plist m z $(ICONV) /' src/CMakeLists.txt
 	cd $(PLATFORM); rm -rf build; mkdir -p build
 	cd $(PLATFORM)/build; $(CMAKE) VERBOSE=1 ..
