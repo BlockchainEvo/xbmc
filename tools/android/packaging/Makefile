@@ -30,7 +30,7 @@ endif
 
 all: package
 SRCLIBS = $(addprefix $(PREFIX)/lib/,$(OBJS)) $(addprefix $(PREFIX)/lib/$(SDK_PLATFORM)/,$(PLATFORM_OBJS))
-DSTLIBS = $(HOST)/lib/libxbmc.so $(addprefix $(HOST)/lib/,$(OBJS)) $(addprefix $(HOST)/lib/,$(PLATFORM_OBJS))
+DSTLIBS = $(CPU)/lib/libxbmc.so $(addprefix $(CPU)/lib/,$(OBJS)) $(addprefix $(CPU)/lib/,$(PLATFORM_OBJS))
 libs= $(DSTLIBS)
 
 multi: x86 arm
@@ -42,15 +42,15 @@ multi: x86 arm
 	@echo "$(XBMCROOT)/xbmcapp-multi-debug.apk created"
 
 package: extras
-	@cp images/xbmcapp-debug-skeleton.apk images/xbmcapp-debug-$(HOST)-unaligned.apk
+	@cp images/xbmcapp-debug-skeleton.apk images/xbmcapp-debug-$(CPU)-unaligned.apk
 	@javac -classpath $(SDKROOT)/platforms/$(SDK_PLATFORM)/android.jar:xbmc/obj -d xbmc/obj -sourcepath xbmc/src xbmc/src/*.java
 	@javac -classpath $(SDKROOT)/platforms/$(SDK_PLATFORM)/android.jar:xbmc/obj -d xbmc/obj -sourcepath xbmc/src xbmc/src/org/xbmc/xbmc/*.java
 	@$(DX) --dex --output=xbmc/classes.dex xbmc/obj
-	@cd xbmc; zip -r -q ../images/xbmcapp-debug-$(HOST)-unaligned.apk lib/$(HOST) assets classes.dex
-	@jarsigner -sigalg MD5withRSA -digestalg SHA1 -keystore ~/.android/debug.keystore -storepass android images/xbmcapp-debug-$(HOST)-unaligned.apk androiddebugkey
-	@$(SDKROOT)/tools/zipalign -f 4 images/xbmcapp-debug-$(HOST)-unaligned.apk $(XBMCROOT)/xbmcapp-$(HOST)-debug.apk
-	@rm images/xbmcapp-debug-$(HOST)-unaligned.apk
-	@echo "$(XBMCROOT)/xbmcapp-$(HOST)-debug.apk created"
+	@cd xbmc; zip -r -q ../images/xbmcapp-debug-$(CPU)-unaligned.apk lib/$(CPU) assets classes.dex
+	@jarsigner -sigalg MD5withRSA -digestalg SHA1 -keystore ~/.android/debug.keystore -storepass android images/xbmcapp-debug-$(CPU)-unaligned.apk androiddebugkey
+	@$(SDKROOT)/tools/zipalign -f 4 images/xbmcapp-debug-$(CPU)-unaligned.apk $(XBMCROOT)/xbmcapp-$(CPU)-debug.apk
+	@rm images/xbmcapp-debug-$(CPU)-unaligned.apk
+	@echo "$(XBMCROOT)/xbmcapp-$(CPU)-debug.apk created"
 
 extras: libs
 	rm -rf xbmc/assets/python2.6/lib/
@@ -68,20 +68,20 @@ extras: libs
 	@rm -rf tmp/
 
 libs: $(PREFIX)/lib/xbmc/libxbmc.so
-	rm -rf xbmc/lib/$(HOST) xbmc/libs/$(HOST) xbmc/obj/local/$(HOST)
-	mkdir -p xbmc/lib/$(HOST) images xbmc/assets/python2.6/lib/ xbmc/libs/$(HOST) xbmc/obj/local/$(HOST)
-	cp -fp $(SRCLIBS) xbmc/obj/local/$(HOST)/
-	cp -fp $(PREFIX)/lib/xbmc/libxbmc.so xbmc/obj/local/$(HOST)/
-	find $(PREFIX)/lib/xbmc/addons -name "*.so" -exec cp -fp {} xbmc/obj/local/$(HOST)/ \;
-	find $(PREFIX)/lib/xbmc/system -name "*.so" -exec cp -fp {} xbmc/obj/local/$(HOST)/ \;
-	cd xbmc/obj/local/$(HOST)/; find . -name "*.so" -not -name "lib*.so" | sed "s/\.\///" | xargs -I@ mv @ lib@
-	cp -fp xbmc/obj/local/$(HOST)/*.so xbmc/lib/$(HOST)/
-	$(STRIP) --strip-unneeded xbmc/lib/$(HOST)/*.so
-	install -p $(GDBPATH) ./xbmc/libs/$(HOST)/gdbserver
-	echo "set solib-search-path ./obj/local/$(HOST)" > ./xbmc/libs/$(HOST)/gdb.setup
+	rm -rf xbmc/lib/$(CPU) xbmc/libs/$(CPU) xbmc/obj/local/$(CPU)
+	mkdir -p xbmc/lib/$(CPU) images xbmc/assets/python2.6/lib/ xbmc/libs/$(CPU) xbmc/obj/local/$(CPU)
+	cp -fp $(SRCLIBS) xbmc/obj/local/$(CPU)/
+	cp -fp $(PREFIX)/lib/xbmc/libxbmc.so xbmc/obj/local/$(CPU)/
+	find $(PREFIX)/lib/xbmc/addons -name "*.so" -exec cp -fp {} xbmc/obj/local/$(CPU)/ \;
+	find $(PREFIX)/lib/xbmc/system -name "*.so" -exec cp -fp {} xbmc/obj/local/$(CPU)/ \;
+	cd xbmc/obj/local/$(CPU)/; find . -name "*.so" -not -name "lib*.so" | sed "s/\.\///" | xargs -I@ mv @ lib@
+	cp -fp xbmc/obj/local/$(CPU)/*.so xbmc/lib/$(CPU)/
+	$(STRIP) --strip-unneeded xbmc/lib/$(CPU)/*.so
+	install -p $(GDBPATH) ./xbmc/libs/$(CPU)/gdbserver
+	echo "set solib-search-path ./obj/local/$(CPU)" > ./xbmc/libs/$(CPU)/gdb.setup
 	echo "directory $(TOOLCHAIN)/sysroot/usr/include $(NDKROOT)/sources/android/native_app_glue" \
-	     "$(NDKROOT)/sources/cxx-stl/gnu-libstdc++/include/$(GCC_VERSION) $(XBMCROOT)  $(PREFIX)/include jni" >> ./xbmc/libs/$(HOST)/gdb.setup
-	cp -fp xbmc/libs/$(HOST)/* xbmc/lib/$(HOST)
+	     "$(NDKROOT)/sources/cxx-stl/gnu-libstdc++/include/$(GCC_VERSION) $(XBMCROOT)  $(PREFIX)/include jni" >> ./xbmc/libs/$(CPU)/gdb.setup
+	cp -fp xbmc/libs/$(CPU)/* xbmc/lib/$(CPU)
 
 $(PREFIX)/lib/xbmc/libxbmc.so: $(SRCLIBS)
 	$(MAKE) -C ../depends/xbmc
