@@ -22,10 +22,24 @@ ARMOVERRIDES=XBMC_OVERRIDE_HOST=arm-linux-androideabi XBMC_OVERRIDE_TOOLCHAIN=$(
 #this fixes a android ndk fuckup where the pathes to 
 #prebuilt stuff follow different name shemes for
 #arm and x86
-ifeq ($(findstring x86,$(CPU)),x86)
-GDBPATH=$(NDKROOT)/toolchains/$(CPU)-$(GCC_VERSION)/prebuilt/gdbserver
-else
-GDBPATH=$(NDKROOT)/toolchains/$(HOST)-$(GCC_VERSION)/prebuilt/gdbserver
+ifeq ($(findstring x86,$$(CPU)),x86)
+ARCH=x86
+endif
+ifeq ($(findstring arm,$(CPU)),arm)
+ARCH=arm
+endif
+
+#older ndk x86
+GDBPATH=$(NDKROOT)/toolchains/$(ARCH)-$(GCC_VERSION)/prebuilt/gdbserver
+
+ifeq ($(shell test $$(GDBPATH)),)
+#older ndk arm
+GDBPATH=$(NDKROOT)/prebuilt/$(HOST)-$(GCC_VERSION)/gdbserver
+endif
+
+ifeq ($(shell test -f $$(GDBPATH)),)
+#vanilla ndk >= 8
+GDBPATH=$(NDKROOT)/prebuilt/android-$(ARCH)/gdbserver/gdbserver
 endif
 
 all: package
