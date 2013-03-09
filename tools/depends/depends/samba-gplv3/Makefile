@@ -33,6 +33,9 @@ $(LIBDYLIB): $(PLATFORM)
 
 .installed-$(PLATFORM): $(LIBDYLIB)
 	$(MAKE) -C $(PLATFORM)/source3 installlibsmbclient
+ifeq (darwin, $(findstring darwin, $(HOST)))
+	install_name_tool -id $(PREFIX)/lib/libsmbclient.dylib.0 $(PREFIX)/lib/libsmbclient.dylib.0
+endif
 	touch $@
 
 clean:
