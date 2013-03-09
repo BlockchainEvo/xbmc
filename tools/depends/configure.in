@@ -280,6 +280,7 @@ AC_PATH_PROG([CXX_FOR_BUILD],[g++ llvm-g++ $platform_cxx], g++, $PATH_FOR_BUILD)
 
 AC_CHECK_LIB([z],   [main], has_zlib=1, AC_MSG_WARN("No zlib support in toolchain. Will build libz."); has_zlib=0)
 AC_SEARCH_LIBS([iconv_open],iconv, link_iconv=$ac_cv_search_iconv_open, link_iconv=-liconv; AC_MSG_WARN("No iconv support in toolchain. Will build libiconv."); need_libiconv=1)
+AC_TRY_LINK([#include <locale.h>],[struct lconv* test=localeconv();], has_localeconv=yes, AC_MSG_WARN("No localeconv support in toolchain. Using replacement."); has_localeconv=no)
 
 if test "x$use_gplv3" = "xauto"; then
   use_gplv3=1
@@ -395,6 +396,10 @@ fi
 if test "$platform_os" == "ios"; then
   simulator_sdk_path=[`$use_xcodebuild -version -sdk iphonesimulator$use_sdk | grep ^Path | awk '{ print $2}'`]
   cp -vf $simulator_sdk_path/usr/include/crt_externs.h $prefix/$deps_dir/include
+fi
+
+if test "x$has_localeconv" == "xno" && test "$platform_os" == "android"; then
+  cp -vf depends/android-libc-replacements/locale.h $prefix/$deps_dir/include/
 fi
 
 cp -vf depends/config.site $prefix/$deps_dir/share
