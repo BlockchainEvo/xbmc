@@ -3,14 +3,14 @@ DEPS= ../../Makefile.include Makefile
 
 # lib name, version
 LIBNAME=libcec
-VERSION=2.0.5-3
+VERSION=2.1.0
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
 
 # configuration settings
 CONFIGURE=./configure --prefix=$(PREFIX) --disable-rpi \
 
-LIBDYLIB=$(PLATFORM)/src/lib/.libs/libcec.so.2.0.0
+LIBDYLIB=$(PLATFORM)/src/lib/.libs/libcec.so.2.0.1
 
 all: .installed-$(PLATFORM)
 
@@ -30,7 +30,7 @@ $(LIBDYLIB): $(PLATFORM)
 	$(MAKE) -C $(PLATFORM)/src/lib install
 ifeq ($(OS),android)
 	rm -f $(PREFIX)/lib/libcec.la $(PREFIX)/lib/libcec.so $(PREFIX)/lib/libcec.so.2
-	mv -f $(PREFIX)/lib/libcec.so.2.0.0 $(PREFIX)/lib/libcec.so
+	mv -f $(PREFIX)/lib/libcec.so.2.0.1 $(PREFIX)/lib/libcec.so
 	$(RPL) -e "libcec.so.2" "libcec.so\x00\x00" $(PREFIX)/lib/libcec.so
 	-$(READELF) --dynamic $(PREFIX)/lib/libcec.so | grep ibrary
 endif
