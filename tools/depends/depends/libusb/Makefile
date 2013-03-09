@@ -9,7 +9,7 @@ ARCHIVE=$(SOURCE).tar.gz
 
 # configuration settings
 CONFIGURE=cp -f $(CONFIG_SUB) $(CONFIG_GUESS) .; \
-          ./configure --prefix=$(PREFIX) --disable-shared
+          ./configure --prefix=$(PREFIX) --disable-shared --disable-build-docs
 
 LIBDYLIB=$(PLATFORM)/.libs/$(LIBNAME).a
 
