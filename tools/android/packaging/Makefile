@@ -32,12 +32,12 @@ endif
 #older ndk x86
 GDBPATH=$(NDKROOT)/toolchains/$(ARCH)-$(GCC_VERSION)/prebuilt/gdbserver
 
-ifeq ($(shell test $$(GDBPATH)),)
+ifneq ($(shell test -f $(GDBPATH) && echo 1),1)
 #older ndk arm
-GDBPATH=$(NDKROOT)/prebuilt/$(HOST)-$(GCC_VERSION)/gdbserver
+GDBPATH=$(NDKROOT)/toolchains/$(HOST)-$(GCC_VERSION)/prebuilt/gdbserver
 endif
 
-ifeq ($(shell test -f $$(GDBPATH)),)
+ifneq ($(shell test -f $(GDBPATH) && echo 1),1)
 #vanilla ndk >= 8
 GDBPATH=$(NDKROOT)/prebuilt/android-$(ARCH)/gdbserver/gdbserver
 endif
