@@ -23,15 +23,10 @@
 
 CBroadcastReceiver::CBroadcastReceiver() : CAndroidJNIBase("org/xbmc/xbmc/XBMCBroadcastReceiver")
 {
-  AddMethod(jniNativeMethod("ReceiveIntent", "(Landroid/content/Intent;)V", (void*)jni_ReceiveIntent));
+  AddMethod(jniNativeMethod("ReceiveIntent", "(Landroid/content/Intent;)V", (void*)CBroadcastReceiver::ReceiveIntent));
 }
 
 void CBroadcastReceiver::ReceiveIntent(JNIEnv *env, jobject thiz, jobject intent)
 {
   CAndroidIntents::getInstance().ReceiveIntent(env, intent);
-}
-
-void jni_ReceiveIntent(JNIEnv *env, jobject thiz, jobject intent)
-{
-  CAndroidJNIManager::GetInstance().GetBroadcastReceiver()->ReceiveIntent(env, thiz, intent);
 }
