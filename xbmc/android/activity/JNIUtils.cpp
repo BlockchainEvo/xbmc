@@ -513,3 +513,41 @@ bool CJNIUtils::StartActivity(const std::string &package, const std::string &int
   }
   return true;
 }
+
+bool CJNIUtils::HasLaunchIntent(const std::string &package)
+{
+  JNIEnv* env = xbmc_jnienv();
+
+  jthrowable exc;
+  jobject oActivity = CAndroidJNIManager::GetInstance().GetActivityInstance();
+  jclass cActivity = env->GetObjectClass(oActivity);
+
+  // oPackageManager = new PackageManager();
+  jmethodID mgetPackageManager = env->GetMethodID(cActivity, "getPackageManager", "()Landroid/content/pm/PackageManager;");
+  jobject oPackageManager = (jobject)env->CallObjectMethod(oActivity, mgetPackageManager);
+
+  // oPackageIntent = oPackageManager.getLaunchIntentForPackage(package);
+  jclass cPackageManager = env->GetObjectClass(oPackageManager);
+  jmethodID mgetLaunchIntentForPackage = env->GetMethodID(cPackageManager, "getLaunchIntentForPackage", "(Ljava/lang/String;)Landroid/content/Intent;");
+  jstring sPackageName = env->NewStringUTF(package.c_str());
+  jobject oPackageIntent = env->CallObjectMethod(oPackageManager, mgetLaunchIntentForPackage, sPackageName);
+  env->DeleteLocalRef(sPackageName);
+  env->DeleteLocalRef(cPackageManager);
+  env->DeleteLocalRef(oPackageManager);
+
+  exc = env->ExceptionOccurred();
+  if (exc)
+  {
+    CLog::Log(LOGERROR, "CXBMCApp::HasLaunchIntent Error checking for  Launch Intent for %s. Exception follows:", package.c_str());
+    env->ExceptionDescribe();
+    env->ExceptionClear();
+    return false;
+  }
+  if (!oPackageIntent)
+  {
+    return false;
+  }
+
+  env->DeleteLocalRef(oPackageIntent);
+  return true;
+}

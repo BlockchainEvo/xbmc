@@ -31,6 +31,7 @@ friend class CAndroidJNIManager;
   bool GetExternalStorage(std::string &path, const std::string &type /* = "" */);
   int GetBatteryLevel();
   bool StartActivity(const std::string &package, const std::string &intent, const std::string &dataType, const std::string &dataURI);
+  bool HasLaunchIntent(const std::string &package);
 private:
   CJNIUtils();
 };
