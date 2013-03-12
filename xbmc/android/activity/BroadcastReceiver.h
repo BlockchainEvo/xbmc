@@ -27,5 +27,6 @@ friend class CAndroidJNIManager;
 public:
 private:
   CBroadcastReceiver();
-  static void ReceiveIntent(JNIEnv *env, jobject thiz, jobject intent);
+  static void ReceiveGenericIntent(JNIEnv *env, jobject thiz, jobject intent);
+  static void ReceiveMediaMounted(JNIEnv *env, jobject thiz, jobject intent);
 };

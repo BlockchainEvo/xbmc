@@ -20,13 +20,21 @@
 #include <jni.h>
 #include "Intents.h"
 #include "BroadcastReceiver.h"
+#include <android/log.h>
 
 CBroadcastReceiver::CBroadcastReceiver() : CAndroidJNIBase("org/xbmc/xbmc/XBMCBroadcastReceiver")
 {
-  AddMethod(jniNativeMethod("ReceiveIntent", "(Landroid/content/Intent;)V", (void*)CBroadcastReceiver::ReceiveIntent));
+  AddMethod(jniNativeMethod("ReceiveGenericIntent", "(Landroid/content/Intent;)V", (void*)CBroadcastReceiver::ReceiveGenericIntent));
+  AddMethod(jniNativeMethod("ReceiveMediaMounted", "(Landroid/content/Intent;)V", (void*)CBroadcastReceiver::ReceiveMediaMounted));
 }
 
-void CBroadcastReceiver::ReceiveIntent(JNIEnv *env, jobject thiz, jobject intent)
+void CBroadcastReceiver::ReceiveGenericIntent(JNIEnv *env, jobject thiz, jobject intent)
 {
   CAndroidIntents::getInstance().ReceiveIntent(env, intent);
+}
+
+void CBroadcastReceiver::ReceiveMediaMounted(JNIEnv *env, jobject thiz, jobject intent)
+{
+  __android_log_print(ANDROID_LOG_VERBOSE, "XBMC", "CBroadcastReceiver ReceiveMediaMounted");
+  CAndroidJNIManager::GetBroadcastReceiver()->m_mediaMounted.Set();
 }
