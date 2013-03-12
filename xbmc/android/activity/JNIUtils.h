@@ -24,6 +24,8 @@ public:
 friend class CAndroidJNIManager;
   bool IsMediaMounted();
   void setup_env();
+  bool SetSystemVolume(float percent);
+  int GetMaxSystemVolume();
 private:
   CJNIUtils();
 };
