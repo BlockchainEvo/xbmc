@@ -23,6 +23,7 @@
 #include <jni.h>
 
 class CBroadcastReceiver;
+class CJNIUtils;
 
 struct jniNativeMethod
 {
@@ -61,6 +62,7 @@ public:
   jobject GetActivityInstance() const {return m_oActivity;};
 
   static CBroadcastReceiver* GetBroadcastReceiver() {return GetInstance().m_broadcastReceiver;};
+  static CJNIUtils* GetJNIUtils() {return GetInstance().m_JNIUtils;};
   void SetActivityInstance(jobject oActivity) {m_oActivity = oActivity;};
 private:
   CAndroidJNIManager();
@@ -70,6 +72,7 @@ private:
   bool RegisterClass(JNIEnv* env, CAndroidJNIBase *jniClass);
 
   CBroadcastReceiver *m_broadcastReceiver;
+  CJNIUtils *m_JNIUtils;
 
   jobject m_oActivity;
 };

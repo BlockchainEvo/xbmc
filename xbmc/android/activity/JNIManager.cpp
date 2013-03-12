@@ -21,12 +21,14 @@
 #include "XBMCApp.h"
 #include "BroadcastReceiver.h"
 #include "JNIThreading.h"
+#include "JNIUtils.h"
 #include <android/log.h>
 
 
 CAndroidJNIManager::CAndroidJNIManager()
 {
   m_broadcastReceiver = NULL;
+  m_JNIUtils = NULL;
   m_oActivity = NULL;
 }
 
@@ -80,6 +82,8 @@ bool CAndroidJNIManager::Load(JavaVM* vm, int jniVersion)
     xbmc_jni_on_load(vm, env);
 
     m_broadcastReceiver = new CBroadcastReceiver();
+    m_JNIUtils = new CJNIUtils();
+
     RegisterClass(env, m_broadcastReceiver);
 
     return true;
