@@ -38,6 +38,9 @@ friend class CAndroidJNIManager;
   bool GetIcon(const std::string &packageName, void* buffer, unsigned int bufSize);
   bool GetIconSize(const std::string &packageName, int *width, int *height);
   bool ListApplications(std::vector<androidPackage> *applications);
+  void acquireWakeLock(jobject *wakelock);
+  bool getWakeLock(jobject *wakelock);
+  void releaseWakeLock(jobject *wakelock);
 private:
   CJNIUtils();
 };

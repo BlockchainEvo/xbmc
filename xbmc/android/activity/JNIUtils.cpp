@@ -755,3 +755,65 @@ bool CJNIUtils::ListApplications(std::vector<androidPackage> *applications)
   env->DeleteLocalRef(oPackageManager);
   return true;
 }
+
+bool CJNIUtils::getWakeLock(jobject *wakelock)
+{
+  CXBMCApp::android_printf("%s", __PRETTY_FUNCTION__);
+  JNIEnv* env = xbmc_jnienv();
+  if (*wakelock == NULL)
+  {
+    jobject oActivity = CAndroidJNIManager::GetInstance().GetActivityInstance();
+    jclass cActivity = env->GetObjectClass(oActivity);
+
+    // get the wake lock
+    jmethodID midActivityGetSystemService = env->GetMethodID(cActivity, "getSystemService", "(Ljava/lang/String;)Ljava/lang/Object;");
+    jstring sPowerService = env->NewStringUTF("power"); // POWER_SERVICE
+    jobject oPowerManager = env->CallObjectMethod(oActivity, midActivityGetSystemService, sPowerService);
+
+    jclass cPowerManager = env->GetObjectClass(oPowerManager);
+    jmethodID midNewWakeLock = env->GetMethodID(cPowerManager, "newWakeLock", "(ILjava/lang/String;)Landroid/os/PowerManager$WakeLock;");
+    jstring sXbmcPackage = env->NewStringUTF("org.xbmc.xbmc");
+    jobject oWakeLock = env->CallObjectMethod(oPowerManager, midNewWakeLock, (jint)0x1a /* FULL_WAKE_LOCK */, sXbmcPackage);
+    *wakelock = env->NewGlobalRef(oWakeLock);
+
+    env->DeleteLocalRef(oWakeLock);
+    env->DeleteLocalRef(cPowerManager);
+    env->DeleteLocalRef(oPowerManager);
+    env->DeleteLocalRef(sPowerService);
+    env->DeleteLocalRef(sXbmcPackage);
+    env->DeleteLocalRef(cActivity);
+  }
+
+  return *wakelock != NULL;
+}
+
+void CJNIUtils::acquireWakeLock(jobject *wakelock)
+{
+  JNIEnv* env = xbmc_jnienv();
+
+  if (!getWakeLock(wakelock))
+  {
+    CXBMCApp::android_printf("%s: unable to acquire a WakeLock");
+    return;
+  }
+
+  jclass cWakeLock = env->GetObjectClass(*wakelock);
+  jmethodID midWakeLockAcquire = env->GetMethodID(cWakeLock, "acquire", "()V");
+  env->CallVoidMethod(*wakelock, midWakeLockAcquire);
+  env->DeleteLocalRef(cWakeLock);
+}
+
+void CJNIUtils::releaseWakeLock(jobject *wakelock)
+{
+  JNIEnv* env = xbmc_jnienv();
+  if (!getWakeLock(wakelock))
+  {
+    CXBMCApp::android_printf("%s: unable to release a WakeLock");
+    return;
+  }
+
+  jclass cWakeLock = env->GetObjectClass(*wakelock);
+  jmethodID midWakeLockRelease = env->GetMethodID(cWakeLock, "release", "()V");
+  env->CallVoidMethod(*wakelock, midWakeLockRelease);
+  env->DeleteLocalRef(cWakeLock);
+}
