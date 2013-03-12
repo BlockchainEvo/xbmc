@@ -29,6 +29,7 @@ friend class CAndroidJNIManager;
   int GetMaxSystemVolume();
   bool GetStorageUsage(const std::string &path, std::string &usage);
   bool GetExternalStorage(std::string &path, const std::string &type /* = "" */);
+  int GetBatteryLevel();
 private:
   CJNIUtils();
 };
