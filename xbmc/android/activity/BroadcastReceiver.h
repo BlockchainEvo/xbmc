@@ -20,13 +20,16 @@
  */
 #include <jni.h>
 #include "JNIManager.h"
+#include "threads/Event.h"
 
 class CBroadcastReceiver : public CAndroidJNIBase
 {
 friend class CAndroidJNIManager;
 public:
+  bool WaitForMedia(int timeout);
 private:
   CBroadcastReceiver();
   static void ReceiveGenericIntent(JNIEnv *env, jobject thiz, jobject intent);
   static void ReceiveMediaMounted(JNIEnv *env, jobject thiz, jobject intent);
+  CEvent m_mediaMounted;
 };

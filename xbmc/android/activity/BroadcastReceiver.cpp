@@ -20,6 +20,7 @@
 #include <jni.h>
 #include "Intents.h"
 #include "BroadcastReceiver.h"
+#include "JNIUtils.h"
 #include <android/log.h>
 
 CBroadcastReceiver::CBroadcastReceiver() : CAndroidJNIBase("org/xbmc/xbmc/XBMCBroadcastReceiver")
@@ -37,4 +38,12 @@ void CBroadcastReceiver::ReceiveMediaMounted(JNIEnv *env, jobject thiz, jobject 
 {
   __android_log_print(ANDROID_LOG_VERBOSE, "XBMC", "CBroadcastReceiver ReceiveMediaMounted");
   CAndroidJNIManager::GetBroadcastReceiver()->m_mediaMounted.Set();
+}
+
+bool CBroadcastReceiver::WaitForMedia(int timeout)
+{
+  if (CAndroidJNIManager::GetJNIUtils()->IsMediaMounted())
+    return true;
+  m_mediaMounted.WaitMSec(timeout);
+  return CAndroidJNIManager::GetJNIUtils()->IsMediaMounted();
 }
