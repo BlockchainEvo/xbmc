@@ -18,30 +18,10 @@
  *
  */
 
-#include <sstream>
-
-#include <unistd.h>
-#include <stdlib.h>
-#include <dlfcn.h>
-#include <string.h>
-
-#include <android/native_window.h>
 #include <android/configuration.h>
-#include <jni.h>
-
 #include "XBMCApp.h"
-
-#include "input/MouseStat.h"
-#include "input/XBMC_keysym.h"
-#include "guilib/Key.h"
-#include "windowing/XBMC_events.h"
 #include <android/log.h>
-
 #include "Application.h"
-#include "settings/AdvancedSettings.h"
-#include "xbmc.h"
-#include "windowing/WinEvents.h"
-#include "guilib/GUIWindowManager.h"
 #include "utils/log.h"
 #include "ApplicationMessenger.h"
 #include "JNIThreading.h"
