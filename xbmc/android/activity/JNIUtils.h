@@ -23,6 +23,7 @@ class CJNIUtils : public CAndroidJNIBase
 public:
 friend class CAndroidJNIManager;
   bool IsMediaMounted();
+  void setup_env();
 private:
   CJNIUtils();
 };

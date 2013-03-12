@@ -45,6 +45,7 @@
 #include "utils/log.h"
 #include "ApplicationMessenger.h"
 #include "JNIThreading.h"
+#include "JNIUtils.h"
 
 #define GIGABYTES       1073741824
 
@@ -279,6 +280,7 @@ void CXBMCApp::run()
   // Hack!
   // TODO: Change EGL startup so that we can start headless, then create the
   // window once android gives us a surface to play with.
+  CAndroidJNIManager::GetJNIUtils()->setup_env();
   while(!m_window)
     usleep(1000);
   m_firstrun=false;
