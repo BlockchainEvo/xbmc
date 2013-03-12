@@ -18,6 +18,7 @@
  *
  */
 #include "JNIManager.h"
+#include <string>
 class CJNIUtils : public CAndroidJNIBase
 {
 public:
@@ -26,6 +27,7 @@ friend class CAndroidJNIManager;
   void setup_env();
   bool SetSystemVolume(float percent);
   int GetMaxSystemVolume();
+  bool GetStorageUsage(const std::string &path, std::string &usage);
 private:
   CJNIUtils();
 };

@@ -24,6 +24,8 @@
 #include <stdio.h>
 #include <android/log.h>
 #include "utils/log.h"
+#include <sstream>
+#define GIGABYTES       1073741824
 
 CJNIUtils::CJNIUtils() : CAndroidJNIBase("")
 {
@@ -223,4 +225,65 @@ bool CJNIUtils::SetSystemVolume(float percent)
   env->CallObjectMethod(oAudioManager, msetStreamVolume, stream_music, int(GetMaxSystemVolume()*percent), 0);
   env->DeleteLocalRef(oAudioManager);
   env->DeleteLocalRef(cAudioManager);
+}
+
+bool CJNIUtils::GetStorageUsage(const std::string &path, std::string &usage)
+{
+  if (path.empty())
+  {
+    std::ostringstream fmt;
+    fmt.width(24);  fmt << std::left  << "Filesystem";
+    fmt.width(12);  fmt << std::right << "Size";
+    fmt.width(12);  fmt << "Used";
+    fmt.width(12);  fmt << "Avail";
+    fmt.width(12);  fmt << "Use %";
+
+    usage = fmt.str();
+    return false;
+  }
+
+  JNIEnv* env = xbmc_jnienv();
+
+  // android.os.StatFs oStats = new android.os.StatFs(sPath);
+  jclass cStatFs = env->FindClass("android/os/StatFs");
+  jmethodID midStatFsCtor = env->GetMethodID(cStatFs, "<init>", "(Ljava/lang/String;)V");
+  jstring sPath = env->NewStringUTF(path.c_str());
+  jobject oStats = env->NewObject(cStatFs, midStatFsCtor, sPath);
+  env->DeleteLocalRef(sPath);
+
+  // int iBlockSize = oStats.getBlockSize();
+  jmethodID midStatFsGetBlockSize = env->GetMethodID(cStatFs, "getBlockSize", "()I");
+  jint iBlockSize = env->CallIntMethod(oStats, midStatFsGetBlockSize);
+  
+  // int iBlocksTotal = oStats.getBlockCount();
+  jmethodID midStatFsGetBlockCount = env->GetMethodID(cStatFs, "getBlockCount", "()I");
+  jint iBlocksTotal = env->CallIntMethod(oStats, midStatFsGetBlockCount);
+  
+  // int iBlocksFree = oStats.getFreeBlocks();
+  jmethodID midStatFsGetFreeBlocks = env->GetMethodID(cStatFs, "getFreeBlocks", "()I");
+  jint iBlocksFree = env->CallIntMethod(oStats, midStatFsGetFreeBlocks);
+
+  env->DeleteLocalRef(oStats);
+  env->DeleteLocalRef(cStatFs);
+
+  if (iBlockSize <= 0 || iBlocksTotal <= 0 || iBlocksFree < 0)
+    return false;
+  
+  float totalSize = (float)iBlockSize * iBlocksTotal / GIGABYTES;
+  float freeSize = (float)iBlockSize * iBlocksFree / GIGABYTES;
+  float usedSize = totalSize - freeSize;
+  float usedPercentage = usedSize / totalSize * 100;
+
+  std::ostringstream fmt;
+  fmt << std::fixed;
+  fmt.precision(1);
+  fmt.width(24);  fmt << std::left  << path;
+  fmt.width(12);  fmt << std::right << totalSize << "G"; // size in GB
+  fmt.width(12);  fmt << usedSize << "G"; // used in GB
+  fmt.width(12);  fmt << freeSize << "G"; // free
+  fmt.precision(0);
+  fmt.width(12);  fmt << usedPercentage << "%"; // percentage used
+  
+  usage = fmt.str();
+  return true;
 }
