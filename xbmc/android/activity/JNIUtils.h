@@ -32,6 +32,7 @@ friend class CAndroidJNIManager;
   int GetBatteryLevel();
   bool StartActivity(const std::string &package, const std::string &intent, const std::string &dataType, const std::string &dataURI);
   bool HasLaunchIntent(const std::string &package);
+  bool GetIcon(const std::string &packageName, void* buffer, unsigned int bufSize);
 private:
   CJNIUtils();
 };

@@ -551,3 +551,65 @@ bool CJNIUtils::HasLaunchIntent(const std::string &package)
   env->DeleteLocalRef(oPackageIntent);
   return true;
 }
+
+bool CJNIUtils::GetIcon(const std::string &packageName, void* buffer, unsigned int bufSize)
+{
+  jthrowable exc;
+  JNIEnv* env = xbmc_jnienv();
+
+  CLog::Log(LOGERROR, "CXBMCApp::GetIconSize Looking for: %s", packageName.c_str());
+
+  jobject oActivity = CAndroidJNIManager::GetInstance().GetActivityInstance();
+  jclass cActivity = env->GetObjectClass(oActivity);
+
+  // oPackageManager = new PackageManager();
+  jmethodID mgetPackageManager = env->GetMethodID(cActivity, "getPackageManager", "()Landroid/content/pm/PackageManager;");
+  jobject oPackageManager = (jobject)env->CallObjectMethod(oActivity, mgetPackageManager);
+  env->DeleteLocalRef(cActivity);
+
+  jclass cPackageManager = env->GetObjectClass(oPackageManager);
+  jmethodID mgetApplicationIcon = env->GetMethodID(cPackageManager, "getApplicationIcon", "(Ljava/lang/String;)Landroid/graphics/drawable/Drawable;");
+  env->DeleteLocalRef(cPackageManager);
+
+  jclass cBitmapDrawable = env->FindClass("android/graphics/drawable/BitmapDrawable");
+  jmethodID mBitmapDrawableCtor = env->GetMethodID(cBitmapDrawable, "<init>", "()V");
+  jmethodID mgetBitmap = env->GetMethodID(cBitmapDrawable, "getBitmap", "()Landroid/graphics/Bitmap;");
+
+   // BitmapDrawable oBitmapDrawable;
+  jobject oBitmapDrawable = env->NewObject(cBitmapDrawable, mBitmapDrawableCtor);
+  jstring sPackageName = env->NewStringUTF(packageName.c_str());
+
+  // oBitmapDrawable = oPackageManager.getApplicationIcon(sPackageName)
+  oBitmapDrawable =  env->CallObjectMethod(oPackageManager, mgetApplicationIcon, sPackageName);
+  env->DeleteLocalRef(sPackageName);
+  env->DeleteLocalRef(cBitmapDrawable);
+  env->DeleteLocalRef(oPackageManager);
+  exc = env->ExceptionOccurred();
+  if (exc)
+  {
+    CLog::Log(LOGERROR, "CXBMCApp::GetIcon Error getting icon for  %s. Exception follows:", packageName.c_str());
+    env->ExceptionDescribe();
+    env->ExceptionClear();
+    return false;
+  }
+  jobject oBitmap = env->CallObjectMethod(oBitmapDrawable, mgetBitmap);
+  env->DeleteLocalRef(oBitmapDrawable);
+  jclass cBitmap = env->GetObjectClass(oBitmap);
+  jmethodID mcopyPixelsToBuffer = env->GetMethodID(cBitmap, "copyPixelsToBuffer", "(Ljava/nio/Buffer;)V");
+  jobject oPixels = env->NewDirectByteBuffer(buffer,bufSize);
+  env->DeleteLocalRef(cBitmap);
+
+  // memcpy(buffer,oPixels,bufSize); 
+  env->CallVoidMethod(oBitmap, mcopyPixelsToBuffer, oPixels);
+  env->DeleteLocalRef(oPixels);
+  env->DeleteLocalRef(oBitmap);
+  exc = env->ExceptionOccurred();
+  if (exc)
+  {
+    CLog::Log(LOGERROR, "CXBMCApp::GetIcon Error copying icon for  %s. Exception follows:", packageName.c_str());
+    env->ExceptionDescribe();
+    env->ExceptionClear();
+    return false;
+  }
+  return true;
+}
