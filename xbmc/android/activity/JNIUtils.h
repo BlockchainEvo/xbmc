@@ -19,6 +19,9 @@
  */
 #include "JNIManager.h"
 #include <string>
+#include <vector>
+struct androidPackage;
+
 class CJNIUtils : public CAndroidJNIBase
 {
 public:
@@ -34,6 +37,7 @@ friend class CAndroidJNIManager;
   bool HasLaunchIntent(const std::string &package);
   bool GetIcon(const std::string &packageName, void* buffer, unsigned int bufSize);
   bool GetIconSize(const std::string &packageName, int *width, int *height);
+  bool ListApplications(std::vector<androidPackage> *applications);
 private:
   CJNIUtils();
 };
