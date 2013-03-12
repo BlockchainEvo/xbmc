@@ -434,78 +434,7 @@ bool CXBMCApp::ListApplications(vector<androidPackage> *applications)
 
 bool CXBMCApp::GetIconSize(const string &packageName, int *width, int *height)
 {
-  if (!m_activity)
-    return false;
-
-  jthrowable exc;
-  JNIEnv* env = xbmc_jnienv();
-
-  jobject oActivity = m_activity->clazz;
-  jclass cActivity = env->GetObjectClass(oActivity);
-
-  // oPackageManager = new PackageManager();
-  jmethodID mgetPackageManager = env->GetMethodID(cActivity, "getPackageManager", "()Landroid/content/pm/PackageManager;");
-  jobject oPackageManager = (jobject)env->CallObjectMethod(oActivity, mgetPackageManager);
-  env->DeleteLocalRef(cActivity);
-
-  jclass cPackageManager = env->GetObjectClass(oPackageManager);
-  jmethodID mgetApplicationIcon = env->GetMethodID(cPackageManager, "getApplicationIcon", "(Ljava/lang/String;)Landroid/graphics/drawable/Drawable;");
-  env->DeleteLocalRef(cPackageManager);
-
-  jclass cBitmapDrawable = env->FindClass("android/graphics/drawable/BitmapDrawable");
-  jmethodID mBitmapDrawableCtor = env->GetMethodID(cBitmapDrawable, "<init>", "()V");
-  jmethodID mgetBitmap = env->GetMethodID(cBitmapDrawable, "getBitmap", "()Landroid/graphics/Bitmap;");
-
-  // BitmapDrawable oBitmapDrawable;
-  jobject oBitmapDrawable = env->NewObject(cBitmapDrawable, mBitmapDrawableCtor);
-  jstring sPackageName = env->NewStringUTF(packageName.c_str());
-
-  // oBitmapDrawable = oPackageManager.getApplicationIcon(sPackageName)
-  oBitmapDrawable =  env->CallObjectMethod(oPackageManager, mgetApplicationIcon, sPackageName);
-  jobject oBitmap = env->CallObjectMethod(oBitmapDrawable, mgetBitmap);
-  env->DeleteLocalRef(sPackageName);
-  env->DeleteLocalRef(cBitmapDrawable);
-  env->DeleteLocalRef(oBitmapDrawable);
-  env->DeleteLocalRef(oPackageManager);
-  exc = env->ExceptionOccurred();
-  if (exc)
-  {
-    CLog::Log(LOGERROR, "CXBMCApp::GetIconSize Error getting icon size for  %s. Exception follows:", packageName.c_str());
-    env->ExceptionDescribe();
-    env->ExceptionClear();
-    env->DeleteLocalRef(oBitmap);
-    return false;
-  } 
-  jclass cBitmap = env->GetObjectClass(oBitmap);
-  jmethodID mgetWidth = env->GetMethodID(cBitmap, "getWidth", "()I");
-  jmethodID mgetHeight = env->GetMethodID(cBitmap, "getHeight", "()I");
-  env->DeleteLocalRef(cBitmap);
-
-  // width = oBitmap.getWidth;
-  *width = (int)env->CallIntMethod(oBitmap, mgetWidth);
-
-  exc = env->ExceptionOccurred();
-  if (exc)
-  {
-    CLog::Log(LOGERROR, "CXBMCApp::GetIconSize Error getting icon width for %s. Exception follows:", packageName.c_str());
-    env->ExceptionDescribe();
-    env->ExceptionClear();
-    env->DeleteLocalRef(oBitmap);
-    return false;
-  }
-  // height = oBitmap.getHeight;
-  *height = (int)env->CallIntMethod(oBitmap, mgetHeight);
-  env->DeleteLocalRef(oBitmap);
-
-  exc = env->ExceptionOccurred();
-  if (exc)
-  {
-    CLog::Log(LOGERROR, "CXBMCApp::GetIconSize Error getting icon height for %s. Exception follows:", packageName.c_str());
-    env->ExceptionDescribe();
-    env->ExceptionClear();
-    return false;
-  }
-  return true;
+  return CAndroidJNIManager::GetJNIUtils()->GetIconSize(packageName, width, height);
 }
 
 bool CXBMCApp::GetIcon(const string &packageName, void* buffer, unsigned int bufSize)
