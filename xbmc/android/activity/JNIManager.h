@@ -60,7 +60,7 @@ public:
   bool Load(JavaVM* vm, int jniVersion);
   jobject GetActivityInstance() const {return m_oActivity;};
 
-  CBroadcastReceiver* GetBroadcastReceiver() const {return m_broadcastReceiver;};
+  static CBroadcastReceiver* GetBroadcastReceiver() {return GetInstance().m_broadcastReceiver;};
   void SetActivityInstance(jobject oActivity) {m_oActivity = oActivity;};
 private:
   CAndroidJNIManager();
