@@ -833,8 +833,7 @@ bool CDVDDemuxFFmpeg::SeekTime(int time, bool backwords, double *startpts)
     return true;
   }
 
-  if(!m_pInput->Seek(0, SEEK_POSSIBLE)
-  && !m_pInput->IsStreamType(DVDSTREAM_TYPE_FFMPEG))
+  if (!CanSeek())
   {
     CLog::Log(LOGDEBUG, "%s - input stream reports it is not seekable", __FUNCTION__);
     return false;
@@ -1326,4 +1325,15 @@ void CDVDDemuxFFmpeg::GetStreamCodecName(int iStreamId, CStdString &strName)
     if (codec)
       strName = codec->name;
   }
+}
+
+bool CDVDDemuxFFmpeg::CanSeek()
+{
+  if((m_pInput->IsStreamType(DVDSTREAM_TYPE_FFMPEG) &&
+      ((m_pFormatContext->pb  && m_pFormatContext->pb->seekable == 0 ) &&
+        m_pFormatContext->pb->seekable == 0 ) ||
+      !m_pInput->Seek(0, SEEK_POSSIBLE)))
+    return false;
+
+  return true;
 }

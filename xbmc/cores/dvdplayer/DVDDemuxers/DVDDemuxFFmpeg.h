@@ -103,6 +103,7 @@ public:
   int GetNrOfStreams();
 
   bool SeekChapter(int chapter, double* startpts = NULL);
+  bool CanSeek();
   int GetChapterCount();
   int GetChapter();
   void GetChapterName(std::string& strChapterName);
