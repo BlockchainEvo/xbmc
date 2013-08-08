@@ -33,16 +33,20 @@ install-sources: $(ANDROID_SOURCE)
 	rm -f $(PREFIX)/opt/$(ANDROID_SOURCE)
 	ln -s $(CURDIR)/$(ANDROID_SOURCE) $(PREFIX)/opt/$(ANDROID_SOURCE)
 
-$(ANDROID_LIBS): $(PLATFORM)/libstagefright.so $(PLATFORM)/libutils.so $(PLATFORM)/libbinder.so $(PLATFORM)/libcutils.so $(PLATFORM)/libui.so $(PLATFORM)/libgui.so
+$(ANDROID_LIBS): $(PLATFORM)/libstagefright-plugin.so $(PLATFORM)/libstagefright.so $(PLATFORM)/libutils.so $(PLATFORM)/libbinder.so $(PLATFORM)/libcutils.so $(PLATFORM)/libui.so $(PLATFORM)/libgui.so
 	mkdir -p $(PREFIX)/opt/$(ANDROID_LIBS)
 	rm -f $(PREFIX)/opt/$(ANDROID_LIBS)/*
-	cp $(PLATFORM)/libstagefright.so $(PLATFORM)/libutils.so $(PLATFORM)/libbinder.so  $(PLATFORM)/libcutils.so $(PLATFORM)/libui.so $(PLATFORM)/libgui.so $(PREFIX)/opt/$(ANDROID_LIBS)
-
+	cp $(PLATFORM)/libstagefright-plugin.so $(PLATFORM)/libstagefright.so $(PLATFORM)/libutils.so $(PLATFORM)/libbinder.so  $(PLATFORM)/libcutils.so $(PLATFORM)/libui.so $(PLATFORM)/libgui.so $(PREFIX)/opt/$(ANDROID_LIBS)
+	mkdir -p $(PREFIX)/include/$(SDK_PLATFORM)/stagefright
+	cp -f MediaBuffer.h  MediaSource.h  MetaData.h OMXClient.h OMXCodec.h ProcessState.h GraphicBuffer.h MediaDefs.h $(PREFIX)/include/$(SDK_PLATFORM)/stagefright
 $(PLATFORM): install-sources
 	mkdir -p $(PLATFORM)
 
 $(PLATFORM)/libstagefright.so:  $(PLATFORM) $(DEPS) libstagefright.cpp
 	$(CXX) -Wno-multichar -fno-exceptions -fno-rtti $(INCLUDES) -DHAVE_PTHREADS -shared -o $(PLATFORM)/libstagefright.so libstagefright.cpp
+
+$(PLATFORM)/libstagefright-plugin.so:  $(PLATFORM) $(DEPS) $(PLATFORM)/libstagefright.so libstagefright-plugin.cpp
+	$(CXX) -Wno-multichar -fno-exceptions -fno-rtti $(INCLUDES) -DHAVE_PTHREADS -shared -o $(PLATFORM)/libstagefright-plugin.so -L$(PLATFORM) -lstagefright libstagefright-plugin.cpp
 	
 $(PLATFORM)/libutils.so:  $(PLATFORM) $(DEPS) libutils.cpp
 	$(CXX) -Wno-multichar -fno-exceptions -fno-rtti $(INCLUDES) -shared -o $(PLATFORM)/libutils.so libutils.cpp
