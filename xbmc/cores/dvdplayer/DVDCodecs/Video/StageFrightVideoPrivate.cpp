@@ -20,6 +20,7 @@
 /***************************************************************************/
 
 #include "StageFrightVideoPrivate.h"
+#include "stagefright/DllLibStagefrightMediaBuffer.h"
 
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
@@ -75,7 +76,7 @@ void CStageFrightVideoPrivate::signalBufferReturned(MediaBuffer *buffer)
 {
 }
 
-MediaBuffer* CStageFrightVideoPrivate::getBuffer(size_t size)
+DllMediaBuffer* CStageFrightVideoPrivate::getBuffer(size_t size)
 {
   int i=0;
   for (; i<INBUFCOUNT; ++i)
@@ -91,7 +92,7 @@ MediaBuffer* CStageFrightVideoPrivate::getBuffer(size_t size)
       return NULL;
     inbuf[i]->setObserver(NULL);
     inbuf[i]->release();
-    inbuf[i] = new MediaBuffer(size);
+    inbuf[i] = new DllMediaBuffer(size);
     inbuf[i]->setObserver(this);
   }
 

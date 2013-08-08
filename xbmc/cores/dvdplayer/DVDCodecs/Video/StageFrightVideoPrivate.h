@@ -19,13 +19,19 @@
  *
  */
 /***************************************************************************/
-
 #include "threads/Thread.h"
 #include "xbmc/guilib/FrameBufferObject.h"
 #include "cores/VideoRenderers/RenderFormats.h"
 
 #include <android/native_window.h>
 #include <android/native_window_jni.h>
+
+#include <EGL/egl.h>
+#include <EGL/eglext.h>
+
+#include <stagefright/MediaBuffer.h>
+#include <stagefright/MediaSource.h>
+
 
 #include <media/stagefright/MetaData.h>
 #include <media/stagefright/MediaBuffer.h>
@@ -44,6 +50,10 @@
 #include <ui/PixelFormat.h>
 #include <gui/SurfaceTexture.h>
 
+/*
+#include "stagefright/DllLibStagefright.h"
+*/
+
 #include "system_gl.h"
 
 #include <map>
@@ -55,6 +65,10 @@
 class CStageFrightDecodeThread;
 class CJNISurface;
 class CJNISurfaceTexture;
+class DllMediaBuffer;
+class DllMediaSource;
+class DllOMXClient;
+class DllMetaData;
 
 using namespace android;
 
@@ -71,7 +85,7 @@ struct Frame
   int64_t pts;
   ERenderFormat format;
   EGLImageKHR eglimg;
-  MediaBuffer* medbuf;
+  DllMediaBuffer* medbuf;
 };
 
 enum StageFrightQuirks
@@ -87,7 +101,7 @@ public:
 
   virtual void signalBufferReturned(MediaBuffer *buffer);
 
-  MediaBuffer* getBuffer(size_t size);
+  DllMediaBuffer* getBuffer(size_t size);
   bool inputBufferAvailable();
 
   void loadOESShader(GLenum shaderType, const char* pSource, GLuint* outShader);
@@ -99,9 +113,9 @@ public:
 public:
   CStageFrightDecodeThread* decode_thread;
 
-  sp<MediaSource> source;
-  
-  MediaBuffer* inbuf[INBUFCOUNT];
+  //sp<MediaSource> source;
+  DllMediaSource* source; 
+  DllMediaBuffer* inbuf[INBUFCOUNT];
 
   GLuint mPgm;
   GLint mPositionHandle;
@@ -118,7 +132,7 @@ public:
   std::list< std::pair<EGLImageKHR, int> > free_queue;
   std::list< std::pair<EGLImageKHR, int> > busy_queue;
 
-  sp<MetaData> meta;
+  DllMetaData *meta;
   int64_t framecount;
   std::map<int64_t, Frame*> in_queue;
   std::map<int64_t, Frame*> out_queue;
@@ -136,7 +150,8 @@ public:
   int width, height;
   int texwidth, texheight;
 
-  OMXClient *client;
+  DllOMXClient *client;
+  //DllMediaSource* decoder;
   sp<MediaSource> decoder;
   const char *decoder_component;
   int videoColorFormat;

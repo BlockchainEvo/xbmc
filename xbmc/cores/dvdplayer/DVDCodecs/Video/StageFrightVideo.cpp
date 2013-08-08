@@ -41,6 +41,14 @@
 #include <EGL/eglext.h>
 #include "windowing/egl/EGLWrapper.h"
 
+#include "stagefright/DllLibStagefrightMediaSource.h"
+#include "stagefright/DllLibStagefrightMediaBuffer.h"
+#include "stagefright/DllLibStagefrightMetaData.h"
+#include "stagefright/DllLibStagefrightReadOptions.h"
+#include "stagefright/DllLibStagefrightProcessState.h"
+#include "stagefright/DllLibStagefrightOMXClient.h"
+#include "stagefright/DllLibStagefrightOMXCodec.h"
+
 #include <new>
 
 #define OMX_QCOM_COLOR_FormatYVU420SemiPlanar 0x7FA30C00
@@ -64,88 +72,6 @@ static double pts_itod(int64_t pts)
 {
   return (double)pts;
 }
-
-/***********************************************************/
-
-class CStageFrightMediaSource : public MediaSource
-{
-public:
-  CStageFrightMediaSource(CStageFrightVideoPrivate *priv, sp<MetaData> meta)
-  {
-    p = priv;
-    source_meta = meta;
-  }
-
-  virtual sp<MetaData> getFormat()
-  {
-    return source_meta;
-  }
-
-  virtual status_t start(MetaData *params)
-  {
-    return OK;
-  }
-
-  virtual status_t stop()
-  {
-    return OK;
-  }
-
-  virtual status_t read(MediaBuffer **buffer,
-                        const MediaSource::ReadOptions *options)
-  {
-    Frame *frame;
-    status_t ret;
-    *buffer = NULL;
-    int64_t time_us = -1;
-    MediaSource::ReadOptions::SeekMode mode;
-    
-    if (options && options->getSeekTo(&time_us, &mode))
-    {
-#if defined(DEBUG_VERBOSE)
-      CLog::Log(LOGDEBUG, "%s: reading source(%d): seek:%llu\n", CLASSNAME,p->in_queue.size(), time_us);
-#endif
-    }
-    else
-    {
-#if defined(DEBUG_VERBOSE)
-      CLog::Log(LOGDEBUG, "%s: reading source(%d)\n", CLASSNAME,p->in_queue.size());
-#endif
-    }
-
-    p->in_mutex.lock();
-    while (p->in_queue.empty() && p->decode_thread)
-      p->in_condition.wait(p->in_mutex);
-
-    if (p->in_queue.empty())
-    {
-      p->in_mutex.unlock();
-      return VC_ERROR;
-    }
-    
-    std::map<int64_t,Frame*>::iterator it = p->in_queue.begin();
-    frame = it->second;
-    ret = frame->status;
-    *buffer = frame->medbuf;
-
-    p->in_queue.erase(it);
-    p->in_mutex.unlock();
-
-#if defined(DEBUG_VERBOSE)
-    CLog::Log(LOGDEBUG, ">>> exiting reading source(%d); pts:%llu\n", p->in_queue.size(),frame->pts);
-#endif
-
-    free(frame);
-
-    return ret;
-  }
-
-private:
-  sp<MetaData> source_meta;
-  CStageFrightVideoPrivate *p;
-};
-
-/********************************************/
 
 class CStageFrightDecodeThread : public CThread
 {
@@ -179,7 +105,7 @@ public:
     int decode_done = 0;
     int32_t keyframe = 0;
     int32_t unreadable = 0;
-    MediaSource::ReadOptions readopt;
+    DllReadOptions readopt;
     // GLuint texid;
 
     //SetPriority(THREAD_PRIORITY_ABOVE_NORMAL);
@@ -204,7 +130,7 @@ public:
         readopt.setSeekTo(0);
         p->resetting = false;
       }
-      frame->status = p->decoder->read(&frame->medbuf, &readopt);
+      frame->status = p->decoder->read(frame->medbuf->getaddr(), readopt.get());
       readopt.clearSeekTo();
       
       if (frame->status == OK)
@@ -228,18 +154,18 @@ public:
 
       if (frame->status == OK)
       {
-        sp<MetaData> outFormat = p->decoder->getFormat();
-        outFormat->findInt32(kKeyWidth , &w);
-        outFormat->findInt32(kKeyHeight, &h);
+        DllMetaData outFormat = p->decoder->getFormat();
+        outFormat.findInt32(kKeyWidth , &w);
+        outFormat.findInt32(kKeyHeight, &h);
 
-        if (!outFormat->findInt32(kKeyDisplayWidth , &dw))
+        if (!outFormat.findInt32(kKeyDisplayWidth , &dw))
           dw = w;
-        if (!outFormat->findInt32(kKeyDisplayHeight, &dh))
+        if (!outFormat.findInt32(kKeyDisplayHeight, &dh))
           dh = h;
 
-        if (!outFormat->findInt32(kKeyIsSyncFrame, &keyframe))
+        if (!outFormat.findInt32(kKeyIsSyncFrame, &keyframe))
           keyframe = 0;
-        if (!outFormat->findInt32(kKeyIsUnreadable, &unreadable))
+        if (!outFormat.findInt32(kKeyIsUnreadable, &unreadable))
           unreadable = 0;
 
         frame->pts = 0;
@@ -256,18 +182,18 @@ public:
         }
         frame->width = w;
         frame->height = h;
-        frame->medbuf->meta_data()->findInt64(kKeyTime, &(frame->pts));
+        frame->medbuf->meta_data().findInt64(kKeyTime, &(frame->pts));
       }
       else if (frame->status == INFO_FORMAT_CHANGED)
       {
         int32_t cropLeft, cropTop, cropRight, cropBottom;
-        sp<MetaData> outFormat = p->decoder->getFormat();
+        DllMetaData outFormat = p->decoder->getFormat();
 
-        outFormat->findInt32(kKeyWidth , &p->width);
-        outFormat->findInt32(kKeyHeight, &p->height);
+        outFormat.findInt32(kKeyWidth , &p->width);
+        outFormat.findInt32(kKeyHeight, &p->height);
 
         cropLeft = cropTop = cropRight = cropBottom = 0;
-       if (!outFormat->findRect(kKeyCropRect, &cropLeft, &cropTop, &cropRight, &cropBottom))
+       if (!outFormat.findRect(kKeyCropRect, &cropLeft, &cropTop, &cropRight, &cropBottom))
         {
           p->x = 0;
           p->y = 0;
@@ -279,10 +205,10 @@ public:
           p->width = cropRight - cropLeft + 1;
           p->height = cropBottom - cropTop + 1;
         }
-        outFormat->findInt32(kKeyColorFormat, &p->videoColorFormat);
-        if (!outFormat->findInt32(kKeyStride, &p->videoStride))
+        outFormat.findInt32(kKeyColorFormat, &p->videoColorFormat);
+        if (!outFormat.findInt32(kKeyStride, &p->videoStride))
           p->videoStride = p->width;
-        if (!outFormat->findInt32(kKeySliceHeight, &p->videoSliceHeight))
+        if (!outFormat.findInt32(kKeySliceHeight, &p->videoSliceHeight))
           p->videoSliceHeight = p->height;
 
 #if defined(DEBUG_VERBOSE)
@@ -325,11 +251,11 @@ public:
           continue;
         }  
 
-        ANativeWindowBuffer* graphicBuffer = frame->medbuf->graphicBuffer()->getNativeBuffer();
+        ANativeWindowBuffer* graphicBuffer = frame->medbuf->graphicBuffer().getNativeBuffer();
         native_window_set_buffers_timestamp(p->mVideoNativeWindow.get(), frame->pts * 1000);
         int err = p->mVideoNativeWindow.get()->queueBuffer(p->mVideoNativeWindow.get(), graphicBuffer);
         if (err == 0)
-          frame->medbuf->meta_data()->setInt32(kKeyRendered, 1);
+          frame->medbuf->meta_data().setInt32(kKeyRendered, 1);
         frame->medbuf->release();
         frame->medbuf = NULL;
         p->UpdateStagefrightTexture();
@@ -430,11 +356,11 @@ bool CStageFrightVideo::Open(CDVDStreamInfo &hints)
   if (g_advancedSettings.m_stagefrightConfig.useSwRenderer)
     p->quirks |= QuirkSWRender;
     
-  sp<MetaData> outFormat;
+  DllMetaData outFormat;
   int32_t cropLeft, cropTop, cropRight, cropBottom;
   //Vector<String8> matchingCodecs;
 
-  p->meta = new MetaData;
+  p->meta = new DllMetaData;
   if (p->meta == NULL)
   {
     goto fail;
@@ -483,10 +409,10 @@ bool CStageFrightVideo::Open(CDVDStreamInfo &hints)
   p->meta->setInt32(kKeyWidth, p->width);
   p->meta->setInt32(kKeyHeight, p->height);
 
-  android::ProcessState::self()->startThreadPool();
+  DllProcessState::self().startThreadPool();
 
-  p->source    = new CStageFrightMediaSource(p, p->meta);
-  p->client    = new OMXClient;
+  p->source    = new DllMediaSource(p, p->meta);
+  p->client    = new DllOMXClient;
 
   if (p->source == NULL || p->client == NULL)
   {
@@ -508,8 +434,8 @@ bool CStageFrightVideo::Open(CDVDStreamInfo &hints)
     native_window_api_connect(p->mVideoNativeWindow.get(), NATIVE_WINDOW_API_MEDIA);
   }
   
-  p->decoder  = OMXCodec::Create(p->client->interface(), p->meta,
-                                         false, p->source, NULL,
+  p->decoder  = DllOMXCodec::Create(p->client->interface(), p->meta->get(),
+                                         false, p->source->get(), NULL,
                                          OMXCodec::kHardwareCodecsOnly | (p->quirks & QuirkSWRender ? OMXCodec::kClientNeedsFramebuffer : 0),
                                          p->mVideoNativeWindow
                                          );
@@ -522,12 +448,12 @@ bool CStageFrightVideo::Open(CDVDStreamInfo &hints)
 
   outFormat = p->decoder->getFormat();
 
-  if (!outFormat->findInt32(kKeyWidth, &p->width) || !outFormat->findInt32(kKeyHeight, &p->height)
-        || !outFormat->findInt32(kKeyColorFormat, &p->videoColorFormat))
+  if (!outFormat.findInt32(kKeyWidth, &p->width) || !outFormat.findInt32(kKeyHeight, &p->height)
+        || !outFormat.findInt32(kKeyColorFormat, &p->videoColorFormat))
     goto fail;
 
   const char *component;
-  if (outFormat->findCString(kKeyDecoderComponent, &component))
+  if (outFormat.findCString(kKeyDecoderComponent, &component))
   {
     CLog::Log(LOGDEBUG, "%s::%s - component: %s\n", CLASSNAME, __func__, component);
     
@@ -555,7 +481,7 @@ bool CStageFrightVideo::Open(CDVDStreamInfo &hints)
   }
 
   cropLeft = cropTop = cropRight = cropBottom = 0;
-  if (!outFormat->findRect(kKeyCropRect, &cropLeft, &cropTop, &cropRight, &cropBottom))
+  if (!outFormat.findRect(kKeyCropRect, &cropLeft, &cropTop, &cropRight, &cropBottom))
   {
     p->x = 0;
     p->y = 0;
@@ -568,14 +494,14 @@ bool CStageFrightVideo::Open(CDVDStreamInfo &hints)
     p->height = cropBottom - cropTop + 1;
   }
 
-  if (!outFormat->findInt32(kKeyStride, &p->videoStride))
+  if (!outFormat.findInt32(kKeyStride, &p->videoStride))
     p->videoStride = p->width;
-  if (!outFormat->findInt32(kKeySliceHeight, &p->videoSliceHeight))
+  if (!outFormat.findInt32(kKeySliceHeight, &p->videoSliceHeight))
     p->videoSliceHeight = p->height;
   
   for (int i=0; i<INBUFCOUNT; ++i)
   {
-    p->inbuf[i] = new MediaBuffer(300000);
+    p->inbuf[i] = new DllMediaBuffer(300000);
     p->inbuf[i]->setObserver(p);
   }
   
@@ -633,8 +559,8 @@ int  CStageFrightVideo::Decode(uint8_t *pData, int iSize, double dts, double pts
       return VC_ERROR;
     }
     fast_memcpy(frame->medbuf->data(), demuxer_content, demuxer_bytes);
-    frame->medbuf->meta_data()->clear();
-    frame->medbuf->meta_data()->setInt64(kKeyTime, frame->pts);
+    frame->medbuf->meta_data().clear();
+    frame->medbuf->meta_data().setInt64(kKeyTime, frame->pts);
     
     p->in_mutex.lock();
     p->framecount++;
