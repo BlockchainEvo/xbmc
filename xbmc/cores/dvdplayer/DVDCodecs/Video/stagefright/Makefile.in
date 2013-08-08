@@ -1,0 +1,28 @@
+ifeq (@USE_LIBSTAGEFRIGHT@,1)
+SRCS += DllLibStagefrightMediaBuffer.cpp
+SRCS += DllLibStagefrightMetaData.cpp
+SRCS += DllLibStagefrightMediaSource.cpp
+SRCS += DllLibStagefrightOMXClient.cpp
+SRCS += DllLibStagefrightOMXCodec.cpp
+SRCS += DllLibStagefrightProcessState.cpp
+SRCS += DllLibStagefrightReadOptions.cpp
+SRCS += DllLibStagefrightGraphicBuffer.cpp
+SRCS += StagefrightMediaDefs.cpp
+
+INCLUDES += -I${prefix}/opt/android-source/frameworks/base/include
+INCLUDES += -I${prefix}/opt/android-source/frameworks/base/native/include
+INCLUDES += -I${prefix}/opt/android-source/frameworks/base/include/media/stagefright
+INCLUDES += -I${prefix}/opt/android-source/frameworks/base/include/media/stagefright/openmax
+INCLUDES += -I${prefix}/opt/android-source/system/core/include
+INCLUDES += -I${prefix}/opt/android-source/libhardware/include
+endif
+
+LIB=Stagefright.a
+
+include @abs_top_srcdir@/Makefile.include
+-include $(patsubst %.cpp,%.P,$(patsubst %.c,%.P,$(SRCS)))
+
+ifeq (@USE_LIBSTAGEFRIGHT@,1)
+CXXFLAGS += -Wno-multichar -fno-rtti
+endif
+

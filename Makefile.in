@@ -14,6 +14,7 @@ DVDPCODECS_DIRS= \
 
 DVDPLAYER_ARCHIVES=xbmc/cores/dvdplayer/DVDPlayer.a \
                    xbmc/cores/dvdplayer/DVDCodecs/DVDCodecs.a \
+                   xbmc/cores/dvdplayer/DVDCodecs/Video/stagefright/DllLibStagefright.a \
                    xbmc/cores/dvdplayer/DVDCodecs/Audio/Audio.a \
                    xbmc/cores/dvdplayer/DVDCodecs/Overlay/Overlay.a \
                    xbmc/cores/dvdplayer/DVDCodecs/Video/Video.a \
