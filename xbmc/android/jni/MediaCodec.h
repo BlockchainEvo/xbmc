@@ -32,8 +32,8 @@ class CJNIMediaCodecCryptoInfo;
 class CJNIMediaCodec : public CJNIBase
 {
 public:
-  CJNIMediaCodec(const jni::jhobject &object) : CJNIBase(object) {};
-  //~CJNIMediaCodec() {};
+  CJNIMediaCodec(const jni::jhobject &object) : CJNIBase(object), m_input_buffers(NULL), m_output_buffers(NULL) {};
+//~CJNIMediaCodec() {};
 
   void  release();
   void  configure(const CJNIMediaFormat &format, const CJNISurface &surface, const CJNIMediaCrypto &crypto, int flags);
@@ -48,10 +48,6 @@ public:
   const CJNIMediaFormat getOutputFormat();
   std::vector<CJNIByteBuffer> getInputBuffers();
   std::vector<CJNIByteBuffer> getOutputBuffers();
-  int   getInputBufferSize();
-  int   getOutputBufferSize();
-  const CJNIByteBuffer getInputBuffer(int index);
-  const CJNIByteBuffer getOutputBuffer(int index);
   void  setVideoScalingMode(int mode);
 
   static void  PopulateStaticFields();
@@ -76,4 +72,6 @@ private:
   CJNIMediaCodec();
 
   static const char *m_classname;
+  jobjectArray  m_input_buffers;
+  jobjectArray  m_output_buffers;
 };
