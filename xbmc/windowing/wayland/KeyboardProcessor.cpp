@@ -27,7 +27,6 @@
 
 #include <boost/bind.hpp>
 #include <boost/function.hpp>
-#include <boost/scope_exit.hpp>
 #include <boost/scoped_ptr.hpp>
 #include <boost/shared_ptr.hpp>
 
@@ -44,32 +43,21 @@
 #include "TimeoutManager.h"
 
 #include "input/linux/XKBCommonKeymap.h"
-#include "input/linux/Keymap.h"
 
 namespace xxkb = xbmc::xkbcommon;
 
-xbmc::KeyboardProcessor::KeyboardProcessor(IDllXKBCommon &xkbCommonLibrary,
-                                           IEventListener &listener,
+xbmc::KeyboardProcessor::KeyboardProcessor(IEventListener &listener,
                                            ITimeoutManager &timeouts) :
-  m_xkbCommonLibrary(xkbCommonLibrary),
   m_listener(listener),
   m_timeouts(timeouts),
   m_xbmcWindow(NULL),
   m_repeatSym(0),
   m_context(NULL)
 {
-  enum xkb_context_flags flags =
-    static_cast<enum xkb_context_flags>(0);
-
-  m_context = m_xkbCommonLibrary.xkb_context_new(flags);
-  
-  if (!m_context)
-    throw std::runtime_error("Failed to create xkb context");
 }
 
 xbmc::KeyboardProcessor::~KeyboardProcessor()
 {
-  m_xkbCommonLibrary.xkb_context_unref(m_context);
 }
 
 void
@@ -79,42 +67,9 @@ xbmc::KeyboardProcessor::SetXBMCSurface(struct wl_surface *s)
 }
 
 void
-xbmc::KeyboardProcessor::UpdateKeymap(uint32_t format,
-                                      int fd,
-                                      uint32_t size)
+xbmc::KeyboardProcessor::UpdateKeymap(xbmc::linux_os::IKeymap *keymap)
 {
-  BOOST_SCOPE_EXIT((fd))
-  {
-    close(fd);
-  } BOOST_SCOPE_EXIT_END
-
-  if (format != WL_KEYBOARD_KEYMAP_FORMAT_XKB_V1)
-    throw std::runtime_error("Server gave us a keymap we don't understand");
-
-  bool successfullyCreatedKeyboard = false;
-  
-  /* Either throws or returns a valid xkb_keymap * */
-  struct xkb_keymap *keymap =
-    xxkb::ReceiveXKBKeymapFromSharedMemory(m_xkbCommonLibrary,
-                                           m_context,
-                                           fd,
-                                           size);
-
-  BOOST_SCOPE_EXIT((&m_xkbCommonLibrary)(&successfullyCreatedKeyboard)(keymap))
-  {
-    if (!successfullyCreatedKeyboard)
-      m_xkbCommonLibrary.xkb_keymap_unref(keymap);
-  } BOOST_SCOPE_EXIT_END
-
-  struct xkb_state *state =
-    xxkb::CreateXKBStateFromKeymap(m_xkbCommonLibrary,
-                                   keymap);
-
-  m_keymap.reset(new xxkb::XKBKeymap(m_xkbCommonLibrary,
-                                     keymap,
-                                     state));
-  
-  successfullyCreatedKeyboard = true;
+  m_keymap = keymap;
 }
 
 void
@@ -143,6 +98,9 @@ xbmc::KeyboardProcessor::SendKeyToXBMC(uint32_t key,
                                        uint32_t sym,
                                        uint32_t eventType)
 {
+  if (!m_keymap)
+    throw std::logic_error("a keymap must be set before processing key events");
+
   XBMC_Event event;
   event.type = eventType;
   event.key.keysym.scancode = key;
@@ -172,7 +130,7 @@ xbmc::KeyboardProcessor::Key(uint32_t serial,
                              uint32_t key,
                              enum wl_keyboard_key_state state)
 {
-  if (!m_keymap.get())
+  if (!m_keymap)
     throw std::logic_error("a keymap must be set before processing key events");
 
   uint32_t sym = XKB_KEY_NoSymbol;
@@ -229,6 +187,9 @@ xbmc::KeyboardProcessor::Modifier(uint32_t serial,
                                   uint32_t locked,
                                   uint32_t group)
 {
+  if (!m_keymap)
+    throw std::logic_error("a keymap must be set before processing key events");
+
   m_keymap->UpdateMask(depressed, latched, locked, group);
 }
 

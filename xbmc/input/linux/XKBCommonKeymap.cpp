@@ -25,6 +25,8 @@
 #include <iostream>
 #include <stdexcept>
 
+#include <boost/scope_exit.hpp>
+
 #include <sys/mman.h>
 
 #include <xkbcommon/xkbcommon.h>
@@ -35,6 +37,20 @@
 #include "XKBCommonKeymap.h"
 
 namespace xxkb = xbmc::xkbcommon;
+
+struct xkb_context *
+xxkb::CreateXKBContext(IDllXKBCommon &xkbCommonLibrary)
+{
+  enum xkb_context_flags flags =
+    static_cast<enum xkb_context_flags>(0);
+
+  struct xkb_context *context = xkbCommonLibrary.xkb_context_new(flags);
+  
+  if (!context)
+    throw std::runtime_error("Failed to create xkb context");
+  
+  return context;
+}
 
 struct xkb_keymap *
 xxkb::ReceiveXKBKeymapFromSharedMemory(IDllXKBCommon &xkbCommonLibrary,
@@ -75,9 +91,43 @@ xxkb::ReceiveXKBKeymapFromSharedMemory(IDllXKBCommon &xkbCommonLibrary,
   return keymap;
 }
 
+struct xkb_keymap *
+xxkb::CreateXKBKeymapFromNames(IDllXKBCommon &xkbCommonLibrary,
+                               struct xkb_context *context,
+                               const std::string &rules,
+                               const std::string &model,
+                               const std::string &layout,
+                               const std::string &variant,
+                               const std::string &options)
+{
+  enum xkb_keymap_compile_flags flags =
+    static_cast<enum xkb_keymap_compile_flags>(0);
+  
+  struct xkb_rule_names names =
+  {
+    rules.c_str(),
+    model.c_str(),
+    layout.c_str(),
+    variant.c_str(),
+    options.c_str()
+  };
+  
+  struct xkb_keymap *keymap =
+    xkbCommonLibrary.xkb_keymap_new_from_names(context,
+                                               &names,
+                                               flags);
+
+  if (!keymap)
+    throw std::runtime_error("Failed to compile keymap");
+
+  return keymap;
+}
+
+namespace
+{
 struct xkb_state *
-xxkb::CreateXKBStateFromKeymap(IDllXKBCommon &xkbCommonLibrary,
-                               struct xkb_keymap *keymap)
+CreateXKBStateFromKeymap(IDllXKBCommon &xkbCommonLibrary,
+                         struct xkb_keymap *keymap)
 {
   struct xkb_state *state = xkbCommonLibrary.xkb_state_new(keymap);
 
@@ -86,13 +136,14 @@ xxkb::CreateXKBStateFromKeymap(IDllXKBCommon &xkbCommonLibrary,
 
   return state;
 }
+}
 
 xxkb::XKBKeymap::XKBKeymap(IDllXKBCommon &xkbCommonLibrary,
-                           struct xkb_keymap *keymap,
-                           struct xkb_state *state) :
+                           struct xkb_keymap *keymap) :
   m_xkbCommonLibrary(xkbCommonLibrary),
   m_keymap(keymap),
-  m_state(state),
+  m_state(CreateXKBStateFromKeymap(xkbCommonLibrary,
+                                   keymap)),
   m_internalLeftControlIndex(m_xkbCommonLibrary.xkb_keymap_mod_get_index(m_keymap,
                                                                          XKB_MOD_NAME_CTRL)),
   m_internalLeftShiftIndex(m_xkbCommonLibrary.xkb_keymap_mod_get_index(m_keymap,
