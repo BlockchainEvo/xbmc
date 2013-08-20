@@ -32,7 +32,7 @@ class CJNIMediaCodecCryptoInfo;
 class CJNIMediaCodec : public CJNIBase
 {
 public:
-  CJNIMediaCodec(const jni::jhobject &object) : CJNIBase(object), m_input_buffers(NULL), m_output_buffers(NULL) {};
+  CJNIMediaCodec(const jni::jhobject &object) : CJNIBase(object){};
 //~CJNIMediaCodec() {};
 
   void  release();
@@ -72,6 +72,4 @@ private:
   CJNIMediaCodec();
 
   static const char *m_classname;
-  jobjectArray  m_input_buffers;
-  jobjectArray  m_output_buffers;
 };
