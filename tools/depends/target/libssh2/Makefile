@@ -13,7 +13,7 @@ CONFIGURE=cp -f $(CONFIG_SUB) $(CONFIG_GUESS) .; \
 
 SHELL := /bin/bash
 RM    := rm -rf
-
+export LDFLAGS+=-Wl,--exclude-libs,ALL
 LIBDYLIB=$(PLATFORM)/src/.libs/$(LIBNAME).a
 
 CLEAN_FILES=$(ARCHIVE) $(PLATFORM)

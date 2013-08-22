@@ -7,6 +7,7 @@ VERSION=7.21.6
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.bz2
 # configuration settings
+export LDFLAGS+=-Wl,--exclude-libs,ALL
 CONFIGURE=cp -f $(CONFIG_SUB) $(CONFIG_GUESS) .; \
           ./configure --prefix=$(PREFIX) --without-libssh2 \
 

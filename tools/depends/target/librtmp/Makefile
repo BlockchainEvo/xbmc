@@ -9,7 +9,7 @@ ARCHIVE=$(SOURCE).tar.gz
 # configuration settings
 LIBDYLIB=$(PLATFORM)/librtmp/librtmp.a
 CLEAN_FILES=$(ARCHIVE) $(PLATFORM)
-
+export LDFLAGS+=-Wl,--exclude-libs,ALL
 SYS=posix
 ifeq ($(OS),ios)
   SYS=darwin
