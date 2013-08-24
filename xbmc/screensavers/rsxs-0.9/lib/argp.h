@@ -558,9 +558,13 @@ extern void *__argp_input (const struct argp *__restrict __argp,
 #  define __option_is_end _option_is_end
 # endif
 
-# ifndef ARGP_EI
-#  define ARGP_EI extern __inline__
-# endif
+#ifndef ARGP_EI
+#ifdef __clang__
+#define ARGP_EI extern inline __attribute__ ((__gnu_inline__))
+#else
+#define ARGP_EI extern inline
+#endif
+#endif
 
 ARGP_EI void
 __argp_usage (const struct argp_state *__state)
