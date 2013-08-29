@@ -222,14 +222,14 @@ uint32_t CXKBKeymap::XBMCKeysymForKeycode(uint32_t code) const
   uint32_t sym =  KeysymForKeycode(code);
 
   /* Strip high bits from functional keys */
-  if ((sym & ~(0xff00)) < 0x1b)
+  if ((sym & ~(0xff00)) <= 0x1b)
     sym = sym & ~(0xff00);
   else if ((sym & ~(0xff00)) == 0xff)
     sym = static_cast<uint32_t>(XBMCK_DELETE);
   
   const bool isNavigationKey = (sym >= 0xff50 && sym <= 0xff58);
   const bool isModifierKey = (sym >= 0xffe1 && sym <= 0xffee);
-  const bool isKeyPadKey = (sym >= 0xffbd && sym <= 0xffb9);
+  const bool isKeyPadKey = (sym >= 0xffb1 && sym <= 0xffb9);
   const bool isFKey = (sym >= 0xffbe && sym <= 0xffcc);
   const bool isMediaKey = (sym >= 0x1008ff26 && sym <= 0x1008ffa2);
 
