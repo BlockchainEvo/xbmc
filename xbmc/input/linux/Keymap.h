@@ -21,26 +21,16 @@
  */
 #include "system.h"
 
-namespace xbmc
-{
-/* Apparantly "linux" is a constant */
-namespace linux_os
-{
-class IKeymap
+class ILinuxKeymap
 {
 public:
 
-  virtual ~IKeymap() {};
+  virtual ~ILinuxKeymap() {};
   
   virtual uint32_t KeysymForKeycode(uint32_t code) const = 0;
-  virtual void UpdateMask(uint32_t depressed,
-                          uint32_t latched,
-                          uint32_t locked,
-                          uint32_t group) = 0;
+  virtual void     UpdateMask(uint32_t depressed, uint32_t latched, uint32_t locked, uint32_t group) = 0;
   virtual uint32_t CurrentModifiers() const = 0;
   
   virtual uint32_t XBMCKeysymForKeycode(uint32_t code) const = 0;
   virtual uint32_t ActiveXBMCModifiers() const = 0;
 };
-}
-}

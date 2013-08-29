@@ -44,8 +44,6 @@
 
 #include "input/linux/XKBCommonKeymap.h"
 
-namespace xxkb = xbmc::xkbcommon;
-
 xbmc::KeyboardProcessor::KeyboardProcessor(IEventListener &listener,
                                            ITimeoutManager &timeouts) :
   m_listener(listener),
@@ -67,7 +65,7 @@ xbmc::KeyboardProcessor::SetXBMCSurface(struct wl_surface *s)
 }
 
 void
-xbmc::KeyboardProcessor::UpdateKeymap(xbmc::linux_os::IKeymap *keymap)
+xbmc::KeyboardProcessor::UpdateKeymap(ILinuxKeymap *keymap)
 {
   m_keymap = keymap;
 }

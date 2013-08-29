@@ -53,7 +53,7 @@ public:
 
 private:
 
-  void UpdateKeymap(linux_os::IKeymap *);
+  void UpdateKeymap(ILinuxKeymap *);
   void Enter(uint32_t serial,
              struct wl_surface *surface,
              struct wl_array *keys);
@@ -83,7 +83,7 @@ private:
   uint32_t m_repeatSym;
   
   struct xkb_context *m_context;
-  linux_os::IKeymap *m_keymap;
+  ILinuxKeymap *m_keymap;
 };
 }
 

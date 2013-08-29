@@ -38,7 +38,6 @@
 #include "Keyboard.h"
 
 namespace xw = xbmc::wayland;
-namespace xxkb = xbmc::xkbcommon;
 
 const struct wl_keyboard_listener xw::Keyboard::m_listener =
 {
@@ -64,7 +63,7 @@ xw::Keyboard::Keyboard(IDllWaylandClient &clientLibrary,
                        IKeyboardReceiver &receiver) :
   m_clientLibrary(clientLibrary),
   m_xkbCommonLibrary(xkbCommonLibrary),
-  m_xkbCommonContext(xxkb::CreateXKBContext(m_xkbCommonLibrary),
+  m_xkbCommonContext(CXKBKeymap::CreateXKBContext(m_xkbCommonLibrary),
                      boost::bind(DestroyXKBCommonContext,
                                  _1,
                                  boost::ref(m_xkbCommonLibrary))),
@@ -158,7 +157,7 @@ void xw::Keyboard::HandleKeymap(uint32_t format,
   
   /* Either throws or returns a valid xkb_keymap * */
   struct xkb_keymap *keymap =
-    xxkb::ReceiveXKBKeymapFromSharedMemory(m_xkbCommonLibrary,
+    CXKBKeymap::ReceiveXKBKeymapFromSharedMemory(m_xkbCommonLibrary,
                                            m_xkbCommonContext.get(),
                                            fd,
                                            size);
@@ -169,7 +168,7 @@ void xw::Keyboard::HandleKeymap(uint32_t format,
       m_xkbCommonLibrary.xkb_keymap_unref(keymap);
   } BOOST_SCOPE_EXIT_END
 
-  m_keymap.reset(new xxkb::XKBKeymap(m_xkbCommonLibrary,
+  m_keymap.reset(new CXKBKeymap(m_xkbCommonLibrary,
                                      keymap));
   
   successfullyCreatedKeyboard = true;

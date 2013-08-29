@@ -36,13 +36,9 @@
 #include "windowing/DllXKBCommon.h"
 #include "XKBCommonKeymap.h"
 
-namespace xxkb = xbmc::xkbcommon;
-
-struct xkb_context *
-xxkb::CreateXKBContext(IDllXKBCommon &xkbCommonLibrary)
+xkb_context *CXKBKeymap::CreateXKBContext(IDllXKBCommon &xkbCommonLibrary)
 {
-  enum xkb_context_flags flags =
-    static_cast<enum xkb_context_flags>(0);
+  enum xkb_context_flags flags =  static_cast<enum xkb_context_flags>(0);
 
   struct xkb_context *context = xkbCommonLibrary.xkb_context_new(flags);
   
@@ -52,18 +48,9 @@ xxkb::CreateXKBContext(IDllXKBCommon &xkbCommonLibrary)
   return context;
 }
 
-struct xkb_keymap *
-xxkb::ReceiveXKBKeymapFromSharedMemory(IDllXKBCommon &xkbCommonLibrary,
-                                       struct xkb_context *context,
-                                       const int &fd,
-                                       uint32_t size)
+xkb_keymap* CXKBKeymap::ReceiveXKBKeymapFromSharedMemory(IDllXKBCommon &xkbCommonLibrary, struct xkb_context *context, const int &fd, uint32_t size)
 {
-  const char *keymapString = static_cast<const char *>(mmap(NULL,
-                                                            size,
-                                                            PROT_READ,
-                                                            MAP_SHARED,
-                                                            fd,
-                                                            0));
+  const char *keymapString = static_cast<const char *>(mmap(NULL, size, PROT_READ, MAP_SHARED, fd, 0));
   if (keymapString == MAP_FAILED)
   {
     std::stringstream ss;
@@ -73,17 +60,11 @@ xxkb::ReceiveXKBKeymapFromSharedMemory(IDllXKBCommon &xkbCommonLibrary,
 
   BOOST_SCOPE_EXIT((keymapString)(size))
   {
-    munmap(const_cast<void *>(static_cast<const void *>(keymapString)),
-                              size);
+    munmap(const_cast<void *>(static_cast<const void *>(keymapString)), size);
   } BOOST_SCOPE_EXIT_END
 
-  enum xkb_keymap_compile_flags flags =
-    static_cast<enum xkb_keymap_compile_flags>(0);
-  struct xkb_keymap *keymap =
-    xkbCommonLibrary.xkb_keymap_new_from_string(context,
-                                                keymapString,
-                                                XKB_KEYMAP_FORMAT_TEXT_V1,
-                                                flags);
+  enum xkb_keymap_compile_flags flags = static_cast<enum xkb_keymap_compile_flags>(0);
+  struct xkb_keymap *keymap = xkbCommonLibrary.xkb_keymap_new_from_string(context, keymapString, XKB_KEYMAP_FORMAT_TEXT_V1, flags);
 
   if (!keymap)
     throw std::runtime_error("Failed to compile keymap");
@@ -91,17 +72,10 @@ xxkb::ReceiveXKBKeymapFromSharedMemory(IDllXKBCommon &xkbCommonLibrary,
   return keymap;
 }
 
-struct xkb_keymap *
-xxkb::CreateXKBKeymapFromNames(IDllXKBCommon &xkbCommonLibrary,
-                               struct xkb_context *context,
-                               const std::string &rules,
-                               const std::string &model,
-                               const std::string &layout,
-                               const std::string &variant,
-                               const std::string &options)
+xkb_keymap* CXKBKeymap::CreateCXKBKeymapFromNames(IDllXKBCommon &xkbCommonLibrary, struct xkb_context *context, const std::string &rules, const std::string &model,
+                                                const std::string &layout, const std::string &variant, const std::string &options)
 {
-  enum xkb_keymap_compile_flags flags =
-    static_cast<enum xkb_keymap_compile_flags>(0);
+  enum xkb_keymap_compile_flags flags = static_cast<enum xkb_keymap_compile_flags>(0);
   
   struct xkb_rule_names names =
   {
@@ -112,10 +86,7 @@ xxkb::CreateXKBKeymapFromNames(IDllXKBCommon &xkbCommonLibrary,
     options.c_str()
   };
   
-  struct xkb_keymap *keymap =
-    xkbCommonLibrary.xkb_keymap_new_from_names(context,
-                                               &names,
-                                               flags);
+  struct xkb_keymap *keymap = xkbCommonLibrary.xkb_keymap_new_from_names(context, &names, flags);
 
   if (!keymap)
     throw std::runtime_error("Failed to compile keymap");
@@ -123,23 +94,17 @@ xxkb::CreateXKBKeymapFromNames(IDllXKBCommon &xkbCommonLibrary,
   return keymap;
 }
 
-namespace
+xkb_state* CXKBKeymap::CreateXKBStateFromKeymap(IDllXKBCommon &xkbCommonLibrary, struct xkb_keymap *keymap)
 {
-struct xkb_state *
-CreateXKBStateFromKeymap(IDllXKBCommon &xkbCommonLibrary,
-                         struct xkb_keymap *keymap)
-{
-  struct xkb_state *state = xkbCommonLibrary.xkb_state_new(keymap);
+  xkb_state *state = xkbCommonLibrary.xkb_state_new(keymap);
 
   if (!state)
     throw std::runtime_error("Failed to create keyboard state");
 
   return state;
 }
-}
 
-xxkb::XKBKeymap::XKBKeymap(IDllXKBCommon &xkbCommonLibrary,
-                           struct xkb_keymap *keymap) :
+CXKBKeymap::CXKBKeymap(IDllXKBCommon &xkbCommonLibrary, struct xkb_keymap *keymap) :
   m_xkbCommonLibrary(xkbCommonLibrary),
   m_keymap(keymap),
   m_state(CreateXKBStateFromKeymap(xkbCommonLibrary,
@@ -173,14 +138,13 @@ xxkb::XKBKeymap::XKBKeymap(IDllXKBCommon &xkbCommonLibrary,
 {
 }
 
-xxkb::XKBKeymap::~XKBKeymap()
+CXKBKeymap::~CXKBKeymap()
 {
   m_xkbCommonLibrary.xkb_state_unref(m_state);
   m_xkbCommonLibrary.xkb_keymap_unref(m_keymap);
 }
 
-uint32_t
-xxkb::XKBKeymap::KeysymForKeycode(uint32_t code) const
+uint32_t CXKBKeymap::KeysymForKeycode(uint32_t code) const
 {
   const xkb_keysym_t *syms;
   uint32_t numSyms;
@@ -200,8 +164,7 @@ xxkb::XKBKeymap::KeysymForKeycode(uint32_t code) const
   throw std::runtime_error(ss.str());
 }
 
-uint32_t
-xxkb::XKBKeymap::CurrentModifiers() const
+uint32_t CXKBKeymap::CurrentModifiers() const
 {
   enum xkb_state_component components =
     static_cast <xkb_state_component>(XKB_STATE_DEPRESSED |
@@ -212,23 +175,12 @@ xxkb::XKBKeymap::CurrentModifiers() const
   return mask;
 }
 
-void
-xxkb::XKBKeymap::UpdateMask(uint32_t depressed,
-                            uint32_t latched,
-                            uint32_t locked,
-                            uint32_t group)
+void CXKBKeymap::UpdateMask(uint32_t depressed, uint32_t latched, uint32_t locked, uint32_t group)
 {
-  m_xkbCommonLibrary.xkb_state_update_mask(m_state,
-                                           depressed,
-                                           latched,
-                                           locked,
-                                           0,
-                                           0,
-                                           group);
+  m_xkbCommonLibrary.xkb_state_update_mask(m_state, depressed, latched, locked, 0, 0, group);
 }
 
-uint32_t
-xxkb::XKBKeymap::ActiveXBMCModifiers() const
+uint32_t CXKBKeymap::ActiveXBMCModifiers() const
 {
   xkb_mod_mask_t mask(CurrentModifiers());
   XBMCMod xbmcModifiers = XBMCKMOD_NONE;
@@ -259,15 +211,13 @@ xxkb::XKBKeymap::ActiveXBMCModifiers() const
   for (size_t i = 0; i < modTableSize; ++i)
   {
     if (mask & (1 << modTable[i].xkbMod))
-      xbmcModifiers = static_cast<XBMCMod>(xbmcModifiers |
-                                           modTable[i].xbmcMod);
+      xbmcModifiers = static_cast<XBMCMod>(xbmcModifiers | modTable[i].xbmcMod);
   }
 
   return static_cast<uint32_t>(xbmcModifiers);
 }
 
-uint32_t
-xxkb::XKBKeymap::XBMCKeysymForKeycode(uint32_t code) const
+uint32_t CXKBKeymap::XBMCKeysymForKeycode(uint32_t code) const
 {
   uint32_t sym =  KeysymForKeycode(code);
 

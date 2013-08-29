@@ -46,7 +46,7 @@ public:
 
   virtual ~IKeyboardReceiver() {}
 
-  virtual void UpdateKeymap(xbmc::linux_os::IKeymap *) = 0;
+  virtual void UpdateKeymap(ILinuxKeymap *) = 0;
   virtual void Enter(uint32_t serial,
                      struct wl_surface *surface,
                      struct wl_array *keys) = 0;
@@ -136,7 +136,7 @@ private:
   struct wl_keyboard *m_keyboard;
   IKeyboardReceiver &m_reciever;
 
-  boost::scoped_ptr<linux_os::IKeymap> m_keymap;
+  boost::scoped_ptr<ILinuxKeymap> m_keymap;
 };
 }
 }

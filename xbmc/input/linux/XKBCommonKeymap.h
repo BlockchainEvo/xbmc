@@ -35,42 +35,32 @@ typedef uint32_t xkb_mask_index_t;
 
 class IDllXKBCommon;
 
-namespace xbmc
-{
-namespace xkbcommon
-{
-struct xkb_context * CreateXKBContext(IDllXKBCommon &xkbCommonLibrary);
-
-/* ReceiveXKBKeymapFromSharedMemory does not own the file descriptor, as such
- * it takes a const reference to it */ 
-struct xkb_keymap * ReceiveXKBKeymapFromSharedMemory(IDllXKBCommon &xkbCommonLibrary,
-                                                     struct xkb_context *context,
-                                                     const int &fd,
-                                                     uint32_t size);
-struct xkb_keymap * CreateXKBKeymapFromNames(IDllXKBCommon &xkbCommonLibrary,
-                                             struct xkb_context *context,
-                                             const std::string &rules,
-                                             const std::string &model,
-                                             const std::string &layout,
-                                             const std::string &variant,
-                                             const std::string &options);
-
-class XKBKeymap :
-  public linux_os::IKeymap
+class CXKBKeymap : public ILinuxKeymap
 {
 public:
 
-  XKBKeymap(IDllXKBCommon &m_xkbCommonLibrary,
+  static xkb_context * CreateXKBContext(IDllXKBCommon &xkbCommonLibrary);
+
+  /* ReceiveCXKBKeymapFromSharedMemory does not own the file descriptor, as such
+   * it takes a const reference to it */
+  static xkb_keymap * ReceiveCXKBKeymapFromSharedMemory(IDllXKBCommon &xkbCommonLibrary,
+                                                     struct xkb_context *context,
+                                                     const int &fd,
+                                                     uint32_t size);
+  static xkb_keymap * CreateCXKBKeymapFromNames(IDllXKBCommon &xkbCommonLibrary, struct xkb_context *context, const std::string &rules,
+                                             const std::string &model, const std::string &layout, const std::string &variant, const std::string &options);
+
+  static xkb_state* CreateXKBStateFromKeymap(IDllXKBCommon &xkbCommonLibrary, struct xkb_keymap *keymap);
+  static xkb_keymap* ReceiveXKBKeymapFromSharedMemory(IDllXKBCommon &xkbCommonLibrary, struct xkb_context *context, const int &fd, uint32_t size);
+
+  CXKBKeymap(IDllXKBCommon &m_xkbCommonLibrary,
             struct xkb_keymap *keymap);
-  ~XKBKeymap();
+  ~CXKBKeymap();
 
 private:
 
   uint32_t KeysymForKeycode(uint32_t code) const;
-  void UpdateMask(uint32_t depressed,
-                  uint32_t latched,
-                  uint32_t locked,
-                  uint32_t group);
+  void UpdateMask(uint32_t depressed, uint32_t latched, uint32_t locked, uint32_t group);
   uint32_t CurrentModifiers() const;
   uint32_t XBMCKeysymForKeycode(uint32_t code) const;
   uint32_t ActiveXBMCModifiers() const;
@@ -96,7 +86,5 @@ private:
   xkb_mod_index_t m_internalNumLockIndex;
   xkb_mod_index_t m_internalModeIndex;
 };
-}
-}
 
 #endif
