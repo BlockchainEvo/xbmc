@@ -1528,8 +1528,8 @@ TYPED_TEST_P(InputEventQueueWestonTest, Construction)
 TYPED_TEST_P(InputEventQueueWestonTest, MotionEvent)
 {
   typedef InputEventsWestonTest Base;
-  unsigned int x = Base::SurfaceWidth / 2;
-  unsigned int y = Base::SurfaceHeight / 2;
+  int x = Base::SurfaceWidth / 2;
+  int y = Base::SurfaceHeight / 2;
   Base::xbmcWayland->MovePointerTo(Base::surface->GetWlSurface(),
                                    wl_fixed_from_int(x),
                                    wl_fixed_from_int(y));
