@@ -172,7 +172,6 @@ namespace xt = xbmc::test;
 namespace xw = xbmc::wayland;
 namespace xtw = xbmc::test::wayland;
 namespace xwe = xbmc::wayland::events;
-namespace xxkb = xbmc::xkbcommon;
 
 xtw::XBMCWayland::XBMCWayland(struct xbmc_wayland *xbmcWayland) :
   m_xbmcWayland(xbmcWayland)
@@ -1338,7 +1337,7 @@ protected:
   StubEventListener listener;
 
   boost::shared_ptr<struct xkb_context> xkbContext;
-  boost::scoped_ptr<xxkb::XKBKeymap> keymap;
+  boost::scoped_ptr<CXKBKeymap> keymap;
 
   boost::scoped_ptr<xw::Display> display;
   boost::scoped_ptr<xwe::IEventQueueStrategy> queue;
@@ -1389,12 +1388,12 @@ void InputEventsWestonTest::SetUp()
   eglLibrary.Load();
   xkbCommonLibrary.Load();
   
-  xkbContext.reset(xxkb::CreateXKBContext(xkbCommonLibrary),
+  xkbContext.reset(CXKBKeymap::CreateXKBContext(xkbCommonLibrary),
                    boost::bind(&IDllXKBCommon::xkb_context_unref,
                                &xkbCommonLibrary, _1));
-  keymap.reset(new xxkb::XKBKeymap(
+  keymap.reset(new CXKBKeymap(
                  xkbCommonLibrary, 
-                 xxkb::CreateXKBKeymapFromNames(xkbCommonLibrary,
+                 CXKBKeymap::CreateXKBKeymapFromNames(xkbCommonLibrary,
                                                 xkbContext.get(),
                                                 "evdev",
                                                 "pc105",
@@ -1608,7 +1607,7 @@ namespace
  * to keysyms and not vice-versa (as such is not implemented in
  * xkbcommon)
  */
-uint32_t LookupKeycodeForKeysym(xbmc::linux_os::IKeymap &keymap,
+uint32_t LookupKeycodeForKeysym(ILinuxKeymap &keymap,
                                 XBMCKey sym)
 {
   uint32_t code = 0;
@@ -1631,7 +1630,7 @@ uint32_t LookupKeycodeForKeysym(xbmc::linux_os::IKeymap &keymap,
   throw std::logic_error("Keysym has no corresponding keycode");
 }
 
-uint32_t LookupModifierIndexForModifier(xbmc::linux_os::IKeymap &keymap,
+uint32_t LookupModifierIndexForModifier(ILinuxKeymap &keymap,
                                         XBMCMod modifier)
 {
   uint32_t maxIndex = std::numeric_limits<uint32_t>::max();
