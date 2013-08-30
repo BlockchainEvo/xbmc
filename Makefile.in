@@ -276,44 +276,15 @@ CHECK_LIBS = xbmc/filesystem/test/filesystemTest.a \
              xbmc/utils/test/utilsTest.a \
              xbmc/threads/test/threadTest.a \
              xbmc/interfaces/python/test/pythonSwigTest.a \
-             xbmc/windowing/tests/test_wayland.a \
+             xbmc/windowing/tests/wayland/test_wayland.a \
              xbmc/test/xbmc-test.a
 
 ifeq (@USE_WAYLAND_TEST_EXTENSION@,1)
-WAYLAND_TEST_MODULE_DIR = xbmc/windowing/tests/wayland
-WAYLAND_TEST_MODULE_INCLUDES = -I./$(WAYLAND_TEST_MODULE_DIR) -I./xbmc -I./xbmc/linux @WAYLAND_TEST_INCLUDES@
-WAYLAND_TEST_MODULE_LIBS = @WAYLAND_TEST_LIBS@   
-WAYLAND_TEST_MODULE_PROTOCOL = $(WAYLAND_TEST_MODULE_DIR)/protocol.xml
-WAYLAND_TEST_MODULE_PROTOCOL_SRCS = $(WAYLAND_TEST_MODULE_DIR)/xbmc_wayland_test_protocol.c
-WAYLAND_TEST_MODULE_PROTOCOL_GENERATED_SRCS = $(WAYLAND_TEST_MODULE_PROTOCOL_SRCS) \
-																							$(WAYLAND_TEST_MODULE_DIR)/xbmc_wayland_test_server_protocol.h \
-																							$(WAYLAND_TEST_MODULE_DIR)/xbmc_wayland_test_client_protocol.h
-WAYLAND_TEST_MODULE_SRCS = $(WAYLAND_TEST_MODULE_DIR)/XBMCWaylandTestExtension.cpp
-WAYLAND_TEST_MODULE_DEFINES = @ARCH_DEFINES@ \
-															-D_FILE_DEFINED \
-															-D__STDC_CONSTANT_MACROS \
-															-DBIN_INSTALL_PATH="\"$(libdir)/xbmc\"" \
-															-DINSTALL_PATH="\"$(datarootdir)/xbmc\"" \
-															@DEFS@ \
-
-xbmc_wayland_test_protocol.c: $(WAYLAND_TEST_MODULE_PROTOCOL)
-	@WAYLAND_SCANNER@ code < $(WAYLAND_TEST_MODULE_PROTOCOL) > $(WAYLAND_TEST_MODULE_DIR)/xbmc_wayland_test_protocol.c
-
-xbmc_wayland_test_server_protocol.h: $(WAYLAND_TEST_MODULE_PROTOCOL)
-	@WAYLAND_SCANNER@ server-header < $(WAYLAND_TEST_MODULE_PROTOCOL) > $(WAYLAND_TEST_MODULE_DIR)/xbmc_wayland_test_server_protocol.h
-
-xbmc_wayland_test_client_protocol.h: $(WAYLAND_TEST_MODULE_PROTOCOL)
-	@WAYLAND_SCANNER@ client-header < $(WAYLAND_TEST_MODULE_PROTOCOL) > $(WAYLAND_TEST_MODULE_DIR)/xbmc_wayland_test_client_protocol.h
-
-xbmc-wayland-test-protocol.o: xbmc_wayland_test_protocol.c xbmc_wayland_test_server_protocol.h xbmc_wayland_test_client_protocol.h
-	$(SILENT_AR) $(CC) $(CFLAGS) $(LDFLAGS) -c -o $(WAYLAND_TEST_MODULE_DIR)/$@ $(WAYLAND_TEST_MODULE_PROTOCOL_SRCS)
-
-xbmc-wayland-test-extension.so: xbmc-wayland-test-protocol.o
-	$(SILENT_LD) $(CXX) $(CXXFLAGS) $(LDFLAGS) $(WAYLAND_TEST_MODULE_INCLUDES) $(WAYLAND_TEST_MODULE_DEFINES) -shared -o $(WAYLAND_TEST_MODULE_DIR)/$@ $(WAYLAND_TEST_MODULE_SRCS) $(WAYLAND_TEST_MODULE_DIR)/xbmc-wayland-test-protocol.o -Wl,--no-whole-archive $(WAYLAND_TEST_MODULE_LIBS) -rdynamic
-
-CHECK_EXTENSIONS = xbmc-wayland-test-extension.so
-CHECK_LIBADD += @WAYLAND_TEST_LIBS@
-CLEAN_FILES += $(WAYLAND_TEST_MODULE_PROTOCOL_SRCS)
+WAYLAND_TEST_MODULE = xbmc/windowing/tests/wayland/xbmc-wayland-test-extension.so
+$(WAYLAND_TEST_MODULE): force
+	$(MAKE) -C $(@D) $(@F)
+CHECK_EXTENSIONS = $(WAYLAND_TEST_MODULE)
+CHECK_LIBADD=@WAYLAND_TEST_LIBS@
 endif
 
 CHECK_PROGRAMS = xbmc-test

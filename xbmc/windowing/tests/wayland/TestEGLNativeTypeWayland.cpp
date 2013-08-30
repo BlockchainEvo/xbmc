@@ -48,7 +48,10 @@
 #include <wayland-client.h>
 #include <wayland-client-protocol.h>
 #include <wayland-version.h>
-#include "wayland/xbmc_wayland_test_client_protocol.h"
+
+#if defined(HAVE_WAYLAND_XBMC_PROTO)
+#include "xbmc_wayland_test_client_protocol.h"
+#endif
 
 #include "windowing/egl/wayland/Callback.h"
 #include "windowing/egl/wayland/Compositor.h"
@@ -173,6 +176,8 @@ namespace xw = xbmc::wayland;
 namespace xtw = xbmc::test::wayland;
 namespace xwe = xbmc::wayland::events;
 
+
+#if defined(HAVE_WAYLAND_XBMC_PROTO)
 xtw::XBMCWayland::XBMCWayland(struct xbmc_wayland *xbmcWayland) :
   m_xbmcWayland(xbmcWayland)
 {
@@ -268,6 +273,7 @@ xtw::XBMCWayland::PingSurface(struct wl_surface *surface,
 {
   xbmc_wayland_ping_surface(m_xbmcWayland, surface, serial);
 }
+#endif
 
 namespace
 {
@@ -1123,11 +1129,13 @@ ConnectedWestonTest::Global(struct wl_registry *registry,
                             const char *interface,
                             uint32_t version)
 {
+#if defined(HAVE_WAYLAND_XBMC_PROTO)
   if (std::string(interface) == "xbmc_wayland")
     m_xbmcWayland.reset(new xtw::XBMCWayland(static_cast<xbmc_wayland *>(wl_registry_bind(registry,
                                                                                           name,
                                                                                           &xbmc_wayland_interface,
                                                                                           version))));
+#endif
 }
 
 TEST_F(ConnectedWestonTest, TestGotXBMCWayland)
@@ -1476,6 +1484,7 @@ bool InputEventsWestonTest::OnGlobalInterfaceAvailable(uint32_t name,
     shell.reset(new xw::Shell(clientLibrary, wlshell));
     return true;
   }
+#if defined(HAVE_WAYLAND_XBMC_PROTO)
   else if (strcmp(interface, "xbmc_wayland") == 0)
   {
     struct wl_interface **xbmcWaylandInterface =
@@ -1487,7 +1496,7 @@ bool InputEventsWestonTest::OnGlobalInterfaceAvailable(uint32_t name,
     xbmcWayland.reset(new xtw::XBMCWayland(wlxbmc_wayland));
     return true;
   }
-  
+#endif
   return false;
 }
 

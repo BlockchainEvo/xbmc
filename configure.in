@@ -1134,40 +1134,25 @@ if test "$use_wayland" = "yes" && test "$host_vendor" != "apple"; then
   # wayland tests as well
   if test "$configure_gtest" = "yes"; then
     have_weston_sdk=no;
-    PKG_CHECK_MODULES([WESTON],
-                      [weston],
-                      [have_weston_sdk=yes],
-                      AC_MSG_WARN($missing_library))
     PKG_CHECK_MODULES([PIXMAN],
-                      [pixman-1],
-                      [INCLUDES="$INCLUDES $PIXMAN_CFLAGS"],
-                      [AC_MSG_WARN($missing_library);
-                       have_weston_sdk=no])
+                      [pixman-1],have_pixman=yes,
+                      [AC_MSG_WARN($missing_library); have_pixman=no])
+    PKG_CHECK_MODULES([WESTON],
+                      [weston >= 1.1.90],[have_weston_sdk=yes],
+                      [have_weston_sdk=no; AC_MSG_WARN($missing_library)])
+
     AC_CHECK_PROG(WAYLAND_SCANNER, wayland-scanner, "wayland-scanner", "no")
-
-    if test "$WAYLAND_SCANNER" = "no"; then
+    if test "x$WAYLAND_SCANNER" == "xno"; then
       AC_MSG_WARN($missing_program)
-    fi
-
-    if test "$have_weston_sdk" = "yes" && test "$WAYLAND_SCANNER" = "wayland-scanner"; then
-      AC_DEFINE([HAVE_WESTON], [1], [Define to 1 if Weston SDK is installed.])
-      # Figure out which version of the SDK we have and build that
-      PKG_CHECK_MODULES([WESTON_SDK1],
-                        [weston >= 1.0.6 weston < 1.0.90],
-                        AC_DEFINE(HAVE_WESTON_SDK1, 1, [Weston SDK 1]),
-                        AC_MSG_NOTICE($missing_library))
-      PKG_CHECK_MODULES([WESTON_SDK2],
-                        [weston >= 1.0.90 weston < 1.1.90],
-                        AC_DEFINE(HAVE_WESTON_SDK2, 1, [Weston SDK 2]),
-                        AC_MSG_NOTICE($missing_library))
-      PKG_CHECK_MODULES([WESTON_SDK3],
-                        [weston >= 1.1.90],
-                        AC_DEFINE(HAVE_WESTON_SDK3, 1, [Weston SDK 3]),
-                        AC_MSG_NOTICE($missing_library))
-      AC_SUBST(WAYLAND_TEST_INCLUDES, "$WAYLAND_CLIENT_CFLAGS $WESTON_CFLAGS $PIXMAN_CFLAGS")
-      AC_SUBST(WAYLAND_TEST_LIBS, "$WAYLAND_CLIENT_LIBS $WESTON_LIBS")
+    else
+      if test "x$have_weston_sdk" == "xyes" && test "x$have_pixman" = "xyes"; then
+        AC_SUBST(WAYLAND_TEST_INCLUDES,"$WAYLAND_TEST_INCLUDES $PIXMAN_CFLAGS $WESTON_CFLAGS")
+        AC_SUBST(WAYLAND_TEST_LIBS,"$WAYLAND_TEST_LIBS $PIXMAN_LIBS $WESTON_LIBS")
+        AC_DEFINE([HAVE_WESTON_SDK], [1], [Define to 1 if Weston SDK is installed.])
+        AC_SUBST(USE_WAYLAND_TEST_EXTENSION, 1)
+      fi
       AC_SUBST(WAYLAND_SCANNER)
-      AC_SUBST(USE_WAYLAND_TEST_EXTENSION, 1)
+      AC_DEFINE([HAVE_WAYLAND_XBMC_PROTO],[1],["Define to 1 if the wayland test-protocol will be built"])
     fi
   fi
 
@@ -2486,7 +2471,7 @@ OUTPUT_FILES="Makefile \
     xbmc/android/jni/Makefile \
     xbmc/utils/Makefile \
     xbmc/main/Makefile \
-    xbmc/windowing/tests/Makefile \
+    xbmc/windowing/tests/wayland/Makefile \
     project/cmake/xbmc-config.cmake"
 
 if test "$use_skin_touched" = "yes"; then
