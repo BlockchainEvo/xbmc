@@ -72,7 +72,7 @@ xkb_keymap* CXKBKeymap::ReceiveXKBKeymapFromSharedMemory(IDllXKBCommon &xkbCommo
   return keymap;
 }
 
-xkb_keymap* CXKBKeymap::CreateCXKBKeymapFromNames(IDllXKBCommon &xkbCommonLibrary, struct xkb_context *context, const std::string &rules, const std::string &model,
+xkb_keymap* CXKBKeymap::CreateXKBKeymapFromNames(IDllXKBCommon &xkbCommonLibrary, struct xkb_context *context, const std::string &rules, const std::string &model,
                                                 const std::string &layout, const std::string &variant, const std::string &options)
 {
   enum xkb_keymap_compile_flags flags = static_cast<enum xkb_keymap_compile_flags>(0);

@@ -43,15 +43,14 @@ public:
 
   /* ReceiveCXKBKeymapFromSharedMemory does not own the file descriptor, as such
    * it takes a const reference to it */
-  static xkb_keymap * ReceiveCXKBKeymapFromSharedMemory(IDllXKBCommon &xkbCommonLibrary,
+  static xkb_keymap * ReceiveXKBKeymapFromSharedMemory(IDllXKBCommon &xkbCommonLibrary,
                                                      struct xkb_context *context,
                                                      const int &fd,
                                                      uint32_t size);
-  static xkb_keymap * CreateCXKBKeymapFromNames(IDllXKBCommon &xkbCommonLibrary, struct xkb_context *context, const std::string &rules,
+  static xkb_keymap * CreateXKBKeymapFromNames(IDllXKBCommon &xkbCommonLibrary, struct xkb_context *context, const std::string &rules,
                                              const std::string &model, const std::string &layout, const std::string &variant, const std::string &options);
 
   static xkb_state* CreateXKBStateFromKeymap(IDllXKBCommon &xkbCommonLibrary, struct xkb_keymap *keymap);
-  static xkb_keymap* ReceiveXKBKeymapFromSharedMemory(IDllXKBCommon &xkbCommonLibrary, struct xkb_context *context, const int &fd, uint32_t size);
 
   CXKBKeymap(IDllXKBCommon &m_xkbCommonLibrary,
             struct xkb_keymap *keymap);
