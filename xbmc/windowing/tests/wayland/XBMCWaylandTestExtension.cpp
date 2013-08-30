@@ -741,23 +741,10 @@ xtwc::Compositor::~Compositor()
 
 extern "C"
 {
-#if defined(HAVE_WESTON_SDK1)
-WL_EXPORT int
-module_init(struct weston_compositor *compositor)
-#elif defined(HAVE_WESTON_SDK2)
-WL_EXPORT int
-module_init(struct weston_compositor *compositor,
-            int *argc,
-            char *argv[],
-            const char *config_file)
-#elif defined(HAVE_WESTON_SDK3)
 WL_EXPORT int
 module_init(struct weston_compositor *c,
             int *argc,
             char *argv[])
-#else
-#error No weston SDK?
-#endif
 {
   /* Using heap allocated memory directly here is awkward, however
    * weston knows when we need to destroy our resources
